@@ -1,0 +1,21 @@
+uuid: e77492c8-fdac-4e56-8522-9a80348983d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_credit
+    - node.type.photo
+id: node.photo.field_credit
+field_name: field_credit
+entity_type: node
+bundle: photo
+label: Credit
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '© Tobias Bührer'
+default_value_callback: ''
+settings: {  }
+field_type: string
