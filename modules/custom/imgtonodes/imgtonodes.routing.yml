@@ -1,0 +1,30 @@
+
+imgtonodes.imgtonodes_controller_import:
+  path: '/imgtonodes/import'
+  defaults:
+    _controller: '\Drupal\imgtonodes\Controller\ImgtonodesController::import'
+    _title: 'Import'
+  requirements:
+    _permission: 'access content'
+
+imgtonodes.imgtonodesform:
+  path: '/admin/config/imgtonodes/imgtonodes'
+  defaults:
+    _form: '\Drupal\imgtonodes\Form\ImgToNodesForm'
+    _title: 'Image import configuration'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+
+imgtonodes.mapping_form:
+  path: '/admin/config/imgtonodes/mapping'
+  defaults:
+    _form: '\Drupal\imgtonodes\Form\MappingForm'
+    _title: 'MappingForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+

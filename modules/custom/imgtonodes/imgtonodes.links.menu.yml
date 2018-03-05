@@ -1,0 +1,14 @@
+imgtonodes.imgtonodesform:
+  title: 'Configure photo import'
+  route_name: imgtonodes.imgtonodesform
+  description: 'Map EXIF/IPTC fields to fields of your content type that contains the image'
+  parent: system.admin_config_media
+  weight: 99
+
+imgtonodes.mapping_form:
+  title: 'Map node fields to IPTC/EXIF'
+  route_name: imgtonodes.mapping_form
+  description: 'Map IPTC/Exif fields to node fields'
+  parent: system.admin_config_media
+  weight: 99
+

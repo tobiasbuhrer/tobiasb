@@ -1,0 +1,5 @@
+name: 'Images to Nodes'
+type: module
+description: 'This module will create new nodes based on images in a folder on the server. It will also map EXIF/IPTC fields to fields of the node.'
+core: 8.x
+package: 'Custom'

@@ -1,0 +1,52 @@
+exif.sample:
+  path: '/admin/config/media/exif_custom/sample'
+  defaults:
+    _title: "Exif module sample page"
+    _controller: "\\Drupal\\exif_custom\\Controller\\ExifCustomSettingsController::showSample"
+  requirements:
+    _permission: "access content"
+
+exif_custom.config:
+  path: '/admin/config/media/exif_custom'
+  defaults:
+    _title: 'Exif Custom module settings'
+    _form: '\Drupal\exif_custom\Controller\ExifCustomSettingsForm'
+  requirements:
+    _permission: 'access content'
+
+
+exif.helper:
+  path: '/admin/config/media/exif_custom/helper'
+  defaults:
+    _title: "Exif module quick start guide"
+    _controller: "\\Drupal\\exif_custom\\Controller\\ExifCustomSettingsController::showGuide"
+  requirements:
+    _permission: "access content"
+
+
+
+exif.helper.vocabulary:
+  path: '/admin/config/media/exif_custom/helper/vocabulary'
+  defaults:
+    _title: "create new vocabulary photography"
+    _controller: "\\Drupal\\exif_custom\\Controller\\ExifCustomSettingsController::createPhotographyVocabulary"
+  requirements:
+    _permission: "access content"
+
+
+exif.helper.nodetype:
+  path: '/admin/config/media/exif_custom/helper/nodetype'
+  defaults:
+    _title: "create new Photography node type"
+    _controller: "\\Drupal\\exif_custom\\Controller\\ExifCustomSettingsController::createPhotographyNodeType"
+  requirements:
+    _permission: "access content"
+
+
+exif.helper.mediatype:
+  path: '/admin/config/media/exif_custom/helper/mediatype'
+  defaults:
+    _title: "create new Photography media type"
+    _controller: "\\Drupal\\exif_custom\\Controller\\ExifCustomSettingsController::createPhotographyMediaType"
+  requirements:
+    _permission: "access content"

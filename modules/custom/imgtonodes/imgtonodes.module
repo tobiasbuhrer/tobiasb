@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains imgtonodes.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function imgtonodes_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the imgtonodes module.
+    case 'help.page.imgtonodes':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module will create new nodes based on images in a folder on the server. It will also map EXIF/IPTC fields to fields of the node.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
