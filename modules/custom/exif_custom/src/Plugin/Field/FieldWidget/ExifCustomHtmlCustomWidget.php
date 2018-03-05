@@ -20,7 +20,7 @@ use Drupal\Core\Form\FormStateInterface;
  *   multiple_values = true,
  *   field_types = {
  *     "text",
- *     "text_long",
+ *     "text_long"
  *   }
  * )
  */

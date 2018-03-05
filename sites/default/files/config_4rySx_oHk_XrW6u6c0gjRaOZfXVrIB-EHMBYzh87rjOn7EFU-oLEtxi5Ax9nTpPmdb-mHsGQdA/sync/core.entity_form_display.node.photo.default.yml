@@ -17,7 +17,7 @@ dependencies:
     - image.style.thumbnail
     - node.type.photo
   module:
-    - datetime
+    - exif_custom
     - file
     - geolocation
     - image
@@ -29,17 +29,18 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 12
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   field_city:
     weight: 5
     settings:
-      size: 60
-      placeholder: ''
+      image_field: field_image
+      exif_field: iptc_city
+      exif_field_separator: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: exif_readonly
     region: content
   field_coordinates:
     weight: 3
@@ -54,29 +55,34 @@ content:
     type: options_select
     region: content
   field_credit:
-    weight: 9
+    weight: 8
     settings:
-      size: 60
-      placeholder: ''
+      exif_field_separator: ''
+      exif_field: naming_convention
+      image_field: null
     third_party_settings: {  }
-    type: string_textfield
+    type: exif_readonly
     region: content
   field_date:
-    weight: 27
-    settings: {  }
+    weight: 10
+    settings:
+      image_field: field_image
+      exif_field: iptc_credit
+      exif_field_separator: ''
     third_party_settings: {  }
-    type: datetime_default
+    type: exif_readonly
     region: content
   field_description:
     weight: 2
     settings:
-      size: 60
-      placeholder: ''
+      image_field: field_image
+      exif_field: iptc_caption
+      exif_field_separator: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: exif_readonly
     region: content
   field_file:
-    weight: 26
+    weight: 12
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
@@ -85,29 +91,31 @@ content:
   field_image:
     weight: 0
     settings:
-      progress_indicator: throbber
       preview_image_style: thumbnail
+      progress_indicator: throbber
     third_party_settings: {  }
     type: image_image
     region: content
   field_location:
     weight: 4
     settings:
-      size: 60
-      placeholder: ''
+      image_field: field_image
+      exif_field: iptc_sublocation
+      exif_field_separator: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: exif_readonly
     region: content
   field_state:
     weight: 6
     settings:
-      size: 60
-      placeholder: ''
+      image_field: field_image
+      exif_field: iptc_state
+      exif_field_separator: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: exif_readonly
     region: content
   field_tags:
-    weight: 10
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
@@ -117,13 +125,13 @@ content:
     region: content
   path:
     type: path
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 14
+    weight: 16
     region: content
     settings:
       display_label: true
@@ -137,22 +145,23 @@ content:
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 15
+    weight: 13
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   title:
-    type: string_textfield
+    type: exif_readonly
     weight: 1
     region: content
     settings:
-      size: 60
-      placeholder: ''
+      image_field: field_image
+      exif_field: iptc_headline
+      exif_field_separator: ''
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS

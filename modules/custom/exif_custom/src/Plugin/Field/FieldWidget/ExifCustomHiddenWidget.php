@@ -26,6 +26,8 @@ use Drupal\field\Entity\FieldConfig;
  *   field_types = {
  *     "text",
  *     "text_long",
+ *     "string",
+ *     "string_long",
  *     "entity_reference",
  *     "date",
  *     "datetime",
