@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.photo.field_credit
     - field.field.node.photo.field_date
     - field.field.node.photo.field_description
+    - field.field.node.photo.field_file
     - field.field.node.photo.field_image
     - field.field.node.photo.field_location
     - field.field.node.photo.field_state
@@ -17,6 +18,7 @@ dependencies:
     - node.type.photo
   module:
     - datetime
+    - file
     - geolocation
     - image
     - path
@@ -60,7 +62,7 @@ content:
     type: string_textfield
     region: content
   field_date:
-    weight: 8
+    weight: 27
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -72,6 +74,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_file:
+    weight: 26
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
     region: content
   field_image:
     weight: 0

@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.photo.field_credit
     - field.field.node.photo.field_date
     - field.field.node.photo.field_description
+    - field.field.node.photo.field_file
     - field.field.node.photo.field_image
     - field.field.node.photo.field_location
     - field.field.node.photo.field_state
@@ -16,6 +17,7 @@ dependencies:
     - node.type.photo
   module:
     - datetime
+    - file
     - geolocation
     - image
     - options
@@ -71,6 +73,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_file:
+    weight: 113
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
     region: content
   field_image:
     weight: 101

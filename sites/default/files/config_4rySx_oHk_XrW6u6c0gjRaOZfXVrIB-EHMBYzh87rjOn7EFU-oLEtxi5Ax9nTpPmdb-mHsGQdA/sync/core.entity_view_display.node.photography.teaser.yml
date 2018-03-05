@@ -1,0 +1,46 @@
+uuid: af8c0853-179d-4637-a53b-40dd6a5314fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.photography.field_exif_filedatetime
+    - field.field.node.photography.field_exif_model
+    - field.field.node.photography.field_image
+    - node.type.photography
+  module:
+    - text
+    - user
+id: node.photography.teaser
+targetEntityType: node
+bundle: photography
+mode: teaser
+content:
+  field_exif_filedatetime:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 116
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_exif_model:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 115
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_image:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 114
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

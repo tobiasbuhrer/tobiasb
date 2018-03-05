@@ -1,0 +1,11 @@
+uuid: 0a83885e-b1e0-4a09-a5ab-d87efe46d08e
+langcode: en
+status: true
+dependencies: {  }
+name: Photography
+type: photography
+description: 'Use Photography for content where the photo is the main content. You still can have some other information related to the photo itself.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true
