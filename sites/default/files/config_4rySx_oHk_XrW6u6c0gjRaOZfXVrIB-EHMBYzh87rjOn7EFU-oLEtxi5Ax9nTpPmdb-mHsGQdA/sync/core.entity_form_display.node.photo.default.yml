@@ -17,7 +17,7 @@ dependencies:
     - image.style.thumbnail
     - node.type.photo
   module:
-    - exif_custom
+    - datetime
     - file
     - geolocation
     - image
@@ -34,13 +34,12 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_city:
-    weight: 5
+    weight: 26
     settings:
-      image_field: field_image
-      exif_field: iptc_city
-      exif_field_separator: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: exif_readonly
+    type: string_textfield
     region: content
   field_coordinates:
     weight: 3
@@ -55,31 +54,26 @@ content:
     type: options_select
     region: content
   field_credit:
-    weight: 8
+    weight: 27
     settings:
-      exif_field_separator: ''
-      exif_field: naming_convention
-      image_field: null
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: exif_readonly
+    type: string_textfield
     region: content
   field_date:
-    weight: 10
-    settings:
-      image_field: field_image
-      exif_field: iptc_credit
-      exif_field_separator: ''
+    weight: 28
+    settings: {  }
     third_party_settings: {  }
-    type: exif_readonly
+    type: datetime_default
     region: content
   field_description:
-    weight: 2
+    weight: 29
     settings:
-      image_field: field_image
-      exif_field: iptc_caption
-      exif_field_separator: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: exif_readonly
+    type: string_textfield
     region: content
   field_file:
     weight: 12
@@ -97,22 +91,20 @@ content:
     type: image_image
     region: content
   field_location:
-    weight: 4
+    weight: 30
     settings:
-      image_field: field_image
-      exif_field: iptc_sublocation
-      exif_field_separator: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: exif_readonly
+    type: string_textfield
     region: content
   field_state:
-    weight: 6
+    weight: 31
     settings:
-      image_field: field_image
-      exif_field: iptc_state
-      exif_field_separator: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: exif_readonly
+    type: string_textfield
     region: content
   field_tags:
     weight: 9
@@ -151,13 +143,12 @@ content:
       display_label: true
     third_party_settings: {  }
   title:
-    type: exif_readonly
+    type: string_textfield
     weight: 1
     region: content
     settings:
-      image_field: field_image
-      exif_field: iptc_headline
-      exif_field_separator: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete

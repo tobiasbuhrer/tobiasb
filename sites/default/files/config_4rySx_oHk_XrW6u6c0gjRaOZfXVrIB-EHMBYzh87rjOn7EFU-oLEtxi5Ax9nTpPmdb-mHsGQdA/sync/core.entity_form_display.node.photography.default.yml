@@ -25,7 +25,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_exif_filedatetime:
-    weight: 137
+    weight: 139
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -82,12 +82,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: entity_reference_autocomplete
-    weight: 5
+    weight: 140
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-    region: content
     third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
 hidden: {  }

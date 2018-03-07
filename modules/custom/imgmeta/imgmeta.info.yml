@@ -1,0 +1,7 @@
+name: 'Image Metadata'
+type: module
+description: 'Batch imports image files and maps their EXIF/IPTC fields to node fields'
+core: 8.x
+package: 'Custom'
+dependencies:
+  - geolocation

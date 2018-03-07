@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains imgmeta.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function imgmeta_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the imgmeta module.
+    case 'help.page.imgmeta':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Batch imports image files and maps their EXIF/IPTC fields to node fields') . '</p>';
+      return $output;
+
+    default:
+  }
+}
