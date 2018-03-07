@@ -91,7 +91,7 @@ class ImgMetaSettingsForm extends ConfigFormBase implements ContainerInjectionIn
         //we check whether each of the selected node types has at least one image field
         $selected_node_types = array_filter($form_state->getValue('node_types'));
         $all_nodetypes = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
-        
+
         $error_types = array();
         $entityManager = \Drupal::service('entity_field.manager');
         foreach ($selected_node_types as $node_type => $value ) {
