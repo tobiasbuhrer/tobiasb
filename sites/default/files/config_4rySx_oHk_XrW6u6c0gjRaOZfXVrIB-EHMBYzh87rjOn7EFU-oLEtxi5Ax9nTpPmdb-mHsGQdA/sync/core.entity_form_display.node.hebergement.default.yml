@@ -25,9 +25,38 @@ content:
     third_party_settings: {  }
   field_coordinates:
     weight: 1
-    settings: {  }
+    settings:
+      default_longitude: '0'
+      default_latitude: '0'
+      google_map_settings:
+        height: 400px
+        width: 100%
+        type: HYBRID
+        zoom: '10'
+        maxZoom: 18
+        minZoom: 0
+        mapTypeControl: 1
+        streetViewControl: 1
+        zoomControl: 1
+        scrollwheel: 1
+        gestureHandling: auto
+        draggable: 1
+        style: ''
+        info_auto_display: 1
+        marker_icon_path: ''
+        disableAutoPan: 1
+        rotateControl: 0
+        fullscreenControl: 0
+        preferScrollingToZooming: 0
+        disableDoubleClickZoom: 0
+      auto_client_location: '0'
+      auto_client_location_marker: '0'
+      allow_override_map_settings: 0
+      populate_address_field: ''
+      target_address_field: null
+      explicite_actions_address_field: ''
     third_party_settings: {  }
-    type: geolocation_latlng
+    type: geolocation_googlegeocoder
     region: content
   field_infos:
     weight: 3
