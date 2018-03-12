@@ -1,0 +1,7 @@
+image_import.image_import_settings_form:
+  title: 'Import image settings Form'
+  route_name: image_import.image_import_settings_form
+  description: 'Import image settings Form'
+  parent: system.admin_config_media
+  weight: 99
+

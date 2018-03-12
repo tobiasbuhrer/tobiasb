@@ -187,7 +187,7 @@ class ExifSettingsForm extends ConfigFormBase implements ContainerInjectionInter
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->getValue('extraction_solution') == 'simple_exiftool' && !is_executable($form_state->getValue('exiftool_location')) ) {
-        $form_state->setErrorByName('exiftool_location', $this->t('The location provided for exiftool is not correct. Please ensure the exiftool location exists and is executable.'));
+      $form_state->setErrorByName('exiftool_location', $this->t('The location provided for exiftool is not correct. Please ensure the exiftool location exists and is executable.'));
     }
     parent::validateForm($form, $form_state);
   }

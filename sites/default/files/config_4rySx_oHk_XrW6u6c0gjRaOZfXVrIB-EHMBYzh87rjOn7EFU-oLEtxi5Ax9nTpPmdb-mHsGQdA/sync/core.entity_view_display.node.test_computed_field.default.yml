@@ -1,0 +1,40 @@
+uuid: ca449850-f851-4220-bcc5-1b029dbdc026
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.test_computed_field.field_computed_text
+    - field.field.node.test_computed_field.field_testimg
+    - node.type.test_computed_field
+  module:
+    - computed_field
+    - image
+    - user
+id: node.test_computed_field.default
+targetEntityType: node
+bundle: test_computed_field
+mode: default
+content:
+  field_computed_text:
+    weight: 102
+    label: above
+    settings:
+      sanitized: true
+      cache_unit: -1
+      cache_duration: 1
+    third_party_settings: {  }
+    type: computed_string
+    region: content
+  field_testimg:
+    weight: 103
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3331da8f3717e4d75ee9c43433eff60e",
+    "content-hash": "cad2692644ccb11e8a47af4cc862dae5",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1159,6 +1159,84 @@
             ],
             "description": "Drupal Console Extend Plugin",
             "time": "2017-07-28T17:11:54+00:00"
+        },
+        {
+            "name": "drupal/plupload",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/plupload",
+                "reference": "0bacd9f658d94258023b6f9228555e0ba42f6928"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta1+4-dev",
+                    "datestamp": "1490404387",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "David_Rothstein",
+                    "homepage": "https://www.drupal.org/user/124982"
+                },
+                {
+                    "name": "JacobSingh",
+                    "homepage": "https://www.drupal.org/user/68912"
+                },
+                {
+                    "name": "budalokko",
+                    "homepage": "https://www.drupal.org/user/788636"
+                },
+                {
+                    "name": "effulgentsia",
+                    "homepage": "https://www.drupal.org/user/78040"
+                },
+                {
+                    "name": "greggles",
+                    "homepage": "https://www.drupal.org/user/36762"
+                },
+                {
+                    "name": "justintime",
+                    "homepage": "https://www.drupal.org/user/99149"
+                },
+                {
+                    "name": "muri",
+                    "homepage": "https://www.drupal.org/user/1358960"
+                },
+                {
+                    "name": "paranojik",
+                    "homepage": "https://www.drupal.org/user/19501"
+                },
+                {
+                    "name": "slashrsm",
+                    "homepage": "https://www.drupal.org/user/744628"
+                },
+                {
+                    "name": "vingborg",
+                    "homepage": "https://www.drupal.org/user/259657"
+                }
+            ],
+            "description": "Provides a plupload Form API element.",
+            "homepage": "https://www.drupal.org/project/plupload",
+            "support": {
+                "source": "http://cgit.drupalcode.org/plupload"
+            },
+            "time": "2017-03-25 01:11:39"
         },
         {
             "name": "easyrdf/easyrdf",
@@ -5384,6 +5462,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "drupal/plupload": 20,
         "behat/mink": 20
     },
     "prefer-stable": true,

@@ -15,7 +15,8 @@ use Drupal\field\Entity\FieldConfig;
  *   id = "imgmeta_field_widget",
  *   label = @Translation("Import data from image EXIF/IPTC fields"),
  *   field_types = {
- *     "string"
+ *     "string", "string_long", "datetime", "list_string", "text", "text_long", "text_with_summary", "geolocation",
+ *     "entity_reference"
  *   }
  * )
  */
@@ -62,7 +63,7 @@ class ImgmetaFieldWidget extends WidgetBase
             );
         }
 
-        $filepath = drupal_get_path('module', 'imgmeta') .'/sample.jpg';
+        $filepath = drupal_get_path('module', 'imgmeta') . '/sample.jpg';
         $fields = $this->readMetaTags($filepath);
 
         foreach ($fields as $key => $field) {
@@ -96,14 +97,13 @@ class ImgmetaFieldWidget extends WidgetBase
                 ->getFieldDefinitions($entity_type, $bundle_name)[$image_field];
             if ($image_field_config instanceof FieldConfig) {
                 if ($image_field_config->getType() == "image" || $image_field_config->getType() == "media") {
-                    $label = $this->t("'@image_linked_label' (id: @image_linked_id)",array('@image_linked_label' => $image_field_config->getLabel(), '@image_linked_id' => $image_field));
+                    $label = $this->t("'@image_linked_label' (id: @image_linked_id)", array('@image_linked_label' => $image_field_config->getLabel(), '@image_linked_id' => $image_field));
                 } else {
                     $label = $image_field;
                 }
             }
             $image_field_msg = $this->t("exif will be extracted from image field @image", array('@image' => $label));
-        }
-        else {
+        } else {
             $image_field_msg = $this->t('No image chosen. field will stay empty.');
         }
         array_unshift($summary, $image_field_msg);
@@ -116,7 +116,8 @@ class ImgmetaFieldWidget extends WidgetBase
     /**
      * Validate.
      */
-    public function validate($element, FormStateInterface $form_state) {
+    public function validate($element, FormStateInterface $form_state)
+    {
 
 
         $value = $element['#value'];
@@ -159,17 +160,21 @@ class ImgmetaFieldWidget extends WidgetBase
             default:
                 $type = 'textfield';
         }
-        //we should get the image
-        $image_field = $this->getSetting('source_field');
-        $bundle = $this->fieldDefinition->get("bundle");
-        //$entity_type = $this->fieldDefinition->get("entity_type");
 
-        $resultmsg = 'we should calculate: ' .  $this->getSetting('exif_field');
+        //we should get the image url
+        $image_field = $this->getSetting('image_field');
+        //$entity = $items->getEntity();
+        $bundle = $items->getEntity()->bundle();
+        $entitytype = $items->getEntity()->getEntityTypeId();
+
+
+
+        //$resultmsg = 'we should calculate: ' . $this->getSetting('exif_field') . " from " . $url;
 
         $element += array(
             '#type' => $type,
-            '#disabled' => FALSE,
-            '#default_value' => $items[$delta]->value ?: $resultmsg,
+            '#disabled' => TRUE,
+            '#default_value' => $items[$delta]->value ?: 'some value',
             '#element_validate' => array(
                 array($this, 'validate'),
             )
@@ -178,7 +183,8 @@ class ImgmetaFieldWidget extends WidgetBase
         return $element;
     }
 
-    public static function validateImageField($element, FormStateInterface $form_state, $form) {
+    public static function validateImageField($element, FormStateInterface $form_state, $form)
+    {
         $elementSettings = $form_state->getValue($element['#parents']);
         if (!$elementSettings) {
             $field_storage_definitions = Drupal::getContainer()
@@ -219,15 +225,16 @@ class ImgmetaFieldWidget extends WidgetBase
         return $result;
     }
 
-    private function readMetaTags($uri, $concatenate_arrays = TRUE) {
+    private function readMetaTags($uri, $concatenate_arrays = TRUE)
+    {
         $fields = array();
 
         //Get all of the EXIF tags
         $exif = exif_read_data($uri, NULL, TRUE);
-        if(is_array($exif)){
-            foreach($exif as $name => $section){
-                foreach($section as $key => $value){
-                    if($concatenate_arrays && is_array($value)){
+        if (is_array($exif)) {
+            foreach ($exif as $name => $section) {
+                foreach ($section as $key => $value) {
+                    if ($concatenate_arrays && is_array($value)) {
                         $value = implode(', ', $value);
                     }
                     $fields['EXIF:' . $name . ':' . $key] = $this->check_plain($value);
@@ -236,27 +243,27 @@ class ImgmetaFieldWidget extends WidgetBase
         }
 
         //XMP - test
-        $fields =  array_merge($fields, $this->get_xmp($uri));
+        $fields = array_merge($fields, $this->get_xmp($uri));
 
         //Look for IPTC data
         $size = getimagesize($uri, $info);
 
-        if(is_array($info)){
-            foreach ($info as $block){
+        if (is_array($info)) {
+            foreach ($info as $block) {
                 $iptc = iptcparse($block);
 
-                if($iptc){
+                if ($iptc) {
                     //IPTC:2#254 can contain name=value pairs
-                    if(isset($iptc['2#254']) && is_array($iptc['2#254'])){
+                    if (isset($iptc['2#254']) && is_array($iptc['2#254'])) {
                         $i = 0;
-                        foreach($iptc['2#254'] as $iptc_field){
+                        foreach ($iptc['2#254'] as $iptc_field) {
                             $subfields = explode('=', $iptc_field);
                             $iptc['2#254.' . $subfields[0]] = $subfields[1];
                         }
                         unset($iptc['2#254']);
                     }
-                    foreach($iptc as $key => $value){
-                        if($concatenate_arrays && is_array($value)){
+                    foreach ($iptc as $key => $value) {
+                        if ($concatenate_arrays && is_array($value)) {
                             $value = implode(', ', $value);
                         }
                         $fields['IPTC:' . $key] = $this->check_plain($value);
@@ -267,36 +274,40 @@ class ImgmetaFieldWidget extends WidgetBase
 
         //TODO: add special treatment for geofield gps import
 
-        if(!is_array($exif) && !isset($iptc)){return FALSE;}
+        if (!is_array($exif) && !isset($iptc)) {
+            return FALSE;
+        }
         return $fields;
     }
 
-    private function check_plain($text){
+    private function check_plain($text)
+    {
         if (is_null($text)) {
             $text = "";
         }
-        if(!mb_detect_encoding($text, 'UTF-8', true)){
-            $text = str_replace("&lt;br /&gt;","\n",
-                str_replace("<","&lt;",
-                    str_replace(">","&gt;",
-                        mb_convert_encoding(html_entity_decode($text),"UTF-8","ISO-8859-1"))));
+        if (!mb_detect_encoding($text, 'UTF-8', true)) {
+            $text = str_replace("&lt;br /&gt;", "\n",
+                str_replace("<", "&lt;",
+                    str_replace(">", "&gt;",
+                        mb_convert_encoding(html_entity_decode($text), "UTF-8", "ISO-8859-1"))));
         }
 
         // return htmlspecialchars($text, ENT_QUOTES, 'UTF-8'); -- removed as stops italics in descriptions
         return $text;
     }
 
-    private function get_xmp($image) {
+    private function get_xmp($image)
+    {
         $content = file_get_contents($image);
         $xmp_data_start = strpos($content, '<x:xmpmeta');
-        $xmp_data_end   = strpos($content, '</x:xmpmeta>');
+        $xmp_data_end = strpos($content, '</x:xmpmeta>');
         if ($xmp_data_start === FALSE || $xmp_data_end === FALSE) {
             return array();
         }
-        $xmp_length     = $xmp_data_end - $xmp_data_start;
-        $xmp_data       = substr($content, $xmp_data_start, $xmp_length + 12);
+        $xmp_length = $xmp_data_end - $xmp_data_start;
+        $xmp_data = substr($content, $xmp_data_start, $xmp_length + 12);
         unset($content);
-        $xmp            = simplexml_load_string($xmp_data);
+        $xmp = simplexml_load_string($xmp_data);
         if ($xmp === FALSE) {
             return array();
         }
@@ -312,25 +323,26 @@ class ImgmetaFieldWidget extends WidgetBase
         return $field_data;
     }
 
-    private function xml_recursion($obj, &$fields, $name){
+    private function xml_recursion($obj, &$fields, $name)
+    {
         $namespace = $obj->getDocNamespaces(true);
         $namespace[NULL] = NULL;
 
         $children = array();
         $attributes = array();
-        $name = $name.':'.strtolower((string)$obj->getName());
+        $name = $name . ':' . strtolower((string)$obj->getName());
 
         $text = trim((string)$obj);
-        if( strlen($text) <= 0 ) {
+        if (strlen($text) <= 0) {
             $text = NULL;
         }
 
         // get info for all namespaces
-        if(is_object($obj)) {
-            foreach( $namespace as $ns=>$nsUrl ) {
+        if (is_object($obj)) {
+            foreach ($namespace as $ns => $nsUrl) {
                 // atributes
                 $objAttributes = $obj->attributes($ns, true);
-                foreach( $objAttributes as $attributeName => $attributeValue ) {
+                foreach ($objAttributes as $attributeName => $attributeValue) {
                     $attribName = strtolower(trim((string)$attributeName));
                     $attribVal = trim((string)$attributeValue);
                     if (!empty($ns)) {
@@ -341,32 +353,32 @@ class ImgmetaFieldWidget extends WidgetBase
 
                 // children
                 $objChildren = $obj->children($ns, true);
-                foreach( $objChildren as $childName=>$child ) {
+                foreach ($objChildren as $childName => $child) {
                     $childName = strtolower((string)$childName);
-                    if( !empty($ns) ) {
-                        $childName = $ns.':'.$childName;
+                    if (!empty($ns)) {
+                        $childName = $ns . ':' . $childName;
                     }
                     $children[$childName][] = $this->xml_recursion($child, $fields, $name);
                 }
             }
         }
-        if (!is_null($text)){
+        if (!is_null($text)) {
             $fields[$name] = $text;
         }
 
         return array(
-            'name'=>$name,
-            'text'=> html_entity_decode($text),
-            'attributes'=>$attributes,
-            'children'=>$children
+            'name' => $name,
+            'text' => html_entity_decode($text),
+            'attributes' => $attributes,
+            'children' => $children
         );
     }
 
-    private function getHumanReadableKey($text) {
+    private function getHumanReadableKey($text)
+    {
         if (!strncmp($text, 'IPTC:', 5)) {
-            return 'IPTC:'.$this->getHumanReadableIPTCkey(substr($text,5));
-        }
-        else {
+            return 'IPTC:' . $this->getHumanReadableIPTCkey(substr($text, 5));
+        } else {
             return $text;
         }
     }
@@ -376,7 +388,8 @@ class ImgmetaFieldWidget extends WidgetBase
      * @return array
      *
      */
-    private function getHumanReadableIPTCkey($text) {
+    private function getHumanReadableIPTCkey($text)
+    {
         $pairs = array(
             "2#202" => "object_data_preview_data",
             "2#201" => "object_data_preview_file_format_version",
@@ -438,6 +451,39 @@ class ImgmetaFieldWidget extends WidgetBase
             "1#090" => "envelope_character_set"
         );
         return $pairs[$text];
+    }
+
+    /**
+     * retrieve the URI and Language of an image.
+     *
+     * @param FieldableEntityInterface $entity the netity to look for
+     * @param $field_image_name string the field name containing the image
+     * @return array|bool a simple array with uri and language for each images in the field of FALSE if the entity type is not known.
+     */
+    private function get_file_uri_and_language(FieldableEntityInterface $entity, $field_image_name)
+    {
+        $result = FALSE;
+        if ($entity->getEntityTypeId() == 'node' || $entity->getEntityTypeId() == 'media') {
+            $image_field_instance = $entity->get($field_image_name);
+            if ($image_field_instance instanceof FileFieldItemList) {
+                $nbImages = count($image_field_instance->getValue());
+                $result = array();
+                for ($i = 0; $i < $nbImages; $i++) {
+                    $result[$i] = array();
+                    $tmp = $image_field_instance->get($i)->entity;
+                    $result[$i]['uri'] = $tmp->uri[0];
+                    $result[$i]['language'] = $tmp->language();
+                }
+            }
+        } else {
+            if ($entity->getEntityTypeId() == 'file') {
+                $result = array();
+                $result[0] = array();
+                $result[0]['uri'] = $entity->uri;
+                $result[0]['language'] = $entity->language();
+            }
+        }
+        return $result;
     }
 
 

@@ -21,7 +21,6 @@ dependencies:
     - file
     - geolocation
     - image
-    - imgmeta
     - path
 id: node.photo.default
 targetEntityType: node
@@ -35,12 +34,12 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_city:
-    weight: 26
+    weight: 33
     settings:
-      image_field: field_image
-      exif_field: 'IPTC:2#092'
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: imgmeta_field_widget
+    type: string_textfield
     region: content
   field_coordinates:
     weight: 3

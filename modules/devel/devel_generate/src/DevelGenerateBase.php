@@ -7,6 +7,8 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginBase;
+use Drupal\node\Entity\Node;
+use Drupal\file\Entity\File;
 
 /**
  * Provides a base DevelGenerate plugin implementation.
