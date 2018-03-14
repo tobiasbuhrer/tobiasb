@@ -4,11 +4,11 @@ _core:
 choose_image: null
 contenttype: photo
 image_field: field_image
-exif_title: 'IPTC:2#105'
-exif_field_city: 'IPTC:2#090'
+exif_title: ''
+exif_field_city: ''
 exif_field_coordinates: ''
-exif_field_country_code: 'IPTC:2#100'
-exif_field_credit: 'IPTC:2#116'
+exif_field_country_code: ''
+exif_field_credit: ''
 exif_field_date: ''
 exif_field_description: ''
 exif_field_location: ''
