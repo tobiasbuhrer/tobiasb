@@ -25,3 +25,10 @@ image_import.import_form:
   parent: image_import.admin_config_image_import
   weight: 30
 
+image_import.unused_files_settings_form:
+  title: 'Setting for unused files'
+  route_name: image_import.unused_files_settings_form
+  description: 'Setting for unused files'
+  parent: system.admin_config_media
+  weight: 99
+

@@ -6,10 +6,3 @@ contenttype: photo
 image_field: field_image
 exif_title: 'EXIF:FILE:FileName'
 exif_field_city: 'IPTC:2#090'
-exif_field_coordinates: ''
-exif_field_country_code: ''
-exif_field_credit: ''
-exif_field_date: ''
-exif_field_description: ''
-exif_field_location: ''
-exif_field_state: ''

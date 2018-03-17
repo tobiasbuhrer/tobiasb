@@ -56,7 +56,7 @@ class TargetBundleSettingsForm extends ConfigFormBase
      */
     public function buildForm(array $form, FormStateInterface $form_state)
     {
-        $config = $config = $this->config('image_import.imageimportsettings');
+        $config = $this->config('image_import.imageimportsettings');
         $all_nodetypes = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
         $all_nt = array();
         foreach ($all_nodetypes as $item) {
@@ -93,11 +93,46 @@ class TargetBundleSettingsForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        parent::submitForm($form, $form_state);
+
 
         $this->config('image_import.imageimportsettings')
             ->set('contenttype', $form_state->getValue('contenttype'))
             ->save();
-    }
 
+        $config = $this->config('image_import.imageimportsettings');
+
+        //we check whether the set image field still exists. If not, we put this to the first image field found
+
+        $options = array();
+        $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $config->get('contenttype'));
+        foreach ($fields as $field) {
+            if (($field->getFieldStorageDefinition()->isBaseField() == FALSE) and ($field->getType() == "image")) {
+                $options[] = $field->getName();
+            }
+        }
+
+        if (!(in_array($config->get('image_field'), $options))) {
+            $this->config('image_import.imageimportsettings')
+                ->set('image_field', $options[0])
+                ->save();
+        }
+
+        //we check whether the exif_ fields still exist. If not, we unset the configuration for them
+        $configs = $config->get();
+        $options = array();
+        foreach ($fields as $field) {
+            $options[] = $field->getName();
+        }
+        foreach ($configs as $key => $setting) {
+            if (substr($key, 0, 5) == 'exif_') {
+                if (!(in_array(substr($key, 5), $options))) {
+                    $this->config('image_import.imageimportsettings')
+                        ->clear($key)
+                        ->save();
+                }
+            }
+        }
+
+        parent::submitForm($form, $form_state);
+    }
 }

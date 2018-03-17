@@ -67,10 +67,11 @@ class ImportForm extends ConfigFormBase
         $configs = $config->get();
         foreach ($configs as $key=>$setting) {
 
-            if ((substr($key,0,5)=='exif_') and ($config->get($key))) {
+            if (substr($key,0,5)=='exif_') {
                 //$msg .= $key . '<br />';
                 $thisfield = substr($key,5);
-                $msg .= '<strong>' . $fields[$thisfield]->getLabel() . '</strong> ' . $this->t('will get value from IPTC/EXIF field') . ': <strong>' . $config->get($key) . '</strong><br />';
+
+                $msg .= '<strong>' . $fields[$thisfield]->getLabel() . '</strong> ' . $this->t('will get value from IPTC/EXIF field') . ': <strong>' . ImageImportSettingsForm::getHumanReadableKey($config->get($key)) . '</strong><br />';
             }
         }
         $msg .= '</p>';

@@ -66,37 +66,12 @@ class ImageImportSettingsForm extends ConfigFormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
         $config = $this->config('image_import.imageimportsettings');
-        $form['plupload'] = array(
-            '#type' => 'plupload',
-            '#title' => 'Image(s) to upload',
-            '#upload_validators' => array(
-                'file_validate_extensions' => array('jpg jpeg gif png'),
-            ),
-        );
-
-        $all_nodetypes = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
-        $all_nt = array();
-        foreach ($all_nodetypes as $item) {
-            //lets check whether the node type has at least one image field
-            $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $item->id());
-            foreach ($fields as $field) {
-                if ($field->getType()=='image') {
-                    $all_nt[$item->id()] = $item->label();
-                    break;
-                }
-            }
-        }
-
-        $form['contenttype'] = [
-            '#type' => 'select',
-            '#title' => $this
-                ->t('Select element'),
-            '#options' => $all_nt,
-            '#default_value' => $config->get('contenttype'),
-        ];
+        $target_node_type = $this->entityTypeManager->getStorage('node_type')->load($config->get('contenttype'));
+        $msg = '<p>' . $this->t('Images shall be imported to Node type') . ': <strong>' . $target_node_type->label() . '</strong><br />';
 
         //can we show dependent form elements?
         $form['mapping'] = array(
+            '#prefix' => $msg,
             '#type' => 'fieldset',
             '#title' => $this
                 ->t('Map fields to IPTC/EXIF values'),
@@ -105,7 +80,7 @@ class ImageImportSettingsForm extends ConfigFormBase
 
         $options = array();
         foreach ($fields as $field) {
-            if (($field->getFieldStorageDefinition()->isBaseField() == FALSE) and ($field->getType()=="image")) {
+            if (($field->getFieldStorageDefinition()->isBaseField() == FALSE) and ($field->getType() == "image")) {
                 $options[$field->getName()] = $field->getLabel();
             }
         }
@@ -126,15 +101,15 @@ class ImageImportSettingsForm extends ConfigFormBase
         }
 
         foreach ($fields as $field) {
-            if (($field->getFieldStorageDefinition()->isBaseField() == FALSE) or ($field->getName()=="title")) {
+            if (($field->getFieldStorageDefinition()->isBaseField() == FALSE) or ($field->getName() == "title")) {
                 $type = $field->getType();
-                if (in_array($type,array('string', 'list_string', 'geolocation', 'datetime'))) {
+                if (in_array($type, array('string', 'list_string', 'geolocation', 'datetime'))) {
                     $label = $field->getName();
                     $name = $field->getLabel();
                     $form['mapping'][$label] = array(
                         '#type' => 'select',
                         '#title' => $name . ' (' . $this->t('Type') . ': ' . $type . ')',
-                        '#default_value' => $config->get('exif_'.$label),
+                        '#default_value' => $config->get('exif_' . $label),
                         '#empty_value' => '',
                         '#required' => FALSE,
                         '#options' => $tagoptions,
@@ -150,17 +125,6 @@ class ImageImportSettingsForm extends ConfigFormBase
      */
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
-/*
-        if (count($form_state->getValue('plupload')) == 0) {
-            $form_state->setErrorByName('plupload', $this->t("No image chosen"));
-        }
-*/
-        foreach ($form_state->getValue('plupload') as $uploaded_file) {
-            if ($uploaded_file['status'] != 'done') {
-                $form_state->setErrorByName('plupload', $this->t("Upload of %filename failed.", array('%filename' => $uploaded_file['name'])));
-            }
-        }
-
         parent::validateForm($form, $form_state);
     }
 
@@ -169,67 +133,23 @@ class ImageImportSettingsForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-
-        $currentmonth = "://" . date("Y-m");
-        // Create target directory if necessary.
-        $destination = \Drupal::config('system.file')
-                ->get('default_scheme') . $currentmonth;
-        file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
-
-        $saved_files = array();
-
-        foreach ($form_state->getValue('plupload') as $uploaded_file) {
-
-            $file_uri = file_stream_wrapper_uri_normalize($destination . '/' . $uploaded_file['name']);
-
-            // Move file without creating a new 'file' entity.
-            //file_unmanaged_move($uploaded_file['tmppath'], $file_uri, FILE_EXISTS_RENAME );
-            //end original code
-
-            // Create file object from a locally copied file.
-            $uri = file_unmanaged_copy($uploaded_file['tmppath'], $file_uri, FILE_EXISTS_REPLACE);
-            $file = File::Create([
-                'uri' => $uri,
-            ]);
-            $file->save();
-            // end
-
-            //only for success message... to remove
-            $saved_files[] = $file->getFileUri();
-            // Create node object with attached file.
-
-            //use filename as default title
-            $title = $file->getFilename();
-
-            $node = Node::create([
-                'type' => $form_state->getValue('contenttype'),
-                'title' => $title,
-                'field_image' => [
-                    'target_id' => $file->id(),
-                    'alt' => $title,
-                ],
-            ]);
-            $node->save();
-        }
-        if (!empty($saved_files)) {
-            drupal_set_message('Files uploaded correctly: ' . implode(', ', $saved_files) . '.', 'status');
-        }
-
-
-        $this->config('image_import.imageimportsettings')
-            ->set('contenttype', $form_state->getValue('contenttype'))
-            ->save();
         $this->config('image_import.imageimportsettings')
             ->set('image_field', $form_state->getValue('image_field'))
             ->save();
 
-        //dpm($form_state->getValues());
         $formvalues = $form_state->getValues();
-        foreach ($formvalues as $key=>$value) {
-            if (($key == 'title') or (substr($key,0,6 )=='field_')) {
-                $this->config('image_import.imageimportsettings')
-                    ->set('exif_' . $key, $value)
-                    ->save();
+
+        foreach ($formvalues as $key => $value) {
+            if (($key == 'title') or (substr($key, 0, 6) == 'field_')) {
+                if ($value == '') {
+                    $this->config('image_import.imageimportsettings')
+                        ->clear('exif_' . $key)
+                        ->save();
+                } else {
+                    $this->config('image_import.imageimportsettings')
+                        ->set('exif_' . $key, $value)
+                        ->save();
+                }
             }
         }
         parent::submitForm($form, $form_state);
@@ -384,10 +304,10 @@ class ImageImportSettingsForm extends ConfigFormBase
         );
     }
 
-    private function getHumanReadableKey($text)
+    public static function getHumanReadableKey($text)
     {
         if (!strncmp($text, 'IPTC:', 5)) {
-            return 'IPTC:' . $this->getHumanReadableIPTCkey(substr($text, 5));
+            return 'IPTC:' . ImageImportSettingsForm::getHumanReadableIPTCkey(substr($text, 5));
         } else {
             return $text;
         }
@@ -398,7 +318,7 @@ class ImageImportSettingsForm extends ConfigFormBase
      * @return array
      *
      */
-    private function getHumanReadableIPTCkey($text)
+    public static function getHumanReadableIPTCkey($text)
     {
         $pairs = array(
             "2#202" => "object_data_preview_data",

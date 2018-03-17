@@ -9,7 +9,7 @@ image_import.image_import_settings_form:
   path: '/admin/config/image_import/imageimportsettings'
   defaults:
     _form: '\Drupal\image_import\Form\ImageImportSettingsForm'
-    _title: 'ImageImportSettingsForm'
+    _title: 'Field mappings'
   requirements:
     _permission: 'access administration pages'
   options:
@@ -20,7 +20,7 @@ image_import.target_bundle_settings_form:
   path: '/admin/config/image_import/targetbundlesettings'
   defaults:
     _form: '\Drupal\image_import\Form\TargetBundleSettingsForm'
-    _title: 'TargetBundleSettingsForm'
+    _title: 'Choose target bundle'
   requirements:
     _permission: 'access administration pages'
   options:
@@ -31,7 +31,18 @@ image_import.import_form:
   path: '/admin/config/image_import/import'
   defaults:
     _form: '\Drupal\image_import\Form\ImportForm'
-    _title: 'ImportForm'
+    _title: 'Image import'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+
+image_import.unused_files_settings_form:
+  path: '/admin/config/image_import/unusedfilessettings'
+  defaults:
+    _form: '\Drupal\image_import\Form\UnusedFilesSettingsForm'
+    _title: 'File settings'
   requirements:
     _permission: 'access administration pages'
   options:
