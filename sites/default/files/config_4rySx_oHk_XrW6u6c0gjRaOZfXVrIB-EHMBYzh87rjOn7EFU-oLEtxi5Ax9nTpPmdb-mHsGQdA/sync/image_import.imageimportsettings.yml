@@ -4,5 +4,5 @@ _core:
 choose_image: null
 contenttype: photo
 image_field: field_image
-exif_title: 'EXIF:FILE:FileName'
+exif_title: 'IPTC:2#105'
 exif_field_city: 'IPTC:2#090'

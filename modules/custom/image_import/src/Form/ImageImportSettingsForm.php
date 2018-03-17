@@ -155,7 +155,7 @@ class ImageImportSettingsForm extends ConfigFormBase
         parent::submitForm($form, $form_state);
     }
 
-    private function readMetaTags($uri, $concatenate_arrays = TRUE)
+    public static function readMetaTags($uri, $concatenate_arrays = TRUE)
     {
         $fields = array();
 
@@ -167,13 +167,13 @@ class ImageImportSettingsForm extends ConfigFormBase
                     if ($concatenate_arrays && is_array($value)) {
                         $value = implode(', ', $value);
                     }
-                    $fields['EXIF:' . $name . ':' . $key] = $this->check_plain($value);
+                    $fields['EXIF:' . $name . ':' . $key] = ImageImportSettingsForm::check_plain($value);
                 }
             }
         }
 
         //XMP - test
-        $fields = array_merge($fields, $this->get_xmp($uri));
+        $fields = array_merge($fields, ImageImportSettingsForm::get_xmp($uri));
 
         //Look for IPTC data
         $size = getimagesize($uri, $info);
@@ -196,7 +196,7 @@ class ImageImportSettingsForm extends ConfigFormBase
                         if ($concatenate_arrays && is_array($value)) {
                             $value = implode(', ', $value);
                         }
-                        $fields['IPTC:' . $key] = $this->check_plain($value);
+                        $fields['IPTC:' . $key] = ImageImportSettingsForm::check_plain($value);
                     }
                 }
             }
@@ -210,7 +210,7 @@ class ImageImportSettingsForm extends ConfigFormBase
         return $fields;
     }
 
-    private function check_plain($text)
+    public static function check_plain($text)
     {
         if (is_null($text)) {
             $text = "";
@@ -226,7 +226,7 @@ class ImageImportSettingsForm extends ConfigFormBase
         return $text;
     }
 
-    private function get_xmp($image)
+    public static function get_xmp($image)
     {
         $content = file_get_contents($image);
         $xmp_data_start = strpos($content, '<x:xmpmeta');
@@ -248,12 +248,12 @@ class ImageImportSettingsForm extends ConfigFormBase
         }*/
 
         $field_data = array();
-        $this->xml_recursion($xmp, $field_data, 'XMP');
+        ImageImportSettingsForm::xml_recursion($xmp, $field_data, 'XMP');
 
         return $field_data;
     }
 
-    private function xml_recursion($obj, &$fields, $name)
+    public static function xml_recursion($obj, &$fields, $name)
     {
         $namespace = $obj->getDocNamespaces(true);
         $namespace[NULL] = NULL;
@@ -288,7 +288,7 @@ class ImageImportSettingsForm extends ConfigFormBase
                     if (!empty($ns)) {
                         $childName = $ns . ':' . $childName;
                     }
-                    $children[$childName][] = $this->xml_recursion($child, $fields, $name);
+                    $children[$childName][] = ImageImportSettingsForm::xml_recursion($child, $fields, $name);
                 }
             }
         }

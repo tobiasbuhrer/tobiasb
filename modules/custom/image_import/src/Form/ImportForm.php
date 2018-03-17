@@ -119,8 +119,11 @@ class ImportForm extends ConfigFormBase
         $destination = \Drupal::config('system.file')
                 ->get('default_scheme') . $currentmonth;
         file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
-
+        //to delete
         $saved_files = array();
+
+        //fields of target node type
+        $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $config->get('contenttype'));
 
         foreach ($form_state->getValue('plupload') as $uploaded_file) {
 
@@ -134,22 +137,42 @@ class ImportForm extends ConfigFormBase
             $file->save();
 
             //only for success message... to remove
-            $saved_files[] = $file->getFileUri();
+            //$saved_files[] = $file->getFileUri();
             // Create node object with attached file.
 
             //use filename as default title
             $title = $file->getFilename();
 
-            //code to complete...
-            $node = Node::create([
-                'type' => $config->get('contenttype'),
-                'title' => $title,
-                $config->get('image_field') => [
-                    'target_id' => $file->id(),
-                    'alt' => $title,
-                ],
-            ]);
+            //load metatags for image
+            $filepath = file_create_url($file->getFileUri());
+            $saved_files[] = $filepath;
+
+            $metatags = ImageImportSettingsForm::readMetaTags($filepath,TRUE);
+
+            //title: if mapping is set, result needs to have at least one char
+            if (($config->get('exif_title'))and (strlen($metatags[$config->get('exif_title')])>0)){
+                $title = $metatags[$config->get('exif_title')];
+            }
+
+            $newnode = array();
+            $newnode['type'] = $config->get('contenttype');
+            $newnode['title'] = $title;
+            $newnode[$config->get('image_field')]['target_id'] = $file->id();
+            $newnode['alt'] = $title;
+
+            $configs = $config->get();
+            foreach ($configs as $key=>$mapping) {
+                    if ((substr($key,0,5)=='exif_') and ($key !== 'exif_title')) {
+                        $fieldname = substr($key,5);
+                        $saved_files[] = $filepath . ' ' . $fieldname;
+                        //continue here, we now have to make a select with the type(s) of target fields.
+                    }
+            }
+
+            $node = Node::create($newnode);
             $node->save();
+            $nodeid = $node->id();
+
         }
         if (!empty($saved_files)) {
             drupal_set_message('Files uploaded correctly: ' . implode(', ', $saved_files) . '.', 'status');
