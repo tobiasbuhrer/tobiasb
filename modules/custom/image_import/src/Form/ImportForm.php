@@ -62,20 +62,20 @@ class ImportForm extends ConfigFormBase
         $target_node_type = $this->entityTypeManager->getStorage('node_type')->load($config->get('contenttype'));
         $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $config->get('contenttype'));
         $msg = '<p>' . $this->t('Images shall be imported to Node type') . ': <strong>' . $target_node_type->label() . '</strong><br />';
-        $msg .= $this->t('The image field will be') . ': <strong>' . $fields[$config->get('image_field')]->getLabel()  . '</strong></p><p>';
+        $msg .= $this->t('The image field will be') . ': <strong>' . $fields[$config->get('image_field')]->getLabel() . '</strong></p><p>';
 
         $configs = $config->get();
-        foreach ($configs as $key=>$setting) {
+        foreach ($configs as $key => $setting) {
 
-            if (substr($key,0,5)=='exif_') {
+            if (substr($key, 0, 5) == 'exif_') {
                 //$msg .= $key . '<br />';
-                $thisfield = substr($key,5);
+                $thisfield = substr($key, 5);
 
                 $msg .= '<strong>' . $fields[$thisfield]->getLabel() . '</strong> ' . $this->t('will get value from IPTC/EXIF field') . ': <strong>' . ImageImportSettingsForm::getHumanReadableKey($config->get($key)) . '</strong><br />';
             }
         }
         $msg .= '</p>';
-        drupal_set_message( $this->t('Remember to set any default values you want in all created nodes'), 'warning');
+        drupal_set_message($this->t('Remember to set any default values you want in all created nodes'), 'warning');
         $form['plupload'] = array(
             '#prefix' => $msg,
             '#type' => 'plupload',
@@ -145,12 +145,12 @@ class ImportForm extends ConfigFormBase
 
             //load metatags for image
             $filepath = file_create_url($file->getFileUri());
-            $saved_files[] = $filepath;
+            //$saved_files[] = $filepath;
 
-            $metatags = ImageImportSettingsForm::readMetaTags($filepath,TRUE);
+            $metatags = ImageImportSettingsForm::readMetaTags($filepath, TRUE);
 
             //title: if mapping is set, result needs to have at least one char
-            if (($config->get('exif_title'))and (strlen($metatags[$config->get('exif_title')])>0)){
+            if (($config->get('exif_title')) and (strlen($metatags[$config->get('exif_title')]) > 0)) {
                 $title = $metatags[$config->get('exif_title')];
             }
 
@@ -158,15 +158,52 @@ class ImportForm extends ConfigFormBase
             $newnode['type'] = $config->get('contenttype');
             $newnode['title'] = $title;
             $newnode[$config->get('image_field')]['target_id'] = $file->id();
-            $newnode['alt'] = $title;
+            $newnode[$config->get('image_field')]['alt'] = $title;
 
             $configs = $config->get();
-            foreach ($configs as $key=>$mapping) {
-                    if ((substr($key,0,5)=='exif_') and ($key !== 'exif_title')) {
-                        $fieldname = substr($key,5);
-                        $saved_files[] = $filepath . ' ' . $fieldname;
-                        //continue here, we now have to make a select with the type(s) of target fields.
-                    }
+            foreach ($configs as $key => $mapping) {
+                if ((substr($key, 0, 5) == 'exif_') and ($key !== 'exif_title')) {
+                    $fieldname = substr($key, 5);
+                    //$saved_files[] = $filepath . ' ' . $fieldname . '=' . $fields[$fieldname]->getName();
+
+                    switch ($fields[$fieldname]->getType()) {
+                        case "string":
+                        case "list_string":
+                            $newnode[$fieldname] = (string)$metatags[$mapping];
+                            break;
+                        case "datetime":
+                            $datetime = date_create_from_format('Y:m:d H:i:s', $metatags[$mapping]);
+                            $newnode[$fieldname] = date_format($datetime, 'Y-m-d\TH:i:s');
+                            break;
+                        case "geolocation":
+                            if (substr($mapping, 0, 9) == 'EXIF:GPS:') {
+                                $lat = $metatags['EXIF:GPS:GPSLatitude'];
+                                $lon = $metatags['EXIF:GPS:GPSLongitude'];
+                                $latref = $metatags['EXIF:GPS:GPSLatitudeRef'];
+                                $lonref = $metatags['EXIF:GPS:GPSLongitudeRef'];
+                            }
+                            if ((!empty($lat)) and
+                                (!empty($lon)) and
+                                (!empty($latref)) and
+                                (!empty($lonref))) {
+
+                                if ($latref == "N") {
+                                    $Latitude = $this->convertToDegree($lat);
+                                } else {
+                                    $Latitude = 0 - $this->convertToDegree($lat);
+                                }
+
+                                if ($lonref == "E") {
+                                    $Longitude = $this->convertToDegree($lon);
+                                } else {
+                                    $Longitude = 0 - $this->convertToDegree($lon);
+                                }
+                                $newnode[$fieldname]['lat'] = $Latitude;
+                                $newnode[$fieldname]['lng'] = $Longitude;
+                            }
+                            break;
+                    };
+                }
             }
 
             $node = Node::create($newnode);
@@ -178,6 +215,18 @@ class ImportForm extends ConfigFormBase
             drupal_set_message('Files uploaded correctly: ' . implode(', ', $saved_files) . '.', 'status');
         }
         parent::submitForm($form, $form_state);
+    }
+
+    // Convert a lat or lon 3-array to decimal degrees
+    private function convertToDegree($exifcoordinates) {
+        $values = explode(',',$exifcoordinates);
+        $deg = explode('/',$values[0]);
+        $degrees = $deg[0]/$deg[1];
+        $min = explode('/',$values[1]);
+        $minutes = $min[0]/$min[1];
+        $sec = explode('/',$values[2]);
+        $seconds  = $sec[0]/$sec[1];
+        return $degrees + $minutes / 60.0 + $seconds / 3600;
     }
 
 }
