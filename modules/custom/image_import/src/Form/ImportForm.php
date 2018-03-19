@@ -169,11 +169,18 @@ class ImportForm extends ConfigFormBase
                     switch ($fields[$fieldname]->getType()) {
                         case "string":
                         case "list_string":
-                            $newnode[$fieldname] = (string)$metatags[$mapping];
+                            $v = (string)$metatags[$mapping];
+                            //we don't write empty values. If no value is written, default will be applied.
+                            if (!empty($v)) {
+                                $newnode[$fieldname] = (string)$metatags[$mapping];
+                            }
                             break;
                         case "datetime":
                             $datetime = date_create_from_format('Y:m:d H:i:s', $metatags[$mapping]);
-                            $newnode[$fieldname] = date_format($datetime, 'Y-m-d\TH:i:s');
+                            //we don't write empty values. If no value is written, default will be applied.
+                            if (!empty($datatime)) {
+                                $newnode[$fieldname] = date_format($datetime, 'Y-m-d\TH:i:s');
+                            }
                             break;
                         case "geolocation":
                             if (substr($mapping, 0, 9) == 'EXIF:GPS:') {
