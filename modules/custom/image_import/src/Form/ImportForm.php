@@ -174,6 +174,7 @@ class ImportForm extends ConfigFormBase
                             }
                             break;
                         case "geolocation":
+
                             if (substr($mapping, 0, 9) == 'EXIF:GPS:') {
                                 $lat = $metatags['EXIF:GPS:GPSLatitude'];
                                 $lon = $metatags['EXIF:GPS:GPSLongitude'];
@@ -198,8 +199,41 @@ class ImportForm extends ConfigFormBase
                                 }
                                 $newnode[$fieldname]['lat'] = $Latitude;
                                 $newnode[$fieldname]['lng'] = $Longitude;
+
                             }
                             break;
+
+
+                        case "geofield":
+                            if (substr($mapping, 0, 9) == 'EXIF:GPS:') {
+                                $lat = $metatags['EXIF:GPS:GPSLatitude'];
+                                $lon = $metatags['EXIF:GPS:GPSLongitude'];
+                                $latref = $metatags['EXIF:GPS:GPSLatitudeRef'];
+                                $lonref = $metatags['EXIF:GPS:GPSLongitudeRef'];
+                            }
+                            if ((!empty($lat)) and
+                                (!empty($lon)) and
+                                (!empty($latref)) and
+                                (!empty($lonref))) {
+
+                                if ($latref == "Nww") {
+                                    $Latitude = $this->convertToDegree($lat);
+                                } else {
+                                    $Latitude = 0 - $this->convertToDegree($lat);
+                                }
+
+                                if ($lonref == "E") {
+                                    $Longitude = $this->convertToDegree($lon);
+                                } else {
+                                    $Longitude = 0 - $this->convertToDegree($lon);
+                                }
+                                // Generate a point [lon, lat]
+                                $coord = [$Longitude, $Latitude];
+                                $point = \Drupal::service('geofield.wkt_generator')->wktBuildPoint($coord);
+                                $newnode[$fieldname] = $point;
+                            }
+                            break;
+
                     };
                 }
             }
@@ -213,14 +247,15 @@ class ImportForm extends ConfigFormBase
     }
 
     // Convert a lat or lon 3-array to decimal degrees
-    private function convertToDegree($exifcoordinates) {
-        $values = explode(',',$exifcoordinates);
-        $deg = explode('/',$values[0]);
-        $degrees = $deg[0]/$deg[1];
-        $min = explode('/',$values[1]);
-        $minutes = $min[0]/$min[1];
-        $sec = explode('/',$values[2]);
-        $seconds  = $sec[0]/$sec[1];
+    private function convertToDegree($exifcoordinates)
+    {
+        $values = explode(',', $exifcoordinates);
+        $deg = explode('/', $values[0]);
+        $degrees = $deg[0] / $deg[1];
+        $min = explode('/', $values[1]);
+        $minutes = $min[0] / $min[1];
+        $sec = explode('/', $values[2]);
+        $seconds = $sec[0] / $sec[1];
         return $degrees + $minutes / 60.0 + $seconds / 3600;
     }
 

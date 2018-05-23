@@ -4,19 +4,19 @@ status: true
 dependencies:
   config:
     - field.field.node.photo.field_city
-    - field.field.node.photo.field_coordinates
     - field.field.node.photo.field_country_code
     - field.field.node.photo.field_credit
     - field.field.node.photo.field_date
     - field.field.node.photo.field_description
     - field.field.node.photo.field_image
     - field.field.node.photo.field_location
+    - field.field.node.photo.field_position
     - field.field.node.photo.field_state
     - field.field.node.photo.field_tags
     - node.type.photo
   module:
     - datetime
-    - geolocation
+    - geofield
     - image
     - options
     - user
@@ -32,13 +32,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-    region: content
-  field_coordinates:
-    weight: 7
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: geolocation_latlng
     region: content
   field_country_code:
     weight: 6
@@ -88,6 +81,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_position:
+    weight: 11
+    label: above
+    settings:
+      output_format: wkt
+    third_party_settings: {  }
+    type: geofield_default
     region: content
   field_state:
     weight: 5

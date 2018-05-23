@@ -5,11 +5,13 @@ dependencies:
   config:
     - field.field.node.hebergement.field_coordinates
     - field.field.node.hebergement.field_infos
+    - field.field.node.hebergement.field_position
     - field.field.node.hebergement.field_quick_evaluation
     - field.field.node.hebergement.field_tags
     - node.type.hebergement
   module:
     - geolocation
+    - leaflet
     - options
     - text
     - user
@@ -31,6 +33,36 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_position:
+    weight: 106
+    label: above
+    settings:
+      leaflet_map: 'OSM Mapnik'
+      height: 400
+      zoom: 10
+      minPossibleZoom: 0
+      maxPossibleZoom: 18
+      minZoom: 0
+      maxZoom: 18
+      popup: false
+      icon:
+        icon_url: ''
+        shadow_url: ''
+        icon_size:
+          x: 0
+          'y': 0
+        icon_anchor:
+          x: 0
+          'y': 0
+        shadow_anchor:
+          x: 0
+          'y': 0
+        popup_anchor:
+          x: 0
+          'y': 0
+    third_party_settings: {  }
+    type: leaflet_formatter_default
     region: content
   field_quick_evaluation:
     weight: 103

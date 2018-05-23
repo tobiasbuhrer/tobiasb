@@ -113,7 +113,7 @@ class WktGenerator implements WktGeneratorInterface {
    */
   public function wktGeneratePoint(array $point = NULL) {
     $point = $point ? $point : $this->randomPoint();
-    return $this->wktBuildPoint($point);
+    return $this->wktGeneratePoint();
   }
 
   /**

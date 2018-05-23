@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.node.hebergement.field_coordinates
     - field.field.node.hebergement.field_infos
+    - field.field.node.hebergement.field_position
     - field.field.node.hebergement.field_quick_evaluation
     - field.field.node.hebergement.field_tags
     - node.type.hebergement
   module:
+    - geofield
     - geolocation
     - path
     - text
@@ -19,61 +21,39 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   field_coordinates:
     weight: 1
-    settings:
-      default_longitude: '0'
-      default_latitude: '0'
-      google_map_settings:
-        height: 400px
-        width: 100%
-        type: HYBRID
-        zoom: '10'
-        maxZoom: 18
-        minZoom: 0
-        mapTypeControl: 1
-        streetViewControl: 1
-        zoomControl: 1
-        scrollwheel: 1
-        gestureHandling: auto
-        draggable: 1
-        style: ''
-        info_auto_display: 1
-        marker_icon_path: ''
-        disableAutoPan: 1
-        rotateControl: 0
-        fullscreenControl: 0
-        preferScrollingToZooming: 0
-        disableDoubleClickZoom: 0
-      auto_client_location: '0'
-      auto_client_location_marker: '0'
-      allow_override_map_settings: 0
-      populate_address_field: ''
-      target_address_field: null
-      explicite_actions_address_field: ''
+    settings: {  }
     third_party_settings: {  }
-    type: geolocation_googlegeocoder
+    type: geolocation_latlng
     region: content
   field_infos:
-    weight: 3
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
     region: content
-  field_quick_evaluation:
+  field_position:
     weight: 2
+    settings:
+      html5_geolocation: false
+    third_party_settings: {  }
+    type: geofield_latlon
+    region: content
+  field_quick_evaluation:
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_tags:
-    weight: 4
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -83,7 +63,7 @@ content:
     region: content
   path:
     type: path
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -91,7 +71,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 7
+    weight: 8
     region: content
     third_party_settings: {  }
   title:
@@ -104,7 +84,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
