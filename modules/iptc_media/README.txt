@@ -1,1 +1,0 @@
-"IPTC Media" 

@@ -1,7 +1,0 @@
-imgmeta.imgmeta_settings_form:
-  title: 'Image Metadata Settings'
-  route_name: imgmeta.imgmeta_settings_form
-  description: 'Image Metadata Settings'
-  parent: system.admin_config_media
-  weight: 99
-

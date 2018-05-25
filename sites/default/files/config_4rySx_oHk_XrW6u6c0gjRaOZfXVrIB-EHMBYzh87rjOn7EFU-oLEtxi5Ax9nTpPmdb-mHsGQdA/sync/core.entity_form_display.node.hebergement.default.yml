@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.hebergement.field_coordinates
     - field.field.node.hebergement.field_infos
     - field.field.node.hebergement.field_position
     - field.field.node.hebergement.field_quick_evaluation
@@ -11,7 +10,6 @@ dependencies:
     - node.type.hebergement
   module:
     - geofield
-    - geolocation
     - path
     - text
 id: node.hebergement.default
@@ -25,12 +23,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_coordinates:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: geolocation_latlng
-    region: content
   field_infos:
     weight: 4
     settings:

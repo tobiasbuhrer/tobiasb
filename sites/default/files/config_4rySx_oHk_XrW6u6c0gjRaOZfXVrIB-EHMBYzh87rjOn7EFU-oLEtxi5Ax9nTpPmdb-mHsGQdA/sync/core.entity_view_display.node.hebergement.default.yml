@@ -3,14 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.hebergement.field_coordinates
     - field.field.node.hebergement.field_infos
     - field.field.node.hebergement.field_position
     - field.field.node.hebergement.field_quick_evaluation
     - field.field.node.hebergement.field_tags
     - node.type.hebergement
   module:
-    - geolocation
     - leaflet
     - options
     - text
@@ -20,13 +18,6 @@ targetEntityType: node
 bundle: hebergement
 mode: default
 content:
-  field_coordinates:
-    weight: 102
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: geolocation_latlng
-    region: content
   field_infos:
     weight: 104
     label: hidden
