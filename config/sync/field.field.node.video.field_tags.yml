@@ -1,0 +1,31 @@
+uuid: e118b360-b75c-4ef7-8247-efe3107e46e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.video
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.voyages
+id: node.video.field_tags
+field_name: field_tags
+entity_type: node
+bundle: video
+label: Tags
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+      voyages: voyages
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: tags
+field_type: entity_reference

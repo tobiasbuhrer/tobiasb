@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains image_import.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\ConfigFormBase;
+
+/**
+ * Implements hook_help().
+ */
+function image_import_help($route_name, RouteMatchInterface $route_match)
+{
+    switch ($route_name) {
+        // Main module help for the image_import module.
+        case 'help.page.image_import':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Batch imports images and creates a node for each of them. Extracts EXIF/IPTC values to fill node fields.') . '</p>';
+            return $output;
+
+        default:
+    }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function image_import_form_alter(&$form, &$form_state, $form_id)
+{
+
+    if ($form_id == 'import_form') {
+
+        $form['actions']['submit']['#value'] = t('Upload images and create nodes');
+    }
+}

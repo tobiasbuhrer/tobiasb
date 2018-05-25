@@ -1,0 +1,23 @@
+uuid: 049aea9c-0eb3-46ca-a10d-dcb98855e10d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_quick_evaluation
+    - node.type.hebergement
+  module:
+    - options
+id: node.hebergement.field_quick_evaluation
+field_name: field_quick_evaluation
+entity_type: node
+bundle: hebergement
+label: 'Quick evaluation'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: black
+default_value_callback: ''
+settings: {  }
+field_type: list_string

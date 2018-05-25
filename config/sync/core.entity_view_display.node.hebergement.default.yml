@@ -1,0 +1,78 @@
+uuid: 3c21b2fd-2420-4c80-9ecd-502c3a2836cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.hebergement.field_infos
+    - field.field.node.hebergement.field_position
+    - field.field.node.hebergement.field_quick_evaluation
+    - field.field.node.hebergement.field_tags
+    - node.type.hebergement
+  module:
+    - leaflet
+    - options
+    - text
+    - user
+id: node.hebergement.default
+targetEntityType: node
+bundle: hebergement
+mode: default
+content:
+  field_infos:
+    weight: 104
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_position:
+    weight: 106
+    label: above
+    settings:
+      leaflet_map: 'OSM Mapnik'
+      height: 400
+      zoom: 10
+      minPossibleZoom: 0
+      maxPossibleZoom: 18
+      minZoom: 0
+      maxZoom: 18
+      popup: false
+      icon:
+        icon_url: ''
+        shadow_url: ''
+        icon_size:
+          x: 0
+          'y': 0
+        icon_anchor:
+          x: 0
+          'y': 0
+        shadow_anchor:
+          x: 0
+          'y': 0
+        popup_anchor:
+          x: 0
+          'y': 0
+    third_party_settings: {  }
+    type: leaflet_formatter_default
+    region: content
+  field_quick_evaluation:
+    weight: 103
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_tags:
+    weight: 105
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

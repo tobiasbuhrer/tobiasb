@@ -1,0 +1,15 @@
+image_import: null
+_core:
+  default_config_hash: T_bRcGjwAISEBdQ6wAYM7aICeUiVUsKU6T8qQD0wNw0
+choose_image: null
+contenttype: photo
+image_field: field_image
+exif_title: 'IPTC:2#105'
+exif_field_city: 'IPTC:2#090'
+exif_field_credit: 'IPTC:2#116'
+exif_field_description: 'IPTC:2#120'
+exif_field_location: 'IPTC:2#092'
+exif_field_state: 'IPTC:2#095'
+exif_field_date: 'EXIF:IFD0:DateTime'
+exif_field_country_code: 'IPTC:2#100'
+exif_field_position: 'EXIF:GPS:GPSLongitude'

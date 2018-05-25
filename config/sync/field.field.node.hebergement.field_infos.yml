@@ -1,0 +1,21 @@
+uuid: 848642f3-030e-4ec6-bdfe-37fa1788ed4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_infos
+    - node.type.hebergement
+  module:
+    - text
+id: node.hebergement.field_infos
+field_name: field_infos
+entity_type: node
+bundle: hebergement
+label: Infos
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
