@@ -26,6 +26,7 @@
         "drupal/examples": "1.x-dev",
         "drupal/geofield": "^1.0",
         "drupal/leaflet": "^1.0@beta",
+        "drupal/leaflet_markercluster": "1.x-dev",
         "drupal/plupload": "1.x-dev",
         "drupal/video": "^1.2",
         "drush/drush": "^9.0.0",
