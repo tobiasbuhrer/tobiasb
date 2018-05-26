@@ -8,7 +8,7 @@ dependencies:
     - system.menu.main
   module:
     - geofield
-    - leaflet_views
+    - geofield_map
     - node
     - user
 id: hebergements
@@ -56,30 +56,95 @@ display:
         options:
           offset: 0
       style:
-        type: leafet_map
+        type: geofield_google_map
         options:
-          grouping: {  }
+          view_settings:
+            entityType: node
+            bundles:
+              - hebergement
           data_source: field_position
-          name_field: title
-          description_field: '#rendered_entity'
           view_mode: full
-          map: 'OSM Mapnik'
-          height: '800'
-          icon:
-            iconUrl: ''
-            shadowUrl: ''
-            iconSize:
-              x: ''
-              'y': ''
-            iconAnchor:
-              x: ''
-              'y': ''
-            shadowAnchor:
-              x: ''
-              'y': ''
-            popupAnchor:
-              x: ''
-              'y': ''
+          map_dimensions:
+            width: 100%
+            height: 450px
+          map_empty:
+            empty_behaviour: '0'
+          map_center:
+            lat: '42'
+            lon: '12.5'
+            center_force: 0
+            geocode: 'Find my location'
+          map_zoom_and_pan:
+            zoom:
+              initial: '6'
+              force: 0
+              min: '1'
+              max: '22'
+            scrollwheel: 1
+            draggable: 1
+            map_reset: 0
+          map_controls:
+            disable_default_ui: 0
+            zoom_control: 1
+            map_type_id: roadmap
+            map_type_control: 1
+            map_type_control_options_type_ids:
+              roadmap: roadmap
+              satellite: satellite
+              hybrid: hybrid
+              terrain: terrain
+            scale_control: 1
+            street_view_control: 1
+            fullscreen_control: 1
+          map_marker_and_infowindow:
+            icon_image_path: ''
+            infowindow_field: title
+            multivalue_split: 0
+            theming:
+              plugin_id: none
+              geofieldmap_entity_type:
+                id: geofieldmap_entity_type
+                values:
+                  hebergement:
+                    weight: '0'
+                    label_alias: ''
+                    icon_file:
+                      fids: ''
+                      upload_button: Upload
+                      remove_button: Remove
+                      upload: ''
+                    image_style: geofield_map_default_icon_style
+                    label: Hébergement
+                    legend_exclude: 0
+                description: 'This Geofield Map Themer allows the definition of different Marker Icons based on the View filtered Entity Types/Bundles.'
+              geofieldmap_taxonomy_term:
+                id: geofieldmap_taxonomy_term
+                description: 'This Geofield Map Themer allows the definition of different Marker Icons based on Taxonomy Terms reference field in View.'
+              geofieldmap_custom_icon:
+                id: geofieldmap_custom_icon
+                values:
+                  icon_file:
+                    fids: {  }
+                    upload_button: Upload
+                    remove_button: Remove
+                    upload: ''
+                  image_style: geofield_map_default_icon_style
+                  label_alias: ''
+                description: 'This Geofield Map Themer allows the definition of a unique custom Marker Icon, valid for all the Map Markers.'
+              plugins_descriptions:
+                table: ''
+          map_additional_options: ''
+          map_oms:
+            map_oms_control: 1
+            map_oms_options: '{"markersWontMove":"true","markersWontHide":"true","basicFormatEvents":"true","nearbyDistance":3}'
+          custom_style_map:
+            custom_style_control: 0
+            custom_style_name: ''
+            custom_style_options: ''
+            custom_style_default: 0
+          map_markercluster:
+            markercluster_control: 1
+            markercluster_additional_options: ''
       row:
         type: fields
       fields:

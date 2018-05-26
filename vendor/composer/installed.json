@@ -7782,83 +7782,6 @@
         }
     },
     {
-        "name": "drupal/leaflet",
-        "version": "1.0.0-beta4",
-        "version_normalized": "1.0.0.0-beta4",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/leaflet",
-            "reference": "8.x-1.0-beta4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.0-beta4.zip",
-            "reference": "8.x-1.0-beta4",
-            "shasum": "59a33a6fd649ee9a0d09979dbe1e89461a797333"
-        },
-        "require": {
-            "drupal/core": "*",
-            "drupal/geofield": "^1.0"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-1.0-beta4",
-                "datestamp": "1526935080",
-                "security-coverage": {
-                    "status": "not-covered",
-                    "message": "Beta releases are not covered by Drupal security advisories."
-                }
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "Italo Mairo",
-                "homepage": "https://www.drupal.org/u/itamair",
-                "role": "Maintainer"
-            },
-            {
-                "name": "Peter Vanhee (pvhee)",
-                "homepage": "https://www.drupal.org/u/pvhee",
-                "role": "Maintainer"
-            },
-            {
-                "name": "Rik de Boer (RdeBoer)",
-                "homepage": "https://www.drupal.org/u/rdeboer",
-                "role": "Maintainer"
-            },
-            {
-                "name": "Gabriel Carleton-Barnes (gcb)",
-                "homepage": "https://www.drupal.org/u/gcb",
-                "role": "Maintainer"
-            },
-            {
-                "name": "Lev Tsypin (levelos)",
-                "homepage": "https://www.drupal.org/u/levelos",
-                "role": "Maintainer"
-            },
-            {
-                "name": "Sean Larkin (seanberto)",
-                "homepage": "https://www.drupal.org/u/seanberto",
-                "role": "Maintainer"
-            }
-        ],
-        "description": "Integration with the Leaflet map scripting library.",
-        "homepage": "https://www.drupal.org/project/leaflet",
-        "support": {
-            "source": "http://cgit.drupalcode.org/leaflet",
-            "issues": "https://www.drupal.org/project/issues/leaflet"
-        }
-    },
-    {
         "name": "drupal/plupload",
         "version": "dev-1.x",
         "version_normalized": "dev-1.x",
@@ -8049,6 +7972,197 @@
         "homepage": "https://www.drupal.org/project/leaflet_markercluster",
         "support": {
             "source": "http://cgit.drupalcode.org/leaflet_markercluster"
+        }
+    },
+    {
+        "name": "drupal/leaflet",
+        "version": "1.0.0-beta4",
+        "version_normalized": "1.0.0.0-beta4",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/leaflet",
+            "reference": "8.x-1.0-beta4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.0-beta4.zip",
+            "reference": "8.x-1.0-beta4",
+            "shasum": "59a33a6fd649ee9a0d09979dbe1e89461a797333"
+        },
+        "require": {
+            "drupal/core": "*",
+            "drupal/geofield": "^1.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.0-beta4",
+                "datestamp": "1526935080",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Beta releases are not covered by Drupal security advisories."
+                }
+            },
+            "patches_applied": []
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Italo Mairo",
+                "homepage": "https://www.drupal.org/u/itamair",
+                "role": "Maintainer"
+            },
+            {
+                "name": "Peter Vanhee (pvhee)",
+                "homepage": "https://www.drupal.org/u/pvhee",
+                "role": "Maintainer"
+            },
+            {
+                "name": "Rik de Boer (RdeBoer)",
+                "homepage": "https://www.drupal.org/u/rdeboer",
+                "role": "Maintainer"
+            },
+            {
+                "name": "Gabriel Carleton-Barnes (gcb)",
+                "homepage": "https://www.drupal.org/u/gcb",
+                "role": "Maintainer"
+            },
+            {
+                "name": "Lev Tsypin (levelos)",
+                "homepage": "https://www.drupal.org/u/levelos",
+                "role": "Maintainer"
+            },
+            {
+                "name": "Sean Larkin (seanberto)",
+                "homepage": "https://www.drupal.org/u/seanberto",
+                "role": "Maintainer"
+            }
+        ],
+        "description": "Integration with the Leaflet map scripting library.",
+        "homepage": "https://www.drupal.org/project/leaflet",
+        "support": {
+            "source": "http://cgit.drupalcode.org/leaflet",
+            "issues": "https://www.drupal.org/project/issues/leaflet"
+        }
+    },
+    {
+        "name": "drupal/geofield_map",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/geofield_map",
+            "reference": "8.x-2.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/geofield_map-8.x-2.0.zip",
+            "reference": "8.x-2.0",
+            "shasum": "6d1f6fc12bfc7f5a3b6308631d7a26a669b2d0d0"
+        },
+        "require": {
+            "drupal/core": "*",
+            "drupal/geofield": "1.0.*@beta"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-2.x": "2.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-2.0",
+                "datestamp": "1526868813",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Project has not opted into security advisory coverage!"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Italo Mairo",
+                "homepage": "https://www.drupal.org/u/itamair",
+                "role": "Creator/Maintainer"
+            }
+        ],
+        "description": "Geofield Map is an advanced, complete and easy-to-use Geo Mapping solution for Drupal 8, based on and fully compatible with the Geofield module.",
+        "homepage": "https://www.drupal.org/project/geofield_map",
+        "support": {
+            "source": "http://git.drupal.org/project/geofield_map.git",
+            "issues": "https://www.drupal.org/project/issues/geofield_map"
+        }
+    },
+    {
+        "name": "drupal/geolocation",
+        "version": "2.0.0-beta1",
+        "version_normalized": "2.0.0.0-beta1",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/geolocation",
+            "reference": "8.x-2.0-beta1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/geolocation-8.x-2.0-beta1.zip",
+            "reference": "8.x-2.0-beta1",
+            "shasum": "71870e2c48681d1ab6ad34119c48e925a21afda9"
+        },
+        "require": {
+            "drupal/core": "*"
+        },
+        "require-dev": {
+            "drupal/address": "*",
+            "drupal/geofield": "*",
+            "drupal/geolocation_demo": "*",
+            "drupal/geolocation_google_maps": "*",
+            "drupal/search_api": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-2.x": "2.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-2.0-beta1",
+                "datestamp": "1515803584",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Beta releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "derjochenmeyer",
+                "homepage": "https://www.drupal.org/u/derjochenmeyer"
+            },
+            {
+                "name": "cadamski",
+                "homepage": "https://www.drupal.org/u/cadamski"
+            }
+        ],
+        "description": "Provides a simple geolocation Drupal field type to store and display location data (lat, lng).",
+        "homepage": "https://www.drupal.org/project/geolocation",
+        "support": {
+            "source": "http://git.drupal.org/project/geolocation.git",
+            "issues": "https://www.drupal.org/project/issues/geolocation"
         }
     }
 ]
