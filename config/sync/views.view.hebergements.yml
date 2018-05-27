@@ -1,20 +1,21 @@
-uuid: 580b8bb3-0628-4134-ae80-7760f48ce74e
+uuid: adb58277-0a23-4823-a1e4-0d5194914b22
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_position
+    - field.storage.node.field_quick_evaluation
     - node.type.hebergement
-    - system.menu.main
   module:
     - geofield
-    - geofield_map
+    - leaflet_views
     - node
+    - options
     - user
 id: hebergements
 label: Hébergements
 module: views
-description: 'Les auberges, hôtels etc.'
+description: ''
 tag: ''
 base_table: node_field_data
 base_field: nid
@@ -56,97 +57,41 @@ display:
         options:
           offset: 0
       style:
-        type: geofield_google_map
+        type: leafet_map
         options:
-          view_settings:
-            entityType: node
-            bundles:
-              - hebergement
+          grouping:
+            -
+              field: field_quick_evaluation
+              rendered: true
+              rendered_strip: false
           data_source: field_position
+          name_field: title
+          description_field: '#rendered_entity'
           view_mode: full
-          map_dimensions:
-            width: 100%
-            height: 450px
-          map_empty:
-            empty_behaviour: '0'
-          map_center:
-            lat: '42'
-            lon: '12.5'
-            center_force: 0
-            geocode: 'Find my location'
-          map_zoom_and_pan:
-            zoom:
-              initial: '6'
-              force: 0
-              min: '1'
-              max: '22'
-            scrollwheel: 1
-            draggable: 1
-            map_reset: 0
-          map_controls:
-            disable_default_ui: 0
-            zoom_control: 1
-            map_type_id: roadmap
-            map_type_control: 1
-            map_type_control_options_type_ids:
-              roadmap: roadmap
-              satellite: satellite
-              hybrid: hybrid
-              terrain: terrain
-            scale_control: 1
-            street_view_control: 1
-            fullscreen_control: 1
-          map_marker_and_infowindow:
-            icon_image_path: ''
-            infowindow_field: title
-            multivalue_split: 0
-            theming:
-              plugin_id: none
-              geofieldmap_entity_type:
-                id: geofieldmap_entity_type
-                values:
-                  hebergement:
-                    weight: '0'
-                    label_alias: ''
-                    icon_file:
-                      fids: ''
-                      upload_button: Upload
-                      remove_button: Remove
-                      upload: ''
-                    image_style: geofield_map_default_icon_style
-                    label: Hébergement
-                    legend_exclude: 0
-                description: 'This Geofield Map Themer allows the definition of different Marker Icons based on the View filtered Entity Types/Bundles.'
-              geofieldmap_taxonomy_term:
-                id: geofieldmap_taxonomy_term
-                description: 'This Geofield Map Themer allows the definition of different Marker Icons based on Taxonomy Terms reference field in View.'
-              geofieldmap_custom_icon:
-                id: geofieldmap_custom_icon
-                values:
-                  icon_file:
-                    fids: {  }
-                    upload_button: Upload
-                    remove_button: Remove
-                    upload: ''
-                  image_style: geofield_map_default_icon_style
-                  label_alias: ''
-                description: 'This Geofield Map Themer allows the definition of a unique custom Marker Icon, valid for all the Map Markers.'
-              plugins_descriptions:
-                table: ''
-          map_additional_options: ''
-          map_oms:
-            map_oms_control: 1
-            map_oms_options: '{"markersWontMove":"true","markersWontHide":"true","basicFormatEvents":"true","nearbyDistance":3}'
-          custom_style_map:
-            custom_style_control: 0
-            custom_style_name: ''
-            custom_style_options: ''
-            custom_style_default: 0
-          map_markercluster:
-            markercluster_control: 1
-            markercluster_additional_options: ''
+          map: google-high-res
+          height: '400'
+          icon:
+            iconUrl: ''
+            shadowUrl: ''
+            iconSize:
+              x: ''
+              'y': ''
+            iconAnchor:
+              x: ''
+              'y': ''
+            shadowAnchor:
+              x: ''
+              'y': ''
+            popupAnchor:
+              x: ''
+              'y': ''
       row:
         type: fields
+        options:
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
       fields:
         title:
           id: title
@@ -258,6 +203,68 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_quick_evaluation:
+          id: field_quick_evaluation
+          table: node__field_quick_evaluation
+          field: field_quick_evaluation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       filters:
         status:
           value: '1'
@@ -279,56 +286,26 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          order: DESC
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-      title: Hébergements
+      sorts: {  }
       header: {  }
       footer: {  }
       empty: {  }
       relationships: {  }
-      arguments: {  }
+      arguments:
+        field_quick_evaluation_value:
+          id: field_quick_evaluation_value
+          table: node__field_quick_evaluation
+          field: field_quick_evaluation_value
+          plugin_id: string_list_field
       display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.field_position'
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Page
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: h-bergements
-      menu:
-        type: normal
-        title: Hébergements
-        menu_name: main
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_position'
+        - 'config:field.storage.node.field_quick_evaluation'

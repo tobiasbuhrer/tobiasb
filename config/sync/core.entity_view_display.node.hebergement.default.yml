@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.hebergement.field_tags
     - node.type.hebergement
   module:
-    - geofield_map
+    - leaflet
     - options
     - text
     - user
@@ -29,61 +29,31 @@ content:
     weight: 106
     label: above
     settings:
-      gmap_api_key: ''
-      map_dimensions:
-        width: 100%
-        height: 450px
-      map_empty:
-        empty_behaviour: '0'
-        empty_message: 'No Geofield Value entered for this field'
-      map_center:
-        lat: '42'
-        lon: '12.5'
-        center_force: 0
-      map_zoom_and_pan:
-        zoom:
-          initial: 6
-          force: 0
-          min: 1
-          max: 22
-        scrollwheel: 1
-        draggable: 1
-        map_reset: 0
-      map_controls:
-        disable_default_ui: 0
-        zoom_control: 1
-        map_type_id: roadmap
-        map_type_control: 1
-        map_type_control_options_type_ids:
-          roadmap: roadmap
-          satellite: satellite
-          hybrid: hybrid
-          terrain: terrain
-        scale_control: 1
-        street_view_control: 1
-        fullscreen_control: 1
-      map_marker_and_infowindow:
-        icon_image_mode: icon_file
-        icon_image_path: ''
-        icon_file_wrapper:
-          icon_file: ''
-        infowindow_field: title
-        multivalue_split: 0
-        force_open: 0
-      map_oms:
-        map_oms_control: 1
-        map_oms_options: '{"markersWontMove": "true", "markersWontHide": "true", "basicFormatEvents": "true", "nearbyDistance": 3}'
-      map_additional_options: ''
-      custom_style_map:
-        custom_style_control: 0
-        custom_style_name: ''
-        custom_style_options: ''
-        custom_style_default: 0
-      map_markercluster:
-        markercluster_control: 0
-        markercluster_additional_options: ''
+      leaflet_map: ~Google
+      zoom: '10'
+      minZoom: '0'
+      maxZoom: '18'
+      height: '400'
+      icon:
+        icon_url: ''
+        shadow_url: ''
+        icon_size:
+          x: '0'
+          'y': '0'
+        icon_anchor:
+          x: '0'
+          'y': '0'
+        shadow_anchor:
+          x: '0'
+          'y': '0'
+        popup_anchor:
+          x: '0'
+          'y': '0'
+      popup: 0
+      minPossibleZoom: 0
+      maxPossibleZoom: 18
     third_party_settings: {  }
-    type: geofield_google_map
+    type: leaflet_formatter_default
     region: content
   field_quick_evaluation:
     weight: 103

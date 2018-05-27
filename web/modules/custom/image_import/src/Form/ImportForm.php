@@ -169,7 +169,7 @@ class ImportForm extends ConfigFormBase
                         case "datetime":
                             $datetime = date_create_from_format('Y:m:d H:i:s', $metatags[$mapping]);
                             //we don't write empty values. If no value is written, default will be applied.
-                            if (!empty($datatime)) {
+                            if (!empty($datetime)) {
                                 $newnode[$fieldname] = date_format($datetime, 'Y-m-d\TH:i:s');
                             }
                             break;

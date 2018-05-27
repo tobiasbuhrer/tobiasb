@@ -25,10 +25,10 @@
         "drupal/entity": "^1.0",
         "drupal/examples": "1.x-dev",
         "drupal/geofield": "^1.0",
-        "drupal/geofield_map": "^2.0",
-        "drupal/geolocation": "^2.0",
+        "drupal/juicebox": "2.x-dev",
         "drupal/leaflet": "^1.0@beta",
         "drupal/leaflet_markercluster": "1.x-dev",
+        "drupal/leaflet_more_maps": "1.x-dev",
         "drupal/plupload": "1.x-dev",
         "drupal/video": "^1.2",
         "drush/drush": "^9.0.0",
@@ -76,6 +76,13 @@
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"]
+        },
+        "patches": {
+            "drupal/leaflet_more_maps": {
+                "Config get does not accept a default value": "https://www.drupal.org/files/issues/lmm.patch",
+                "Update Thunderforest maps": "https://www.drupal.org/files/issues/update_thunderforest_maps_D8-2848895-6.patch",
+                "Invalid argument in leaflet_more_maps_leaflet_map_info()": "https://www.drupal.org/files/issues/lmm_2847024-9.patch"
+            }
         }
     }
 }
