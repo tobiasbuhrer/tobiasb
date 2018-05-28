@@ -10,7 +10,7 @@ dependencies:
     - node.type.video
   module:
     - user
-    - video
+    - video_plupload_widget
 id: node.video.default
 targetEntityType: node
 bundle: video
@@ -41,18 +41,18 @@ content:
     type: entity_reference_label
     region: content
   field_video:
-    type: video_player_list
+    type: video_player_list_formatter_extended
     weight: 0
     region: content
     label: above
     settings:
       width: '854'
       height: '480'
-      controls: true
-      autoplay: true
-      loop: true
+      controls: '1'
+      autoplay: '1'
+      loop: '1'
       preload: auto
-      muted: false
+      muted: 0
     third_party_settings: {  }
   links:
     weight: 4
