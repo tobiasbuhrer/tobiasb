@@ -194,7 +194,7 @@ class VideoPlayerFormatter extends VideoPlayerFormatterBase implements Container
       $entity_form_display = entity_get_form_display($field_definition->getTargetEntityTypeId(), $field_definition->getTargetBundle(), 'default');
       $widget = $entity_form_display->getRenderer($field_definition->getName());
       $widget_id = $widget->getBaseId();
-      if(!$field_definition->isList() && $widget_id == 'video_upload'){
+      if(!$field_definition->isList() && (in_array($widget_id, array('video_upload','video_plupload_widget')))) {
         return TRUE;
       }
     }

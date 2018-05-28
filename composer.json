@@ -19,7 +19,7 @@
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6",
         "drupal-composer/drupal-scaffold": "^2.2",
-        "drupal/console": "^1.0.2",
+        "drupal/console": "~1.0",
         "drupal/core": "~8.5.3",
         "drupal/devel": "~1.0",
         "drupal/entity": "^1.0",
@@ -30,6 +30,7 @@
         "drupal/leaflet_markercluster": "1.x-dev",
         "drupal/leaflet_more_maps": "1.x-dev",
         "drupal/plupload": "1.x-dev",
+        "drupal/plupload_widget": "^1.0",
         "drupal/video": "^1.2",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
@@ -80,8 +81,7 @@
         "patches": {
             "drupal/leaflet_more_maps": {
                 "Config get does not accept a default value": "https://www.drupal.org/files/issues/lmm.patch",
-                "Update Thunderforest maps": "https://www.drupal.org/files/issues/update_thunderforest_maps_D8-2848895-6.patch",
-                "Invalid argument in leaflet_more_maps_leaflet_map_info()": "https://www.drupal.org/files/issues/lmm_2847024-9.patch"
+                "Update Thunderforest maps": "https://www.drupal.org/files/issues/update_thunderforest_maps_D8-2848895-6.patch"
             }
         }
     }

@@ -41,15 +41,19 @@ content:
     type: entity_reference_label
     region: content
   field_video:
+    type: video_player_list
     weight: 0
+    region: content
     label: above
     settings:
       width: '854'
       height: '480'
+      controls: true
       autoplay: true
+      loop: true
+      preload: auto
+      muted: false
     third_party_settings: {  }
-    type: video_embed_player
-    region: content
   links:
     weight: 4
     region: content

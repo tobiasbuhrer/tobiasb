@@ -10,7 +10,7 @@ dependencies:
     - node.type.video
   module:
     - path
-    - video
+    - video_plupload_widget
 id: node.video.default
 targetEntityType: node
 bundle: video
@@ -45,14 +45,13 @@ content:
     type: options_buttons
     region: content
   field_video:
-    weight: 0
+    weight: 1
     settings:
-      file_directory: 'video-thumbnails/[date:custom:Y]-[date:custom:m]'
-      allowed_providers:
-        youtube: youtube
-      uri_scheme: public
+      file_extensions: 'mp4 ogv webm'
+      max_filesize: '50 MB'
+      progress_indicator: throbber
     third_party_settings: {  }
-    type: video_embed
+    type: video_plupload_widget
     region: content
   path:
     type: path
@@ -83,7 +82,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 1
+    weight: 0
     region: content
     settings:
       size: 60
