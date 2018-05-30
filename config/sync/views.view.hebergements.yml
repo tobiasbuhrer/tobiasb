@@ -211,7 +211,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -252,7 +252,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_default
+          type: list_key
           settings: {  }
           group_column: value
           group_columns: {  }

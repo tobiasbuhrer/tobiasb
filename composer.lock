@@ -1995,7 +1995,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/examples",
-                "reference": "8ee1a98d5406f9bdafe6b797965942096f761ead"
+                "reference": "000c39f711f94ed68002e2ee32a613b27c4ef345"
             },
             "require": {
                 "drupal/core": "*"
@@ -2011,7 +2011,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.x-dev",
-                    "datestamp": "1525633985",
+                    "datestamp": "1527630784",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2095,7 +2095,7 @@
                 "issues": "https://www.drupal.org/project/issues/examples",
                 "documentation": "https://api.drupal.org/api/examples"
             },
-            "time": "2018-05-06 19:31:22"
+            "time": "2018-05-29 22:53:16"
         },
         {
             "name": "drupal/geofield",

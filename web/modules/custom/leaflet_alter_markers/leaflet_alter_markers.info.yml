@@ -1,0 +1,7 @@
+name: 'Leaflet alter markers'
+type: module
+description: 'changes markers based on grouping fields in the view'
+core: 8.x
+package: 'Custom'
+dependencies:
+  - leaflet
