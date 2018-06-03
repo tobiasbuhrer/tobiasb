@@ -16,8 +16,8 @@ dependencies:
     - node.type.photo
   module:
     - datetime
-    - geofield
     - image
+    - leaflet
     - options
     - user
 id: node.photo.default
@@ -84,11 +84,33 @@ content:
     region: content
   field_position:
     weight: 11
-    label: above
+    label: hidden
     settings:
-      output_format: wkt
+      leaflet_map: 'OSM Mapnik'
+      zoom: '10'
+      minZoom: '0'
+      maxZoom: '18'
+      height: '400'
+      icon:
+        iconUrl: /sites/default/files/icons/pb.png
+        shadowUrl: /sites/default/files/icons/s.png
+        iconSize:
+          x: '48'
+          'y': '48'
+        iconAnchor:
+          x: '24'
+          'y': '48'
+        shadowAnchor:
+          x: '24'
+          'y': '48'
+        popupAnchor:
+          x: '24'
+          'y': '24'
+      popup: 0
+      minPossibleZoom: 0
+      maxPossibleZoom: 18
     third_party_settings: {  }
-    type: geofield_default
+    type: leaflet_formatter_default
     region: content
   field_state:
     weight: 5

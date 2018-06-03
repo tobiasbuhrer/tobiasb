@@ -27,7 +27,7 @@ content:
     region: content
   field_position:
     weight: 106
-    label: above
+    label: hidden
     settings:
       leaflet_map: ~Google
       zoom: '10'

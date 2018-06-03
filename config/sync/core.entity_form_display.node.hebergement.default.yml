@@ -17,12 +17,6 @@ targetEntityType: node
 bundle: hebergement
 mode: default
 content:
-  created:
-    type: datetime_timestamp
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_infos:
     weight: 4
     settings:
@@ -59,13 +53,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 8
-    region: content
-    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -74,15 +61,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 6
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    region: content
-    third_party_settings: {  }
 hidden:
+  created: true
   promote: true
+  status: true
   sticky: true
+  uid: true

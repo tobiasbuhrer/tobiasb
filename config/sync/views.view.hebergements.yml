@@ -6,11 +6,13 @@ dependencies:
     - field.storage.node.field_position
     - field.storage.node.field_quick_evaluation
     - node.type.hebergement
+    - taxonomy.vocabulary.voyages
   module:
     - geofield
-    - leaflet_views
+    - more_leaflet_markers
     - node
     - options
+    - taxonomy
     - user
 id: hebergements
 label: Hébergements
@@ -57,34 +59,30 @@ display:
         options:
           offset: 0
       style:
-        type: leafet_map
+        type: leaflet_marker_map
         options:
-          grouping:
-            -
-              field: field_quick_evaluation
-              rendered: true
-              rendered_strip: false
+          grouping: {  }
           data_source: field_position
           name_field: title
           description_field: '#rendered_entity'
-          view_mode: full
-          map: google-high-res
-          height: '400'
+          view_mode: teaser
+          map: esri-world_street_map
+          height: '800'
           icon:
-            iconUrl: ''
-            shadowUrl: ''
+            iconUrl: sites/default/files/icons/hb.png
+            shadowUrl: sites/default/files/icons/s.png
             iconSize:
-              x: ''
-              'y': ''
+              x: '48'
+              'y': '48'
             iconAnchor:
-              x: ''
-              'y': ''
+              x: '24'
+              'y': '48'
             shadowAnchor:
-              x: ''
-              'y': ''
+              x: '24'
+              'y': '48'
             popupAnchor:
-              x: ''
-              'y': ''
+              x: '24'
+              'y': '24'
       row:
         type: fields
         options:
@@ -246,13 +244,13 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_key
+          type: list_default
           settings: {  }
           group_column: value
           group_columns: {  }
@@ -286,6 +284,51 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        field_tags_target_id:
+          id: field_tags_target_id
+          table: node__field_tags
+          field: field_tags_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_tags_target_id_op
+            label: 'Tags (field_tags)'
+            description: ''
+            use_operator: false
+            operator: field_tags_target_id_op
+            identifier: field_tags_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: voyages
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       sorts: {  }
       header: {  }
       footer: {  }
@@ -298,12 +341,36 @@ display:
           field: field_quick_evaluation_value
           plugin_id: string_list_field
       display_extenders: {  }
+      link_url: hebergements
+      link_display: '0'
+      title: Hébergements
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_position'
+        - 'config:field.storage.node.field_quick_evaluation'
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: Page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: hebergements
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:

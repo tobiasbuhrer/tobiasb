@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains more_leaflet_markers.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function more_leaflet_markers_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the more_leaflet_markers module.
+    case 'help.page.more_leaflet_markers':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Allows to use different markers in views, based on field value conditions') . '</p>';
+      return $output;
+
+    default:
+  }
+}
