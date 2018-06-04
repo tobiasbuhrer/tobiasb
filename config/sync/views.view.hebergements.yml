@@ -334,12 +334,7 @@ display:
       footer: {  }
       empty: {  }
       relationships: {  }
-      arguments:
-        field_quick_evaluation_value:
-          id: field_quick_evaluation_value
-          table: node__field_quick_evaluation
-          field: field_quick_evaluation_value
-          plugin_id: string_list_field
+      arguments: {  }
       display_extenders: {  }
       link_url: hebergements
       link_display: '0'

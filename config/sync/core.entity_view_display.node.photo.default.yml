@@ -85,11 +85,11 @@ content:
     weight: 10
     label: hidden
     settings:
-      leaflet_map: 'OSM Mapnik'
+      leaflet_map: ~tobiasb
       zoom: '10'
       minZoom: '0'
       maxZoom: '18'
-      height: '400'
+      height: '800'
       icon:
         iconUrl: /sites/default/files/icons/pb.png
         shadowUrl: /sites/default/files/icons/s.png

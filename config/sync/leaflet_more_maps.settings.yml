@@ -1,16 +1,13 @@
 leaflet_more_maps_custom_maps:
   1:
-    map-key: Google
+    map-key: tobiasb
     layer-keys:
-      'google-hybrid layer': 'google-hybrid layer'
-      'google-hybrid overlay': 'google-hybrid overlay'
-      'google-satellite layer': 'google-satellite layer'
-      'google-roadmap layer': 'google-roadmap layer'
+      'esri-world_imagery layer': 'esri-world_imagery layer'
       'google-high-res terrain': 'google-high-res terrain'
-      'google-high-res roadmap': 'google-high-res roadmap'
-    reverse-order: 0
+      'mapquest road layer': 'mapquest road layer'
+    reverse-order: 1
   2:
-    map-key: OSM
+    map-key: ''
     layer-keys:
       'osm-cycle layer': 'osm-cycle layer'
       'osm-transport layer': 'osm-transport layer'
@@ -19,15 +16,7 @@ leaflet_more_maps_custom_maps:
       'osm-spinal-map layer': 'osm-spinal-map layer'
     reverse-order: 0
   3:
-    map-key: ESRI
+    map-key: ''
     layer-keys:
-      'esri-specialty/soil_survey_map layer': 'esri-specialty/soil_survey_map layer'
-      'esri-specialty/world_navigation_charts layer': 'esri-specialty/world_navigation_charts layer'
-      'esri-world_imagery layer': 'esri-world_imagery layer'
-      'esri-natgeo_world_map layer': 'esri-natgeo_world_map layer'
-      'esri-world_physical_map layer': 'esri-world_physical_map layer'
-      'esri-ocean_basemap layer': 'esri-ocean_basemap layer'
-      'esri-reference/world_transportation layer': 'esri-reference/world_transportation layer'
-      'esri-world_topo_map layer': 'esri-world_topo_map layer'
-      'esri-world_street_map layer': 'esri-world_street_map layer'
+      'osm-spinal-map layer': 'osm-spinal-map layer'
     reverse-order: 0
