@@ -465,9 +465,10 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                         foreach ($points as &$point) {
                             $point['label'] = $this->rendered_fields[$id][$this->options['name_field']];
 
-                            // TB Test
-
+                            // Custom logic, needs some checks.
                             $point['icon'] = $this->options['icon'];
+
+                            // Custom logic for hébergements.
                             $test = $this->rendered_fields[$id]['field_quick_evaluation'];
                             switch ($test) {
                                 case "green":
@@ -481,7 +482,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                     break;
                             }
 
-                            // end TB Test
+                            // end custom logic
 
                         }
                     }
@@ -490,13 +491,6 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
                     //end TB Test
                     $data = array_merge($data, $points);
-
-                    if (!empty($this->options['icon']) && $this->options['icon']['iconUrl']) {
-                        foreach ($data as $key => $feature) {
-                            //next line deleted for TB Test
-                            //$data[$key]['icon'] = $this->options['icon'];
-                        }
-                    }
                 }
             }
         }
