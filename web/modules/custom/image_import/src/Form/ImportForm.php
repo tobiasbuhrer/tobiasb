@@ -160,6 +160,7 @@ class ImportForm extends ConfigFormBase
                     switch ($fields[$fieldname]->getType()) {
                         case "string":
                         case "list_string":
+                        case "string_long":
                             $v = (string)$metatags[$mapping];
                             //we don't write empty values. If no value is written, default will be applied.
                             if (!empty($v)) {
@@ -216,7 +217,7 @@ class ImportForm extends ConfigFormBase
                                 (!empty($latref)) and
                                 (!empty($lonref))) {
 
-                                if ($latref == "Nww") {
+                                if ($latref == "N") {
                                     $Latitude = $this->convertToDegree($lat);
                                 } else {
                                     $Latitude = 0 - $this->convertToDegree($lat);

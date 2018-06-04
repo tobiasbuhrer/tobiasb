@@ -28,6 +28,7 @@ module:
   image: 0
   image_import: 0
   juicebox: 0
+  layout_discovery: 0
   leaflet: 0
   leaflet_markercluster: 0
   leaflet_more_maps: 0

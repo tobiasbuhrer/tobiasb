@@ -3,11 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.photo.field_caption
     - field.field.node.photo.field_city
     - field.field.node.photo.field_country_code
     - field.field.node.photo.field_credit
     - field.field.node.photo.field_date
-    - field.field.node.photo.field_description
     - field.field.node.photo.field_image
     - field.field.node.photo.field_location
     - field.field.node.photo.field_position
@@ -25,6 +25,13 @@ targetEntityType: node
 bundle: photo
 mode: default
 content:
+  field_caption:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
   field_city:
     weight: 4
     label: hidden
@@ -41,7 +48,7 @@ content:
     type: list_default
     region: content
   field_credit:
-    weight: 10
+    weight: 9
     label: hidden
     settings:
       link_to_entity: false
@@ -49,21 +56,13 @@ content:
     type: string
     region: content
   field_date:
-    weight: 8
+    weight: 7
     label: hidden
     settings:
       format_type: medium
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
-    region: content
-  field_description:
-    weight: 2
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
     region: content
   field_image:
     weight: 1
@@ -83,7 +82,7 @@ content:
     type: string
     region: content
   field_position:
-    weight: 11
+    weight: 10
     label: hidden
     settings:
       leaflet_map: 'OSM Mapnik'
@@ -121,7 +120,7 @@ content:
     type: string
     region: content
   field_tags:
-    weight: 9
+    weight: 8
     label: hidden
     settings:
       link: true

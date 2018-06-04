@@ -103,7 +103,7 @@ class ImageImportSettingsForm extends ConfigFormBase
         foreach ($fields as $field) {
             if (($field->getFieldStorageDefinition()->isBaseField() == FALSE) or ($field->getName() == "title")) {
                 $type = $field->getType();
-                if (in_array($type, array('string', 'list_string', 'geolocation', 'geofield', 'datetime'))) {
+                if (in_array($type, array('string', 'string_long', 'list_string', 'geolocation', 'geofield', 'datetime'))) {
                     $label = $field->getName();
                     $name = $field->getLabel();
                     $form['mapping'][$label] = array(
