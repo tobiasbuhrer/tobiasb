@@ -435,8 +435,14 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         $data = [];
         $geofield_name = $this->options['data_source'];
         if ($this->options['data_source']) {
+
+            $viewid = $this->view->id();
+            $arguments = $this->view->args;
+
             $this->renderFields($this->view->result);
             /* @var \Drupal\views\ResultRow $result */
+            $counter = 1;
+
             foreach ($this->view->result as $id => $result) {
                 $geofield_value = $this->getFieldValue($id, $geofield_name);
 
@@ -465,21 +471,46 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                         foreach ($points as &$point) {
                             $point['label'] = $this->rendered_fields[$id][$this->options['name_field']];
 
-                            // Custom logic, needs some checks.
+                            // Custom logic
                             $point['icon'] = $this->options['icon'];
 
                             // Custom logic for hébergements.
-                            $test = $this->rendered_fields[$id]['field_quick_evaluation'];
-                            switch ($test) {
-                                case "green":
-                                    $point['icon']['iconUrl'] = "sites/default/files/icons/hg.png";
-                                    break;
-                                case "yellow":
-                                    $point['icon']['iconUrl'] = "sites/default/files/icons/hy.png";
-                                    break;
-                                case "red":
-                                    $point['icon']['iconUrl'] = "sites/default/files/icons/hr.png";
-                                    break;
+                            if ($viewid == "hebergements")  {
+                                $test = $this->rendered_fields[$id]['field_quick_evaluation'];
+                                switch ($test) {
+                                    case "green":
+                                        $point['icon']['iconUrl'] = $base_url . "/sites/default/files/icons/hg.png";
+                                        break;
+                                    case "yellow":
+                                        $point['icon']['iconUrl'] = $base_url . "/sites/default/files/icons/hy.png";
+                                        break;
+                                    case "red":
+                                        $point['icon']['iconUrl'] = $base_url . "/sites/default/files/icons/hr.png";
+                                        break;
+                                }
+                            }
+                            // Custom logic for photo map
+                            if ($viewid == "carte_des_photos") {
+
+                                $test = $this->rendered_fields[$id]['nid'];
+                                if ($test == $arguments[1]) {
+                                    $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image'];
+                                    $point['icon']['shadowUrl'] = $base_url . "/sites/default/files/icons/hy.png";
+                                }
+                                //$point['icon']['shadowUrl'] = $base_url . "/sites/default/files/icons/hy.png";
+                                http://tobiasb/sites/default/files/styles/tobiasb_map_icon/public/2018-06/A3250286.JPG?itok=i9L9Suge
+                                //todo: setting icon to (small) version of image
+                                //todo: add icon shadow
+                                //todo: add new image toolkit
+                                //todo: reset map centre to photo that was just viewed.
+
+                                //setting url back to photo gallery
+                                $targeturl = $base_url . '/photos?field_tags_target_id=' . $arguments[0] .'#' . (string) $counter;
+                                //we don't need the counter in other views, leave him here.
+                                $counter++;
+
+                                $point['popup'] = '<a href="' . $targeturl . '">' . strip_tags($point['label']) . '</a>';
+
                             }
 
                             // end custom logic

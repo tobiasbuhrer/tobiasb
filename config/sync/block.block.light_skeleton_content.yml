@@ -1,0 +1,22 @@
+uuid: 2d715178-73f7-47a4-ac43-677061199ec2
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - light_skeleton
+_core:
+  default_config_hash: BW0UbHq6TEAQHqOpVwob2byVlVLaFzHtMbyykJOf8a8
+id: light_skeleton_content
+theme: light_skeleton
+region: content
+weight: -2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: 87d277d5-54ee-402a-9c08-8da6571904fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - light_skeleton
+_core:
+  default_config_hash: Oal52UPqCE_kLrBzWzvqebtUKSXgkSyQozkXD72aw3Q
+id: light_skeleton_help
+theme: light_skeleton
+region: content
+weight: -4
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

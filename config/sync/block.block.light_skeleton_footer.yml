@@ -1,0 +1,26 @@
+uuid: 744a7127-dbf0-4812-af14-20413967b0ee
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - light_skeleton
+_core:
+  default_config_hash: nXceqp740yPK--Ox4HBpa-QGWZtRGzosXearZDaZHic
+id: light_skeleton_footer
+theme: light_skeleton
+region: header
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Footer menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

@@ -1,0 +1,14 @@
+uuid: 6e38f6da-d724-4878-aff2-44baf4ea9f38
+langcode: en
+status: true
+dependencies: {  }
+name: tobiasb_map_icon
+label: 'tobiasb map icon'
+effects:
+  6630cbc9-e61e-4548-9c23-6271f7a86d21:
+    uuid: 6630cbc9-e61e-4548-9c23-6271f7a86d21
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 48
+      height: 48

@@ -1,0 +1,22 @@
+uuid: ecd0c6f0-1033-4446-a507-7f6ccd65d2b6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - light_skeleton
+_core:
+  default_config_hash: KFJfY4fX7rZZuEiuRAwSX2hRe5oOMsW1UINbmemuW4M
+id: light_skeleton_messages
+theme: light_skeleton
+region: highlighted
+weight: -6
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

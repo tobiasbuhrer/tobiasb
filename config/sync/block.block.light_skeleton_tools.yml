@@ -1,0 +1,26 @@
+uuid: e8a2e791-6abd-45be-9a26-38c728a3d6e5
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.tools
+  module:
+    - system
+  theme:
+    - light_skeleton
+_core:
+  default_config_hash: UADl9MzZugGeky5o_mtNBfkks8NwrqbdIK5LNRiGnfY
+id: light_skeleton_tools
+theme: light_skeleton
+region: header
+weight: -4
+provider: null
+plugin: 'system_menu_block:tools'
+settings:
+  id: 'system_menu_block:tools'
+  label: Tools
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+visibility: {  }

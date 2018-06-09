@@ -1,0 +1,22 @@
+uuid: 114e590f-6d96-4344-bc3d-613418bc854e
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - light_skeleton
+_core:
+  default_config_hash: 765QT4nIE-jlR72uT0DqA9qGmJmHYhO-xqtfdIta1ok
+id: light_skeleton_breadcrumbs
+theme: light_skeleton
+region: header
+weight: -6
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }
