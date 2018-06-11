@@ -5,6 +5,8 @@ dependencies:
   enforced:
     module:
       - juicebox
+  module:
+    - image_effects
 _core:
   default_config_hash: ZdXkWTZGcgpropdpGOuf7bUVZFREQlGVSN-Us5ub-8w
 name: juicebox_large
@@ -13,8 +15,13 @@ effects:
   ca5fe360-0fb0-11e4-9191-0800200c9a66:
     uuid: ca5fe360-0fb0-11e4-9191-0800200c9a66
     id: image_scale
-    weight: 0
+    weight: -9
     data:
       width: 2048
       height: 2048
       upscale: false
+  35aef60a-5186-4daf-8943-189a58f4d55d:
+    uuid: 35aef60a-5186-4daf-8943-189a58f4d55d
+    id: image_effects_strip_metadata
+    weight: -10
+    data: {  }

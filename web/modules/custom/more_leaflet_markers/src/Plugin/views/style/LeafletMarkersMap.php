@@ -14,6 +14,7 @@ use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Leaflet\LeafletService;
+use Drupal\Core\Site\Settings;
 
 
 /**
@@ -295,6 +296,53 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
             '#required' => TRUE,
         ];
 
+        $zoom_options = [];
+        for ($i = $this->options['minPossibleZoom']; $i <= $this->options['maxPossibleZoom']; $i++) {
+            $zoom_options[$i] = $i;
+        }
+
+        $form['zoom'] = [
+            '#title' => $this->t('Zoom'),
+            '#type' => 'select',
+            '#options' => range(0,18),
+            '#default_value' => $this->options['zoom'],
+            '#required' => TRUE,
+        ];
+
+        $form['minZoom'] = [
+            '#title' => $this->t('Min. Zoom'),
+            '#type' => 'select',
+            '#options' => range(0,18),
+            '#default_value' => $this->options['minZoom'],
+            '#required' => TRUE,
+        ];
+
+        $form['maxZoom'] = [
+            '#title' => $this->t('Max. Zoom'),
+            '#type' => 'select',
+            '#options' => range(0,18),
+            '#default_value' => $this->options['maxZoom'],
+            '#required' => TRUE,
+        ];
+
+        $form['center_lat'] = [
+            '#title' => $this->t('Map center lattitude'),
+            '#type' => 'number',
+            '#step' => 'any',
+            '#size' => 4,
+            '#default_value' => $this->options['center_lat'],
+            '#required' => FALSE,
+        ];
+
+        $form['center_lng'] = [
+            '#title' => $this->t('Map center longitude'),
+            '#type' => 'number',
+            '#step' => 'any',
+            '#size' => 4,
+            '#default_value' => $this->options['center_lng'],
+            '#required' => FALSE,
+        ];
+
         $form['height'] = [
             '#title' => $this->t('Map height'),
             '#type' => 'textfield',
@@ -479,36 +527,39 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                 $test = $this->rendered_fields[$id]['field_quick_evaluation'];
                                 switch ($test) {
                                     case "green":
-                                        $point['icon']['iconUrl'] = $base_url . "/sites/default/files/icons/hg.png";
+                                        $point['icon']['iconUrl'] = $GLOBALS['base_url'] . "/sites/default/files/icons/hg.png";
                                         break;
                                     case "yellow":
-                                        $point['icon']['iconUrl'] = $base_url . "/sites/default/files/icons/hy.png";
+                                        $point['icon']['iconUrl'] = $GLOBALS['base_url'] . "/sites/default/files/icons/hy.png";
                                         break;
                                     case "red":
-                                        $point['icon']['iconUrl'] = $base_url . "/sites/default/files/icons/hr.png";
+                                        $point['icon']['iconUrl'] = $GLOBALS['base_url'] . "/sites/default/files/icons/hr.png";
                                         break;
                                 }
                             }
                             // Custom logic for photo map
                             if ($viewid == "carte_des_photos") {
-
                                 $test = $this->rendered_fields[$id]['nid'];
-                                if ($test == $arguments[1]) {
-                                    $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image'];
-                                    $point['icon']['shadowUrl'] = $base_url . "/sites/default/files/icons/hy.png";
+
+                                if ($test <> $arguments[1]) {
+                                    $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image_1'];
+                                    $center = array(
+                                        'lat' => $point['lat'],
+                                        'lng' => $point['lon']);
+
                                 }
-                                //$point['icon']['shadowUrl'] = $base_url . "/sites/default/files/icons/hy.png";
-                                http://tobiasb/sites/default/files/styles/tobiasb_map_icon/public/2018-06/A3250286.JPG?itok=i9L9Suge
-                                //todo: setting icon to (small) version of image
-                                //todo: add icon shadow
-                                //todo: add new image toolkit
+                                else {
+                                    $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image'];
+                                }
+
+
                                 //todo: reset map centre to photo that was just viewed.
 
                                 //setting url back to photo gallery
                                 $targeturl = $base_url . '/photos?field_tags_target_id=' . $arguments[0] .'#' . (string) $counter;
-                                //we don't need the counter in other views, leave him here.
                                 $counter++;
 
+                                //todo: allow direct click on marker rather than popup
                                 $point['popup'] = '<a href="' . $targeturl . '">' . strip_tags($point['label']) . '</a>';
 
                             }
@@ -517,10 +568,6 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
                         }
                     }
-
-
-
-                    //end TB Test
                     $data = array_merge($data, $points);
                 }
             }
@@ -528,6 +575,20 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
         // Always render the map, even if we do not have any data.
         $map = leaflet_map_get_info($this->options['map']);
+        $map['settings']['zoom'] = isset($this->options['zoom']) ? $this->options['zoom'] : NULL;
+        $map['settings']['minZoom'] = isset($this->options['minZoom']) ? $this->options['minZoom'] : NULL;
+        $map['settings']['maxZoom'] = isset($this->options['maxZoom']) ? $this->options['maxZoom'] : NULL;
+        $map['settings']['center'] = (isset($this->options['center_lat']) && isset($this->options['center_lng'])) ? ['lat' => $this->options['center_lat'], 'lng' => $this->options['center_lng']] : NULL;
+
+        if ($viewid == "carte_des_photos") {
+            //center map on the photo we clicked. By default, only zooming out
+            $map['settings']['zoom'] = 4;
+
+            // [center] needs to be added to modules/contrib/leaflet/leaflet.drupal.js
+            $map['settings']['center'] = $center;
+            $map['settings']['disableClusteringAtZoom'] = 15;
+        }
+
         return $this->leafletService->leafletRenderMap($map, $data, $this->options['height'] . 'px');
     }
 
@@ -542,6 +603,13 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         $options['description_field'] = ['default' => ''];
         $options['view_mode'] = ['default' => 'full'];
         $options['map'] = ['default' => ''];
+        $options['zoom'] = ['default' => 10];
+        $options['minPossibleZoom'] = ['default' => 0];
+        $options['maxPossibleZoom'] = ['default' => 18];
+        $options['minZoom'] = ['default' => 0];
+        $options['maxZoom'] = ['default' => 18];
+        $options['center_lat'] = ['default' => NULL];
+        $options['center_lng'] = ['default' => NULL];
         $options['height'] = ['default' => '400'];
         $options['icon'] = ['default' => []];
         return $options;

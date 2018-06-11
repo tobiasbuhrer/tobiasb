@@ -26,6 +26,8 @@
         "drupal/entity": "^1.0",
         "drupal/examples": "1.x-dev",
         "drupal/geofield": "^1.0",
+        "drupal/image_effects": "^2.1",
+        "drupal/imagemagick": "^2.3",
         "drupal/juicebox": "2.x-dev",
         "drupal/leaflet": "^1.0@beta",
         "drupal/leaflet_markercluster": "1.x-dev",

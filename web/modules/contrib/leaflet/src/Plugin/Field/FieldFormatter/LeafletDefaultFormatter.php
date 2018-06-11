@@ -95,12 +95,12 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
       'maxZoom' => 18,
       'popup' => FALSE,
       'icon' => [
-        'iconUrl' => '',
-        'shadowUrl' => '',
-        'iconSize' => ['x' => 0, 'y' => 0],
-        'iconAnchor' => ['x' => 0, 'y' => 0],
-        'shadowAnchor' => ['x' => 0, 'y' => 0],
-        'popupAnchor' => ['x' => 0, 'y' => 0],
+        'icon_url' => '',
+        'shadow_url' => '',
+        'icon_size' => ['x' => 0, 'y' => 0],
+        'icon_anchor' => ['x' => 0, 'y' => 0],
+        'shadow_anchor' => ['x' => 0, 'y' => 0],
+        'popup_anchor' => ['x' => 0, 'y' => 0],
       ],
     ] + parent::defaultSettings();
   }
@@ -167,85 +167,85 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
       '#collapsible' => TRUE,
       '#collapsed' => empty($icon),
     ];
-    $elements['icon']['iconUrl'] = [
+    $elements['icon']['icon_url'] = [
       '#title' => $this->t('Icon URL'),
       '#description' => $this->t('Can be an absolute or relative URL.'),
       '#type' => 'textfield',
       '#maxlength' => 999,
-      '#default_value' => $icon['iconUrl'],
+      '#default_value' => $icon['icon_url'],
       '#element_validate' => [[$this, 'validateUrl']],
     ];
-    $elements['icon']['shadowUrl'] = [
+    $elements['icon']['shadow_url'] = [
       '#title' => $this->t('Icon Shadow URL'),
       '#type' => 'textfield',
       '#maxlength' => 999,
-      '#default_value' => $icon['shadowUrl'],
+      '#default_value' => $icon['shadow_url'],
       '#element_validate' => [[$this, 'validateUrl']],
     ];
 
-    $elements['icon']['iconSize'] = [
+    $elements['icon']['icon_size'] = [
       '#title' => $this->t('Icon Size'),
       '#type' => 'fieldset',
       '#collapsible' => FALSE,
       '#description' => $this->t('Size of the icon image in pixels.'),
     ];
-    $elements['icon']['iconSize']['x'] = [
+    $elements['icon']['icon_size']['x'] = [
       '#title' => $this->t('Width'),
       '#type' => 'number',
-      '#default_value' => $icon['iconSize']['x'],
+      '#default_value' => $icon['icon_size']['x'],
     ];
-    $elements['icon']['iconSize']['y'] = [
+    $elements['icon']['icon_size']['y'] = [
       '#title' => $this->t('Height'),
       '#type' => 'number',
-      '#default_value' => $icon['iconSize']['y'],
+      '#default_value' => $icon['icon_size']['y'],
     ];
-    $elements['icon']['iconAnchor'] = [
+    $elements['icon']['icon_anchor'] = [
       '#title' => $this->t('Icon Anchor'),
       '#type' => 'fieldset',
       '#collapsible' => FALSE,
       '#description' => $this->t('The coordinates of the "tip" of the icon (relative to its top left corner). The icon will be aligned so that this point is at the marker\'s geographical location.'),
     ];
-    $elements['icon']['iconAnchor']['x'] = [
+    $elements['icon']['icon_anchor']['x'] = [
       '#title' => $this->t('X'),
       '#type' => 'number',
-      '#default_value' => $icon['iconAnchor']['x'],
+      '#default_value' => $icon['icon_anchor']['x'],
     ];
-    $elements['icon']['iconAnchor']['y'] = [
+    $elements['icon']['icon_anchor']['y'] = [
       '#title' => $this->t('Y'),
       '#type' => 'number',
-      '#default_value' => $icon['iconAnchor']['y'],
+      '#default_value' => $icon['icon_anchor']['y'],
     ];
-    $elements['icon']['shadowAnchor'] = [
+    $elements['icon']['shadow_anchor'] = [
       '#title' => $this->t('Shadow Anchor'),
       '#type' => 'fieldset',
       '#collapsible' => FALSE,
       '#description' => $this->t('The point from which the shadow is shown.'),
     ];
-    $elements['icon']['shadowAnchor']['x'] = [
+    $elements['icon']['shadow_anchor']['x'] = [
       '#title' => $this->t('X'),
       '#type' => 'number',
-      '#default_value' => $icon['shadowAnchor']['x'],
+      '#default_value' => $icon['shadow_anchor']['x'],
     ];
-    $elements['icon']['shadowAnchor']['y'] = [
+    $elements['icon']['shadow_anchor']['y'] = [
       '#title' => $this->t('Y'),
       '#type' => 'number',
-      '#default_value' => $icon['shadowAnchor']['y'],
+      '#default_value' => $icon['shadow_anchor']['y'],
     ];
-    $elements['icon']['popupAnchor'] = [
+    $elements['icon']['popup_anchor'] = [
       '#title' => $this->t('Popup Anchor'),
       '#type' => 'fieldset',
       '#collapsible' => FALSE,
       '#description' => $this->t('The point from which the marker popup opens, relative to the anchor point.'),
     ];
-    $elements['icon']['popupAnchor']['x'] = [
+    $elements['icon']['popup_anchor']['x'] = [
       '#title' => $this->t('X'),
       '#type' => 'number',
-      '#default_value' => $icon['popupAnchor']['x'],
+      '#default_value' => $icon['popup_anchor']['x'],
     ];
-    $elements['icon']['popupAnchor']['y'] = [
+    $elements['icon']['popup_anchor']['y'] = [
       '#title' => $this->t('Y'),
       '#type' => 'number',
-      '#default_value' => $icon['popupAnchor']['y'],
+      '#default_value' => $icon['popup_anchor']['y'],
     ];
 
     return $elements;
@@ -268,7 +268,7 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $settings = $this->getSettings();
-    $icon_url = $settings['icon']['iconUrl'];
+    $icon_url = $settings['icon']['icon_url'];
 
     $map = leaflet_map_get_info($settings['leaflet_map']);
     $map['settings']['zoom'] = isset($settings['zoom']) ? $settings['zoom'] : NULL;

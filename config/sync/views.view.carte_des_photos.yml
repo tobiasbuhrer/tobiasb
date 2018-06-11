@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_image
     - field.storage.node.field_position
+    - image.style.map_icon_black_48x48_
     - image.style.tobiasb_map_icon
     - node.type.photo
     - node.type.video
@@ -68,10 +69,15 @@ display:
           description_field: ''
           view_mode: teaser
           map: esri-world_street_map
+          zoom: '15'
+          minZoom: '0'
+          maxZoom: '18'
+          center_lat: '45'
+          center_lng: '45'
           height: '800'
           icon:
             iconUrl: /sites/default/files/icons/pn.png
-            shadowUrl: /sites/default/files/icons/s.png
+            shadowUrl: /sites/default/files/icons/ss.png
             iconSize:
               x: '48'
               'y': '48'
@@ -82,8 +88,8 @@ display:
               x: '24'
               'y': '48'
             popupAnchor:
-              x: '24'
-              'y': '24'
+              x: '0'
+              'y': '-48'
       row:
         type: fields
         options:
@@ -210,7 +216,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -276,7 +282,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -320,6 +326,69 @@ display:
           type: image_url
           settings:
             image_style: tobiasb_map_icon
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_image_1:
+          id: field_image_1
+          table: node__field_image
+          field: field_image
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image_url
+          settings:
+            image_style: map_icon_black_48x48_
           group_column: ''
           group_columns: {  }
           group_rows: true
