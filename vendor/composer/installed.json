@@ -276,56 +276,6 @@
         "description": "Composer Plugin for updating the Drupal scaffold files when using drupal/core"
     },
     {
-        "name": "paragonie/random_compat",
-        "version": "v2.0.12",
-        "version_normalized": "2.0.12.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/paragonie/random_compat.git",
-            "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
-            "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*|5.*"
-        },
-        "suggest": {
-            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-        },
-        "time": "2018-04-04T21:24:14+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/random.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Paragon Initiative Enterprises",
-                "email": "security@paragonie.com",
-                "homepage": "https://paragonie.com"
-            }
-        ],
-        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
-        "keywords": [
-            "csprng",
-            "pseudorandom",
-            "random"
-        ]
-    },
-    {
         "name": "symfony/polyfill-php70",
         "version": "v1.8.0",
         "version_normalized": "1.8.0.0",
@@ -4244,123 +4194,6 @@
         ]
     },
     {
-        "name": "zendframework/zend-feed",
-        "version": "2.10.0",
-        "version_normalized": "2.10.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-feed.git",
-            "reference": "c3b1b86591e7e2e8bf759e2964d8638d4c5e2f02"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-feed/zipball/c3b1b86591e7e2e8bf759e2964d8638d4c5e2f02",
-            "reference": "c3b1b86591e7e2e8bf759e2964d8638d4c5e2f02",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.6 || ^7.0",
-            "zendframework/zend-escaper": "^2.5.2",
-            "zendframework/zend-stdlib": "^2.7.7 || ^3.1"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^5.7.23 || ^6.4.3",
-            "psr/http-message": "^1.0.1",
-            "zendframework/zend-cache": "^2.7.2",
-            "zendframework/zend-coding-standard": "~1.0.0",
-            "zendframework/zend-db": "^2.8.2",
-            "zendframework/zend-http": "^2.7",
-            "zendframework/zend-servicemanager": "^2.7.8 || ^3.3",
-            "zendframework/zend-validator": "^2.10.1"
-        },
-        "suggest": {
-            "psr/http-message": "PSR-7 ^1.0.1, if you wish to use Zend\\Feed\\Reader\\Http\\Psr7ResponseDecorator",
-            "zendframework/zend-cache": "Zend\\Cache component, for optionally caching feeds between requests",
-            "zendframework/zend-db": "Zend\\Db component, for use with PubSubHubbub",
-            "zendframework/zend-http": "Zend\\Http for PubSubHubbub, and optionally for use with Zend\\Feed\\Reader",
-            "zendframework/zend-servicemanager": "Zend\\ServiceManager component, for easily extending ExtensionManager implementations",
-            "zendframework/zend-validator": "Zend\\Validator component, for validating email addresses used in Atom feeds and entries when using the Writer subcomponent"
-        },
-        "time": "2018-05-24T20:36:29+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.10.x-dev",
-                "dev-develop": "2.11.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Feed\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "provides functionality for consuming RSS and Atom feeds",
-        "keywords": [
-            "ZendFramework",
-            "feed",
-            "zf"
-        ]
-    },
-    {
-        "name": "zendframework/zend-diactoros",
-        "version": "1.7.1",
-        "version_normalized": "1.7.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-diactoros.git",
-            "reference": "bf26aff803a11c5cc8eb7c4878a702c403ec67f1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/bf26aff803a11c5cc8eb7c4878a702c403ec67f1",
-            "reference": "bf26aff803a11c5cc8eb7c4878a702c403ec67f1",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.6 || ^7.0",
-            "psr/http-message": "^1.0"
-        },
-        "provide": {
-            "psr/http-message-implementation": "1.0"
-        },
-        "require-dev": {
-            "ext-dom": "*",
-            "ext-libxml": "*",
-            "phpunit/phpunit": "^5.7.16 || ^6.0.8",
-            "zendframework/zend-coding-standard": "~1.0"
-        },
-        "time": "2018-02-26T15:44:50+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.7.x-dev",
-                "dev-develop": "1.8.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Diactoros\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-2-Clause"
-        ],
-        "description": "PSR HTTP Message implementations",
-        "homepage": "https://github.com/zendframework/zend-diactoros",
-        "keywords": [
-            "http",
-            "psr",
-            "psr-7"
-        ]
-    },
-    {
         "name": "symfony/psr-http-message-bridge",
         "version": "v1.0.2",
         "version_normalized": "1.0.2.0",
@@ -5802,71 +5635,6 @@
             "source": "http://cgit.drupalcode.org/devel",
             "issues": "http://drupal.org/project/devel",
             "irc": "irc://irc.freenode.org/drupal-contribute"
-        }
-    },
-    {
-        "name": "drupal/entity",
-        "version": "1.0.0-beta3",
-        "version_normalized": "1.0.0.0-beta3",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/entity",
-            "reference": "8.x-1.0-beta3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.0-beta3.zip",
-            "reference": "8.x-1.0-beta3",
-            "shasum": "5d74dbef7bff0db099517b2c7aad14312eb02afa"
-        },
-        "require": {
-            "drupal/core": "~8.5"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-1.0-beta3",
-                "datestamp": "1520958485",
-                "security-coverage": {
-                    "status": "not-covered",
-                    "message": "Beta releases are not covered by Drupal security advisories."
-                }
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "Berdir",
-                "homepage": "https://www.drupal.org/user/214652"
-            },
-            {
-                "name": "bojanz",
-                "homepage": "https://www.drupal.org/user/86106"
-            },
-            {
-                "name": "dawehner",
-                "homepage": "https://www.drupal.org/user/99340"
-            },
-            {
-                "name": "dixon_",
-                "homepage": "https://www.drupal.org/user/239911"
-            },
-            {
-                "name": "fago",
-                "homepage": "https://www.drupal.org/user/16747"
-            }
-        ],
-        "description": "Provides expanded entity APIs, which will be moved to Drupal core one day.",
-        "homepage": "http://drupal.org/project/entity",
-        "support": {
-            "source": "http://cgit.drupalcode.org/entity"
         }
     },
     {
@@ -8636,6 +8404,175 @@
         }
     },
     {
+        "name": "paragonie/random_compat",
+        "version": "v2.0.15",
+        "version_normalized": "2.0.15.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/paragonie/random_compat.git",
+            "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
+            "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*|5.*"
+        },
+        "suggest": {
+            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+        },
+        "time": "2018-06-08T15:26:40+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/random.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Paragon Initiative Enterprises",
+                "email": "security@paragonie.com",
+                "homepage": "https://paragonie.com"
+            }
+        ],
+        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+        "keywords": [
+            "csprng",
+            "polyfill",
+            "pseudorandom",
+            "random"
+        ]
+    },
+    {
+        "name": "zendframework/zend-diactoros",
+        "version": "1.7.2",
+        "version_normalized": "1.7.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-diactoros.git",
+            "reference": "741e7a571836f038de731105f4742ca8a164e43a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/741e7a571836f038de731105f4742ca8a164e43a",
+            "reference": "741e7a571836f038de731105f4742ca8a164e43a",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6 || ^7.0",
+            "psr/http-message": "^1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "1.0"
+        },
+        "require-dev": {
+            "ext-dom": "*",
+            "ext-libxml": "*",
+            "phpunit/phpunit": "^5.7.16 || ^6.0.8",
+            "zendframework/zend-coding-standard": "~1.0"
+        },
+        "time": "2018-05-29T16:53:08+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.7.x-dev",
+                "dev-develop": "1.8.x-dev",
+                "dev-release-2.0": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Diactoros\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "description": "PSR HTTP Message implementations",
+        "homepage": "https://github.com/zendframework/zend-diactoros",
+        "keywords": [
+            "http",
+            "psr",
+            "psr-7"
+        ]
+    },
+    {
+        "name": "zendframework/zend-feed",
+        "version": "2.10.1",
+        "version_normalized": "2.10.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-feed.git",
+            "reference": "2815c29a4c4e52bf4033128592ea310b0f4e9379"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-feed/zipball/2815c29a4c4e52bf4033128592ea310b0f4e9379",
+            "reference": "2815c29a4c4e52bf4033128592ea310b0f4e9379",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6 || ^7.0",
+            "zendframework/zend-escaper": "^2.5.2",
+            "zendframework/zend-stdlib": "^2.7.7 || ^3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^5.7.23 || ^6.4.3",
+            "psr/http-message": "^1.0.1",
+            "zendframework/zend-cache": "^2.7.2",
+            "zendframework/zend-coding-standard": "~1.0.0",
+            "zendframework/zend-db": "^2.8.2",
+            "zendframework/zend-http": "^2.7",
+            "zendframework/zend-servicemanager": "^2.7.8 || ^3.3",
+            "zendframework/zend-validator": "^2.10.1"
+        },
+        "suggest": {
+            "psr/http-message": "PSR-7 ^1.0.1, if you wish to use Zend\\Feed\\Reader\\Http\\Psr7ResponseDecorator",
+            "zendframework/zend-cache": "Zend\\Cache component, for optionally caching feeds between requests",
+            "zendframework/zend-db": "Zend\\Db component, for use with PubSubHubbub",
+            "zendframework/zend-http": "Zend\\Http for PubSubHubbub, and optionally for use with Zend\\Feed\\Reader",
+            "zendframework/zend-servicemanager": "Zend\\ServiceManager component, for easily extending ExtensionManager implementations",
+            "zendframework/zend-validator": "Zend\\Validator component, for validating email addresses used in Atom feeds and entries when using the Writer subcomponent"
+        },
+        "time": "2018-06-05T13:16:04+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.10.x-dev",
+                "dev-develop": "2.11.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Feed\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "provides functionality for consuming RSS and Atom feeds",
+        "keywords": [
+            "ZendFramework",
+            "feed",
+            "zf"
+        ]
+    },
+    {
         "name": "drupal/leaflet",
         "version": "1.0.0-beta5",
         "version_normalized": "1.0.0.0-beta5",
@@ -8666,8 +8603,7 @@
                     "status": "not-covered",
                     "message": "Beta releases are not covered by Drupal security advisories."
                 }
-            },
-            "patches_applied": []
+            }
         },
         "installation-source": "dist",
         "notification-url": "https://packages.drupal.org/8/downloads",
@@ -8711,6 +8647,71 @@
         "support": {
             "source": "http://cgit.drupalcode.org/leaflet",
             "issues": "https://www.drupal.org/project/issues/leaflet"
+        }
+    },
+    {
+        "name": "drupal/entity",
+        "version": "1.0.0-beta4",
+        "version_normalized": "1.0.0.0-beta4",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/entity",
+            "reference": "8.x-1.0-beta4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.0-beta4.zip",
+            "reference": "8.x-1.0-beta4",
+            "shasum": "00c1ae1fd4942285564af4325c0c98f895dac754"
+        },
+        "require": {
+            "drupal/core": "~8.5"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.0-beta4",
+                "datestamp": "1528452184",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Beta releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Berdir",
+                "homepage": "https://www.drupal.org/user/214652"
+            },
+            {
+                "name": "bojanz",
+                "homepage": "https://www.drupal.org/user/86106"
+            },
+            {
+                "name": "dawehner",
+                "homepage": "https://www.drupal.org/user/99340"
+            },
+            {
+                "name": "dixon_",
+                "homepage": "https://www.drupal.org/user/239911"
+            },
+            {
+                "name": "fago",
+                "homepage": "https://www.drupal.org/user/16747"
+            }
+        ],
+        "description": "Provides expanded entity APIs, which will be moved to Drupal core one day.",
+        "homepage": "http://drupal.org/project/entity",
+        "support": {
+            "source": "http://cgit.drupalcode.org/entity"
         }
     }
 ]

@@ -268,10 +268,10 @@
 
     if (marker.icon) {
       var icon = this.create_icon(marker.icon);
-      lMarker = new L.Marker(latLng, {icon: icon, title: tooltip});
+      lMarker = new L.Marker(latLng, {icon: icon, title: tooltip, riseOnHover: true});
     }
     else {
-      lMarker = new L.Marker(latLng, {title: tooltip});
+      lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
     }
     return lMarker;
   };
@@ -345,9 +345,20 @@
     if (this.bounds.length > 0) {
       this.lMap.fitBounds(new L.LatLngBounds(this.bounds));
     }
-    // If we have provided a zoom level, then use it after fitting bounds.
+
+    // if we have provided a zoom level, then use it after fitting bounds.
     if (this.settings.zoom) {
-      this.lMap.setZoom(this.settings.zoom);
+       var zoomLevel = this.settings.zoom;
+       if (this.settings.middle) {
+           //this.lMap.setZoom(zoomLevel);
+           //var latLngs = new L.LatLng(this.settings.middle.lat, this.settings.middle.lon);
+           //var markerBounds = new L.latLngBounds(latLngs);
+           //this.lMap.map.fitBounds(markerBounds);
+           this.lMap.setView(new L.LatLng(this.settings.middle.lat, this.settings.middle.lon), zoomLevel);
+       }
+       else {
+           this.lMap.setZoom(zoomLevel);
+       }
     }
   };
 

@@ -301,48 +301,6 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
             $zoom_options[$i] = $i;
         }
 
-        $form['zoom'] = [
-            '#title' => $this->t('Zoom'),
-            '#type' => 'select',
-            '#options' => range(0,18),
-            '#default_value' => $this->options['zoom'],
-            '#required' => TRUE,
-        ];
-
-        $form['minZoom'] = [
-            '#title' => $this->t('Min. Zoom'),
-            '#type' => 'select',
-            '#options' => range(0,18),
-            '#default_value' => $this->options['minZoom'],
-            '#required' => TRUE,
-        ];
-
-        $form['maxZoom'] = [
-            '#title' => $this->t('Max. Zoom'),
-            '#type' => 'select',
-            '#options' => range(0,18),
-            '#default_value' => $this->options['maxZoom'],
-            '#required' => TRUE,
-        ];
-
-        $form['center_lat'] = [
-            '#title' => $this->t('Map center lattitude'),
-            '#type' => 'number',
-            '#step' => 'any',
-            '#size' => 4,
-            '#default_value' => $this->options['center_lat'],
-            '#required' => FALSE,
-        ];
-
-        $form['center_lng'] = [
-            '#title' => $this->t('Map center longitude'),
-            '#type' => 'number',
-            '#step' => 'any',
-            '#size' => 4,
-            '#default_value' => $this->options['center_lng'],
-            '#required' => FALSE,
-        ];
-
         $form['height'] = [
             '#title' => $this->t('Map height'),
             '#type' => 'textfield',
@@ -543,17 +501,13 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
                                 if ($test <> $arguments[1]) {
                                     $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image_1'];
-                                    $center = array(
-                                        'lat' => $point['lat'],
-                                        'lng' => $point['lon']);
-
                                 }
                                 else {
                                     $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image'];
+                                    $center = array(
+                                        'lat' => $point['lat'],
+                                        'lon' => $point['lon']);
                                 }
-
-
-                                //todo: reset map centre to photo that was just viewed.
 
                                 //setting url back to photo gallery
                                 $targeturl = $base_url . '/photos?field_tags_target_id=' . $arguments[0] .'#' . (string) $counter;
@@ -561,7 +515,6 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
                                 //todo: allow direct click on marker rather than popup
                                 $point['popup'] = '<a href="' . $targeturl . '">' . strip_tags($point['label']) . '</a>';
-
                             }
 
                             // end custom logic
@@ -575,18 +528,52 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
         // Always render the map, even if we do not have any data.
         $map = leaflet_map_get_info($this->options['map']);
-        $map['settings']['zoom'] = isset($this->options['zoom']) ? $this->options['zoom'] : NULL;
-        $map['settings']['minZoom'] = isset($this->options['minZoom']) ? $this->options['minZoom'] : NULL;
-        $map['settings']['maxZoom'] = isset($this->options['maxZoom']) ? $this->options['maxZoom'] : NULL;
-        $map['settings']['center'] = (isset($this->options['center_lat']) && isset($this->options['center_lng'])) ? ['lat' => $this->options['center_lat'], 'lng' => $this->options['center_lng']] : NULL;
 
         if ($viewid == "carte_des_photos") {
             //center map on the photo we clicked. By default, only zooming out
-            $map['settings']['zoom'] = 4;
+            $map['settings']['zoom'] = 14;
 
-            // [center] needs to be added to modules/contrib/leaflet/leaflet.drupal.js
-            $map['settings']['center'] = $center;
-            $map['settings']['disableClusteringAtZoom'] = 15;
+            // [center] needs to be added to modules/contrib/leaflet/leaflet.drupal.js, which becomes
+            /*
+             *
+  Drupal.Leaflet.prototype.create_point = function (marker) {
+    var latLng = new L.LatLng(marker.lat, marker.lon);
+    this.bounds.push(latLng);
+    var lMarker;
+
+    var tooltip = marker.label ? marker.label.replace(/<[^>]*>/g, '').trim() : '';
+
+    if (marker.icon) {
+      var icon = this.create_icon(marker.icon);
+      lMarker = new L.Marker(latLng, {icon: icon, title: tooltip, riseOnHover: true});
+    }
+    else {
+      lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
+    }
+    return lMarker;
+  };
+
+
+  Drupal.Leaflet.prototype.create_point = function (marker) {
+    var latLng = new L.LatLng(marker.lat, marker.lon);
+    this.bounds.push(latLng);
+    var lMarker;
+
+    var tooltip = marker.label ? marker.label.replace(/<[^>]*>/g, '').trim() : '';
+
+    if (marker.icon) {
+      var icon = this.create_icon(marker.icon);
+      lMarker = new L.Marker(latLng, {icon: icon, title: tooltip, riseOnHover: true});
+    }
+    else {
+      lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
+    }
+    return lMarker;
+  };
+             *
+             */
+            $map['settings']['middle'] = $center;
+            $map['settings']['disableClusteringAtZoom'] = 14;
         }
 
         return $this->leafletService->leafletRenderMap($map, $data, $this->options['height'] . 'px');
@@ -603,13 +590,6 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         $options['description_field'] = ['default' => ''];
         $options['view_mode'] = ['default' => 'full'];
         $options['map'] = ['default' => ''];
-        $options['zoom'] = ['default' => 10];
-        $options['minPossibleZoom'] = ['default' => 0];
-        $options['maxPossibleZoom'] = ['default' => 18];
-        $options['minZoom'] = ['default' => 0];
-        $options['maxZoom'] = ['default' => 18];
-        $options['center_lat'] = ['default' => NULL];
-        $options['center_lng'] = ['default' => NULL];
         $options['height'] = ['default' => '400'];
         $options['icon'] = ['default' => []];
         return $options;
