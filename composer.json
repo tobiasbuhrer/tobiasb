@@ -1,91 +1,105 @@
 {
-    "name": "drupal-composer/drupal-project",
-    "description": "Project template for Drupal 8 projects with composer",
-    "type": "project",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "",
-            "role": ""
-        }
-    ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
-    ],
-    "require": {
-        "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.6",
-        "drupal-composer/drupal-scaffold": "^2.2",
-        "drupal/bootstrap": "^3.11",
-        "drupal/console": "~1.0",
-        "drupal/core": "~8.5.3",
-        "drupal/devel": "~1.0",
-        "drupal/entity": "^1.0",
-        "drupal/examples": "1.x-dev",
-        "drupal/geofield": "^1.0",
-        "drupal/image_effects": "^2.1",
-        "drupal/imagemagick": "^2.3",
-        "drupal/juicebox": "2.x-dev",
-        "drupal/leaflet": "^1.0@beta",
-        "drupal/leaflet_markercluster": "1.x-dev",
-        "drupal/leaflet_more_maps": "1.x-dev",
-        "drupal/plupload": "1.x-dev",
-        "drupal/plupload_widget": "^1.0",
-        "drupal/video": "^1.2",
-        "drush/drush": "^9.0.0",
-        "vlucas/phpdotenv": "^2.4",
-        "webflo/drupal-finder": "^1.0.0",
-        "webmozart/path-util": "^2.3"
-    },
-    "require-dev": {
-        "webflo/drupal-core-require-dev": "~8.5.3"
-    },
-    "conflict": {
-        "drupal/drupal": "*"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
-    },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ],
-        "files": ["load.environment.php"]
-    },
-    "scripts": {
-        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ]
-    },
-    "extra": {
-        "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/contrib/{$name}": ["type:drupal-drush"]
-        },
-        "patches": {
-            "drupal/leaflet_more_maps": {
-                "Config get does not accept a default value": "https://www.drupal.org/files/issues/lmm.patch",
-                "Update Thunderforest maps": "https://www.drupal.org/files/issues/update_thunderforest_maps_D8-2848895-6.patch"
-            }
-        }
+  "name": "drupal-composer/drupal-project",
+  "description": "Project template for Drupal 8 projects with composer",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "",
+      "role": ""
     }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
+  "require": {
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6",
+    "drupal-composer/drupal-scaffold": "^2.2",
+    "drupal/bootstrap": "^3.11",
+    "drupal/console": "~1.0",
+    "drupal/core": "~8.5.3",
+    "drupal/devel": "~1.0",
+    "drupal/entity": "^1.0",
+    "drupal/examples": "1.x-dev",
+    "drupal/geofield": "^1.0",
+    "drupal/image_effects": "^2.1",
+    "drupal/imagemagick": "^2.3",
+    "drupal/juicebox": "2.x-dev",
+    "drupal/leaflet": "^1.0@beta",
+    "drupal/leaflet_markercluster": "1.x-dev",
+    "drupal/leaflet_more_maps": "1.x-dev",
+    "drupal/plupload": "1.x-dev",
+    "drupal/plupload_widget": "^1.0",
+    "drupal/video": "^1.2",
+    "drush/drush": "^9.0.0",
+    "vlucas/phpdotenv": "^2.4",
+    "webflo/drupal-finder": "^1.0.0",
+    "webmozart/path-util": "^2.3"
+  },
+  "require-dev": {
+    "webflo/drupal-core-require-dev": "~8.5.3"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "classmap": [
+      "scripts/composer/ScriptHandler.php"
+    ],
+    "files": [
+      "load.environment.php"
+    ]
+  },
+  "scripts": {
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "pre-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "pre-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "post-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ]
+  },
+  "extra": {
+    "installer-paths": {
+      "web/core": [
+        "type:drupal-core"
+      ],
+      "web/libraries/{$name}": [
+        "type:drupal-library"
+      ],
+      "web/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "web/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "web/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
+    },
+    "patches": {
+      "drupal/leaflet_more_maps": {
+        "Config get does not accept a default value": "https://www.drupal.org/files/issues/lmm.patch",
+        "Update Thunderforest maps": "https://www.drupal.org/files/issues/update_thunderforest_maps_D8-2848895-6.patch"
+      }
+    }
+  }
 }

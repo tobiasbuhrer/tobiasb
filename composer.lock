@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c353f5102d3fc79564356cf9200fbe55",
+    "content-hash": "4c511adfc4afe7a21145200ddc9bf6b0",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2594,7 +2594,8 @@
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
                     }
-                }
+                },
+                "patches_applied": []
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
