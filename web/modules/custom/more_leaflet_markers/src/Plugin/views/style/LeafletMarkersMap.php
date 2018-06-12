@@ -500,9 +500,11 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                 $test = $this->rendered_fields[$id]['nid'];
 
                                 if ($test <> $arguments[1]) {
+                                    // dark blue frame
                                     $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image_1'];
                                 }
                                 else {
+                                    // icon that shall be in the center
                                     $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image'];
                                     $center = array(
                                         'lat' => $point['lat'],

@@ -273,6 +273,15 @@
     else {
       lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
     }
+
+    //proof of concept only, needs work.
+    //var urlStart = marker.label.indexOf('"');
+    //var urlEnd = marker.label.substr(urlStart).indexOf('"');
+    //lMarker.url = marker.label.slice(urlStart, urlEnd);
+    //lMarker.on('click', function(){
+    //      window.location = (this.url);
+    //  });
+
     return lMarker;
   };
 
