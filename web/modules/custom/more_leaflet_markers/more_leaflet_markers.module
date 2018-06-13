@@ -22,3 +22,23 @@ function more_leaflet_markers_help($route_name, RouteMatchInterface $route_match
     default:
   }
 }
+
+/**
+
+ * Preprocess the leaflet_map theme function to add
+
+ * the markercluster libraries.
+
+ *
+
+ * @param  [type] &$vars [description]
+
+ * @return [type]        [description]
+
+ */
+
+function more_leaflet_markers_preprocess_leaflet_map(&$vars) {
+
+    $vars['#attached']['library'][] = 'more_leaflet_markers/more_leaflet_markers-drupal';
+
+}

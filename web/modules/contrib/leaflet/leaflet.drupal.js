@@ -268,20 +268,11 @@
 
     if (marker.icon) {
       var icon = this.create_icon(marker.icon);
-      lMarker = new L.Marker(latLng, {icon: icon, title: tooltip, riseOnHover: true});
+      lMarker = new L.Marker(latLng, {icon: icon, title: tooltip});
     }
     else {
-      lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
+      lMarker = new L.Marker(latLng, {title: tooltip});
     }
-
-    //proof of concept only, needs work.
-    //var urlStart = marker.label.indexOf('"');
-    //var urlEnd = marker.label.substr(urlStart).indexOf('"');
-    //lMarker.url = marker.label.slice(urlStart, urlEnd);
-    //lMarker.on('click', function(){
-    //      window.location = (this.url);
-    //  });
-
     return lMarker;
   };
 
@@ -354,20 +345,9 @@
     if (this.bounds.length > 0) {
       this.lMap.fitBounds(new L.LatLngBounds(this.bounds));
     }
-
-    // if we have provided a zoom level, then use it after fitting bounds.
+    // If we have provided a zoom level, then use it after fitting bounds.
     if (this.settings.zoom) {
-       var zoomLevel = this.settings.zoom;
-       if (this.settings.middle) {
-           //this.lMap.setZoom(zoomLevel);
-           //var latLngs = new L.LatLng(this.settings.middle.lat, this.settings.middle.lon);
-           //var markerBounds = new L.latLngBounds(latLngs);
-           //this.lMap.map.fitBounds(markerBounds);
-           this.lMap.setView(new L.LatLng(this.settings.middle.lat, this.settings.middle.lon), zoomLevel);
-       }
-       else {
-           this.lMap.setZoom(zoomLevel);
-       }
+      this.lMap.setZoom(this.settings.zoom);
     }
   };
 
