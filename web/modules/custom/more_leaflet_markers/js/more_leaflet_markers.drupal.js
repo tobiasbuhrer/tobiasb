@@ -19,13 +19,14 @@
             lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
         }
 
-        //proof of concept only, needs work (didn't work without label...)
-        //var urlStart = marker.label.indexOf('"');
-        //var urlEnd = marker.label.substr(urlStart).indexOf('"');
-        //lMarker.url = marker.label.slice(urlStart, urlEnd);
-        //lMarker.on('click', function(){
-        //      window.location = (this.url);
-        //  });
+        if (marker.targetUrl) {
+            //var urlStart = marker.label.indexOf('"');
+            //var urlEnd = marker.label.substr(urlStart).indexOf('"');
+            //lMarker.url = marker.label.slice(urlStart, urlEnd);
+            lMarker.on('click', function () {
+                window.location = (marker.targetUrl);
+            });
+        }
 
         return lMarker;
     };

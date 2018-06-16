@@ -310,6 +310,12 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
             '#required' => TRUE,
         ];
 
+        $form['clickToUrl'] = [
+            '#type' => 'checkbox',
+            '#title' => $this->t('Click on marker opens URL from Description field. No popups'),
+            '#default_value' => $this->options['clickToUrl'],
+        ];
+
         $form['icon'] = [
             '#title' => $this->t('Map Icon'),
             '#type' => 'fieldset',
@@ -465,10 +471,16 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                         $description = $this->rendered_fields[$id][$this->options['description_field']];
                     }
 
-                    // Attach pop-ups if we have a description field.
+
                     if (isset($description)) {
-                        foreach ($points as &$point) {
-                            $point['popup'] = $description;
+                        if ($this->options['clickToUrl']) {
+                            // Attach a target URL if we want clicking on the marker to open an URL
+                            $point['targetUrl'] = $description;
+                        } else {
+                            // Attach pop-ups if we have a description field.
+                            foreach ($points as &$point) {
+                                $point['popup'] = $description;
+                            }
                         }
                     }
 
@@ -481,7 +493,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                             $point['icon'] = $this->options['icon'];
 
                             // Custom logic for hébergements.
-                            if ($viewid == "hebergements")  {
+                            if ($viewid == "hebergements") {
                                 $test = $this->rendered_fields[$id]['field_quick_evaluation'];
                                 switch ($test) {
                                     case "green":
@@ -502,8 +514,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                 if ($test <> $arguments[1]) {
                                     // dark blue frame
                                     $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image_1'];
-                                }
-                                else {
+                                } else {
                                     // icon that shall be in the center
                                     $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image'];
                                     $center = array(
@@ -512,11 +523,22 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                 }
 
                                 //setting url back to photo gallery
+                                //http://tobiasb/photos?field_tags_target_id=31#1
+
                                 $targeturl = $base_url . '/photos?field_tags_target_id=' . $arguments[0] .'#' . (string) $counter;
                                 $counter++;
 
-                                //todo: allow direct click on marker rather than popup
-                                $point['popup'] = '<a href="' . $targeturl . '">' . strip_tags($point['label']) . '</a>';
+                                //Override for photo map only.
+                                if ($this->options['clickToUrl']) {
+                                    // Attach a target URL if we want clicking on the marker to open an URL
+                                    $point['targetUrl'] = $targeturl;
+                                } else {
+                                    // Attach pop-ups if we have a description field.
+                                    foreach ($points as &$point) {
+                                        $point['popup'] = '<a href="' . $targeturl . '">' . strip_tags($point['label']) . '</a>';
+                                    }
+                                }
+
                             }
 
                             // end custom logic
@@ -594,6 +616,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         $options['map'] = ['default' => ''];
         $options['height'] = ['default' => '400'];
         $options['icon'] = ['default' => []];
+        $options['clickToUrl'] = ['default' => FALSE];
         return $options;
     }
 
