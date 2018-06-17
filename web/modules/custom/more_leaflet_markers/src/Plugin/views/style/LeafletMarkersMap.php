@@ -555,49 +555,9 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
         if ($viewid == "carte_des_photos") {
             //center map on the photo we clicked. By default, only zooming out
-            $map['settings']['zoom'] = 14;
-
-            // [center] needs to be added to modules/contrib/leaflet/leaflet.drupal.js, which becomes
-            /*
-             *
-  Drupal.Leaflet.prototype.create_point = function (marker) {
-    var latLng = new L.LatLng(marker.lat, marker.lon);
-    this.bounds.push(latLng);
-    var lMarker;
-
-    var tooltip = marker.label ? marker.label.replace(/<[^>]*>/g, '').trim() : '';
-
-    if (marker.icon) {
-      var icon = this.create_icon(marker.icon);
-      lMarker = new L.Marker(latLng, {icon: icon, title: tooltip, riseOnHover: true});
-    }
-    else {
-      lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
-    }
-    return lMarker;
-  };
-
-
-  Drupal.Leaflet.prototype.create_point = function (marker) {
-    var latLng = new L.LatLng(marker.lat, marker.lon);
-    this.bounds.push(latLng);
-    var lMarker;
-
-    var tooltip = marker.label ? marker.label.replace(/<[^>]*>/g, '').trim() : '';
-
-    if (marker.icon) {
-      var icon = this.create_icon(marker.icon);
-      lMarker = new L.Marker(latLng, {icon: icon, title: tooltip, riseOnHover: true});
-    }
-    else {
-      lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
-    }
-    return lMarker;
-  };
-             *
-             */
+            $map['settings']['zoom'] = 16;
             $map['settings']['middle'] = $center;
-            $map['settings']['disableClusteringAtZoom'] = 14;
+            //$map['settings']['disableClusteringAtZoom'] = 14;
         }
 
         return $this->leafletService->leafletRenderMap($map, $data, $this->options['height'] . 'px');

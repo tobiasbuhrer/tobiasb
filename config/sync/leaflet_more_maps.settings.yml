@@ -1,11 +1,12 @@
 leaflet_more_maps_custom_maps:
   1:
-    map-key: tobiasb
+    map-key: ''
     layer-keys:
       'esri-world_imagery layer': 'esri-world_imagery layer'
+      'esri-world_physical_map layer': 'esri-world_physical_map layer'
       'google-high-res terrain': 'google-high-res terrain'
       'mapquest road layer': 'mapquest road layer'
-    reverse-order: 1
+    reverse-order: 0
   2:
     map-key: ''
     layer-keys:
@@ -18,5 +19,7 @@ leaflet_more_maps_custom_maps:
   3:
     map-key: ''
     layer-keys:
-      'osm-spinal-map layer': 'osm-spinal-map layer'
+      'google-hybrid overlay': 'google-hybrid overlay'
+      'google-satellite layer': 'google-satellite layer'
+      'google-roadmap layer': 'google-roadmap layer'
     reverse-order: 0

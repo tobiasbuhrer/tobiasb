@@ -939,7 +939,7 @@ display:
           exposed: true
           expose:
             operator_id: field_tags_target_id_op
-            label: 'Tags (field_tags)'
+            label: 'Voyage / excursion'
             description: ''
             use_operator: false
             operator: field_tags_target_id_op

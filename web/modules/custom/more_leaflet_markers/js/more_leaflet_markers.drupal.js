@@ -20,9 +20,6 @@
         }
 
         if (marker.targetUrl) {
-            //var urlStart = marker.label.indexOf('"');
-            //var urlEnd = marker.label.substr(urlStart).indexOf('"');
-            //lMarker.url = marker.label.slice(urlStart, urlEnd);
             lMarker.on('click', function () {
                 window.location = (marker.targetUrl);
             });

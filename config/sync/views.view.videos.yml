@@ -187,6 +187,11 @@ display:
         type: normal
         title: Videos
         menu_name: main
+        description: ''
+        parent: ''
+        weight: 1
+        expanded: false
+        enabled: true
     cache_metadata:
       max-age: -1
       contexts:
