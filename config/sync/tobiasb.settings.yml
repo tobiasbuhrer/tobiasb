@@ -1,0 +1,20 @@
+cdn_provider: ''
+_core:
+  default_config_hash: _5qrDuRmWmRVjW00si3U1s1NrgrocA4N653EYGRfgEE
+favicon:
+  mimetype: image/vnd.microsoft.icon
+  path: ''
+  url: 'http://tobiasb/themes/contrib/bootstrap/favicon.ico'
+  use_default: false
+features:
+  comment_user_picture: false
+  comment_user_verification: false
+  favicon: false
+  node_user_picture: false
+logo:
+  path: ''
+  url: ''
+  use_default: false
+schemas:
+  bootstrap: 8000
+  tobiasb: 8000

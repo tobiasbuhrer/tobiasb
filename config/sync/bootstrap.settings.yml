@@ -18,3 +18,5 @@ logo:
   use_default: false
 table_responsive: '-1'
 table: ''
+breadcrumb: '0'
+cdn_jsdelivr_theme: bootstrap

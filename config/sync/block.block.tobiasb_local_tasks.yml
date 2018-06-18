@@ -1,0 +1,22 @@
+uuid: def617c7-5287-4a3b-902a-c2f088a6171b
+langcode: en
+status: false
+dependencies:
+  theme:
+    - tobiasb
+_core:
+  default_config_hash: qHdtze2DZ2mFfaJadxjZz6epm92_SN9SAFY4yJGl8Fo
+id: tobiasb_local_tasks
+theme: tobiasb
+region: header
+weight: 10
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

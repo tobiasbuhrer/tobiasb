@@ -1,0 +1,25 @@
+uuid: c102016e-ad6b-46c5-ba9f-e14ae32ab9bd
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - drupal8_w3css_theme
+_core:
+  default_config_hash: 3kluVX6xVfYuKg2AKx3K6lVMrllIykqTJoy7HsrOwPI
+id: drupal8_w3css_theme_branding
+theme: drupal8_w3css_theme
+region: header
+weight: 1
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

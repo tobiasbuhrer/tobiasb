@@ -1,0 +1,22 @@
+uuid: 904a0d2e-ad89-40f5-915a-5495656691c7
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - tobiasb
+_core:
+  default_config_hash: fNNLN48MSGSLiqwIFywCuxH2Dk_IxDbaP0kYhg_IPrg
+id: tobiasb_content
+theme: tobiasb
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

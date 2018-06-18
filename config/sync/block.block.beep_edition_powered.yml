@@ -1,0 +1,22 @@
+uuid: a4582ca9-4428-4586-82a7-2ff55bd691bc
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - beep_edition
+_core:
+  default_config_hash: iggZSiUKz4mYP1YPJ8SsUfFu79HIgOTt6IDy3Up59aM
+id: beep_edition_powered
+theme: beep_edition
+region: footer
+weight: -10
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

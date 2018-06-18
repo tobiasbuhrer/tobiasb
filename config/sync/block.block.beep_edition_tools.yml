@@ -1,0 +1,26 @@
+uuid: 31d72df9-c60e-42b0-9d47-c70e8d81be91
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.tools
+  module:
+    - system
+  theme:
+    - beep_edition
+_core:
+  default_config_hash: f3Dd5TnUiFDjFZp9yEGJInwt6cUzs7O6SvLTFTATSlU
+id: beep_edition_tools
+theme: beep_edition
+region: sidebar_second
+weight: 0
+provider: null
+plugin: 'system_menu_block:tools'
+settings:
+  id: 'system_menu_block:tools'
+  label: Tools
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+visibility: {  }

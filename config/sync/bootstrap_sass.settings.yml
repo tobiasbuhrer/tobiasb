@@ -1,0 +1,42 @@
+bootstrap_barrio_library: production
+bootstrap_barrio_sidebar_position: left
+bootstrap_barrio_content_offset: '0'
+bootstrap_barrio_sidebar_first_width: '4'
+bootstrap_barrio_sidebar_first_offset: '0'
+bootstrap_barrio_sidebar_second_width: '3'
+bootstrap_barrio_sidebar_second_offset: '0'
+bootstrap_barrio_fluid_container: 0
+bootstrap_barrio_button_size: ''
+bootstrap_barrio_button_outline: 0
+bootstrap_barrio_navbar_toggle: navbar-toggleable-lg
+bootstrap_barrio_navbar_container: 0
+bootstrap_barrio_navbar_top_position: ''
+bootstrap_barrio_navbar_top_color: navbar-dark
+bootstrap_barrio_navbar_top_background: bg-secondary
+bootstrap_barrio_navbar_position: ''
+bootstrap_barrio_navbar_color: navbar-dark
+bootstrap_barrio_navbar_background: bg-primary
+bootstrap_barrio_table_hover: 1
+_core:
+  default_config_hash: 78qpB4gShKy__Mqle_dzCnNVnSf-dprQszBls-TYr5Q
+features:
+  node_user_picture: true
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+logo:
+  use_default: false
+favicon:
+  use_default: true
+bootstrap_barrio_sidebar_collapse: 1
+bootstrap_barrio_navbar_top_navbar: 0
+bootstrap_barrio_navbar_top_affix: 0
+bootstrap_barrio_navbar_affix: 0
+bootstrap_barrio_sidebar_first_affix: 0
+bootstrap_barrio_sidebar_second_affix: 0
+bootstrap_barrio_scroll_spy: ''
+bootstrap_barrio_google_fonts: ''
+bootstrap_barrio_icons: ''
+bootstrap_barrio_system_messages: ''
+bootstrap_barrio_table_style: ''
+bootstrap_barrio_table_head: ''

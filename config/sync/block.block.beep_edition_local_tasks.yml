@@ -1,0 +1,22 @@
+uuid: 1e542ed2-ba77-4b96-baec-9dde86870245
+langcode: en
+status: false
+dependencies:
+  theme:
+    - beep_edition
+_core:
+  default_config_hash: qHdtze2DZ2mFfaJadxjZz6epm92_SN9SAFY4yJGl8Fo
+id: beep_edition_local_tasks
+theme: beep_edition
+region: header
+weight: 10
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }
