@@ -185,11 +185,11 @@ display:
       path: videos
       menu:
         type: normal
-        title: Videos
+        title: Vidéos
         menu_name: main
         description: ''
         parent: ''
-        weight: 1
+        weight: -47
         expanded: false
         enabled: true
     cache_metadata:

@@ -560,7 +560,9 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
             //$map['settings']['disableClusteringAtZoom'] = 14;
         }
 
-        return $this->leafletService->leafletRenderMap($map, $data, $this->options['height'] . 'px');
+        //lets set  these maps to 85% of the viewport height
+        //return $this->leafletService->leafletRenderMap($map, $data, $this->options['height'] . 'px');
+        return $this->leafletService->leafletRenderMap($map, $data, '85vh');
     }
 
     /**

@@ -1,0 +1,26 @@
+uuid: d7a52796-cd30-400d-88fd-c662bf2dc2f1
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - bulma
+_core:
+  default_config_hash: ivRfdXcG0y7oqxOSNtZVZoHjqp4UiRzqxBkeWu-td7w
+id: bulma_account_menu
+theme: bulma
+region: sidebar_second
+weight: 0
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  provider: system
+  label_display: '1'
+  level: 1
+  depth: 1
+visibility: {  }
