@@ -11,7 +11,6 @@ module:
   contextual: 0
   datetime: 0
   dblog: 0
-  devel_generate: 0
   dynamic_page_cache: 0
   editor: 0
   entity: 0
@@ -75,7 +74,7 @@ theme:
   beep_edition: 0
   drupal8_w3css_theme: 0
   tobiasb: 0
-  bulma: 0
+  ttobias: 0
 profile: standard
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc

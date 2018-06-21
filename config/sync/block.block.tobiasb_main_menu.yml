@@ -12,8 +12,8 @@ _core:
   default_config_hash: GT_zYl7I9VAILH8OxMRe-VDvFadCDHxRcnmBc5xEmf0
 id: tobiasb_main_menu
 theme: tobiasb
-region: navigation_collapsible
-weight: 10
+region: primary_menu
+weight: -6
 provider: null
 plugin: 'system_menu_block:main'
 settings:

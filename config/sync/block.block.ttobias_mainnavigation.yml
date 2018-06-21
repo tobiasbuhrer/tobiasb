@@ -1,0 +1,24 @@
+uuid: 0c8063ac-2762-4dd9-84ae-88c60d445aad
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - ttobias
+id: ttobias_mainnavigation
+theme: ttobias
+region: primary_menu
+weight: -4
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

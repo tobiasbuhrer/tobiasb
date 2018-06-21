@@ -1,6 +1,6 @@
 uuid: 256a1356-3c62-4fec-aa14-3b27a71ee875
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -10,8 +10,8 @@ _core:
   default_config_hash: wDR9JKEATSWldBjw8du8s3G2zjEYeQf88nlld11hMLo
 id: tobiasb_breadcrumbs
 theme: tobiasb
-region: header
-weight: -100
+region: footer
+weight: -4
 provider: null
 plugin: system_breadcrumb_block
 settings:

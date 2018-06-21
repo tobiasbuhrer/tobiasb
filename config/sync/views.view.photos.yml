@@ -78,7 +78,7 @@ display:
           caption_field: rendered_entity
           show_title: false
           jlib_galleryWidth: 100%
-          jlib_galleryHeight: 100%
+          jlib_galleryHeight: 85%
           jlib_backgroundColor: '#222222'
           jlib_textColor: 'rgba(255,255,255,1)'
           jlib_thumbFrameColor: 'rgba(255,255,255,.5)'

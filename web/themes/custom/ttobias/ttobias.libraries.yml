@@ -1,0 +1,14 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      includes/font-awesome/css/font-awesome.css: {}
+      css/style.css: {}
+  js:
+    js/ttobias.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
