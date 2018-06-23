@@ -21,6 +21,7 @@
     "drupal-composer/drupal-scaffold": "^2.2",
     "drupal/console": "~1.0",
     "drupal/core": "~8.5.3",
+    "drupal/devel": "^1.2",
     "drupal/entity": "^1.0",
     "drupal/geofield": "^1.0",
     "drupal/image_effects": "^2.1",

@@ -115,6 +115,7 @@ class ImportForm extends ConfigFormBase
     {
         $config = $this->config('image_import.imageimportsettings');
         $currentmonth = "://" . date("Y-m");
+        $file_usage = \Drupal::service('file.usage');
         // Create target directory if necessary.
         $destination = \Drupal::config('system.file')
                 ->get('default_scheme') . $currentmonth;
@@ -130,7 +131,9 @@ class ImportForm extends ConfigFormBase
             // Create file object from a locally copied file.
             $uri = file_unmanaged_copy($uploaded_file['tmppath'], $file_uri, FILE_EXISTS_REPLACE);
             $file = File::Create([
+                'uid' => 1,
                 'uri' => $uri,
+                'status' => 1,
             ]);
             $file->save();
 
@@ -241,7 +244,8 @@ class ImportForm extends ConfigFormBase
 
             $node = Node::create($newnode);
             $node->save();
-            $nodeid = $node->id();
+            $file_usage->add($file, 'node', 'node', $node->id());
+            $file->save();
 
         }
         parent::submitForm($form, $form_state);

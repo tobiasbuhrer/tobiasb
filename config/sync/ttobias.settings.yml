@@ -6,8 +6,8 @@ general:
 button:
   colorize: 1
   size: '0'
-  outlined: 1
-  inverted: 1
+  outlined: 0
+  inverted: 0
 elements:
   labels_inline: 0
   input_size: '0'

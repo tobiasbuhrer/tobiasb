@@ -14,6 +14,8 @@ use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Leaflet\LeafletService;
+use Drupal\Component\Utility\Html;
+use Drupal\leaflet\LeafletSettingsElementsTrait;
 
 /**
  * Style plugin to render a View output as a Leaflet map.
@@ -33,6 +35,8 @@ use Drupal\Leaflet\LeafletService;
  * @deprecated Should be removed in favor of other plugins.
  */
 class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterface {
+
+  use LeafletSettingsElementsTrait;
 
   /**
    * The Entity type property.
@@ -277,9 +281,11 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
 
     // Choose a map preset.
     $map_options = [];
+
     foreach (leaflet_map_get_info() as $key => $map) {
       $map_options[$key] = $map['label'];
     }
+
     $form['map'] = [
       '#title' => $this->t('Map'),
       '#type' => 'select',
@@ -297,101 +303,10 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
       '#required' => TRUE,
     ];
 
-    $form['icon'] = [
-      '#title' => $this->t('Map Icon'),
-      '#type' => 'fieldset',
-      '#collapsible' => TRUE,
-      '#collapsed' => !isset($this->options['icon']['iconUrl']),
-    ];
+    // Generate Icon form element.
+    $icon = $this->options['icon'];
+    $form['icon'] = $this->generateIconFormElement($icon);
 
-    $form['icon']['iconUrl'] = [
-      '#title' => $this->t('Icon URL'),
-      '#description' => $this->t('Can be an absolute or relative URL.'),
-      '#type' => 'textfield',
-      '#maxlength' => 999,
-      '#default_value' => $this->options['icon']['iconUrl'] ?: '',
-    ];
-
-    $form['icon']['shadowUrl'] = [
-      '#title' => $this->t('Icon Shadow URL'),
-      '#type' => 'textfield',
-      '#maxlength' => 999,
-      '#default_value' => $this->options['icon']['shadowUrl'] ?: '',
-    ];
-
-    $form['icon']['iconSize'] = [
-      '#title' => $this->t('Icon Size'),
-      '#type' => 'fieldset',
-      '#collapsible' => FALSE,
-      '#description' => $this->t('Size of the icon image in pixels.'),
-    ];
-
-    $form['icon']['iconSize']['x'] = [
-      '#title' => $this->t('Width'),
-      '#type' => 'number',
-      '#default_value' => isset($this->options['icon']['iconSize']['x']) ? $this->options['icon']['iconSize']['x'] : '',
-    ];
-
-    $form['icon']['iconSize']['y'] = [
-      '#title' => $this->t('Height'),
-      '#type' => 'number',
-      '#default_value' => isset($this->options['icon']['iconSize']['y']) ? $this->options['icon']['iconSize']['y'] : '',
-    ];
-
-    $form['icon']['iconAnchor'] = [
-      '#title' => $this->t('Icon Anchor'),
-      '#type' => 'fieldset',
-      '#collapsible' => FALSE,
-      '#description' => $this->t('The coordinates of the "tip" of the icon (relative to its top left corner). The icon will be aligned so that this point is at the marker\'s geographical location.'),
-    ];
-
-    $form['icon']['iconAnchor']['x'] = [
-      '#title' => $this->t('X'),
-      '#type' => 'number',
-      '#default_value' => isset($this->options['icon']['iconAnchor']['x']) ? $this->options['icon']['iconAnchor']['x'] : '',
-    ];
-
-    $form['icon']['iconAnchor']['y'] = [
-      '#title' => $this->t('Y'),
-      '#type' => 'number',
-      '#default_value' => isset($this->options['icon']['iconAnchor']['y']) ? $this->options['icon']['iconAnchor']['y'] : '',
-    ];
-
-    $form['icon']['shadowAnchor'] = [
-      '#title' => $this->t('Shadow Anchor'),
-      '#type' => 'fieldset',
-      '#collapsible' => FALSE,
-      '#description' => $this->t('The point from which the shadow is shown.'),
-    ];
-    $form['icon']['shadowAnchor']['x'] = [
-      '#title' => $this->t('X'),
-      '#type' => 'number',
-      '#default_value' => isset($this->options['icon']['shadowAnchor']['x']) ? $this->options['icon']['shadowAnchor']['x'] : '',
-    ];
-    $form['icon']['shadowAnchor']['y'] = [
-      '#title' => $this->t('Y'),
-      '#type' => 'number',
-      '#default_value' => isset($this->options['icon']['shadowAnchor']['y']) ? $this->options['icon']['shadowAnchor']['y'] : '',
-    ];
-
-    $form['icon']['popupAnchor'] = [
-      '#title' => $this->t('Popup Anchor'),
-      '#type' => 'fieldset',
-      '#collapsible' => FALSE,
-      '#description' => $this->t('The point from which the marker popup opens, relative to the anchor point.'),
-    ];
-
-    $form['icon']['popupAnchor']['x'] = [
-      '#title' => $this->t('X'),
-      '#type' => 'number',
-      '#default_value' => isset($this->options['icon']['popupAnchor']['x']) ? $this->options['icon']['popupAnchor']['x'] : '',
-    ];
-
-    $form['icon']['popupAnchor']['y'] = [
-      '#title' => $this->t('Y'),
-      '#type' => 'number',
-      '#default_value' => isset($this->options['icon']['popupAnchor']['y']) ? $this->options['icon']['popupAnchor']['y'] : '',
-    ];
   }
 
   /**
@@ -423,8 +338,14 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    * Renders the View.
    */
   public function render() {
+
+    // Performs some preprocess on the leaflet map settings.
+    $this->leafletService->preProcessMapSettings($this->options);
+
     $data = [];
+
     $geofield_name = $this->options['data_source'];
+
     if ($this->options['data_source']) {
       $this->renderFields($this->view->result);
       /* @var \Drupal\views\ResultRow $result */
@@ -456,19 +377,31 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
           // Attach also titles, they might be used later on.
           if ($this->options['name_field']) {
             foreach ($points as &$point) {
-              $point['label'] = $this->rendered_fields[$id][$this->options['name_field']];
+              // Decode any entities because JS will encode them again and we
+              // don't want double encoding.
+              $point['label'] = Html::decodeEntities(($this->rendered_fields[$id][$this->options['name_field']]));
             }
           }
 
+          // Attach iconUrl properties to each point.
+          if (!empty($this->options['icon']) && !empty($this->options['icon']['iconUrl'])) {
+            foreach ($points as &$point) {
+              $point['icon'] = $this->options['icon'];
+            }
+          }
+
+          // Add new points to the whole basket.
           $data = array_merge($data, $points);
 
-          if (!empty($this->options['icon']) && $this->options['icon']['iconUrl']) {
-            foreach ($data as $key => $feature) {
-              $data[$key]['icon'] = $this->options['icon'];
-            }
-          }
         }
       }
+
+      // Allow modules to adjust the marker.
+      foreach ($data as &$feature) {
+        \Drupal::moduleHandler()
+          ->alter('leaflet_views_feature', $feature, $result, $this->view->rowPlugin);
+      }
+
     }
 
     // Always render the map, even if we do not have any data.

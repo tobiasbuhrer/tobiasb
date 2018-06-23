@@ -17,7 +17,7 @@ dependencies:
     - responsive_image.styles.responsive_photo
   module:
     - datetime
-    - more_leaflet_markers
+    - leaflet
     - options
     - responsive_image
     - user
@@ -83,35 +83,35 @@ content:
     type: string
     region: content
   field_position:
-    weight: 10
-    label: hidden
+    weight: 11
+    label: above
     settings:
+      multiple_map: '0'
       leaflet_map: 'OSM Mapnik'
       zoom: '10'
       minZoom: '0'
       maxZoom: '18'
-      height: '800'
+      height: '400'
       icon:
-        iconUrl: ''
-        shadowUrl: ''
+        iconUrl: /sites/default/files/icons/pn.png
+        shadowUrl: /sites/default/files//icons/s.png
         iconSize:
-          x: ''
-        icon_size:
-          'y': ''
+          x: '48'
+          'y': '48'
         iconAnchor:
-          x: ''
-          'y': ''
+          x: '24'
+          'y': '48'
         shadowAnchor:
-          x: ''
-          'y': ''
+          x: '24'
+          'y': '48'
         popupAnchor:
-          x: ''
-          'y': ''
+          x: '24'
+          'y': '24'
       popup: 0
       minPossibleZoom: 0
       maxPossibleZoom: 18
     third_party_settings: {  }
-    type: leaflet_field_formatter
+    type: leaflet_formatter_default
     region: content
   field_state:
     weight: 5

@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.hebergement.field_tags
     - node.type.hebergement
   module:
-    - more_leaflet_markers
+    - leaflet
     - options
     - text
     - user
@@ -26,35 +26,35 @@ content:
     type: text_default
     region: content
   field_position:
-    weight: 106
-    label: hidden
+    weight: 107
+    label: above
     settings:
+      multiple_map: '0'
       leaflet_map: 'OSM Mapnik'
       zoom: '10'
       minZoom: '0'
       maxZoom: '18'
       height: '400'
       icon:
-        iconUrl: ''
-        shadowUrl: ''
+        iconUrl: /sites/default/files/icons/hb.png
+        shadowUrl: /sites/default/files/icons/s.png
         iconSize:
-          x: ''
-        icon_size:
-          'y': ''
+          x: '48'
+          'y': '48'
         iconAnchor:
-          x: ''
-          'y': ''
+          x: '24'
+          'y': '48'
         shadowAnchor:
-          x: ''
-          'y': ''
+          x: '24'
+          'y': '48'
         popupAnchor:
-          x: ''
-          'y': ''
+          x: '24'
+          'y': '24'
       popup: 0
       minPossibleZoom: 0
       maxPossibleZoom: 18
     third_party_settings: {  }
-    type: leaflet_field_formatter
+    type: leaflet_formatter_default
     region: content
   field_quick_evaluation:
     weight: 103
