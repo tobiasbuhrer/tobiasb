@@ -1,6 +1,6 @@
 uuid: 9a23f7d4-4e8b-42b7-bfe0-af549e4a60f1
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -19,5 +19,5 @@ settings:
   label_display: '0'
   use_site_logo: true
   use_site_name: true
-  use_site_slogan: true
+  use_site_slogan: false
 visibility: {  }

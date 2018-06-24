@@ -462,46 +462,4 @@ class Ttobias {
 
     return $json;
   }
-
-  /**
-   * Returns available versions for a package.
-   *
-   * @param string $package
-   *   The name of a package to return version data for. Valid values are
-   *  'bulma' and 'bulmaswatch'.
-   *
-   * @return array|FALSE
-   *   The available versions keyed by version, or FALSE on error.
-   */
-  /*
-  public static function getCdnVersions($package = 'bulma') {
-    $cdn_data = static::getCdnData();
-    $api = $cdn_data['api'][$package]['version'];
-    $json = static::getApiData($api);
-    if ($json) {
-      return array_combine($json['versions'], $json['versions']);
-    }
-    return FALSE;
-  }
-  */
-
-  /**
-   * Returns the locally installed Bulma version.
-   *
-   * @return string|FALSE
-   *   A version string, or FALSE on error.
-   */
-  /*
-  public static function getBulmaLocalVersion() {
-    $filename = DRUPAL_ROOT . '/libraries/bulma/package.json';
-    if (file_exists($filename)) {
-      $json = Json::decode(file_get_contents($filename));
-      if ($json) {
-        return $json['version'];
-      }
-    }
-
-    return FALSE;
-  }
-  */
 }
