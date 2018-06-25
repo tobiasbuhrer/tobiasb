@@ -53,7 +53,7 @@ set classes = [
 'js-form-type-' ~ type|clean_class,
 'form-item-' ~ name|clean_class,
 'js-form-item-' ~ name|clean_class,
-title_display not in ['after', 'before'] ? 'form-no-label',
+name == 'field_tags_target_id' ? 'field is-horizontal',
 disabled == 'disabled' ? 'form-disabled',
 errors ? 'is-danger is-outlined',
 ]
@@ -65,6 +65,7 @@ set description_classes = [
 description_display == 'invisible' ? 'visually-hidden',
 ]
 %}
+{% spaceless %}
 <div{{ attributes.addClass(classes) }}>
     {% if label_display in ['before', 'invisible'] %}
         {{ label }}
@@ -95,3 +96,4 @@ description_display == 'invisible' ? 'visually-hidden',
         </div>
     {% endif %}
 </div>
+{% endspaceless %}

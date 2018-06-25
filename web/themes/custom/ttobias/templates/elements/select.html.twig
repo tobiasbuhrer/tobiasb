@@ -13,8 +13,11 @@
  */
 #}
 {% spaceless %}
-<div class="control"><span class="select">
-  <select{{ attributes }}>
+{% if element['#id'] == 'edit-field-tags-target-id' %}
+<div class="field-body has-addon">
+{%- endif -%}
+<div class="control">
+  <select{{ attributes }} >
     {% for option in options %}
       {% if option.type == 'optgroup' %}
         <optgroup label="{{ option.label }}">
@@ -27,5 +30,6 @@
       {% endif %}
     {% endfor %}
   </select>
-</span></div>
+</div>
 {% endspaceless %}
+

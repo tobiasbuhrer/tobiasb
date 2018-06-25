@@ -181,6 +181,8 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
 
+    $form['#tree'] = TRUE;
+
     // Get a list of fields and a sublist of geo data fields in this view.
     $fields = [];
     $fields_geo_data = [];
@@ -303,9 +305,13 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
       '#required' => TRUE,
     ];
 
+    // Generate the Leaflet Map Position Form Element.
+    $map_position_options = $this->options['map_position'];
+    $form['map_position'] = $this->generateMapPositionElement($map_position_options);
+
     // Generate Icon form element.
-    $icon = $this->options['icon'];
-    $form['icon'] = $this->generateIconFormElement($icon);
+    $icon_options = $this->options['icon'];
+    $form['icon'] = $this->generateIconFormElement($icon_options);
 
   }
 
@@ -390,22 +396,25 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
             }
           }
 
+          foreach ($points as &$point) {
+            // Allow modules to adjust the marker.
+            \Drupal::moduleHandler()
+              ->alter('leaflet_views_feature', $point, $result, $this->view->rowPlugin);
+          }
+
           // Add new points to the whole basket.
           $data = array_merge($data, $points);
 
         }
       }
 
-      // Allow modules to adjust the marker.
-      foreach ($data as &$feature) {
-        \Drupal::moduleHandler()
-          ->alter('leaflet_views_feature', $feature, $result, $this->view->rowPlugin);
-      }
-
     }
 
     // Always render the map, even if we do not have any data.
     $map = leaflet_map_get_info($this->options['map']);
+
+    // Set Map additional map Settings.
+    $this->setAdditionalMapOptions($map, $this->options);
     return $this->leafletService->leafletRenderMap($map, $data, $this->options['height'] . 'px');
   }
 
@@ -420,6 +429,18 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
     $options['view_mode'] = ['default' => 'full'];
     $options['map'] = ['default' => ''];
     $options['height'] = ['default' => '400'];
+    $options['map_position'] = [
+      'default' => [
+        'force' => 0,
+        'center' => [
+          'lat' => 0,
+          'lon' => 0,
+        ],
+        'zoom' => 12,
+        'minZoom' => 1,
+        'maxZoom' => 18,
+      ],
+    ];
     $options['icon'] = ['default' => []];
     return $options;
   }

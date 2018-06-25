@@ -519,7 +519,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                     $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image'];
                                     $center = array(
                                         'lat' => $point['lat'],
-                                        'lon' => $point['lon']);
+                                        'lng' => $point['lon']);
                                 }
 
                                 //setting url back to photo gallery
@@ -555,8 +555,9 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
         if ($viewid == "carte_des_photos") {
             //center map on the photo we clicked. By default, only zooming out
-            $map['settings']['zoom'] = 16;
-            $map['settings']['middle'] = $center;
+            $map['settings']['zoom'] = 18;
+            $map['settings']['center'] = $center;
+            $map['settings']['map_position_force'] = 1;
             //$map['settings']['disableClusteringAtZoom'] = 14;
         }
 
@@ -578,6 +579,18 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         $options['map'] = ['default' => ''];
         $options['height'] = ['default' => '400'];
         $options['icon'] = ['default' => []];
+        $options['map_position'] = [
+            'default' => [
+                'force' => 0,
+                'center' => [
+                    'lat' => 0,
+                    'lon' => 0,
+                ],
+                'zoom' => 16,
+                'minZoom' => 1,
+                'maxZoom' => 18,
+            ],
+        ];
         $options['clickToUrl'] = ['default' => FALSE];
         return $options;
     }

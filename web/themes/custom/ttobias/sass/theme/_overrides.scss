@@ -90,3 +90,31 @@ article {
     margin-right: 0.5rem
   }
 }
+
+// changes on horizontal form
+.field {
+
+  &.is-horizontal {
+    @include tablet {
+      align-items:center;
+    }
+  }
+}
+
+.field-label {
+  margin-right:1rem;
+  .label {
+    white-space: nowrap;
+  }
+
+  @include tablet {
+    flex-grow: 0;
+  }
+}
+
+.field-body {
+  @include tablet {
+    flex-grow: 0;
+    margin-right:0.25rem;
+  }
+}

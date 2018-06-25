@@ -8574,14 +8574,14 @@ label.panel-block {
 
 /* line 5, ../sass/bulma/layout/_section.scss */
 .section {
-  padding: 3rem 1.5rem; }
+  padding: 2rem 1.5rem; }
   @media screen and (min-width: 1088px) {
     /* line 11, ../sass/bulma/layout/_section.scss */
     .section.is-medium {
-      padding: 9rem 1.5rem; }
+      padding: 6rem 1.5rem; }
     /* line 15, ../sass/bulma/layout/_section.scss */
     .section.is-large {
-      padding: 18rem 1.5rem; } }
+      padding: 12rem 1.5rem; } }
 
 /* line 3, ../sass/bulma/layout/_footer.scss */
 .footer {
@@ -8636,3 +8636,25 @@ article section.comment-section article {
 /* line 89, ../sass/theme/_overrides.scss */
 .block-system-branding-block > figure {
   margin-right: 0.5rem; }
+
+@media screen and (min-width: 769px), print {
+  /* line 97, ../sass/theme/_overrides.scss */
+  .field.is-horizontal {
+    align-items: center; } }
+
+/* line 104, ../sass/theme/_overrides.scss */
+.field-label {
+  margin-right: 1rem; }
+  /* line 106, ../sass/theme/_overrides.scss */
+  .field-label .label {
+    white-space: nowrap; }
+  @media screen and (min-width: 769px), print {
+    /* line 104, ../sass/theme/_overrides.scss */
+    .field-label {
+      flex-grow: 0; } }
+
+@media screen and (min-width: 769px), print {
+  /* line 115, ../sass/theme/_overrides.scss */
+  .field-body {
+    flex-grow: 0;
+    margin-right: 0.25rem; } }

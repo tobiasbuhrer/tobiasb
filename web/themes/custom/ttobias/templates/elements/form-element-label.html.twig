@@ -31,6 +31,7 @@
     size,
   ]
 -%}
+{% spaceless %}
 {% if title is not empty and title_display == 'invisible' and (is_checkbox or is_radio) -%}
   {#
     Clear but preserve label text as attribute (e.g. for screen readers) for
@@ -38,6 +39,9 @@
   #}
   {%- set attributes = attributes.setAttribute('title', title) -%}
   {%- set title = null -%}
+{%- endif -%}
+{% if element['#id'] == 'edit-field-tags-target-id' %}
+  <div class="field-label">
 {%- endif -%}
 {#
   Labels for single checkboxes/radios contain the element itself and thus have
@@ -50,3 +54,7 @@
     {%- endif -%}
   </label>
 {%- endif -%}
+{% if element['#id'] == 'edit-field-tags-target-id' %}
+  </div>
+{%- endif -%}
+{% endspaceless %}

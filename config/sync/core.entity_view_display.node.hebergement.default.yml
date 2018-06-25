@@ -31,10 +31,12 @@ content:
     settings:
       multiple_map: '0'
       leaflet_map: 'OSM Mapnik'
-      zoom: '10'
-      minZoom: '0'
-      maxZoom: '18'
       height: '400'
+      map_position:
+        zoom: '12'
+        minZoom: '1'
+        maxZoom: '18'
+        force: 0
       icon:
         iconUrl: /sites/default/files/icons/hb.png
         shadowUrl: /sites/default/files/icons/s.png
@@ -51,8 +53,6 @@ content:
           x: '24'
           'y': '24'
       popup: 0
-      minPossibleZoom: 0
-      maxPossibleZoom: 18
     third_party_settings: {  }
     type: leaflet_formatter_default
     region: content
