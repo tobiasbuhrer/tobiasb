@@ -12,7 +12,7 @@ effects:
   ddd73aa7-4bd6-4c85-b600-bdf2b1628d1d:
     uuid: ddd73aa7-4bd6-4c85-b600-bdf2b1628d1d
     id: image_scale
-    weight: -9
+    weight: -10
     data:
       width: 480
       height: 480
@@ -20,5 +20,11 @@ effects:
   99834ed4-bbd9-44f2-ad44-7cd835e5dc77:
     uuid: 99834ed4-bbd9-44f2-ad44-7cd835e5dc77
     id: image_effects_strip_metadata
-    weight: -10
+    weight: -8
     data: {  }
+  e77a6363-c7cd-4699-95f2-f47ccc7e9e1e:
+    uuid: e77a6363-c7cd-4699-95f2-f47ccc7e9e1e
+    id: image_effects_auto_orient
+    weight: -9
+    data:
+      scan_exif: true

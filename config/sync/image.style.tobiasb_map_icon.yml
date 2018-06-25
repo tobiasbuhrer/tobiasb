@@ -10,14 +10,14 @@ effects:
   6630cbc9-e61e-4548-9c23-6271f7a86d21:
     uuid: 6630cbc9-e61e-4548-9c23-6271f7a86d21
     id: image_scale_and_crop
-    weight: -9
+    weight: -10
     data:
       width: 48
       height: 48
   ff7b4c7b-5b3d-4234-8d3e-50701ad1e3c4:
     uuid: ff7b4c7b-5b3d-4234-8d3e-50701ad1e3c4
     id: image_effects_strip_metadata
-    weight: -10
+    weight: -7
     data: {  }
   0e64befe-930c-40b3-a8b7-c346a018f083:
     uuid: 0e64befe-930c-40b3-a8b7-c346a018f083
@@ -28,3 +28,9 @@ effects:
       dimensions_method: keep
       width: ''
       height: ''
+  af4b0875-4e66-463e-bc8d-2f30e8abe5b9:
+    uuid: af4b0875-4e66-463e-bc8d-2f30e8abe5b9
+    id: image_effects_auto_orient
+    weight: -9
+    data:
+      scan_exif: true

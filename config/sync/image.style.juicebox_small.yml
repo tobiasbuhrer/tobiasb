@@ -20,8 +20,14 @@ effects:
       width: 800
       height: 800
       upscale: false
-  67301091-29f7-4e39-8b01-c6b6afba3ea2:
-    uuid: 67301091-29f7-4e39-8b01-c6b6afba3ea2
+  e6c978a5-966c-4ff1-a745-e41d9cb78a52:
+    uuid: e6c978a5-966c-4ff1-a745-e41d9cb78a52
+    id: image_effects_auto_orient
+    weight: 2
+    data:
+      scan_exif: true
+  7504e849-2cdb-4e31-8d34-961130d013d7:
+    uuid: 7504e849-2cdb-4e31-8d34-961130d013d7
     id: image_effects_strip_metadata
-    weight: -10
+    weight: 3
     data: {  }

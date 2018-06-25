@@ -74,4 +74,5 @@ hidden:
   field_image: true
   field_position: true
   field_tags: true
+  langcode: true
   links: true

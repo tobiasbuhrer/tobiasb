@@ -48,4 +48,5 @@ content:
     third_party_settings: {  }
 hidden:
   field_tags: true
+  langcode: true
   links: true

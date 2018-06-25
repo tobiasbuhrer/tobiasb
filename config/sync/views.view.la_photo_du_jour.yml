@@ -244,7 +244,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/photomap/{{ tid }}/{{ nid }}">{{ title__value }}</a>'
+            text: '<a href="/photomap/{{ tid }}/{{ nid }}" title="vers la carte">{{ title__value }}</a>'
             make_link: false
             path: ''
             absolute: false

@@ -26,7 +26,7 @@
           {% endfor %}
         </optgroup>
       {% elseif option.type == 'option' %}
-        <option value="{{ option.value }}"{{ option.selected ? ' selected="selected"' }}>{{ option.label }}</option>
+        <option value="{{ option.value }}"{{ option.selected ? ' selected="selected"' }}>{% if option.label == '- Any -' %}- Tous -{% else %}{{ option.label }}{% endif %}</option>
       {% endif %}
     {% endfor %}
   </select>

@@ -4,6 +4,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.video.field_credit
+    - field.field.node.video.field_description
+    - field.field.node.video.field_tags
+    - field.field.node.video.field_video
     - node.type.video
   module:
     - user
@@ -15,4 +19,9 @@ content:
   links:
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  field_credit: true
+  field_description: true
+  field_tags: true
+  field_video: true
+  langcode: true

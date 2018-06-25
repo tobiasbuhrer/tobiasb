@@ -6,7 +6,7 @@ general:
 button:
   colorize: 1
   size: '0'
-  outlined: 0
+  outlined: 1
   inverted: 0
 elements:
   labels_inline: 0

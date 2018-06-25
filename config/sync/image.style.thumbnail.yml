@@ -20,5 +20,11 @@ effects:
   0b2c63f8-0ea4-4d57-b844-19022a298206:
     uuid: 0b2c63f8-0ea4-4d57-b844-19022a298206
     id: image_effects_strip_metadata
-    weight: -10
+    weight: -8
     data: {  }
+  167d485a-5f43-412e-8038-083f6ec65d02:
+    uuid: 167d485a-5f43-412e-8038-083f6ec65d02
+    id: image_effects_auto_orient
+    weight: -10
+    data:
+      scan_exif: true

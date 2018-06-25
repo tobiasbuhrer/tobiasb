@@ -12,6 +12,13 @@ content:
   copy:
     weight: 50
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   mail:
     weight: -40
     region: content

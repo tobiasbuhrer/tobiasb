@@ -56,7 +56,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Choisir
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -243,7 +243,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/photomap/{{ tid }}/{{ nid }}">{{ title__value }}</a>'
+            text: '<a href="/photomap/{{ tid }}/{{ nid }}" title="vers la carte">{{ title__value }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -944,7 +944,7 @@ display:
             use_operator: false
             operator: field_tags_target_id_op
             identifier: field_tags_target_id
-            required: false
+            required: true
             remember: false
             multiple: false
             remember_roles:

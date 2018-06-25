@@ -9,12 +9,11 @@ sass_dir = 'sass'
 
 # While in Dev, we can use this feature to easily debug the CSS styles
 # Production use: = false
-line_comments = true
+line_comments = false
 
-
-# While in Dev, for readability
+# While in Dev, for readability  # output_style = :nested
 # Production use: output_style = :compressed.
-output_style = :nested
+output_style = :compressed
 
 # Production use
-# environment = :production
+environment = :production

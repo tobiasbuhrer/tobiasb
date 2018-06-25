@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.photo.field_caption
     - field.field.node.photo.field_city
     - field.field.node.photo.field_country_code
     - field.field.node.photo.field_credit
@@ -37,6 +38,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_caption: true
   field_city: true
   field_country_code: true
   field_credit: true
@@ -45,3 +47,4 @@ hidden:
   field_position: true
   field_state: true
   field_tags: true
+  langcode: true
