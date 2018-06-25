@@ -28,26 +28,7 @@
         return lMarker;
     };
 
-    Drupal.Leaflet.prototype.fitbounds = function () {
-        if (this.bounds.length > 0) {
-            this.lMap.fitBounds(new L.LatLngBounds(this.bounds));
-        }
 
-        // if we have provided a zoom level, then use it after fitting bounds.
-        if (this.settings.zoom) {
-            var zoomLevel = this.settings.zoom;
-            if (this.settings.middle) {
-                //this.lMap.setZoom(zoomLevel);
-                //var latLngs = new L.LatLng(this.settings.middle.lat, this.settings.middle.lon);
-                //var markerBounds = new L.latLngBounds(latLngs);
-                //this.lMap.map.fitBounds(markerBounds);
-                this.lMap.setView(new L.LatLng(this.settings.middle.lat, this.settings.middle.lon), zoomLevel);
-            }
-            else {
-                this.lMap.setZoom(zoomLevel);
-            }
-        }
-    };
 
     Drupal.Leaflet.prototype.setMapPosition = function (features) {
         // Fit Bounds if both them and features exist, and the Map Position in not forced.
