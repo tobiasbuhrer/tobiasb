@@ -38,7 +38,7 @@ content:
     region: content
     label: hidden
     settings:
-      width: '854'
+      width: '640'
       height: '480'
       controls: '1'
       preload: auto
@@ -48,5 +48,4 @@ content:
     third_party_settings: {  }
 hidden:
   field_tags: true
-  langcode: true
   links: true

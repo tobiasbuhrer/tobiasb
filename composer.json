@@ -24,6 +24,7 @@
     "drupal/devel": "^1.2",
     "drupal/entity": "^1.0",
     "drupal/geofield": "^1.0",
+    "drupal/honeypot": "1.x-dev",
     "drupal/image_effects": "^2.1",
     "drupal/imagemagick": "^2.3",
     "drupal/juicebox": "2.x-dev",

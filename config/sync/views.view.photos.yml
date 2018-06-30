@@ -87,7 +87,7 @@ display:
           jlib_useFullscreenExpand: '0'
           jlib_showThumbsButton: true
           jlib_useThumbDots: false
-          manual_config: "captionPosition=\"BELOW_IMAGE\"\nshowImageNumber=\"FALSE\"\nshowOpenButton=\"FALSE\"\nenableDirectLinks=\"TRUE\"\nenableAutoPlay=\"TRUE\"\ndisplayTime=\"2\""
+          manual_config: "captionPosition=\"BELOW_IMAGE\"\nshowImageNumber=\"FALSE\"\nshowOpenButton=\"FALSE\"\nenableDirectLinks=\"TRUE\"\nenableAutoPlay=\"TRUE\"\ndisplayTime=\"4\"\nmaxThumbColumns=\"8\""
           incompatible_file_action: skip
           linkurl_source: view_node
           linkurl_target: _self
