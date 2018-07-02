@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.video.field_credit
     - field.field.node.video.field_description
+    - field.field.node.video.field_display_title
     - field.field.node.video.field_tags
     - field.field.node.video.field_video
     - node.type.video
@@ -53,13 +54,6 @@ content:
     third_party_settings: {  }
     type: video_plupload_widget
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   path:
     type: path
     weight: 9
@@ -104,4 +98,5 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_display_title: true

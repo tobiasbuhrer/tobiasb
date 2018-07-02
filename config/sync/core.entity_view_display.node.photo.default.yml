@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.photo.field_country_code
     - field.field.node.photo.field_credit
     - field.field.node.photo.field_date
+    - field.field.node.photo.field_display_title
     - field.field.node.photo.field_image
     - field.field.node.photo.field_location
     - field.field.node.photo.field_position
@@ -60,8 +61,8 @@ content:
     weight: 7
     label: hidden
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: long
     third_party_settings: {  }
     type: datetime_default
     region: content
@@ -88,9 +89,6 @@ content:
     settings:
       multiple_map: '0'
       leaflet_map: 'OSM Mapnik'
-      zoom: '10'
-      minZoom: '0'
-      maxZoom: '18'
       height: '400'
       icon:
         iconUrl: /sites/default/files/icons/pn.png
@@ -108,8 +106,14 @@ content:
           x: '24'
           'y': '24'
       popup: 0
-      minPossibleZoom: 0
-      maxPossibleZoom: 18
+      map_position:
+        force: 0
+        center:
+          lat: 0
+          lon: 0
+        zoom: 12
+        minZoom: 1
+        maxZoom: 18
     third_party_settings: {  }
     type: leaflet_formatter_default
     region: content
@@ -135,4 +139,4 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  langcode: true
+  field_display_title: true

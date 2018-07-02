@@ -1,0 +1,19 @@
+uuid: c16b00c7-cb69-4888-a117-3bfd08b38a9b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.video
+id: node.video.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: video
+label: Title
+description: 'Manage Display Title'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

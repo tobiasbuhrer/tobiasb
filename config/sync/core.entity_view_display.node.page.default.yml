@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_display_title
     - node.type.page
   module:
     - text
@@ -26,4 +27,4 @@ content:
     weight: 101
     region: content
 hidden:
-  langcode: true
+  field_display_title: true

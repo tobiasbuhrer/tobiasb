@@ -7,12 +7,11 @@ unprotected_forms:
 protect_all_forms: false
 log: false
 element_name: country
-time_limit: 5
+time_limit: 6
 expire: 300
 form_settings:
   user_register_form: true
   user_pass: true
-  contact_message_personal_form: true
   node_hebergement_form: false
   node_page_form: false
   node_photo_form: false

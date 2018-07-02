@@ -525,7 +525,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                 //setting url back to photo gallery
                                 //http://tobiasb/photos?field_tags_target_id=31#1
 
-                                $targeturl = $base_url . '/photos?field_tags_target_id=' . $arguments[0] .'#' . (string) $counter;
+                                $targeturl = $GLOBALS['base_url'] . '/photos?field_tags_target_id=' . $arguments[0] .'#' . (string) $counter;
                                 $counter++;
 
                                 //Override for photo map only.

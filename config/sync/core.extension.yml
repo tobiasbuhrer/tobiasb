@@ -1,17 +1,16 @@
 module:
+  advagg: 0
+  advagg_css_minify: 0
+  advagg_js_minify: 0
   automated_cron: 0
   block: 0
   block_content: 0
   breakpoint: 0
   ckeditor: 0
-  color: 0
-  comment: 0
   config: 0
-  contact: 0
   contextual: 0
   datetime: 0
   dblog: 0
-  devel: 0
   dynamic_page_cache: 0
   editor: 0
   entity: 0
@@ -31,7 +30,6 @@ module:
   image_import: 0
   imagemagick: 0
   juicebox: 0
-  kint: 0
   layout_discovery: 0
   leaflet: 0
   leaflet_markercluster: 0
@@ -47,7 +45,6 @@ module:
   path: 0
   plupload: 0
   plupload_test: 0
-  quickedit: 0
   rdf: 0
   responsive_image: 0
   search: 0
@@ -57,7 +54,6 @@ module:
   taxonomy: 0
   text: 0
   toolbar: 0
-  tour: 0
   update: 0
   user: 0
   video: 0

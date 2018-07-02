@@ -5,6 +5,7 @@ package: Other
 core: 8.x
 libraries:
   - ttobias/global-styling
+  - ttobias/fonts
 
 base theme: false
 

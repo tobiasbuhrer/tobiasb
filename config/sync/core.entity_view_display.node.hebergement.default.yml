@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.hebergement.field_display_title
     - field.field.node.hebergement.field_infos
     - field.field.node.hebergement.field_position
     - field.field.node.hebergement.field_quick_evaluation
@@ -77,4 +78,4 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  langcode: true
+  field_display_title: true

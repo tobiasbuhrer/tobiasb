@@ -71,6 +71,7 @@ display:
       style:
         type: default
         options:
+          grouping: {  }
           row_class: box
           default_row_class: false
           uses_fields: false
@@ -88,7 +89,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: 'TEST<h2>{{ title__value }}</h2>TEST'

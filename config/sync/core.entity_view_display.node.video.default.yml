@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.video.field_credit
     - field.field.node.video.field_description
+    - field.field.node.video.field_display_title
     - field.field.node.video.field_tags
     - field.field.node.video.field_video
     - node.type.video
@@ -47,5 +48,6 @@ content:
       muted: 0
     third_party_settings: {  }
 hidden:
+  field_display_title: true
   field_tags: true
   links: true

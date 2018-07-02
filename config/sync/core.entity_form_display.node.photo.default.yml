@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.photo.field_country_code
     - field.field.node.photo.field_credit
     - field.field.node.photo.field_date
+    - field.field.node.photo.field_display_title
     - field.field.node.photo.field_image
     - field.field.node.photo.field_location
     - field.field.node.photo.field_position
@@ -104,13 +105,6 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   path:
     type: path
     weight: 15
@@ -155,4 +149,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_display_title: true

@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.hebergement.field_display_title
     - field.field.node.hebergement.field_infos
     - field.field.node.hebergement.field_position
     - field.field.node.hebergement.field_quick_evaluation
@@ -47,13 +48,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   path:
     type: path
     weight: 9
@@ -70,6 +64,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_display_title: true
   promote: true
   status: true
   sticky: true
