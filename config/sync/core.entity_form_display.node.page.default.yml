@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
-    - field.field.node.page.field_display_title
     - node.type.page
   module:
     - path
@@ -75,5 +74,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  field_display_title: true
+hidden: {  }

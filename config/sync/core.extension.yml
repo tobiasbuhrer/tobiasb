@@ -1,7 +1,4 @@
 module:
-  advagg: 0
-  advagg_css_minify: 0
-  advagg_js_minify: 0
   automated_cron: 0
   block: 0
   block_content: 0
@@ -38,6 +35,8 @@ module:
   libraries: 0
   link: 0
   menu_ui: 0
+  minifyhtml: 0
+  minifyjs: 0
   more_leaflet_markers: 0
   node: 0
   options: 0
