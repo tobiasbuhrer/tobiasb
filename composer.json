@@ -341,7 +341,6 @@
         "drupal/leaflet_markercluster": "1.x-dev",
         "drupal/leaflet_more_maps": "1.x-dev",
         "drupal/minifyhtml": "^1.1",
-        "drupal/minifyjs": "^1.8",
         "drupal/plupload": "1.x-dev",
         "drupal/plupload_widget": "^1.0",
         "drupal/smtp": "^1.0",

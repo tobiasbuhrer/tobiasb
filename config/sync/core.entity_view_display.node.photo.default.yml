@@ -9,17 +9,19 @@ dependencies:
     - field.field.node.photo.field_credit
     - field.field.node.photo.field_date
     - field.field.node.photo.field_image
+    - field.field.node.photo.field_legend
     - field.field.node.photo.field_location
     - field.field.node.photo.field_position
     - field.field.node.photo.field_state
     - field.field.node.photo.field_tags
+    - image.style.juicebox_large
     - node.type.photo
-    - responsive_image.styles.responsive_photo
   module:
     - datetime
+    - image
     - leaflet
     - options
-    - responsive_image
+    - text
     - user
 id: node.photo.default
 targetEntityType: node
@@ -66,13 +68,20 @@ content:
     type: datetime_default
     region: content
   field_image:
+    type: image
     weight: 1
+    region: content
     label: hidden
     settings:
-      responsive_image_style: responsive_photo
+      image_style: juicebox_large
       image_link: ''
     third_party_settings: {  }
-    type: responsive_image
+  field_legend:
+    weight: 11
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
     region: content
   field_location:
     weight: 3
@@ -83,7 +92,7 @@ content:
     type: string
     region: content
   field_position:
-    weight: 11
+    weight: 10
     label: above
     settings:
       multiple_map: '0'
@@ -113,6 +122,7 @@ content:
         zoom: 12
         minZoom: 1
         maxZoom: 18
+      hide_empty_map: 0
     third_party_settings: {  }
     type: leaflet_formatter_default
     region: content

@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.photo.field_credit
     - field.field.node.photo.field_date
     - field.field.node.photo.field_image
+    - field.field.node.photo.field_legend
     - field.field.node.photo.field_location
     - field.field.node.photo.field_position
     - field.field.node.photo.field_state
@@ -20,6 +21,7 @@ dependencies:
     - geofield
     - image
     - path
+    - text
 id: node.photo.default
 targetEntityType: node
 bundle: photo
@@ -74,6 +76,14 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_legend:
+    weight: 27
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
     region: content
   field_location:
     weight: 4

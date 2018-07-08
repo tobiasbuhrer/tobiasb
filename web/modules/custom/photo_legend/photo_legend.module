@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * Contains photo_legend.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function photo_legend_help($route_name, RouteMatchInterface $route_match)
+{
+    switch ($route_name) {
+        // Main module help for the photo_legend module.
+        case 'help.page.photo_legend':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Calculates photo legend on save of node') . '</p>';
+            return $output;
+
+        default:
+    }
+};
+
+/**
+* Implements hook_ENTITY_TYPE_presave().
+*/
+function photo_legend_node_presave(Drupal\Core\Entity\EntityInterface $entity) {
+    if ($entity->bundle() === 'photo') {
+        // Add the profile entity's completeness field value.
+        $legend = '';
+        $p_date = $entity->get('field_date')->getValue();
+        $p_credit = $entity->get('field_credit')->getString();
+        $p_caption = $entity->get('field_caption')->getString();
+        $p_location = $entity->get('field_location')->getString();
+        $p_city = $entity->get('field_city')->getString();
+        $p_state = $entity->get('field_state')->getString();
+        $p_country = $entity->get('field_country_code')->getValue();
+        $p_country = $p_country[0]['value'];
+
+
+        if ($p_caption) {
+            $legend .= $p_caption . '<br /><br />';
+        }
+
+        if ($p_location) {
+            $legend .= $p_location . ', ';
+        }
+
+        if ($p_city) {
+            $legend .= $p_city . ', ';
+        }
+
+        if ($p_state) {
+            $legend .= $p_state . ', ';
+        }
+
+        if ($p_country) {
+            $allowed_values = $entity->getFieldDefinition('field_country_code')->getFieldStorageDefinition()->getSetting('allowed_values');
+            $p_country = $allowed_values[$p_country];
+            $legend .= $p_country . '. '; // {{ field_legend__value }}
+            }
+
+        if ($p_date[0]['value']) {
+            $p_date = new DateTime($p_date[0]['value']);
+            $p_date = $p_date->format("j F Y, H:i");
+            $needle = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+            $replace = array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
+            $legend .= str_replace($needle, $replace, $p_date) . ".<br />";
+        }
+
+        if ($p_credit) {
+            $legend .= $p_credit;
+        }
+
+        $entity->set('field_legend', $legend);
+    }
+}

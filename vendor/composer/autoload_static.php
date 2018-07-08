@@ -113,7 +113,6 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
-            'Patchwork\\' => 10,
         ),
         'M' => 
         array (
@@ -375,10 +374,6 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
-        ),
-        'Patchwork\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/patchwork/jsqueeze/src',
         ),
         'Masterminds\\' => 
         array (

@@ -36,16 +36,15 @@ module:
   link: 0
   menu_ui: 0
   minifyhtml: 0
-  minifyjs: 0
   more_leaflet_markers: 0
   node: 0
   options: 0
   page_cache: 0
   path: 0
+  photo_legend: 0
   plupload: 0
   plupload_test: 0
   rdf: 0
-  responsive_image: 0
   search: 0
   shortcut: 0
   smtp: 0

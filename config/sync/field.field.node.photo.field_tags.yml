@@ -7,7 +7,7 @@ dependencies:
     - node.type.photo
     - taxonomy.vocabulary.voyages
   content:
-    - 'taxonomy_term:voyages:2eaf0c65-c8c6-4a9e-a351-ef7f65bb9d9d'
+    - 'taxonomy_term:voyages:0aacd5fe-837c-40db-89d6-b0e34b9aad16'
 id: node.photo.field_tags
 field_name: field_tags
 entity_type: node
@@ -18,7 +18,7 @@ required: false
 translatable: false
 default_value:
   -
-    target_uuid: 2eaf0c65-c8c6-4a9e-a351-ef7f65bb9d9d
+    target_uuid: 0aacd5fe-837c-40db-89d6-b0e34b9aad16
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
