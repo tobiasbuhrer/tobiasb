@@ -139,6 +139,10 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         array (
             'FontLib\\' => 8,
         ),
+        'E' => 
+        array (
+            'ExiftoolReader\\' => 15,
+        ),
         'D' => 
         array (
             'Drush\\Internal\\' => 15,
@@ -414,6 +418,10 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         'FontLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
+        'ExiftoolReader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vvval/exiftool-reader/src',
         ),
         'Drush\\Internal\\' => 
         array (

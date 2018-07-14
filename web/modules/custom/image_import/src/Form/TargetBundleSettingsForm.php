@@ -4,8 +4,10 @@ namespace Drupal\image_import\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\image_import\ExifToolBatch;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+
 
 /**
  * Class TargetBundleSettingsForm.
@@ -77,7 +79,33 @@ class TargetBundleSettingsForm extends ConfigFormBase
             '#options' => $all_nt,
             '#default_value' => $config->get('contenttype'),
         ];
+
+        $form['exiftoolpath'] = [
+            '#type' => 'textfield',
+            '#title' => $this
+                ->t('Path to Exiftool binary'),
+            '#default_value' => $config->get('exiftoolpath'),
+            // Add your validation here
+            '#element_validate' => [
+                // settingsFormMyFieldValidate() is arbitrary. Choose something descriptive
+                [$this, 'checkExiftoolPath'],
+            ],
+        ];
         return parent::buildForm($form, $form_state);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkExiftoolPath($element, FormStateInterface $form_state)
+    {
+        $submitted_value = $form_state->getValue($element['#parents']);
+        $result = shell_exec($submitted_value . ' -ver');
+
+        if (is_null($result))
+        {
+            $form_state->setError($element, t('Exiftool not found at this location'));
+        }
     }
 
     /**
@@ -97,6 +125,10 @@ class TargetBundleSettingsForm extends ConfigFormBase
 
         $this->config('image_import.imageimportsettings')
             ->set('contenttype', $form_state->getValue('contenttype'))
+            ->save();
+
+        $this->config('image_import.imageimportsettings')
+            ->set('exiftoolpath', $form_state->getValue('exiftoolpath'))
             ->save();
 
         $config = $this->config('image_import.imageimportsettings');

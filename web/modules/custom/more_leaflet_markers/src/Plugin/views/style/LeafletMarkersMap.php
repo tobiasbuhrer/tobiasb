@@ -526,7 +526,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                 //http://tobiasb/photos?field_tags_target_id=31#1
 
                                 $targeturl = $GLOBALS['base_url'] . '/photos?field_tags_target_id=' . $arguments[0] .'#' . (string) $counter;
-                                $counter++;
+
 
                                 //Override for photo map only.
                                 if ($this->options['clickToUrl']) {
@@ -547,6 +547,8 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                     }
                     $data = array_merge($data, $points);
                 }
+                // next image in gallery, even if it doesn't have geofield data
+                $counter++;
             }
         }
 

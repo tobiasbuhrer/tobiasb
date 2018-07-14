@@ -336,6 +336,7 @@
         "drupal/honeypot": "1.x-dev",
         "drupal/image_effects": "^2.1",
         "drupal/imagemagick": "^2.3",
+        "drupal/imagick": "^1.2",
         "drupal/juicebox": "2.x-dev",
         "drupal/leaflet": "^1.0@beta",
         "drupal/leaflet_markercluster": "1.x-dev",
@@ -358,6 +359,7 @@
         "progress-tracker/progress-tracker": "1.4.0",
         "signature_pad/signature_pad": "2.3.0",
         "vlucas/phpdotenv": "^2.4",
+        "vvval/exiftool-reader": "^0.0.11",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
     },

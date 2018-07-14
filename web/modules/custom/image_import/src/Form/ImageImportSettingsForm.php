@@ -97,7 +97,7 @@ class ImageImportSettingsForm extends ConfigFormBase
 
         $tagoptions = array();
         foreach ($tags as $key => $tag) {
-            $tagoptions[$key] = $this->getHumanReadableKey($key);
+            $tagoptions[$key] = $key;
         }
 
         foreach ($fields as $field) {
@@ -155,231 +155,26 @@ class ImageImportSettingsForm extends ConfigFormBase
         parent::submitForm($form, $form_state);
     }
 
-    public static function readMetaTags($uri, $concatenate_arrays = TRUE)
+    public static function readMetaTags($uri)
     {
         $fields = array();
+        $exiftoolpath = \Drupal::config('image_import.imageimportsettings')->get('exiftoolpath');
 
         //Get all of the EXIF tags
-        $exif = exif_read_data($uri, NULL, TRUE);
-        if (is_array($exif)) {
-            foreach ($exif as $name => $section) {
-                foreach ($section as $key => $value) {
-                    if ($concatenate_arrays && is_array($value)) {
-                        $value = implode(', ', $value);
-                    }
-                    $fields['EXIF:' . $name . ':' . $key] = ImageImportSettingsForm::check_plain($value);
-                }
-            }
-        }
+        //$exif = exif_read_data($uri, NULL, TRUE);
+        $exiftoolConfig = new \ExiftoolReader\Config\Exiftool();
+        $exiftoolConfig->setConfig([
+            'path'    => $exiftoolpath,
+            'command' => 'exiftool -j -n %s',
+        ]);
+        $command = new \ExiftoolReader\Command($exiftoolConfig);
+        $reader = new \ExiftoolReader\Reader($command);
 
-        //XMP - test
-        $fields = array_merge($fields, ImageImportSettingsForm::get_xmp($uri));
+        $output = $reader->read($uri)->getDecoded();
 
-        //Look for IPTC data
-        $size = getimagesize($uri, $info);
-
-        if (is_array($info)) {
-            foreach ($info as $block) {
-                $iptc = iptcparse($block);
-
-                if ($iptc) {
-                    //IPTC:2#254 can contain name=value pairs
-                    if (isset($iptc['2#254']) && is_array($iptc['2#254'])) {
-                        $i = 0;
-                        foreach ($iptc['2#254'] as $iptc_field) {
-                            $subfields = explode('=', $iptc_field);
-                            $iptc['2#254.' . $subfields[0]] = $subfields[1];
-                        }
-                        unset($iptc['2#254']);
-                    }
-                    foreach ($iptc as $key => $value) {
-                        if ($concatenate_arrays && is_array($value)) {
-                            $value = implode(', ', $value);
-                        }
-                        $fields['IPTC:' . $key] = ImageImportSettingsForm::check_plain($value);
-                    }
-                }
-            }
-        }
-
-        //TODO: add special treatment for geofield gps import
-
-        if (!is_array($exif) && !isset($iptc)) {
-            return FALSE;
+        foreach ($output as $key => $value) {
+            $fields[$key] = $value;
         }
         return $fields;
-    }
-
-    public static function check_plain($text)
-    {
-        if (is_null($text)) {
-            $text = "";
-        }
-        if (!mb_detect_encoding($text, 'UTF-8', true)) {
-            $text = str_replace("&lt;br /&gt;", "\n",
-                str_replace("<", "&lt;",
-                    str_replace(">", "&gt;",
-                        mb_convert_encoding(html_entity_decode($text), "UTF-8", "ISO-8859-1"))));
-        }
-
-        // return htmlspecialchars($text, ENT_QUOTES, 'UTF-8'); -- removed as stops italics in descriptions
-        return $text;
-    }
-
-    public static function get_xmp($image)
-    {
-        $content = file_get_contents($image);
-        $xmp_data_start = strpos($content, '<x:xmpmeta');
-        $xmp_data_end = strpos($content, '</x:xmpmeta>');
-        if ($xmp_data_start === FALSE || $xmp_data_end === FALSE) {
-            return array();
-        }
-        $xmp_length = $xmp_data_end - $xmp_data_start;
-        $xmp_data = substr($content, $xmp_data_start, $xmp_length + 12);
-        unset($content);
-        $xmp = simplexml_load_string($xmp_data);
-        if ($xmp === FALSE) {
-            return array();
-        }
-        /* $namespaces = $xmp->getDocNamespaces(true);
-          $fields = array();
-        foreach ($namespaces as $namespace){
-          $fields[] = exif_custom_xml_recursion($xmp->children($namespace));
-        }*/
-
-        $field_data = array();
-        ImageImportSettingsForm::xml_recursion($xmp, $field_data, 'XMP');
-
-        return $field_data;
-    }
-
-    public static function xml_recursion($obj, &$fields, $name)
-    {
-        $namespace = $obj->getDocNamespaces(true);
-        $namespace[NULL] = NULL;
-
-        $children = array();
-        $attributes = array();
-        $name = $name . ':' . strtolower((string)$obj->getName());
-
-        $text = trim((string)$obj);
-        if (strlen($text) <= 0) {
-            $text = NULL;
-        }
-
-        // get info for all namespaces
-        if (is_object($obj)) {
-            foreach ($namespace as $ns => $nsUrl) {
-                // atributes
-                $objAttributes = $obj->attributes($ns, true);
-                foreach ($objAttributes as $attributeName => $attributeValue) {
-                    $attribName = strtolower(trim((string)$attributeName));
-                    $attribVal = trim((string)$attributeValue);
-                    if (!empty($ns)) {
-                        $attribName = $ns . ':' . $attribName;
-                    }
-                    $attributes[$attribName] = $attribVal;
-                }
-
-                // children
-                $objChildren = $obj->children($ns, true);
-                foreach ($objChildren as $childName => $child) {
-                    $childName = strtolower((string)$childName);
-                    if (!empty($ns)) {
-                        $childName = $ns . ':' . $childName;
-                    }
-                    $children[$childName][] = ImageImportSettingsForm::xml_recursion($child, $fields, $name);
-                }
-            }
-        }
-        if (!is_null($text)) {
-            $fields[$name] = $text;
-        }
-
-        return array(
-            'name' => $name,
-            'text' => html_entity_decode($text),
-            'attributes' => $attributes,
-            'children' => $children
-        );
-    }
-
-    public static function getHumanReadableKey($text)
-    {
-        if (!strncmp($text, 'IPTC:', 5)) {
-            return 'IPTC:' . ImageImportSettingsForm::getHumanReadableIPTCkey(substr($text, 5));
-        } else {
-            return $text;
-        }
-    }
-
-    /**
-     * Just some little helper function to get the iptc fields
-     * @return array
-     *
-     */
-    public static function getHumanReadableIPTCkey($text)
-    {
-        $pairs = array(
-            "2#202" => "object_data_preview_data",
-            "2#201" => "object_data_preview_file_format_version",
-            "2#200" => "object_data_preview_file_format",
-            "2#154" => "audio_outcue",
-            "2#153" => "audio_duration",
-            "2#152" => "audio_sampling_resolution",
-            "2#151" => "audio_sampling_rate",
-            "2#150" => "audio_type",
-            "2#135" => "language_identifier",
-            "2#131" => "image_orientation",
-            "2#130" => "image_type",
-            "2#125" => "rasterized_caption",
-            "2#122" => "writer",
-            "2#120" => "caption",
-            "2#118" => "contact",
-            "2#116" => "copyright_notice",
-            "2#115" => "source",
-            "2#110" => "credit",
-            "2#105" => "headline",
-            "2#103" => "original_transmission_reference",
-            "2#101" => "country_name",
-            "2#100" => "country_code",
-            "2#095" => "state",
-            "2#092" => "sublocation",
-            "2#090" => "city",
-            "2#085" => "by_line_title",
-            "2#080" => "by_line",
-            "2#075" => "object_cycle",
-            "2#070" => "program_version",
-            "2#065" => "originating_program",
-            "2#063" => "digital_creation_time",
-            "2#062" => "digital_creation_date",
-            "2#060" => "creation_time",
-            "2#055" => "creation_date",
-            "2#050" => "reference_number",
-            "2#047" => "reference_date",
-            "2#045" => "reference_service",
-            "2#042" => "action_advised",
-            "2#040" => "special_instruction",
-            "2#038" => "expiration_time",
-            "2#037" => "expiration_date",
-            "2#035" => "release_time",
-            "2#030" => "release_date",
-            "2#027" => "content_location_name",
-            "2#026" => "content_location_code",
-            "2#025" => "keywords",
-            "2#022" => "fixture_identifier",
-            "2#020" => "supplemental_category",
-            "2#015" => "category",
-            "2#010" => "subject_reference",
-            "2#010" => "urgency",
-            "2#008" => "editorial_update",
-            "2#007" => "edit_status",
-            "2#005" => "object_name",
-            "2#004" => "object_attribute_reference",
-            "2#003" => "object_type_reference",
-            "2#000" => "record_version",
-            "1#090" => "envelope_character_set"
-        );
-        return $pairs[$text];
     }
 }

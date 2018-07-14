@@ -12,9 +12,9 @@ image_import.image_import_settings_form:
   weight: 20
 
 image_import.target_bundle_settings_form:
-  title: 'Target bundle settings'
+  title: 'Basic settings'
   route_name: image_import.target_bundle_settings_form
-  description: 'Choose where your images will go'
+  description: 'Choose where your images will go and where the Exiftool binary is'
   parent: image_import.admin_config_image_import
   weight: 10
 

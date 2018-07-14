@@ -95,25 +95,11 @@ content:
     weight: 10
     label: above
     settings:
-      multiple_map: '0'
+      multiple_map: 0
       leaflet_map: 'OSM Mapnik'
-      height: '400'
-      icon:
-        iconUrl: /sites/default/files/icons/pn.png
-        shadowUrl: /sites/default/files//icons/s.png
-        iconSize:
-          x: '48'
-          'y': '48'
-        iconAnchor:
-          x: '24'
-          'y': '48'
-        shadowAnchor:
-          x: '24'
-          'y': '48'
-        popupAnchor:
-          x: '24'
-          'y': '24'
-      popup: 0
+      height: 400
+      hide_empty_map: 0
+      popup: false
       map_position:
         force: 0
         center:
@@ -122,7 +108,21 @@ content:
         zoom: 12
         minZoom: 1
         maxZoom: 18
-      hide_empty_map: 0
+      icon:
+        iconUrl: ''
+        shadowUrl: ''
+        iconSize:
+          x: null
+          'y': null
+        iconAnchor:
+          x: null
+          'y': null
+        shadowAnchor:
+          x: null
+          'y': null
+        popupAnchor:
+          x: null
+          'y': null
     third_party_settings: {  }
     type: leaflet_formatter_default
     region: content

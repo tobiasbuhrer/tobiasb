@@ -71,11 +71,11 @@ class ImportForm extends ConfigFormBase
                 //$msg .= $key . '<br />';
                 $thisfield = substr($key, 5);
 
-                $msg .= '<strong>' . $fields[$thisfield]->getLabel() . '</strong> ' . $this->t('will get value from IPTC/EXIF field') . ': <strong>' . ImageImportSettingsForm::getHumanReadableKey($config->get($key)) . '</strong><br />';
+                $msg .= '<strong>' . $fields[$thisfield]->getLabel() . '</strong> ' . $this->t('will get value from IPTC/EXIF field') . ': <strong>' . $config->get($key) . '</strong><br />';
             }
         }
         $msg .= '</p>';
-        drupal_set_message($this->t('Remember to set any default values you want in all created nodes'), 'warning');
+        \Drupal::messenger()->addMessage($this->t('Remember to set any default values you want in all created nodes'), 'warning');
         $form['plupload'] = array(
             '#prefix' => $msg,
             '#type' => 'plupload',
@@ -114,7 +114,8 @@ class ImportForm extends ConfigFormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $config = $this->config('image_import.imageimportsettings');
-        $currentmonth = "://" . date("Y-m");
+        //we use the hour to avoid problems with duplicate file names.
+        $currentmonth = "://" . date("Y-m-d-H");
         $file_usage = \Drupal::service('file.usage');
         // Create target directory if necessary.
         $destination = \Drupal::config('system.file')
@@ -141,8 +142,10 @@ class ImportForm extends ConfigFormBase
             $title = $file->getFilename();
 
             //load metatags for image
-            $filepath = file_create_url($file->getFileUri());
-            $metatags = ImageImportSettingsForm::readMetaTags($filepath, TRUE);
+            $uri = $file->GetFileUri();
+            $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
+            $filepath = $stream_wrapper_manager->realpath();
+            $metatags = ImageImportSettingsForm::readMetaTags($filepath);
 
             //title: if mapping is set, result needs to have at least one char
             if (($config->get('exif_title')) and (strlen($metatags[$config->get('exif_title')]) > 0)) {
@@ -168,100 +171,61 @@ class ImportForm extends ConfigFormBase
                             //we don't write empty values. If no value is written, default will be applied.
                             if (!empty($v)) {
                                 $newnode[$fieldname] = (string)$metatags[$mapping];
+
                             }
                             break;
                         case "datetime":
                             $datetime = date_create_from_format('Y:m:d H:i:s', $metatags[$mapping]);
+
                             //we don't write empty values. If no value is written, default will be applied.
                             if (!empty($datetime)) {
-                                $newnode[$fieldname] = date_format($datetime, 'Y-m-d\TH:i:s');
+                                $newnode[$fieldname] = date_format($datetime, 'Y-m-d H:i:s');
                             }
                             break;
                         case "geolocation":
-
-                            if (substr($mapping, 0, 9) == 'EXIF:GPS:') {
-                                $lat = $metatags['EXIF:GPS:GPSLatitude'];
-                                $lon = $metatags['EXIF:GPS:GPSLongitude'];
-                                $latref = $metatags['EXIF:GPS:GPSLatitudeRef'];
-                                $lonref = $metatags['EXIF:GPS:GPSLongitudeRef'];
-                            }
-                            if ((!empty($lat)) and
-                                (!empty($lon)) and
-                                (!empty($latref)) and
-                                (!empty($lonref))) {
-
-                                if ($latref == "N") {
-                                    $Latitude = $this->convertToDegree($lat);
-                                } else {
-                                    $Latitude = 0 - $this->convertToDegree($lat);
-                                }
-
-                                if ($lonref == "E") {
-                                    $Longitude = $this->convertToDegree($lon);
-                                } else {
-                                    $Longitude = 0 - $this->convertToDegree($lon);
-                                }
-                                $newnode[$fieldname]['lat'] = $Latitude;
-                                $newnode[$fieldname]['lng'] = $Longitude;
-
-                            }
-                            break;
-
-
                         case "geofield":
-                            if (substr($mapping, 0, 9) == 'EXIF:GPS:') {
-                                $lat = $metatags['EXIF:GPS:GPSLatitude'];
-                                $lon = $metatags['EXIF:GPS:GPSLongitude'];
-                                $latref = $metatags['EXIF:GPS:GPSLatitudeRef'];
-                                $lonref = $metatags['EXIF:GPS:GPSLongitudeRef'];
+                            if (substr($mapping, 0, 3) == 'GPS') {
+                                $Latitude = $metatags['GPSLatitude'];
+                                $Longitude = $metatags['GPSLongitude'];
                             }
-                            if ((!empty($lat)) and
-                                (!empty($lon)) and
-                                (!empty($latref)) and
-                                (!empty($lonref))) {
+                            if ((!empty($Latitude)) and
+                                (!empty($Longitude))) {
 
-                                if ($latref == "N") {
-                                    $Latitude = $this->convertToDegree($lat);
+                                if ($fields[$fieldname]->getType() == "geolocation") {
+                                    $newnode[$fieldname]['lat'] = $Latitude;
+                                    $newnode[$fieldname]['lng'] = $Longitude;
                                 } else {
-                                    $Latitude = 0 - $this->convertToDegree($lat);
+                                    // geofield - Generate a point [lon, lat]
+                                    $coord = [$Longitude, $Latitude];
+                                    $point = \Drupal::service('geofield.wkt_generator')->wktBuildPoint($coord);
+                                    $newnode[$fieldname] = $point;
                                 }
-
-                                if ($lonref == "E") {
-                                    $Longitude = $this->convertToDegree($lon);
-                                } else {
-                                    $Longitude = 0 - $this->convertToDegree($lon);
-                                }
-                                // Generate a point [lon, lat]
-                                $coord = [$Longitude, $Latitude];
-                                $point = \Drupal::service('geofield.wkt_generator')->wktBuildPoint($coord);
-                                $newnode[$fieldname] = $point;
-                            }
-                            break;
-
-                    };
+                                break;
+                            };
+                        }
+                    }
                 }
+
+                $node = Node::create($newnode);
+                $node->save();
+                $file_usage->add($file, 'node', 'node', $node->id());
+                $file->save();
+
             }
-
-            $node = Node::create($newnode);
-            $node->save();
-            $file_usage->add($file, 'node', 'node', $node->id());
-            $file->save();
-
+            parent::submitForm($form, $form_state);
         }
-        parent::submitForm($form, $form_state);
-    }
 
-    // Convert a lat or lon 3-array to decimal degrees
-    private function convertToDegree($exifcoordinates)
-    {
-        $values = explode(',', $exifcoordinates);
-        $deg = explode('/', $values[0]);
-        $degrees = $deg[0] / $deg[1];
-        $min = explode('/', $values[1]);
-        $minutes = $min[0] / $min[1];
-        $sec = explode('/', $values[2]);
-        $seconds = $sec[0] / $sec[1];
-        return $degrees + $minutes / 60.0 + $seconds / 3600;
-    }
+        // Convert a lat or lon 3-array to decimal degrees
+        function convertToDegree($exifcoordinates)
+        {
+            $values = explode(',', $exifcoordinates);
+            $deg = explode('/', $values[0]);
+            $degrees = $deg[0] / $deg[1];
+            $min = explode('/', $values[1]);
+            $minutes = $min[0] / $min[1];
+            $sec = explode('/', $values[2]);
+            $seconds = $sec[0] / $sec[1];
+            return $degrees + $minutes / 60.0 + $seconds / 3600;
+        }
 
-}
+    }

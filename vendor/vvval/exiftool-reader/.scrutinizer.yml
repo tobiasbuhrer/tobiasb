@@ -1,0 +1,14 @@
+build:
+  environment:
+    php: "5.6.9"
+
+  dependencies:
+      before:
+          - "sudo apt-get install libimage-exiftool-perl"
+
+  tests:
+      before:
+          - "phpunit"
+
+before_commands:
+    - "composer install --no-interaction --prefer-source"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8482005f8190ed319f698864c4cabd05",
+    "content-hash": "77904780710156bc82f9f012d175fefc",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2419,6 +2419,69 @@
             "homepage": "https://www.drupal.org/project/imagemagick",
             "support": {
                 "source": "http://cgit.drupalcode.org/imagemagick"
+            }
+        },
+        {
+            "name": "drupal/imagick",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/imagick",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/imagick-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "8737733a36f05fdd7f8efcd314a7ab186d400ac4"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1530700721",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Karel Bemelmans",
+                    "homepage": "https://www.drupal.org/user/1205344"
+                },
+                {
+                    "name": "aspilicious",
+                    "homepage": "https://www.drupal.org/user/172527"
+                },
+                {
+                    "name": "bceyssens",
+                    "homepage": "https://www.drupal.org/user/2743951"
+                },
+                {
+                    "name": "kristofvanroy",
+                    "homepage": "https://www.drupal.org/user/382101"
+                },
+                {
+                    "name": "stijndm",
+                    "homepage": "https://www.drupal.org/user/201482"
+                }
+            ],
+            "description": "Imagick toolkit for image manipulation within Drupal",
+            "homepage": "https://www.drupal.org/project/imagick",
+            "support": {
+                "source": "http://cgit.drupalcode.org/imagick"
             }
         },
         {
@@ -6248,6 +6311,46 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "vvval/exiftool-reader",
+            "version": "v0.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vvval/exiftool-reader.git",
+                "reference": "2cbe9fc863d2c7341cb52e46c2a2db6e8735940f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vvval/exiftool-reader/zipball/2cbe9fc863d2c7341cb52e46c2a2db6e8735940f",
+                "reference": "2cbe9fc863d2c7341cb52e46c2a2db6e8735940f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "symfony/process": "^3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ExiftoolReader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Valentin V / vvval",
+                    "email": "vintsukevich@gmail.com"
+                }
+            ],
+            "description": "Exiftool reader process wrapper",
+            "time": "2017-02-27T19:46:17+00:00"
         },
         {
             "name": "webflo/drupal-finder",

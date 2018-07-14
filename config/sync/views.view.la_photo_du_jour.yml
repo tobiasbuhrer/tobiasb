@@ -5,8 +5,10 @@ dependencies:
   config:
     - field.storage.node.field_image
     - field.storage.node.field_legend
+    - field.storage.node.field_position
     - node.type.photo
   module:
+    - geofield
     - image
     - juicebox
     - node
@@ -227,6 +229,11 @@ display:
           entity_type: node
           entity_field: nid
           plugin_id: field
+        field_position:
+          id: field_position
+          table: node__field_position
+          field: field_position
+          plugin_id: field
         title:
           id: title
           table: node_field_data
@@ -238,7 +245,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/photomap/{{ tid }}/{{ nid }}" title="vers la carte">{{ title__value }}</a>'
+            text: "{% if field_position %}\n   <a href=\"/photomap/{{ tid }}/{{ nid }}\" title=\"vers la carte\">{{ title__value }}</a>\n{% else %}\n  <span title=\"photo sans coordonnées\">{{ title__value }}</span>\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -477,6 +484,7 @@ display:
       tags:
         - 'config:field.storage.node.field_image'
         - 'config:field.storage.node.field_legend'
+        - 'config:field.storage.node.field_position'
   page_1:
     display_plugin: page
     id: page_1
@@ -496,3 +504,4 @@ display:
       tags:
         - 'config:field.storage.node.field_image'
         - 'config:field.storage.node.field_legend'
+        - 'config:field.storage.node.field_position'
