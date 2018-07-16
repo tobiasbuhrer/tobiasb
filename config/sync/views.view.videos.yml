@@ -334,7 +334,7 @@ display:
         menu_name: main
         description: ''
         parent: ''
-        weight: -47
+        weight: -46
         expanded: false
         enabled: true
     cache_metadata:

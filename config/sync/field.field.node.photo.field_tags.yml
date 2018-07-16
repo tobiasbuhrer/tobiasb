@@ -7,7 +7,7 @@ dependencies:
     - node.type.photo
     - taxonomy.vocabulary.voyages
   content:
-    - 'taxonomy_term:voyages:bca41ed8-0e72-4937-b278-b33a5356fea7'
+    - 'taxonomy_term:voyages:4c36a22f-eb1a-42ff-ac24-82e9408b095a'
 id: node.photo.field_tags
 field_name: field_tags
 entity_type: node
@@ -18,7 +18,7 @@ required: false
 translatable: false
 default_value:
   -
-    target_uuid: bca41ed8-0e72-4937-b278-b33a5356fea7
+    target_uuid: 4c36a22f-eb1a-42ff-ac24-82e9408b095a
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
@@ -29,5 +29,5 @@ settings:
       field: name
       direction: asc
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: animaux
 field_type: entity_reference
