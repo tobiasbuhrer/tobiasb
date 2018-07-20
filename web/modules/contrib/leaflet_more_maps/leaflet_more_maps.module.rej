@@ -1,0 +1,11 @@
+--- leaflet_more_maps.module
++++ leaflet_more_maps.module
+@@ -39,7 +39,7 @@ function leaflet_more_maps_leaflet_map_info() {
+   $map_info = array();
+   _leaflet_more_maps_assemble_default_map_info($map_info, $default_settings);
+ 
+-  $custom_maps = \Drupal::config('leaflet_more_maps.settings')->get('leaflet_more_maps_custom_maps', array());
++  $custom_maps = \Drupal::config('leaflet_more_maps.settings')->get('leaflet_more_maps_custom_maps') ? : array();
+ 
+   foreach ($custom_maps as $custom_map) {
+     _leaflet_more_maps_assemble_custom_map_info(
