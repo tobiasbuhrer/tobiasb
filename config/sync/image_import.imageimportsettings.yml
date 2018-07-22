@@ -1,0 +1,16 @@
+image_import: null
+_core:
+  default_config_hash: T_bRcGjwAISEBdQ6wAYM7aICeUiVUsKU6T8qQD0wNw0
+choose_image: null
+contenttype: photo
+image_field: field_image
+exif_title: Headline
+exif_field_city: City
+exif_field_credit: CopyrightNotice
+exif_field_location: Sub-location
+exif_field_state: Province-State
+exif_field_date: DateTimeOriginal
+exif_field_country_code: Country-PrimaryLocationCode
+exif_field_position: GPSLatitude
+exif_field_caption: Caption-Abstract
+exiftoolpath: /usr/bin/exiftool

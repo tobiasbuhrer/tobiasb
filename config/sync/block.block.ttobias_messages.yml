@@ -1,0 +1,22 @@
+uuid: 4a19ad82-c70d-4aef-a7ba-5decd4dd1fa9
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ttobias
+_core:
+  default_config_hash: XJqWwLt1LDCnazcEN6QkJmCLjk4R0__-8s0OO9xeNjg
+id: ttobias_messages
+theme: ttobias
+region: help
+weight: -3
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: 3c900a7a-cd00-465c-80b9-9e5b186c9169
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_position
+    - node.type.photo
+  module:
+    - geofield
+id: node.photo.field_position
+field_name: field_position
+entity_type: node
+bundle: photo
+label: Position
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  backend: geofield_backend_default
+field_type: geofield

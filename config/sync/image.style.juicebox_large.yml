@@ -1,0 +1,33 @@
+uuid: bff08830-0fb0-11e4-9191-0800200c9a66
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - juicebox
+  module:
+    - image_effects
+_core:
+  default_config_hash: ZdXkWTZGcgpropdpGOuf7bUVZFREQlGVSN-Us5ub-8w
+name: juicebox_large
+label: 'Juicebox large (2048x2048)'
+effects:
+  ca5fe360-0fb0-11e4-9191-0800200c9a66:
+    uuid: ca5fe360-0fb0-11e4-9191-0800200c9a66
+    id: image_scale
+    weight: -9
+    data:
+      width: 2048
+      height: 2048
+      upscale: false
+  4a351c3c-1e9e-4f29-b160-f1aaa9fd2a48:
+    uuid: 4a351c3c-1e9e-4f29-b160-f1aaa9fd2a48
+    id: image_effects_auto_orient
+    weight: 2
+    data:
+      scan_exif: true
+  52f8c3fd-f9cd-4d72-8fcf-5296c85d52ee:
+    uuid: 52f8c3fd-f9cd-4d72-8fcf-5296c85d52ee
+    id: image_effects_strip_metadata
+    weight: 3
+    data: {  }

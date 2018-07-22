@@ -2338,6 +2338,54 @@
         "description": "Drupal is an open source content management platform powering millions of websites and applications."
     },
     {
+        "name": "drupal/drush",
+        "version": "6.0.0-rc4",
+        "version_normalized": "6.0.0.0-RC4",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/drush",
+            "reference": "8.x-6.0-rc4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/drush-8.x-6.0-rc4.zip",
+            "reference": "8.x-6.0-rc4",
+            "shasum": "b937035f9de947190cc2438decb56483ff7cc1cd"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-6.x": "6.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-6.0-rc4",
+                "datestamp": "1376806255",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "RC releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "moshe weitzman",
+                "homepage": "https://www.drupal.org/user/23"
+            }
+        ],
+        "homepage": "https://www.drupal.org/project/drush",
+        "support": {
+            "source": "http://cgit.drupalcode.org/drush"
+        }
+    },
+    {
         "name": "drupal/entity",
         "version": "1.0.0-beta4",
         "version_normalized": "1.0.0.0-beta4",
@@ -2821,71 +2869,6 @@
         "homepage": "https://www.drupal.org/project/imagemagick",
         "support": {
             "source": "http://cgit.drupalcode.org/imagemagick"
-        }
-    },
-    {
-        "name": "drupal/imagick",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/imagick",
-            "reference": "8.x-1.2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/imagick-8.x-1.2.zip",
-            "reference": "8.x-1.2",
-            "shasum": "8737733a36f05fdd7f8efcd314a7ab186d400ac4"
-        },
-        "require": {
-            "drupal/core": "*"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-1.2",
-                "datestamp": "1530700721",
-                "security-coverage": {
-                    "status": "covered",
-                    "message": "Covered by Drupal's security advisory policy"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0-or-later"
-        ],
-        "authors": [
-            {
-                "name": "Karel Bemelmans",
-                "homepage": "https://www.drupal.org/user/1205344"
-            },
-            {
-                "name": "aspilicious",
-                "homepage": "https://www.drupal.org/user/172527"
-            },
-            {
-                "name": "bceyssens",
-                "homepage": "https://www.drupal.org/user/2743951"
-            },
-            {
-                "name": "kristofvanroy",
-                "homepage": "https://www.drupal.org/user/382101"
-            },
-            {
-                "name": "stijndm",
-                "homepage": "https://www.drupal.org/user/201482"
-            }
-        ],
-        "description": "Imagick toolkit for image manipulation within Drupal",
-        "homepage": "https://www.drupal.org/project/imagick",
-        "support": {
-            "source": "http://cgit.drupalcode.org/imagick"
         }
     },
     {
