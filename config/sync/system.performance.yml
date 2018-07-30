@@ -1,6 +1,7 @@
 cache:
   page:
     max_age: 86400
+    use_internal: true
 css:
   preprocess: true
   gzip: true
@@ -17,3 +18,5 @@ _core:
   default_config_hash: b2cssrj-lOmATIbdehfCqfCFgVR0qCdxxWhwqa2KBVQ
 minifyhtml:
   minify_html: 1
+response:
+  gzip: true

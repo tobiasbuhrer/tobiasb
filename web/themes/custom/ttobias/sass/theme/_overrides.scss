@@ -118,3 +118,23 @@ article {
     margin-right:0.25rem;
   }
 }
+
+#block-sitebranding img {
+  width:auto;
+}
+
+main {
+  padding: $section-padding;
+
+  // Responsiveness
+  @include desktop {
+    // Sizes
+    &.is-medium {
+      padding: $section-padding-medium;
+    }
+
+    &.is-large {
+      padding: $section-padding-large;
+    }
+  }
+}
