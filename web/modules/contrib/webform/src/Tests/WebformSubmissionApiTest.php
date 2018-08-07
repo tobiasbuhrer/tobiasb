@@ -149,7 +149,7 @@ class WebformSubmissionApiTest extends WebformTestBase {
     WebformElementHelper::convertRenderMarkupToStrings($errors);
     // $this->debug($errors);
     $this->assertEqual($errors, [
-        'gender' => 'An illegal choice has been detected. Please contact the site administrator.',
+      'gender' => 'An illegal choice has been detected. Please contact the site administrator.',
     ]);
 
     /**************************************************************************/
@@ -190,7 +190,7 @@ class WebformSubmissionApiTest extends WebformTestBase {
     // Check form closed message.
     $test_form_limit_webform->setStatus(FALSE)->save();
     $result = WebformSubmissionForm::isOpen($test_form_limit_webform);
-    $this->assertEqual($result['#markup'], 'Sorry...This form is closed to new submissions.');
+    $this->assertEqual($result['#markup'], 'Sorry…This form is closed to new submissions.');
   }
 
 }

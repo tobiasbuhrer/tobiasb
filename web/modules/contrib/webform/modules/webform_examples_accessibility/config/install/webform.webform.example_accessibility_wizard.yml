@@ -1,5 +1,6 @@
 langcode: en
 status: open
+weight: 0
 dependencies:
   enforced:
     module:
@@ -57,7 +58,7 @@ elements: |
 css: ''
 javascript: ''
 settings:
-  ajax: false
+  ajax: true
   ajax_scroll_top: form
   page: true
   page_submit_path: ''
@@ -89,6 +90,7 @@ settings:
   submission_label: ''
   submission_log: false
   submission_user_columns: {  }
+  submission_user_duplicate: false
   submission_login: false
   submission_login_message: ''
   submission_exception_message: ''
@@ -101,7 +103,9 @@ settings:
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
+  wizard_progress_link: true
   wizard_start_label: ''
+  wizard_preview_link: true
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''

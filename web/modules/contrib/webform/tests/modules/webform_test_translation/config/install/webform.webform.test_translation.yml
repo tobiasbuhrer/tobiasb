@@ -1,5 +1,6 @@
 langcode: en
 status: open
+weight: 0
 dependencies:
   enforced:
     module:
@@ -28,7 +29,7 @@ elements: |
       4: Four
       5: Five
       6: Six
-    '#other__option_label': 'Custom number...'
+    '#other__option_label': 'Custom number…'
   details:
     '#type': details
     '#title': Details
@@ -50,6 +51,10 @@ elements: |
         '#field_suffix': ' yrs. old'
         '#min': 1
         '#max': 125
+  token:
+    '#type': webform_computed_token
+    '#title': 'Computed (token)'
+    '#value': 'Site name: [site:name]'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
@@ -102,7 +107,9 @@ settings:
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
+  wizard_progress_link: false
   wizard_start_label: ''
+  wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''

@@ -265,7 +265,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
     ];
     $form['ajax_settings']['ajax_scroll_top'] = [
       '#type' => 'radios',
-      '#title' => $this->t('On Ajax load, scroll to the top of the...'),
+      '#title' => $this->t('On Ajax load, scroll to the top of the…'),
       '#description' => $this->t("Select where the page should be scrolled to when paging, saving of drafts, previews, submissions, and confirmations. Select 'None' to disable scrolling."),
       '#options' => [
         '' => $this->t('None'),
@@ -297,19 +297,15 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
             'class' => ['webform-dialog', 'webform-dialog-' . $dialog_name, 'button'],
           ],
         ];
-        $dialog_source = $dialog_link;
+        $dialog_webform_source = $dialog_link;
+        $dialog_webform_source_entity = $dialog_link;
+        $dialog_webform_source_entity['#url']->setOption('query', ['entity_type' => 'ENTITY_TYPE', 'entity_id' => 'ENTITY_ID']);
+
         $row = [];
         $row['title'] = $dialog_options['title'];
         $row['dimensions'] = $dialog_options['width'] . ' x ' . $dialog_options['height'];
         $row['link'] = ['data' => $dialog_link, 'nowrap' => 'nowrap'];
-        $row['source'] = [
-          'data' => [
-            '#theme' => 'webform_codemirror',
-            '#type' => 'html',
-            '#code' => (string) \Drupal::service('renderer')->renderPlain($dialog_source),
-            '#suffix' => '<br/>',
-          ],
-        ];
+        $row['source'] = $this->buildDialogSource($dialog_webform_source, $dialog_webform_source_entity);
         $rows[$dialog_name] = $row;
       }
 
@@ -323,22 +319,17 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
           'data-dialog-options' => Json::encode([
             'width' => 400,
             'height' => 400,
-          ])
+          ]),
         ],
       ];
-      $dialog_source = $dialog_link;
+      $dialog_webform_source = $dialog_link;
+      $dialog_webform_source_entity = $dialog_link;
+      $dialog_webform_source_entity['#url']->setOption('query', ['entity_type' => 'ENTITY_TYPE', 'entity_id' => 'ENTITY_ID']);
       $row = [];
       $row['title'] = $this->t('Custom');
       $row['dimensions'] = '400 x 400';
       $row['link'] = ['data' => $dialog_link];
-      $row['source'] = [
-        'data' => [
-          '#theme' => 'webform_codemirror',
-          '#type' => 'html',
-          '#code' => (string) \Drupal::service('renderer')->renderPlain($dialog_source),
-          '#suffix' => '<br/>',
-        ],
-      ];
+      $row['source'] = $this->buildDialogSource($dialog_webform_source, $dialog_webform_source_entity);
       $rows['custom'] = $row;
 
       $form['dialog_settings'] = [
@@ -357,6 +348,15 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
           '#rows' => $rows,
         ],
       ];
+
+      $form['dialog_settings']['form_prepopulate_source_entity'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Allow (dialog) source entity to be populated using query string parameters'),
+        '#description' => $this->t("If checked, source entity can be populated using query string parameters. For example, appending ?source_entity_type=node&source_entity_id=1 to a webform's URL would set a submission's 'Submitted to' value to 'node:1'."),
+        '#return_value' => TRUE,
+        '#default_value' => $settings['form_prepopulate_source_entity'],
+      ];
+
     }
 
     if ($this->currentUser()->hasPermission('administer webform')) {
@@ -379,6 +379,21 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
         '#default_value' => $webform->getOwner(),
       ];
     }
+
+    // Advanced settings.
+    $form['advanced_settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Advanced settings'),
+      '#open' => TRUE,
+      '#access' => $this->moduleHandler->moduleExists('webform_node'),
+    ];
+    $form['advanced_settings']['weight'] = [
+      '#type' => 'weight',
+      '#title' => $this->t('Weight'),
+      '#description' => $this->t('Weight is used when multiple webforms are associated to the same webform node.'),
+      '#default_value' => $webform->get('weight'),
+      '#access' => $this->moduleHandler->moduleExists('webform_node'),
+    ];
 
     // Third party settings.
     $form['third_party_settings'] = [
@@ -427,6 +442,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       $values['title'],
       $values['description'],
       $values['category'],
+      $values['weight'],
       $values['template'],
       $values['uid']
     );
@@ -437,4 +453,44 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
     parent::save($form, $form_state);
   }
 
+  /**
+   * Build dialog source.
+   *
+   * @param array $dialog_webform_source
+   *   Webform source
+   * @param array $dialog_webform_source_entity
+   *   Source entity source
+   *
+   * @return array
+   *   A renderable array containing dialog source
+   */
+  protected function buildDialogSource(array $dialog_webform_source, array $dialog_webform_source_entity) {
+    return [
+      'data' => [
+        'webform' => [
+          '#theme' => 'webform_codemirror',
+          '#type' => 'html',
+          '#code' => (string) \Drupal::service('renderer')->renderPlain($dialog_webform_source),
+          '#suffix' => '<br/>',
+        ],
+        'source_entity' => [
+          'container' => [
+            '#type' => 'container',
+            '#attributes' => ['class' => ['js-form-item']],
+            '#states' => [
+              'visible' => [
+                ':input[name="form_prepopulate_source_entity"]' => ['checked' => TRUE],
+              ],
+            ],
+            'link' => [
+              '#theme' => 'webform_codemirror',
+              '#type' => 'html',
+              '#code' => (string) \Drupal::service('renderer')->renderPlain($dialog_webform_source_entity),
+            ],
+          ],
+        ],
+      ],
+    ];
+
+  }
 }

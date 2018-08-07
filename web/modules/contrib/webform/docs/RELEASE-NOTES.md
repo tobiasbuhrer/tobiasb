@@ -5,10 +5,11 @@ Steps for creating a new release
   1. Cleanup code
   2. Export configuration
   3. Review code
-  4. Run tests
-  5. Generate release notes
-  6. Tag and create a new release
-  7. Upload screencast to YouTube
+  4. Review accessibility
+  5. Run tests
+  6. Generate release notes
+  7. Tag and create a new release
+  8. Upload screencast to YouTube
 
 1. Cleanup code
 ---------------
@@ -51,8 +52,24 @@ Tidy YAML files
     # Directories should be 755 or drwxr-xr-x
     find . -type f -print0 | xargs -0 chmod 0644
 
+3. Review accessibility
+-----------------------
 
-4. Run tests
+[Pa11y](http://pa11y.org/)
+
+Pa11y is your automated accessibility testing pal.
+
+Notes
+- Requires node 8.x+
+
+
+    drush en -y webform_example_accessibility
+    pa11y http://localhost/wf/webform/example_accessibility_basic
+    pa11y http://localhost/wf/webform/example_accessibility_advanced
+    pa11y http://localhost/wf/webform/example_accessibility_containers
+    pa11y http://localhost/wf/webform/example_accessibility_wizard
+
+5. Run tests
 ------------
 
 [SimpleTest](https://www.drupal.org/node/645286)
@@ -68,7 +85,7 @@ Tidy YAML files
 [PHPUnit](https://www.drupal.org/node/2116263)
      
 Notes
-- Links to PHP Unit HTML responses are not being printed by PHPStrom
+- Links to PHP Unit HTML responses are not being printed by PHPStorm
 
 References 
 - [Issue #2870145: Set printerClass in phpunit.xml.dist](https://www.drupal.org/node/2870145) 
@@ -92,11 +109,11 @@ References
     php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Kernal/Utility/WebformDialogHelperTest.php
 
     # Unit test.
-    php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter"  ../modules/sandbox/webform/tests/src/Unit/Utility/WebformYamlTest.php
+    php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Unit/Utility/WebformYamlTest.php
 
-    php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter"  ../modules/sandbox/webform/tests/src/Unit/Access/WebformAccessCheckTest
+    php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Unit/Access/WebformAccessCheckTest
 
-5. Generate release notes
+6. Generate release notes
 -------------------------
 
 [Git Release Notes for Drush](https://www.drupal.org/project/grn)
@@ -104,7 +121,7 @@ References
     drush release-notes --nouser 8.x-5.0-VERSION 8.x-5.x
 
 
-6. Tag and create a new release
+7. Tag and create a new release
 -------------------------------
 
 [Tag a release](https://www.drupal.org/node/1066342)
@@ -116,7 +133,7 @@ References
 [Create new release](https://www.drupal.org/node/add/project-release/2640714)
 
 
-7. Upload screencast to YouTube
+8. Upload screencast to YouTube
 -------------------------------
 
 - Title : Webform 8.x-5.x-betaXX

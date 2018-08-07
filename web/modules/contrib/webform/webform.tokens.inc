@@ -146,7 +146,7 @@ function webform_token_info() {
   $webform_submission['values'] = [
     'name' => t('Submission values'),
     'description' => Markup::create((string) t('Webform tokens from submitted data.') .
-      t("Replace the '?' with...") . '<br />' .
+      t("Replace the '?' with…") . '<br />' .
       '<ul>' .
       '<li>element_key</li>' .
       '<li>element_key:format:items</li>' .
@@ -270,7 +270,7 @@ function webform_token_info() {
   $webform['handler'] = [
     'name' => t('Handler response'),
     'description' => Markup::create((string) t('Webform handler response tokens.') . '<br/>' .
-      t("Replace the '?' with...") . '<br />' .
+      t("Replace the '?' with…") . '<br />' .
       '<ul>' .
       '<li>handler_id:state:key</li>' .
       '<li>handler_id:state:key1:key2</li>' .
@@ -290,7 +290,7 @@ function webform_token_info() {
   if ($roles) {
     $types['webform_role'] = [
       'name' => t('Webform roles'),
-      'description' => t("Tokens related to user roles that can receive email. <em>This token is only available to a Webform email handler's 'To', 'CC', and 'BCC' email recipents.</em>"),
+      'description' => t("Tokens related to user roles that can receive email. <em>This token is only available to a Webform email handler's 'To', 'CC', and 'BCC' email recipients.</em>"),
       'needs-data' => 'webform_role',
     ];
 
@@ -717,6 +717,12 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
 
   $element_plugin = $element_manager->getElementInstance($element);
 
+  // Always get value for a computed element.
+  if ($element_plugin instanceof WebformComputedBase) {
+    $token_value = $element_plugin->getValue($element, $webform_submission);
+    return _webform_token_get_submission_value_encode($token_value, $options);
+  }
+
   // Exit if no submission data and form element is not a container.
   if (!isset($submission_data[$element_key]) && !$element_plugin->isContainer($element)) {
     return NULL;
@@ -743,12 +749,6 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
   /****************************************************************************/
   // Get value.
   /****************************************************************************/
-
-  // Get value for a computed element.
-  if ($element_plugin instanceof WebformComputedBase) {
-    $token_value = $element_plugin->getValue($element, $webform_submission);
-    return _webform_token_get_submission_value_encode($token_value, $options);
-  }
 
   // Set entity reference chaining.
   if ($keys && $keys[0] == 'entity' && $element_plugin instanceof WebformElementEntityReferenceInterface) {

@@ -86,19 +86,19 @@ webform.config.advanced:
   title: 'Advanced'
   route_name: webform.config.advanced
   parent_id: webform.config
-  weight: 80
+  weight: 100
 
 webform.addons:
   title: 'Add-ons'
   route_name: webform.addons
   base_route: entity.webform.collection
-  weight: 40
+  weight: 50
 
 webform.contribute:
   title: 'Contribute'
   route_name: webform.contribute
   base_route: entity.webform.collection
-  weight: 50
+  weight: 60
 
 # Form
 
@@ -204,6 +204,14 @@ entity.webform.settings_access:
   title: 'Access'
   route_name: entity.webform.settings_access
   parent_id: entity.webform.settings
+  weight: 60
+
+# Export
+
+entity.webform.export_form:
+  title: 'Export'
+  route_name: entity.webform.export_form
+  base_route: entity.webform.canonical
   weight: 60
 
 # Submission
@@ -325,3 +333,10 @@ webform.reports_plugins.exporters:
   route_name: webform.reports_plugins.exporters
   base_route: webform.reports_plugins.elements
   weight: 20
+
+# User Submissions.
+
+webform.user.submissions:
+  title: 'Submissions'
+  route_name: webform.user.submissions
+  base_route: entity.user.canonical

@@ -1,5 +1,6 @@
 langcode: en
 status: open
+weight: 0
 dependencies:
   enforced:
     module:
@@ -36,7 +37,7 @@ elements: |
         'Option Group':
           Two: Two
         Three: Three
-      '#empty_option': Select...
+      '#empty_option': Select…
       '#other__option_label': 'Is there another option you wish to enter?'
       '#other__title': Other
       '#other__placeholder': 'What is this other option'
@@ -185,7 +186,9 @@ settings:
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
+  wizard_progress_link: false
   wizard_start_label: ''
+  wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''

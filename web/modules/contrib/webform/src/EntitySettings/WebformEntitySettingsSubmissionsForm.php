@@ -50,7 +50,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
 
     // Display warning and disable the submission form.
     if ($webform->isResultsDisabled()) {
-      drupal_set_message($this->t('Saving of submissions is disabled, submission settings, submission limits, purging and the saving of drafts is disabled. Submissions must be sent via an email or handled using a <a href=":href">custom webform handler</a>.', [':href' => $webform->toUrl('handlers')->toString()]), 'warning');
+      $this->messenger()->addWarning($this->t('Saving of submissions is disabled, submission settings, submission limits, purging and the saving of drafts is disabled. Submissions must be sent via an email or handled using a <a href=":href">custom webform handler</a>.', [':href' => $webform->toUrl('handlers')->toString()]));
       return $form;
     }
 
@@ -115,7 +115,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#min' => 1,
       '#default_value' => $webform_storage->getNextSerial($webform),
     ];
-    $form['submission_settings']['token_tree_link'] = $this->tokenManager->buildTreeLink();
+    $form['submission_settings']['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     // User settings.
     $form['submission_user_settings'] = [
@@ -189,12 +189,12 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
         ],
       ],
     ];
-    $form['submission_access_denied']['token_tree_link'] = $this->tokenManager->buildTreeLink();
+    $form['submission_access_denied']['token_tree_link'] = $this->tokenManager->buildTreeElement();
     if ($form['submission_access_denied']['token_tree_link']) {
       $form['submission_access_denied']['token_tree_link']['#states'] = [
         'visible' => [
           ':input[name="submission_login"]' => ['checked' => TRUE],
-        ]
+        ],
       ];
     }
 
@@ -323,6 +323,19 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
         ],
       ],
     ];
+    $form['submission_limits']['total']['token_tree_link'] = $this->tokenManager->buildTreeElement();
+    if ($form['submission_limits']['total']['token_tree_link']) {
+      $form['submission_limits']['total']['token_tree_link'] += [
+        '#states' => [
+          'visible' => [
+            [':input[name="limit_total"]' => ['!value' => '']],
+            'or',
+            [':input[name="entity_limit_total"]' => ['!value' => '']],
+          ],
+        ],
+      ];
+    }
+
     $form['submission_limits']['user'] = [
       '#type' => 'details',
       '#title' => $this->t('Per user'),
@@ -370,6 +383,18 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
         ],
       ],
     ];
+    $form['submission_limits']['user']['token_tree_link'] = $this->tokenManager->buildTreeElement();
+    if ($form['submission_limits']['user']['token_tree_link']) {
+      $form['submission_limits']['user']['token_tree_link'] += [
+        '#states' => [
+          'visible' => [
+            [':input[name="limit_user"]' => ['!value' => '']],
+            'or',
+            [':input[name="entity_limit_user"]' => ['!value' => '']],
+          ],
+        ],
+      ];
+    }
 
     // Purge settings.
     $form['purge_settings'] = [
@@ -464,7 +489,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#description' => $this->t('Message to be displayed when a draft is loaded.'),
       '#default_value' => $settings['draft_loaded_message'],
     ];
-    $form['draft_settings']['draft_container']['token_tree_link'] = $this->tokenManager->buildTreeLink();
+    $form['draft_settings']['draft_container']['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     // Autofill settings.
     $form['autofill_settings'] = [
@@ -502,6 +527,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#webform_id' => $this->getEntity()->id(),
       '#default_value' => $settings['autofill_excluded_elements'],
     ];
+    $form['autofill_settings']['autofill_container']['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     $this->tokenManager->elementValidate($form);
 
@@ -533,7 +559,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
     $next_serial = (int) $values['next_serial'];
     $max_serial = $webform_storage->getMaxSerial($webform);
     if ($next_serial < $max_serial) {
-      drupal_set_message($this->t('The next submission number was increased to @min to make it higher than existing submissions.', ['@min' => $max_serial]));
+      $this->messenger()->addStatus($this->t('The next submission number was increased to @min to make it higher than existing submissions.', ['@min' => $max_serial]));
       $next_serial = $max_serial;
     }
     $webform_storage->setNextSerial($webform, $next_serial);

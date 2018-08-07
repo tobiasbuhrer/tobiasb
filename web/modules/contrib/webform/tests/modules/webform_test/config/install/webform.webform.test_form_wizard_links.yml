@@ -9,36 +9,25 @@ close: null
 uid: null
 template: false
 archive: false
-id: test_element_text
-title: 'Test: Element: Text'
-description: 'Tests text field and text area based elements.'
-category: 'Test: Element'
+id: test_form_wizard_links
+title: 'Test: Webform: Wizard previous links'
+description: 'Test a multiple step ''wizard'' webform with previous page links.'
+category: 'Test: Webform'
 elements: |
-  '#attributes':
-    novalidate: novalidate
-  text_format_element:
-    '#type': details
-    '#title': 'Text format elements'
-    '#open': true
-    text_format:
-      '#type': text_format
-      '#title': text_format
-      '#hide_help': true
-  counter_elements:
-    '#type': details
-    '#title': 'Word and character counter'
-    '#open': true
-    counter_characters:
+  page_1:
+    '#title': 'Page 1'
+    '#type': webform_wizard_page
+    element_1:
+      '#title': 'Element 1'
       '#type': textfield
-      '#title': 'Character counter'
-      '#counter_type': character
-      '#counter_maximum': 10
-    counter_words:
-      '#type': textarea
-      '#title': 'Word counter'
-      '#counter_type': word
-      '#counter_maximum': 3
-      '#counter_message': 'word(s) left. This is a custom message'
+      '#default_value': '{element_1}'
+  page_2:
+    '#title': 'Page 2'
+    '#type': webform_wizard_page
+    element_2:
+      '#title': 'Element 2'
+      '#type': textfield
+      '#default_value': '{element_2}'
 css: ''
 javascript: ''
 settings:
@@ -87,11 +76,13 @@ settings:
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
+  wizard_progress_link: true
   wizard_start_label: ''
+  wizard_preview_link: true
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
-  preview: 0
+  preview: 1
   preview_label: ''
   preview_title: ''
   preview_message: ''
@@ -99,12 +90,12 @@ settings:
   preview_excluded_elements: {  }
   preview_exclude_empty: true
   preview_exclude_empty_checkbox: false
-  draft: none
+  draft: all
   draft_multiple: false
-  draft_auto_save: false
+  draft_auto_save: true
   draft_saved_message: ''
   draft_loaded_message: ''
-  confirmation_type: message
+  confirmation_type: page
   confirmation_title: ''
   confirmation_message: ''
   confirmation_url: ''
@@ -126,7 +117,7 @@ settings:
   entity_limit_user_interval: null
   purge: none
   purge_days: null
-  results_disabled: true
+  results_disabled: false
   results_disabled_ignore: false
   token_update: false
 access:
@@ -172,12 +163,4 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  debug:
-    id: debug
-    label: Debug
-    handler_id: debug
-    status: true
-    conditions: {  }
-    weight: 1
-    settings: {  }
+handlers: {  }

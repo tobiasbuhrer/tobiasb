@@ -1,5 +1,6 @@
 langcode: en
 status: closed
+weight: 0
 dependencies:
   enforced:
     module:
@@ -22,7 +23,7 @@ elements: |
     '#required': true
   speaker:
     '#type': webform_likert
-    '#title': 'Please rate the speaker''s...'
+    '#title': 'Please rate the speaker''s…'
     '#questions':
       mastery: 'Mastery of this topic'
       presentation: 'Presentation skills'
@@ -91,7 +92,9 @@ settings:
   wizard_progress_bar: false
   wizard_progress_pages: false
   wizard_progress_percentage: false
+  wizard_progress_link: false
   wizard_start_label: ''
+  wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''

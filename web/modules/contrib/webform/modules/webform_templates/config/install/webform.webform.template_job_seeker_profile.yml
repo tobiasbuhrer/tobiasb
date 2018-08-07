@@ -1,5 +1,6 @@
 langcode: en
 status: closed
+weight: 0
 dependencies:
   enforced:
     module:
@@ -24,7 +25,7 @@ elements: |
       </ul>
   information:
     '#title': 'Job Seeker Information'
-    '#type': fieldset
+    '#type': webform_section
     first_name:
       '#title': 'First Name'
       '#type': textfield
@@ -129,7 +130,9 @@ settings:
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
+  wizard_progress_link: false
   wizard_start_label: ''
+  wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''

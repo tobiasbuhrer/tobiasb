@@ -98,6 +98,7 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
     $form['#prefix'] = '<div id="webform-ui-element-type-ajax-wrapper">';
     $form['#suffix'] = '</div>';
 
+    $form['#attached']['library'][] = 'webform/webform.admin';
     $form['#attached']['library'][] = 'webform/webform.form';
     $form['#attached']['library'][] = 'webform/webform.tooltip';
     $form['#attached']['library'][] = 'webform_ui/webform_ui';
@@ -131,6 +132,8 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
       '#attributes' => [
         'class' => ['webform-form-filter-text'],
         'data-element' => '.webform-ui-element-type-table',
+        'data-item-single' => $this->t('element'),
+        'data-item-plural' => $this->t('elements'),
         'title' => $this->t('Enter a part of the element name to filter by.'),
         'autofocus' => 'autofocus',
       ],
@@ -140,7 +143,7 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
   }
 
   /**
-   * Never trigge validation.
+   * Never trigger validation.
    */
   public function noValidate(array &$form, FormStateInterface $form_state) {
     $form_state->clearErrors();
@@ -234,6 +237,7 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
     $row['type']['help'] = [
       '#type' => 'webform_help',
       '#help' => $webform_element->getPluginDescription(),
+      '#help_title' => $webform_element->getPluginLabel(),
     ];
 
     // Preview.
@@ -361,8 +365,10 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
 
     // Custom element type specific attributes.
     switch ($webform_element->getTypeName()) {
+      case 'details':
       case 'fieldset':
       case 'webform_email_confirm':
+        // Title needs to be displayed.
         unset($element['#title_display']);
         break;
 

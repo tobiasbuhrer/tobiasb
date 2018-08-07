@@ -12,7 +12,6 @@ use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Render\Element;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformOptions;
-use Drupal\webform\Plugin\WebformHandler\ActionWebformHandler;
 use Drupal\webform\Plugin\WebformHandler\EmailWebformHandler;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\Plugin\WebformHandler\RemotePostWebformHandler;
@@ -20,6 +19,18 @@ use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Utility\WebformReflectionHelper;
 use Drupal\webform\Utility\WebformYaml;
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function webform_update_dependencies() {
+  // Ensure that system_update_8501() runs before the webform update, so that
+  // the new revision_default field is installed in the correct table.
+  // @see https://www.drupal.org/project/webform/issues/2958102
+  $dependencies['webform'][8099]['system'] = 8501;
+
+  return $dependencies;
+}
 
 /******************************************************************************/
 // Webform-8.x-5.0-beta1 - December 7, 2016 (No update required).
@@ -726,7 +737,7 @@ function webform_update_8034() {
 /******************************************************************************/
 
 /******************************************************************************/
-// Webform-8.x-5.0-beta12 -  April 21, 2017.
+// Webform-8.x-5.0-beta12 - April 21, 2017.
 /******************************************************************************/
 
 /**
@@ -1005,7 +1016,7 @@ function webform_update_8046() {
  *   Webform config data.
  *
  * @return array
- *   Webform config data with 'webfor_actions' element.
+ *   Webform config data with 'webform_actions' element.
  */
 function _webform_update_8046_convert_data(array $data) {
   $button_names = [
@@ -1189,7 +1200,7 @@ function webform_update_8057() {
 }
 
 /**
- * Issue #2888076: Redirect users to login page when trying to access the a protected webform file.
+ * Issue #2888076: Redirect users to login page when trying to access a protected webform file.
  */
 function webform_update_8058() {
   _webform_update_admin_settings();
@@ -2342,4 +2353,93 @@ function webform_update_8131() {
  */
 function webform_update_8132() {
   _webform_update_admin_settings();
+}
+
+/**
+ * Issue #2890861: Webform toggle element is not accessible.
+ */
+function webform_update_8133() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $data = $webform_config->getRawData();
+    $yaml = Yaml::encode($data);
+    if (strpos($yaml, 'webform_toggle')) {
+      return;
+    }
+  }
+
+  $admin_config = \Drupal::configFactory()->getEditable('webform.settings');
+  $settings = $admin_config->getRawData();
+  $settings['libraries']['excluded_libraries'][] = 'jquery.toggles';
+  $admin_config->setData($settings)->save();
+}
+
+/**
+ * Issue #2984348: Link to relevant wizard page on preview.
+ */
+function webform_update_8134() {
+  _webform_update_admin_settings();
+}
+
+/**
+ * Issue #2984868: Allow to specify the text format for emails.
+ */
+function webform_update_8135() {
+  $admin_config = \Drupal::configFactory()->getEditable('webform.settings');
+  $settings = $admin_config->getRawData();
+  $settings['html_editor']['element_format'] = $settings['html_editor']['format'];
+  $settings['html_editor']['mail_format'] = $settings['html_editor']['format'];
+  unset($settings['html_editor']['format']);
+  $admin_config->setData($settings)->save();
+}
+
+/**
+ * Issue #2987174: Replace and improve word/character counter.
+ */
+function webform_update_8136() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+
+    $data = $webform_config->getRawData();
+    if (strpos($data['elements'], "'#counter_message'") === FALSE) {
+      continue;
+    }
+
+    $elements = Yaml::decode($data['elements']);
+    _webform_update_8136($elements);
+
+    $data['elements'] = Yaml::encode($elements);
+    $webform_config->setData($data);
+    $webform_config->save();
+  }
+}
+
+/**
+ * Update #counter_* attributes.
+ *
+ * Replace 'X' in counter message with '%d' and
+ * move '#counter_message' to '#counter_maximum_message'.
+ *
+ * @param array $element
+ *   A form element.
+ */
+function _webform_update_8136(array &$element) {
+  if (isset($element['#counter_message'])) {
+    if (strpos($element['#counter_message'], 'X') === FALSE) {
+      $element['#counter_message'] = '%d ' . $element['#counter_message'];
+    }
+    else {
+      $element['#counter_message'] = str_replace('X', '%d', $element['#counter_message']);
+    }
+    $element['#counter_maximum_message'] = $element['#counter_message'];
+    unset($element['#counter_message']);
+  }
+
+  foreach (Element::children($element) as $key) {
+    if (is_array($element[$key])) {
+      _webform_update_8136($element[$key]);
+    }
+  }
 }
