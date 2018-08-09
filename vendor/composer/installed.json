@@ -3720,18 +3720,18 @@
     },
     {
         "name": "drupal/webform",
-        "version": "5.0.0-rc17",
-        "version_normalized": "5.0.0.0-RC17",
+        "version": "5.0.0-rc18",
+        "version_normalized": "5.0.0.0-RC18",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/webform",
-            "reference": "8.x-5.0-rc17"
+            "reference": "8.x-5.0-rc18"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.0-rc17.zip",
-            "reference": "8.x-5.0-rc17",
-            "shasum": "a5413bde54b7082e45e8fc3ce3484452611b1f4a"
+            "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.0-rc18.zip",
+            "reference": "8.x-5.0-rc18",
+            "shasum": "f4c1854e8c4c1deaebfd452718d7aa67b01777ac"
         },
         "require": {
             "drupal/core": "*"
@@ -3750,8 +3750,8 @@
                 "dev-5.x": "5.x-dev"
             },
             "drupal": {
-                "version": "8.x-5.0-rc17",
-                "datestamp": "1533563280",
+                "version": "8.x-5.0-rc18",
+                "datestamp": "1533682980",
                 "security-coverage": {
                     "status": "not-covered",
                     "message": "RC releases are not covered by Drupal security advisories."
