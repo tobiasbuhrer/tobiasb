@@ -330,7 +330,7 @@
         "cweagans/composer-patches": "^1.6",
         "drupal-composer/drupal-scaffold": "^2.2",
         "drupal/console": "~1.0",
-        "drupal/core": "~8.5.3",
+        "drupal/core": "^8.6.0",
         "drupal/drush": "^6.0@RC",
         "drupal/entity": "^1.0",
         "drupal/geofield": "^1.0",
@@ -364,7 +364,7 @@
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "webflo/drupal-core-require-dev": "~8.5.3"
+        "webflo/drupal-core-require-dev": "^8.6.0"
     },
     "conflict": {
         "drupal/drupal": "*"

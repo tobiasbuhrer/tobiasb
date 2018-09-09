@@ -25,14 +25,12 @@ use Drupal\leaflet\LeafletSettingsElementsTrait;
  * Attributes set below end up in the $this->definition[] array.
  *
  * @ViewsStyle(
- *   id = "leafet_map",
+ *   id = "leaflet_map",
  *   title = @Translation("Leaflet Map"),
  *   help = @Translation("Displays a View as a Leaflet map."),
  *   display_types = {"normal"},
  *   theme = "leaflet-map"
  * )
- *
- * @deprecated Should be removed in favor of other plugins.
  */
 class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterface {
 
@@ -43,14 +41,14 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    *
    * @var string
    */
-  private $entityType;
+  protected $entityType;
 
   /**
    * The Entity Info service property.
    *
    * @var string
    */
-  private $entityInfo;
+  protected $entityInfo;
 
   /**
    * Does the style plugin for itself support to add fields to it's output.

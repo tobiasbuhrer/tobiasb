@@ -14,6 +14,7 @@ effects:
     data:
       width: 48
       height: 48
+      anchor: center-center
   ff7b4c7b-5b3d-4234-8d3e-50701ad1e3c4:
     uuid: ff7b4c7b-5b3d-4234-8d3e-50701ad1e3c4
     id: image_effects_strip_metadata

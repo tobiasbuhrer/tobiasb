@@ -19,6 +19,7 @@ effects:
     data:
       width: 48
       height: 48
+      anchor: center-center
   536fd441-aba4-492d-a139-9d0d917e7960:
     uuid: 536fd441-aba4-492d-a139-9d0d917e7960
     id: image_effects_imagemagick_arguments
