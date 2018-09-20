@@ -212,6 +212,11 @@ class MinifyHTMLExit implements EventSubscriberInterface {
       '',         // trim each line
     ];
 
-    $this->content = preg_replace($search, $replace, $this->content);
+    $minified = preg_replace($search, $replace, $this->content);
+
+    // Only use minified content if there was not an error during minification.
+    if (PREG_NO_ERROR === preg_last_error()) {
+      $this->content = $minified;
+    }
   }
 }
