@@ -25,7 +25,6 @@ module:
   image: 0
   image_effects: 0
   image_import: 0
-  image_style_warmer: 0
   imagemagick: 0
   juicebox: 0
   layout_discovery: 0
