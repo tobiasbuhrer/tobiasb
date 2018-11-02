@@ -336,6 +336,7 @@
         "drupal/geofield": "^1.0",
         "drupal/honeypot": "1.x-dev",
         "drupal/image_effects": "^2.1",
+        "drupal/image_style_warmer": "^1.0",
         "drupal/imagemagick": "^2.3",
         "drupal/juicebox": "2.x-dev",
         "drupal/leaflet": "^1.0@beta",

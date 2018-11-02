@@ -1,0 +1,6 @@
+upload_image_styles: {  }
+queue_image_styles:
+  juicebox_large: juicebox_large
+  juicebox_medium: juicebox_medium
+  juicebox_small: juicebox_small
+  juicebox_square_thumb: juicebox_square_thumb
