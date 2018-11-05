@@ -1,0 +1,78 @@
+uuid: 7bbacc8f-cf5d-42f6-a521-c8266751f39a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.place
+    - field.field.node.photo.field_caption
+    - field.field.node.photo.field_city
+    - field.field.node.photo.field_country_code
+    - field.field.node.photo.field_credit
+    - field.field.node.photo.field_date
+    - field.field.node.photo.field_image
+    - field.field.node.photo.field_location
+    - field.field.node.photo.field_position
+    - field.field.node.photo.field_state
+    - field.field.node.photo.field_tags
+    - node.type.photo
+  module:
+    - options
+    - user
+id: node.photo.place
+targetEntityType: node
+bundle: photo
+mode: place
+content:
+  field_caption:
+    type: basic_string
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_city:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_country_code:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_credit:
+    type: string
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_location:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_state:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_date: true
+  field_image: true
+  field_position: true
+  field_tags: true
+  langcode: true
+  links: true

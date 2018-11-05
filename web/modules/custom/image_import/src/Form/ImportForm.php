@@ -8,6 +8,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\file\FileInterface;
 
 /**
  * Class ImportForm.
@@ -121,6 +124,7 @@ class ImportForm extends ConfigFormBase
         $destination = \Drupal::config('system.file')
                 ->get('default_scheme') . $currentmonth;
         file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+        $styles = ImageStyle::loadMultiple();
 
         //fields of target node type
         $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $config->get('contenttype'));
@@ -143,8 +147,10 @@ class ImportForm extends ConfigFormBase
 
             //load metatags for image
             $uri = $file->GetFileUri();
+
             $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
             $filepath = $stream_wrapper_manager->realpath();
+            //$filepath = \Drupal::service('file_system')->realpath($uri);
             $metatags = ImageImportSettingsForm::readMetaTags($filepath);
 
             //title: if mapping is set, result needs to have at least one char
@@ -159,6 +165,8 @@ class ImportForm extends ConfigFormBase
             $newnode[$config->get('image_field')]['alt'] = $title;
 
             $configs = $config->get();
+
+
             foreach ($configs as $key => $mapping) {
                 if ((substr($key, 0, 5) == 'exif_') and ($key !== 'exif_title')) {
                     $fieldname = substr($key, 5);
@@ -211,6 +219,23 @@ class ImportForm extends ConfigFormBase
                 $file_usage->add($file, 'node', 'node', $node->id());
                 $file->save();
 
+                //create image styles
+
+                $fid = $file->id();
+                $entity = \Drupal\file\Entity\File::load($fid);
+
+                if ($entity instanceof FileInterface) {
+                    $image = \Drupal::service('image.factory')->get($entity->getFileUri());
+                    /** @var \Drupal\Core\Image\Image $image */
+                    if ($image->isValid()) {
+                        $image_uri = $entity->getFileUri();
+                        /** @var \Drupal\image\Entity\ImageStyle $style */
+                        foreach ($styles as $style) {
+                            $dest = $style->buildUri($image_uri);
+                            $style->createDerivative($image_uri, $dest);
+                        }
+                    }
+                }
             }
             parent::submitForm($form, $form_state);
         }

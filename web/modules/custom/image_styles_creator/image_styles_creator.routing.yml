@@ -1,0 +1,19 @@
+
+image_styles_creator.image_styles_creator_settings_form:
+  path: '/admin/config/image_styles_creator/settings'
+  defaults:
+    _form: '\Drupal\image_styles_creator\Form\ImageStylesCreatorSettingsForm'
+    _title: 'ImageStylesCreatorSettingsForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+image_styles_creator.generate_form:
+  path: '/image_styles_creator/form/generate'
+  defaults:
+    _form: '\Drupal\image_styles_creator\Form\GenerateForm'
+    _title: 'GenerateForm'
+  requirements:
+    _access: 'TRUE'
+  

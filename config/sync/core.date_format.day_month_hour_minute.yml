@@ -1,0 +1,8 @@
+uuid: 4ad57c6c-f202-4d00-917c-009d8b6d6947
+langcode: en
+status: true
+dependencies: {  }
+id: day_month_hour_minute
+label: 'day month hour:minute'
+locked: false
+pattern: 'j F, H:i'

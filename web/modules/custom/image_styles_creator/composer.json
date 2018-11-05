@@ -1,0 +1,14 @@
+{
+  "name": "drupal/image_styles_creator",
+  "type": "drupal-module",
+  "description": "Creates image styles before they are required. In this way, image delivery is speeded up.",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/image_styles_creator",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/image_styles_creator",
+    "source": "http://cgit.drupalcode.org/image_styles_creator"
+  },
+  "require": { }
+}

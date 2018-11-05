@@ -1,0 +1,22 @@
+uuid: ad0be424-5aec-4a7a-a38c-f05996f1114b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_position
+    - node.type.hebergement
+  module:
+    - geofield
+id: node.hebergement.field_position
+field_name: field_position
+entity_type: node
+bundle: hebergement
+label: Position
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  backend: geofield_backend_default
+field_type: geofield

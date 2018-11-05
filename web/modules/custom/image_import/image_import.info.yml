@@ -2,4 +2,5 @@ name: 'Image import'
 type: module
 description: 'Batch imports images and creates a node for each of them. Extracts EXIF/IPTC values to fill node fields.'
 core: 8.x
+
 package: 'Custom'

@@ -1,0 +1,14 @@
+image_styles_creator.image_styles_creator_settings_form:
+  title: 'Image Styles Creator: Settings'
+  route_name: image_styles_creator.image_styles_creator_settings_form
+  description: 'Choose which styles should be generated'
+  parent: system.admin_config_media
+  weight: 60
+
+image_styles_creator.image_styles_creator_generator_form:
+  title: 'Image Styles Creator: Generate'
+  route_name: image_styles_creator.generate_form
+  description: 'Creates files for selected image styles'
+  parent: system.admin_config_media
+  weight: 61
+

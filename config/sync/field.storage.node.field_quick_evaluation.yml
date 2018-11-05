@@ -1,0 +1,33 @@
+uuid: c9038ac0-3818-4f83-a61d-8428309ecf1f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_quick_evaluation
+field_name: field_quick_evaluation
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: green
+      label: green
+    -
+      value: yellow
+      label: yellow
+    -
+      value: red
+      label: red
+    -
+      value: black
+      label: black
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
