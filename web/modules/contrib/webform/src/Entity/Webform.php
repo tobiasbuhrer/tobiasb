@@ -12,7 +12,6 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Drupal\webform\Plugin\WebformElement\WebformActions;
-use Drupal\webform\Plugin\WebformElement\WebformManagedFileBase;
 use Drupal\webform\Plugin\WebformElement\WebformWizardPage;
 use Drupal\webform\Plugin\WebformHandlerMessageInterface;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -331,7 +330,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * @var array
    */
   protected $elementsWizardPages = [];
-
 
   /**
    * Track managed file elements.
@@ -1338,7 +1336,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
         }
 
         // Track managed files.
-        if ($element_plugin instanceof WebformManagedFileBase) {
+        if ($element_plugin->hasManagedFiles($element)) {
           $this->elementsManagedFiles[$key] = $key;
         }
 

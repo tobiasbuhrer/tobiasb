@@ -18,8 +18,6 @@ elements: |
   webform_custom_composite_basic:
     '#type': webform_custom_composite
     '#title': webform_custom_composite_basic
-    '#multiple': false
-    '#multiple_header': false
     '#element':
       first_name:
         '#type': textfield

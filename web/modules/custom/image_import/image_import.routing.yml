@@ -48,3 +48,13 @@ image_import.unused_files_settings_form:
   options:
     _admin_route: TRUE
 
+image_import.generate_form:
+      path: '/admin/config/image_import/form/generate'
+      defaults:
+        _form: '\Drupal\image_import\Form\GenerateForm'
+        _title: 'Generate image styles'
+      requirements:
+        _permission: 'access administration pages'
+      options:
+        _admin_route: TRUE
+

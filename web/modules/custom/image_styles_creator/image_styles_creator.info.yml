@@ -1,5 +1,0 @@
-name: 'Image Styles Creator'
-type: module
-description: 'Creates image styles before they are required. In this way, image delivery is speeded up.'
-core: 8.x
-package: 'Custom'

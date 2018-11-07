@@ -210,47 +210,44 @@ class ImportForm extends ConfigFormBase
                                 }
                                 break;
                             };
-                        }
-                    }
-                }
-
-                $node = Node::create($newnode);
-                $node->save();
-                $file_usage->add($file, 'node', 'node', $node->id());
-                $file->save();
-
-                //create image styles
-
-                $fid = $file->id();
-                $entity = \Drupal\file\Entity\File::load($fid);
-
-                if ($entity instanceof FileInterface) {
-                    $image = \Drupal::service('image.factory')->get($entity->getFileUri());
-                    /** @var \Drupal\Core\Image\Image $image */
-                    if ($image->isValid()) {
-                        $image_uri = $entity->getFileUri();
-                        /** @var \Drupal\image\Entity\ImageStyle $style */
-                        foreach ($styles as $style) {
-                            $dest = $style->buildUri($image_uri);
-                            $style->createDerivative($image_uri, $dest);
-                        }
                     }
                 }
             }
-            parent::submitForm($form, $form_state);
-        }
 
-        // Convert a lat or lon 3-array to decimal degrees
-        function convertToDegree($exifcoordinates)
-        {
-            $values = explode(',', $exifcoordinates);
-            $deg = explode('/', $values[0]);
-            $degrees = $deg[0] / $deg[1];
-            $min = explode('/', $values[1]);
-            $minutes = $min[0] / $min[1];
-            $sec = explode('/', $values[2]);
-            $seconds = $sec[0] / $sec[1];
-            return $degrees + $minutes / 60.0 + $seconds / 3600;
-        }
+            $node = Node::create($newnode);
+            $node->save();
+            $file_usage->add($file, 'node', 'node', $node->id());
+            $file->save();
 
+            //create image styles
+
+            $fid = $file->id();
+            $entity = \Drupal\file\Entity\File::load($fid);
+
+            if ($entity instanceof FileInterface) {
+                $image = \Drupal::service('image.factory')->get($entity->getFileUri());
+                /** @var \Drupal\Core\Image\Image $image */
+                if ($image->isValid()) {
+                    $queue = \Drupal::queue('image_import_image_style');
+                    $data = ['entity' => $entity];
+                    $queue->createItem($data);
+                }
+            }
+        }
+        parent::submitForm($form, $form_state);
     }
+
+    // Convert a lat or lon 3-array to decimal degrees
+    function convertToDegree($exifcoordinates)
+    {
+        $values = explode(',', $exifcoordinates);
+        $deg = explode('/', $values[0]);
+        $degrees = $deg[0] / $deg[1];
+        $min = explode('/', $values[1]);
+        $minutes = $min[0] / $min[1];
+        $sec = explode('/', $values[2]);
+        $seconds = $sec[0] / $sec[1];
+        return $degrees + $minutes / 60.0 + $seconds / 3600;
+    }
+
+}

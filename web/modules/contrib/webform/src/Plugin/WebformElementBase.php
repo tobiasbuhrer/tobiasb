@@ -482,6 +482,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
   /**
    * {@inheritdoc}
    */
+  public function hasManagedFiles(array $element) {
+    return FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function supportsMultipleValues() {
     return $this->hasProperty('multiple');
   }
@@ -1011,15 +1018,21 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
 
     // Set the multiple element.
     $element['#element'] = $element;
+
     // Remove properties that should only be applied to the parent element.
-    $element['#element'] = array_diff_key($element['#element'], array_flip(['#default_value', '#description', '#description_display', '#required', '#required_error', '#states', '#wrapper_attributes', '#prefix', '#suffix', '#element', '#tags', '#multiple']));
+    $element['#element'] = array_diff_key($element['#element'], array_flip(['#access', '#default_value', '#description', '#description_display', '#required', '#required_error', '#states', '#wrapper_attributes', '#prefix', '#suffix', '#element', '#tags', '#multiple']));
+
     // Propagate #states to sub element.
     // @see \Drupal\webform\Element\WebformCompositeBase::processWebformComposite
     if (!empty($element['#states'])) {
       $element['#element']['#_webform_states'] = $element['#states'];
     }
+
     // Always make the title invisible.
     $element['#element']['#title_display'] = 'invisible';
+
+    // Set hidden element #after_build handler.
+    $element['#element']['#after_build'][] = [get_class($this), 'hiddenElementAfterBuild'];
 
     // Change the element to a multiple element.
     $element['#type'] = 'webform_multiple';
@@ -1138,17 +1151,14 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
    *   A render array representing an element as text or HTML.
    */
   protected function build($format, array &$element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $options += [
-      'exclude_empty' => TRUE,
-    ];
     $options['multiline'] = $this->isMultiline($element);
     $format_function = 'format' . ucfirst($format);
     $value = $this->$format_function($element, $webform_submission, $options);
 
     // Handle empty value.
     if ($value === '') {
-      // Return NULL for empty formatted value.
-      if (!empty($options['exclude_empty'])) {
+      // Return NULL if empty is excluded.
+      if ($this->isEmptyExcluded($element, $options)) {
         return NULL;
       }
       // Else set the formatted value to empty message/placeholder.
@@ -1719,6 +1729,16 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
    */
   public function formatTableColumn(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     return $this->formatHtml($element, $webform_submission);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isEmptyExcluded(array $element, array $options) {
+    $options += [
+      'exclude_empty' => TRUE,
+    ];
+    return !empty($options['exclude_empty']);
   }
 
   /****************************************************************************/
