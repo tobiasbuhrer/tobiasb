@@ -35,4 +35,7 @@ function image_import_form_alter(&$form, &$form_state, $form_id)
 
         $form['actions']['submit']['#value'] = t('Upload images and create nodes');
     }
+    elseif ($form_id == 'generator_form') {
+        $form['actions']['submit']['#value'] = t('Add images to the queue for image style creation');
+    }
 }

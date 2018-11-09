@@ -14,3 +14,5 @@ exif_field_country_code: Country-PrimaryLocationCode
 exif_field_position: GPSLatitude
 exif_field_caption: Caption-Abstract
 exiftoolpath: /usr/bin/exiftool
+queue_start: 2000
+queue_range: '1000'

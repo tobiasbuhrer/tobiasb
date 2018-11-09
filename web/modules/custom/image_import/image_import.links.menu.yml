@@ -32,9 +32,10 @@ image_import.unused_files_settings_form:
   parent: system.admin_config_media
   weight: 99
 
-image_import.generate_form:
-  title: 'Image Styles Creator: Generate'
-  route_name: image_import.generate_form
-  description: 'Creates files for selected image styles'
+image_import.generator_form:
+  title: 'Generate image styles'
+  route_name: image_import.generator_form
+  description: 'A description for the menu entry'
   parent: image_import.admin_config_image_import
-  weight: 61
+  weight: 62
+
