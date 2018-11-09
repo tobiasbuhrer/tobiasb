@@ -35,7 +35,7 @@ image_import.unused_files_settings_form:
 image_import.generator_form:
   title: 'Generate image styles'
   route_name: image_import.generator_form
-  description: 'A description for the menu entry'
+  description: 'Creates the different image sizes and types used for each image'
   parent: image_import.admin_config_image_import
   weight: 62
 
