@@ -3343,18 +3343,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.0.0-beta15",
-        "version_normalized": "1.0.0.0-beta15",
+        "version": "1.0.0-beta16",
+        "version_normalized": "1.0.0.0-beta16",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/leaflet",
-            "reference": "8.x-1.0-beta15"
+            "reference": "8.x-1.0-beta16"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.0-beta15.zip",
-            "reference": "8.x-1.0-beta15",
-            "shasum": "4596a7b54a3f3337e680baeb9e802af15412785a"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.0-beta16.zip",
+            "reference": "8.x-1.0-beta16",
+            "shasum": "7b47bb0cb91483e54de7280aa83bce86329f5d37"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -3366,8 +3366,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.0-beta15",
-                "datestamp": "1538370781",
+                "version": "8.x-1.0-beta16",
+                "datestamp": "1541908980",
                 "security-coverage": {
                     "status": "not-covered",
                     "message": "Beta releases are not covered by Drupal security advisories."
