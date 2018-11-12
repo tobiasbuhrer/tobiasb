@@ -7,12 +7,12 @@ use Drupal\Core\Queue\QueueWorkerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Executes interface translation queue tasks.
+ * Executes image style creation  queue tasks.
  *
  * @QueueWorker(
  *   id = "image_import_image_style",
  *   title = @Translation("Generate image styles"),
- *   cron = {"time" = 300}
+ *   cron = {"time" = 1500}
  * )
  */
 class ImageImportImageStyle extends QueueWorkerBase implements ContainerFactoryPluginInterface {
