@@ -10,85 +10,69 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_form_states_server_custom
-title: 'Test: Form API #states custom pattern, less, and greater condition validation'
-description: 'Test Drupal''s #states API custom pattern, less, and greater condition validation.'
+id: test_states_server_containers
+title: 'Test: Form API #states nested elements in a conditional hidden container'
+description: 'Test Drupal''s #states for nested elements in a conditional hidden container.'
 category: 'Test: Form API #states'
 elements: |
-  trigger_pattern:
-    '#type': textfield
-    '#title': trigger_pattern
-    '#description': 'pattern: ^[a-z]+$'
-  dependent_pattern:
-    '#type': textfield
-    '#title': dependent_pattern
-    '#states':
-      visible:
-        ':input[name="trigger_pattern"]':
-          value:
-            pattern: '^[a-z]+$'
-      required:
-        ':input[name="trigger_pattern"]':
-          value:
-            pattern: '^[a-z]+$'
-  trigger_not_pattern:
-    '#type': textfield
-    '#title': trigger_not_pattern
-    '#description': '!pattern: ^$'
-  dependent_not_pattern:
-    '#type': textfield
-    '#title': dependent_not_pattern
-    '#states':
-      visible:
-        ':input[name="trigger_not_pattern"]':
-          value:
-            '!pattern': '^$'
-      required:
-        ':input[name="trigger_not_pattern"]':
-          value:
-            '!pattern': '^$'
-  trigger_less:
-    '#type': number
-    '#title': trigger_less
-    '#description': '< 10'
-  dependent_less:
-    '#type': textfield
-    '#title': dependent_less
-    '#states':
-      visible:
-        ':input[name="trigger_less"]':
-          value:
-            less: 10
-      required:
-        ':input[name="trigger_less"]':
-          value:
-            less: 10
-  trigger_greater:
-    '#type': number
-    '#title': trigger_greater
-    '#description': '> 10'
-  dependent_greater:
-    '#type': textfield
-    '#title': dependent_greater
-    '#states':
-      visible:
-        ':input[name="trigger_greater"]':
-          value:
-            greater: 10
-      required:
-        ':input[name="trigger_greater"]':
-          value:
-            greater: 10
-  trigger_visible_slide:
+  visible_trigger:
     '#type': checkbox
-    '#title': trigger_visible_slide
-  dependent_visible_slide:
-    '#type': textfield
-    '#title': dependent_visible_slide
+    '#title': visible_trigger
+  visible_fieldset:
+    '#type': fieldset
+    '#title': visible_fieldset
+    '#states':
+      visible:
+        ':input[name="visible_trigger"]':
+          checked: true
+    visible_textfield:
+      '#type': textfield
+      '#title': visible_textfield
+      '#required': true
+    visible_composite:
+      '#type': webform_custom_composite
+      '#title': visible_composite
+      '#element':
+        textfield:
+          '#type': textfield
+          '#title': textfield
+          '#required': true
+        select_other:
+          '#type': webform_select_other
+          '#title': select_other
+          '#options':
+            one: One
+            two: Two
+          '#required': true
+    visible_custom_textfield:
+      '#type': textfield
+      '#title': visible_custom_textfield
+      '#states':
+        required:
+          ':input[name="visible_trigger"]':
+            checked: true
+          ':input[name="visible_textfield"]':
+            filled: true
+  visible_slide_fieldset:
+    '#type': fieldset
+    '#title': visible_slide_fieldset
     '#states':
       visible-slide:
-        ':input[name="trigger_visible_slide"]':
+        ':input[name="visible_trigger"]':
           checked: true
+    visible_slide_textfield:
+      '#type': textfield
+      '#title': visible_slide_textfield
+      '#required': true
+    visible_slide_custom_textfield:
+      '#type': textfield
+      '#title': visible_slide_custom_textfield
+      '#states':
+        required:
+          ':input[name="visible_trigger"]':
+            checked: true
+          ':input[name="visible_slide_textfield"]':
+            filled: true
   
 css: ''
 javascript: ''
@@ -106,6 +90,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -235,6 +220,10 @@ access:
     users: {  }
     permissions: {  }
   test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
     roles: {  }
     users: {  }
     permissions: {  }

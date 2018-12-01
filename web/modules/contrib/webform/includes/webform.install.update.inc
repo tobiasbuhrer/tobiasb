@@ -19,6 +19,7 @@ use Drupal\webform\Plugin\WebformHandler\EmailWebformHandler;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\Plugin\WebformHandler\RemotePostWebformHandler;
 use Drupal\webform\Utility\WebformArrayHelper;
+use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Utility\WebformReflectionHelper;
 use Drupal\webform\Utility\WebformYaml;
@@ -2712,6 +2713,10 @@ function webform_update_8146() {
   }
 }
 
+/******************************************************************************/
+// Webform-8.x-5.0-rc23 - October 20, 2018.
+/******************************************************************************/
+
 /**
  * Issue #3006468: Hide empty fields on on submission page.
  */
@@ -2743,9 +2748,100 @@ function webform_update_8149() {
   }
 }
 
+/******************************************************************************/
+// Webform-8.x-5.0-rc24 - October 22, 2018.
+/******************************************************************************/
+
 /**
  * Issue #2980032: SUBMISSION BEHAVIORS: Allow edit the previous submission.
  */
 function webform_update_8150() {
+  _webform_update_webform_settings();
+}
+
+/******************************************************************************/
+// Webform-8.x-5.0-rc25 - November 5, 2018 (No update required).
+/******************************************************************************/
+
+/******************************************************************************/
+// Webform-8.x-5.0-rc26 - November 5, 2018 (No update required).
+/******************************************************************************/
+
+/******************************************************************************/
+// Webform-8.x-5.0-rc27 - TBD.
+/******************************************************************************/
+
+/**
+ * Issue #3013767: Computed twig element is not working on multi-step form.
+ */
+function webform_update_8151() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $elements = $webform_config->get('elements');
+
+    // Try to decode elements.
+    try {
+      $elements = Yaml::decode($elements);
+    }
+    catch (\Exception $exception) {
+      continue;
+    }
+
+    // Make sure elements is an array.
+    if (!is_array($elements)) {
+      continue;
+    }
+
+    $has_computed_element = FALSE;
+    $flattened_elements =& WebformFormHelper::flattenElements($elements);
+    foreach ($flattened_elements as &$element) {
+      // Convert #value property to #template property.
+      // @see \Drupal\webform\Entity\Webform::initElementsRecursive
+      if (isset($element['#type']) && strpos($element['#type'], 'webform_computed_') === 0) {
+        $has_computed_element = TRUE;
+        if (isset($element['#value']) && !isset($element['#template'])) {
+          $element['#template'] = $element['#value'];
+          unset($element['#value']);
+        }
+      }
+    }
+    if ($has_computed_element) {
+      $webform_config->set('elements', Yaml::encode($elements));
+      $webform_config->save(TRUE);
+    }
+  }
+}
+
+/**
+ * Issue #3014933: Webform paths not being removed when a webform is deleted.
+ */
+function webform_update_8153() {
+  // Load all webforms to improve performance.
+  $webform = Webform::loadMultiple();
+
+  $database = \Drupal::database();
+  $select = $database->select('url_alias', 'u');
+  $select->fields('u', ['pid', 'source', 'alias', 'langcode']);
+  $select->condition('source', '/webform/%', 'LIKE');
+  $result = $select->execute();
+  while ($record = $result->fetchAssoc()) {
+    if (preg_match('#^/webform/([^/]+)/(?:drafts|submissions)$#', $record['source'], $match)) {
+      // Check if the webform still exists.
+      $webform_id = $match[1];
+      if (!isset($webform[$webform_id])) {
+        // Delete the broken URL alias.
+        $database->delete('url_alias')
+          ->condition('pid', $record['pid'])
+          ->execute();
+      }
+    }
+  }
+}
+
+/**
+ * Issue #3015990: Option not to store the IP address for logged-in users.
+ */
+function webform_update_8154() {
   _webform_update_webform_settings();
 }

@@ -10,7 +10,7 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_form_states_server_required
+id: test_states_server_required
 title: 'Test: Form API #states server-side required validation'
 description: 'Test Drupal''s #states API via server-side required validation.'
 category: 'Test: Form API #states'
@@ -356,7 +356,7 @@ elements: |
       '#states':
         required:
           ':input[name="composite_required_trigger"]':
-            'checked': true
+            checked: true
   composite_sub_elements_required_details:
     '#type': details
     '#title': composite_sub_elements_required
@@ -447,6 +447,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -576,6 +577,10 @@ access:
     users: {  }
     permissions: {  }
   test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
     roles: {  }
     users: {  }
     permissions: {  }

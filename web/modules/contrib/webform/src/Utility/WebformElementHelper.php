@@ -383,6 +383,11 @@ class WebformElementHelper {
    *   An associative array of translated element properties.
    */
   public static function applyTranslation(array &$element, array $translation) {
+    // Apply all translated properties to the element.
+    // This allows default properties to be translated, which includes
+    // composite element titles.
+    $element += $translation;
+
     foreach ($element as $key => &$value) {
       // Make sure to only merge properties.
       if (!Element::property($key) || empty($translation[$key])) {
@@ -586,7 +591,7 @@ class WebformElementHelper {
    * @return array
    *   An associative array containing an element's states.
    */
-  public static function getStates(array $element) {
+  public static function &getStates(array &$element) {
     // Composite and multiple elements use use a custom states wrapper
     // which will changes '#states' to '#_webform_states'.
     // @see \Drupal\webform\Utility\WebformElementHelper::fixStatesWrapper
@@ -597,7 +602,10 @@ class WebformElementHelper {
       return $element['#states'];
     }
     else {
-      return [];
+      // Return empty states variable to prevent the below notice.
+      // 'Only variable references should be returned by reference'.
+      $empty_states = [];
+      return $empty_states;
     }
   }
 
@@ -630,7 +638,7 @@ class WebformElementHelper {
    * Randomoize an associative array of element values and disable page caching.
    *
    * @param array $values
-   *   An associative array of element values,
+   *   An associative array of element values.
    *
    * @return array
    *   Randomized associative array of element values.

@@ -358,7 +358,7 @@ abstract class WebformTestBase extends WebTestBase {
   /**
    * Passes if the substring is contained within text, fails otherwise.
    */
-  protected function assertContains($haystack, $needle, $message = '', $group = 'Other') {
+  protected function assertContains($needle, $haystack, $message = '') {
     if (!$message) {
       $t_args = [
         '@haystack' => Unicode::truncate($haystack, 150, TRUE, TRUE),
@@ -370,13 +370,13 @@ abstract class WebformTestBase extends WebTestBase {
     if (!$result) {
       $this->verbose($haystack);
     }
-    return $this->assert($result, $message, $group);
+    $this->assert($result, $message);
   }
 
   /**
    * Passes if the substring is not contained within text, fails otherwise.
    */
-  protected function assertNotContains($haystack, $needle, $message = '', $group = 'Other') {
+  protected function assertNotContains($needle, $haystack, $message = '') {
     if (!$message) {
       $t_args = [
         '@haystack' => Unicode::truncate($haystack, 150, TRUE, TRUE),
@@ -389,7 +389,7 @@ abstract class WebformTestBase extends WebTestBase {
     if (!$result) {
       $this->verbose($haystack);
     }
-    return $this->assert($result, $message, $group);
+    $this->assert($result, $message);
   }
 
   /**

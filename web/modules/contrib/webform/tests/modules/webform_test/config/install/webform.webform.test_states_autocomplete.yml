@@ -10,98 +10,155 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_form_states_server_clear
-title: 'Test: Form API #states save hide/show element without clearing default value'
-description: 'Test Drupal&#39;s #states API hide/show element without clearing default value.'
+id: test_states_autocomplete
+title: 'Test: Form API #states autocomplete'
+description: 'Test Drupal''s #states autocomplete.'
 category: 'Test: Form API #states'
 elements: |
-  trigger_checkbox:
-    '#type': checkbox
-    '#title': trigger_checkbox
-  dependent_hidden:
-    '#type': hidden
-    '#title': dependent_hidden
-    '#default_value': '{dependent_hidden}'
-    '#states_clear': FALSE
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_checkbox:
-    '#type': checkbox
-    '#title': dependent_checkbox
-    '#default_value': TRUE
-    '#states_clear': FALSE
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_radios:
-    '#type': radios
-    '#title': dependent_radios
-    '#default_value': One
+  select:
+    '#type': select
+    '#title': select
     '#options':
       One: One
       Two: Two
       Three: Three
-    '#states_clear': FALSE
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_value:
-    '#type': value
-    '#title': dependent_value
-    '#value': '{value}'
-    '#states_clear': FALSE
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_textfield:
-    '#type': textfield
-    '#title': dependent_textfield
-    '#default_value': '{dependent_textfield}'
-    '#states_clear': FALSE
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_textfield_multiple:
-    '#type': textfield
-    '#title': dependent_textfield
+  select_multiple:
+    '#type': select
+    '#title': select_multiple
     '#multiple': true
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  webform_select_other:
+    '#type': webform_select_other
+    '#title': webform_select_other
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  radios:
+    '#type': radios
+    '#title': radios
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  webform_radios_other:
+    '#type': webform_radios_other
+    '#title': webform_radios_other
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  checkboxes:
+    '#type': checkboxes
+    '#title': checkboxes
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  webform_checkboxes_other:
+    '#type': webform_checkboxes_other
+    '#title': webform_checkboxes_other
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  webform_buttons:
+    '#type': webform_buttons
+    '#title': webform_buttons
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  webform_buttons_other:
+    '#type': webform_buttons_other
+    '#title': webform_buttons_other
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  tableselect_single:
+    '#type': tableselect
+    '#title': tableselect_single
+    '#multiple': false
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  tableselect_multiple:
+    '#type': tableselect
+    '#title': tableselect_multiple
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+  webform_entity_select:
+    '#type': webform_entity_select
+    '#title': webform_entity_select
+    '#target_type': user
+    '#selection_handler': 'default:user'
+    '#selection_settings':
+      include_anonymous: true
+  webform_likert:
+    '#type': webform_likert
+    '#title': webform_likert
+    '#questions':
+      q1: 'Question 1'
+      q2: 'Question 2'
+      q3: 'Question 3'
+    '#answers':
+      1: 'Option 1'
+      2: 'Option 2'
+      3: 'Option 3'
+  webform_address:
+    '#type': webform_address
+    '#title': webform_address
+    '#state_province__type': webform_select_other
+  webform_custom_composite:
+    '#type': webform_custom_composite
+    '#title': webform_custom_composite
+    '#element':
+      textfield:
+        '#type': textfield
+        '#title': textfield
+      select:
+        '#type': select
+        '#title': select
+        '#options':
+          One: One
+          Two: Two
+          Three: Three
+  webform_element_composite:
+    '#type': webform_element_composite
+    '#title': webform_element_composite
     '#default_value':
-      - '{dependent_textfield}'
-    '#states_clear': FALSE
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_webform_name:
-    '#type': webform_name
-    '#title': webform_name
-    '#multiple': true
-    '#default_value':
-      - first: John
-        last: Smith
-    '#states_clear': FALSE
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_details:
-    '#type': details
-    '#title': dependent_details
-    '#states_clear': FALSE
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-    dependent_details_textfield:
-      '#type': textfield
-      '#title': dependent_details_textfield
-      '#default_value': '{dependent_details_textfield}'
+      first_name:
+        '#type': textfield
+        '#title': 'First name'
+      last_name:
+        '#type': textfield
+        '#title': 'Last name'
+      gender:
+        '#type': select
+        '#options':
+          Male: Male
+          Female: Female
+        '#title': Gender
+  webform_image_select:
+    '#type': webform_image_select
+    '#title': webform_image_select
+    '#images':
+      kitten_1:
+        text: 'Cute Kitten 1'
+        src: 'http://placekitten.com/220/200'
+      kitten_2:
+        text: 'Cute Kitten 2'
+        src: 'http://placekitten.com/180/200'
+      kitten_3:
+        text: 'Cute Kitten 3'
+        src: 'http://placekitten.com/130/200'
   
 css: ''
 javascript: ''
@@ -119,6 +176,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -205,7 +263,7 @@ settings:
   entity_limit_user_interval: null
   purge: none
   purge_days: null
-  results_disabled: false
+  results_disabled: true
   results_disabled_ignore: true
   token_update: false
 access:
@@ -251,12 +309,8 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  debug:
-    id: debug
-    label: Debug
-    handler_id: debug
-    status: true
-    conditions: {  }
-    weight: 0
-    settings: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }

@@ -10,48 +10,54 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_form_states_server_preview
-title: 'Test: Form API #states preview hide/show condition validation'
-description: 'Test Drupal''s #states API hide/show condition validation.'
+id: test_states_server_comp
+title: 'Test: Form API #states server-side composite elements'
+description: 'Test Drupal''s #states API for composite elements via server-side.'
 category: 'Test: Form API #states'
 elements: |
-  trigger_checkbox:
+  webform_name_trigger:
     '#type': checkbox
-    '#title': trigger_checkbox
-  dependent_checkbox:
+    '#title': webform_name_trigger
+    '#default_value': false
+  webform_name:
+    '#type': webform_name
+    '#title': webform_name
+    '#states':
+      visible:
+        ':input[name="webform_name_trigger"]':
+          checked: true
+    '#first__required': true
+    '#last__required': true
+    '#last__required_error': 'Custom error message for ''last'' element.'
+  webform_name_multiple_trigger:
     '#type': checkbox
-    '#title': dependent_checkbox
+    '#title': webform_name_multiple_trigger
+    '#default_value': false
+  webform_name_multiple:
+    '#type': webform_name
+    '#title': webform_name_multiple_header
+    '#multiple': true
+    '#first__required': true
+    '#last__required': true
     '#states':
       visible:
-        ':input[name="trigger_checkbox"]':
+        ':input[name="webform_name_multiple_trigger"]':
           checked: true
-  dependent_markup:
-    '#type': webform_markup
+  webform_name_multiple_header_trigger:
+    '#type': checkbox
+    '#title': webform_name_multiple_header_trigger
+    '#default_value': false
+  webform_name_multiple_header:
+    '#type': webform_name
+    '#title': webform_name_multiple_header
+    '#multiple': true
+    '#multiple__header': true
+    '#first__required': true
+    '#last__required': true
     '#states':
       visible:
-        ':input[name="trigger_checkbox"]':
+        ':input[name="webform_name_multiple_header_trigger"]':
           checked: true
-    '#display_on': both
-    '#markup': dependent_markup
-  dependent_message:
-    '#type': webform_message
-    '#display_on': view
-    '#message_message': dependent_message
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_fieldset:
-    '#type': fieldset
-    '#title': dependent_fieldset
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-    nested_textfield:
-      '#type': textfield
-      '#title': nested_textfield
-      '#default_value': '{value}'
   
 css: ''
 javascript: ''
@@ -69,6 +75,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -76,7 +83,7 @@ settings:
   form_prepopulate_source_entity_type: ''
   form_reset: false
   form_disable_autocomplete: false
-  form_novalidate: true
+  form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
   form_unsaved: false
@@ -118,7 +125,7 @@ settings:
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
-  preview: 2
+  preview: 0
   preview_label: ''
   preview_title: ''
   preview_message: ''
@@ -198,6 +205,10 @@ access:
     users: {  }
     permissions: {  }
   test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
     roles: {  }
     users: {  }
     permissions: {  }

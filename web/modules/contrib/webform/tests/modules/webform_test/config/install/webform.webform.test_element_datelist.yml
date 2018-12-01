@@ -50,7 +50,7 @@ elements: |
     '#type': datelist
     '#title': datelist_date_year_range_reverse
     '#date_year_range': '2005:2010'
-    '#date_year_range_reverse': TRUE
+    '#date_year_range_reverse': true
   datelist_required_error:
     '#type': datelist
     '#title': datelist_required_error
@@ -74,6 +74,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -203,6 +204,10 @@ access:
     users: {  }
     permissions: {  }
   test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
     roles: {  }
     users: {  }
     permissions: {  }

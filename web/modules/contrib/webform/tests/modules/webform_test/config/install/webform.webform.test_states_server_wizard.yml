@@ -10,7 +10,7 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_form_states_server_wizard
+id: test_states_server_wizard
 title: 'Test: Form API #states server-side wizard pages'
 description: 'Test Drupal''s #states API for wizard pages via server-side.'
 category: 'Test: Form API #states'
@@ -113,7 +113,7 @@ elements: |
     page_01_trigger_checkbox_computed:
       '#type': webform_computed_twig
       '#title': trigger_checkbox
-      '#value': '{{ data.page_01_trigger_checkbox ? ''Yes'' : ''No'' }}'
+      '#template': '{{ data.page_01_trigger_checkbox ? ''Yes'' : ''No'' }}'
     page_02_textfield_required:
       '#type': textfield
       '#title': page_02_textfield_required
@@ -161,12 +161,12 @@ elements: |
       '#title': page_02_textfield_visible_slide
       '#description': '<b>Visible (Slide):</b> page_01_trigger_checkbox:checked'
       '#states':
-        'visible-slide':
+        visible-slide:
           ':input[name="page_01_trigger_checkbox"]':
             checked: true
     page_02_textfield_invisible:
       '#type': textfield
-      '#title': 'page_02_textfield_invisible'
+      '#title': page_02_textfield_invisible
       '#description': '<b>Invisible:</b> page_01_trigger_checkbox:checked'
       '#states':
         invisible:
@@ -174,10 +174,10 @@ elements: |
             checked: true
     page_02_textfield_invisible_slide:
       '#type': textfield
-      '#title': 'page_02_textfield_invisible_slide'
+      '#title': page_02_textfield_invisible_slide
       '#description': '<b>Invisible (Slide):</b> page_01_trigger_checkbox:checked'
       '#states':
-        'invisible-slide':
+        invisible-slide:
           ':input[name="page_01_trigger_checkbox"]':
             checked: true
     page_02_checkbox_checked:
@@ -233,6 +233,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -362,6 +363,10 @@ access:
     users: {  }
     permissions: {  }
   test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
     roles: {  }
     users: {  }
     permissions: {  }

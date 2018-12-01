@@ -10,66 +10,71 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_form_states_server_save
-title: 'Test: Form API #states save hide/show element'
-description: 'Test Drupal&#39;s #states API hide/show element.'
-category: 'Test: Form API #states'
+id: test_element_input_mask
+title: 'Test: Element:  Input Mask'
+description: 'Tests input mask.'
+category: 'Test: Element'
 elements: |
-  trigger_checkbox:
-    '#type': checkbox
-    '#title': trigger_checkbox
-  dependent_hidden:
-    '#type': hidden
-    '#title': dependent_hidden
-    '#default_value': '{dependent_hidden}'
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_checkbox:
-    '#type': checkbox
-    '#title': dependent_checkbox
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_value:
-    '#type': value
-    '#title': dependent_value
-    '#value': '{value}'
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_textfield:
+  currency:
     '#type': textfield
-    '#title': dependent_textfield
-    '#default_value': '{dependent_textfield}'
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_textfield_multiple:
+    '#title': currency
+    '#input_mask': '''alias'': ''currency'''
+  datetime:
     '#type': textfield
-    '#title': dependent_textfield
-    '#multiple': true
-    '#default_value':
-      - '{dependent_textfield}'
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-  dependent_details:
-    '#type': details
-    '#title': dependent_details
-    '#states':
-      visible:
-        ':input[name="trigger_checkbox"]':
-          checked: true
-    dependent_details_textfield:
-      '#type': textfield
-      '#title': dependent_details_textfield
-      '#default_value': '{dependent_details_textfield}'
+    '#title': datetime
+    '#input_mask': '''alias'': ''datetime'''
+  decimal:
+    '#type': textfield
+    '#title': decimal
+    '#input_mask': '''alias'': ''decimal'''
+  email:
+    '#type': textfield
+    '#title': email
+    '#input_mask': '''alias'': ''email'''
+  ip:
+    '#type': textfield
+    '#title': ip
+    '#input_mask': '''alias'': ''ip'''
+  license_plate:
+    '#type': textfield
+    '#title': license_plate
+    '#input_mask': '[9-]AAA-999'
+  mac:
+    '#type': textfield
+    '#title': mac
+    '#input_mask': '''alias'': ''mac'''
+  percentage:
+    '#type': textfield
+    '#title': percentage
+    '#input_mask': '''alias'': ''percentage'''
+  phone:
+    '#type': textfield
+    '#title': phone
+    '#input_mask': '(999) 999-9999'
+  ssn:
+    '#type': textfield
+    '#title': ssn
+    '#input_mask': 999-99-9999
+  vin:
+    '#type': textfield
+    '#title': vin
+    '#input_mask': '''alias'': ''vin'''
+  zip:
+    '#type': textfield
+    '#title': zip
+    '#input_mask': '99999[-9999]'
+  uppercase:
+    '#type': textfield
+    '#title': uppercase
+    '#input_mask': '''casing'': ''upper'''
+  lowercase:
+    '#type': textfield
+    '#title': lowercase
+    '#input_mask': '''casing'': ''lower'''
+  custom:
+    '#type': textfield
+    '#title': custom
+    '#input_mask': '''alias'': ''numeric'', ''groupSeparator'': '','', ''autoGroup'': true, ''digits'': 2, ''digitsOptional'': false, ''prefix'': ''$ '', ''placeholder'': ''0'''
   
 css: ''
 javascript: ''
@@ -87,6 +92,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -94,7 +100,7 @@ settings:
   form_prepopulate_source_entity_type: ''
   form_reset: false
   form_disable_autocomplete: false
-  form_novalidate: true
+  form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
   form_unsaved: false
@@ -149,7 +155,7 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
-  confirmation_type: message
+  confirmation_type: page
   confirmation_title: ''
   confirmation_message: ''
   confirmation_url: ''
@@ -174,7 +180,7 @@ settings:
   purge: none
   purge_days: null
   results_disabled: false
-  results_disabled_ignore: true
+  results_disabled_ignore: false
   token_update: false
 access:
   create:
@@ -219,6 +225,10 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
   debug:
     id: debug
@@ -226,5 +236,5 @@ handlers:
     handler_id: debug
     status: true
     conditions: {  }
-    weight: 0
+    weight: 1
     settings: {  }
