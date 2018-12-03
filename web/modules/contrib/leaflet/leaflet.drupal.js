@@ -177,12 +177,18 @@
       case 'polygon':
         lFeature = this.create_polygon(feature);
         break;
-      case 'multipolygon':
+       case 'multipolygon':
+        lFeature = this.create_multipolygon(feature);
+        break;
       case 'multipolyline':
         lFeature = this.create_multipoly(feature);
         break;
       case 'json':
         lFeature = this.create_json(feature.json);
+        break;
+      case 'multipoint':
+      case 'geometrycollection':
+        lFeature = this.create_collection(feature);
         break;
       default:
         return; // Crash and burn.
@@ -293,6 +299,14 @@
     return new L.Polyline(latlngs);
   };
 
+  Drupal.Leaflet.prototype.create_collection = function (collection) {
+    var layers = new L.featureGroup();
+    for (var x = 0; x < collection.component.length; x++) {
+      layers.addLayer(this.create_feature(collection.component[x]));
+    }
+    return layers;
+  };
+
   Drupal.Leaflet.prototype.create_polygon = function (polygon) {
     var latlngs = [];
     for (var i = 0; i < polygon.points.length; i++) {
@@ -301,6 +315,21 @@
       this.bounds.push(latlng);
     }
     return new L.Polygon(latlngs);
+  };
+
+  Drupal.Leaflet.prototype.create_multipolygon = function (multipolygon) {
+    var polygons = [];
+    for (var x = 0; x < multipolygon.component.length; x++) {
+      var latlngs = [];
+      var polygon = multipolygon.component[x];
+      for (var i = 0; i < polygon.points.length; i++) {
+        var latlng = [polygon.points[i].lat, polygon.points[i].lon];
+        latlngs.push(latlng);
+        this.bounds.push(latlng);
+      }
+      polygons.push(latlngs);
+    }
+    return new L.Polygon(polygons);
   };
 
   Drupal.Leaflet.prototype.create_multipoly = function (multipoly) {
@@ -316,10 +345,10 @@
       polygons.push(latlngs);
     }
     if (multipoly.multipolyline) {
-      return new L.MultiPolyline(polygons);
+      return new L.polyline(polygons);
     }
     else {
-      return new L.MultiPolygon(polygons);
+      return new L.polygon(polygons);
     }
   };
 

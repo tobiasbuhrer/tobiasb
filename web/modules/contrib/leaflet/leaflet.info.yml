@@ -6,8 +6,8 @@ package: Leaflet
 dependencies:
   - geofield:geofield
 
-# Information added by Drupal.org packaging script on 2018-11-11
-version: '8.x-1.0-beta16'
+# Information added by Drupal.org packaging script on 2018-12-03
+version: '8.x-1.0-beta18'
 core: '8.x'
 project: 'leaflet'
-datestamp: 1541908984
+datestamp: 1543806790
