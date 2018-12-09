@@ -9,8 +9,8 @@ dependencies:
   - 'drupal:views'
   - 'webform:webform'
 
-# Information added by Drupal.org packaging script on 2018-11-29
-version: '8.x-5.0-rc27'
+# Information added by Drupal.org packaging script on 2018-12-07
+version: '8.x-5.0-rc29'
 core: '8.x'
 project: 'webform'
-datestamp: 1543520306
+datestamp: 1544223214

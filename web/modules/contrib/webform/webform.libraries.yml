@@ -320,6 +320,7 @@ webform.form.submit_once:
     js/webform.form.submit_once.js: {}
   dependencies:
     - core/drupal
+    - core/drupal.progress
     - core/jquery.once
     - system/base
 
@@ -521,6 +522,9 @@ webform.element.counter:
 
 webform.element.date:
   version: VERSION
+  css:
+    component:
+      css/webform.element.date.css: {}
   js:
     js/webform.element.date.js: {}
   dependencies:
