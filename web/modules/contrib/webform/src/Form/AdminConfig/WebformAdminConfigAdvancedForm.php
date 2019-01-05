@@ -2,7 +2,6 @@
 
 namespace Drupal\webform\Form\AdminConfig;
 
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -10,7 +9,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteBuilderInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Commands\WebformCliService;
-use Drupal\webform\Entity\Webform;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -275,12 +273,13 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
         '<p>' . $this->t("Running the below 'Repair' command will apply all missing settings to older Webform configuration files.") . '</p>',
       '#help' => FALSE,
     ];
-    $form['repair']['repair'] = [
+    $form['repair']['action'] = ['#type' => 'actions'];
+    $form['repair']['action']['repair_configuration'] = [
       '#type' => 'submit',
       '#value' => $this->t('Repair configuration'),
       '#attributes' => [
         'onclick' => 'return confirm("' . $this->t('Are you sure you want to repair webform configuration?') . '\n' . $this->t('This cannot be undone!!!') . '");',
-      ]
+      ],
     ];
 
     return parent::buildForm($form, $form_state);
@@ -295,20 +294,23 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       // Copied from:
       // @see \Drupal\webform\Commands\WebformCliService::drush_webform_repair
       module_load_include('install', 'webform');
-      
-      $this->messenger()->addMessage('Repairing admin settings…');
+
+      $this->messenger()->addMessage($this->t('Repairing webform submission storage schema…'));
+      _webform_update_webform_submission_storage_schema();
+
+      $this->messenger()->addMessage($this->t('Repairing admin settings…'));
       _webform_update_admin_settings(TRUE);
 
-      $this->messenger()->addMessage('Repairing webform settings…');
+      $this->messenger()->addMessage($this->t('Repairing webform settings…'));
       _webform_update_webform_settings();
 
-      $this->messenger()->addMessage('Repairing webform handlers…');
+      $this->messenger()->addMessage($this->t('Repairing webform handlers…'));
       _webform_update_webform_handler_settings();
 
-      $this->messenger()->addMessage('Repairing webform field storage definitions…');
+      $this->messenger()->addMessage($this->t('Repairing webform field storage definitions…'));
       _webform_update_field_storage_definitions();
 
-      $this->messenger()->addMessage('Repairing webform submission storage schema…');
+      $this->messenger()->addMessage($this->t('Repairing webform submission storage schema…'));
       _webform_update_webform_submission_storage_schema();
 
       drupal_flush_all_caches();

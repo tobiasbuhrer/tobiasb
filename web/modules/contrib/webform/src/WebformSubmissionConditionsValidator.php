@@ -4,6 +4,7 @@ namespace Drupal\webform;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 use Drupal\webform\Plugin\WebformElement\WebformElement;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
@@ -155,7 +156,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
 
   /**
    * Replace hidden cross page targets with hidden inputs.
-   * 
+   *
    * @param array $conditions
    *   An element's conditions.
    * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
@@ -172,7 +173,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
     $cross_page_conditions = [];
     foreach ($conditions as $index => $value) {
       if (is_int($index) && is_array($value) && WebformArrayHelper::isSequential($value)) {
-        $cross_page_conditions[$index] = $this->replaceCrossPageTargets($conditions, $webform_submission, $cross_page_targets, $form);
+        $cross_page_conditions[$index] = $this->replaceCrossPageTargets($conditions, $webform_submission, $targets, $form);
       }
       else {
         $cross_page_conditions[$index] = $value;
@@ -549,7 +550,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    *   NULL is returned when there is invalid selector and missing element
    *   in the conditions.
    */
-  protected function validateCondition($selector, $condition, $webform_submission) {
+  protected function validateCondition($selector, array $condition, WebformSubmissionInterface $webform_submission) {
     // Ignore invalid selector and return NULL.
     $input_name = static::getSelectorInputName($selector);
     if (!$input_name) {
@@ -803,8 +804,37 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
 
       $this->getBuildElementsRecusive($elements, $element, $subelement_states);
 
-      // Recurse through a composite sub elements.
-      if (isset($element['#element']) && isset($element['#webform_composite_elements'])) {
+      $element_plugin = $this->elementManager->getElementInstance($element);
+      if ($element_plugin instanceof WebformCompositeBase && !$element_plugin->hasMultipleValues($element)) {
+        // Handle composite with single item.
+        if ($subelement_states) {
+          $composite_elements = $element_plugin->getCompositeElements();
+          foreach ($composite_elements as $composite_key => $composite_element) {
+            // Skip if #access is set to FALSE.
+            if (isset($element['#' . $composite_key . '__access']) && $element['#' . $composite_key . '__access'] === FALSE) {
+              continue;
+            }
+            // Move #composite__required to #composite___required which triggers
+            // conditional #_required handling.
+            if (!empty($element['#' . $composite_key . '__required'])) {
+              unset($element['#' . $composite_key . '__required']);
+              $element['#' . $composite_key . '___required'] = TRUE;
+              $element['#' . $composite_key . '__states'] = $subelement_states;
+            }
+          }
+        }
+      }
+      elseif (isset($element['#element']) && isset($element['#webform_composite_elements'])) {
+        // Handle composite with multiple items and custom composite elements.
+        //
+        // For $element['#elements'] ...
+        // @see \Drupal\webform\Plugin\WebformElement\WebformCompositeBase::prepareMultipleWrapper
+        //
+        // For $element['#webform_composite_elements'] ...
+        // @see \Drupal\webform\Plugin\WebformElement\WebformCompositeBase::initializeCompositeElements
+        // @see \Drupal\webform_composite\Plugin\WebformElement\WebformComposite::initializeCompositeElements
+        //
+        // Recurse through a composite's sub elements.
         $this->getBuildElementsRecusive($elements, $element['#element'], $subelement_states);
       }
     }

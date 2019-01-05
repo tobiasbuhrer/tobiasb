@@ -8,3 +8,11 @@ system.performance:
         minify_html:
           type: boolean
           label: 'Minified Source HTML'
+# Minify HTML Settings
+minifyhtml.config:
+  type: config_object
+  label: 'Minify HTML settings'
+  mapping:
+    strip_comments:
+      type: integer
+      label: 'Strip comments from the source HTML'

@@ -269,7 +269,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     $form['additional']['type'] = [
       '#type' => 'select',
       '#title' => $this->t('Post type'),
-      '#description' => $this->t('Use x-www-form-urlencoded if unsure, as it is the default format for HTML webforms. You also have the option to post data in <a href="http://www.json.org/" target="_blank">JSON</a> format.'),
+      '#description' => $this->t('Use x-www-form-urlencoded if unsure, as it is the default format for HTML webforms. You also have the option to post data in <a href="http://www.json.org/">JSON</a> format.'),
       '#options' => [
         'x-www-form-urlencoded' => $this->t('x-www-form-urlencoded'),
         'json' => $this->t('JSON'),
@@ -427,6 +427,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     $this->messageManager->setWebformSubmission($webform_submission);
 
     $request_url = $this->configuration[$state . '_url'];
+    $request_url = $this->tokenManager->replace($request_url, $webform_submission);
     $request_method = (!empty($this->configuration['method'])) ? $this->configuration['method'] : 'POST';
     $request_type = ($request_method !== 'GET') ? $this->configuration['type'] : NULL;
 

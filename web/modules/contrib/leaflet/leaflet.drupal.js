@@ -3,6 +3,21 @@
   Drupal.behaviors.leaflet = {
     attach: function (context, settings) {
 
+      // Attach leaflet ajax popup listeners.
+      $(document).on('leaflet.map', function (e, settings, lMap) {
+        lMap.on('popupopen', function (e) {
+          var content = $('[data-leaflet-ajax-popup]', e.popup._contentNode);
+          if (content.length) {
+            var url = content.data('leaflet-ajax-popup');
+            $.get(url, function (response) {
+              if (response) {
+                e.popup.setContent(response)
+              }
+            });
+          }
+        });
+      });
+
       $.each(settings.leaflet, function (m, data) {
         $('#' + data.mapId, context).each(function () {
           var $container = $(this);
@@ -84,11 +99,8 @@
     // Only add a layer switcher if it is enabled in settings, and we have
     // at least two base layers or at least one overlay.
     if (this.layer_control == null && this.settings.layerControl && (count_layers(this.base_layers) > 1 || count_layers(this.overlays) > 0)) {
-      // Only add base-layers if we have more than one, i.e. if there actually
-      // is a choice for the user.
-      var _layers = this.base_layers.length > 1 ? this.base_layers : [];
       // Instantiate layer control, using settings.layerControl as settings.
-      this.layer_control = new L.Control.Layers(_layers, this.overlays, this.settings.layerControl);
+      this.layer_control = new L.Control.Layers(this.base_layers, this.overlays, this.settings.layerControl);
       this.lMap.addControl(this.layer_control);
     }
   };

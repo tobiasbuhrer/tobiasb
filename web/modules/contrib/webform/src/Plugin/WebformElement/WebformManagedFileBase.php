@@ -20,6 +20,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\Utility\WebformOptionsHelper;
@@ -157,6 +158,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       'file_name' => '',
       'file_help' => '',
       'file_preview' => '',
+      'file_placeholder' => '',
       'uri_scheme' => 'private',
       'sanitize' => FALSE,
       'button' => FALSE,
@@ -327,8 +329,11 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       $element = $container;
     }
 
-    // Add after build handler.
-    $element['#after_build'][] = [get_class($this), 'afterBuildManagedFile'];
+    // Add process callback.
+    // Set element's #process callback so that is not replaced by
+    // additional #process callbacks.
+    $this->setElementDefaultCallback($element, 'process');
+    $element['#process'][] = [get_class($this), 'processManagedFile'];
 
     // Add managed file upload tracking.
     if (\Drupal::moduleHandler()->moduleExists('file')) {
@@ -603,19 +608,25 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
   }
 
   /**
-   * Get allowed file extensions for an element.
+   * Get the allowed file extensions for an element.
    *
    * @param array $element
    *   An element.
    *
    * @return int
-   *   File extension.
+   *   File extensions.
    */
   protected function getFileExtensions(array $element = NULL) {
-    if (!empty($element['#file_extensions'])) {
-      return $element['#file_extensions'];
-    }
+    return (!empty($element['#file_extensions'])) ? $element['#file_extensions'] : $this->getDefaultFileExtensions();
+  }
 
+  /**
+   * Get the default allowed file extensions.
+   *
+   * @return int
+   *   File extensions.
+   */
+  protected function getDefaultFileExtensions() {
     $file_type = str_replace('webform_', '', $this->getPluginId());
     return $this->configFactory->get('webform.settings')->get("file.default_{$file_type}_extensions");
   }
@@ -678,9 +689,9 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
   }
 
   /**
-   * After build handler for managed file elements.
+   * Process callback  for managed file elements.
    */
-  public static function afterBuildManagedFile(array $element, FormStateInterface $form_state) {
+  public static function processManagedFile(&$element, FormStateInterface $form_state, &$complete_form) {
     // Disable inline form errors for multiple file upload checkboxes.
     if (!empty($element['#multiple'])) {
       foreach (Element::children($element) as $key) {
@@ -698,6 +709,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       /** @var \Drupal\webform\Plugin\WebformElement\WebformManagedFileBase $element_plugin */
       $element_plugin = $element_manager->getElementInstance($element);
 
+
       // Get the webform submission.
       /** @var \Drupal\webform\WebformSubmissionForm $form_object */
       $form_object = $form_state->getFormObject();
@@ -708,22 +720,67 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       $preview_element = ['#format' => $element['#file_preview']] + $element;
 
       // Convert '#theme': file_link to a container with a file preview.
+      $delta = 0;
       foreach (Element::children($element) as $child_key) {
-        if (isset($element[$child_key]['filename'])) {
-          // Don't allow anonymous temporary files to be previewed.
-          // @see template_preprocess_file_link().
-          // @see webform_preprocess_file_link().
-          $file = $element[$child_key]['filename']['#file'];
-          if ($file->isTemporary() && $file->getOwner()->isAnonymous() && strpos($file->getFileUri(), 'private://') === 0) {
-            continue;
-          }
+        if (strpos($child_key, 'file_') !== 0) {
+          continue;
+        }
 
+        // Set multiple options delta.
+        $options = ['delta' => $delta];
+        $delta++;
+
+        $fid = str_replace('file_', '', $child_key);
+        $file = File::load((string)$fid);
+        // Make sure the file entity exists.
+        if (!$file) {
+          continue;
+        }
+
+        // Don't allow anonymous temporary files to be previewed.
+        // @see template_preprocess_file_link().
+        // @see webform_preprocess_file_link().
+        if ($file->isTemporary() && $file->getOwner()->isAnonymous() && strpos($file->getFileUri(), 'private://') === 0) {
+          continue;
+        }
+
+        $preview = $element_plugin->previewManagedFile($preview_element, $webform_submission, $options);
+        if (isset($element[$child_key]['filename'])) {
+          // Single file.
+          // Covert file link to a container with preview.
           unset($element[$child_key]['filename']['#theme']);
           $element[$child_key]['filename']['#type'] = 'container';
-          $element[$child_key]['filename']['#attributes']['class'][] = Html::getClass($element_plugin->getPluginId() . '-preview');
-          $element[$child_key]['filename']['preview'] = $element_plugin->previewManagedFile($preview_element, $webform_submission);
+          $element[$child_key]['filename']['#attributes']['class'][] = 'webform-managed-file-preview';
+          $element[$child_key]['filename']['#attributes']['class'][] = Html::getClass($element['#type'] . '-preview');
+          $element[$child_key]['filename']['preview'] = $preview;
+        }
+        elseif (isset($element[$child_key]['selected'])) {
+          // Multiple files.
+          // Convert file link checkbox #title to preview.
+          $element[$child_key]['selected']['#wrapper_attributes']['class'][] = 'webform-managed-file-preview-wrapper';
+          $element[$child_key]['selected']['#wrapper_attributes']['class'][] = Html::getClass($element['#type'] . '-preview-wrapper');
+          $element[$child_key]['selected']['#label_attributes']['class'][] = 'webform-managed-file-preview';
+          $element[$child_key]['selected']['#label_attributes']['class'][] = Html::getClass($element['#type'] . '-preview');
+
+          $element[$child_key]['selected']['#title'] = \Drupal::service('renderer')->render($preview);
         }
       }
+    }
+
+    // File placeholder.
+    if (!empty($element['#file_placeholder']) && (empty($element['#value']) || empty($element['#value']['fids']))) {
+      $element['file_placeholder'] = [
+        '#type' => 'container',
+        '#attributes' => [
+          'class' => [
+            'webform-managed-file-placeholder',
+            Html::getClass($element['#type'] . '-placeholder'),
+          ],
+        ],
+        // Display placeholder before file upload input.
+        '#weight' => ($element['upload']['#weight'] - 1),
+        'content' => WebformHtmlEditor::checkMarkup($element['#file_placeholder']),
+      ];
     }
 
     return $element;
@@ -866,7 +923,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $scheme_options = static::getVisibleStreamWrappers();
     $form['file']['uri_scheme'] = [
       '#type' => 'radios',
-      '#title' => t('Upload destination'),
+      '#title' => t('File upload destination'),
       '#description' => t('Select where the final files should be stored. Private file storage has more overhead than public files, but allows restricted access to files within this element.'),
       '#required' => TRUE,
       '#options' => $scheme_options,
@@ -910,14 +967,19 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         'none' => $this->t('None'),
       ],
     ];
+    $form['file']['file_placeholder'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('File upload placeholder'),
+      '#description' => $this->t('The placeholder will be shown before a file is uploaded.'),
+    ];
     $form['file']['file_preview'] = [
       '#type' => 'select',
       '#title' => $this->t('File upload preview (Authenticated users only)'),
-      '#description' => $this->t('Select how the uploaded file previewed.') . '<br/>' .
+      '#description' => $this->t('Select how the uploaded file previewed.') . '<br/><br/>' .
           $this->t('Allowing anonymous users to preview files is dangerous.') . '<br/>' .
           $this->t('For more information see: <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>'),
       '#options' => WebformOptionsHelper::appendValueToText($this->getItemFormats()),
-      '#empty_option' => $this->t('File link (default)'),
+      '#empty_option' => '<' . $this->t('no preview') . '>',
     ];
     $form['file']['max_filesize'] = [
       '#type' => 'number',
@@ -931,7 +993,8 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $form['file']['file_extensions'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Allowed file extensions'),
-      '#description' => $this->t('Separate extensions with a space and do not include the leading dot.'),
+      '#description' => $this->t('Separate extensions with a space and do not include the leading dot.') . '<br/><br/>' .
+        $this->t('Defaults to: %value', ['%value' => $this->getDefaultFileExtensions()]),
       '#maxlength' => 255,
     ];
     $form['file']['file_name'] = [
@@ -983,7 +1046,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     ];
     $form['file']['button__title'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Upload button title'),
+      '#title' => $this->t('File upload button title'),
       '#description' => $this->t('Defaults to: %value', ['%value' => $this->t('Choose file')]),
       '#states' => [
         'visible' => [
@@ -993,7 +1056,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     ];
     $form['file']['button__attributes'] = [
       '#type' => 'webform_element_attributes',
-      '#title' => $this->t('Upload button attributes'),
+      '#title' => $this->t('File upload button'),
       '#classes' => $this->configFactory->get('webform.settings')->get('settings.button_classes'),
       '#class__description' => $this->t("Apply classes to the button. Button classes default to 'button button-primary'."),
       '#states' => [

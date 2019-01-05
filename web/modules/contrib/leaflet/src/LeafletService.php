@@ -69,7 +69,7 @@ class LeafletService {
    *   The leaflet_map render array.
    */
   public function leafletRenderMap(array $map, array $features = [], $height = '400px') {
-    $map_id = Html::getUniqueId('leaflet_map');
+    $map_id = isset($map['id']) ? $map['id'] : Html::getUniqueId('leaflet_map');
 
     $settings[$map_id] = [
       'mapId' => $map_id,
@@ -83,7 +83,7 @@ class LeafletService {
       '#height' => $height,
       '#map' => $map,
       '#attached' => [
-        'library' => ['leaflet/leaflet-drupal'],
+        'library' => ['leaflet/leaflet-drupal', 'leaflet/general'],
         'drupalSettings' => [
           'leaflet' => $settings,
         ],

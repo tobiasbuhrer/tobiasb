@@ -285,7 +285,7 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Get the source entity and allow webform submission to be used as a source
     // entity.
-    $this->sourceEntity = $this->requestHandler->getCurrentSourceEntity(['webform']);
+    $this->sourceEntity = $entity->getSourceEntity() ?: $this->requestHandler->getCurrentSourceEntity(['webform']);
     if ($this->sourceEntity === $entity) {
       $this->sourceEntity = $this->requestHandler->getCurrentSourceEntity(['webform', 'webform_submission']);
     }
@@ -462,6 +462,9 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Server side #states API validation.
     $this->conditionsValidator->buildForm($form, $form_state);
 
+    // Add Ajax callbacks.
+    $form = $this->buildAjaxForm($form, $form_state);
+
     // Alter webform via webform handler.
     $this->getWebform()->invokeHandlers('alterForm', $form, $form_state, $webform_submission);
 
@@ -469,7 +472,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     $form_id = $this->getFormId();
     $this->thirdPartySettingsManager->alter('webform_submission_form', $form, $form_state, $form_id);
 
-    return $this->buildAjaxForm($form, $form_state);
+    return $form;
   }
 
   /**

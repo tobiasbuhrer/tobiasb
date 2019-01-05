@@ -196,9 +196,10 @@ class WebformElementStates extends FormElement {
       '#attributes' => ['class' => ['webform-states-table']],
     ] + $rows;
 
+    $element['actions'] = ['#type' => 'container'];
     // Build add state action.
     if ($element['#multiple']) {
-      $element['add'] = [
+      $element['actions']['add'] = [
         '#type' => 'submit',
         '#value' => t('Add another state'),
         '#limit_validation_errors' => [],
@@ -210,7 +211,7 @@ class WebformElementStates extends FormElement {
 
     // Edit source.
     if (\Drupal::currentUser()->hasPermission('edit webform source')) {
-      $element['source'] = [
+      $element['actions']['source'] = [
         '#type' => 'submit',
         '#value' => t('Edit source'),
         '#limit_validation_errors' => [],
@@ -234,7 +235,7 @@ class WebformElementStates extends FormElement {
     if (!empty($element['#disabled_message'])) {
       $element['disabled_message'] = [
         '#type' => 'webform_message',
-        '#message_message' => t('<a href="https://www.w3schools.com/tags/att_input_disabled.asp" target="_blank">Disabled</a> elements do not submit data back to the server and the element\'s server-side default or current value will be preserved and saved to the database.'),
+        '#message_message' => t('<a href="https://www.w3schools.com/tags/att_input_disabled.asp">Disabled</a> elements do not submit data back to the server and the element\'s server-side default or current value will be preserved and saved to the database.'),
         '#message_type' => 'warning',
         '#states' => ['visible' => $triggers],
       ];
@@ -307,6 +308,7 @@ class WebformElementStates extends FormElement {
     ];
     return $build;
   }
+
   /**
    * Convert options with optgroup to item list.
    *
@@ -553,7 +555,7 @@ class WebformElementStates extends FormElement {
   public static function addStateSubmit(array &$form, FormStateInterface $form_state) {
     // Get the webform states element by going up one level.
     $button = $form_state->getTriggeringElement();
-    $element =& NestedArray::getValue($form, array_slice($button['#array_parents'], 0, -1));
+    $element =& NestedArray::getValue($form, array_slice($button['#array_parents'], 0, -2));
 
     $values = $element['states']['#value'];
 
@@ -657,7 +659,7 @@ class WebformElementStates extends FormElement {
     // Rebuild the form.
     $form_state->setRebuild();
   }
-  
+
   /**
    * Form submission handler for editing source.
    *
@@ -669,7 +671,7 @@ class WebformElementStates extends FormElement {
   public static function editSourceSubmit(array &$form, FormStateInterface $form_state) {
     // Get the webform states element by going up one level.
     $button = $form_state->getTriggeringElement();
-    $element =& NestedArray::getValue($form, array_slice($button['#array_parents'], 0, -1));
+    $element =& NestedArray::getValue($form, array_slice($button['#array_parents'], 0, -2));
 
     // Set edit source.
     $form_state->set(static::getStorageKey($element, 'edit_source'), TRUE);
@@ -688,7 +690,7 @@ class WebformElementStates extends FormElement {
    */
   public static function ajaxCallback(array &$form, FormStateInterface $form_state) {
     $button = $form_state->getTriggeringElement();
-    $parent_length = (isset($button['#row_index'])) ? -4 : -1;
+    $parent_length = (isset($button['#row_index'])) ? -4 : -2;
     $element = NestedArray::getValue($form, array_slice($button['#array_parents'], 0, $parent_length));
     return $element;
   }

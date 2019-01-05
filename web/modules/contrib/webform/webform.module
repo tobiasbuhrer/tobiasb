@@ -601,6 +601,9 @@ function _webform_page_attachments(array &$attachments) {
     $attachments['#attached']['library'][] = 'webform/webform.element.details.save';
   }
 
+  // Add 'info' message style to all webform pages.
+  $attachments['#attached']['library'][] = 'webform/webform.element.message';
+
   // Assets: Add custom shared and webform specific CSS and JS.
   // @see webform_library_info_build()
   /** @var \Drupal\webform\WebformRequestInterface $request_handler */
@@ -977,6 +980,27 @@ function webform_query_webform_submission_list_builder_alter(AlterableInterface 
     $query->condition('property', $property_name);
   }
   $query->orderBy('value', $direction);
+}
+
+/**
+ * Implements hook_query_TAG_alter().
+ */
+function webform_query_entity_reference_alter(AlterableInterface $query) {
+  /** @var \Drupal\Core\Entity\Plugin\EntityReferenceSelection\DefaultSelection $handler */
+  $handler = $query->getMetaData('entity_reference_selection_handler');
+
+  // Get webform settings used to limit and randomize results.
+  // @see \Drupal\webform\Plugin\WebformElement\WebformEntityReferenceTrait::getTestValues
+  // @see \Drupal\webform\Plugin\WebformElement\WebformEntityReferenceTrait::setOptions
+  // @see \Drupal\webform\Element\WebformEntityTrait::setOptions
+  $configuration = $handler->getConfiguration() + ['_webform_settings' => []];
+  $settings = $configuration['_webform_settings'];
+  if (!empty($settings['random'])) {
+    $query->orderRandom();
+  }
+  if (!empty($settings['limit'])) {
+    $query->range(0, $settings['limit']);
+  }
 }
 
 /**
