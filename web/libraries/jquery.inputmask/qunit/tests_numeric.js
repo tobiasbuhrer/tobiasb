@@ -1,4 +1,5 @@
-export default function (qunit, $, Inputmask) {
+export default function (qunit, Inputmask) {
+    var $ = Inputmask.dependencyLib;
 
     qunit.module("Numeric.Extensions");
 
@@ -294,7 +295,7 @@ export default function (qunit, $, Inputmask) {
 
         //IE7 does not know type=number and treats as type=text
         //noinspection JSUnresolvedFunction
-        assert.ok(testmask.value === "" || testmask.value === "123456", "Result " + testmask.value);
+        assert.ok(testmask.value === "" || testmask.value === "123456-", "Result " + testmask.value);
 
     });
 
@@ -934,7 +935,7 @@ export default function (qunit, $, Inputmask) {
         $("#testmask").val("-5.000,77");
         $(testmask).trigger("blur");
 
-        assert.equal(testmask.value, "-5000", "Result " + testmask.value);
+        assert.equal(testmask.value, "-5001", "Result " + testmask.value);
 
     });
 
@@ -994,7 +995,8 @@ export default function (qunit, $, Inputmask) {
             autoGroup: true,
             digits: 2,
             radixPoint: ',',
-            groupSize: 3
+            groupSize: 3,
+            inputType: "number"
         }).mask(testmask);
 
         $("#testmask").val("8100000.00");
@@ -1013,7 +1015,8 @@ export default function (qunit, $, Inputmask) {
             autoGroup: true,
             digits: 2,
             radixPoint: ',',
-            groupSize: 3
+            groupSize: 3,
+            inputType: "number"
         }).mask(testmask);
 
         $("#testmask").val("12345678.12");
@@ -1051,7 +1054,8 @@ export default function (qunit, $, Inputmask) {
             autoGroup: true,
             digits: 2,
             radixPoint: ',',
-            groupSize: 3
+            groupSize: 3,
+            inputType: "number"
         }).mask(testmask);
 
         $("#testmask").val(8100000.00);
@@ -1070,7 +1074,8 @@ export default function (qunit, $, Inputmask) {
             digits: 2,
             digitsOptional: false,
             radixPoint: ',',
-            groupSize: 3
+            groupSize: 3,
+            inputType: "number"
         }).mask(testmask);
 
         $("#testmask").val(8100000.00);
@@ -1090,7 +1095,8 @@ export default function (qunit, $, Inputmask) {
             autoGroup: true,
             digits: 2,
             radixPoint: ",",
-            groupSize: 3
+            groupSize: 3,
+            inputType: "number"
         }).mask(testmask);
 
         $("#testmask").val("810000.00");
@@ -1924,11 +1930,13 @@ export default function (qunit, $, Inputmask) {
             groupSeparator: '.',
             autoGroup: true,
             digits: 2,
-            removeMaskOnSubmit: false
+            removeMaskOnSubmit: false,
+            enforceDigitsOnBlur: true,
+            inputType: "number"
         }).mask(testmask);
 
         $(testmask).val("0.50");
-
+        testmask.blur();
         assert.equal(testmask.inputmask._valueGet(), "0,50", "Result " + testmask.inputmask._valueGet());
     });
 
@@ -1957,7 +1965,8 @@ export default function (qunit, $, Inputmask) {
             groupSeparator: '.',
             autoGroup: true,
             digits: 2,
-            removeMaskOnSubmit: false
+            removeMaskOnSubmit: false,
+            inputType: "number"
         }).mask(testmask);
 
         $(testmask).val("1234.56");
@@ -1969,7 +1978,7 @@ export default function (qunit, $, Inputmask) {
         var $fixture = $("#qunit-fixture");
         $fixture.append('<input type="text" id="testmask" />');
         var testmask = document.getElementById("testmask");
-        Inputmask("currency", {radixPoint: ","}).mask(testmask);
+        Inputmask("currency", {radixPoint: ",", inputType: "number"}).mask(testmask);
 
         $(testmask).val("100.00");
 
@@ -2025,12 +2034,13 @@ export default function (qunit, $, Inputmask) {
         var $fixture = $("#qunit-fixture");
         $fixture.append('<input type="text" id="testmask" />');
         var testmask = document.getElementById("testmask");
-        Inputmask(  {
+        Inputmask({
             max: '99999999.99',
             alias: 'currency',
             prefix: '',
             allowPlus: false,
-            autoUnmask: true}).mask(testmask);
+            autoUnmask: true
+        }).mask(testmask);
 
         $(testmask).Type("1.23");
         $.caret(testmask, 0);
@@ -2039,5 +2049,69 @@ export default function (qunit, $, Inputmask) {
         $("#testmask").SendKey(Inputmask.keyCode.DELETE);
 
         assert.equal(testmask.inputmask._valueGet(), "0.00", "Result " + testmask.inputmask._valueGet());
+    });
+
+    qunit.test("numeric + (negationSymbol = parentheses) + (clearIncomplete = true) + type -123. then blur", function (assert) {
+        var $fixture = $("#qunit-fixture");
+        $fixture.append('<input type="text" id="testmask" />');
+        var testmask = document.getElementById("testmask");
+        Inputmask("numeric", {
+            rightAlign: false,
+            autoGroup: true,
+            groupSize: 3,
+            digits: 3,
+            enforceDigitsOnBlur: true,
+            groupSeparator: ',',
+            negationSymbol: {
+                front: "(",
+                back: ")"
+            },
+            clearIncomplete: true
+        }).mask(testmask);
+        testmask.focus();
+        $("#testmask").Type("-123.");
+        testmask.blur();
+
+        assert.equal(testmask.value, "(123.000)", "Result " + testmask.value);
+    });
+
+    qunit.test("numeric rounding with digits 0 - dianavele", function (assert) {
+        var $fixture = $("#qunit-fixture");
+        $fixture.append('<input type="text" id="testmask" value="123,67"/>');
+        var testmask = document.getElementById("testmask");
+        Inputmask("numeric", {
+            radixPoint: ",",
+            groupSeparator: ".",
+            digits: 0,
+            showMaskOnHover: false,
+            showMaskOnFocus: false,
+            placeholder: '0',
+            digitsOptional: false,
+            autoGroup: true,
+            clearMaskOnLostFocus: false
+        }).mask(testmask);
+
+        assert.equal(testmask.value, "124", "Result " + testmask.value);
+    });
+
+    qunit.test("set 0.001 - ghost", function (assert) {
+        var $fixture = $("#qunit-fixture");
+        $fixture.append('<input type="text" id="testmask" value="0.001"/>');
+        var testmask = document.getElementById("testmask");
+        Inputmask("numeric", {
+            digits: 3,
+            digitsOptional: false,
+            suffix: ' €',
+            rightAlign: 0,
+            groupSeparator: '.',
+            radixPoint: ',',
+            placeholder: '0',
+            autoGroup: true,
+            autoUnmask: true,
+            removeMaskOnSubmit: true,
+            inputType: "number"
+        }).mask(testmask);
+
+        assert.equal(testmask.value, "0,001", "Result " + testmask.value);
     });
 };

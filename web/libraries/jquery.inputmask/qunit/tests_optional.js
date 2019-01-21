@@ -1,4 +1,5 @@
-export default function (qunit, $, Inputmask) {
+export default function (qunit, Inputmask) {
+    var $ = Inputmask.dependencyLib;
 
 	qunit.module("Optional");
 	qunit.test("inputmask(\"(99) 9999[9]-99999\") - input 121234-12345", function (assert) {
@@ -77,7 +78,7 @@ export default function (qunit, $, Inputmask) {
 
 		testmask.focus();
 		$("#testmask").Type("123456");
-		assert.equal(testmask.value, "12345-6", "Result " + testmask.value);
+		assert.equal(testmask.value, "12345-6___", "Result " + testmask.value);
 	});
 
 	qunit.test("inputmask({ mask: \"99999[-9999]\", greedy: false }) - input 123456789", function (assert) {

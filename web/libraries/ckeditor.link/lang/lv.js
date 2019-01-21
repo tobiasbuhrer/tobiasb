@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'lv', {
@@ -19,8 +19,8 @@ CKEDITOR.plugins.setLang( 'link', 'lv', {
 	anchorName: 'Pēc iezīmes nosaukuma',
 	charset: 'Pievienotā resursa kodējums',
 	cssClasses: 'Stilu saraksta klases',
-	download: 'Force Download', // MISSING
-	displayText: 'Display Text', // MISSING
+	download: 'Piespiedu ielāde',
+	displayText: 'Attēlot tekstu',
 	emailAddress: 'E-pasta adrese',
 	emailBody: 'Ziņas saturs',
 	emailSubject: 'Ziņas tēma',

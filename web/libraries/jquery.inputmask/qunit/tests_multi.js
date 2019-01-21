@@ -1,4 +1,5 @@
-export default function (qunit, $, Inputmask) {
+export default function (qunit, Inputmask) {
+    var $ = Inputmask.dependencyLib;
 
 	qunit.module("multi masks");
 	qunit.test("inputmask({ mask: [\"99-99\", \"999-99\"]}) - input 12345", function (assert) {
@@ -228,7 +229,7 @@ export default function (qunit, $, Inputmask) {
 		setTimeout(function () { //needed to pass on ie
 			$("#testmask").Type("123456");
 			setTimeout(function () {
-				assert.equal(testmask.value, "___6-54321", "Result " + testmask.value);
+				assert.equal(testmask.value, "___65-4321", "Result " + testmask.value);
 				done();
 			}, 0);
 		}, 0);

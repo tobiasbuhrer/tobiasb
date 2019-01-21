@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'fa', {
@@ -20,7 +20,7 @@ CKEDITOR.plugins.setLang( 'link', 'fa', {
 	charset: 'نویسه​گان منبع پیوند شده',
 	cssClasses: 'کلاس​های شیوه​نامه(Stylesheet)',
 	download: 'Force Download', // MISSING
-	displayText: 'Display Text', // MISSING
+	displayText: 'نمایش متن',
 	emailAddress: 'نشانی پست الکترونیکی',
 	emailBody: 'متن پیام',
 	emailSubject: 'موضوع پیام',

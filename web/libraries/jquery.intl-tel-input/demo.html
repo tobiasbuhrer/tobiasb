@@ -11,19 +11,18 @@
 <body>
   <h1>International Telephone Input</h1>
   <form>
-    <input id="phone" type="tel">
+    <input id="phone" name="phone" type="tel">
     <button type="submit">Submit</button>
   </form>
 
-  <!-- Load jQuery from CDN so can run demo immediately -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="build/js/intlTelInput.js"></script>
   <script>
-    $("#phone").intlTelInput({
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
       // allowDropdown: false,
       // autoHideDialCode: false,
       // autoPlaceholder: "off",
-      // dropdownContainer: "body",
+      // dropdownContainer: document.body,
       // excludeCountries: ["us"],
       // formatOnDisplay: false,
       // geoIpLookup: function(callback) {
@@ -34,12 +33,13 @@
       // },
       // hiddenInput: "full_number",
       // initialCountry: "auto",
+      // localizedCountries: { 'de': 'Deutschland' },
       // nationalMode: false,
       // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
       // placeholderNumberType: "MOBILE",
       // preferredCountries: ['cn', 'jp'],
       // separateDialCode: true,
-      utilsScript: "build/js/utils.js"
+      utilsScript: "build/js/utils.js",
     });
   </script>
 </body>
