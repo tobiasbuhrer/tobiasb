@@ -345,7 +345,6 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    * Renders the View.
    */
   public function render() {
-
     // Performs some preprocess on the leaflet map settings.
     $this->leafletService->preProcessMapSettings($this->options);
 
@@ -424,7 +423,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
 
               default:
                 // Normal rendering via fields.
-                $description = $this->rendered_fields[$result->index][$this->options['description_field']];
+                $description = !empty($this->options['description_field']) ? $this->rendered_fields[$result->index][$this->options['description_field']] : '';
             }
 
           }
@@ -441,7 +440,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
             foreach ($points as &$point) {
               // Decode any entities because JS will encode them again and we
               // don't want double encoding.
-              $point['label'] = Html::decodeEntities(($this->rendered_fields[$result->index][$this->options['name_field']]));
+              $point['label'] = !empty($this->options['name_field']) ? Html::decodeEntities(($this->rendered_fields[$result->index][$this->options['name_field']])) : '';
             }
           }
 
@@ -452,9 +451,13 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
               $tokens[$field_name] = $field_value;
             }
             foreach ($points as &$point) {
-              $point['icon'] = $this->options['icon'];
-              $point['icon']['iconUrl'] = $this->viewsTokenReplace($this->options['icon']['iconUrl'], $tokens);
-              $point['icon']['shadowUrl'] = $this->viewsTokenReplace($this->options['icon']['shadowUrl'], $tokens);
+              if (!empty($this->options['icon']['iconUrl'])) {
+                $point['icon'] = $this->options['icon'];
+                $point['icon']['iconUrl'] = $this->viewsTokenReplace($this->options['icon']['iconUrl'], $tokens);
+                if (!empty($this->options['icon']['shadowUrl'])) {
+                  $point['icon']['shadowUrl'] = $this->viewsTokenReplace($this->options['icon']['shadowUrl'], $tokens);
+                }
+              }
             }
           }
 

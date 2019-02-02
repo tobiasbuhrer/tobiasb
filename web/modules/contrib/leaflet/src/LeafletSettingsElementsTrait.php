@@ -96,7 +96,7 @@ trait LeafletSettingsElementsTrait {
     $elements['disable_wheel'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Disable zoom using mouse wheel'),
-      '#description' => $this->t('If enabled, the mouse wheel won\'t change the zoom level of the map.'),
+      '#description' => $this->t("If enabled, the mouse wheel won't change the zoom level of the map."),
       '#default_value' => $settings['disable_wheel'],
       '#return_value' => 1,
     ];
@@ -306,27 +306,26 @@ trait LeafletSettingsElementsTrait {
     $element['iconSize'] = [
       '#title' => $this->t('Icon Size'),
       '#type' => 'fieldset',
-      '#collapsible' => FALSE,
-      '#description' => $this->t('Size of the icon image in pixels.'),
+      '#description' => $this->t("Size of the icon image in pixels (if empty the natural icon image size will be used).<br>Note: Both the values shouldn't be null to be valid."),
     ];
 
     $element['iconSize']['x'] = [
       '#title' => $this->t('Width'),
       '#type' => 'number',
-      '#default_value' => isset($icon_options['iconSize']) ? $icon_options['iconSize']['x'] : NULL,
+      '#default_value' => isset($icon_options['iconSize']['x']) ? $icon_options['iconSize']['x'] : NULL,
     ];
 
     $element['iconSize']['y'] = [
       '#title' => $this->t('Height'),
       '#type' => 'number',
-      '#default_value' => isset($icon_options['iconSize']) ? $icon_options['iconSize']['y'] : NULL,
+      '#default_value' => isset($icon_options['iconSize']['y']) ? $icon_options['iconSize']['y'] : NULL,
     ];
 
     $element['iconAnchor'] = [
       '#title' => $this->t('Icon Anchor'),
       '#type' => 'fieldset',
       '#collapsible' => FALSE,
-      '#description' => $this->t('The coordinates of the "tip" of the icon (relative to its top left corner). The icon will be aligned so that this point is at the marker\'s geographical location.'),
+      '#description' => $this->t("The coordinates of the 'tip' of the icon (relative to its top left corner). The icon will be aligned so that this point is at the marker\'s geographical location.<br>Note: Both the values shouldn't be null to be valid."),
     ];
 
     $element['iconAnchor']['x'] = [
@@ -341,11 +340,28 @@ trait LeafletSettingsElementsTrait {
       '#default_value' => isset($icon_options['iconAnchor']) ? $icon_options['iconAnchor']['y'] : NULL,
     ];
 
+    $element['shadowSize'] = [
+      '#title' => $this->t('Shadow Size'),
+      '#type' => 'fieldset',
+      '#description' => $this->t("Size of the shadow image in pixels (if empty the natural shadow image size will be used). <br>Note: Both the values shouldn't be null to be valid."),
+    ];
+
+    $element['shadowSize']['x'] = [
+      '#title' => $this->t('Width'),
+      '#type' => 'number',
+      '#default_value' => isset($icon_options['shadowSize']['x']) ? $icon_options['shadowSize']['x'] : NULL,
+    ];
+
+    $element['shadowSize']['y'] = [
+      '#title' => $this->t('Height'),
+      '#type' => 'number',
+      '#default_value' => isset($icon_options['shadowSize']['y']) ? $icon_options['shadowSize']['y'] : NULL,
+    ];
+
     $element['shadowAnchor'] = [
       '#title' => $this->t('Shadow Anchor'),
       '#type' => 'fieldset',
-      '#collapsible' => FALSE,
-      '#description' => $this->t('The point from which the shadow is shown.'),
+      '#description' => $this->t("The coordinates of the 'tip' of the shadow (relative to its top left corner) (the same as iconAnchor if not specified).<br>Note: Both the values shouldn't be null to be valid."),
     ];
 
     $element['shadowAnchor']['x'] = [
@@ -364,7 +380,7 @@ trait LeafletSettingsElementsTrait {
       '#title' => $this->t('Popup Anchor'),
       '#type' => 'fieldset',
       '#collapsible' => FALSE,
-      '#description' => $this->t('The point from which the marker popup opens, relative to the anchor point.'),
+      '#description' => $this->t("The coordinates of the point from which popups will 'open', relative to the icon anchor.<br>Note: Both the values shouldn't be null to be valid."),
     ];
 
     $element['popupAnchor']['x'] = [
