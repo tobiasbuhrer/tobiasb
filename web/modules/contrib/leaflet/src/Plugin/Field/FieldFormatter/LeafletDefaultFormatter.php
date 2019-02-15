@@ -141,34 +141,7 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return [
-      'multiple_map' => 0,
-      'leaflet_map' => 'OSM Mapnik',
-      'height' => 400,
-      'hide_empty_map' => 0,
-      'popup' => FALSE,
-      'popup_content' => '',
-      'map_position' => [
-        'force' => 0,
-        'center' => [
-          'lat' => 0,
-          'lon' => 0,
-        ],
-        'zoom' => 12,
-        'minZoom' => 1,
-        'maxZoom' => 18,
-      ],
-      'icon' => [
-        'iconUrl' => '',
-        'iconSize' => ['x' => NULL, 'y' => NULL],
-        'iconAnchor' => ['x' => NULL, 'y' => NULL],
-        'shadowUrl' => '',
-        'shadowSize' => ['x' => NULL, 'y' => NULL],
-        'shadowAnchor' => ['x' => NULL, 'y' => NULL],
-        'popupAnchor' => ['x' => NULL, 'y' => NULL],
-      ],
-      'disable_wheel' => 0,
-    ] + parent::defaultSettings();
+    return self::getDefaultSettings() + parent::defaultSettings();
   }
 
   /**
@@ -220,18 +193,19 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
       ],
     ];
 
-    $elements['replacement_patterns'] = [
-      '#type' => 'details',
-      '#title' => 'Replacement patterns',
-      '#description' => $this->t('The following replacement tokens are available for the "Popup Content":'),
-      '#states' => [
-        'visible' => [
-          'input[name="fields[' . $field_name . '][settings_edit_form][settings][popup]"]' => ['checked' => TRUE],
-        ],
-      ],
-    ];
-
     if ($this->moduleHandler->moduleExists('token')) {
+
+      $elements['replacement_patterns'] = [
+        '#type' => 'details',
+        '#title' => 'Replacement patterns',
+        '#description' => $this->t('The following replacement tokens are available for the "Popup Content and the Icon Options":'),
+        '#states' => [
+          'visible' => [
+            'input[name="fields[' . $field_name . '][settings_edit_form][settings][popup]"]' => ['checked' => TRUE],
+          ],
+        ],
+      ];
+
       $elements['replacement_patterns']['token_help'] = [
         '#theme' => 'token_tree_link',
         '#token_types' => [$this->fieldDefinition->getTargetEntityTypeId()],
@@ -257,6 +231,12 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
     // Generate Icon form element.
     $icon = $this->getSetting('icon');
     $elements['icon'] = $this->generateIconFormElement($icon);
+
+    // Set Map Marker Cluster Element.
+    $this->setMapMarkerclusterElement($elements, $this->getSettings());
+
+    // Set Map Geometries Options Element.
+    $this->setMapPathOptionsElement($elements, $this->getSettings());
 
     return $elements;
   }
@@ -337,6 +317,19 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
         // We need a string for using it inside the popup.
         $build = $this->renderer->renderPlain($build);
         $feature['popup'] = !empty($build) ? $build : $entity->label();;
+      }
+
+      // Add/merge eventual map icon definition from hook_leaflet_map_info.
+      if (!empty($map['icon'])) {
+        $settings['icon'] = $settings['icon'] ?: [];
+        // Remove empty icon options so that they might be replaced by the
+        // ones set by the hook_leaflet_map_info.
+        foreach ($settings['icon'] as $k => $icon_option) {
+          if (empty($icon_option) || (is_array($icon_option) && $this->leafletService::multipleEmpty($icon_option))) {
+            unset($settings['icon'][$k]);
+          }
+        }
+        $settings['icon'] = array_replace($map['icon'], $settings['icon']);
       }
 
       // Eventually set the custom icon.
