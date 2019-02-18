@@ -805,17 +805,17 @@
     },
     {
         "name": "consolidation/config",
-        "version": "1.1.1",
-        "version_normalized": "1.1.1.0",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/consolidation/config.git",
-            "reference": "925231dfff32f05b787e1fddb265e789b939cf4c"
+            "reference": "11ab7ecd19131ce084390171b9c070eedecf7dab"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/consolidation/config/zipball/925231dfff32f05b787e1fddb265e789b939cf4c",
-            "reference": "925231dfff32f05b787e1fddb265e789b939cf4c",
+            "url": "https://api.github.com/repos/consolidation/config/zipball/11ab7ecd19131ce084390171b9c070eedecf7dab",
+            "reference": "11ab7ecd19131ce084390171b9c070eedecf7dab",
             "shasum": ""
         },
         "require": {
@@ -824,9 +824,9 @@
             "php": ">=5.4.0"
         },
         "require-dev": {
-            "g1a/composer-test-scenarios": "^1",
+            "g1a/composer-test-scenarios": "^3",
+            "php-coveralls/php-coveralls": "^1",
             "phpunit/phpunit": "^5",
-            "satooshi/php-coveralls": "^1.0",
             "squizlabs/php_codesniffer": "2.*",
             "symfony/console": "^2.5|^3|^4",
             "symfony/yaml": "^2.8.11|^3|^4"
@@ -834,9 +834,36 @@
         "suggest": {
             "symfony/yaml": "Required to use Consolidation\\Config\\Loader\\YamlConfigLoader"
         },
-        "time": "2018-10-24T17:55:35+00:00",
+        "time": "2019-02-16T01:18:47+00:00",
         "type": "library",
         "extra": {
+            "scenarios": {
+                "symfony4": {
+                    "require-dev": {
+                        "symfony/console": "^4.0"
+                    },
+                    "config": {
+                        "platform": {
+                            "php": "7.1.3"
+                        }
+                    }
+                },
+                "symfony2": {
+                    "require-dev": {
+                        "symfony/console": "^2.8",
+                        "symfony/event-dispatcher": "^2.8",
+                        "phpunit/phpunit": "^4.8.36"
+                    },
+                    "remove": [
+                        "php-coveralls/php-coveralls"
+                    ],
+                    "config": {
+                        "platform": {
+                            "php": "5.4.8"
+                        }
+                    }
+                }
+            },
             "branch-alias": {
                 "dev-master": "1.x-dev"
             }
@@ -1011,17 +1038,17 @@
     },
     {
         "name": "consolidation/robo",
-        "version": "1.4.4",
-        "version_normalized": "1.4.4.0",
+        "version": "1.4.6",
+        "version_normalized": "1.4.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/consolidation/Robo.git",
-            "reference": "8bec6a6ea54a7d03d56552a4250c49dec3b3083d"
+            "reference": "d4805a1abbc730e9a6d64ede2eba56f91a2b4eb3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/consolidation/Robo/zipball/8bec6a6ea54a7d03d56552a4250c49dec3b3083d",
-            "reference": "8bec6a6ea54a7d03d56552a4250c49dec3b3083d",
+            "url": "https://api.github.com/repos/consolidation/Robo/zipball/d4805a1abbc730e9a6d64ede2eba56f91a2b4eb3",
+            "reference": "d4805a1abbc730e9a6d64ede2eba56f91a2b4eb3",
             "shasum": ""
         },
         "require": {
@@ -1063,7 +1090,7 @@
             "patchwork/jsqueeze": "For minifying JS files in taskMinify",
             "pear/archive_tar": "Allows tar archives to be created and extracted in taskPack and taskExtract, respectively."
         },
-        "time": "2019-02-08T20:59:23+00:00",
+        "time": "2019-02-17T05:32:27+00:00",
         "bin": [
             "robo"
         ],
@@ -3407,18 +3434,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
+        "version": "1.3.0",
+        "version_normalized": "1.3.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/leaflet",
-            "reference": "8.x-1.2"
+            "reference": "8.x-1.3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.2.zip",
-            "reference": "8.x-1.2",
-            "shasum": "3c2e382f4a0c5fe2456809ea3a6a966c07c37c41"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.3.zip",
+            "reference": "8.x-1.3",
+            "shasum": "5a08a9b798621a98912c2c91af34bf7fb39ee32e"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -3430,8 +3457,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.2",
-                "datestamp": "1550157184",
+                "version": "8.x-1.3",
+                "datestamp": "1550423885",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -5352,17 +5379,17 @@
     },
     {
         "name": "nikic/php-parser",
-        "version": "v4.2.0",
-        "version_normalized": "4.2.0.0",
+        "version": "v4.2.1",
+        "version_normalized": "4.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nikic/PHP-Parser.git",
-            "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a"
+            "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
-            "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5221f49a608808c1e4d436df32884cbc1b821ac0",
+            "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0",
             "shasum": ""
         },
         "require": {
@@ -5372,7 +5399,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.5 || ^7.0"
         },
-        "time": "2019-01-12T16:31:37+00:00",
+        "time": "2019-02-16T20:54:15+00:00",
         "bin": [
             "bin/php-parse"
         ],
@@ -6264,7 +6291,8 @@
         "keywords": [
             "mock",
             "xunit"
-        ]
+        ],
+        "abandoned": true
     },
     {
         "name": "progress-tracker/progress-tracker",
