@@ -148,6 +148,7 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         'F' => 
         array (
             'FontLib\\' => 8,
+            'FileEye\\MimeMap\\' => 16,
         ),
         'E' => 
         array (
@@ -449,6 +450,10 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         'FontLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
+        'FileEye\\MimeMap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fileeye/mimemap/src',
         ),
         'ExiftoolReader\\' => 
         array (

@@ -226,7 +226,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       '#description' => $this->t('If needed, the path to the package executables (<kbd>convert</kbd>, <kbd>identify</kbd>, <kbd>gm</kbd>, etc.), <b>including</b> the trailing slash/backslash. For example: <kbd>/usr/bin/</kbd> or <kbd>C:\Program Files\ImageMagick-6.3.4-Q16\</kbd>.'),
     ];
     // Version information.
-    $status = $this->getExecManager()->checkPath($config->get('path_to_binaries'));
+    $status = $this->getExecManager()->checkPath($this->configFactory->get('imagemagick.settings')->get('path_to_binaries'));
     if (empty($status['errors'])) {
       $version_info = explode("\n", preg_replace('/\r/', '', Html::escape($status['output'])));
     }
@@ -516,7 +516,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       // Validate the enabled image formats.
       $errors = $this->formatMapper->validateMap($image_formats);
       if ($errors) {
-        $form_state->setErrorByName('imagemagick][formats][mapping][image_formats', new FormattableMarkup("<pre>@errors</pre>", ['@errors' => Yaml::encode($errors)]));
+        $form_state->setErrorByName('imagemagick][formats][mapping][image_formats', new FormattableMarkup("<pre>Image format errors:<br/>@errors</pre>", ['@errors' => Yaml::encode($errors)]));
       }
     }
     catch (InvalidDataTypeException $e) {
