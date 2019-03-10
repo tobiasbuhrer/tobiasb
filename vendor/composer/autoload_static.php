@@ -186,6 +186,7 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         ),
         'B' => 
         array (
+            'Brumann\\Polyfill\\' => 17,
             'Behat\\Mink\\Driver\\' => 18,
             'Behat\\Mink\\' => 11,
         ),
@@ -557,6 +558,10 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
+        'Brumann\\Polyfill\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brumann/polyfill-unserialize/src',
         ),
         'Behat\\Mink\\Driver\\' => 
         array (
