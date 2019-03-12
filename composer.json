@@ -339,7 +339,6 @@
         "drupal/imagemagick": "^2.3",
         "drupal/juicebox": "2.x-dev",
         "drupal/leaflet": "1.3.0",
-        "drupal/leaflet_markercluster": "1.x-dev",
         "drupal/leaflet_more_maps": "1.x-dev",
         "drupal/minifyhtml": "^1.7",
         "drupal/plupload": "1.x-dev",

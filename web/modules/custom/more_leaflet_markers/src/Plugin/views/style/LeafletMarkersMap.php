@@ -555,6 +555,10 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         // Always render the map, even if we do not have any data.
         $map = leaflet_map_get_info($this->options['map']);
 
+        $map['settings']['leaflet_markercluster']['control'] = 1;
+        $map['settings']['leaflet_markercluster']['options'] = '{"spiderfyOnMaxZoom":true,"showCoverageOnHover":true,"removeOutsideVisibleBounds": false}';
+
+
         if ($viewid == "carte_des_photos") {
             //center map on the photo we clicked. By default, only zooming out
             $map['settings']['zoom'] = 18;
@@ -594,7 +598,13 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
             ],
         ];
         $options['clickToUrl'] = ['default' => FALSE];
-        return $options;
+        $options['leaflet_markercluster'] = [
+            'default' => [
+                'control' => 1,
+                'options' => '{"spiderfyOnMaxZoom":true,"showCoverageOnHover":true,"removeOutsideVisibleBounds": false}'],
+        ];
+    return $options;
+
     }
 
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fbee8bbb5d92f3de93271b86132c128",
+    "content-hash": "2c0825d5d8a1e60a45355a76f6dae0d6",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3124,52 +3124,6 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/leaflet",
                 "issues": "https://www.drupal.org/project/issues/leaflet"
-            }
-        },
-        {
-            "name": "drupal/leaflet_markercluster",
-            "version": "dev-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/leaflet_markercluster",
-                "reference": "929377e4736e383a25e7b068c01f9beb0f375fc9"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/leaflet": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0-alpha2+1-dev",
-                    "datestamp": "1475226839",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "RdeBoer",
-                    "homepage": "https://www.drupal.org/user/404007"
-                },
-                {
-                    "name": "pvhee",
-                    "homepage": "https://www.drupal.org/user/108811"
-                }
-            ],
-            "description": "Extends Leaflet with the Markercluster library.",
-            "homepage": "https://www.drupal.org/project/leaflet_markercluster",
-            "support": {
-                "source": "http://cgit.drupalcode.org/leaflet_markercluster"
             }
         },
         {
@@ -9567,7 +9521,6 @@
         "drupal/drush": 5,
         "drupal/honeypot": 20,
         "drupal/juicebox": 20,
-        "drupal/leaflet_markercluster": 20,
         "drupal/leaflet_more_maps": 20,
         "drupal/plupload": 20
     },
