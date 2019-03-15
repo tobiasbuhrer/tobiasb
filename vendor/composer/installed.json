@@ -2857,17 +2857,17 @@
     },
     {
         "name": "drupal/core",
-        "version": "8.6.11",
-        "version_normalized": "8.6.11.0",
+        "version": "8.6.12",
+        "version_normalized": "8.6.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core.git",
-            "reference": "95233343dca7d0276b800ec2a1d9a3e7d0fc622d"
+            "reference": "f81e50dd6145c1d35797eb522f841a96804e9869"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core/zipball/95233343dca7d0276b800ec2a1d9a3e7d0fc622d",
-            "reference": "95233343dca7d0276b800ec2a1d9a3e7d0fc622d",
+            "url": "https://api.github.com/repos/drupal/core/zipball/f81e50dd6145c1d35797eb522f841a96804e9869",
+            "reference": "f81e50dd6145c1d35797eb522f841a96804e9869",
             "shasum": ""
         },
         "require": {
@@ -3040,7 +3040,7 @@
             "symfony/debug": "^3.4.0",
             "symfony/phpunit-bridge": "^3.4.3"
         },
-        "time": "2019-03-13T20:52:10+00:00",
+        "time": "2019-03-14T22:08:21+00:00",
         "type": "drupal-core",
         "extra": {
             "merge-plugin": {
@@ -9692,17 +9692,17 @@
     },
     {
         "name": "webflo/drupal-core-require-dev",
-        "version": "8.6.11",
-        "version_normalized": "8.6.11.0",
+        "version": "8.6.12",
+        "version_normalized": "8.6.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/webflo/drupal-core-require-dev.git",
-            "reference": "eebc9ee0eba9f4c05b68e88bda8ac0968dacc5f2"
+            "reference": "c0130a86db22cfc31dc52f407855e5e7ff53c9d9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/webflo/drupal-core-require-dev/zipball/eebc9ee0eba9f4c05b68e88bda8ac0968dacc5f2",
-            "reference": "eebc9ee0eba9f4c05b68e88bda8ac0968dacc5f2",
+            "url": "https://api.github.com/repos/webflo/drupal-core-require-dev/zipball/c0130a86db22cfc31dc52f407855e5e7ff53c9d9",
+            "reference": "c0130a86db22cfc31dc52f407855e5e7ff53c9d9",
             "shasum": ""
         },
         "require": {
@@ -9710,7 +9710,7 @@
             "behat/mink-goutte-driver": "^1.2",
             "behat/mink-selenium2-driver": "1.3.x-dev",
             "drupal/coder": "^8.2.12",
-            "drupal/core": "8.6.11",
+            "drupal/core": "8.6.12",
             "jcalderonzumba/gastonjs": "^1.0.2",
             "jcalderonzumba/mink-phantomjs-driver": "^0.3.1",
             "mikey179/vfsstream": "^1.2",
@@ -9720,7 +9720,7 @@
             "symfony/debug": "^3.4.0",
             "symfony/phpunit-bridge": "^3.4.3"
         },
-        "time": "2019-03-13T21:01:38+00:00",
+        "time": "2019-03-14T22:31:34+00:00",
         "type": "metapackage",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
