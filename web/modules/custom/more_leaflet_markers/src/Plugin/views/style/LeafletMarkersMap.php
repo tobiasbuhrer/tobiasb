@@ -519,7 +519,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                     $point['icon']['iconUrl'] = $this->rendered_fields[$id]['field_image'];
                                     $center = array(
                                         'lat' => $point['lat'],
-                                        'lng' => $point['lon']);
+                                        'lon' => $point['lon']);
                                 }
 
                                 //setting url back to photo gallery
@@ -556,7 +556,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         $map = leaflet_map_get_info($this->options['map']);
 
         $map['settings']['leaflet_markercluster']['control'] = 1;
-        $map['settings']['leaflet_markercluster']['options'] = '{"spiderfyOnMaxZoom":true,"showCoverageOnHover":true,"removeOutsideVisibleBounds": false}';
+        $map['settings']['leaflet_markercluster']['options'] = '{"spiderfyOnMaxZoom":true,"showCoverageOnHover":true,"removeOutsideVisibleBounds": true}';
 
 
         if ($viewid == "carte_des_photos") {
@@ -564,7 +564,6 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
             $map['settings']['zoom'] = 18;
             $map['settings']['center'] = $center;
             $map['settings']['map_position_force'] = 1;
-            //$map['settings']['disableClusteringAtZoom'] = 14;
         }
 
         //lets set  these maps to 85% of the viewport height
@@ -585,24 +584,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         $options['map'] = ['default' => ''];
         $options['height'] = ['default' => '400'];
         $options['icon'] = ['default' => []];
-        $options['map_position'] = [
-            'default' => [
-                'force' => 0,
-                'center' => [
-                    'lat' => 0,
-                    'lon' => 0,
-                ],
-                'zoom' => 16,
-                'minZoom' => 1,
-                'maxZoom' => 18,
-            ],
-        ];
         $options['clickToUrl'] = ['default' => FALSE];
-        $options['leaflet_markercluster'] = [
-            'default' => [
-                'control' => 1,
-                'options' => '{"spiderfyOnMaxZoom":true,"showCoverageOnHover":true,"removeOutsideVisibleBounds": false}'],
-        ];
     return $options;
 
     }

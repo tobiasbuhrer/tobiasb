@@ -3681,18 +3681,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.3.0",
-        "version_normalized": "1.3.0.0",
+        "version": "1.4.0",
+        "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/leaflet",
-            "reference": "8.x-1.3"
+            "reference": "8.x-1.4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.3.zip",
-            "reference": "8.x-1.3",
-            "shasum": "5a08a9b798621a98912c2c91af34bf7fb39ee32e"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.4.zip",
+            "reference": "8.x-1.4",
+            "shasum": "70ae22535b67a2f0370ec1ad0d7285a4c0528650"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -3704,7 +3704,7 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.3",
+                "version": "8.x-1.4",
                 "datestamp": "1551757985",
                 "security-coverage": {
                     "status": "covered",

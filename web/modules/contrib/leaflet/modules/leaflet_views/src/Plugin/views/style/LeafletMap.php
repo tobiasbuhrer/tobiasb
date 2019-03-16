@@ -325,6 +325,9 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
     // Generate the Leaflet Map General Settings.
     $this->generateMapGeneralSettings($form, $this->options);
 
+    // Generate the Leaflet Map Reset Control.
+    $this->setResetMapControl($form, $this->options);
+
     // Generate the Leaflet Map Position Form Element.
     $map_position_options = $this->options['map_position'];
     $form['map_position'] = $this->generateMapPositionElement($map_position_options);
@@ -478,7 +481,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
             // Remove empty icon options so that they might be replaced by the
             // ones set by the hook_leaflet_map_info.
             foreach ($this->options['icon'] as $k => $icon_option) {
-              if (empty($icon_option) || (is_array($icon_option) && $this->leafletService::multipleEmpty($icon_option))) {
+              if (empty($icon_option) || (is_array($icon_option) && $this->leafletService->multipleEmpty($icon_option))) {
                 unset($this->options['icon'][$k]);
               }
             }

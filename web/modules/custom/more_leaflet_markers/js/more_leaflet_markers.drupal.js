@@ -72,7 +72,7 @@
         }
         else if (self.settings.map_position_force) {
             if (self.settings.center) {
-                self.lMap.setView(new L.LatLng(self.settings.center.lat, self.settings.center.lng), self.settings.zoom);
+                self.lMap.setView(new L.LatLng(self.settings.center.lat, self.settings.center.lon), self.settings.zoom);
             }
             else {
                 self.lMap.setZoom(self.settings.zoom);
