@@ -3,32 +3,6 @@
  */
 
 (function ($) {
-/*
-    Drupal.Leaflet.prototype.create_point = function (marker) {
-        var latLng = new L.LatLng(marker.lat, marker.lon);
-        this.bounds.push(latLng);
-        var lMarker;
-
-        var tooltip = marker.label ? marker.label.replace(/<[^>]*>/g, '').trim() : '';
-
-        if (marker.icon) {
-            var icon = this.create_icon(marker.icon);
-            lMarker = new L.Marker(latLng, {icon: icon, title: tooltip, riseOnHover: true});
-        }
-        else {
-            lMarker = new L.Marker(latLng, {title: tooltip, riseOnHover: true});
-        }
-
-        if (marker.targetUrl) {
-            lMarker.on('click', function () {
-                window.location = (marker.targetUrl);
-            });
-        }
-
-        return lMarker;
-    };
-*/
-
     Drupal.Leaflet.prototype.create_point = function (marker) {
         var self = this;
         var latLng = new L.LatLng(marker.lat, marker.lon);
@@ -82,27 +56,26 @@
         return lMarker;
     };
 
-
-    Drupal.Leaflet.prototype.setMapPosition = function (features) {
+    // Set Map position, fitting Bounds in case of more than one feature
+    // @NOTE: This method used by Leaflet Markecluster module (don't remove/rename)
+    Drupal.Leaflet.prototype.fitbounds = function () {
         var self = this;
 
         // Fit Bounds if both them and features exist, and the Map Position in not forced.
-        if (features.length > 0 && !self.settings.map_position_force && self.bounds.length > 0) {
+        if (!self.settings.map_position_force && self.bounds.length > 0) {
             self.lMap.fitBounds(new L.LatLngBounds(self.bounds));
 
             // In case of single result use the custom Map Zoom set.
-            if (features.length === 1 && self.settings.zoom) {
+            if (self.bounds.length === 1 && self.settings.zoom) {
                 self.lMap.setZoom(self.settings.zoom);
             }
-
         }
         else if (self.settings.map_position_force) {
-            var zoomLevel = self.settings.zoom;
             if (self.settings.center) {
-                self.lMap.setView(new L.LatLng(self.settings.center.lat, self.settings.center.lng), zoomLevel);
+                self.lMap.setView(new L.LatLng(self.settings.center.lat, self.settings.center.lng), self.settings.zoom);
             }
             else {
-                self.lMap.setZoom(zoomLevel);
+                self.lMap.setZoom(self.settings.zoom);
             }
         }
     };
