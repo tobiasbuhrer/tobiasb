@@ -2,6 +2,7 @@
     "name": "fileeye/mimemap",
     "type": "library",
     "description": "A PHP library to handle MIME Content-Type fields and their related file extensions.",
+    "keywords": ["mime", "mime-type", "mime-database", "mime-parser"],
     "homepage": "https://github.com/FileEye/MimeMap",
     "license": "LGPL-3.0-or-later",
     "require": {
@@ -27,5 +28,10 @@
             "FileEye\\MimeMap\\Test\\": "tests/src/"
         }
     },
-    "bin": ["bin/fileeye-mimemap"]
+    "bin": ["bin/fileeye-mimemap"],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
 }
