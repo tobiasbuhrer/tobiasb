@@ -6,8 +6,8 @@ package: Leaflet
 dependencies:
   - leaflet:leaflet
 
-# Information added by Drupal.org packaging script on 2019-03-05
-version: '8.x-1.4'
+# Information added by Drupal.org packaging script on 2019-04-10
+version: '8.x-1.5'
 core: '8.x'
 project: 'leaflet'
-datestamp: 1551757992
+datestamp: 1554885186

@@ -3686,18 +3686,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.4.0",
-        "version_normalized": "1.4.0.0",
+        "version": "1.5.0",
+        "version_normalized": "1.5.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.4"
+            "reference": "8.x-1.5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.4.zip",
-            "reference": "8.x-1.4",
-            "shasum": "70ae22535b67a2f0370ec1ad0d7285a4c0528650"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.5.zip",
+            "reference": "8.x-1.5",
+            "shasum": "08f7b02b0b76744028839149c5881d47362caca6"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -3709,8 +3709,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.4",
-                "datestamp": "1551757985",
+                "version": "8.x-1.5",
+                "datestamp": "1554885181",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -3757,7 +3757,7 @@
         "description": "Integration with the Leaflet map scripting library.",
         "homepage": "https://www.drupal.org/project/leaflet",
         "support": {
-            "source": "http://cgit.drupalcode.org/leaflet",
+            "source": "https://git.drupalcode.org/project/leaflet",
             "issues": "https://www.drupal.org/project/issues/leaflet"
         }
     },
@@ -4626,24 +4626,24 @@
     },
     {
         "name": "fileeye/mimemap",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/FileEye/MimeMap.git",
-            "reference": "bac14ca00328d79a07ab8d02e37e045157efc6d1"
+            "reference": "2344b024f73dc0638f51508759ba174f3c4e5342"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/FileEye/MimeMap/zipball/bac14ca00328d79a07ab8d02e37e045157efc6d1",
-            "reference": "bac14ca00328d79a07ab8d02e37e045157efc6d1",
+            "url": "https://api.github.com/repos/FileEye/MimeMap/zipball/2344b024f73dc0638f51508759ba174f3c4e5342",
+            "reference": "2344b024f73dc0638f51508759ba174f3c4e5342",
             "shasum": ""
         },
         "require": {
             "php": ">=5.4"
         },
         "require-dev": {
-            "phpunit/phpunit": "<9",
+            "phpunit/phpunit": "<8.1",
             "sebastian/comparator": "*",
             "sebastian/diff": "*",
             "squizlabs/php_codesniffer": "*",
@@ -4652,7 +4652,7 @@
             "symfony/var-dumper": "*",
             "symfony/yaml": "*"
         },
-        "time": "2019-03-27T18:50:55+00:00",
+        "time": "2019-04-10T11:14:46+00:00",
         "bin": [
             "bin/fileeye-mimemap"
         ],
@@ -5636,21 +5636,21 @@
     },
     {
         "name": "myclabs/deep-copy",
-        "version": "1.9.0",
-        "version_normalized": "1.9.0.0",
+        "version": "1.9.1",
+        "version_normalized": "1.9.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/myclabs/DeepCopy.git",
-            "reference": "78af75148f9fdd34ea727c8b529a9b4a8f7b740c"
+            "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/78af75148f9fdd34ea727c8b529a9b4a8f7b740c",
-            "reference": "78af75148f9fdd34ea727c8b529a9b4a8f7b740c",
+            "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
+            "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
             "shasum": ""
         },
         "require": {
-            "php": "^7.2"
+            "php": "^7.1"
         },
         "replace": {
             "myclabs/deep-copy": "self.version"
@@ -5658,11 +5658,9 @@
         "require-dev": {
             "doctrine/collections": "^1.0",
             "doctrine/common": "^2.6",
-            "phpstan/phpstan": "^0.9.2",
-            "phpstan/phpstan-phpunit": "^0.9.4",
             "phpunit/phpunit": "^7.1"
         },
-        "time": "2018-10-30T00:14:44+00:00",
+        "time": "2019-04-07T13:18:21+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -7494,17 +7492,17 @@
     },
     {
         "name": "squizlabs/php_codesniffer",
-        "version": "3.4.1",
-        "version_normalized": "3.4.1.0",
+        "version": "3.4.2",
+        "version_normalized": "3.4.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-            "reference": "5b4333b4010625d29580eb4a41f1e53251be6baa"
+            "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5b4333b4010625d29580eb4a41f1e53251be6baa",
-            "reference": "5b4333b4010625d29580eb4a41f1e53251be6baa",
+            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
+            "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
             "shasum": ""
         },
         "require": {
@@ -7516,7 +7514,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
         },
-        "time": "2019-03-19T03:22:27+00:00",
+        "time": "2019-04-10T23:49:02+00:00",
         "bin": [
             "bin/phpcs",
             "bin/phpcbf"
