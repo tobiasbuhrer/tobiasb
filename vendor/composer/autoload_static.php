@@ -125,6 +125,7 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         ),
         'J' => 
         array (
+            'JsonSchema\\' => 11,
             'JakubOnderka\\PhpConsoleHighlighter\\' => 35,
             'JakubOnderka\\PhpConsoleColor\\' => 29,
         ),
@@ -149,6 +150,7 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         'E' => 
         array (
             'ExiftoolReader\\' => 15,
+            'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
         array (
@@ -407,6 +409,10 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         array (
             0 => __DIR__ . '/..' . '/league/container/src',
         ),
+        'JsonSchema\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
+        ),
         'JakubOnderka\\PhpConsoleHighlighter\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
@@ -454,6 +460,10 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         'ExiftoolReader\\' => 
         array (
             0 => __DIR__ . '/..' . '/vvval/exiftool-reader/src',
+        ),
+        'Egulias\\EmailValidator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
         ),
         'Drush\\Internal\\' => 
         array (
@@ -625,13 +635,13 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
             ),
+            'PEAR' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/pear_exception',
+            ),
         ),
         'E' => 
         array (
-            'Egulias\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/egulias/email-validator/src',
-            ),
             'EasyRdf_' => 
             array (
                 0 => __DIR__ . '/..' . '/easyrdf/easyrdf/lib',
@@ -664,6 +674,24 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
                 0 => __DIR__ . '/..' . '/dflydev/dot-access-configuration/src',
             ),
         ),
+        'C' => 
+        array (
+            'Console' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/console_getopt',
+            ),
+        ),
+        'A' => 
+        array (
+            'Archive_Tar' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/archive_tar',
+            ),
+        ),
+    );
+
+    public static $fallbackDirsPsr0 = array (
+        0 => __DIR__ . '/..' . '/pear/pear-core-minimal/src',
     );
 
     public static $classMap = array (
@@ -1234,6 +1262,7 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
             $loader->prefixLengthsPsr4 = ComposerStaticInit323e7c4a711d9212f323665cbac78041::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit323e7c4a711d9212f323665cbac78041::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit323e7c4a711d9212f323665cbac78041::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit323e7c4a711d9212f323665cbac78041::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInit323e7c4a711d9212f323665cbac78041::$classMap;
 
         }, null, ClassLoader::class);
