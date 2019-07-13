@@ -3,6 +3,7 @@
 namespace Drupal\leaflet_views\Plugin\views\style;
 
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Entity\Plugin\DataType\EntityAdapter;
 use Drupal\Core\Form\FormStateInterface;
@@ -47,6 +48,13 @@ use Drupal\Core\Entity\EntityTypeInterface;
 class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterface {
 
   use LeafletSettingsElementsTrait;
+
+  /**
+   * The Default Settings.
+   *
+   * @var array
+   */
+  protected $defaultSettings;
 
   /**
    * The Entity source property.
@@ -148,6 +156,14 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
   protected $viewFields = [];
 
   /**
+   * Field type plugin manager.
+   *
+   * @var \Drupal\Core\Field\FieldTypePluginManagerInterface
+   */
+  protected $fieldTypeManager;
+
+
+  /**
    * Constructs a LeafletMap style instance.
    *
    * @param array $configuration
@@ -174,6 +190,8 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    *   The Leaflet service.
    * @param \Drupal\Core\Utility\LinkGeneratorInterface $link_generator
    *   The Link Generator service.
+   * @param \Drupal\Core\Field\FieldTypePluginManagerInterface $field_type_manager
+   *   The field type plugin manager service.
    */
   public function __construct(
     array $configuration,
@@ -187,10 +205,12 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
     RendererInterface $renderer,
     ModuleHandlerInterface $module_handler,
     LeafletService $leaflet_service,
-    LinkGeneratorInterface $link_generator
+    LinkGeneratorInterface $link_generator,
+    FieldTypePluginManagerInterface $field_type_manager
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
+    $this->defaultSettings = self::getDefaultSettings();
     $this->entityManager = $entity_manager;
     $this->entityFieldManager = $entity_field_manager;
     $this->entityDisplay = $entity_display;
@@ -200,6 +220,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
     $this->moduleHandler = $module_handler;
     $this->leafletService = $leaflet_service;
     $this->link = $link_generator;
+    $this->fieldTypeManager = $field_type_manager;
   }
 
   /**
@@ -218,7 +239,8 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
       $container->get('renderer'),
       $container->get('module_handler'),
       $container->get('leaflet.service'),
-      $container->get('link_generator')
+      $container->get('link_generator'),
+      $container->get('plugin.manager.field.field_type')
     );
   }
 
@@ -312,7 +334,9 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
         $field_storage_definitions = $this->entityFieldManager->getFieldStorageDefinitions($entity_type);
         $field_storage_definition = $field_storage_definitions[$handler->definition['field_name']];
 
-        if ($field_storage_definition->getType() == 'geofield') {
+        $type = $field_storage_definition->getType();
+        $definition = $this->fieldTypeManager->getDefinition($type);
+        if (is_a($definition['class'], '\Drupal\geofield\Plugin\Field\FieldType\GeofieldItem', TRUE)) {
           $fields_geo_data[$field_id] = $label;
         }
       }
@@ -406,6 +430,9 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+
+    $default_settings = self::getDefaultSettings();
+
     // If data source changed then apply the changes.
     if ($form_state->get('entity_source')) {
       $this->options['entity_source'] = $form_state->get('entity_source');
