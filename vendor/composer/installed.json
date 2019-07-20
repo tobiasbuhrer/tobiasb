@@ -126,12 +126,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/minkphp/Mink.git",
-            "reference": "7f7af8fc7649c4f74935ddd1a1fa82e205eeb25e"
+            "reference": "a534fe7dac9525e8e10ca68e737c3d7e5058ec83"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/minkphp/Mink/zipball/7f7af8fc7649c4f74935ddd1a1fa82e205eeb25e",
-            "reference": "7f7af8fc7649c4f74935ddd1a1fa82e205eeb25e",
+            "url": "https://api.github.com/repos/minkphp/Mink/zipball/a534fe7dac9525e8e10ca68e737c3d7e5058ec83",
+            "reference": "a534fe7dac9525e8e10ca68e737c3d7e5058ec83",
             "shasum": ""
         },
         "require": {
@@ -139,7 +139,7 @@
             "symfony/css-selector": "^2.7|^3.0|^4.0"
         },
         "require-dev": {
-            "symfony/phpunit-bridge": "^3.3|^4.0"
+            "symfony/phpunit-bridge": "^4.2"
         },
         "suggest": {
             "behat/mink-browserkit-driver": "extremely fast headless driver for Symfony\\Kernel-based apps (Sf2, Silex)",
@@ -148,7 +148,7 @@
             "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)",
             "dmore/chrome-mink-driver": "fast and JS-enabled driver for any app (requires chromium or google chrome)"
         },
-        "time": "2019-07-08T10:19:23+00:00",
+        "time": "2019-07-15T12:45:29+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -360,23 +360,23 @@
     },
     {
         "name": "brumann/polyfill-unserialize",
-        "version": "v1.0.3",
-        "version_normalized": "1.0.3.0",
+        "version": "v1.0.4",
+        "version_normalized": "1.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/dbrumann/polyfill-unserialize.git",
-            "reference": "844d7e44b62a1a3d5c68cfb7ebbd59c17ea0fd7b"
+            "reference": "8ed1cd343ddc134a7ef649aca0aa0fe2a1b45008"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/dbrumann/polyfill-unserialize/zipball/844d7e44b62a1a3d5c68cfb7ebbd59c17ea0fd7b",
-            "reference": "844d7e44b62a1a3d5c68cfb7ebbd59c17ea0fd7b",
+            "url": "https://api.github.com/repos/dbrumann/polyfill-unserialize/zipball/8ed1cd343ddc134a7ef649aca0aa0fe2a1b45008",
+            "reference": "8ed1cd343ddc134a7ef649aca0aa0fe2a1b45008",
             "shasum": ""
         },
         "require": {
             "php": "^5.3|^7.0"
         },
-        "time": "2017-02-03T09:55:47+00:00",
+        "time": "2019-07-14T23:16:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2604,17 +2604,17 @@
     },
     {
         "name": "drupal/console",
-        "version": "v1.9.0",
-        "version_normalized": "1.9.0.0",
+        "version": "1.9.1",
+        "version_normalized": "1.9.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/hechoendrupal/drupal-console.git",
-            "reference": "e03c085ef2c83d52a869a5e49f57f298f0fbe4e5"
+            "reference": "3bcce31018ea61f6f83f090c598835669f8e7e5a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/hechoendrupal/drupal-console/zipball/e03c085ef2c83d52a869a5e49f57f298f0fbe4e5",
-            "reference": "e03c085ef2c83d52a869a5e49f57f298f0fbe4e5",
+            "url": "https://api.github.com/repos/hechoendrupal/drupal-console/zipball/3bcce31018ea61f6f83f090c598835669f8e7e5a",
+            "reference": "3bcce31018ea61f6f83f090c598835669f8e7e5a",
             "shasum": ""
         },
         "require": {
@@ -2622,7 +2622,7 @@
             "composer/installers": "~1.0",
             "doctrine/annotations": "^1.2",
             "doctrine/collections": "^1.3",
-            "drupal/console-core": "1.9.0",
+            "drupal/console-core": "1.9.1",
             "drupal/console-extend-plugin": "~0",
             "php": "^5.5.9 || ^7.0",
             "psy/psysh": "0.6.* || ~0.8",
@@ -2634,7 +2634,7 @@
             "symfony/thanks": "Thank your favorite PHP projects on GitHub using the CLI",
             "vlucas/phpdotenv": "Loads environment variables from .env to getenv(), $_ENV and $_SERVER automagically"
         },
-        "time": "2019-06-11T00:33:19+00:00",
+        "time": "2019-07-15T22:02:23+00:00",
         "bin": [
             "bin/drupal"
         ],
@@ -2685,22 +2685,22 @@
     },
     {
         "name": "drupal/console-core",
-        "version": "v1.9.0",
-        "version_normalized": "1.9.0.0",
+        "version": "1.9.1",
+        "version_normalized": "1.9.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/hechoendrupal/drupal-console-core.git",
-            "reference": "8a60d3cfaa2523613575e701ae45a43028c886b6"
+            "reference": "6a196d67633d12cce4c62e4707c91c2c469af77f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/hechoendrupal/drupal-console-core/zipball/8a60d3cfaa2523613575e701ae45a43028c886b6",
-            "reference": "8a60d3cfaa2523613575e701ae45a43028c886b6",
+            "url": "https://api.github.com/repos/hechoendrupal/drupal-console-core/zipball/6a196d67633d12cce4c62e4707c91c2c469af77f",
+            "reference": "6a196d67633d12cce4c62e4707c91c2c469af77f",
             "shasum": ""
         },
         "require": {
             "dflydev/dot-access-configuration": "^1.0",
-            "drupal/console-en": "1.9.0",
+            "drupal/console-en": "1.9.1",
             "guzzlehttp/guzzle": "~6.1",
             "php": "^5.5.9 || ^7.0",
             "stecman/symfony-console-completion": "~0.7",
@@ -2718,7 +2718,7 @@
             "webflo/drupal-finder": "^1.0",
             "webmozart/path-util": "^2.3"
         },
-        "time": "2019-06-11T00:43:52+00:00",
+        "time": "2019-07-03T00:45:07+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2769,20 +2769,20 @@
     },
     {
         "name": "drupal/console-en",
-        "version": "v1.9.0",
-        "version_normalized": "1.9.0.0",
+        "version": "1.9.1",
+        "version_normalized": "1.9.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/hechoendrupal/drupal-console-en.git",
-            "reference": "d99d1635509dd32957853f5da5e60cbd2938eb6c"
+            "reference": "167660cde15de0be6c98af20556beff2c23bc498"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/hechoendrupal/drupal-console-en/zipball/d99d1635509dd32957853f5da5e60cbd2938eb6c",
-            "reference": "d99d1635509dd32957853f5da5e60cbd2938eb6c",
+            "url": "https://api.github.com/repos/hechoendrupal/drupal-console-en/zipball/167660cde15de0be6c98af20556beff2c23bc498",
+            "reference": "167660cde15de0be6c98af20556beff2c23bc498",
             "shasum": ""
         },
-        "time": "2019-05-29T19:03:44+00:00",
+        "time": "2019-07-15T21:59:24+00:00",
         "type": "drupal-console-language",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -2868,17 +2868,17 @@
     },
     {
         "name": "drupal/core",
-        "version": "8.7.4",
-        "version_normalized": "8.7.4.0",
+        "version": "8.7.5",
+        "version_normalized": "8.7.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core.git",
-            "reference": "a6d447d41545323f54c5034e551fb43b8050eca9"
+            "reference": "12cea52c782bb76e666c54c2a65cd3946daa3613"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core/zipball/a6d447d41545323f54c5034e551fb43b8050eca9",
-            "reference": "a6d447d41545323f54c5034e551fb43b8050eca9",
+            "url": "https://api.github.com/repos/drupal/core/zipball/12cea52c782bb76e666c54c2a65cd3946daa3613",
+            "reference": "12cea52c782bb76e666c54c2a65cd3946daa3613",
             "shasum": ""
         },
         "require": {
@@ -3055,7 +3055,7 @@
             "symfony/debug": "^3.4.0",
             "symfony/phpunit-bridge": "^3.4.3"
         },
-        "time": "2019-07-04T07:26:51+00:00",
+        "time": "2019-07-16T16:24:57+00:00",
         "type": "drupal-core",
         "extra": {
             "merge-plugin": {
@@ -4213,33 +4213,38 @@
     },
     {
         "name": "drupal/webform",
-        "version": "5.2.0",
-        "version_normalized": "5.2.0.0",
+        "version": "5.3.0",
+        "version_normalized": "5.3.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/webform.git",
-            "reference": "8.x-5.2"
+            "reference": "8.x-5.3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.2.zip",
-            "reference": "8.x-5.2",
-            "shasum": "44e67c377e156f7f8d6f26bba43240dfa1885637"
+            "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.3.zip",
+            "reference": "8.x-5.3",
+            "shasum": "0ac8066ed09c688d7900f35d961ea521c6da6e3a"
         },
         "require": {
             "drupal/core": "*"
         },
         "require-dev": {
             "drupal/address": "~1.4",
+            "drupal/bootstrap": "~3.0",
             "drupal/captcha": "~1.0",
             "drupal/chosen": "~2.6",
             "drupal/devel": "*",
-            "drupal/jsonapi": "~2.0",
+            "drupal/entity_print": "^2.1",
+            "drupal/jsonapi": "~2.0 || ~8.7",
             "drupal/mailsystem": "~4.0",
             "drupal/select2": "~1.1",
+            "drupal/smtp": "~1.0",
             "drupal/telephone_validation": "^2.2",
             "drupal/token": "~1.3",
             "drupal/webform_access": "*",
+            "drupal/webform_attachment": "*",
+            "drupal/webform_entity_print": "*",
             "drupal/webform_node": "*",
             "drupal/webform_scheduled_email": "*",
             "drupal/webform_ui": "*"
@@ -4250,8 +4255,8 @@
                 "dev-5.x": "5.x-dev"
             },
             "drupal": {
-                "version": "8.x-5.2",
-                "datestamp": "1553801966",
+                "version": "8.x-5.3",
+                "datestamp": "1563460085",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4539,17 +4544,17 @@
     },
     {
         "name": "egulias/email-validator",
-        "version": "2.1.9",
-        "version_normalized": "2.1.9.0",
+        "version": "2.1.10",
+        "version_normalized": "2.1.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/egulias/EmailValidator.git",
-            "reference": "128cc721d771ec2c46ce59698f4ca42b73f71b25"
+            "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/128cc721d771ec2c46ce59698f4ca42b73f71b25",
-            "reference": "128cc721d771ec2c46ce59698f4ca42b73f71b25",
+            "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
+            "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
             "shasum": ""
         },
         "require": {
@@ -4559,12 +4564,13 @@
         "require-dev": {
             "dominicsayers/isemail": "dev-master",
             "phpunit/phpunit": "^4.8.35||^5.7||^6.0",
-            "satooshi/php-coveralls": "^1.0.1"
+            "satooshi/php-coveralls": "^1.0.1",
+            "symfony/phpunit-bridge": "^4.4@dev"
         },
         "suggest": {
             "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
         },
-        "time": "2019-06-23T10:14:27+00:00",
+        "time": "2019-07-19T20:52:08+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -10035,17 +10041,17 @@
     },
     {
         "name": "webflo/drupal-core-require-dev",
-        "version": "8.7.4",
-        "version_normalized": "8.7.4.0",
+        "version": "8.7.5",
+        "version_normalized": "8.7.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/webflo/drupal-core-require-dev.git",
-            "reference": "6ab0d5c54addc3000ed7797bbcddec105d5f4dd9"
+            "reference": "f2d22767efe8b6444676eafdd51a452088048747"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/webflo/drupal-core-require-dev/zipball/6ab0d5c54addc3000ed7797bbcddec105d5f4dd9",
-            "reference": "6ab0d5c54addc3000ed7797bbcddec105d5f4dd9",
+            "url": "https://api.github.com/repos/webflo/drupal-core-require-dev/zipball/f2d22767efe8b6444676eafdd51a452088048747",
+            "reference": "f2d22767efe8b6444676eafdd51a452088048747",
             "shasum": ""
         },
         "require": {
@@ -10053,7 +10059,7 @@
             "behat/mink-goutte-driver": "^1.2",
             "behat/mink-selenium2-driver": "1.3.x-dev",
             "drupal/coder": "^8.3.1",
-            "drupal/core": "8.7.4",
+            "drupal/core": "8.7.5",
             "jcalderonzumba/gastonjs": "^1.0.2",
             "jcalderonzumba/mink-phantomjs-driver": "^0.3.1",
             "justinrainbow/json-schema": "^5.2",
@@ -10064,7 +10070,7 @@
             "symfony/debug": "^3.4.0",
             "symfony/phpunit-bridge": "^3.4.3"
         },
-        "time": "2019-07-04T08:01:42+00:00",
+        "time": "2019-07-17T16:31:47+00:00",
         "type": "metapackage",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
