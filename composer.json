@@ -14,18 +14,56 @@
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
+        "algolia.places": {
+            "_webform": true,
+            "type": "package",
+            "package": {
+                "name": "algolia/places",
+                "version": "1.16.4",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "algolia.places"
+                },
+                "dist": {
+                    "url": "https://registry.npmjs.org/places.js/-/places.js-1.16.4.tgz",
+                    "type": "tar"
+                },
+                "require": {
+                    "composer/installers": "~1.0"
+                }
+            }
+        },
+        "choices": {
+            "_webform": true,
+            "type": "package",
+            "package": {
+                "name": "choices/choices",
+                "version": "7.0.0",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "choices"
+                },
+                "dist": {
+                    "url": "https://github.com/jshjohnson/Choices/archive/v7.0.0.zip",
+                    "type": "zip"
+                },
+                "require": {
+                    "composer/installers": "~1.0"
+                }
+            }
+        },
         "ckeditor.autogrow": {
             "_webform": true,
             "type": "package",
             "package": {
                 "name": "ckeditor/autogrow",
-                "version": "4.8.0",
+                "version": "4.11.3",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "ckeditor.autogrow"
                 },
                 "dist": {
-                    "url": "https://download.ckeditor.com/autogrow/releases/autogrow_4.8.0.zip",
+                    "url": "https://download.ckeditor.com/autogrow/releases/autogrow_4.11.3.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -38,13 +76,13 @@
             "type": "package",
             "package": {
                 "name": "ckeditor/codemirror",
-                "version": "v1.17.5",
+                "version": "v1.17.12",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "ckeditor.codemirror"
                 },
                 "dist": {
-                    "url": "https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.17.5/CKEditor-CodeMirror-Plugin.zip",
+                    "url": "https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.17.12/CKEditor-CodeMirror-Plugin.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -57,13 +95,13 @@
             "type": "package",
             "package": {
                 "name": "ckeditor/fakeobjects",
-                "version": "4.8.0",
+                "version": "4.11.3",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "ckeditor.fakeobjects"
                 },
                 "dist": {
-                    "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.8.0.zip",
+                    "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.11.3.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -76,13 +114,13 @@
             "type": "package",
             "package": {
                 "name": "ckeditor/image",
-                "version": "4.8.0",
+                "version": "4.11.3",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "ckeditor.image"
                 },
                 "dist": {
-                    "url": "https://download.ckeditor.com/image/releases/image_4.8.0.zip",
+                    "url": "https://download.ckeditor.com/image/releases/image_4.11.3.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -95,13 +133,13 @@
             "type": "package",
             "package": {
                 "name": "ckeditor/link",
-                "version": "4.8.0",
+                "version": "4.11.3",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "ckeditor.link"
                 },
                 "dist": {
-                    "url": "https://download.ckeditor.com/link/releases/link_4.8.0.zip",
+                    "url": "https://download.ckeditor.com/link/releases/link_4.11.3.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -114,32 +152,13 @@
             "type": "package",
             "package": {
                 "name": "codemirror/codemirror",
-                "version": "5.36.0",
+                "version": "5.47.0",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "codemirror"
                 },
                 "dist": {
-                    "url": "https://github.com/components/codemirror/archive/5.36.0.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
-        },
-        "jquery.geocomplete": {
-            "_webform": true,
-            "type": "package",
-            "package": {
-                "name": "jquery/geocomplete",
-                "version": "1.7.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "jquery.geocomplete"
-                },
-                "dist": {
-                    "url": "https://github.com/ubilabs/geocomplete/archive/1.7.0.zip",
+                    "url": "https://github.com/components/codemirror/archive/5.47.0.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -152,13 +171,13 @@
             "type": "package",
             "package": {
                 "name": "jquery/inputmask",
-                "version": "3.3.11",
+                "version": "4.0.8",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.inputmask"
                 },
                 "dist": {
-                    "url": "https://github.com/RobinHerbots/jquery.inputmask/archive/3.3.11.zip",
+                    "url": "https://github.com/RobinHerbots/jquery.inputmask/archive/4.0.8.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -171,13 +190,13 @@
             "type": "package",
             "package": {
                 "name": "jquery/intl-tel-input",
-                "version": "12.1.12",
+                "version": "15.0.1",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.intl-tel-input"
                 },
                 "dist": {
-                    "url": "https://github.com/jackocnr/intl-tel-input/archive/v12.1.12.zip",
+                    "url": "https://github.com/jackocnr/intl-tel-input/archive/v15.0.1.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -190,13 +209,13 @@
             "type": "package",
             "package": {
                 "name": "jquery/rateit",
-                "version": "1.1.1",
+                "version": "1.1.2",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.rateit"
                 },
                 "dist": {
-                    "url": "https://github.com/gjunge/rateit.js/archive/1.1.1.zip",
+                    "url": "https://github.com/gjunge/rateit.js/archive/1.1.2.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -209,13 +228,32 @@
             "type": "package",
             "package": {
                 "name": "jquery/select2",
-                "version": "4.0.5",
+                "version": "4.0.7",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.select2"
                 },
                 "dist": {
-                    "url": "https://github.com/select2/select2/archive/4.0.5.zip",
+                    "url": "https://github.com/select2/select2/archive/4.0.7.zip",
+                    "type": "zip"
+                },
+                "require": {
+                    "composer/installers": "~1.0"
+                }
+            }
+        },
+        "jquery.textcounter": {
+            "_webform": true,
+            "type": "package",
+            "package": {
+                "name": "jquery/textcounter",
+                "version": "0.8.0",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "jquery.textcounter"
+                },
+                "dist": {
+                    "url": "https://github.com/ractoon/jQuery-Text-Counter/archive/0.8.0.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -228,51 +266,13 @@
             "type": "package",
             "package": {
                 "name": "jquery/timepicker",
-                "version": "1.11.13",
+                "version": "1.11.15",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.timepicker"
                 },
                 "dist": {
-                    "url": "https://github.com/jonthornton/jquery-timepicker/archive/1.11.13.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
-        },
-        "jquery.toggles": {
-            "_webform": true,
-            "type": "package",
-            "package": {
-                "name": "jquery/toggles",
-                "version": "4.0.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "jquery.toggles"
-                },
-                "dist": {
-                    "url": "https://github.com/simontabor/jquery-toggles/archive/v4.0.0.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
-        },
-        "jquery.word-and-character-counter": {
-            "_webform": true,
-            "type": "package",
-            "package": {
-                "name": "jquery/word-and-character-counter",
-                "version": "2.5.1",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "jquery.word-and-character-counter"
-                },
-                "dist": {
-                    "url": "https://github.com/qwertypants/jQuery-Word-and-Character-Counter-Plugin/archive/2.5.1.zip",
+                    "url": "https://github.com/jonthornton/jquery-timepicker/archive/1.11.15.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -320,12 +320,14 @@
         }
     },
     "require": {
-        "ckeditor/autogrow": "4.8.0",
-        "ckeditor/codemirror": "v1.17.5",
-        "ckeditor/fakeobjects": "4.8.0",
-        "ckeditor/image": "4.8.0",
-        "ckeditor/link": "4.8.0",
-        "codemirror/codemirror": "5.36.0",
+        "algolia/places": "*",
+        "choices/choices": "*",
+        "ckeditor/autogrow": "*",
+        "ckeditor/codemirror": "*",
+        "ckeditor/fakeobjects": "*",
+        "ckeditor/image": "*",
+        "ckeditor/link": "*",
+        "codemirror/codemirror": "*",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6",
         "drupal-composer/drupal-scaffold": "^2.2",
@@ -347,16 +349,14 @@
         "drupal/video": "^1.2",
         "drupal/webform": "^5.0",
         "drush/drush": "^9.0.0",
-        "jquery/geocomplete": "1.7.0",
-        "jquery/inputmask": "3.3.11",
-        "jquery/intl-tel-input": "12.1.12",
-        "jquery/rateit": "1.1.1",
-        "jquery/select2": "4.0.5",
-        "jquery/timepicker": "1.11.13",
-        "jquery/toggles": "4.0.0",
-        "jquery/word-and-character-counter": "2.5.1",
-        "progress-tracker/progress-tracker": "1.4.0",
-        "signature_pad/signature_pad": "2.3.0",
+        "jquery/inputmask": "*",
+        "jquery/intl-tel-input": "*",
+        "jquery/rateit": "*",
+        "jquery/select2": "*",
+        "jquery/textcounter": "*",
+        "jquery/timepicker": "*",
+        "progress-tracker/progress-tracker": "*",
+        "signature_pad/signature_pad": "*",
         "vlucas/phpdotenv": "^2.4",
         "vvval/exiftool-reader": "^0.0.11",
         "webflo/drupal-finder": "^1.0.0",

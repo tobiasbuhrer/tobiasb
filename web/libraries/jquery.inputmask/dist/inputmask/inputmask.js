@@ -1,9 +1,9 @@
 /*!
 * inputmask.js
 * https://github.com/RobinHerbots/Inputmask
-* Copyright (c) 2010 - 2018 Robin Herbots
+* Copyright (c) 2010 - 2019 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 4.0.4
+* Version: 4.0.7
 */
 
 (function(factory) {
@@ -562,6 +562,9 @@
                 reverseTokens(maskTokens[0]);
             }
             return maskTokens;
+        },
+        positionColorMask: function(input, template) {
+            input.style.left = template.offsetLeft + "px";
         }
     };
     Inputmask.extendDefaults = function(options) {
@@ -1577,7 +1580,7 @@
         }
         function HandleNativePlaceholder(npt, value) {
             if (ie) {
-                if (npt.inputmask._valueGet() !== value) {
+                if (npt.inputmask._valueGet() !== value && (npt.placeholder !== value || npt.placeholder === "")) {
                     var buffer = getBuffer().slice(), nptValue = npt.inputmask._valueGet();
                     if (nptValue !== value) {
                         var lvp = getLastValidPosition();
@@ -1908,7 +1911,7 @@
                 this.inputmask.refreshValue = false;
                 var input = this, value = e && e.detail ? e.detail[0] : arguments[1], value = value || input.inputmask._valueGet(true);
                 if ($.isFunction(opts.onBeforeMask)) value = opts.onBeforeMask.call(inputmask, value, opts) || value;
-                value = value.split("");
+                value = value.toString().split("");
                 checkVal(input, true, false, value);
                 undoValue = getBuffer().join("");
                 if ((opts.clearMaskOnLostFocus || opts.clearIncomplete) && input.inputmask._valueGet() === getBufferTemplate().join("")) {
@@ -2373,9 +2376,6 @@
                 return EventHandlers.clickEvent.call(input, [ e ]);
             });
         }
-        Inputmask.prototype.positionColorMask = function(input, template) {
-            input.style.left = template.offsetLeft + "px";
-        };
         function renderColorMask(input, caretPos, clear) {
             var maskTemplate = [], isStatic = false, test, testPos, ndxIntlzr, pos = 0;
             function setEntry(entry) {

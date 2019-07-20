@@ -66,6 +66,25 @@
         ]
     },
     {
+        "name": "algolia/places",
+        "version": "1.16.4",
+        "version_normalized": "1.16.4.0",
+        "dist": {
+            "type": "tar",
+            "url": "https://registry.npmjs.org/places.js/-/places.js-1.16.4.tgz",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "drupal-library",
+        "extra": {
+            "installer-name": "algolia.places"
+        },
+        "installation-source": "dist"
+    },
+    {
         "name": "asm89/stack-cors",
         "version": "1.2.0",
         "version_normalized": "1.2.0.0",
@@ -442,6 +461,25 @@
             "GPL-2.0-or-later"
         ],
         "description": "Drupal code generator"
+    },
+    {
+        "name": "choices/choices",
+        "version": "7.0.0",
+        "version_normalized": "7.0.0.0",
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/jshjohnson/Choices/archive/v7.0.0.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "drupal-library",
+        "extra": {
+            "installer-name": "choices"
+        },
+        "installation-source": "dist"
     },
     {
         "name": "ckeditor/autogrow",
@@ -5372,6 +5410,25 @@
         "type": "drupal-library",
         "extra": {
             "installer-name": "jquery.select2"
+        },
+        "installation-source": "dist"
+    },
+    {
+        "name": "jquery/textcounter",
+        "version": "0.8.0",
+        "version_normalized": "0.8.0.0",
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/ractoon/jQuery-Text-Counter/archive/0.8.0.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "drupal-library",
+        "extra": {
+            "installer-name": "jquery.textcounter"
         },
         "installation-source": "dist"
     },
