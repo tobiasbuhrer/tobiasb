@@ -483,11 +483,11 @@
     },
     {
         "name": "ckeditor/autogrow",
-        "version": "4.8.0",
-        "version_normalized": "4.8.0.0",
+        "version": "4.11.3",
+        "version_normalized": "4.11.3.0",
         "dist": {
             "type": "zip",
-            "url": "https://download.ckeditor.com/autogrow/releases/autogrow_4.8.0.zip",
+            "url": "https://download.ckeditor.com/autogrow/releases/autogrow_4.11.3.zip",
             "reference": null,
             "shasum": null
         },
@@ -502,11 +502,11 @@
     },
     {
         "name": "ckeditor/codemirror",
-        "version": "v1.17.5",
-        "version_normalized": "1.17.5.0",
+        "version": "v1.17.12",
+        "version_normalized": "1.17.12.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.17.5/CKEditor-CodeMirror-Plugin.zip",
+            "url": "https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.17.12/CKEditor-CodeMirror-Plugin.zip",
             "reference": null,
             "shasum": null
         },
@@ -521,11 +521,11 @@
     },
     {
         "name": "ckeditor/fakeobjects",
-        "version": "4.8.0",
-        "version_normalized": "4.8.0.0",
+        "version": "4.11.3",
+        "version_normalized": "4.11.3.0",
         "dist": {
             "type": "zip",
-            "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.8.0.zip",
+            "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.11.3.zip",
             "reference": null,
             "shasum": null
         },
@@ -540,11 +540,11 @@
     },
     {
         "name": "ckeditor/image",
-        "version": "4.8.0",
-        "version_normalized": "4.8.0.0",
+        "version": "4.11.3",
+        "version_normalized": "4.11.3.0",
         "dist": {
             "type": "zip",
-            "url": "https://download.ckeditor.com/image/releases/image_4.8.0.zip",
+            "url": "https://download.ckeditor.com/image/releases/image_4.11.3.zip",
             "reference": null,
             "shasum": null
         },
@@ -559,11 +559,11 @@
     },
     {
         "name": "ckeditor/link",
-        "version": "4.8.0",
-        "version_normalized": "4.8.0.0",
+        "version": "4.11.3",
+        "version_normalized": "4.11.3.0",
         "dist": {
             "type": "zip",
-            "url": "https://download.ckeditor.com/link/releases/link_4.8.0.zip",
+            "url": "https://download.ckeditor.com/link/releases/link_4.11.3.zip",
             "reference": null,
             "shasum": null
         },
@@ -578,11 +578,11 @@
     },
     {
         "name": "codemirror/codemirror",
-        "version": "5.36.0",
-        "version_normalized": "5.36.0.0",
+        "version": "5.47.0",
+        "version_normalized": "5.47.0.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/components/codemirror/archive/5.36.0.zip",
+            "url": "https://github.com/components/codemirror/archive/5.47.0.zip",
             "reference": null,
             "shasum": null
         },
@@ -3743,18 +3743,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.15.0",
-        "version_normalized": "1.15.0.0",
+        "version": "1.16.0",
+        "version_normalized": "1.16.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.15"
+            "reference": "8.x-1.16"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.15.zip",
-            "reference": "8.x-1.15",
-            "shasum": "d905048584e676706efe00e31f457ae8442284e8"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.16.zip",
+            "reference": "8.x-1.16",
+            "shasum": "46b699dddac0d6b2ab566b21a93a28aa77f08c64"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -3766,8 +3766,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.15",
-                "datestamp": "1562885581",
+                "version": "8.x-1.16",
+                "datestamp": "1563897785",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -5319,31 +5319,12 @@
         ]
     },
     {
-        "name": "jquery/geocomplete",
-        "version": "1.7.0",
-        "version_normalized": "1.7.0.0",
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/ubilabs/geocomplete/archive/1.7.0.zip",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "~1.0"
-        },
-        "type": "drupal-library",
-        "extra": {
-            "installer-name": "jquery.geocomplete"
-        },
-        "installation-source": "dist"
-    },
-    {
         "name": "jquery/inputmask",
-        "version": "3.3.11",
-        "version_normalized": "3.3.11.0",
+        "version": "4.0.8",
+        "version_normalized": "4.0.8.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/RobinHerbots/jquery.inputmask/archive/3.3.11.zip",
+            "url": "https://github.com/RobinHerbots/jquery.inputmask/archive/4.0.8.zip",
             "reference": null,
             "shasum": null
         },
@@ -5358,11 +5339,11 @@
     },
     {
         "name": "jquery/intl-tel-input",
-        "version": "12.1.12",
-        "version_normalized": "12.1.12.0",
+        "version": "15.0.1",
+        "version_normalized": "15.0.1.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/jackocnr/intl-tel-input/archive/v12.1.12.zip",
+            "url": "https://github.com/jackocnr/intl-tel-input/archive/v15.0.1.zip",
             "reference": null,
             "shasum": null
         },
@@ -5377,11 +5358,11 @@
     },
     {
         "name": "jquery/rateit",
-        "version": "1.1.1",
-        "version_normalized": "1.1.1.0",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/gjunge/rateit.js/archive/1.1.1.zip",
+            "url": "https://github.com/gjunge/rateit.js/archive/1.1.2.zip",
             "reference": null,
             "shasum": null
         },
@@ -5396,11 +5377,11 @@
     },
     {
         "name": "jquery/select2",
-        "version": "4.0.5",
-        "version_normalized": "4.0.5.0",
+        "version": "4.0.7",
+        "version_normalized": "4.0.7.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/select2/select2/archive/4.0.5.zip",
+            "url": "https://github.com/select2/select2/archive/4.0.7.zip",
             "reference": null,
             "shasum": null
         },
@@ -5434,11 +5415,11 @@
     },
     {
         "name": "jquery/timepicker",
-        "version": "1.11.13",
-        "version_normalized": "1.11.13.0",
+        "version": "1.11.15",
+        "version_normalized": "1.11.15.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/jonthornton/jquery-timepicker/archive/1.11.13.zip",
+            "url": "https://github.com/jonthornton/jquery-timepicker/archive/1.11.15.zip",
             "reference": null,
             "shasum": null
         },
@@ -5448,44 +5429,6 @@
         "type": "drupal-library",
         "extra": {
             "installer-name": "jquery.timepicker"
-        },
-        "installation-source": "dist"
-    },
-    {
-        "name": "jquery/toggles",
-        "version": "4.0.0",
-        "version_normalized": "4.0.0.0",
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/simontabor/jquery-toggles/archive/v4.0.0.zip",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "~1.0"
-        },
-        "type": "drupal-library",
-        "extra": {
-            "installer-name": "jquery.toggles"
-        },
-        "installation-source": "dist"
-    },
-    {
-        "name": "jquery/word-and-character-counter",
-        "version": "2.5.1",
-        "version_normalized": "2.5.1.0",
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/qwertypants/jQuery-Word-and-Character-Counter-Plugin/archive/2.5.1.zip",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "~1.0"
-        },
-        "type": "drupal-library",
-        "extra": {
-            "installer-name": "jquery.word-and-character-counter"
         },
         "installation-source": "dist"
     },
