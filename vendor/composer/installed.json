@@ -3743,18 +3743,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.16.0",
-        "version_normalized": "1.16.0.0",
+        "version": "1.17.0",
+        "version_normalized": "1.17.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.16"
+            "reference": "8.x-1.17"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.16.zip",
-            "reference": "8.x-1.16",
-            "shasum": "46b699dddac0d6b2ab566b21a93a28aa77f08c64"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.17.zip",
+            "reference": "8.x-1.17",
+            "shasum": "bebc4b1b99395ed97b80d82ed48072be064d4383"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -3766,8 +3766,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.16",
-                "datestamp": "1563897785",
+                "version": "8.x-1.17",
+                "datestamp": "1564015085",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -5626,17 +5626,17 @@
     },
     {
         "name": "masterminds/html5",
-        "version": "2.6.0",
-        "version_normalized": "2.6.0.0",
+        "version": "2.7.0",
+        "version_normalized": "2.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Masterminds/html5-php.git",
-            "reference": "c961ca6a0a81dc6b55b6859b3f9ea7f402edf9ad"
+            "reference": "104443ad663d15981225f99532ba73c2f1d6b6f2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/c961ca6a0a81dc6b55b6859b3f9ea7f402edf9ad",
-            "reference": "c961ca6a0a81dc6b55b6859b3f9ea7f402edf9ad",
+            "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/104443ad663d15981225f99532ba73c2f1d6b6f2",
+            "reference": "104443ad663d15981225f99532ba73c2f1d6b6f2",
             "shasum": ""
         },
         "require": {
@@ -5650,11 +5650,11 @@
             "sami/sami": "~2.0",
             "satooshi/php-coveralls": "1.0.*"
         },
-        "time": "2019-03-10T11:41:28+00:00",
+        "time": "2019-07-25T07:03:26+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.6-dev"
+                "dev-master": "2.7-dev"
             }
         },
         "installation-source": "dist",
@@ -5673,12 +5673,12 @@
                 "email": "technosophos@gmail.com"
             },
             {
-                "name": "Asmir Mustafic",
-                "email": "goetas@gmail.com"
-            },
-            {
                 "name": "Matt Farina",
                 "email": "matt@mattfarina.com"
+            },
+            {
+                "name": "Asmir Mustafic",
+                "email": "goetas@gmail.com"
             }
         ],
         "description": "An HTML5 parser and serializer.",
