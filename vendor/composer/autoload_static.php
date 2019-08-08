@@ -614,7 +614,7 @@ class ComposerStaticInit323e7c4a711d9212f323665cbac78041
         array (
             'org\\bovigo\\vfs\\' => 
             array (
-                0 => __DIR__ . '/..' . '/mikey179/vfsStream/src/main/php',
+                0 => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php',
             ),
         ),
         'W' => 
