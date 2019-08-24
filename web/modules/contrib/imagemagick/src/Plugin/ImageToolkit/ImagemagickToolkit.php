@@ -1235,11 +1235,13 @@ class ImagemagickToolkit extends ImageToolkitBase {
     // Get 'imagemagick_identify' metadata for this image. The file metadata
     // plugin will fetch it from the file via the ::identify() method if data
     // is not already available.
-    $file_md = $this->fileMetadataManager->uri($this->getSource());
-    $data = $file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID);
+    if (!$file_md = $this->fileMetadataManager->uri($this->getSource())) {
+      // No file, return.
+      return FALSE;
+    }
 
-    // No data, return.
-    if (!$data) {
+    if (!$file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID)) {
+      // No data, return.
       return FALSE;
     }
 
@@ -1287,11 +1289,13 @@ class ImagemagickToolkit extends ImageToolkitBase {
     $this->moduleHandler->alter('imagemagick_pre_parse_file', $this->arguments);
 
     // Get 'getimagesize' metadata for this image.
-    $file_md = $this->fileMetadataManager->uri($this->getSource());
-    $data = $file_md->getMetadata('getimagesize');
+    if (!$file_md = $this->fileMetadataManager->uri($this->getSource())) {
+      // No file, return.
+      return FALSE;
+    }
 
-    // No data, return.
-    if (!$data) {
+    if (!$data = $file_md->getMetadata('getimagesize')) {
+      // No data, return.
       return FALSE;
     }
 

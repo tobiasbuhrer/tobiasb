@@ -376,6 +376,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
       }
     }
 
+    // Test loading non-existing image files.
+    $this->assertFalse($this->imageFactory->get('/generic.png')->isValid());
+    $this->assertFalse($this->imageFactory->get('public://generic.png')->isValid());
+
     // Test creation of image from scratch, and saving to storage.
     foreach ([IMAGETYPE_PNG, IMAGETYPE_GIF, IMAGETYPE_JPEG] as $type) {
       $image = $this->imageFactory->get();
@@ -787,6 +791,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         $this->assertSame('JPEG', $image->getToolkit()->arguments()->getDestinationFormat());
       }
     }
+
+    // Test loading non-existing image files.
+    $this->assertFalse($this->imageFactory->get('/generic.png')->isValid());
+    $this->assertFalse($this->imageFactory->get('public://generic.png')->isValid());
 
     // Test retrieval of EXIF information.
     file_unmanaged_copy(drupal_get_path('module', 'imagemagick') . '/misc/test-exif.jpeg', 'public://', FILE_EXISTS_REPLACE);
