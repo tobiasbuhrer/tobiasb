@@ -417,17 +417,17 @@
     },
     {
         "name": "chi-teck/drupal-code-generator",
-        "version": "1.30.3",
-        "version_normalized": "1.30.3.0",
+        "version": "1.30.4",
+        "version_normalized": "1.30.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Chi-teck/drupal-code-generator.git",
-            "reference": "1da9f06843b6bf2b0e7d28fea4b6c1d79aead197"
+            "reference": "8b7ae331e21e58088e3e52688823692ed6471ec3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Chi-teck/drupal-code-generator/zipball/1da9f06843b6bf2b0e7d28fea4b6c1d79aead197",
-            "reference": "1da9f06843b6bf2b0e7d28fea4b6c1d79aead197",
+            "url": "https://api.github.com/repos/Chi-teck/drupal-code-generator/zipball/8b7ae331e21e58088e3e52688823692ed6471ec3",
+            "reference": "8b7ae331e21e58088e3e52688823692ed6471ec3",
             "shasum": ""
         },
         "require": {
@@ -437,7 +437,7 @@
             "symfony/filesystem": "^2.7 || ^3.4 || ^4.0",
             "twig/twig": "^1.38.2 || ^2.10"
         },
-        "time": "2019-06-29T10:29:45+00:00",
+        "time": "2019-08-25T06:39:56+00:00",
         "bin": [
             "bin/dcg"
         ],
@@ -3747,18 +3747,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.18.0",
-        "version_normalized": "1.18.0.0",
+        "version": "1.19.0",
+        "version_normalized": "1.19.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.18"
+            "reference": "8.x-1.19"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.18.zip",
-            "reference": "8.x-1.18",
-            "shasum": "3414d069866d379023bf30f11c172ac69acff30a"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.19.zip",
+            "reference": "8.x-1.19",
+            "shasum": "d409f9978a8ab153ab1bc15be0d3d4a1be378a38"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -3770,8 +3770,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.18",
-                "datestamp": "1565345585",
+                "version": "8.x-1.19",
+                "datestamp": "1566735488",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -9834,29 +9834,29 @@
     },
     {
         "name": "twig/twig",
-        "version": "v1.42.2",
-        "version_normalized": "1.42.2.0",
+        "version": "v1.42.3",
+        "version_normalized": "1.42.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twigphp/Twig.git",
-            "reference": "21707d6ebd05476854805e4f91b836531941bcd4"
+            "reference": "201baee843e0ffe8b0b956f336dd42b2a92fae4e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/21707d6ebd05476854805e4f91b836531941bcd4",
-            "reference": "21707d6ebd05476854805e4f91b836531941bcd4",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/201baee843e0ffe8b0b956f336dd42b2a92fae4e",
+            "reference": "201baee843e0ffe8b0b956f336dd42b2a92fae4e",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.4.0",
+            "php": ">=5.5.0",
             "symfony/polyfill-ctype": "^1.8"
         },
         "require-dev": {
             "psr/container": "^1.0",
-            "symfony/debug": "^2.7",
-            "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0"
+            "symfony/debug": "^3.4|^4.2",
+            "symfony/phpunit-bridge": "^4.4@dev|^5.0"
         },
-        "time": "2019-06-18T15:35:16+00:00",
+        "time": "2019-08-24T12:51:03+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -9879,19 +9879,19 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
+                "role": "Lead Developer",
                 "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Armin Ronacher",
-                "email": "armin.ronacher@active-4.com",
-                "role": "Project Founder"
+                "homepage": "http://fabien.potencier.org"
             },
             {
                 "name": "Twig Team",
-                "homepage": "https://twig.symfony.com/contributors",
-                "role": "Contributors"
+                "role": "Contributors",
+                "homepage": "https://twig.symfony.com/contributors"
+            },
+            {
+                "name": "Armin Ronacher",
+                "role": "Project Founder",
+                "email": "armin.ronacher@active-4.com"
             }
         ],
         "description": "Twig, the flexible, fast, and secure template language for PHP",
