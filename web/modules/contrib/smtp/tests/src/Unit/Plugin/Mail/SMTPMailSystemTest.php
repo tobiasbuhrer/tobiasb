@@ -24,14 +24,10 @@ class SMTPMailSystemTest extends UnitTestCase {
    * Test setup.
    */
   public function setup() {
-    $this->mockConfigFactory = $this->prophesize(ConfigFactoryInterface::class);
     $this->mockConfig = $this->prophesize(Config::class);
+    $this->mockConfigFactory = $this->prophesize(ConfigFactoryInterface::class);
     $this->mockConfigFactory->get('smtp.settings')->willReturn($this->mockConfig->reveal());
     $this->mockConfigFactory->getEditable('smtp.settings')->willReturn($this->mockConfig->reveal());
-
-    // $this->mockConfigSystemSite = $this->prophesize(Config::class);
-    // $this->mockConfigSystemSite->get('name')->willReturn('Site name');
-    // $this->mockConfigFactory->get('system.site')->willReturn($this->mockConfigSystemSite->reveal());
 
     $this->mockLogger = $this->prophesize(LoggerChannelFactoryInterface::class);
     $this->mockMessenger = $this->prophesize(Messenger::class);
@@ -142,4 +138,4 @@ class SMTPMailSystemTestHelper extends SMTPMailSystem {
     return $this->getComponents($input);
   }
 
-};
+}

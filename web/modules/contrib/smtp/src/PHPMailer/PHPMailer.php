@@ -462,7 +462,7 @@ class PHPMailer {
     $address = trim($address);
     $name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
     if (!self::ValidateAddress($address)) {
-      $invalidAddress = t('Invalid address: @address', ['address' => $address]);
+      $invalidAddress = t('Invalid address: @address', ['@address' => $address]);
       $this->SetError($invalidAddress);
       if ($this->exceptions) {
         throw new PHPMailerException($invalidAddress);
@@ -496,7 +496,7 @@ class PHPMailer {
     $address = trim($address);
     $name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
     if (!self::ValidateAddress($address)) {
-      $invalidAddress = t('Invalid address: @address', ['address' => $address]);
+      $invalidAddress = t('Invalid address: @address', ['@address' => $address]);
       $this->SetError($invalidAddress);
       if ($this->exceptions) {
         throw new PHPMailerException($invalidAddress);
@@ -1665,7 +1665,7 @@ class PHPMailer {
     $eol = "\r\n";
     $escape = '=';
     $output = '';
-    while ( list(, $line) = each($lines) ) {
+    foreach ($lines as $line) {
       $linlen = strlen($line);
       $newline = '';
       for ($i = 0; $i < $linlen; $i++) {
