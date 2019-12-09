@@ -3081,7 +3081,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/honeypot.git",
-                "reference": "6b1858a421848009b2b191031174621bba14fa0b"
+                "reference": "c24368dc384f6c4ca3237a640953049ef4f8d4d9"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -3092,8 +3092,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.29+9-dev",
-                    "datestamp": "1556000584",
+                    "version": "8.x-1.29+12-dev",
+                    "datestamp": "1575566885",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -3132,7 +3132,7 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/honeypot"
             },
-            "time": "2019-06-21T18:56:54+00:00"
+            "time": "2019-12-05T20:42:52+00:00"
         },
         {
             "name": "drupal/image_effects",
