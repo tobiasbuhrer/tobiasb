@@ -333,6 +333,7 @@
         "drupal-composer/drupal-scaffold": "^2.2",
         "drupal/console": "~1.0",
         "drupal/core": "^8.6.0",
+        "drupal/devel_entity_updates": "^1.0",
         "drupal/drush": "^6.0@RC",
         "drupal/entity": "^1.0",
         "drupal/geofield": "^1.0",
