@@ -4,5 +4,4 @@ description: 'Provides the API allowing to rename URLs.'
 package: Core
 version: VERSION
 required: true
-core: 8.x
 hidden: true
