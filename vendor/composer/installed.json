@@ -86,29 +86,29 @@
     },
     {
         "name": "asm89/stack-cors",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
+        "version": "1.3.0",
+        "version_normalized": "1.3.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/asm89/stack-cors.git",
-            "reference": "c163e2b614550aedcf71165db2473d936abbced6"
+            "reference": "b9c31def6a83f84b4d4a40d35996d375755f0e08"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/asm89/stack-cors/zipball/c163e2b614550aedcf71165db2473d936abbced6",
-            "reference": "c163e2b614550aedcf71165db2473d936abbced6",
+            "url": "https://api.github.com/repos/asm89/stack-cors/zipball/b9c31def6a83f84b4d4a40d35996d375755f0e08",
+            "reference": "b9c31def6a83f84b4d4a40d35996d375755f0e08",
             "shasum": ""
         },
         "require": {
             "php": ">=5.5.9",
-            "symfony/http-foundation": "~2.7|~3.0|~4.0",
-            "symfony/http-kernel": "~2.7|~3.0|~4.0"
+            "symfony/http-foundation": "~2.7|~3.0|~4.0|~5.0",
+            "symfony/http-kernel": "~2.7|~3.0|~4.0|~5.0"
         },
         "require-dev": {
             "phpunit/phpunit": "^5.0 || ^4.8.10",
             "squizlabs/php_codesniffer": "^2.3"
         },
-        "time": "2017-12-20T14:37:45+00:00",
+        "time": "2019-12-24T22:41:47+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4103,18 +4103,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.23.0",
-        "version_normalized": "1.23.0.0",
+        "version": "1.24.0",
+        "version_normalized": "1.24.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.23"
+            "reference": "8.x-1.24"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.23.zip",
-            "reference": "8.x-1.23",
-            "shasum": "909837d6b879bb129daaa9d6c555a32831405679"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.24.zip",
+            "reference": "8.x-1.24",
+            "shasum": "514727b58fc10f1ede3479404dc9e60380802e23"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -4126,8 +4126,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.23",
-                "datestamp": "1574825586",
+                "version": "8.x-1.24",
+                "datestamp": "1577743983",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4945,33 +4945,32 @@
     },
     {
         "name": "egulias/email-validator",
-        "version": "2.1.12",
-        "version_normalized": "2.1.12.0",
+        "version": "2.1.13",
+        "version_normalized": "2.1.13.0",
         "source": {
             "type": "git",
             "url": "https://github.com/egulias/EmailValidator.git",
-            "reference": "a6255605af39f2db7f5cb62e672bd8a7bad8d208"
+            "reference": "834593d5900615639208417760ba6a17299e2497"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a6255605af39f2db7f5cb62e672bd8a7bad8d208",
-            "reference": "a6255605af39f2db7f5cb62e672bd8a7bad8d208",
+            "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/834593d5900615639208417760ba6a17299e2497",
+            "reference": "834593d5900615639208417760ba6a17299e2497",
             "shasum": ""
         },
         "require": {
             "doctrine/lexer": "^1.0.1",
-            "php": ">= 5.5"
+            "php": ">=5.5"
         },
         "require-dev": {
-            "dominicsayers/isemail": "dev-master",
-            "phpunit/phpunit": "^4.8.35||^5.7||^6.0",
-            "satooshi/php-coveralls": "^1.0.1",
-            "symfony/phpunit-bridge": "^4.4@dev"
+            "dominicsayers/isemail": "^3.0.7",
+            "phpunit/phpunit": "^4.8.36|^7.5.15",
+            "satooshi/php-coveralls": "^1.0.1"
         },
         "suggest": {
             "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
         },
-        "time": "2019-12-20T12:49:39+00:00",
+        "time": "2019-12-30T08:14:25+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -5218,17 +5217,17 @@
     },
     {
         "name": "guzzlehttp/guzzle",
-        "version": "6.5.1",
-        "version_normalized": "6.5.1.0",
+        "version": "6.5.2",
+        "version_normalized": "6.5.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "0274c05370a7bc9bb3a33838858253418bd7d14b"
+            "reference": "43ece0e75098b7ecd8d13918293029e555a50f82"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0274c05370a7bc9bb3a33838858253418bd7d14b",
-            "reference": "0274c05370a7bc9bb3a33838858253418bd7d14b",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/43ece0e75098b7ecd8d13918293029e555a50f82",
+            "reference": "43ece0e75098b7ecd8d13918293029e555a50f82",
             "shasum": ""
         },
         "require": {
@@ -5246,7 +5245,7 @@
             "ext-intl": "Required for Internationalized Domain Name (IDN) support",
             "psr/log": "Required for using the Log middleware"
         },
-        "time": "2019-12-21T08:51:15+00:00",
+        "time": "2019-12-23T11:57:10+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -6716,17 +6715,17 @@
     },
     {
         "name": "phpdocumentor/reflection-docblock",
-        "version": "4.3.3",
-        "version_normalized": "4.3.3.0",
+        "version": "4.3.4",
+        "version_normalized": "4.3.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-            "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62"
+            "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
-            "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
+            "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/da3fd972d6bafd628114f7e7e036f45944b62e9c",
+            "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c",
             "shasum": ""
         },
         "require": {
@@ -6738,9 +6737,10 @@
         "require-dev": {
             "doctrine/instantiator": "^1.0.5",
             "mockery/mockery": "^1.0",
+            "phpdocumentor/type-resolver": "0.4.*",
             "phpunit/phpunit": "^6.4"
         },
-        "time": "2019-12-20T13:40:23+00:00",
+        "time": "2019-12-28T18:55:12+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -6818,17 +6818,17 @@
     },
     {
         "name": "phpspec/prophecy",
-        "version": "1.10.0",
-        "version_normalized": "1.10.0.0",
+        "version": "1.10.1",
+        "version_normalized": "1.10.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpspec/prophecy.git",
-            "reference": "d638ebbb58daba25a6a0dc7969e1358a0e3c6682"
+            "reference": "cbe1df668b3fe136bcc909126a0f529a78d4cbbc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/d638ebbb58daba25a6a0dc7969e1358a0e3c6682",
-            "reference": "d638ebbb58daba25a6a0dc7969e1358a0e3c6682",
+            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/cbe1df668b3fe136bcc909126a0f529a78d4cbbc",
+            "reference": "cbe1df668b3fe136bcc909126a0f529a78d4cbbc",
             "shasum": ""
         },
         "require": {
@@ -6842,7 +6842,7 @@
             "phpspec/phpspec": "^2.5 || ^3.2",
             "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5 || ^7.1"
         },
-        "time": "2019-12-17T16:54:23+00:00",
+        "time": "2019-12-22T21:05:45+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -10875,7 +10875,8 @@
             "http",
             "psr",
             "psr-7"
-        ]
+        ],
+        "abandoned": "laminas/laminas-diactoros"
     },
     {
         "name": "zendframework/zend-escaper",
@@ -10922,7 +10923,8 @@
             "ZendFramework",
             "escaper",
             "zf"
-        ]
+        ],
+        "abandoned": "laminas/laminas-escaper"
     },
     {
         "name": "zendframework/zend-feed",
@@ -10987,7 +10989,8 @@
             "ZendFramework",
             "feed",
             "zf"
-        ]
+        ],
+        "abandoned": "laminas/laminas-feed"
     },
     {
         "name": "zendframework/zend-stdlib",
@@ -11035,6 +11038,7 @@
             "ZendFramework",
             "stdlib",
             "zf"
-        ]
+        ],
+        "abandoned": "laminas/laminas-stdlib"
     }
 ]
