@@ -3419,17 +3419,17 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "1.24.0",
+            "version": "1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "8.x-1.24"
+                "reference": "8.x-1.25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.24.zip",
-                "reference": "8.x-1.24",
-                "shasum": "514727b58fc10f1ede3479404dc9e60380802e23"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.25.zip",
+                "reference": "8.x-1.25",
+                "shasum": "593eeee163b41fc9ae1d3c5d556899dfa1c3b01e"
             },
             "require": {
                 "drupal/core": "~8.0",
@@ -3441,8 +3441,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.24",
-                    "datestamp": "1577743983",
+                    "version": "8.x-1.25",
+                    "datestamp": "1578485587",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4240,16 +4240,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.13",
+            "version": "2.1.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "834593d5900615639208417760ba6a17299e2497"
+                "reference": "c4b8d12921999d8a561004371701dbc2e05b5ece"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/834593d5900615639208417760ba6a17299e2497",
-                "reference": "834593d5900615639208417760ba6a17299e2497",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/c4b8d12921999d8a561004371701dbc2e05b5ece",
+                "reference": "c4b8d12921999d8a561004371701dbc2e05b5ece",
                 "shasum": ""
             },
             "require": {
@@ -4293,7 +4293,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-12-30T08:14:25+00:00"
+            "time": "2020-01-05T14:11:20+00:00"
         },
         {
             "name": "fileeye/mimemap",
@@ -9619,16 +9619,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.18",
+            "version": "7.5.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fcf6c4bfafaadc07785528b06385cce88935474d"
+                "reference": "9467db479d1b0487c99733bb1e7944d32deded2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fcf6c4bfafaadc07785528b06385cce88935474d",
-                "reference": "fcf6c4bfafaadc07785528b06385cce88935474d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9467db479d1b0487c99733bb1e7944d32deded2c",
+                "reference": "9467db479d1b0487c99733bb1e7944d32deded2c",
                 "shasum": ""
             },
             "require": {
@@ -9699,7 +9699,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-12-06T05:14:37+00:00"
+            "time": "2020-01-08T08:45:45+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
