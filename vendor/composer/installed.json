@@ -559,17 +559,17 @@
     },
     {
         "name": "composer/ca-bundle",
-        "version": "1.2.5",
-        "version_normalized": "1.2.5.0",
+        "version": "1.2.6",
+        "version_normalized": "1.2.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/ca-bundle.git",
-            "reference": "62e8fc2dc550e5d6d8c9360c7721662670f58149"
+            "reference": "47fe531de31fca4a1b997f87308e7d7804348f7e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/62e8fc2dc550e5d6d8c9360c7721662670f58149",
-            "reference": "62e8fc2dc550e5d6d8c9360c7721662670f58149",
+            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/47fe531de31fca4a1b997f87308e7d7804348f7e",
+            "reference": "47fe531de31fca4a1b997f87308e7d7804348f7e",
             "shasum": ""
         },
         "require": {
@@ -582,7 +582,7 @@
             "psr/log": "^1.0",
             "symfony/process": "^2.5 || ^3.0 || ^4.0 || ^5.0"
         },
-        "time": "2019-12-11T14:44:42+00:00",
+        "time": "2020-01-13T10:02:55+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -617,17 +617,17 @@
     },
     {
         "name": "composer/composer",
-        "version": "1.9.1",
-        "version_normalized": "1.9.1.0",
+        "version": "1.9.2",
+        "version_normalized": "1.9.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/composer.git",
-            "reference": "bb01f2180df87ce7992b8331a68904f80439dd2f"
+            "reference": "7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/composer/zipball/bb01f2180df87ce7992b8331a68904f80439dd2f",
-            "reference": "bb01f2180df87ce7992b8331a68904f80439dd2f",
+            "url": "https://api.github.com/repos/composer/composer/zipball/7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb",
+            "reference": "7a04aa0201ddaa0b3cf64d41022bd8cdcd7fafeb",
             "shasum": ""
         },
         "require": {
@@ -657,7 +657,7 @@
             "ext-zip": "Enabling the zip extension allows you to unzip archives",
             "ext-zlib": "Allow gzip compression of HTTP requests"
         },
-        "time": "2019-11-01T16:20:17+00:00",
+        "time": "2020-01-14T15:30:32+00:00",
         "bin": [
             "bin/composer"
         ],
@@ -823,27 +823,26 @@
     },
     {
         "name": "composer/semver",
-        "version": "1.5.0",
-        "version_normalized": "1.5.0.0",
+        "version": "1.5.1",
+        "version_normalized": "1.5.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/semver.git",
-            "reference": "46d9139568ccb8d9e7cdd4539cab7347568a5e2e"
+            "reference": "c6bea70230ef4dd483e6bbcab6005f682ed3a8de"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/semver/zipball/46d9139568ccb8d9e7cdd4539cab7347568a5e2e",
-            "reference": "46d9139568ccb8d9e7cdd4539cab7347568a5e2e",
+            "url": "https://api.github.com/repos/composer/semver/zipball/c6bea70230ef4dd483e6bbcab6005f682ed3a8de",
+            "reference": "c6bea70230ef4dd483e6bbcab6005f682ed3a8de",
             "shasum": ""
         },
         "require": {
             "php": "^5.3.2 || ^7.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.5 || ^5.0.5",
-            "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
+            "phpunit/phpunit": "^4.5 || ^5.0.5"
         },
-        "time": "2019-03-19T17:25:45+00:00",
+        "time": "2020-01-13T12:06:48+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2269,17 +2268,17 @@
     },
     {
         "name": "doctrine/common",
-        "version": "v2.11.0",
-        "version_normalized": "2.11.0.0",
+        "version": "2.12.0",
+        "version_normalized": "2.12.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/common.git",
-            "reference": "b8ca1dcf6b0dc8a2af7a09baac8d0c48345df4ff"
+            "reference": "2053eafdf60c2172ee1373d1b9289ba1db7f1fc6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/common/zipball/b8ca1dcf6b0dc8a2af7a09baac8d0c48345df4ff",
-            "reference": "b8ca1dcf6b0dc8a2af7a09baac8d0c48345df4ff",
+            "url": "https://api.github.com/repos/doctrine/common/zipball/2053eafdf60c2172ee1373d1b9289ba1db7f1fc6",
+            "reference": "2053eafdf60c2172ee1373d1b9289ba1db7f1fc6",
             "shasum": ""
         },
         "require": {
@@ -2301,7 +2300,7 @@
             "squizlabs/php_codesniffer": "^3.0",
             "symfony/phpunit-bridge": "^4.0.5"
         },
-        "time": "2019-09-10T10:10:14+00:00",
+        "time": "2020-01-10T15:49:25+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2623,17 +2622,17 @@
     },
     {
         "name": "doctrine/persistence",
-        "version": "1.3.3",
-        "version_normalized": "1.3.3.0",
+        "version": "1.3.6",
+        "version_normalized": "1.3.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/persistence.git",
-            "reference": "99b196bbd4715a94fa100fac664a351ffa46d6a5"
+            "reference": "5dd3ac5eebef2d0b074daa4440bb18f93132dee4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/persistence/zipball/99b196bbd4715a94fa100fac664a351ffa46d6a5",
-            "reference": "99b196bbd4715a94fa100fac664a351ffa46d6a5",
+            "url": "https://api.github.com/repos/doctrine/persistence/zipball/5dd3ac5eebef2d0b074daa4440bb18f93132dee4",
+            "reference": "5dd3ac5eebef2d0b074daa4440bb18f93132dee4",
             "shasum": ""
         },
         "require": {
@@ -2641,7 +2640,7 @@
             "doctrine/cache": "^1.0",
             "doctrine/collections": "^1.0",
             "doctrine/event-manager": "^1.0",
-            "doctrine/reflection": "^1.0",
+            "doctrine/reflection": "^1.1",
             "php": "^7.1"
         },
         "conflict": {
@@ -2652,7 +2651,7 @@
             "phpstan/phpstan": "^0.11",
             "phpunit/phpunit": "^7.0"
         },
-        "time": "2019-12-13T10:43:02+00:00",
+        "time": "2020-01-16T22:06:23+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2708,17 +2707,17 @@
     },
     {
         "name": "doctrine/reflection",
-        "version": "v1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/reflection.git",
-            "reference": "02538d3f95e88eb397a5f86274deb2c6175c2ab6"
+            "reference": "bc420ead87fdfe08c03ecc3549db603a45b06d4c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/reflection/zipball/02538d3f95e88eb397a5f86274deb2c6175c2ab6",
-            "reference": "02538d3f95e88eb397a5f86274deb2c6175c2ab6",
+            "url": "https://api.github.com/repos/doctrine/reflection/zipball/bc420ead87fdfe08c03ecc3549db603a45b06d4c",
+            "reference": "bc420ead87fdfe08c03ecc3549db603a45b06d4c",
             "shasum": ""
         },
         "require": {
@@ -2726,15 +2725,17 @@
             "ext-tokenizer": "*",
             "php": "^7.1"
         },
-        "require-dev": {
-            "doctrine/coding-standard": "^4.0",
-            "doctrine/common": "^2.8",
-            "phpstan/phpstan": "^0.9.2",
-            "phpstan/phpstan-phpunit": "^0.9.4",
-            "phpunit/phpunit": "^7.0",
-            "squizlabs/php_codesniffer": "^3.0"
+        "conflict": {
+            "doctrine/common": "<2.9"
         },
-        "time": "2018-06-14T14:45:07+00:00",
+        "require-dev": {
+            "doctrine/coding-standard": "^5.0",
+            "doctrine/common": "^2.10",
+            "phpstan/phpstan": "^0.11.0",
+            "phpstan/phpstan-phpunit": "^0.11.0",
+            "phpunit/phpunit": "^7.0"
+        },
+        "time": "2020-01-08T19:53:19+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2753,16 +2754,16 @@
         ],
         "authors": [
             {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
                 "name": "Roman Borschel",
                 "email": "roman@code-factory.org"
             },
             {
                 "name": "Benjamin Eberlei",
                 "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
             },
             {
                 "name": "Jonathan Wage",
@@ -2777,10 +2778,11 @@
                 "email": "ocramius@gmail.com"
             }
         ],
-        "description": "Doctrine Reflection component",
+        "description": "The Doctrine Reflection project is a simple library used by the various Doctrine projects which adds some additional functionality on top of the reflection functionality that comes with PHP. It allows you to get the reflection information about classes, methods and properties statically.",
         "homepage": "https://www.doctrine-project.org/projects/reflection.html",
         "keywords": [
-            "reflection"
+            "reflection",
+            "static"
         ]
     },
     {
@@ -3850,10 +3852,10 @@
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/honeypot.git",
-            "reference": "295921f64bbacf890b5764e85beabf0fb04cf9ef"
+            "reference": "53cf4aa860b611bfd8bfe54110e7538c33950ab1"
         },
         "require": {
-            "drupal/core": "~8.0"
+            "drupal/core": "^8.0 || ^9.0"
         },
         "type": "drupal-module",
         "extra": {
@@ -3861,8 +3863,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.29+16-dev",
-                "datestamp": "1576273687",
+                "version": "8.x-1.30+1-dev",
+                "datestamp": "1579102083",
                 "security-coverage": {
                     "status": "not-covered",
                     "message": "Dev releases are not covered by Drupal security advisories."
@@ -4611,21 +4613,21 @@
     },
     {
         "name": "drupal/webform",
-        "version": "5.6.0",
-        "version_normalized": "5.6.0.0",
+        "version": "5.7.0",
+        "version_normalized": "5.7.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/webform.git",
-            "reference": "8.x-5.6"
+            "reference": "8.x-5.7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.6.zip",
-            "reference": "8.x-5.6",
-            "shasum": "58d77d2df011c25eb5086cab6d12743d63442cf5"
+            "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.7.zip",
+            "reference": "8.x-5.7",
+            "shasum": "b7ff506daeff15d2edcdc01b2c4881c0fdaf3fff"
         },
         "require": {
-            "drupal/core": "*"
+            "drupal/core": "^8"
         },
         "require-dev": {
             "drupal/address": "~1.4",
@@ -4657,8 +4659,8 @@
                 "dev-5.x": "5.x-dev"
             },
             "drupal": {
-                "version": "8.x-5.6",
-                "datestamp": "1575331086",
+                "version": "8.x-5.7",
+                "datestamp": "1579208583",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -8159,23 +8161,23 @@
     },
     {
         "name": "seld/phar-utils",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/phar-utils.git",
-            "reference": "7009b5139491975ef6486545a39f3e6dad5ac30a"
+            "reference": "84715761c35808076b00908a20317a3a8a67d17e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Seldaek/phar-utils/zipball/7009b5139491975ef6486545a39f3e6dad5ac30a",
-            "reference": "7009b5139491975ef6486545a39f3e6dad5ac30a",
+            "url": "https://api.github.com/repos/Seldaek/phar-utils/zipball/84715761c35808076b00908a20317a3a8a67d17e",
+            "reference": "84715761c35808076b00908a20317a3a8a67d17e",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3"
         },
-        "time": "2015-10-13T18:44:15+00:00",
+        "time": "2020-01-13T10:41:09+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
