@@ -29,7 +29,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  *   id = "plupload_file_widget",
  *   label = @Translation("PLupload widget"),
  *   field_types = {
- *     "file", "video"
+ *     "file"
  *   }
  * )
  */
@@ -78,7 +78,7 @@ class FileWidget extends CoreFileWidget {
       '#autosubmit' => TRUE,
       '#submit_element' => "[name={$element['upload_button']['#name']}]",
       '#upload_validators' => [
-        'file_validate_extensions' => array('mp4 ogv webm'),
+        'file_validate_extensions' => $configuration->validators['file_validate_extensions'],
       ],
       '#plupload_settings' => [
         'runtimes' => 'html5,flash,silverlight,html4',
