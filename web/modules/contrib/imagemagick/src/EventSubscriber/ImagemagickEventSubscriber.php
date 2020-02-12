@@ -103,6 +103,10 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
         $temp_path .= '.' . pathinfo($source, PATHINFO_EXTENSION);
         $path = file_unmanaged_copy($arguments->getSource(), $temp_path, FILE_EXISTS_ERROR);
         $arguments->setSourceLocalPath($this->fileSystem->realpath($path));
+        drupal_register_shutdown_function(
+          [static::class, 'removeTemporaryRemoteCopy'],
+          $arguments->getSourceLocalPath()
+        );
       }
     }
   }
@@ -140,6 +144,10 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
         $this->fileSystem->unlink($temp_path);
         $temp_path .= '.' . pathinfo($destination, PATHINFO_EXTENSION);
         $arguments->setDestinationLocalPath($this->fileSystem->realpath($temp_path));
+        drupal_register_shutdown_function(
+          [static::class, 'removeTemporaryRemoteCopy'],
+          $arguments->getDestinationLocalPath()
+        );
       }
     }
   }
@@ -292,6 +300,20 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
     // Change image quality.
     if (empty($arguments->find('/^\-quality/'))) {
       $arguments->add('-quality ' . $this->imagemagickSettings->get('quality'));
+    }
+  }
+
+  /**
+   * Removes a temporary file created during operations on a remote file.
+   *
+   * Used with drupal_register_shutdown_function().
+   *
+   * @param string $path
+   *   The temporary file realpath.
+   */
+  public static function removeTemporaryRemoteCopy($path) {
+    if (file_exists($path)) {
+      file_unmanaged_delete($path);
     }
   }
 

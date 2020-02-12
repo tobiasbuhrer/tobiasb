@@ -3,6 +3,7 @@
 namespace Drupal\Tests\imagemagick\Functional;
 
 use Drupal\Core\Image\ImageInterface;
+use Drupal\imagemagick\EventSubscriber\ImagemagickEventSubscriber;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\imagemagick\ImagemagickExecArguments;
 use Drupal\Tests\imagemagick\Kernel\ToolkitSetupTrait;
@@ -63,6 +64,39 @@ class ToolkitImagemagickTest extends BrowserTestBase {
     // Prepare directory.
     file_unmanaged_delete_recursive($this->testDirectory);
     file_prepare_directory($this->testDirectory, FILE_CREATE_DIRECTORY);
+  }
+
+  /**
+   * Test removal of temporary files created during operations on remote files.
+   *
+   * @param string $toolkit_id
+   *   The id of the toolkit to set up.
+   * @param string $toolkit_config
+   *   The config object of the toolkit to set up.
+   * @param array $toolkit_settings
+   *   The settings of the toolkit to set up.
+   *
+   * @dataProvider providerToolkitConfiguration
+   */
+  public function testTemporaryRemoteCopiesDeletion($toolkit_id, $toolkit_config, array $toolkit_settings) {
+    $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
+    $this->prepareImageFileHandling();
+
+    // Get metadata from a remote file.
+    $image = $this->imageFactory->get('dummy-remote://image-test.png');
+    $image->getToolkit()->getExifOrientation();
+    $this->assertCount(1, file_scan_directory('temporary://', '/ima.*/'), 'A temporary file has been created for getting metadata from a remote file.');
+
+    // Simulate Drupal shutdown.
+    $callbacks = drupal_register_shutdown_function();
+    foreach ($callbacks as $callback) {
+      if ($callback['callback'] === [ImagemagickEventSubscriber::class, 'removeTemporaryRemoteCopy']) {
+        call_user_func_array($callback['callback'], $callback['arguments']);
+      }
+    }
+
+    // Ensure we have no leftovers in the temporary directory.
+    $this->assertCount(0, file_scan_directory('temporary://', '/ima.*/'), 'No files left in the temporary directory after the Drupal shutdown.');
   }
 
   /**

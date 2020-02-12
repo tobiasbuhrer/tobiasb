@@ -9,7 +9,7 @@ dependencies:
   - file_mdm:file_mdm_exif
   - drupal:system (>=8.3.0)
 
-# Information added by Drupal.org packaging script on 2019-08-22
-version: '8.x-2.6'
+# Information added by Drupal.org packaging script on 2020-02-11
+version: '8.x-2.7'
 project: 'imagemagick'
-datestamp: 1566506604
+datestamp: 1581425673
