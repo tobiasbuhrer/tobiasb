@@ -3,7 +3,7 @@
 namespace Drupal\leaflet;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url as CoreUrl;
+use Drupal\field\FieldConfigInterface;
 use Drupal\views\Plugin\views\ViewsPluginInterface;
 use Drupal\Core\Url;
 use Drupal\Component\Serialization\Json;
@@ -27,6 +27,17 @@ trait LeafletSettingsElementsTrait {
     'topright' => 'Top Right',
     'bottomleft' => 'Bottom Left',
     'bottomright' => 'Bottom Right',
+  ];
+
+  /**
+   * Leaflet Circle Radius Marker Field Types Options.
+   *
+   * @var array
+   */
+  protected $leafletCircleRadiusFieldTypesOptions = [
+    'integer',
+    'float',
+    'decimal',
   ];
 
   /**
@@ -79,6 +90,7 @@ trait LeafletSettingsElementsTrait {
         'popupAnchor' => ['x' => NULL, 'y' => NULL],
         'html' => '<div></div>',
         'html_class' => 'leaflet-map-divicon',
+        'circle_marker_options' => '{"radius": 100, "color": "red", "fillColor": "#f03", "fillOpacity": 0.5}',
       ],
       'leaflet_markercluster' => [
         'control' => 0,
@@ -323,7 +335,7 @@ trait LeafletSettingsElementsTrait {
    *   The Leaflet Icon Form Element.
    */
   protected function generateIconFormElement(array $icon_options) {
-
+    $default_settings = $this::getDefaultSettings();
     $token_replacement_disclaimer = $this->t('<b>Note: </b> Using <strong>Replacement Patterns</strong> it is possible to dynamically define the Marker Icon output, with the composition of Marker Icon paths including entity properties or fields values.');
     $icon_url_description = $this->t('Can be an absolute or relative URL. <b>If left empty the default Leaflet Marker will be used.</b><br>@token_replacement_disclaimer', [
       '@token_replacement_disclaimer' => $token_replacement_disclaimer,
@@ -349,10 +361,18 @@ trait LeafletSettingsElementsTrait {
     $element['iconType'] = [
       '#type' => 'radios',
       '#title' => t('Icon Source'),
-      '#default_value' => isset($icon_options['iconType']) ? $icon_options['iconType'] : 'marker',
+      '#default_value' => isset($icon_options['iconType']) ? $icon_options['iconType'] : $default_settings['icon']['iconType'],
       '#options' => [
         'marker' => 'Icon Image Url/Path',
         'html' => 'Field (html DivIcon)',
+        'circle_marker' => $this->t('Circle Marker (@more_info)', [
+          '@more_info' => $this->link->generate('more info', Url::fromUri('https://leafletjs.com/reference-1.6.0.html#circlemarker', [
+            'absolute' => TRUE,
+            'attributes' => ['target' => 'blank'],
+          ])
+          ),
+        ]
+        ),
       ],
     ];
 
@@ -361,7 +381,7 @@ trait LeafletSettingsElementsTrait {
       '#description' => $icon_url_description,
       '#type' => 'textarea',
       '#rows' => 3,
-      '#default_value' => isset($icon_options['iconUrl']) ? $icon_options['iconUrl'] : NULL,
+      '#default_value' => isset($icon_options['iconUrl']) ? $icon_options['iconUrl'] : $default_settings['icon']['iconUrl'],
       '#states' => [
         'visible' => [
           $icon_type => ['value' => 'marker'],
@@ -374,7 +394,7 @@ trait LeafletSettingsElementsTrait {
       '#description' => $icon_url_description,
       '#type' => 'textarea',
       '#rows' => 3,
-      '#default_value' => isset($icon_options['shadowUrl']) ? $icon_options['shadowUrl'] : NULL,
+      '#default_value' => isset($icon_options['shadowUrl']) ? $icon_options['shadowUrl'] : $default_settings['icon']['shadowUrl'],
       '#states' => [
         'visible' => [
           $icon_type => ['value' => 'marker'],
@@ -388,7 +408,7 @@ trait LeafletSettingsElementsTrait {
       '#description' => $this->t('Insert here the Html code that will be used as marker html markup. <b>If left empty the default Leaflet Marker will be used.</b><br>@token_replacement_disclaimer', [
         '@token_replacement_disclaimer' => $token_replacement_disclaimer,
       ]),
-      '#default_value' => isset($icon_options['html']) ? $icon_options['html'] : '<div></div>',
+      '#default_value' => isset($icon_options['html']) ? $icon_options['html'] : $default_settings['icon']['html'],
       '#rows' => 3,
       '#states' => [
         'visible' => [
@@ -404,10 +424,31 @@ trait LeafletSettingsElementsTrait {
       '#type' => 'textfield',
       '#title' => t('Marker HTML class'),
       '#description' => t('Required class name for the div used to wrap field output. For multiple classes, separate with a space.'),
-      '#default_value' => isset($icon_options['html_class']) ? $icon_options['html_class'] : 'leaflet-map-divicon',
+      '#default_value' => isset($icon_options['html_class']) ? $icon_options['html_class'] : $default_settings['icon']['html_class'],
       '#states' => [
         'visible' => [
           $icon_type => ['value' => 'html'],
+        ],
+      ],
+    ];
+
+    $element['circle_marker_options'] = [
+      '#type' => 'textarea',
+      '#rows' => 2,
+      '#title' => $this->t('Circle Marker Options'),
+      '#description' => $this->t('An object literal of Circle Marker options, that comply with the @leaflet_circle_marker_object.<br>The syntax should respect the javascript object notation (json) format.<br>As suggested in the field placeholder, always use double quotes (") both for the indexes and the string values.<br><b>Note: </b> Use <strong>Replacement Patterns</strong> to input dynamic values.<br>Empty value will fallback to default Leaflet Circle Marker style.', [
+        '@leaflet_circle_marker_object' => $this->link->generate('Leaflet Circle Marker object', Url::fromUri('https://leafletjs.com/reference-1.6.0.html#circlemarker', [
+          'absolute' => TRUE,
+          'attributes' => ['target' => 'blank'],
+        ])
+        ),
+      ]),
+      '#default_value' => isset($icon_options['circle_marker_options']) ? $icon_options['circle_marker_options'] : $default_settings['icon']['circle_marker_options'],
+      '#placeholder' => $default_settings['icon']['circle_marker_options'],
+      '#element_validate' => [[get_class($this), 'jsonValidate']],
+      '#states' => [
+        'visible' => [
+          $icon_type => ['value' => 'circle_marker'],
         ],
       ],
     ];
