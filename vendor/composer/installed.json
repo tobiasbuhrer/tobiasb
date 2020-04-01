@@ -3329,18 +3329,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.30.0",
-        "version_normalized": "1.30.0.0",
+        "version": "1.31.0",
+        "version_normalized": "1.31.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.30"
+            "reference": "8.x-1.31"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.30.zip",
-            "reference": "8.x-1.30",
-            "shasum": "105a6be3e449d1da7a531faf406e39a1b4f6bfdd"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.31.zip",
+            "reference": "8.x-1.31",
+            "shasum": "fef7a287c3e96644d0eb073ce360be172b4fb283"
         },
         "require": {
             "drupal/core": "~8.0",
@@ -3352,8 +3352,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.30",
-                "datestamp": "1585473837",
+                "version": "8.x-1.31",
+                "datestamp": "1585602761",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -7451,17 +7451,17 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v4.4.6",
-        "version_normalized": "4.4.6.0",
+        "version": "v4.4.7",
+        "version_normalized": "4.4.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "6dae4692ac91230b33b70d9a48882ff5c838d67a"
+            "reference": "5a0c2d93006131a36cf6f767d10e2ca8333b0d4a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/6dae4692ac91230b33b70d9a48882ff5c838d67a",
-            "reference": "6dae4692ac91230b33b70d9a48882ff5c838d67a",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/5a0c2d93006131a36cf6f767d10e2ca8333b0d4a",
+            "reference": "5a0c2d93006131a36cf6f767d10e2ca8333b0d4a",
             "shasum": ""
         },
         "require": {
@@ -7484,7 +7484,7 @@
             "ext-intl": "To show region name in time zone dump",
             "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
         },
-        "time": "2020-03-18T07:15:43+00:00",
+        "time": "2020-03-27T16:54:36+00:00",
         "bin": [
             "Resources/bin/var-dump-server"
         ],
