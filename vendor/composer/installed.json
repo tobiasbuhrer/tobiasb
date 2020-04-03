@@ -2280,17 +2280,17 @@
     },
     {
         "name": "drupal/core",
-        "version": "8.8.4",
-        "version_normalized": "8.8.4.0",
+        "version": "8.8.5",
+        "version_normalized": "8.8.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core.git",
-            "reference": "34e59fcf702c1b3c497bbd6e92e68e546c5d15b8"
+            "reference": "e22cfc3adf1dac7a92452287a7d8602f3c27b68f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core/zipball/34e59fcf702c1b3c497bbd6e92e68e546c5d15b8",
-            "reference": "34e59fcf702c1b3c497bbd6e92e68e546c5d15b8",
+            "url": "https://api.github.com/repos/drupal/core/zipball/e22cfc3adf1dac7a92452287a7d8602f3c27b68f",
+            "reference": "e22cfc3adf1dac7a92452287a7d8602f3c27b68f",
             "shasum": ""
         },
         "require": {
@@ -2456,7 +2456,7 @@
             "drupal/workflows": "self.version",
             "drupal/workspaces": "self.version"
         },
-        "time": "2020-03-18T16:26:33+00:00",
+        "time": "2020-04-02T19:01:19+00:00",
         "type": "drupal-core",
         "extra": {
             "drupal-scaffold": {
@@ -2512,17 +2512,17 @@
     },
     {
         "name": "drupal/core-recommended",
-        "version": "8.8.4",
-        "version_normalized": "8.8.4.0",
+        "version": "8.8.5",
+        "version_normalized": "8.8.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core-recommended.git",
-            "reference": "4155bff03954bae498029899f44e8adf697b20e6"
+            "reference": "7163954903e63ead331de073c83ad769926ad9a1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core-recommended/zipball/4155bff03954bae498029899f44e8adf697b20e6",
-            "reference": "4155bff03954bae498029899f44e8adf697b20e6",
+            "url": "https://api.github.com/repos/drupal/core-recommended/zipball/7163954903e63ead331de073c83ad769926ad9a1",
+            "reference": "7163954903e63ead331de073c83ad769926ad9a1",
             "shasum": ""
         },
         "require": {
@@ -2535,7 +2535,7 @@
             "doctrine/common": "v2.7.3",
             "doctrine/inflector": "v1.2.0",
             "doctrine/lexer": "1.0.2",
-            "drupal/core": "8.8.4",
+            "drupal/core": "8.8.5",
             "easyrdf/easyrdf": "0.9.1",
             "egulias/email-validator": "2.1.11",
             "guzzlehttp/guzzle": "6.3.3",
@@ -2583,7 +2583,7 @@
         "conflict": {
             "webflo/drupal-core-strict": "*"
         },
-        "time": "2020-03-18T16:26:33+00:00",
+        "time": "2020-04-02T19:01:19+00:00",
         "type": "metapackage",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -4624,7 +4624,8 @@
                 "name": "Jakub Onderka",
                 "email": "jakub.onderka@gmail.com"
             }
-        ]
+        ],
+        "abandoned": "php-parallel-lint/php-console-color"
     },
     {
         "name": "jakub-onderka/php-console-highlighter",
@@ -4672,7 +4673,8 @@
                 "homepage": "http://www.acci.cz/"
             }
         ],
-        "description": "Highlight PHP code in terminal"
+        "description": "Highlight PHP code in terminal",
+        "abandoned": "php-parallel-lint/php-console-highlighter"
     },
     {
         "name": "jquery/inputmask",
