@@ -192,6 +192,8 @@ class GeofieldItem extends FieldItemBase {
     $value = $this->get('value')->getValue();
     if (!empty($value)) {
       /* @var \Drupal\geofield\GeoPHP\GeoPHPInterface $geoPhpWrapper */
+      // Note: Geofield FieldType doesn't support Dependency Injecton yet
+      // (https://www.drupal.org/node/2053415).
       $geoPhpWrapper = \Drupal::service('geofield.geophp');
       /* @var \Geometry|null $geometry */
       $geometry = $geoPhpWrapper->load($value);
