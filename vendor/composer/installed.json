@@ -1060,25 +1060,25 @@
     },
     {
         "name": "consolidation/self-update",
-        "version": "1.1.5",
-        "version_normalized": "1.1.5.0",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/consolidation/self-update.git",
-            "reference": "a1c273b14ce334789825a09d06d4c87c0a02ad54"
+            "reference": "dba6b2c0708f20fa3ba8008a2353b637578849b4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/consolidation/self-update/zipball/a1c273b14ce334789825a09d06d4c87c0a02ad54",
-            "reference": "a1c273b14ce334789825a09d06d4c87c0a02ad54",
+            "url": "https://api.github.com/repos/consolidation/self-update/zipball/dba6b2c0708f20fa3ba8008a2353b637578849b4",
+            "reference": "dba6b2c0708f20fa3ba8008a2353b637578849b4",
             "shasum": ""
         },
         "require": {
             "php": ">=5.5.0",
-            "symfony/console": "^2.8|^3|^4",
-            "symfony/filesystem": "^2.5|^3|^4"
+            "symfony/console": "^2.8|^3|^4|^5",
+            "symfony/filesystem": "^2.5|^3|^4|^5"
         },
-        "time": "2018-10-28T01:52:03+00:00",
+        "time": "2020-04-13T02:49:20+00:00",
         "bin": [
             "scripts/release"
         ],
@@ -1100,12 +1100,12 @@
         ],
         "authors": [
             {
-                "name": "Greg Anderson",
-                "email": "greg.1.anderson@greenknowe.org"
-            },
-            {
                 "name": "Alexander Menk",
                 "email": "menk@mestrona.net"
+            },
+            {
+                "name": "Greg Anderson",
+                "email": "greg.1.anderson@greenknowe.org"
             }
         ],
         "description": "Provides a self:update command for Symfony Console applications."
@@ -3326,18 +3326,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.34.0",
-        "version_normalized": "1.34.0.0",
+        "version": "1.35.0",
+        "version_normalized": "1.35.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.34"
+            "reference": "8.x-1.35"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.34.zip",
-            "reference": "8.x-1.34",
-            "shasum": "9bc5326eb0eeb9c60d3c8ed87c9f45f2cdf1bcfe"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.35.zip",
+            "reference": "8.x-1.35",
+            "shasum": "40ddd6fae7800b168b71b2521d7f5452f68f1215"
         },
         "require": {
             "drupal/core": "^8 || ^9",
@@ -3346,8 +3346,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-1.34",
-                "datestamp": "1586625828",
+                "version": "8.x-1.35",
+                "datestamp": "1586903111",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -7611,17 +7611,17 @@
     },
     {
         "name": "vlucas/phpdotenv",
-        "version": "v2.6.2",
-        "version_normalized": "2.6.2.0",
+        "version": "v2.6.3",
+        "version_normalized": "2.6.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/vlucas/phpdotenv.git",
-            "reference": "c4a653ed3f1ff900baa15b4130c8770b57285b62"
+            "reference": "df4c4d08a639be4ef5d6d1322868f9e477553679"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/c4a653ed3f1ff900baa15b4130c8770b57285b62",
-            "reference": "c4a653ed3f1ff900baa15b4130c8770b57285b62",
+            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/df4c4d08a639be4ef5d6d1322868f9e477553679",
+            "reference": "df4c4d08a639be4ef5d6d1322868f9e477553679",
             "shasum": ""
         },
         "require": {
@@ -7637,7 +7637,7 @@
             "ext-filter": "Required to use the boolean validator.",
             "ext-pcre": "Required to use most of the library."
         },
-        "time": "2020-03-27T23:16:19+00:00",
+        "time": "2020-04-12T15:11:38+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
