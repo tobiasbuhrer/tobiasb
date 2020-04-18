@@ -140,17 +140,17 @@
     },
     {
         "name": "chi-teck/drupal-code-generator",
-        "version": "1.31.0",
-        "version_normalized": "1.31.0.0",
+        "version": "1.32.0",
+        "version_normalized": "1.32.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Chi-teck/drupal-code-generator.git",
-            "reference": "f994157721f238175be90171f0ccc1c0aa17c276"
+            "reference": "0e045f7a7e747af3d8f603156bf4d73be5768246"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Chi-teck/drupal-code-generator/zipball/f994157721f238175be90171f0ccc1c0aa17c276",
-            "reference": "f994157721f238175be90171f0ccc1c0aa17c276",
+            "url": "https://api.github.com/repos/Chi-teck/drupal-code-generator/zipball/0e045f7a7e747af3d8f603156bf4d73be5768246",
+            "reference": "0e045f7a7e747af3d8f603156bf4d73be5768246",
             "shasum": ""
         },
         "require": {
@@ -160,7 +160,7 @@
             "symfony/filesystem": "^2.7 || ^3.4 || ^4.0",
             "twig/twig": "^1.41 || ^2.12"
         },
-        "time": "2019-12-07T16:54:31+00:00",
+        "time": "2020-04-16T06:45:06+00:00",
         "bin": [
             "bin/dcg"
         ],
@@ -2988,18 +2988,18 @@
     },
     {
         "name": "drupal/geofield",
-        "version": "1.11.0",
-        "version_normalized": "1.11.0.0",
+        "version": "1.12.0",
+        "version_normalized": "1.12.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/geofield.git",
-            "reference": "8.x-1.11"
+            "reference": "8.x-1.12"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.11.zip",
-            "reference": "8.x-1.11",
-            "shasum": "f1628a08b115e07782930848da1bd34fff9e4f4a"
+            "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.12.zip",
+            "reference": "8.x-1.12",
+            "shasum": "ddd035a4e6955a31f63e47eecb33afc186f0eaa5"
         },
         "require": {
             "drupal/core": "^8 || ^9",
@@ -3008,8 +3008,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-1.11",
-                "datestamp": "1586208210",
+                "version": "8.x-1.12",
+                "datestamp": "1587146817",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
