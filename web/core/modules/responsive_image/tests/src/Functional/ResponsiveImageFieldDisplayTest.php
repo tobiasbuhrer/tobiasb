@@ -40,7 +40,11 @@ class ResponsiveImageFieldDisplayTest extends ImageFieldTestBase {
    *
    * @var array
    */
-  public static $modules = ['field_ui', 'responsive_image', 'responsive_image_test_module'];
+  public static $modules = [
+    'field_ui',
+    'responsive_image',
+    'responsive_image_test_module',
+  ];
 
   /**
    * Drupal\simpletest\WebTestBase\setUp().
@@ -287,9 +291,6 @@ class ResponsiveImageFieldDisplayTest extends ImageFieldTestBase {
     $this->drupalGet('node/' . $nid);
     if (!$empty_styles) {
       $this->assertRaw('/styles/medium/');
-      // Make sure the IE9 workaround is present.
-      $this->assertRaw('<!--[if IE 9]><video style="display: none;"><![endif]-->');
-      $this->assertRaw('<!--[if IE 9]></video><![endif]-->');
       // Assert the empty image is present.
       $this->assertRaw('data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
       $thumbnail_style = ImageStyle::load('thumbnail');

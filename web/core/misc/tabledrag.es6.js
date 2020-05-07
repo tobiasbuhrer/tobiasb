@@ -111,9 +111,9 @@
     /**
      * Used to determine up or down direction from last mouse move.
      *
-     * @type {number}
+     * @type {?number}
      */
-    this.oldY = 0;
+    this.oldY = null;
 
     /**
      * Whether anything in the entire table has changed.
@@ -721,7 +721,7 @@
    * @param {Drupal.tableDrag} self
    *   The drag handle.
    * @param {HTMLElement} item
-   *   The item that that is being dragged.
+   *   The item that is being dragged.
    */
   Drupal.tableDrag.prototype.dragStart = function(event, self, item) {
     // Create a new dragObject recording the pointer information.
@@ -760,6 +760,10 @@
     if (self.oldRowElement) {
       $(self.oldRowElement).removeClass('drag-previous');
     }
+
+    // Set the initial y coordinate so the direction can be calculated in
+    // dragRow().
+    self.oldY = self.pointerCoords(event).y;
   };
 
   /**
