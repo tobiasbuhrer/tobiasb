@@ -48,14 +48,7 @@ class ContextualDynamicContextTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
-    'contextual',
-    'node',
-    'views',
-    'views_ui',
-    'language',
-    'menu_test',
-  ];
+  public static $modules = ['contextual', 'node', 'views', 'views_ui', 'language', 'menu_test'];
 
   protected function setUp() {
     parent::setUp();

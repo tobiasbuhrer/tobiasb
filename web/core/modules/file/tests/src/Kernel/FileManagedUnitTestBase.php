@@ -207,7 +207,7 @@ abstract class FileManagedUnitTestBase extends KernelTestBase {
     }
 
     file_put_contents($filepath, $contents);
-    $this->assertFileExists($filepath);
+    $this->assertTrue(is_file($filepath), t('The test file exists on the disk.'), 'Create test file');
     return $filepath;
   }
 

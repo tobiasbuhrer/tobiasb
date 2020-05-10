@@ -26,13 +26,7 @@ class CommentNonNodeTest extends BrowserTestBase {
   use FieldUiTestTrait;
   use CommentTestTrait;
 
-  public static $modules = [
-    'comment',
-    'user',
-    'field_ui',
-    'entity_test',
-    'block',
-  ];
+  public static $modules = ['comment', 'user', 'field_ui', 'entity_test', 'block'];
 
   /**
    * {@inheritdoc}
@@ -217,7 +211,7 @@ class CommentNonNodeTest extends BrowserTestBase {
    *   Contact info is available.
    */
   public function commentContactInfoAvailable() {
-    return (bool) preg_match('/(input).*?(name="name").*?(input).*?(name="mail").*?(input).*?(name="homepage")/s', $this->getSession()->getPage()->getContent());
+    return preg_match('/(input).*?(name="name").*?(input).*?(name="mail").*?(input).*?(name="homepage")/s', $this->getSession()->getPage()->getContent());
   }
 
   /**

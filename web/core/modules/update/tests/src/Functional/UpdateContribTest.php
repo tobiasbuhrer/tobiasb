@@ -5,7 +5,6 @@ namespace Drupal\Tests\update\Functional;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\ProjectInfo;
-use Drupal\update\UpdateManagerInterface;
 
 /**
  * Tests how the Update Manager module handles contributed modules and themes in
@@ -30,13 +29,7 @@ class UpdateContribTest extends UpdateTestBase {
    *
    * @var array
    */
-  public static $modules = [
-    'update_test',
-    'update',
-    'aaa_update_test',
-    'bbb_update_test',
-    'ccc_update_test',
-  ];
+  public static $modules = ['update_test', 'update', 'aaa_update_test', 'bbb_update_test', 'ccc_update_test'];
 
   /**
    * {@inheritdoc}
@@ -523,7 +516,7 @@ class UpdateContribTest extends UpdateTestBase {
     $update_test_config->set('system_info', $system_info)->save();
     $update_status = [
       'aaa_update_test' => [
-        'status' => UpdateManagerInterface::NOT_SECURE,
+        'status' => UPDATE_NOT_SECURE,
       ],
     ];
     $update_test_config->set('update_status', $update_status)->save();
@@ -715,13 +708,9 @@ class UpdateContribTest extends UpdateTestBase {
         'expected_update_message_type' => static::UPDATE_NONE,
         'fixture' => 'sec.8.x-1.2_8.x-2.2',
       ],
-      '8.x-2.0, 8.x-1.2 8.x-2.2' => [
-        'module_patch_version' => '8.x-2.0',
-        'expected_security_releases' => ['8.x-2.2'],
-        'expected_update_message_type' => static::SECURITY_UPDATE_REQUIRED,
-        'fixture' => 'sec.8.x-1.2_8.x-2.2',
-      ],
       // @todo In https://www.drupal.org/node/2865920 add test cases:
+      //   - 8.x-2.0 using fixture 'sec.8.x-1.2_8.x-2.2' to ensure that 8.x-2.2
+      //     is the only security update.
       //   - 8.x-3.0-beta1 using fixture 'sec.8.x-1.2_8.x-2.2' to ensure that
       //     8.x-2.2 is the  only security update.
     ];

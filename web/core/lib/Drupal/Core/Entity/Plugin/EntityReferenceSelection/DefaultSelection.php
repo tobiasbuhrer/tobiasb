@@ -247,20 +247,13 @@ class DefaultSelection extends SelectionPluginBase implements ContainerFactoryPl
       $form['sort']['field'] = [
         '#type' => 'select',
         '#title' => $this->t('Sort by'),
-        '#options' => $fields,
+        '#options' => [
+          '_none' => $this->t('- None -'),
+        ] + $fields,
         '#ajax' => TRUE,
-        '#empty_value' => '_none',
-        '#sort_options' => TRUE,
         '#limit_validation_errors' => [],
         '#default_value' => $configuration['sort']['field'],
       ];
-      if ($entity_type->hasKey('bundle')) {
-        $form['sort']['field']['#states'] = [
-          'visible' => [
-            ':input[name^="settings[handler_settings][target_bundles]["]' => ['checked' => TRUE],
-          ],
-        ];
-      }
 
       $form['sort']['settings'] = [
         '#type' => 'container',

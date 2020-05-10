@@ -32,16 +32,7 @@ class PagePreviewTest extends NodeTestBase {
    *
    * @var array
    */
-  public static $modules = [
-    'node',
-    'taxonomy',
-    'comment',
-    'image',
-    'file',
-    'text',
-    'node_test',
-    'menu_ui',
-  ];
+  public static $modules = ['node', 'taxonomy', 'comment', 'image', 'file', 'text', 'node_test', 'menu_ui'];
 
   /**
    * {@inheritdoc}

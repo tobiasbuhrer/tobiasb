@@ -406,10 +406,7 @@ class BulkForm extends FieldPluginBase implements CacheableDependencyInterface {
 
       foreach ($selected as $bulk_form_key) {
         $entity = $this->loadEntityFromBulkFormKey($bulk_form_key);
-        // Skip execution if current entity does not exist.
-        if (empty($entity)) {
-          continue;
-        }
+
         // Skip execution if the user did not have access.
         if (!$action->getPlugin()->access($entity, $this->view->getUser())) {
           $this->messenger->addError($this->t('No access to execute %action on the @entity_type_label %entity_label.', [
@@ -464,8 +461,8 @@ class BulkForm extends FieldPluginBase implements CacheableDependencyInterface {
    * {@inheritdoc}
    */
   public function viewsFormValidate(&$form, FormStateInterface $form_state) {
-    $ids = $form_state->getValue($this->options['id']);
-    if (empty($ids) || empty(array_filter($ids))) {
+    $selected = array_filter($form_state->getValue($this->options['id']));
+    if (empty($selected)) {
       $form_state->setErrorByName('', $this->emptySelectedMessage());
     }
   }
@@ -491,7 +488,7 @@ class BulkForm extends FieldPluginBase implements CacheableDependencyInterface {
    *
    * This generates a key that is used as the checkbox return value when
    * submitting a bulk form. This key allows the entity for the row to be loaded
-   * totally independent of the executed view row.
+   * totally independently of the executed view row.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity to calculate a bulk form key for.

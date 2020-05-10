@@ -11,13 +11,7 @@ use Drupal\Tests\BrowserTestBase;
  */
 class ContentTranslationEntityBundleUITest extends BrowserTestBase {
 
-  public static $modules = [
-    'language',
-    'content_translation',
-    'node',
-    'comment',
-    'field_ui',
-  ];
+  public static $modules = ['language', 'content_translation', 'node', 'comment', 'field_ui'];
 
   /**
    * {@inheritdoc}

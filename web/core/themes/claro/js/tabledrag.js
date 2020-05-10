@@ -41,7 +41,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     this.oldRowElement = null;
 
-    this.oldY = null;
+    this.oldY = 0;
 
     this.changed = false;
 
@@ -433,8 +433,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       if (self.oldRowElement) {
         $(self.oldRowElement).removeClass('drag-previous');
       }
-
-      self.oldY = self.pointerCoords(event).y;
     },
     dragRow: function dragRow(event, self) {
       if (self.dragObject) {

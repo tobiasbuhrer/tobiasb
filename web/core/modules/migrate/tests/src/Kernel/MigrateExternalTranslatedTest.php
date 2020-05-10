@@ -19,14 +19,7 @@ class MigrateExternalTranslatedTest extends MigrateTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
-    'system',
-    'user',
-    'language',
-    'node',
-    'field',
-    'migrate_external_translated_test',
-  ];
+  public static $modules = ['system', 'user', 'language', 'node', 'field', 'migrate_external_translated_test'];
 
   /**
    * {@inheritdoc}

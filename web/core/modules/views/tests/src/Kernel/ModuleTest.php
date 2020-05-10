@@ -76,7 +76,7 @@ class ModuleTest extends ViewsKernelTestBase {
       'field' => 'job',
     ];
     $handler = $this->container->get('plugin.manager.views.filter')->getHandler($item, 'standard');
-    $this->assertInstanceOf(Standard::class, $handler);
+    $this->assertTrue($handler instanceof Standard);
 
     // @todo Reinstate these tests when the debug() in views_get_handler() is
     //   restored.
@@ -89,7 +89,7 @@ class ModuleTest extends ViewsKernelTestBase {
       'field' => 'field_invalid',
     ];
     $this->container->get('plugin.manager.views.field')->getHandler($item);
-    $this->assertStringContainsString(new FormattableMarkup("Missing handler: @table @field @type", ['@table' => 'views_test_data', '@field' => 'field_invalid', '@type' => 'field']), $this->lastErrorMessage, 'An invalid field name throws a debug message.');
+    $this->assertTrue(strpos($this->lastErrorMessage, new FormattableMarkup("Missing handler: @table @field @type", ['@table' => 'views_test_data', '@field' => 'field_invalid', '@type' => 'field'])) !== FALSE, 'An invalid field name throws a debug message.');
     unset($this->lastErrorMessage);
 
     $item = [
@@ -97,7 +97,7 @@ class ModuleTest extends ViewsKernelTestBase {
       'field' => 'id',
     ];
     $this->container->get('plugin.manager.views.filter')->getHandler($item);
-    $this->assertStringContainsString(new FormattableMarkup("Missing handler: @table @field @type", ['@table' => 'table_invalid', '@field' => 'id', '@type' => 'filter']), $this->lastErrorMessage, 'An invalid table name throws a debug message.');
+    $this->assertEqual(strpos($this->lastErrorMessage, new FormattableMarkup("Missing handler: @table @field @type", ['@table' => 'table_invalid', '@field' => 'id', '@type' => 'filter'])) !== FALSE, 'An invalid table name throws a debug message.');
     unset($this->lastErrorMessage);
 
     $item = [
@@ -105,7 +105,7 @@ class ModuleTest extends ViewsKernelTestBase {
       'field' => 'id',
     ];
     $this->container->get('plugin.manager.views.filter')->getHandler($item);
-    $this->assertStringContainsString(new FormattableMarkup("Missing handler: @table @field @type", ['@table' => 'table_invalid', '@field' => 'id', '@type' => 'filter']), $this->lastErrorMessage, 'An invalid table name throws a debug message.');
+    $this->assertEqual(strpos($this->lastErrorMessage, new FormattableMarkup("Missing handler: @table @field @type", ['@table' => 'table_invalid', '@field' => 'id', '@type' => 'filter'])) !== FALSE, 'An invalid table name throws a debug message.');
     unset($this->lastErrorMessage);
 
     restore_error_handler();
@@ -191,9 +191,9 @@ class ModuleTest extends ViewsKernelTestBase {
     $this->assertIdentical(array_keys($all_views_sorted), array_keys(Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE)), 'All view id keys returned in expected sort order');
 
     // Test $exclude_view parameter.
-    $this->assertArrayNotHasKey('archive', Views::getViewsAsOptions(TRUE, 'all', 'archive'));
-    $this->assertArrayNotHasKey('archive:default', Views::getViewsAsOptions(FALSE, 'all', 'archive:default'));
-    $this->assertArrayNotHasKey('archive', Views::getViewsAsOptions(TRUE, 'all', $archive->getExecutable()));
+    $this->assertFalse(array_key_exists('archive', Views::getViewsAsOptions(TRUE, 'all', 'archive')), 'View excluded from options based on name');
+    $this->assertFalse(array_key_exists('archive:default', Views::getViewsAsOptions(FALSE, 'all', 'archive:default')), 'View display excluded from options based on name');
+    $this->assertFalse(array_key_exists('archive', Views::getViewsAsOptions(TRUE, 'all', $archive->getExecutable())), 'View excluded from options based on object');
 
     // Test the $opt_group parameter.
     $expected_opt_groups = [];

@@ -24,14 +24,7 @@ class CommentIntegrationTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
-    'comment',
-    'field',
-    'entity_test',
-    'user',
-    'system',
-    'dblog',
-  ];
+  public static $modules = ['comment', 'field', 'entity_test', 'user', 'system', 'dblog'];
 
   /**
    * {@inheritdoc}

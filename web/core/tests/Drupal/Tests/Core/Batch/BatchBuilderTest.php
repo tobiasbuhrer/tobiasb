@@ -23,9 +23,9 @@ class BatchBuilderTest extends UnitTestCase {
   public function testDefaultValues() {
     $batch = (new BatchBuilder())->toArray();
 
-    $this->assertIsArray($batch);
+    $this->assertInternalType('array', $batch);
     $this->assertArrayHasKey('operations', $batch);
-    $this->assertIsArray($batch['operations']);
+    $this->assertInternalType('array', $batch['operations']);
     $this->assertEmpty($batch['operations'], 'Operations array is empty.');
     $this->assertEquals(new TranslatableMarkup('Processing'), $batch['title']);
     $this->assertEquals(new TranslatableMarkup('Initializing.'), $batch['init_message']);
@@ -34,10 +34,10 @@ class BatchBuilderTest extends UnitTestCase {
     $this->assertNull($batch['finished']);
     $this->assertNull($batch['file']);
     $this->assertArrayHasKey('library', $batch);
-    $this->assertIsArray($batch['library']);
+    $this->assertInternalType('array', $batch['library']);
     $this->assertEmpty($batch['library']);
     $this->assertArrayHasKey('url_options', $batch);
-    $this->assertIsArray($batch['url_options']);
+    $this->assertInternalType('array', $batch['url_options']);
     $this->assertEmpty($batch['url_options']);
     $this->assertArrayHasKey('progressive', $batch);
     $this->assertTrue($batch['progressive']);

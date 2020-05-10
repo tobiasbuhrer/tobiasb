@@ -35,7 +35,7 @@ class MigrateBlockContentStubTest extends MigrateDrupalTestBase {
   public function testStubFailure() {
     $message = 'Expected MigrateException thrown when no bundles exist.';
     try {
-      $this->createEntityStub('block_content');
+      $this->createStub('block_content');
       $this->fail($message);
     }
     catch (MigrateException $e) {

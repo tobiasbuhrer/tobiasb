@@ -39,13 +39,11 @@ class UrlTest extends BrowserTestBase {
     $encoded_path = "3CSCRIPT%3Ealert%28%27XSS%27%29%3C/SCRIPT%3E";
 
     $link = Link::fromTextAndUrl($text, Url::fromUserInput('/' . $path))->toString();
-    $this->assertStringContainsString($encoded_path, $link, new FormattableMarkup('XSS attack @path was filtered by \Drupal\Core\Utility\LinkGeneratorInterface::generate().', ['@path' => $path]));
-    $this->assertStringNotContainsString($path, $link, new FormattableMarkup('XSS attack @path was filtered by \Drupal\Core\Utility\LinkGeneratorInterface::generate().', ['@path' => $path]));
+    $this->assertTrue(strpos($link, $encoded_path) !== FALSE && strpos($link, $path) === FALSE, new FormattableMarkup('XSS attack @path was filtered by \Drupal\Core\Utility\LinkGeneratorInterface::generate().', ['@path' => $path]));
 
     // Test \Drupal\Core\Url.
     $link = Url::fromUri('base:' . $path)->toString();
-    $this->assertStringContainsString($encoded_path, $link, new FormattableMarkup('XSS attack @path was filtered by #theme', ['@path' => $path]));
-    $this->assertStringNotContainsString($path, $link, new FormattableMarkup('XSS attack @path was filtered by #theme', ['@path' => $path]));
+    $this->assertTrue(strpos($link, $encoded_path) !== FALSE && strpos($link, $path) === FALSE, new FormattableMarkup('XSS attack @path was filtered by #theme', ['@path' => $path]));
   }
 
   /**

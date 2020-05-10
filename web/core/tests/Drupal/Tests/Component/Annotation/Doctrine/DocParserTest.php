@@ -9,7 +9,6 @@ use Doctrine\Common\Annotations\Annotation\Target;
 use Drupal\Tests\Component\Annotation\Doctrine\Fixtures\AnnotationWithConstants;
 use Drupal\Tests\Component\Annotation\Doctrine\Fixtures\ClassWithConstants;
 use Drupal\Tests\Component\Annotation\Doctrine\Fixtures\IntefaceWithConstants;
-use Drupal\Tests\PhpunitCompatibilityTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,7 +27,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DocParserTest extends TestCase
 {
-  use PhpunitCompatibilityTrait;
     public function testNestedArraysWithNestedAnnotation()
     {
         $parser = $this->createTestParser();
@@ -37,16 +35,16 @@ class DocParserTest extends TestCase
         $result = $parser->parse('@Name(foo={1,2, {"key"=@Name}})');
         $annot = $result[0];
 
-        $this->assertInstanceOf(Name::class, $annot);
+        $this->assertTrue($annot instanceof Name);
         $this->assertNull($annot->value);
         $this->assertEquals(3, count($annot->foo));
         $this->assertEquals(1, $annot->foo[0]);
         $this->assertEquals(2, $annot->foo[1]);
-        $this->assertIsArray($annot->foo[2]);
+        $this->assertTrue(is_array($annot->foo[2]));
 
         $nestedArray = $annot->foo[2];
         $this->assertTrue(isset($nestedArray['key']));
-        $this->assertInstanceOf(Name::class, $nestedArray['key']);
+        $this->assertTrue($nestedArray['key'] instanceof Name);
     }
 
     public function testBasicAnnotations()
@@ -56,7 +54,7 @@ class DocParserTest extends TestCase
         // Marker annotation
         $result = $parser->parse("@Name");
         $annot = $result[0];
-        $this->assertInstanceOf(Name::class, $annot);
+        $this->assertTrue($annot instanceof Name);
         $this->assertNull($annot->value);
         $this->assertNull($annot->foo);
 
@@ -64,13 +62,13 @@ class DocParserTest extends TestCase
         $result = $parser->parse('@Name(foo={"key1" = "value1"})');
         $annot = $result[0];
         $this->assertNull($annot->value);
-        $this->assertIsArray($annot->foo);
+        $this->assertTrue(is_array($annot->foo));
         $this->assertTrue(isset($annot->foo['key1']));
 
         // Numerical arrays
         $result = $parser->parse('@Name({2="foo", 4="bar"})');
         $annot = $result[0];
-        $this->assertIsArray($annot->value);
+        $this->assertTrue(is_array($annot->value));
         $this->assertEquals('foo', $annot->value[2]);
         $this->assertEquals('bar', $annot->value[4]);
         $this->assertFalse(isset($annot->value[0]));
@@ -81,19 +79,19 @@ class DocParserTest extends TestCase
         $result = $parser->parse('@Name(@Name, @Name)');
         $annot = $result[0];
 
-        $this->assertInstanceOf(Name::class, $annot);
-        $this->assertIsArray($annot->value);
-        $this->assertInstanceOf(Name::class, $annot->value[0]);
-        $this->assertInstanceOf(Name::class, $annot->value[1]);
+        $this->assertTrue($annot instanceof Name);
+        $this->assertTrue(is_array($annot->value));
+        $this->assertTrue($annot->value[0] instanceof Name);
+        $this->assertTrue($annot->value[1] instanceof Name);
 
         // Multiple types as values
         $result = $parser->parse('@Name(foo="Bar", @Name, {"key1"="value1", "key2"="value2"})');
         $annot = $result[0];
 
-        $this->assertInstanceOf(Name::class, $annot);
-        $this->assertIsArray($annot->value);
-        $this->assertInstanceOf(Name::class, $annot->value[0]);
-        $this->assertIsArray($annot->value[1]);
+        $this->assertTrue($annot instanceof Name);
+        $this->assertTrue(is_array($annot->value));
+        $this->assertTrue($annot->value[0] instanceof Name);
+        $this->assertTrue(is_array($annot->value[1]));
         $this->assertEquals('value1', $annot->value[1]['key1']);
         $this->assertEquals('value2', $annot->value[1]['key2']);
 
@@ -110,7 +108,7 @@ DOCBLOCK;
         $result = $parser->parse($docblock);
         $this->assertEquals(1, count($result));
         $annot = $result[0];
-        $this->assertInstanceOf(Name::class, $annot);
+        $this->assertTrue($annot instanceof Name);
         $this->assertEquals("bar", $annot->foo);
         $this->assertNull($annot->value);
    }
@@ -123,16 +121,16 @@ DOCBLOCK;
         $result = $parser->parse('@Name({"key1"="value1"})');
         $annot = $result[0];
 
-        $this->assertInstanceOf(Name::class, $annot);
-        $this->assertIsArray($annot->value);
+        $this->assertTrue($annot instanceof Name);
+        $this->assertTrue(is_array($annot->value));
         $this->assertEquals('value1', $annot->value['key1']);
 
         // Array as first value and additional values
         $result = $parser->parse('@Name({"key1"="value1"}, foo="bar")');
         $annot = $result[0];
 
-        $this->assertInstanceOf(Name::class, $annot);
-        $this->assertIsArray($annot->value);
+        $this->assertTrue($annot instanceof Name);
+        $this->assertTrue(is_array($annot->value));
         $this->assertEquals('value1', $annot->value['key1']);
         $this->assertEquals('bar', $annot->foo);
     }
@@ -157,7 +155,7 @@ DOCBLOCK;
         $result = $parser->parse($docblock);
         $this->assertEquals(1, count($result));
         $annot = $result[0];
-        $this->assertInstanceOf(Name::class, $annot);
+        $this->assertTrue($annot instanceof Name);
         $this->assertEquals("bar", $annot->foo);
     }
 
@@ -187,10 +185,10 @@ DOCBLOCK;
         $this->assertTrue(isset($result[0]));
         $this->assertTrue(isset($result[1]));
         $annot = $result[0];
-        $this->assertInstanceOf(Name::class, $annot);
+        $this->assertTrue($annot instanceof Name);
         $this->assertEquals("bar", $annot->foo);
         $marker = $result[1];
-        $this->assertInstanceOf(Marker::class, $marker);
+        $this->assertTrue($marker instanceof Marker);
     }
 
 
@@ -210,7 +208,7 @@ DOCBLOCK;
         $annot      = $result[0];
 
         $this->assertNotNull($annot);
-        $this->assertInstanceOf(SomeAnnotationClassNameWithoutConstructor::class, $annot);
+        $this->assertTrue($annot instanceof SomeAnnotationClassNameWithoutConstructor);
 
         $this->assertNull($annot->name);
         $this->assertNotNull($annot->data);
@@ -231,7 +229,7 @@ DOCBLOCK;
         $annot      = $result[0];
 
         $this->assertNotNull($annot);
-        $this->assertInstanceOf(SomeAnnotationClassNameWithoutConstructor::class, $annot);
+        $this->assertTrue($annot instanceof SomeAnnotationClassNameWithoutConstructor);
 
         $this->assertEquals($annot->name, "Some Name");
         $this->assertEquals($annot->data, "Some data");
@@ -316,7 +314,7 @@ DOCBLOCK;
 
         $result     = $parser->parse($docblock);
         $this->assertEquals(count($result), 1);
-        $this->assertInstanceOf(SomeAnnotationClassNameWithoutConstructorAndProperties::class, $result[0]);
+        $this->assertTrue($result[0] instanceof SomeAnnotationClassNameWithoutConstructorAndProperties);
     }
 
     public function testAnnotationTarget()
@@ -1110,8 +1108,7 @@ DOCBLOCK;
         try {
             $parser = $this->createTestParser();
             $result = $parser->parse($docblock);
-            $this->assertIsArray($result);
-            $this->assertEmpty($result);
+            $this->assertTrue(is_array($result) && empty($result));
         } catch (\Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -1133,8 +1130,7 @@ DOCBLOCK;
         try {
             $parser = $this->createTestParser();
             $result = $parser->parse($docblock);
-            $this->assertIsArray($result);
-            $this->assertEmpty($result);
+            $this->assertTrue(is_array($result) && empty($result));
         } catch (\Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -1202,18 +1198,18 @@ DOCBLOCK;
         $parser = $this->createTestParser();
 
         $result = $parser->parse('@Drupal\Tests\Component\Annotation\Doctrine\True');
-        $this->assertInstanceOf(True::class, $result[0]);
+        $this->assertTrue($result[0] instanceof True);
         $result = $parser->parse('@Drupal\Tests\Component\Annotation\Doctrine\False');
-        $this->assertInstanceOf(False::class, $result[0]);
+        $this->assertTrue($result[0] instanceof False);
         $result = $parser->parse('@Drupal\Tests\Component\Annotation\Doctrine\Null');
-        $this->assertInstanceOf(Null::class, $result[0]);
+        $this->assertTrue($result[0] instanceof Null);
 
         $result = $parser->parse('@True');
-        $this->assertInstanceOf(True::class, $result[0]);
+        $this->assertTrue($result[0] instanceof True);
         $result = $parser->parse('@False');
-        $this->assertInstanceOf(False::class, $result[0]);
+        $this->assertTrue($result[0] instanceof False);
         $result = $parser->parse('@Null');
-        $this->assertInstanceOf(Null::class, $result[0]);
+        $this->assertTrue($result[0] instanceof Null);
     }
 
     public function testSetValuesExeption()
@@ -1308,7 +1304,7 @@ DOCBLOCK;
 
         $this->assertCount(1, $result);
 
-        $this->assertInstanceOf(Name::class, $result[0]);
+        $this->assertTrue($result[0] instanceof Name);
         $this->assertEquals('"bar"', $result[0]->foo);
     }
 }

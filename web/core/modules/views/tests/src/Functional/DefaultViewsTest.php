@@ -30,15 +30,7 @@ class DefaultViewsTest extends ViewTestBase {
    *
    * @var array
    */
-  public static $modules = [
-    'views',
-    'node',
-    'search',
-    'comment',
-    'taxonomy',
-    'block',
-    'user',
-  ];
+  public static $modules = ['views', 'node', 'search', 'comment', 'taxonomy', 'block', 'user'];
 
   /**
    * {@inheritdoc}

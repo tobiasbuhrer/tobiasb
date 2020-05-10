@@ -100,7 +100,7 @@ class EntityTranslationFormTest extends BrowserTestBase {
 
     // Check to make sure the node was created.
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
-    $this->assertInstanceOf(Node::class, $node);
+    $this->assertInstanceOf(Node::class, $node, 'Node found in database.');
 
     // Make body translatable.
     $field_storage = FieldStorageConfig::loadByName('node', 'body');

@@ -44473,10 +44473,10 @@ $connection->insert('node')
   'vid' => '1',
   'type' => 'story',
   'language' => '',
-  'title' => 'Test title rev 3',
+  'title' => 'Test title',
   'uid' => '1',
   'status' => '1',
-  'created' => '1390095702',
+  'created' => '1388271197',
   'changed' => '1420861423',
   'comment' => '0',
   'promote' => '0',
@@ -44507,7 +44507,7 @@ $connection->insert('node')
   'vid' => '4',
   'type' => 'test_planet',
   'language' => '',
-  'title' => 'Test page title rev 4',
+  'title' => 'Test planet title 3',
   'uid' => '1',
   'status' => '1',
   'created' => '1388271527',
@@ -44524,7 +44524,7 @@ $connection->insert('node')
   'vid' => '6',
   'type' => 'test_planet',
   'language' => '',
-  'title' => 'Node 4',
+  'title' => '',
   'uid' => '1',
   'status' => '1',
   'created' => '1388271527',
@@ -44541,7 +44541,7 @@ $connection->insert('node')
   'vid' => '7',
   'type' => 'test_planet',
   'language' => '',
-  'title' => 'Node 5',
+  'title' => '',
   'uid' => '1',
   'status' => '1',
   'created' => '1388271527',
@@ -44558,7 +44558,7 @@ $connection->insert('node')
   'vid' => '8',
   'type' => 'test_planet',
   'language' => '',
-  'title' => 'Node 6',
+  'title' => '',
   'uid' => '1',
   'status' => '1',
   'created' => '1388271527',
@@ -44575,7 +44575,7 @@ $connection->insert('node')
   'vid' => '9',
   'type' => 'test_planet',
   'language' => '',
-  'title' => 'Node 7',
+  'title' => '',
   'uid' => '1',
   'status' => '1',
   'created' => '1388271527',
@@ -44592,7 +44592,7 @@ $connection->insert('node')
   'vid' => '10',
   'type' => 'test_planet',
   'language' => '',
-  'title' => 'Node 8',
+  'title' => '',
   'uid' => '1',
   'status' => '1',
   'created' => '1388271527',
@@ -45288,7 +45288,7 @@ $connection->insert('node_revisions')
   'body' => 'test',
   'teaser' => 'test',
   'log' => '',
-  'timestamp' => '1390095702',
+  'timestamp' => '1420861423',
   'format' => '1',
 ))
 ->values(array(
@@ -45317,10 +45317,10 @@ $connection->insert('node_revisions')
   'nid' => '1',
   'vid' => '5',
   'uid' => '1',
-  'title' => 'Test title rev 2',
-  'body' => 'body test rev 2',
-  'teaser' => 'teaser test rev 2',
-  'log' => 'modified rev 2',
+  'title' => 'Test title rev 3',
+  'body' => 'body test rev 3',
+  'teaser' => 'teaser test rev 3',
+  'log' => 'modified rev 3',
   'timestamp' => '1390095703',
   'format' => '1',
 ))
@@ -45526,11 +45526,11 @@ $connection->insert('node_revisions')
   'nid' => '1',
   'vid' => '2001',
   'uid' => '2',
-  'title' => 'Test title rev 3',
-  'body' => 'body test rev 3',
-  'teaser' => 'teaser test rev 3',
-  'log' => 'modified rev 3',
-  'timestamp' => '1420861423',
+  'title' => 'Test title rev 2',
+  'body' => 'body test rev 2',
+  'teaser' => 'teaser test rev 2',
+  'log' => 'modified rev 2',
+  'timestamp' => '1390095702',
   'format' => '1',
 ))
 ->values(array(
@@ -49670,15 +49670,7 @@ $connection->insert('variable')
   'value' => 'i:0;',
 ))
 ->values(array(
-  'name' => 'i18n_lock_node_sponsor',
-  'value' => 'i:0;',
-))
-->values(array(
   'name' => 'i18n_newnode_current_employee',
-  'value' => 'i:0;',
-))
-->values(array(
-  'name' => 'i18n_newnode_current_sponsor',
   'value' => 'i:0;',
 ))
 ->values(array(
@@ -49686,12 +49678,20 @@ $connection->insert('variable')
   'value' => 's:1:"1";',
 ))
 ->values(array(
-  'name' => 'i18n_node_sponsor',
-  'value' => 'i:1;',
-))
-->values(array(
   'name' => 'i18n_required_node_employee',
   'value' => 'i:0;',
+))
+->values(array(
+  'name' => 'i18n_lock_node_sponsor',
+  'value' => 'i:0;',
+))
+->values(array(
+  'name' => 'i18n_newnode_current_sponsor',
+  'value' => 'i:0;',
+))
+->values(array(
+  'name' => 'i18n_node_sponsor',
+  'value' => 'i:1;',
 ))
 ->values(array(
   'name' => 'i18n_required_node_sponsor',

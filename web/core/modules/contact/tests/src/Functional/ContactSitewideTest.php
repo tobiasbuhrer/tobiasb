@@ -29,15 +29,7 @@ class ContactSitewideTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
-    'text',
-    'contact',
-    'field_ui',
-    'contact_test',
-    'block',
-    'error_service_test',
-    'dblog',
-  ];
+  public static $modules = ['text', 'contact', 'field_ui', 'contact_test', 'block', 'error_service_test', 'dblog'];
 
   /**
    * {@inheritdoc}

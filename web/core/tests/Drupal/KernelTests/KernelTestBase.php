@@ -6,6 +6,7 @@ use Drupal\Component\FileCache\ApcuFileCacheBackend;
 use Drupal\Component\FileCache\FileCache;
 use Drupal\Component\FileCache\FileCacheFactory;
 use Drupal\Component\Utility\Html;
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Config\Development\ConfigSchemaChecker;
 use Drupal\Core\Database\Database;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
@@ -21,7 +22,6 @@ use Drupal\Tests\ConfigTestTrait;
 use Drupal\Tests\PhpunitCompatibilityTrait;
 use Drupal\Tests\RandomGeneratorTrait;
 use Drupal\Tests\TestRequirementsTrait;
-use Drupal\TestTools\Comparator\MarkupInterfaceComparator;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Reference;
@@ -237,9 +237,6 @@ abstract class KernelTestBase extends TestCase implements ServiceProviderInterfa
   protected function setUp() {
     parent::setUp();
 
-    // Allow tests to compare MarkupInterface objects via assertEquals().
-    $this->registerComparator(new MarkupInterfaceComparator());
-
     $this->root = static::getDrupalRoot();
     $this->initFileCache();
     $this->bootEnvironment();
@@ -365,10 +362,8 @@ abstract class KernelTestBase extends TestCase implements ServiceProviderInterfa
 
     // Ensure database tasks have been run.
     require_once __DIR__ . '/../../../includes/install.inc';
-    $connection_info = Database::getConnectionInfo();
-    $driver = $connection_info['default']['driver'];
-    $namespace = $connection_info['default']['namespace'] ?? NULL;
-    $errors = db_installer_object($driver, $namespace)->runTasks();
+    $connection = Database::getConnection();
+    $errors = db_installer_object($connection->driver())->runTasks();
     if (!empty($errors)) {
       $this->fail('Failed to run installer database tasks: ' . implode(', ', $errors));
     }
@@ -747,8 +742,21 @@ abstract class KernelTestBase extends TestCase implements ServiceProviderInterfa
     if ($storage instanceof SqlEntityStorageInterface) {
       $tables = $storage->getTableMapping()->getTableNames();
       $db_schema = $this->container->get('database')->schema();
+      $all_tables_exist = TRUE;
       foreach ($tables as $table) {
-        $this->assertTrue($db_schema->tableExists($table), "The entity type table '$table' for the entity type '$entity_type_id' should exist.");
+        if (!$db_schema->tableExists($table)) {
+          $this->fail(new FormattableMarkup('Installed entity type table for the %entity_type entity type: %table', [
+            '%entity_type' => $entity_type_id,
+            '%table' => $table,
+          ]));
+          $all_tables_exist = FALSE;
+        }
+      }
+      if ($all_tables_exist) {
+        $this->pass(new FormattableMarkup('Installed entity type tables for the %entity_type entity type: %tables', [
+          '%entity_type' => $entity_type_id,
+          '%tables' => '{' . implode('}, {', $tables) . '}',
+        ]));
       }
     }
   }

@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\Core\Entity;
 
-use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Entity\Entity\EntityFormMode;
 use Drupal\Core\Entity\EntityType;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
@@ -169,8 +167,6 @@ class EntityTypeTest extends UnitTestCase {
     ]);
     $this->assertSame($controller, $entity_type->getHandlerClass('storage'));
     $this->assertSame($controller, $entity_type->getHandlerClass('form', 'default'));
-    $this->assertNull($entity_type->getHandlerClass('foo'));
-    $this->assertNull($entity_type->getHandlerClass('foo', 'bar'));
   }
 
   /**
@@ -480,26 +476,6 @@ class EntityTypeTest extends UnitTestCase {
   protected function assertNoPublicProperties(EntityTypeInterface $entity_type) {
     $reflection = new \ReflectionObject($entity_type);
     $this->assertEmpty($reflection->getProperties(\ReflectionProperty::IS_PUBLIC));
-  }
-
-  /**
-   * @covers ::entityClassImplements
-   */
-  public function testEntityClassImplements() {
-    $entity_type = $this->setUpEntityType(['class' => EntityFormMode::class]);
-    $this->assertSame(TRUE, $entity_type->entityClassImplements(ConfigEntityInterface::class));
-    $this->assertSame(FALSE, $entity_type->entityClassImplements(\DateTimeInterface::class));
-  }
-
-  /**
-   * @covers ::isSubclassOf
-   * @group legacy
-   * @expectedDeprecation Drupal\Core\Entity\EntityType::isSubclassOf() is deprecated in drupal:8.3.0 and is removed from drupal:10.0.0. Use Drupal\Core\Entity\EntityTypeInterface::entityClassImplements() instead. See https://www.drupal.org/node/2842808
-   */
-  public function testIsSubClassOf() {
-    $entity_type = $this->setUpEntityType(['class' => EntityFormMode::class]);
-    $this->assertSame(TRUE, $entity_type->isSubclassOf(ConfigEntityInterface::class));
-    $this->assertSame(FALSE, $entity_type->isSubclassOf(\DateTimeInterface::class));
   }
 
   /**

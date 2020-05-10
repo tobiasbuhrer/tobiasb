@@ -18,13 +18,7 @@ class MenuLinkContentDeriverTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
-    'menu_link_content',
-    'link',
-    'system',
-    'menu_link_content_dynamic_route',
-    'user',
-  ];
+  public static $modules = ['menu_link_content', 'link', 'system', 'menu_link_content_dynamic_route', 'user'];
 
   /**
    * {@inheritdoc}
@@ -71,7 +65,7 @@ class MenuLinkContentDeriverTest extends KernelTestBase {
     $tree_element = reset($menu_tree);
     $this->assertEqual('route_name_2', $tree_element->link->getRouteName());
     $title = $tree_element->link->getTitle();
-    $this->assertNotInstanceOf(TranslatableMarkup::class, $title);
+    $this->assertFalse($title instanceof TranslatableMarkup);
     $this->assertIdentical('<script>alert("Welcome to the discovered jungle!")</script>', $title);
 
     // Create a hierarchy.

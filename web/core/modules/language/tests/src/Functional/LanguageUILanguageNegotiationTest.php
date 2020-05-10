@@ -58,13 +58,7 @@ class LanguageUILanguageNegotiationTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
-    'locale',
-    'language_test',
-    'block',
-    'user',
-    'content_translation',
-  ];
+  public static $modules = ['locale', 'language_test', 'block', 'user', 'content_translation'];
 
   /**
    * {@inheritdoc}
@@ -558,8 +552,8 @@ class LanguageUILanguageNegotiationTest extends BrowserTestBase {
     $this->assertTrue(in_array('language_content', $config->get('configurable')), 'Content language is configurable.');
 
     // Ensure configuration was saved.
-    $this->assertArrayNotHasKey('language-url', $config->get('negotiation.language_content.enabled'));
-    $this->assertArrayHasKey('language-session', $config->get('negotiation.language_content.enabled'));
+    $this->assertFalse(array_key_exists('language-url', $config->get('negotiation.language_content.enabled')), 'URL negotiation is not enabled for content.');
+    $this->assertTrue(array_key_exists('language-session', $config->get('negotiation.language_content.enabled')), 'Session negotiation is enabled for content.');
   }
 
   /**
