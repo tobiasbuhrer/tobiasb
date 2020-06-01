@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Element;
 /**
  * Tests for webform (text) counter.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementCounterTest extends WebformElementBrowserTestBase {
 

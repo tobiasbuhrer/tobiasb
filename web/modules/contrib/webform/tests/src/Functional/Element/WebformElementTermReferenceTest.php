@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for term reference elements.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
 
@@ -29,7 +29,7 @@ class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
 
     // Create 'tags' vocabulary.

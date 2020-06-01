@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform datelist element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementDateListTest extends WebformElementBrowserTestBase {
 

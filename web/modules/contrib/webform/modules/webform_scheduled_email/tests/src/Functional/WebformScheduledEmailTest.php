@@ -9,7 +9,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for webform scheduled email handler.
  *
- * @group WebformScheduledEmail
+ * @group webform_scheduled_email
  */
 class WebformScheduledEmailTest extends WebformNodeBrowserTestBase {
 

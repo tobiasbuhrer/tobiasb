@@ -11,7 +11,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for webform submission form draft.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSettingsDraftTest extends WebformBrowserTestBase {
 

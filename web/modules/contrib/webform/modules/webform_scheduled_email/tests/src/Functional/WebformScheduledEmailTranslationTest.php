@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform scheduled email handler translation.
  *
- * @group WebformScheduledEmail
+ * @group webform_scheduled_email
  */
 class WebformScheduledEmailTranslationTest extends WebformNodeBrowserTestBase {
 

@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Element;
 /**
  * Tests for webform required validation.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementValidateRequiredTest extends WebformElementBrowserTestBase {
 

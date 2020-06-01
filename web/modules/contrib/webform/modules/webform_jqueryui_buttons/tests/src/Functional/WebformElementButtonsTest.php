@@ -7,7 +7,7 @@ use Drupal\Tests\webform\Functional\Element\WebformElementBrowserTestBase;
 /**
  * Tests for webform element buttons.
  *
- * @group Webform
+ * @group webform_jqueryui_buttons
  */
 class WebformElementButtonsTest extends WebformElementBrowserTestBase {
 

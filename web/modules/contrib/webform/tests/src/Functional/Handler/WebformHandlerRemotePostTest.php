@@ -10,7 +10,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for remote post webform handler functionality.
  *
- * @group Webform
+ * @group webform
  */
 class WebformHandlerRemotePostTest extends WebformBrowserTestBase {
 

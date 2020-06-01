@@ -9,7 +9,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform datetime element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementDateTimeTest extends WebformElementBrowserTestBase {
 
@@ -45,10 +45,15 @@ class WebformElementDateTimeTest extends WebformElementBrowserTestBase {
 
     // Check datepicker and timepicker.
     $now_date = date('D, m/d/Y', strtotime('now'));
-    $this->assertRaw('<input data-drupal-selector="edit-datetime-datepicker-timepicker-date" title="Date (e.g. ' . $now_date . ')" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" data-drupal-date-format="D, m/d/Y" id="edit-datetime-datepicker-timepicker-date" name="datetime_datepicker_timepicker[date]" value="Tue, 08/18/2009" size="15" maxlength="128" class="form-text" />');
+    if (floatval(\Drupal::VERSION) >= 9) {
+      $this->assertRaw('<input data-drupal-selector="edit-datetime-datepicker-timepicker-date" title="Date (e.g. ' . $now_date . ')" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" data-drupal-date-format="D, m/d/Y" placeholder="YYYY-MM-DD" data-help="Enter the date using the format YYYY-MM-DD (e.g., ' . $now_date . ')." id="edit-datetime-datepicker-timepicker-date" name="datetime_datepicker_timepicker[date]" value="Tue, 08/18/2009" size="15" maxlength="128" class="form-text" />');
+    }
+    else {
+      $this->assertRaw('<input data-drupal-selector="edit-datetime-datepicker-timepicker-date" title="Date (e.g. ' . $now_date . ')" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" data-drupal-date-format="D, m/d/Y" id="edit-datetime-datepicker-timepicker-date" name="datetime_datepicker_timepicker[date]" value="Tue, 08/18/2009" size="15" maxlength="128" class="form-text" />');
+    }
     $this->assertRaw('<input data-drupal-selector="edit-datetime-datepicker-timepicker-time"');
     // Skip time which can change during the tests.
-    $this->assertRaw('type="text" step="1" data-webform-time-format="g:i A" id="edit-datetime-datepicker-timepicker-time" name="datetime_datepicker_timepicker[time]" value="4:00 PM" size="12" maxlength="12" class="form-time webform-time" />');
+    $this->assertRaw('id="edit-datetime-datepicker-timepicker-time" name="datetime_datepicker_timepicker[time]" value="4:00 PM" size="12" maxlength="12" class="form-time webform-time" />');
 
     // Check date/time placeholder attribute.
     $this->assertRaw(' type="text" data-drupal-date-format="Y-m-d" placeholder="{date}"');

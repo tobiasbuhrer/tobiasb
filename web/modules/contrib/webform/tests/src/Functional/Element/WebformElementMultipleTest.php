@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform element multiple.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementMultipleTest extends WebformElementBrowserTestBase {
 

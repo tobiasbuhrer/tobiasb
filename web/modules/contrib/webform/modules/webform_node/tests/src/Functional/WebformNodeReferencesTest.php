@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform_node\Functional;
 /**
  * Tests for webform node references.
  *
- * @group WebformNode
+ * @group webform_node
  */
 class WebformNodeReferencesTest extends WebformNodeBrowserTestBase {
 

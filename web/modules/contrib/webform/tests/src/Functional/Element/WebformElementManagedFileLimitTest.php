@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Test for webform element managed file limit.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementManagedFileLimitTest extends WebformElementManagedFileTestBase {
 

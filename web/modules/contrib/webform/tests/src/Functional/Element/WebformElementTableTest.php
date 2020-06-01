@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for table elements.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementTableTest extends WebformElementBrowserTestBase {
 

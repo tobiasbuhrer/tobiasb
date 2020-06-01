@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Element;
 /**
  * Tests for webform pattern validation.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementValidatePatternTest extends WebformElementBrowserTestBase {
 

@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Wizard;
 /**
  * Tests for webform wizard validation.
  *
- * @group Webform
+ * @group webform
  */
 class WebformWizardValidateTest extends WebformWizardTestBase {
 

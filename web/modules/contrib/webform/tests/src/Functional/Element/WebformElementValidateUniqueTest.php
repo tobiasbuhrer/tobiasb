@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform validate unique.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementValidateUniqueTest extends WebformElementBrowserTestBase {
 

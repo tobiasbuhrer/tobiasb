@@ -7,7 +7,7 @@ use Drupal\Tests\webform\Functional\Element\WebformElementBrowserTestBase;
 /**
  * Tests for webform image select images element.
  *
- * @group Webform
+ * @group webform_image_select
  */
 class WebformImageSelectElementImagesTest extends WebformElementBrowserTestBase {
 

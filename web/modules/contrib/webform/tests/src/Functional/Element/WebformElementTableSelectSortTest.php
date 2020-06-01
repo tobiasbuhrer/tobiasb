@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for table select and sort elements.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementTableSelectSortTest extends WebformElementBrowserTestBase {
 

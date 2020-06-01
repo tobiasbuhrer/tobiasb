@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Element;
 /**
  * Tests for webform element multiple property.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementMultiplePropertyTest extends WebformElementBrowserTestBase {
 

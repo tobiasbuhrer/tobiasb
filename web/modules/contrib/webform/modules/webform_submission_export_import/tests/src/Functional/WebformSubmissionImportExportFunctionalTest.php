@@ -11,7 +11,7 @@ use Drupal\webform\Utility\WebformElementHelper;
 /**
  * Webform submission export/import test.
  *
- * @group webform_browser
+ * @group webform_submission_import_export
  */
 class WebformSubmissionImportExportFunctionalTest extends WebformBrowserTestBase {
 

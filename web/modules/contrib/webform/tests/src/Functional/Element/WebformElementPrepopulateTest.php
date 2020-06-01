@@ -9,7 +9,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for webform element prepopulate.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementPrepopulateTest extends WebformElementBrowserTestBase {
 

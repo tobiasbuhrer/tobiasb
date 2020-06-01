@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform conditional wizard.
  *
- * @group Webform
+ * @group webform
  */
 class WebformWizardConditionalTest extends WebformWizardTestBase {
 

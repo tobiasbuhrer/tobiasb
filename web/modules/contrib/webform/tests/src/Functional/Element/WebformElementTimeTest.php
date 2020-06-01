@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Element;
 /**
  * Tests for webform time element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementTimeTest extends WebformElementBrowserTestBase {
 

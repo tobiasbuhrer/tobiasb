@@ -7,7 +7,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for the webform variant apply.
  *
- * @group Webform
+ * @group webform
  */
 class WebformVariantApplyTest extends WebformBrowserTestBase {
 

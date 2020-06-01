@@ -10,7 +10,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for action webform handler functionality.
  *
- * @group Webform
+ * @group webform
  */
 class WebformHandlerActionTest extends WebformBrowserTestBase {
 

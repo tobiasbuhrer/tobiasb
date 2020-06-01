@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform submission list builder.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
 

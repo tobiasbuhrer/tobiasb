@@ -6,7 +6,7 @@ use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 use Drupal\webform\Entity\Webform;
 
 /**
- * Tests webform JavasScript.
+ * Tests webform JavaScript.
  *
  * @group webform_javascript
  */

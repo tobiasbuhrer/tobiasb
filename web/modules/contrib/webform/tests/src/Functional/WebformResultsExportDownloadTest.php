@@ -9,7 +9,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for webform results export download.
  *
- * @group Webform
+ * @group webform
  */
 class WebformResultsExportDownloadTest extends WebformBrowserTestBase {
 

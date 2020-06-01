@@ -9,7 +9,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for webform submission form confirmation.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
 
@@ -32,7 +32,7 @@ class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
 
     // Set page.front (aka <front>) to /node instead of /user/login.

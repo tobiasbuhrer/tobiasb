@@ -8,7 +8,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for webform submission entity.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSubmissionTest extends WebformBrowserTestBase {
 

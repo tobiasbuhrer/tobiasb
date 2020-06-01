@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for the webform variant element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformVariantElementTest extends WebformBrowserTestBase {
 
@@ -29,7 +29,7 @@ class WebformVariantElementTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
     $this->placeBlocks();
   }

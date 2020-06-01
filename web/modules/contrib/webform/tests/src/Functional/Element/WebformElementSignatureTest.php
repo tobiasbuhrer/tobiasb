@@ -8,7 +8,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for signature element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementSignatureTest extends WebformElementBrowserTestBase {
 
@@ -42,14 +42,14 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
     $this->postSubmissionTest($webform, [], t('Preview'));
     $this->assertRaw("$signature_path/signature-");
     $this->assertRaw(' alt="Signature" class="webform-signature-image" />');
-    $this->assertCount(1, file_scan_directory($signature_directory, '/^signature-.*\.png$/'));
+    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_directory, '/^signature-.*\.png$/'));
 
     // Check signature saved image.
     $sid = $this->postSubmissionTest($webform);
     $webform_submission = WebformSubmission::load($sid);
     $this->assertRaw("$signature_path/$sid/signature-");
     $this->assertFileExists("$signature_directory/$sid");
-    $this->assertCount(1, file_scan_directory($signature_directory, '/^signature-.*\.png$/'));
+    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_directory, '/^signature-.*\.png$/'));
 
     /**************************************************************************/
     // Validation.
@@ -73,7 +73,7 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
     $webform_submission->delete();
     $this->assertFileExists("$signature_directory");
     $this->assertFileNotExists("$signature_directory/$sid");
-    $this->assertCount(1, file_scan_directory($signature_directory, '/^signature-.*\.png$/'));
+    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_directory, '/^signature-.*\.png$/'));
 
     // Check deleting the webform deletes webform's signature directory.
     $webform->delete();

@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform date element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementDateTest extends WebformElementBrowserTestBase {
 

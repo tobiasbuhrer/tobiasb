@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform basic wizard.
  *
- * @group Webform
+ * @group webform
  */
 class WebformWizardBasicTest extends WebformWizardTestBase {
 

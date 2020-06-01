@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform third party settings.
  *
- * @group Webform
+ * @group webform
  */
 class WebformThirdPartySettingsTest extends WebformBrowserTestBase {
 
