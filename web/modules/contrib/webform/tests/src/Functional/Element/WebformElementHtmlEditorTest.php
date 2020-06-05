@@ -71,7 +71,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
     $this->assertRaw('<textarea data-drupal-selector="edit-webform-html-editor-codemirror-value" class="js-webform-codemirror webform-codemirror html required form-textarea resize-vertical" required="required" aria-required="true" data-webform-codemirror-mode="text/html" id="edit-webform-html-editor-codemirror-value" name="webform_html_editor_codemirror[value]" rows="5" cols="60">Hello &lt;b&gt;World!!!&lt;/b&gt;</textarea>');
 
     // Disable HTML editor.
-    $this->drupalPostForm('/admin/structure/webform/config/elements', ['html_editor[disabled]' => TRUE], t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/elements', ['html_editor[disabled]' => TRUE], 'Save configuration');
 
     // Check that HTML editor is removed and replaced by CodeMirror HTML editor.
     $this->drupalGet('/webform/test_element_html_editor');
@@ -83,7 +83,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
       'html_editor[disabled]' => FALSE,
       'html_editor[element_format]' => 'basic_html',
     ];
-    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, 'Save configuration');
 
     // Check that Text format is disabled.
     $this->drupalGet('/webform/test_element_html_editor');
@@ -96,7 +96,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
     $edit = [
       'html_editor[element_format]' => '',
     ];
-    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, 'Save configuration');
 
     // Check that tidy removed <p> tags.
     $build = WebformHtmlEditor::checkMarkup('<p>Some text</p>');
@@ -109,7 +109,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
     $this->assertEqual(\Drupal::service('renderer')->renderPlain($build), '<p>Some text</p><p>More text</p>');
 
     // Disable HTML tidy.
-    $this->drupalPostForm('/admin/structure/webform/config/elements', ['html_editor[tidy]' => FALSE], t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/elements', ['html_editor[tidy]' => FALSE], 'Save configuration');
 
     // Check that tidy is disabled.
     $build = WebformHtmlEditor::checkMarkup('<p>Some text</p>');
@@ -122,7 +122,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
       'html_editor[element_format]' => '',
       'html_editor[mail_format]' => '',
     ];
-    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, 'Save configuration');
 
     // Check that HTML editor is used.
     $this->drupalGet('/admin/structure/webform/manage/contact/handlers/email_confirmation/edit');
@@ -132,7 +132,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
     $edit = [
       'html_editor[mail_format]' => 'basic_html',
     ];
-    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, 'Save configuration');
 
     // Check mail text format is used.
     $this->drupalGet('/admin/structure/webform/manage/contact/handlers/email_confirmation/edit');

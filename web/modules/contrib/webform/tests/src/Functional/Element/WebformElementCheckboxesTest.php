@@ -51,7 +51,7 @@ class WebformElementCheckboxesTest extends WebformElementBrowserTestBase {
       'checkboxes_required_conditions[Yes]' => TRUE,
       'checkboxes_other_required_conditions[checkboxes][Yes]' => TRUE,
     ];
-    $this->postSubmission($webform, $edit, t('Preview'));
+    $this->postSubmission($webform, $edit, 'Preview');
     $this->assertNoRaw('<label>checkbox_exclude_empty</label>');
 
     // Uncheck #exclude_empty.
@@ -63,7 +63,7 @@ class WebformElementCheckboxesTest extends WebformElementBrowserTestBase {
       'checkboxes_required_conditions[Yes]' => TRUE,
       'checkboxes_other_required_conditions[checkboxes][Yes]' => TRUE,
     ];
-    $this->postSubmission($webform, $edit, t('Preview'));
+    $this->postSubmission($webform, $edit, 'Preview');
     $this->assertRaw('<label>checkbox_exclude_empty</label>');
   }
 

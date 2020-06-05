@@ -68,7 +68,7 @@ class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
       'webform_term_checkboxes_breadcrumb_advanced[2]' => TRUE,
       'webform_term_checkboxes_breadcrumb_advanced[3]' => TRUE,
     ];
-    $this->postSubmission($webform, $edit, t('Preview'));
+    $this->postSubmission($webform, $edit, 'Preview');
     $this->assertRaw('<label>webform_term_checkboxes_breadcrumb_advanced</label>');
     $this->assertRaw('<div class="item-list"><ul><li>Parent 1 › Parent 1: Child 1</li><li>Parent 1 › Parent 1: Child 2</li></ul></div>');
 
@@ -126,7 +126,7 @@ class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
     $edit = [
       'webform_term_select_breadcrumb_advanced[]' => [2, 3],
     ];
-    $this->postSubmission($webform, $edit, t('Preview'));
+    $this->postSubmission($webform, $edit, 'Preview');
     $this->assertRaw('<label>webform_term_select_breadcrumb_advanced</label>');
     $this->assertRaw('<div class="item-list"><ul><li>Parent 1 › Parent 1: Child 1</li><li>Parent 1 › Parent 1: Child 2</li></ul></div>');
 

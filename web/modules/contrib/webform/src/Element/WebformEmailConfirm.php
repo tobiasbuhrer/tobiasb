@@ -140,6 +140,14 @@ class WebformEmailConfirm extends FormElement {
     $element += ['#element_validate' => []];
     array_unshift($element['#element_validate'], [get_called_class(), 'validateWebformEmailConfirm']);
 
+    // Add clientside valiation support for equal to.
+    if (\Drupal::moduleHandler()->moduleExists('clientside_validation')) {
+      $element['mail_2'] += [
+        '#equal_to' => $element['#name'] . '[mail_1]',
+        '#equal_to_error' => t('The specified email addresses do not match.'),
+      ];
+    }
+
     // Add flexbox support.
     if (!empty($element['#flexbox'])) {
       $flex_wrapper = [
@@ -156,14 +164,6 @@ class WebformEmailConfirm extends FormElement {
         ],
       ];
       unset($element['mail_1'], $element['mail_2']);
-    }
-
-    // Add clientside valiation support for equal to.
-    if (\Drupal::moduleHandler()->moduleExists('clientside_validation')) {
-      $element['mail_2'] += [
-        '#equal_to' => $element['#name'] . '[mail_1]',
-        '#equal_to_error' => t('The specified email addresses do not match.'),
-      ];
     }
 
     return $element;

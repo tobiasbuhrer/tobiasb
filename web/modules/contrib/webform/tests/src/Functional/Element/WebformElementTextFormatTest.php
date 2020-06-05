@@ -121,7 +121,7 @@ class WebformElementTextFormatTest extends WebformElementBrowserTestBase {
       'text_format[value]' => '<img data-entity-type="file" data-entity-uuid="' . $images[0]->uuid() . '"/><img data-entity-type="file" data-entity-uuid="' . $images[1]->uuid() . '"/>',
       'text_format[format]' => 'full_html',
     ];
-    $this->drupalPostForm("/admin/structure/webform/manage/test_element_text_format/submission/$sid/edit", $edit, t('Save'));
+    $this->drupalPostForm("/admin/structure/webform/manage/test_element_text_format/submission/$sid/edit", $edit, 'Save');
     $this->reloadImages($images);
 
     // Check that first and second image are not temporary.
@@ -138,7 +138,7 @@ class WebformElementTextFormatTest extends WebformElementBrowserTestBase {
       'text_format[value]' => '<img data-entity-type="file" data-entity-uuid="' . $images[1]->uuid() . '"/>',
       'text_format[format]' => 'full_html',
     ];
-    $this->drupalPostForm("/admin/structure/webform/manage/test_element_text_format/submission/$sid/edit", $edit, t('Save'));
+    $this->drupalPostForm("/admin/structure/webform/manage/test_element_text_format/submission/$sid/edit", $edit, 'Save');
     $this->reloadImages($images);
 
     // Check that first is temporary and second image is not temporary.
@@ -165,7 +165,7 @@ class WebformElementTextFormatTest extends WebformElementBrowserTestBase {
     $this->assertIdentical(['editor' => ['webform_submission' => [$sid => '1']]], $this->fileUsage->listUsage($images[1]), 'The file has 1 usage.');
 
     // Delete the webform submission.
-    $this->drupalPostForm("/admin/structure/webform/manage/test_element_text_format/submission/$sid/delete", [], t('Delete'));
+    $this->drupalPostForm("/admin/structure/webform/manage/test_element_text_format/submission/$sid/delete", [], 'Delete');
     $this->reloadImages($images);
 
     // Check that first and second image are temporary.

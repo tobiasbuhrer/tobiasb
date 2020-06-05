@@ -311,6 +311,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       ->fields('sd', ['sid'])
       ->condition('sd.webform_id', $webform->id())
       ->condition('sd.name', $element_key)
+      ->range(0, 1)
       ->execute();
     return $result->fetchAssoc() ? TRUE : FALSE;
   }
