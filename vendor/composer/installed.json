@@ -2968,18 +2968,18 @@
     },
     {
         "name": "drupal/geofield",
-        "version": "1.14.0",
-        "version_normalized": "1.14.0.0",
+        "version": "1.15.0",
+        "version_normalized": "1.15.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/geofield.git",
-            "reference": "8.x-1.14"
+            "reference": "8.x-1.15"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.14.zip",
-            "reference": "8.x-1.14",
-            "shasum": "821b6dacf5a7b7d30cd413a9cb944c00a009c0b7"
+            "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.15.zip",
+            "reference": "8.x-1.15",
+            "shasum": "b2726d7d6cd46a8b4615c828f7944bcba1193875"
         },
         "require": {
             "drupal/core": "^8.8 || ^9",
@@ -2988,8 +2988,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-1.14",
-                "datestamp": "1591462555",
+                "version": "8.x-1.15",
+                "datestamp": "1591556172",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -6213,8 +6213,8 @@
     },
     {
         "name": "symfony/config",
-        "version": "v3.4.41",
-        "version_normalized": "3.4.41.0",
+        "version": "v3.4.42",
+        "version_normalized": "3.4.42.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/config.git",
@@ -6381,8 +6381,8 @@
     },
     {
         "name": "symfony/css-selector",
-        "version": "v3.4.41",
-        "version_normalized": "3.4.41.0",
+        "version": "v3.4.42",
+        "version_normalized": "3.4.42.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/css-selector.git",
@@ -6609,8 +6609,8 @@
     },
     {
         "name": "symfony/dom-crawler",
-        "version": "v3.4.41",
-        "version_normalized": "3.4.41.0",
+        "version": "v3.4.42",
+        "version_normalized": "3.4.42.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/dom-crawler.git",
@@ -6761,8 +6761,8 @@
     },
     {
         "name": "symfony/filesystem",
-        "version": "v3.4.41",
-        "version_normalized": "3.4.41.0",
+        "version": "v3.4.42",
+        "version_normalized": "3.4.42.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/filesystem.git",
@@ -6827,8 +6827,8 @@
     },
     {
         "name": "symfony/finder",
-        "version": "v3.4.41",
-        "version_normalized": "3.4.41.0",
+        "version": "v3.4.42",
+        "version_normalized": "3.4.42.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/finder.git",
@@ -6874,7 +6874,21 @@
             }
         ],
         "description": "Symfony Finder Component",
-        "homepage": "https://symfony.com"
+        "homepage": "https://symfony.com",
+        "funding": [
+            {
+                "url": "https://symfony.com/sponsor",
+                "type": "custom"
+            },
+            {
+                "url": "https://github.com/fabpot",
+                "type": "github"
+            },
+            {
+                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                "type": "tidelift"
+            }
+        ]
     },
     {
         "name": "symfony/http-foundation",
@@ -8225,8 +8239,8 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v4.4.9",
-        "version_normalized": "4.4.9.0",
+        "version": "v4.4.10",
+        "version_normalized": "4.4.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
@@ -8511,33 +8525,33 @@
     },
     {
         "name": "vlucas/phpdotenv",
-        "version": "v2.6.4",
-        "version_normalized": "2.6.4.0",
+        "version": "v2.6.5",
+        "version_normalized": "2.6.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/vlucas/phpdotenv.git",
-            "reference": "67d472b1794c986381a8950e4958e1adb779d561"
+            "reference": "2e977311ffb17b2f82028a9c36824647789c6365"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/67d472b1794c986381a8950e4958e1adb779d561",
-            "reference": "67d472b1794c986381a8950e4958e1adb779d561",
+            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2e977311ffb17b2f82028a9c36824647789c6365",
+            "reference": "2e977311ffb17b2f82028a9c36824647789c6365",
             "shasum": ""
         },
         "require": {
             "php": "^5.3.9 || ^7.0 || ^8.0",
-            "symfony/polyfill-ctype": "^1.9"
+            "symfony/polyfill-ctype": "^1.16"
         },
         "require-dev": {
             "ext-filter": "*",
             "ext-pcre": "*",
-            "phpunit/phpunit": "^4.8.35 || ^5.0"
+            "phpunit/phpunit": "^4.8.35 || ^5.7.27"
         },
         "suggest": {
             "ext-filter": "Required to use the boolean validator.",
             "ext-pcre": "Required to use most of the library."
         },
-        "time": "2020-05-02T13:38:00+00:00",
+        "time": "2020-06-02T14:06:52+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
