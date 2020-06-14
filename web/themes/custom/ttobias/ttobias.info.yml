@@ -3,6 +3,7 @@ type: theme
 description: "Theme for ttobias.net website. Based on Bulma"
 package: Other
 core: 8.x
+core_version_requirement: ^8 || ^9 
 libraries:
   - ttobias/global-styling
   - ttobias/fonts

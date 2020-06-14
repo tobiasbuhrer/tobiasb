@@ -88,7 +88,7 @@ class Ttobias {
 
           // Default choice in select or checkbox is not selected.
           case '0':
-            continue;
+            break;
 
           // Cases for checkbox settings.
           case 1:
@@ -210,7 +210,7 @@ class Ttobias {
             break;
 
           case 'contains':
-            if (strpos(Unicode::strtolower($value), Unicode::strtolower($text)) !== FALSE) {
+            if (strpos(mb_strtolower($value), mb_strtolower($text)) !== FALSE) {
               return $class;
             }
             break;
@@ -315,7 +315,7 @@ class Ttobias {
     ];
 
     foreach ($icons as $key => $icon) {
-      if (Unicode::strtolower($name) === Unicode::strtolower($key)) {
+      if (mb_strtolower($name) === mb_strtolower($key)) {
         $class = $icon;
       }
     }
