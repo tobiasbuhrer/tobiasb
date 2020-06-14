@@ -37,6 +37,7 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         '786bf90caabc9e09b6ad4cc5ca8f0e30' => __DIR__ . '/..' . '/laminas/laminas-diactoros/src/functions/normalize_uploaded_files.legacy.php',
         '751a5a3f463e4be759be31748b61737c' => __DIR__ . '/..' . '/laminas/laminas-diactoros/src/functions/parse_cookie_header.legacy.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
+        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '952683d815ff0a7bf322b93c0be7e4e4' => __DIR__ . '/..' . '/chi-teck/drupal-code-generator/src/bootstrap.php',
         '5a12a5271c58108e0aa33355e6ac54ea' => __DIR__ . '/..' . '/drupal/console-core/src/functions.php',
@@ -51,6 +52,11 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         'c' => 
         array (
             'cweagans\\Composer\\' => 18,
+        ),
+        'Z' => 
+        array (
+            'Zend\\Text\\' => 10,
+            'Zend\\ServiceManager\\' => 20,
         ),
         'X' => 
         array (
@@ -112,10 +118,12 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
+            'PHPStan\\' => 8,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
+            'MathieuViossat\\Util\\' => 20,
             'Masterminds\\' => 12,
         ),
         'L' => 
@@ -196,6 +204,14 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         'cweagans\\Composer\\' => 
         array (
             0 => __DIR__ . '/..' . '/cweagans/composer-patches/src',
+        ),
+        'Zend\\Text\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-text/src',
+        ),
+        'Zend\\ServiceManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-servicemanager/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -369,9 +385,18 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'PHPStan\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'MathieuViossat\\Util\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mathieuviossat/arraytotexttable/src',
         ),
         'Masterminds\\' => 
         array (
@@ -630,6 +655,47 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         'Drupal\\Core\\DrupalKernelInterface' => __DIR__ . '/../..' . '/web/core/lib/Drupal/Core/DrupalKernelInterface.php',
         'Drupal\\Core\\Site\\Settings' => __DIR__ . '/../..' . '/web/core/lib/Drupal/Core/Site/Settings.php',
         'Error' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/Error.php',
+        'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\DeprecatedException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\DirectoryNotFoundException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\FileNotFoundException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\IOException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\InvalidArgumentException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\InvalidStateException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\Iterators\\CachingIterator' => __DIR__ . '/..' . '/nette/utils/src/Iterators/CachingIterator.php',
+        'Nette\\Iterators\\Mapper' => __DIR__ . '/..' . '/nette/utils/src/Iterators/Mapper.php',
+        'Nette\\Localization\\ITranslator' => __DIR__ . '/..' . '/nette/utils/src/Utils/ITranslator.php',
+        'Nette\\MemberAccessException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\NotImplementedException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\NotSupportedException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\OutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\SmartObject' => __DIR__ . '/..' . '/nette/utils/src/Utils/SmartObject.php',
+        'Nette\\StaticClass' => __DIR__ . '/..' . '/nette/utils/src/Utils/StaticClass.php',
+        'Nette\\UnexpectedValueException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\Utils\\ArrayHash' => __DIR__ . '/..' . '/nette/utils/src/Utils/ArrayHash.php',
+        'Nette\\Utils\\ArrayList' => __DIR__ . '/..' . '/nette/utils/src/Utils/ArrayList.php',
+        'Nette\\Utils\\Arrays' => __DIR__ . '/..' . '/nette/utils/src/Utils/Arrays.php',
+        'Nette\\Utils\\AssertionException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\Utils\\Callback' => __DIR__ . '/..' . '/nette/utils/src/Utils/Callback.php',
+        'Nette\\Utils\\DateTime' => __DIR__ . '/..' . '/nette/utils/src/Utils/DateTime.php',
+        'Nette\\Utils\\FileSystem' => __DIR__ . '/..' . '/nette/utils/src/Utils/FileSystem.php',
+        'Nette\\Utils\\Finder' => __DIR__ . '/..' . '/nette/finder/src/Utils/Finder.php',
+        'Nette\\Utils\\Helpers' => __DIR__ . '/..' . '/nette/utils/src/Utils/Helpers.php',
+        'Nette\\Utils\\Html' => __DIR__ . '/..' . '/nette/utils/src/Utils/Html.php',
+        'Nette\\Utils\\IHtmlString' => __DIR__ . '/..' . '/nette/utils/src/Utils/IHtmlString.php',
+        'Nette\\Utils\\Image' => __DIR__ . '/..' . '/nette/utils/src/Utils/Image.php',
+        'Nette\\Utils\\ImageException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\Utils\\Json' => __DIR__ . '/..' . '/nette/utils/src/Utils/Json.php',
+        'Nette\\Utils\\JsonException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\Utils\\ObjectHelpers' => __DIR__ . '/..' . '/nette/utils/src/Utils/ObjectHelpers.php',
+        'Nette\\Utils\\ObjectMixin' => __DIR__ . '/..' . '/nette/utils/src/Utils/ObjectMixin.php',
+        'Nette\\Utils\\Paginator' => __DIR__ . '/..' . '/nette/utils/src/Utils/Paginator.php',
+        'Nette\\Utils\\Random' => __DIR__ . '/..' . '/nette/utils/src/Utils/Random.php',
+        'Nette\\Utils\\Reflection' => __DIR__ . '/..' . '/nette/utils/src/Utils/Reflection.php',
+        'Nette\\Utils\\RegexpException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\Utils\\Strings' => __DIR__ . '/..' . '/nette/utils/src/Utils/Strings.php',
+        'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
         'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'ParseError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
         'SessionUpdateTimestampHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',

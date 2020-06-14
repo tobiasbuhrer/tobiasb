@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'lsolesen\\pel\\' => array($vendorDir . '/lsolesen/pel/src'),
     'cweagans\\Composer\\' => array($vendorDir . '/cweagans/composer-patches/src'),
+    'Zend\\Text\\' => array($vendorDir . '/zendframework/zend-text/src'),
+    'Zend\\ServiceManager\\' => array($vendorDir . '/zendframework/zend-servicemanager/src'),
     'XdgBaseDir\\' => array($vendorDir . '/dnoegel/php-xdg-base-dir/src'),
     'Webmozart\\PathUtil\\' => array($vendorDir . '/webmozart/path-util/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
@@ -51,7 +53,9 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
+    'PHPStan\\' => array($vendorDir . '/mglaman/phpstan-drupal/src', $vendorDir . '/phpstan/phpstan-deprecation-rules/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'MathieuViossat\\Util\\' => array($vendorDir . '/mathieuviossat/arraytotexttable/src'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
     'League\\Container\\' => array($vendorDir . '/league/container/src'),
     'Laminas\\ZendFrameworkBridge\\' => array($vendorDir . '/laminas/laminas-zendframework-bridge/src'),

@@ -348,6 +348,7 @@
         "drupal/plupload": "1.x-dev",
         "drupal/plupload_widget": "^1.0",
         "drupal/smtp": "^1.0",
+        "drupal/upgrade_status": "^2.0",
         "drupal/video": "^1.2",
         "drupal/webform": "^5.0",
         "drush/drush": "^9.0.0",
