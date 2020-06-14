@@ -11,6 +11,8 @@ use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\StreamWrapper;
 
 /**
  * Class ImportForm.
@@ -123,7 +125,7 @@ class ImportForm extends ConfigFormBase
         // Create target directory if necessary.
         $destination = \Drupal::config('system.file')
                 ->get('default_scheme') . $currentmonth;
-        file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+        \Drupal::service('file_system')->prepareDirectory($destination, \Drupal\Core\File\FileSystemInterface::CREATE_DIRECTORY | \Drupal\Core\File\FileSystemInterface::MODIFY_PERMISSIONS );
         $styles = ImageStyle::loadMultiple();
 
         //fields of target node type
@@ -131,10 +133,11 @@ class ImportForm extends ConfigFormBase
 
         foreach ($form_state->getValue('plupload') as $uploaded_file) {
 
-            $file_uri = file_stream_wrapper_uri_normalize($destination . '/' . $uploaded_file['name']);
+	    $file_uri = \Drupal::service('stream_wrapper_manager')->normalizeUri($destination . '/' . $uploaded_file['name']);
 
             // Create file object from a locally copied file.
-            $uri = file_unmanaged_copy($uploaded_file['tmppath'], $file_uri, FILE_EXISTS_REPLACE);
+            $uri = \Drupal::service('file_system')->copy($uploaded_file['tmppath'], $file_uri, \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE);
+            
             $file = File::Create([
                 'uid' => 1,
                 'uri' => $uri,

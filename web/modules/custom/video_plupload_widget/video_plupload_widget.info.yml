@@ -2,6 +2,7 @@ name: 'Video Plupload widget'
 type: module
 description: 'Adds a plupload-type upload field to the video content type'
 core: 8.x
+core_version_requirement: ^8 || ^9
 package: 'Custom'
 dependencies:
   - plupload
