@@ -8,7 +8,7 @@ php: '7.1'
 dependencies:
   - drupal:update
 
-# Information added by Drupal.org packaging script on 2020-06-02
-version: '8.x-2.7'
+# Information added by Drupal.org packaging script on 2020-06-18
+version: '8.x-2.8'
 project: 'upgrade_status'
-datestamp: 1591125754
+datestamp: 1592489913

@@ -21,7 +21,7 @@ final class DeprecationAnalyzer {
    *
    * @var string
    */
-  const CORE_MINOR_OLDEST_SUPPORTED = '8.7';
+  const CORE_MINOR_OLDEST_SUPPORTED = '8.8';
 
   /**
    * Upgrade status scan result storage.
@@ -335,7 +335,7 @@ final class DeprecationAnalyzer {
         $error_path = str_replace(DRUPAL_ROOT . '/', '', $info_file);
         if (!isset($info['core_version_requirement'])) {
           $result['data']['files'][$error_path]['messages'][] = [
-            'message' => "Add <code>core_version_requirement: ^8 || ^9</code> to {$error_path} to designate that the module is compatible with Drupal 9. See https://drupal.org/node/3070687.",
+            'message' => "Add core_version_requirement: ^8 || ^9 to designate that the module is compatible with Drupal 9. See https://drupal.org/node/3070687.",
             'line' => 0,
           ];
           $result['data']['totals']['errors']++;
@@ -344,7 +344,7 @@ final class DeprecationAnalyzer {
         }
         elseif (!Semver::satisfies('9.0.0', $info['core_version_requirement'])) {
           $result['data']['files'][$error_path]['messages'][] = [
-            'message' => "The current value  <code>core_version_requirement: {$info['core_version_requirement']}</code> in {$error_path} is not compatible with Drupal 9.0.0. See https://drupal.org/node/3070687.",
+            'message' => "Value of core_version_requirement: {$info['core_version_requirement']} is not compatible with Drupal 9.0.0. See https://drupal.org/node/3070687.",
             'line' => 0,
           ];
           $result['data']['totals']['errors']++;
@@ -634,10 +634,18 @@ final class DeprecationAnalyzer {
       // Covered below with the pattern.
       //'Call to deprecated method l() of class [redacted]. Deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use Drupal\Core\Link::fromTextAndUrl() instead.',
       'Call to deprecated function entity_create(). Deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use The method overriding Entity::create() for the entity type, e.g. \Drupal\node\Entity\Node::create() if the entity type is known. If the entity type is variable, use the entity storage\'s create() method to construct a new entity:',
+
+      // 0.5.5
+      // No new rules
+
+      // 0.5.6
+      'Call to deprecated constant DATETIME_STORAGE_TIMEZONE: Deprecated in drupal:8.5.0 and is removed from drupal:9.0.0. Use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface::STORAGE_TIMEZONE instead.',
+      'Call to deprecated constant DATETIME_DATETIME_STORAGE_FORMAT: Deprecated in drupal:8.5.0 and is removed from drupal:9.0.0. Use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface::DATETIME_STORAGE_FORMAT instead.',
+      'Call to deprecated constant DATETIME_DATE_STORAGE_FORMAT: Deprecated in drupal:8.5.0 and is removed from drupal:9.0.0. Use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface::DATE_STORAGE_FORMAT instead.',
     ];
     return
       in_array($string, $rector_covered) ||
-      preg_match('!Call to deprecated method l\\(\\) of class Drupal\\\\.+ Deprecated in!', $string);
+      strpos($string, 'Call to deprecated method l() of class Drupal') === 0;
   }
 
   /**
@@ -650,7 +658,15 @@ final class DeprecationAnalyzer {
    *   A list of paths to .info.yml files found under the base path.
    */
   private function getSubExtensionInfoFiles(string $path) {
-    $files = glob($path . '/*.info.yml');
+    $files = [];
+    foreach(glob($path . '/*.info.yml') as $file) {
+      // Make sure the filename matches rules for an extension. There may be
+      // info.yml files in shipped configuration which would have more parts.
+      $parts = explode('.', basename($file));
+      if (count($parts) == 3) {
+        $files[] = $file;
+      }
+    }
     foreach (glob($path . '/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
       $files = array_merge($files, $this->getSubExtensionInfoFiles($dir));
     }
