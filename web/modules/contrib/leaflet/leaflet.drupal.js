@@ -112,6 +112,8 @@
 
     // Set the public map object, to make it accessible from outside.
     Drupal.Leaflet[mapid] = {};
+    // Define immediately the l.Map property, to make sub-methods mapid specific.
+    Drupal.Leaflet[mapid].lMap = self.lMap;
 
     // Add map layers (base and overlay layers).
     let i = 0;
@@ -158,9 +160,6 @@
     if (self.settings.fullscreen_control) {
       self.lMap.addControl(new L.Control.Fullscreen());
     }
-
-    // Finally define the l.Map property, to make it accessible from outside.
-    Drupal.Leaflet[mapid].lMap = self.lMap;
 
   };
 
@@ -231,7 +230,7 @@
           lFeature = self.create_feature(groupFeature);
           if (lFeature !== undefined) {
             if (lFeature.setStyle) {
-              feature.path = feature.path ? JSON.parse(feature.path) : {};
+              feature.path = feature.path ? (feature.path instanceof Object ? feature.path : JSON.parse(feature.path)) : {};
               lFeature.setStyle(feature.path);
             }
             if (groupFeature.popup) {
@@ -248,7 +247,7 @@
         lFeature = self.create_feature(feature);
         if (lFeature !== undefined) {
           if (lFeature.setStyle) {
-            feature.path = feature.path ? JSON.parse(feature.path) : {};
+            feature.path = feature.path ? (feature.path instanceof Object ? feature.path : JSON.parse(feature.path)) : {};
             lFeature.setStyle(feature.path);
           }
           self.lMap.addLayer(lFeature);

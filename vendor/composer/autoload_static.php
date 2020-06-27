@@ -53,11 +53,6 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         array (
             'cweagans\\Composer\\' => 18,
         ),
-        'Z' => 
-        array (
-            'Zend\\Text\\' => 10,
-            'Zend\\ServiceManager\\' => 20,
-        ),
         'X' => 
         array (
             'XdgBaseDir\\' => 11,
@@ -130,7 +125,9 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         array (
             'League\\Container\\' => 17,
             'Laminas\\ZendFrameworkBridge\\' => 28,
+            'Laminas\\Text\\' => 13,
             'Laminas\\Stdlib\\' => 15,
+            'Laminas\\ServiceManager\\' => 23,
             'Laminas\\Feed\\' => 13,
             'Laminas\\Escaper\\' => 16,
             'Laminas\\Diactoros\\' => 18,
@@ -204,14 +201,6 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         'cweagans\\Composer\\' => 
         array (
             0 => __DIR__ . '/..' . '/cweagans/composer-patches/src',
-        ),
-        'Zend\\Text\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zendframework/zend-text/src',
-        ),
-        'Zend\\ServiceManager\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zendframework/zend-servicemanager/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -410,9 +399,17 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src',
         ),
+        'Laminas\\Text\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-text/src',
+        ),
         'Laminas\\Stdlib\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-stdlib/src',
+        ),
+        'Laminas\\ServiceManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-servicemanager/src',
         ),
         'Laminas\\Feed\\' => 
         array (
@@ -699,6 +696,7 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'ParseError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
         'SessionUpdateTimestampHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',
+        'Spoons\\ScriptHandler' => __DIR__ . '/../..' . '/web/modules/contrib/devel/.spoons/ScriptHandler.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
