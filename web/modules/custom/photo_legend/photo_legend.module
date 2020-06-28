@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_help().
@@ -64,7 +65,9 @@ function photo_legend_node_presave(Drupal\Core\Entity\EntityInterface $entity) {
             }
 
         if ($p_date[0]['value']) {
-            $p_date = new DateTime($p_date[0]['value']);
+            $p_date = new DrupalDateTime($p_date[0]['value']);
+            //correction for timezone offset, we do NOT want to correct the timezone.
+            $p_date->modify($p_date->Format("Z") . ' seconds');
             $p_date = $p_date->format("j F Y, H:i");
             $needle = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
             $replace = array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");

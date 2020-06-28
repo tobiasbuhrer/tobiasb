@@ -13,6 +13,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Class ImportForm.
@@ -168,7 +169,7 @@ class ImportForm extends ConfigFormBase
             $newnode[$config->get('image_field')]['alt'] = $title;
 
             $configs = $config->get();
-
+            
 
             foreach ($configs as $key => $mapping) {
                 if ((substr($key, 0, 5) == 'exif_') and ($key !== 'exif_title')) {
@@ -190,7 +191,10 @@ class ImportForm extends ConfigFormBase
 
                             //we don't write empty values. If no value is written, default will be applied.
                             if (!empty($datetime)) {
-                                $newnode[$fieldname] = date_format($datetime, 'Y-m-d H:i:s');
+                                //$newnode[$fieldname] = date_format($datetime, 'Y-m-d\TH:i:s');
+                                $date = DrupalDateTime::createFromDateTime($datetime);
+                                $date->setTimezone(new \DateTimeZone('UTC'));
+                                $newnode[$fieldname] = $date->format('Y-m-d\TH:i:s');
                             }
                             break;
                         case "geolocation":
