@@ -4002,18 +4002,18 @@
     },
     {
         "name": "drupal/webform",
-        "version": "5.18.0",
-        "version_normalized": "5.18.0.0",
+        "version": "5.19.0",
+        "version_normalized": "5.19.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/webform.git",
-            "reference": "8.x-5.18"
+            "reference": "8.x-5.19"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.18.zip",
-            "reference": "8.x-5.18",
-            "shasum": "539d0ba5bacc402cf6ea2a3419ae164703a09aa0"
+            "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.19.zip",
+            "reference": "8.x-5.19",
+            "shasum": "90a2084c2647bca791cc8b18a7e2a3b49f3da7ea"
         },
         "require": {
             "drupal/core": "^8.8"
@@ -4052,8 +4052,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-5.18",
-                "datestamp": "1593034084",
+                "version": "8.x-5.19",
+                "datestamp": "1593681136",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -5773,17 +5773,17 @@
     },
     {
         "name": "nikic/php-parser",
-        "version": "v4.5.0",
-        "version_normalized": "4.5.0.0",
+        "version": "v4.6.0",
+        "version_normalized": "4.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nikic/PHP-Parser.git",
-            "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463"
+            "reference": "c346bbfafe2ff60680258b631afb730d186ed864"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/53c2753d756f5adb586dca79c2ec0e2654dd9463",
-            "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c346bbfafe2ff60680258b631afb730d186ed864",
+            "reference": "c346bbfafe2ff60680258b631afb730d186ed864",
             "shasum": ""
         },
         "require": {
@@ -5794,7 +5794,7 @@
             "ircmaxell/php-yacc": "0.0.5",
             "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
         },
-        "time": "2020-06-03T07:24:19+00:00",
+        "time": "2020-07-02T17:12:47+00:00",
         "bin": [
             "bin/php-parse"
         ],
@@ -6241,17 +6241,17 @@
     },
     {
         "name": "phpstan/phpstan",
-        "version": "0.12.31",
-        "version_normalized": "0.12.31.0",
+        "version": "0.12.32",
+        "version_normalized": "0.12.32.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpstan/phpstan.git",
-            "reference": "776c8056b401e1b67f277b9e9fb334d1a274671d"
+            "reference": "d03863f504c8432b3de4d1881f73f6acb8c0e67c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpstan/phpstan/zipball/776c8056b401e1b67f277b9e9fb334d1a274671d",
-            "reference": "776c8056b401e1b67f277b9e9fb334d1a274671d",
+            "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d03863f504c8432b3de4d1881f73f6acb8c0e67c",
+            "reference": "d03863f504c8432b3de4d1881f73f6acb8c0e67c",
             "shasum": ""
         },
         "require": {
@@ -6260,7 +6260,7 @@
         "conflict": {
             "phpstan/phpstan-shim": "*"
         },
-        "time": "2020-06-24T20:55:29+00:00",
+        "time": "2020-07-01T11:57:52+00:00",
         "bin": [
             "phpstan",
             "phpstan.phar"
