@@ -129,7 +129,7 @@ class JuiceboxFieldFormatter extends ImageFormatterBase implements ContainerFact
     if ($this->isPseudoInstance()) {
       $element['instance_warning'] = array(
         '#prefix' => '<div class="messages messages--warning">',
-        '#markup' => t('<strong>WARNING:</strong> You appear to be using the Juicebox field formatter with a field instance that is not directly attached to an entity. Support for this configuration is currently experimental. Please test your final gallery output thoroughly.'),
+        '#markup' => $this->t('<strong>WARNING:</strong> You appear to be using the Juicebox field formatter with a field instance that is not directly attached to an entity. Support for this configuration is currently experimental. Please test your final gallery output thoroughly.'),
         '#suffix' => '</div>',
       );
     }
@@ -138,35 +138,35 @@ class JuiceboxFieldFormatter extends ImageFormatterBase implements ContainerFact
     // Add the field-formatter-specific elements.
     $element['image_style'] = array(
       '#type' => 'select',
-      '#title' => t('Main Image Style'),
+      '#title' => $this->t('Main Image Style'),
       '#default_value' => $this->getSetting('image_style'),
-      '#description' => t('The style formatter for the main image.'),
+      '#description' => $this->t('The style formatter for the main image.'),
       '#options' => $this->juicebox->confBaseStylePresets(),
-      '#empty_option' => t('None (original image)'),
+      '#empty_option' => $this->t('None (original image)'),
     );
     $element['thumb_style'] = array(
       '#type' => 'select',
-      '#title' => t('Thumbnail Style'),
+      '#title' => $this->t('Thumbnail Style'),
       '#default_value' => $this->getSetting('thumb_style'),
-      '#description' => t('The style formatter for the thumbnail.'),
+      '#description' => $this->t('The style formatter for the thumbnail.'),
       '#options' => $this->juicebox->confBaseStylePresets(FALSE),
-      '#empty_option' => t('None (original image)'),
+      '#empty_option' => $this->t('None (original image)'),
     );
     $element['caption_source'] = array(
       '#type' => 'select',
-      '#title' => t('Caption Source'),
+      '#title' => $this->t('Caption Source'),
       '#default_value' => $this->getSetting('caption_source'),
-      '#description' => t('The image value that should be used for the caption.'),
+      '#description' => $this->t('The image value that should be used for the caption.'),
       '#options' => $text_sources,
-      '#empty_option' => t('No caption'),
+      '#empty_option' => $this->t('No caption'),
     );
     $element['title_source'] = array(
       '#type' => 'select',
-      '#title' => t('Title Source'),
+      '#title' => $this->t('Title Source'),
       '#default_value' => $this->getSetting('title_source'),
-      '#description' => t('The image value that should be used for the title.'),
+      '#description' => $this->t('The image value that should be used for the title.'),
       '#options' => $text_sources,
-      '#empty_option' => t('No title'),
+      '#empty_option' => $this->t('No title'),
     );
     // Add the common configuration options.
     $element = $this->juicebox->confBaseForm($element, $this->getSettings());
@@ -186,17 +186,17 @@ class JuiceboxFieldFormatter extends ImageFormatterBase implements ContainerFact
       $style = $presets[$settings['image_style']];
     }
     else {
-      $style = t('Original Image');
+      $style = $this->t('Original Image');
     }
-    $settings_display[] = t("Image style: @style", array('@style' => $style));
+    $settings_display[] = $this->t("Image style: @style", array('@style' => $style));
     // Thumb style setting.
     if (!empty($settings['thumb_style']) && isset($presets[$settings['thumb_style']])) {
       $style = $presets[$settings['thumb_style']];
     }
     else {
-      $style = t('Original Image');
+      $style = $this->t('Original Image');
     }
-    $settings_display[] = t("Thumbnail style: @style", array('@style' => $style));
+    $settings_display[] = $this->t("Thumbnail style: @style", array('@style' => $style));
     // Define display options for caption and title source.
     $text_sources = $this->getFieldTextSources();
     // Caption source setting.
@@ -204,19 +204,19 @@ class JuiceboxFieldFormatter extends ImageFormatterBase implements ContainerFact
       $source = $text_sources[$settings['caption_source']];
     }
     else {
-      $source = t('None');
+      $source = $this->t('None');
     }
-    $settings_display[] = t("Caption source: @source", array('@source' => $source));
+    $settings_display[] = $this->t("Caption source: @source", array('@source' => $source));
     // Title source setting.
     if (!empty($text_sources[$settings['title_source']])) {
       $source = $text_sources[$settings['title_source']];
     }
     else {
-      $source = t('None');
+      $source = $this->t('None');
     }
-    $settings_display[] = t("Title source: @source", array('@source' => $source));
+    $settings_display[] = $this->t("Title source: @source", array('@source' => $source));
     // Add-in a note about the additional fieldsets.
-    $settings_display[] = t("Additional Juicebox library configuration options may also be set.");
+    $settings_display[] = $this->t("Additional Juicebox library configuration options may also be set.");
     return $settings_display;
   }
 
@@ -244,7 +244,7 @@ class JuiceboxFieldFormatter extends ImageFormatterBase implements ContainerFact
     // previously saved version (that is the only version the XML generation
     // methods will have access to). Display a warning because of this.
     if (!empty($entity->in_preview)) {
-      drupal_set_message(t('Juicebox galleries may not display correctly in preview mode. Any edits made to gallery data will only be visible after all changes are saved.'), 'warning', FALSE);
+      drupal_set_message($this->t('Juicebox galleries may not display correctly in preview mode. Any edits made to gallery data will only be visible after all changes are saved.'), 'warning', FALSE);
     }
     // Generate xml details.
     $xml_route_info = array(
@@ -361,7 +361,7 @@ class JuiceboxFieldFormatter extends ImageFormatterBase implements ContainerFact
    */
   protected function getFieldTextSources() {
     // The filename should always be an available option.
-    $text_source_options['filename'] = t('File - Filename (processed by fallback text format)');
+    $text_source_options['filename'] = $this->t('File - Filename (processed by fallback text format)');
     $field_settings = $this->getFieldSettings();
     // Check if this is a "pseudo" instance such that the field is managed by
     // something other than the core Field API (e.g., a fake instance used
@@ -377,15 +377,15 @@ class JuiceboxFieldFormatter extends ImageFormatterBase implements ContainerFact
       // If this is a standard image field we can use core image "alt" and
       // "title" values if they are active.
       if (!empty($field_settings['alt_field'])) {
-        $text_source_options['alt'] = t('Image - Alt text (processed by fallback text format)');
+        $text_source_options['alt'] = $this->t('Image - Alt text (processed by fallback text format)');
       }
       if (!empty($field_settings['title_field'])) {
-        $text_source_options['title'] = t('Image - Title text (processed by fallback text format)');
+        $text_source_options['title'] = $this->t('Image - Title text (processed by fallback text format)');
       }
       // If this is a standard file field, we can use the core file
       // "description" value if it is active.
       if (!empty($field_settings['description_field'])) {
-        $text_source_options['description'] = t('File - Description text (processed by fallback text format)');
+        $text_source_options['description'] = $this->t('File - Description text (processed by fallback text format)');
       }
     }
     // @todo: Add support for fieldable file entities and/or media entities.

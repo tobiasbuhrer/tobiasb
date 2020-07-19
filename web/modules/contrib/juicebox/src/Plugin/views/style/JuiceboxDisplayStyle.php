@@ -160,73 +160,73 @@ class JuiceboxDisplayStyle extends StylePluginBase {
     $options = $this->confGetFieldSources();
     $missing_field_warning = '';
     if (empty($options['field_options_images'])) {
-      $missing_field_warning = t('<strong>You must add a field of type image, file or file ID to your view display before this value can be set.</strong><br/>');
+      $missing_field_warning = $this->t('<strong>You must add a field of type image, file or file ID to your view display before this value can be set.</strong><br/>');
     }
     // Add the view-specific elements.
     $form['image_field'] = array(
       '#type' => 'select',
-      '#title' => t('Image Source'),
+      '#title' => $this->t('Image Source'),
       '#default_value' => $settings['image_field'],
-      '#description' => t('The field source to use for each image in the gallery. Must be an image field, file field or a file ID. If using a multivalued field (*) only the <em>first</em> value from each entity will be used.'),
+      '#description' => $this->t('The field source to use for each image in the gallery. Must be an image field, file field or a file ID. If using a multivalued field (*) only the <em>first</em> value from each entity will be used.'),
       '#suffix' => $missing_field_warning,
       '#options' => $options['field_options_images'],
-      '#empty_option' => t('- Select -'),
+      '#empty_option' => $this->t('- Select -'),
     );
     $form['thumb_field'] = array(
       '#type' => 'select',
-      '#title' => t('Thumbnail Source'),
+      '#title' => $this->t('Thumbnail Source'),
       '#default_value' => $settings['thumb_field'],
-      '#description' => t('The field source to use for each thumbnail in the gallery. Must be an image field, file field or a file ID. Typically you will choose the same value that was set in the "Image Source" option above.'),
+      '#description' => $this->t('The field source to use for each thumbnail in the gallery. Must be an image field, file field or a file ID. Typically you will choose the same value that was set in the "Image Source" option above.'),
       '#suffix' => $missing_field_warning,
       '#options' => $options['field_options_images'],
-      '#empty_option' => t('- Select -'),
+      '#empty_option' => $this->t('- Select -'),
     );
     $form['image_field_style'] = array(
       '#type' => 'select',
-      '#title' => t('Image Field Style'),
+      '#title' => $this->t('Image Field Style'),
       '#default_value' => $settings['image_field_style'],
-      '#description' => t('The style formatter for the image. Any formatting settings configured on the field itself will be ignored and this style setting will always be used.'),
+      '#description' => $this->t('The style formatter for the image. Any formatting settings configured on the field itself will be ignored and this style setting will always be used.'),
       '#options' => $this->juicebox->confBaseStylePresets(),
-      '#empty_option' => t('None (original image)'),
+      '#empty_option' => $this->t('None (original image)'),
     );
     $form['thumb_field_style'] = array(
       '#type' => 'select',
-      '#title' => t('Thumbnail Field Style'),
+      '#title' => $this->t('Thumbnail Field Style'),
       '#default_value' => $settings['thumb_field_style'],
-      '#description' => t('The style formatter for the thumbnail. Any formatting settings configured on the field itself will be ignored and this style setting will always be used.'),
+      '#description' => $this->t('The style formatter for the thumbnail. Any formatting settings configured on the field itself will be ignored and this style setting will always be used.'),
       '#options' => $this->juicebox->confBaseStylePresets(FALSE),
-      '#empty_option' => t('None (original image)'),
+      '#empty_option' => $this->t('None (original image)'),
     );
     $form['title_field'] = array(
       '#type' => 'select',
-      '#title' => t('Title Field'),
+      '#title' => $this->t('Title Field'),
       '#default_value' => $settings['title_field'],
-      '#description' => t('The view\'s field that should be used for the title of each image in the gallery. Any formatting settings configured on the field itself will be respected.'),
+      '#description' => $this->t('The view\'s field that should be used for the title of each image in the gallery. Any formatting settings configured on the field itself will be respected.'),
       '#options' => $options['field_options'],
-      '#empty_option' => t('None'),
+      '#empty_option' => $this->t('None'),
     );
     $form['caption_field'] = array(
       '#type' => 'select',
-      '#title' => t('Caption Field'),
+      '#title' => $this->t('Caption Field'),
       '#default_value' => $settings['caption_field'],
-      '#description' => t('The view\'s field that should be used for the caption of each image in the gallery. Any formatting settings configured on the field itself will be respected.'),
+      '#description' => $this->t('The view\'s field that should be used for the caption of each image in the gallery. Any formatting settings configured on the field itself will be respected.'),
       '#options' => $options['field_options'],
-      '#empty_option' => t('None'),
+      '#empty_option' => $this->t('None'),
     );
     $form['show_title'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Show Gallery Title'),
+      '#title' => $this->t('Show Gallery Title'),
       '#default_value' => $settings['show_title'],
-      '#description' => t('Show the view display title as the gallery title.'),
+      '#description' => $this->t('Show the view display title as the gallery title.'),
     );
     // Add the common form elements.
     $form = $this->juicebox->confBaseForm($form, $settings);
     // Add view-sepcific field options for the linkURL setting.
     $linkurl_field_options = array();
     foreach ($options['field_options'] as $field_key => $field_name) {
-      $linkurl_field_options[$field_key] = t('Field') . ' - ' . $field_name;
+      $linkurl_field_options[$field_key] = $this->t('Field') . ' - ' . $field_name;
     }
-    $form['linkurl_source']['#description'] = $form['linkurl_source']['#description'] . '</br><strong>' . t('If using a field source it must render a properly formatted URL and nothing else.') . '</strong>';
+    $form['linkurl_source']['#description'] = $form['linkurl_source']['#description'] . '</br><strong>' . $this->t('If using a field source it must render a properly formatted URL and nothing else.') . '</strong>';
     $form['linkurl_source']['#options'] = array_merge($form['linkurl_source']['#options'], $linkurl_field_options);
   }
 
@@ -368,7 +368,7 @@ class JuiceboxDisplayStyle extends StylePluginBase {
     // Get the field source options and make sure the passed-source is valid.
     $source_options = $this->confGetFieldSources();
     if (empty($source_options['field_options_images_type'][$source_field])) {
-      throw new \Exception(t('Empty or invalid field source @source detected for Juicebox view-based gallery.', array('@source' => $source_field)));
+      throw new \Exception($this->t('Empty or invalid field source @source detected for Juicebox view-based gallery.', array('@source' => $source_field)));
     }
     else {
       $source_type = $source_options['field_options_images_type'][$source_field];

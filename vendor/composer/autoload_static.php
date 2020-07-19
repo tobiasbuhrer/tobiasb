@@ -699,6 +699,7 @@ class ComposerStaticInit5071c7a38144438f4c0e1f4e036c1f7c
         'Spoons\\ScriptHandler' => __DIR__ . '/../..' . '/web/modules/contrib/devel/.spoons/ScriptHandler.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
+        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'geoPHP' => __DIR__ . '/..' . '/phayes/geophp/geoPHP.inc',
     );

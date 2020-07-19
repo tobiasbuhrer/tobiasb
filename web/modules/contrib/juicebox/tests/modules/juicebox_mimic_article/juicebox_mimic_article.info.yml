@@ -5,8 +5,8 @@ package: Testing
 version: VERSION
 core: 8.x
 dependencies:
-  - node
-  - image
-  - text
-  - user
-  - entity_reference
+  - drupal:node
+  - drupal:image
+  - drupal:text
+  - drupal:user
+  - drupal:entity_reference

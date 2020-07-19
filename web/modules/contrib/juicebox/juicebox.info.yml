@@ -4,7 +4,7 @@ description: 'Provides an integration between the Juicebox HTML5 responsive gall
 package: Media
 core: 8.x
 dependencies:
-  - file
-  - image
-  - libraries
+  - drupal:file
+  - drupal:image
+  - libraries:libraries
 configure: admin/config/media/juicebox

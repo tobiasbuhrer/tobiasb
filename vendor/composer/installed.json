@@ -138,17 +138,17 @@
     },
     {
         "name": "chi-teck/drupal-code-generator",
-        "version": "1.32.0",
-        "version_normalized": "1.32.0.0",
+        "version": "1.32.1",
+        "version_normalized": "1.32.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Chi-teck/drupal-code-generator.git",
-            "reference": "0e045f7a7e747af3d8f603156bf4d73be5768246"
+            "reference": "8abba7131ed4c89c1e8fc6dca0d05a4b6d0b2749"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Chi-teck/drupal-code-generator/zipball/0e045f7a7e747af3d8f603156bf4d73be5768246",
-            "reference": "0e045f7a7e747af3d8f603156bf4d73be5768246",
+            "url": "https://api.github.com/repos/Chi-teck/drupal-code-generator/zipball/8abba7131ed4c89c1e8fc6dca0d05a4b6d0b2749",
+            "reference": "8abba7131ed4c89c1e8fc6dca0d05a4b6d0b2749",
             "shasum": ""
         },
         "require": {
@@ -158,7 +158,7 @@
             "symfony/filesystem": "^2.7 || ^3.4 || ^4.0",
             "twig/twig": "^1.41 || ^2.12"
         },
-        "time": "2020-04-16T06:45:06+00:00",
+        "time": "2020-07-15T06:08:04+00:00",
         "bin": [
             "bin/dcg"
         ],
@@ -3325,7 +3325,7 @@
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/juicebox.git",
-            "reference": "8649ef0e169c14213a4a98341356a6bab734feb1"
+            "reference": "a55a813f087ada0664fc9c497b62af12a693243f"
         },
         "require": {
             "drupal/core": "^8",
@@ -3337,8 +3337,8 @@
                 "dev-2.x": "2.x-dev"
             },
             "drupal": {
-                "version": "8.x-2.0-beta3+8-dev",
-                "datestamp": "1490666884",
+                "version": "8.x-2.0-beta3+9-dev",
+                "datestamp": "1595139867",
                 "security-coverage": {
                     "status": "not-covered",
                     "message": "Dev releases are not covered by Drupal security advisories."
@@ -3352,6 +3352,10 @@
         ],
         "authors": [
             {
+                "name": "Neslee Canil Pinto",
+                "homepage": "https://www.drupal.org/user/3580850"
+            },
+            {
                 "name": "rjacobs",
                 "homepage": "https://www.drupal.org/user/422459"
             }
@@ -3364,18 +3368,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.40.0",
-        "version_normalized": "1.40.0.0",
+        "version": "1.41.0",
+        "version_normalized": "1.41.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.40"
+            "reference": "8.x-1.41"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.40.zip",
-            "reference": "8.x-1.40",
-            "shasum": "712b227b6489011f48c3d63628e47032bdc54827"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.41.zip",
+            "reference": "8.x-1.41",
+            "shasum": "b947380e846a85bc2ddb378c6a451400dd614fe2"
         },
         "require": {
             "drupal/core": "^8.8 || ^9",
@@ -3384,8 +3388,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-1.40",
-                "datestamp": "1594152426",
+                "version": "8.x-1.41",
+                "datestamp": "1595068845",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -6171,17 +6175,17 @@
     },
     {
         "name": "phpmailer/phpmailer",
-        "version": "v6.1.6",
-        "version_normalized": "6.1.6.0",
+        "version": "v6.1.7",
+        "version_normalized": "6.1.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PHPMailer/PHPMailer.git",
-            "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3"
+            "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
-            "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
+            "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
             "shasum": ""
         },
         "require": {
@@ -6202,7 +6206,7 @@
             "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
             "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
         },
-        "time": "2020-05-27T12:24:03+00:00",
+        "time": "2020-07-14T18:50:27+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -8260,27 +8264,27 @@
     },
     {
         "name": "symfony/polyfill-php80",
-        "version": "v1.17.1",
-        "version_normalized": "1.17.1.0",
+        "version": "v1.18.0",
+        "version_normalized": "1.18.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-php80.git",
-            "reference": "4a5b6bba3259902e386eb80dd1956181ee90b5b2"
+            "reference": "d87d5766cbf48d72388a9f6b85f280c8ad51f981"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/4a5b6bba3259902e386eb80dd1956181ee90b5b2",
-            "reference": "4a5b6bba3259902e386eb80dd1956181ee90b5b2",
+            "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/d87d5766cbf48d72388a9f6b85f280c8ad51f981",
+            "reference": "d87d5766cbf48d72388a9f6b85f280c8ad51f981",
             "shasum": ""
         },
         "require": {
             "php": ">=7.0.8"
         },
-        "time": "2020-06-06T08:46:27+00:00",
+        "time": "2020-07-14T12:35:20+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.17-dev"
+                "dev-master": "1.18-dev"
             },
             "thanks": {
                 "name": "symfony/polyfill",
@@ -9201,22 +9205,22 @@
     },
     {
         "name": "vlucas/phpdotenv",
-        "version": "v2.6.5",
-        "version_normalized": "2.6.5.0",
+        "version": "v2.6.6",
+        "version_normalized": "2.6.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/vlucas/phpdotenv.git",
-            "reference": "2e977311ffb17b2f82028a9c36824647789c6365"
+            "reference": "e1d57f62db3db00d9139078cbedf262280701479"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2e977311ffb17b2f82028a9c36824647789c6365",
-            "reference": "2e977311ffb17b2f82028a9c36824647789c6365",
+            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/e1d57f62db3db00d9139078cbedf262280701479",
+            "reference": "e1d57f62db3db00d9139078cbedf262280701479",
             "shasum": ""
         },
         "require": {
             "php": "^5.3.9 || ^7.0 || ^8.0",
-            "symfony/polyfill-ctype": "^1.16"
+            "symfony/polyfill-ctype": "^1.17"
         },
         "require-dev": {
             "ext-filter": "*",
@@ -9227,7 +9231,7 @@
             "ext-filter": "Required to use the boolean validator.",
             "ext-pcre": "Required to use most of the library."
         },
-        "time": "2020-06-02T14:06:52+00:00",
+        "time": "2020-07-14T17:54:18+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
