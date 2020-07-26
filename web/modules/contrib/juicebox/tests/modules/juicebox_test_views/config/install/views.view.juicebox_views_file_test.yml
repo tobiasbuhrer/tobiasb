@@ -6,7 +6,7 @@ dependencies:
     - file
     - juicebox
     - user
-id: juicebox_views_files_test
+id: juicebox_views_file_test
 label: 'Juicebox Views Files Test'
 module: views
 description: ''
