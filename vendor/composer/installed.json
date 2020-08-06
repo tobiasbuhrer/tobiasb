@@ -2277,17 +2277,17 @@
     },
     {
         "name": "drupal/core",
-        "version": "8.9.2",
-        "version_normalized": "8.9.2.0",
+        "version": "8.9.3",
+        "version_normalized": "8.9.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core.git",
-            "reference": "8f0e24555c093669ce41edbb30637fe19df16802"
+            "reference": "ee02fd4cbe4ac148b4d7e297ec63b3459983862e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core/zipball/8f0e24555c093669ce41edbb30637fe19df16802",
-            "reference": "8f0e24555c093669ce41edbb30637fe19df16802",
+            "url": "https://api.github.com/repos/drupal/core/zipball/ee02fd4cbe4ac148b4d7e297ec63b3459983862e",
+            "reference": "ee02fd4cbe4ac148b4d7e297ec63b3459983862e",
             "shasum": ""
         },
         "require": {
@@ -2454,7 +2454,7 @@
             "drupal/workflows": "self.version",
             "drupal/workspaces": "self.version"
         },
-        "time": "2020-07-08T18:53:45+00:00",
+        "time": "2020-08-05T21:49:40+00:00",
         "type": "drupal-core",
         "extra": {
             "drupal-scaffold": {
@@ -2510,17 +2510,17 @@
     },
     {
         "name": "drupal/core-recommended",
-        "version": "8.9.2",
-        "version_normalized": "8.9.2.0",
+        "version": "8.9.3",
+        "version_normalized": "8.9.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core-recommended.git",
-            "reference": "8301ff766f17ce8a9eb36d3ffd183cbfff01dad6"
+            "reference": "db5c2fdd4bf3e72aee8c862eca72dd445e704d71"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core-recommended/zipball/8301ff766f17ce8a9eb36d3ffd183cbfff01dad6",
-            "reference": "8301ff766f17ce8a9eb36d3ffd183cbfff01dad6",
+            "url": "https://api.github.com/repos/drupal/core-recommended/zipball/db5c2fdd4bf3e72aee8c862eca72dd445e704d71",
+            "reference": "db5c2fdd4bf3e72aee8c862eca72dd445e704d71",
             "shasum": ""
         },
         "require": {
@@ -2532,7 +2532,7 @@
             "doctrine/common": "v2.7.3",
             "doctrine/inflector": "v1.2.0",
             "doctrine/lexer": "1.0.2",
-            "drupal/core": "8.9.2",
+            "drupal/core": "8.9.3",
             "easyrdf/easyrdf": "0.9.1",
             "egulias/email-validator": "2.1.17",
             "guzzlehttp/guzzle": "6.5.4",
@@ -2583,7 +2583,7 @@
         "conflict": {
             "webflo/drupal-core-strict": "*"
         },
-        "time": "2020-07-08T18:53:45+00:00",
+        "time": "2020-08-05T21:49:40+00:00",
         "type": "metapackage",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -3325,7 +3325,7 @@
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/juicebox.git",
-            "reference": "39a69eae98cf7c9ab6eac4017f8f479c93ac8e1f"
+            "reference": "3ab54f9e03f32108875f3f29d0013994f4cb0940"
         },
         "require": {
             "drupal/core": "^8",
@@ -3337,8 +3337,8 @@
                 "dev-2.x": "2.x-dev"
             },
             "drupal": {
-                "version": "8.x-2.0-beta3+12-dev",
-                "datestamp": "1595183690",
+                "version": "8.x-2.0-beta3+38-dev",
+                "datestamp": "1596048366",
                 "security-coverage": {
                     "status": "not-covered",
                     "message": "Dev releases are not covered by Drupal security advisories."
@@ -3368,18 +3368,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "1.45.0",
-        "version_normalized": "1.45.0.0",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "8.x-1.45"
+            "reference": "2.0.4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-8.x-1.45.zip",
-            "reference": "8.x-1.45",
-            "shasum": "babeba435c078c7776f56a7b38c181ad8355e405"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-2.0.4.zip",
+            "reference": "2.0.4",
+            "shasum": "8ef0907a0fe86b955177efa034a4ab133cfe7b3c"
         },
         "require": {
             "drupal/core": "^8.8 || ^9",
@@ -3388,8 +3388,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-1.45",
-                "datestamp": "1595632988",
+                "version": "2.0.4",
+                "datestamp": "1595632945",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -5541,17 +5541,17 @@
     },
     {
         "name": "mglaman/phpstan-drupal",
-        "version": "0.12.4",
-        "version_normalized": "0.12.4.0",
+        "version": "0.12.5",
+        "version_normalized": "0.12.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/mglaman/phpstan-drupal.git",
-            "reference": "4a74b797251562081715bb086a49d460c61a8783"
+            "reference": "f7676482b39184270eaba25cbd5e491144814a93"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/4a74b797251562081715bb086a49d460c61a8783",
-            "reference": "4a74b797251562081715bb086a49d460c61a8783",
+            "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/f7676482b39184270eaba25cbd5e491144814a93",
+            "reference": "f7676482b39184270eaba25cbd5e491144814a93",
             "shasum": ""
         },
         "require": {
@@ -5573,7 +5573,7 @@
         "suggest": {
             "phpstan/phpstan-deprecation-rules": "For catching deprecations, especially in Drupal core."
         },
-        "time": "2020-06-10T21:05:10+00:00",
+        "time": "2020-07-26T17:10:56+00:00",
         "type": "phpstan-extension",
         "extra": {
             "branch-alias": {
@@ -5625,8 +5625,12 @@
                 "type": "github"
             },
             {
-                "url": "https://liberapay.com/mglaman",
-                "type": "liberapay"
+                "url": "https://ko-fi.com/mglaman",
+                "type": "ko_fi"
+            },
+            {
+                "url": "https://tidelift.com/funding/github/packagist/mglaman/phpstan-drupal",
+                "type": "tidelift"
             }
         ]
     },
@@ -6245,17 +6249,17 @@
     },
     {
         "name": "phpstan/phpstan",
-        "version": "0.12.33",
-        "version_normalized": "0.12.33.0",
+        "version": "0.12.36",
+        "version_normalized": "0.12.36.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpstan/phpstan.git",
-            "reference": "46e698a0452526a05c4a351d7c47c4b8c37a548d"
+            "reference": "eaeff985e395ff4e7aebf3251a43fca6c9be1af3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpstan/phpstan/zipball/46e698a0452526a05c4a351d7c47c4b8c37a548d",
-            "reference": "46e698a0452526a05c4a351d7c47c4b8c37a548d",
+            "url": "https://api.github.com/repos/phpstan/phpstan/zipball/eaeff985e395ff4e7aebf3251a43fca6c9be1af3",
+            "reference": "eaeff985e395ff4e7aebf3251a43fca6c9be1af3",
             "shasum": ""
         },
         "require": {
@@ -6264,7 +6268,7 @@
         "conflict": {
             "phpstan/phpstan-shim": "*"
         },
-        "time": "2020-07-19T22:10:11+00:00",
+        "time": "2020-08-05T09:29:40+00:00",
         "bin": [
             "phpstan",
             "phpstan.phar"
@@ -8264,8 +8268,8 @@
     },
     {
         "name": "symfony/polyfill-php80",
-        "version": "v1.18.0",
-        "version_normalized": "1.18.0.0",
+        "version": "v1.18.1",
+        "version_normalized": "1.18.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-php80.git",

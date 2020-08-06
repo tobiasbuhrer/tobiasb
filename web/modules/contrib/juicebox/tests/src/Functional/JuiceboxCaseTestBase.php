@@ -1,54 +1,77 @@
 <?php
 
-namespace Drupal\Tests\juicebox\FunctionalJavascript;
+namespace Drupal\Tests\juicebox\Functional;
 
-use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use Drupal\Tests\BrowserTestBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Tests\TestFileCreationTrait;
 
 /**
  * Common helper class for Juicebox module tests.
+ *
+ * @group juicebox
  */
-abstract class JuiceboxCaseTestBase extends WebDriverTestBase {
+abstract class JuiceboxCaseTestBase extends BrowserTestBase {
 
-  use TestFileCreationTrait {
-    getTestFiles as drupalGetTestFiles;
-  }
+  use TestFileCreationTrait;
 
-  // Common variables.
+  /**
+   * Common variables.
+   *
+   * @var mixed
+   */
   protected $webUser;
-  // Properties to store details of the field that will be use in a field
-  // formatter test.
+  // Properties to store details of the field that will be use in a field.
+  /**
+   * Formatter test.
+   *
+   * @var mixed
+   */
   protected $node;
-  protected $instBundle = 'juicebox_gallery';
-  protected $instFieldName = 'field_juicebox_image';
-  protected $instFieldType = 'image';
 
+  /**
+   * Bundle name.
+   *
+   * @var string
+   */
+  protected $instBundle = 'juicebox_gallery';
+
+  /**
+   * Field name.
+   *
+   * @var string
+   */
+  protected $instFieldName = 'field_juicebox_image';
+
+  /**
+   * Field type.
+   *
+   * @var string
+   */
+  protected $instFieldType = 'image';
 
   /**
    * Setup a new content type, with a image/file field.
    */
   protected function initNode() {
     // Create a new content type.
-    $this->drupalCreateContentType(array('type' => $this->instBundle, 'name' => $this->instBundle));
+    $this->drupalCreateContentType(['type' => $this->instBundle, 'name' => $this->instBundle]);
     // Prep a field base.
-    $field_storage_settings = array(
+    $field_storage_settings = [
       'display_field' => TRUE,
       'display_default' => TRUE,
       'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
-    );
-    $field_storage = array(
+    ];
+    $field_storage = [
       'entity_type' => 'node',
       'field_name' => $this->instFieldName,
       'type' => $this->instFieldType,
       'settings' => $field_storage_settings,
       'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
-    );
-    FieldStorageConfig::create($field_storage)->save();
+    ];
+    entity_create('field_storage_config', $field_storage)->save();
     // Prep a field instance.
-    $field_settings = array();
+    $field_settings = [];
     if ($this->instFieldType == 'image') {
       $field_settings['alt_field'] = TRUE;
       $field_settings['alt_field_required'] = FALSE;
@@ -59,22 +82,21 @@ abstract class JuiceboxCaseTestBase extends WebDriverTestBase {
       $field_settings['description_field'] = TRUE;
       $field_settings['file_extensions'] = 'txt jpg png mp3 rtf docx pdf';
     }
-    $field = array(
+    $field = [
       'field_name' => $this->instFieldName,
       'label' => $this->randomString(),
       'entity_type' => 'node',
       'bundle' => $this->instBundle,
       'required' => FALSE,
       'settings' => $field_settings,
-    );
-    FieldConfig::create($field)->save();
+    ];
+    entity_create('field_config', $field)->save();
     // Setup widget.
-    \Drupal::entityTypeManager()->getStorage('entity_form_display')
-      ->load('node.' . $this->instBundle . '.default')
-      ->setComponent($this->instFieldName, array(
+    entity_get_form_display('node', $this->instBundle, 'default')
+      ->setComponent($this->instFieldName, [
         'type' => 'file_generic',
-        'settings' => array(),
-      ))
+        'settings' => [],
+      ])
       ->save();
     // Clear some caches for good measure.
     $entity_manager = $this->container->get('entity.manager');
@@ -86,12 +108,11 @@ abstract class JuiceboxCaseTestBase extends WebDriverTestBase {
    * Helper to activate a Juicebox field formatter on a field.
    */
   protected function activateJuiceboxFieldFormatter() {
-    \Drupal::entityTypeManager()->getStorage('entity_view_display')
-      ->load('node.' . $this->instBundle . '.default')
-      ->setComponent($this->instFieldName, array(
+    entity_get_display('node', $this->instBundle, 'default')
+      ->setComponent($this->instFieldName, [
         'type' => 'juicebox_formatter',
-        'settings' => array(),
-      ))
+        'settings' => [],
+      ])
       ->save();
   }
 
@@ -99,30 +120,23 @@ abstract class JuiceboxCaseTestBase extends WebDriverTestBase {
    * Helper to create a node and upload a file to it.
    */
   protected function createNodeWithFile($file_type = 'image', $multivalue = TRUE, $add_title_caption = TRUE) {
-    $page = $this->getSession()->getPage();
-    $file = current($this->drupalGetTestFiles($file_type));
-    $file_path = \Drupal::service('file_system')
-      ->realpath($file->uri);
-    $this->drupalGet("node/add/$this->instBundle");
-    $page->attachFileToField('files[' . $this->instFieldName . '_0]' . ($multivalue ? '[]' : ''), $file_path);
-    $edit = array(
+    $file = current($this->getTestFiles($file_type));
+    $edit = [
       'title[0][value]' => 'Test Juicebox Gallery Node',
-    );
-    $result = $this->assertSession()->waitForButton('Remove');
-    $this->assertNotEmpty($result);
-
-    $this->drupalPostForm(NULL, $edit, 'Save');
+      'files[' . $this->instFieldName . '_0]' . ($multivalue ? '[]' : '') => \Drupal::service('file_system')->realpath($file->uri),
+    ];
+    $this->drupalPostForm('node/add/' . $this->instBundle, $edit, t('Save'));
     // Get ID of the newly created node from the current URL.
-    $matches = array();
+    $matches = [];
     preg_match('/node\/([0-9]+)/', $this->getUrl(), $matches);
     if (isset($matches[1])) {
       $nid = $matches[1];
       // Now re-edit the node to add title and caption values for the newly
       // uploaded image. This could probably also be done above with
       // DrupalWebTestCase::drupalPostAJAX(), but this works too.
-      $edit = array(
+      $edit = [
         'body[0][value]' => 'Some body content on node ' . $nid . ' <strong>with formatting</strong>',
-      );
+      ];
       if ($add_title_caption) {
         if ($this->instFieldType == 'image') {
           $edit[$this->instFieldName . '[0][title]'] = 'Some title text for field ' . $this->instFieldName . ' on node ' . $nid;
@@ -136,7 +150,7 @@ abstract class JuiceboxCaseTestBase extends WebDriverTestBase {
       // Clear some caches for good measure and save the node object for
       // reference during tests.
       $node_storage = $this->container->get('entity.manager')->getStorage('node');
-      $node_storage->resetCache(array($nid));
+      $node_storage->resetCache([$nid]);
       $this->node = $node_storage->load($nid);
       return TRUE;
     }
@@ -154,12 +168,12 @@ abstract class JuiceboxCaseTestBase extends WebDriverTestBase {
    * @return string
    *   The response body.
    */
-  protected function renderContextualLinks($ids, $current_path) {
-    $post = array();
+  protected function renderContextualLinks(array $ids, $current_path) {
+    $post = [];
     for ($i = 0; $i < count($ids); $i++) {
       $post['ids[' . $i . ']'] = $ids[$i];
     }
-    return $this->drupalPost('contextual/render', 'application/json', $post, array('query' => array('destination' => $current_path)));
+    return $this->drupalPost('contextual/render', 'application/json', $post, ['query' => ['destination' => $current_path]]);
   }
 
 }

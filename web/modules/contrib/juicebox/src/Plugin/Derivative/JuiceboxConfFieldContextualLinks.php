@@ -19,9 +19,8 @@ class JuiceboxConfFieldContextualLinks extends DeriverBase implements ContainerD
    */
   protected $entityTypeManager;
 
-
   /**
-   * Constructor
+   * Constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.

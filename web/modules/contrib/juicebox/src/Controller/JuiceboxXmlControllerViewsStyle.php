@@ -33,13 +33,11 @@ class JuiceboxXmlControllerViewsStyle extends JuiceboxXmlControllerBase {
   protected $view;
 
   /**
-   * An indexed array of view args that apply to the view used in this XML
-   * request.
+   * An indexed array of view args that apply to view used in this XML request.
    *
    * @var array
    */
-  protected $viewArgs = array();
-
+  protected $viewArgs = [];
 
   /**
    * {@inheritdoc}
@@ -95,10 +93,10 @@ class JuiceboxXmlControllerViewsStyle extends JuiceboxXmlControllerBase {
    *   A indexed array of the view args.
    */
   protected function queryToArgs() {
-    $args = array();
+    $args = [];
     // Get the args from the query params.
     $query_args = $this->request->query->all();
-    foreach($query_args as $param => $value) {
+    foreach ($query_args as $param => $value) {
       if (preg_match('/^arg_[0-9]+$/', $param)) {
         list($prefix, $key) = explode('_', $param);
         $args[$key] = $value;
