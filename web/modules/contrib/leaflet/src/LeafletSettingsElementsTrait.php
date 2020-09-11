@@ -232,11 +232,11 @@ trait LeafletSettingsElementsTrait {
         '#value' => $this->t('These settings will be applied in case of single Marker Map (otherwise the Zoom will be set to Fit Elements bounds).'),
       ],
       '#states' => [
-        'invisible' => [
+        'invisible' => isset($force_checkbox_selector_widget) ? [
           [$force_checkbox_selector => ['checked' => TRUE]],
           'or',
           [$force_checkbox_selector_widget => ['checked' => TRUE]],
-        ],
+        ] : [$force_checkbox_selector => ['checked' => TRUE]],
       ],
     ];
 
@@ -314,11 +314,11 @@ trait LeafletSettingsElementsTrait {
       '#description' => $this->t('Value that might/will be added to default Fit Elements Bounds Zoom. (-5 / +5)'),
       '#default_value' => $map_position_options['zoomFiner'] ?? $this->getDefaultSettings()['map_position']['zoomFiner'],
       '#states' => [
-        'invisible' => [
+        'invisible' => isset($force_checkbox_selector_widget) ? [
           [$force_checkbox_selector => ['checked' => TRUE]],
           'or',
           [$force_checkbox_selector_widget => ['checked' => TRUE]],
-        ],
+        ] : [$force_checkbox_selector => ['checked' => TRUE]],
       ],
     ];
 
@@ -603,6 +603,37 @@ trait LeafletSettingsElementsTrait {
   }
 
   /**
+   * Set Replacement Patterns Element.
+   *
+   * @param array $element
+   *   The Form element to alter.
+   */
+  protected function setReplacementPatternsElement(array &$element) {
+    if ($this->moduleHandler->moduleExists('token')) {
+
+      $element['replacement_patterns'] = [
+        '#type' => 'details',
+        '#title' => 'Replacement patterns',
+        '#description' => $this->t('The following replacement tokens are available for the "Popup Content and the Icon Options":'),
+      ];
+
+      $element['replacement_patterns']['token_help'] = [
+        '#theme' => 'token_tree_link',
+        '#token_types' => [$this->fieldDefinition->getTargetEntityTypeId()],
+      ];
+    }
+    else {
+      $element['replacement_patterns']['#description'] = $this->t('The @token_link is needed to browse and use @entity_type entity token replacements.', [
+        '@token_link' => $this->link->generate(t('Token module'), Url::fromUri('https://www.drupal.org/project/token', [
+          'absolute' => TRUE,
+          'attributes' => ['target' => 'blank'],
+        ])),
+        '@entity_type' => $this->fieldDefinition->getTargetEntityTypeId(),
+      ]);
+    }
+  }
+
+  /**
    * Set Map Geometries Options Element.
    *
    * @param array $element
@@ -612,7 +643,13 @@ trait LeafletSettingsElementsTrait {
    */
   protected function setMapPathOptionsElement(array &$element, array $settings) {
 
-    $token_replacement_disclaimer = $this->t('<b>Note: </b> Using <strong>Replacement Patterns</strong> it is possible to dynamically define the Path geometries options, based on the entity properties or fields values.');
+    $token_replacement_disclaimer = $this->moduleHandler->moduleExists('token') ? $this->t('<b>Note: </b> Using <strong>Replacement Patterns</strong> it is possible to dynamically define the Path geometries options, based on the entity properties or fields values.')
+      : $this->t('<b>Note: </b> Using the @token_module_link it is possible to use <strong>Replacement Patterns</strong> and dynamically define the Path geometries options, based on the entity properties or fields values.', [
+        '@token_module_link' => $this->link->generate($this->t('Toke module'), Url::fromUri('https://www.drupal.org/project/token', [
+          'absolute' => TRUE,
+          'attributes' => ['target' => 'blank'],
+        ])),
+      ]);
     $path_description = $this->t('Set here options that will be applied to the rendering of Map Path Geometries (Lines & Polylines, Polygons, Multipolygons, etc.).<br>Refer to the @polygons_documentation.<br>Note: If empty the default Leaflet path style, or the one choosen and defined in leaflet.api/hook_leaflet_map_info, will be used.<br>@token_replacement_disclaimer', [
       '@polygons_documentation' => $this->link->generate($this->t('Leaflet Path Documentation'), Url::fromUri('https://leafletjs.com/reference-1.0.3.html#path', [
         'absolute' => TRUE,
