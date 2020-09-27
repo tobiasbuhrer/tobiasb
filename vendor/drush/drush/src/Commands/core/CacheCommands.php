@@ -15,6 +15,7 @@ use Drush\Drush;
 use Drush\Utils\StringUtils;
 use Consolidation\AnnotatedCommand\Input\StdinAwareInterface;
 use Consolidation\AnnotatedCommand\Input\StdinAwareTrait;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 /*
  * Interact with Drupal's Cache API.
@@ -56,6 +57,23 @@ class CacheCommands extends DrushCommands implements CustomEventAwareInterface, 
             throw new \Exception(dt('The !cid object in the !bin bin was not found.', ['!cid' => $cid, '!bin' => $bin]));
         }
         return new PropertyList($result);
+    }
+
+    /**
+     * Invalidate by cache tags.
+     *
+     * @command cache:tags
+     * @param string $tags A comma delimited list of cache tags to clear.
+     * @aliases ct
+     * @bootstrap full
+     * @usage drush cache:tag node:12,user:4
+     *   Purge content associated with two cache tags.
+     */
+    public function tags($tags)
+    {
+        $tags = StringUtils::csvToArray($tags);
+        Cache::invalidateTags($tags);
+        $this->logger()->success(dt("Invalidated tag(s): !list.", ['!list' => implode(' ', $tags)]));
     }
 
     /**
@@ -111,7 +129,7 @@ class CacheCommands extends DrushCommands implements CustomEventAwareInterface, 
      * @param $bin The cache bin to store the object in.
      * @param $expire 'CACHE_PERMANENT', or a Unix timestamp.
      * @param $tags A comma delimited list of cache tags.
-     * @option input-format The format of value. Use 'json' for complex values.
+     * @option input-format The format of value. Use <info>json</info> for complex values.
      * @option cache-get If the object is the result a previous fetch from the cache, only store the value in the 'data' property of the object in the cache.
      * @aliases cs,cache-set
      * @bootstrap full
@@ -269,8 +287,14 @@ class CacheCommands extends DrushCommands implements CustomEventAwareInterface, 
      */
     public static function clearDrush()
     {
-        drush_cache_clear_all(null, 'default'); // commandfiles, etc.
-        drush_cache_clear_all(null, 'factory'); // command info from annotated-command library
+        try {
+            drush_cache_clear_all(null, 'default');// No longer used by Drush core, but still cleared for backward compat.
+            drush_cache_clear_all(null, 'factory'); // command info from annotated-command library (i.e. parsed annotations)
+        } catch (IOException $e) {
+            // Sometimes another process writes files into a bin dir and \Drush\Cache\FileCache::clear fails.
+            // That is not considered an error. https://github.com/drush-ops/drush/pull/4535.
+            Drush::logger()->info($e->getMessage());
+        }
     }
 
     /**
