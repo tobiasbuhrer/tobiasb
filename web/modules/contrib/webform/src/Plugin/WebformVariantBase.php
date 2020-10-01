@@ -5,6 +5,7 @@ namespace Drupal\webform\Plugin;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginBase;
+use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -337,6 +338,13 @@ abstract class WebformVariantBase extends PluginBase implements WebformVariantIn
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {}
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOffCanvasWidth() {
+    return WebformDialogHelper::DIALOG_NORMAL;
+  }
 
   /**
    * {@inheritdoc}

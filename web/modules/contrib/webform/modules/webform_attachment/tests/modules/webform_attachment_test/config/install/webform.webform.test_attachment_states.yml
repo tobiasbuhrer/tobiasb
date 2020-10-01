@@ -1,3 +1,4 @@
+uuid: 08971b54-57be-4bc9-956a-8cfa57c7cadd
 langcode: en
 status: open
 dependencies:
@@ -69,6 +70,7 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_elements_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -243,6 +245,5 @@ handlers:
       theme_name: ''
       parameters: {  }
 variants: {  }
-uuid: 08971b54-57be-4bc9-956a-8cfa57c7cadd
 _core:
   default_config_hash: XUf67HS7kvhJPn6INGzCeH3OdEnQNm9Kb_H5o-HfYlQ

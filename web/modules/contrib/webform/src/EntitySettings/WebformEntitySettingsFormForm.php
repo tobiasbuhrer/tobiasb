@@ -174,6 +174,17 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#classes' => $this->config('webform.settings')->get('settings.form_classes'),
       '#default_value' => (isset($elements['#attributes'])) ? $elements['#attributes'] : [],
     ];
+    $form['form_settings']['form_elements'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Form elements (container) attributes'),
+      '#open' => TRUE,
+    ];
+    $form['form_settings']['form_elements']['form_elements_attributes'] = [
+      '#type' => 'webform_element_attributes',
+      '#title' => $this->t('Form elements'),
+      '#classes' => $this->config('webform.settings')->get('settings.form_classes'),
+      '#default_value' => $settings['form_elements_attributes'],
+    ];
 
     // Form behaviors.
     $form['form_behaviors'] = [

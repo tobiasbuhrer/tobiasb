@@ -1063,6 +1063,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'form_access_denied_message' => '',
       'form_access_denied_attributes' => [],
       'form_file_limit' => '',
+      'form_elements_attributes' => [],
       'share' => FALSE,
       'share_node' => FALSE,
       'share_theme_name' => '',
@@ -3048,6 +3049,17 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     $user_data = \Drupal::service('user.data');
     $values = $user_data->get('webform', $account->id(), $this->id()) ?: [];
     return (isset($values[$key])) ? TRUE : FALSE;
+  }
+
+  /****************************************************************************/
+  // Third party settings.
+  /****************************************************************************/
+
+  /**
+   * {@inheritdoc}
+   */
+  public function unsetThirdPartySettings($module) {
+    unset($this->third_party_settings[$module]);
   }
 
   /****************************************************************************/

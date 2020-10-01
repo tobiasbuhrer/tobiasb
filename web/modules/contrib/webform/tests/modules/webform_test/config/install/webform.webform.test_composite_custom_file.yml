@@ -1,3 +1,4 @@
+uuid: b754b5b4-0b50-4a42-a23c-30f95cd9870e
 langcode: en
 status: open
 dependencies:
@@ -78,6 +79,7 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_elements_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -260,6 +262,5 @@ handlers:
       theme_name: ''
       parameters: {  }
 variants: {  }
-uuid: b754b5b4-0b50-4a42-a23c-30f95cd9870e
 _core:
   default_config_hash: l67ofWFfSw0nP4K6ZBRppS9Dv_uBzGiAeEUKwW7-IwA

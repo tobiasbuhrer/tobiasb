@@ -10,6 +10,7 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionConditionsValidatorInterface;
@@ -470,6 +471,13 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
    */
   public function defaultConfiguration() {
     return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOffCanvasWidth() {
+    return WebformDialogHelper::DIALOG_NORMAL;
   }
 
   /**
