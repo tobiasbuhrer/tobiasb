@@ -27,7 +27,7 @@ elements: |
     '#required': true
     '#multiple': true
     '#file_extensions': txt
-  
+
 css: ''
 javascript: ''
 settings:
@@ -48,7 +48,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: true
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -69,7 +69,6 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
-  form_elements_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -132,7 +131,7 @@ settings:
   confirmation_title: ''
   confirmation_message: |
     <p>Your confirmation number is [webform_submission:values:confirmation_number].</p>
-    
+
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
@@ -212,6 +211,7 @@ handlers:
   remote_post:
     id: remote_post
     label: 'Remote post'
+    notes: ''
     handler_id: remote_post
     status: true
     conditions: {  }

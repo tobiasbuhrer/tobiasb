@@ -350,7 +350,7 @@
         "drupal/smtp": "^1.0",
         "drupal/upgrade_status": "^2.0",
         "drupal/video": "^1.2",
-        "drupal/webform": "^5.0",
+        "drupal/webform": "^6.0",
         "drush/drush": "10.3.4",
         "jquery/inputmask": "*",
         "jquery/intl-tel-input": "*",

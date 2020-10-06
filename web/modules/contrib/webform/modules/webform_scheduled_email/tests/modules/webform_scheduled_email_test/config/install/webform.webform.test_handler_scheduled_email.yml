@@ -40,7 +40,7 @@ elements: |
       visible:
         ':input[name="send"]':
           value: other
-  
+
 css: ''
 javascript: ''
 settings:
@@ -61,7 +61,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -82,7 +82,6 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
-  form_elements_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -223,6 +222,7 @@ handlers:
   tomorrow:
     id: scheduled_email
     label: Tomorow
+    notes: ''
     handler_id: tomorrow
     status: true
     conditions: {  }
@@ -266,6 +266,7 @@ handlers:
   yesterday:
     id: scheduled_email
     label: Yesterday
+    notes: ''
     handler_id: yesterday
     status: true
     conditions: {  }
@@ -309,6 +310,7 @@ handlers:
   last_year:
     id: scheduled_email
     label: 'Last year'
+    notes: ''
     handler_id: last_year
     status: true
     conditions: {  }
@@ -352,6 +354,7 @@ handlers:
   broken:
     id: scheduled_email
     label: Broken
+    notes: ''
     handler_id: broken
     status: true
     conditions: {  }
@@ -395,6 +398,7 @@ handlers:
   other:
     id: scheduled_email
     label: Other
+    notes: ''
     handler_id: other
     status: true
     conditions: {  }
@@ -441,6 +445,7 @@ handlers:
   draft_reminder:
     id: scheduled_email
     label: 'Draft reminder'
+    notes: ''
     handler_id: draft_reminder
     status: true
     conditions: {  }

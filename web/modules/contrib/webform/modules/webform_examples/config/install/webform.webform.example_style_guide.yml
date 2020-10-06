@@ -216,6 +216,9 @@ elements: |
       '#type': webform_codemirror
       '#title': CodeMirror
       '#mode': yaml
+    webform_height:
+      '#type': webform_height
+      '#title': Height
     webform_image_select:
       '#type': webform_image_select
       '#title': 'Image select'
@@ -375,10 +378,10 @@ elements: |
         last_name:
           '#type': textfield
           '#title': 'Last name'
-        gender:
+        sex:
           '#type': webform_select_other
-          '#options': gender
-          '#title': Gender
+          '#options': sex
+          '#title': Sex
         martial_status:
           '#type': webform_select_other
           '#options': marital_status
@@ -644,7 +647,7 @@ elements: |
       '#type': address
       '#title': Address
       '#description': '@see <a href="https://www.drupal.org/project/address">https://www.drupal.org/project/address</a>'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -665,7 +668,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -686,7 +689,6 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
-  form_elements_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''

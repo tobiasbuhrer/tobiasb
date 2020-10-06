@@ -40,7 +40,7 @@ elements: |
     '#type': webform_actions
     '#title': 'Submit button(s)'
     '#submit__label': 'Send message'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -61,7 +61,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -82,7 +82,6 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
-  form_elements_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -223,6 +222,7 @@ handlers:
   employee_email:
     id: email
     label: 'Employee: Email'
+    notes: ''
     handler_id: employee_email
     status: true
     conditions: {  }
@@ -259,6 +259,7 @@ handlers:
   manager_email:
     id: email
     label: 'Manager: Email'
+    notes: ''
     handler_id: manager_email
     status: true
     conditions: {  }
@@ -295,6 +296,7 @@ handlers:
   manager_admins_email:
     id: email
     label: 'Manager: Admins: Email'
+    notes: ''
     handler_id: manager_admins_email
     status: true
     conditions: {  }
@@ -331,6 +333,7 @@ handlers:
   manager_users_email:
     id: email
     label: 'Manager: Users: Email'
+    notes: ''
     handler_id: manager_users_email
     status: true
     conditions: {  }
@@ -367,6 +370,7 @@ handlers:
   manager_email_addresses_email:
     id: email
     label: 'Manager: Email addresses: Email'
+    notes: ''
     handler_id: manager_email_addresses_email
     status: true
     conditions: {  }
@@ -403,6 +407,7 @@ handlers:
   everyone_email:
     id: email
     label: 'Everyone: Email'
+    notes: ''
     handler_id: everyone_email
     status: true
     conditions: {  }

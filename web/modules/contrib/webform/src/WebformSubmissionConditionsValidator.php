@@ -306,10 +306,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
         || !Element::isVisibleElement($element)) {
         continue;
       }
-
-
       $this->validateFormElement($element, $form_state);
-
       $this->validateFormRecursive($element, $form_state);
     }
   }
@@ -879,8 +876,15 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    *   Visible elements.
    */
   protected function &getBuildElements(array &$form) {
+    if (isset($form['#webform_id']) && isset($form['elements'])) {
+      $form_elements =& $form['elements'];
+    }
+    else {
+      $form_elements =& $form;
+    }
+
     $elements = [];
-    $this->getBuildElementsRecursive($elements, $form);
+    $this->getBuildElementsRecursive($elements, $form_elements);
     return $elements;
   }
 

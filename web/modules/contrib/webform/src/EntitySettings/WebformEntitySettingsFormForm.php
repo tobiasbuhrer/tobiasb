@@ -10,7 +10,6 @@ use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformTokenManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -26,22 +25,12 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
   protected $tokenManager;
 
   /**
-   * Constructs a WebformEntitySettingsFormForm.
-   *
-   * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
-   *   The webform token manager.
-   */
-  public function __construct(WebformTokenManagerInterface $token_manager) {
-    $this->tokenManager = $token_manager;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('webform.token_manager')
-    );
+    $instance = parent::create($container);
+    $instance->tokenManager = $container->get('webform.token_manager');
+    return $instance;
   }
 
   /**
@@ -173,17 +162,6 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#title' => $this->t('Form'),
       '#classes' => $this->config('webform.settings')->get('settings.form_classes'),
       '#default_value' => (isset($elements['#attributes'])) ? $elements['#attributes'] : [],
-    ];
-    $form['form_settings']['form_elements'] = [
-      '#type' => 'details',
-      '#title' => $this->t('Form elements (container) attributes'),
-      '#open' => TRUE,
-    ];
-    $form['form_settings']['form_elements']['form_elements_attributes'] = [
-      '#type' => 'webform_element_attributes',
-      '#title' => $this->t('Form elements'),
-      '#classes' => $this->config('webform.settings')->get('settings.form_classes'),
-      '#default_value' => $settings['form_elements_attributes'],
     ];
 
     // Form behaviors.

@@ -54,7 +54,7 @@ abstract class WebformVariantFormBase extends FormBase {
   }
 
   /**
-   * Constructs a WebformVariantFormBase.
+   * Constructs a WebformVariantFormBase object.
    *
    * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
    *   The webform token manager.
@@ -175,6 +175,8 @@ abstract class WebformVariantFormBase extends FormBase {
     $form['general']['notes'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Administrative notes'),
+      '#description' => $this->t("Entered text will be displayed on the variants administrative page."),
+      '#rows' => 2,
       '#default_value' => $this->webformVariant->getNotes(),
     ];
 
