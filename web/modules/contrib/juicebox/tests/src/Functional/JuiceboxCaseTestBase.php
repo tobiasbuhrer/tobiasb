@@ -125,7 +125,8 @@ abstract class JuiceboxCaseTestBase extends BrowserTestBase {
       'title[0][value]' => 'Test Juicebox Gallery Node',
       'files[' . $this->instFieldName . '_0]' . ($multivalue ? '[]' : '') => \Drupal::service('file_system')->realpath($file->uri),
     ];
-    $this->drupalPostForm('node/add/' . $this->instBundle, $edit, t('Save'));
+    $this->drupalGet('node/add/' . $this->instBundle);
+    $this->submitForm($edit, 'Save');
     // Get ID of the newly created node from the current URL.
     $matches = [];
     preg_match('/node\/([0-9]+)/', $this->getUrl(), $matches);
@@ -146,7 +147,8 @@ abstract class JuiceboxCaseTestBase extends BrowserTestBase {
           $edit[$this->instFieldName . '[0][description]'] = 'Some description text for field ' . $this->instFieldName . ' on node ' . $nid . ' <strong>with formatting</strong>';
         }
       }
-      $this->drupalPostForm('node/' . $nid . '/edit', $edit, t('Save'));
+      $this->drupalGet('node/' . $nid . '/edit');
+      $this->submitForm($edit, 'Save');
       // Clear some caches for good measure and save the node object for
       // reference during tests.
       $node_storage = $this->container->get('entity.manager')->getStorage('node');

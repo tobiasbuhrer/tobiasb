@@ -53,22 +53,22 @@ trait LeafletSettingsElementsTrait {
    */
   public static function getDefaultSettings() {
     return [
-      'multiple_map' => 0,
+      'multiple_map' => FALSE,
       'leaflet_map' => 'OSM Mapnik',
       'height' => 400,
       'height_unit' => 'px',
-      'hide_empty_map' => 0,
-      'disable_wheel' => 0,
-      'fullscreen_control' => 1,
-      'gesture_handling' => 0,
+      'hide_empty_map' => FALSE,
+      'disable_wheel' => FALSE,
+      'fullscreen_control' => TRUE,
+      'gesture_handling' => FALSE,
       'reset_map' => [
-        'control' => 0,
+        'control' => FALSE,
         'position' => 'topright',
       ],
       'popup' => FALSE,
       'popup_content' => '',
       'map_position' => [
-        'force' => 0,
+        'force' => FALSE,
         'center' => [
           'lat' => 0,
           'lon' => 0,
@@ -82,10 +82,10 @@ trait LeafletSettingsElementsTrait {
       'icon' => [
         'iconType' => 'marker',
         'iconUrl' => '',
+        'shadowUrl' => '',
         'className' => '',
         'iconSize' => ['x' => NULL, 'y' => NULL],
         'iconAnchor' => ['x' => NULL, 'y' => NULL],
-        'shadowUrl' => '',
         'shadowSize' => ['x' => NULL, 'y' => NULL],
         'shadowAnchor' => ['x' => NULL, 'y' => NULL],
         'popupAnchor' => ['x' => NULL, 'y' => NULL],
@@ -94,12 +94,12 @@ trait LeafletSettingsElementsTrait {
         'circle_marker_options' => '{"radius": 100, "color": "red", "fillColor": "#f03", "fillOpacity": 0.5}',
       ],
       'leaflet_markercluster' => [
-        'control' => 0,
+        'control' => FALSE,
         'options' => '{"spiderfyOnMaxZoom":true,"showCoverageOnHover":true,"removeOutsideVisibleBounds": false}',
       ],
       'path' => '{"color":"#3388ff","opacity":"1.0","stroke":true,"weight":3,"fill":"depends","fillColor":"*","fillOpacity":"0.2"}',
       'geocoder' => [
-        'control' => 0,
+        'control' => FALSE,
         'settings' => [
           'position' => 'topright',
           'input_size' => 25,
@@ -107,7 +107,7 @@ trait LeafletSettingsElementsTrait {
           'min_terms' => 4,
           'delay' => 800,
           'zoom' => 16,
-          'popup' => 0,
+          'popup' => FALSE,
           'options' => '',
         ],
       ],

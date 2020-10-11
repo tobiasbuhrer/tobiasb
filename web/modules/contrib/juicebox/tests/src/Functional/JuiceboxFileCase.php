@@ -103,11 +103,12 @@ class JuiceboxFileCase extends JuiceboxCaseTestBase {
     $this->assertPattern('|imageURL=.*text.png.*thumbURL=.*text.png|', 'Non-image mimetype placeholder found for image and thumbnail.');
     // Change the file handling option to "skip".
     $this->drupalLogin($this->webUser);
-    $this->drupalPostForm('admin/structure/types/manage/' . $this->instBundle . '/display', [], $this->instFieldName . '_settings_edit', [], 'entity-view-display-edit-form');
+    $this->drupalGet('admin/structure/types/manage/' . $this->instBundle . '/display');
+    $this->submitForm([], $this->instFieldName . '_settings_edit', 'entity-view-display-edit-form');
     $edit = [
       'fields[' . $this->instFieldName . '][settings_edit_form][settings][incompatible_file_action]' => 'skip',
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->submitForm($edit, 'Save');
     $this->assertText(t('Your settings have been saved.'), 'Gallery configuration changes saved.');
     // Re-check the XML. This time no image should appear at all.
     $this->drupalLogout();
