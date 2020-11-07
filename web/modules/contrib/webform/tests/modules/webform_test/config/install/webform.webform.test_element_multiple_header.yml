@@ -4,138 +4,100 @@ status: open
 dependencies:
   enforced:
     module:
-      - webform_test_entity_reference_views
+      - webform_test
 open: null
 close: null
 weight: 0
 uid: null
 template: false
 archive: false
-id: test_element_entity_reference_vs
-title: 'Test: Element: Entity reference views'
-description: 'Test entity reference views elements.'
+id: test_element_multiple_header
+title: 'Test: Element: Multiple header'
+description: 'Test multiple element header.'
 category: 'Test: Element'
 elements: |
-  entity_autocomplete:
-    '#type': entity_autocomplete
-    '#title': entity_autocomplete
-    '#multiple': true
-    '#target_type': node
-    '#selection_handler': views
-    '#selection_settings':
-      view:
-        view_name: webform_test_entity_reference_vs
-        display_name: entity_reference_1
-        arguments: {  }
-  entity_select:
-    '#type': webform_entity_select
-    '#title': webform_entity_select
-    '#multiple': true
-    '#target_type': node
-    '#selection_handler': views
-    '#selection_settings':
-      view:
-        view_name: webform_test_entity_reference_vs
-        display_name: entity_reference_1
-        arguments: {  }
-  entity_radios:
-    '#type': webform_entity_radios
-    '#title': webform_entity_radios
-    '#multiple': true
-    '#target_type': node
-    '#selection_handler': views
-    '#selection_settings':
-      view:
-        view_name: webform_test_entity_reference_vs
-        display_name: entity_reference_1
-        arguments: {  }
-    '#wrapper_attributes':
-      class:
-        - webform-entity-reference-options
-  entity_checkboxes:
-    '#type': webform_entity_checkboxes
-    '#title': entity_checkboxes
-    '#multiple': true
-    '#target_type': node
-    '#selection_handler': views
-    '#selection_settings':
-      view:
-        view_name: webform_test_entity_reference_vs
-        display_name: entity_reference_1
-        arguments: {  }
-    '#wrapper_attributes':
-      class:
-        - webform-entity-reference-options
+  webform_multiple_basic:
+    '#type': webform_multiple
+    '#title': webform_multiple_basic
+  webform_multiple_basic_header_string:
+    '#type': webform_multiple
+    '#title': webform_multiple_basic_header_string
+    '#header': '{webform_multiple_basic_header_string}'
+  webform_multiple_basic_header_label:
+    '#type': webform_multiple
+    '#title': webform_multiple_basic_header_label
+    '#header_label': '{webform_multiple_basic_header_label}'
+  webform_multiple_elements:
+    '#type': webform_multiple
+    '#title': webform_multiple_elements
+    '#element':
+      textfield:
+        '#type': textfield
+        '#title': textfield
+      email:
+        '#type': email
+        '#title': email
+  webform_multiple_elements_header_string:
+    '#type': webform_multiple
+    '#title': webform_multiple_elements_header_string
+    '#header': '{webform_multiple_elements_header_string}'
+    '#element':
+      textfield:
+        '#type': textfield
+        '#title': textfield
+      email:
+        '#type': email
+        '#title': email
+  webform_multiple_elements_header_true:
+    '#type': webform_multiple
+    '#title': webform_multiple_elements_header_true
+    '#header': true
+    '#element':
+      textfield:
+        '#type': textfield
+        '#title': textfield
+      email:
+        '#type': email
+        '#title': email
+  webform_multiple_elements_header_custom:
+    '#type': webform_multiple
+    '#title': webform_multiple_elements_header_custom
+    '#header':
+      - '{textfield_custom}'
+      - '{email_custom}'
+    '#element':
+      textfield:
+        '#type': textfield
+        '#title': textfield
+      email:
+        '#type': email
+        '#title': email
+  webform_multiple_elements_header_true_label:
+    '#type': webform_multiple
+    '#title': webform_multiple_elements_header_true_label
+    '#header': true
+    '#header_label': '{webform_multiple_elements_header_true_label}'
+    '#element':
+      textfield:
+        '#type': textfield
+        '#title': textfield
+      email:
+        '#type': email
+        '#title': email
+  webform_multiple_elements_header_false_label:
+    '#type': webform_multiple
+    '#title': webform_multiple_elements_header_false_label
+    '#header': false
+    '#header_label': '{webform_multiple_elements_header_false_label}'
+    '#element':
+      textfield:
+        '#type': textfield
+        '#title': textfield
+      email:
+        '#type': email
+        '#title': email
 
-css: |
-  /* Autocomplete */
-
-  .ui-autocomplete {
-    display: flex;
-    flex-wrap: wrap !important;
-    align-self: flex-start !important;
-    max-width: 540px !important;
-  }
-
-  .ui-autocomplete .ui-menu-item-wrapper {
-    display: block !important;
-    border: 1px solid #ccc !important;
-    background-color: #eee !important;
-    width: 100px !important;
-    margin: 10px 0 0 10px !important;
-    padding: 10px !important;
-  }
-
-  .ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
-    background-color: blue !important;
-  }
-
-  .ui-autocomplete .views-field views-field-field-image {
-    display: block;
-    margin: 0 0 5px 0;
-  }
-
-  /* Checkboex and radios */
-
-  .webform-entity-reference-options .fieldset-wrapper > div {
-    display: flex;
-    flex-wrap: wrap;
-    align-self: flex-start;
-  }
-
-  .webform-entity-reference-options .form-item {
-    position: relative;
-  }
-
-  .webform-entity-reference-options .form-item input {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-  }
-
-  .webform-entity-reference-options .form-item label {
-    display: block;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    width: 100px;
-    margin: 0 10px 10px 0;
-    padding: 10px;
-  }
-
-  .webform-entity-reference-options .form-item input:checked + label {
-    display: block;
-    border: 1px solid #ccc;
-    background-color: #ffc;
-    width: 100px;
-    margin: 0 10px 10px 0;
-    padding: 10px;
-  }
-
-  .webform-entity-reference-options label.option img {
-    display: block;
-    margin: 0 0 5px 0;
-  }
-
+css: ''
 javascript: ''
 settings:
   ajax: false
@@ -219,7 +181,7 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
-  preview: 1
+  preview: 0
   preview_label: ''
   preview_title: ''
   preview_message: ''
@@ -234,7 +196,7 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
+  confirmation_type: message
   confirmation_title: ''
   confirmation_message: ''
   confirmation_url: ''
@@ -259,7 +221,7 @@ settings:
   entity_limit_user_interval: null
   purge: none
   purge_days: null
-  results_disabled: false
+  results_disabled: true
   results_disabled_ignore: false
   results_customize: false
   token_view: false
