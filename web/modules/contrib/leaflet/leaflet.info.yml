@@ -6,7 +6,7 @@ package: Geofield
 dependencies:
   - geofield:geofield
 
-# Information added by Drupal.org packaging script on 2020-11-03
-version: '2.1.3'
+# Information added by Drupal.org packaging script on 2020-11-12
+version: '2.1.4'
 project: 'leaflet'
-datestamp: 1604421699
+datestamp: 1605220015
