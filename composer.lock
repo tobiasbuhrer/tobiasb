@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d972fa85c42f75cdcdced9530ff9247",
+    "content-hash": "e07b6b68e3cf05e4f78eddc792017a50",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3617,51 +3617,6 @@
                 "source": "https://git.drupalcode.org/project/plupload"
             },
             "time": "2018-12-09T19:54:33+00:00"
-        },
-        {
-            "name": "drupal/plupload_widget",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/plupload_widget.git",
-                "reference": "8.x-1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/plupload_widget-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "8d3dace4ba22b3ffcf0e0bd7e0f8ab8ae099bef1"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/plupload": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1489999082",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "david_garcia",
-                    "homepage": "https://www.drupal.org/user/696200"
-                }
-            ],
-            "description": "Provides a plupload widget.",
-            "homepage": "https://www.drupal.org/project/plupload_widget",
-            "support": {
-                "source": "https://git.drupalcode.org/project/plupload_widget"
-            }
         },
         {
             "name": "drupal/smtp",
