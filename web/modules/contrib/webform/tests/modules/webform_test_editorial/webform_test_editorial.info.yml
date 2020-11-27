@@ -7,7 +7,7 @@ configure: webform_test_editorial.index
 dependencies:
   - 'webform:webform'
 
-# Information added by Drupal.org packaging script on 2020-11-04
-version: '6.0.0-alpha21'
+# Information added by Drupal.org packaging script on 2020-11-24
+version: '6.0.0-beta1'
 project: 'webform'
-datestamp: 1604531936
+datestamp: 1606179574

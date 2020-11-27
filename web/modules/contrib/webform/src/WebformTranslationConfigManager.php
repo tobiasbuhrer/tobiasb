@@ -717,6 +717,8 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    */
   protected function alterElements(array &$elements, array $element_alterations) {
     foreach ($elements as $key => &$element) {
+      // Make sure the element key is a string.
+      $key = (string) $key;
       if (Element::property($key) || !is_array($element)) {
         continue;
       }

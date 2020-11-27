@@ -16,6 +16,10 @@ title: 'Test: Translations'
 description: 'Test translating a webform.'
 category: null
 elements: |
+  variant:
+    '#type': webform_variant
+    '#title': Variant
+    '#variant': override
   textfield:
     '#type': textfield
     '#title': 'Text field'
@@ -76,7 +80,7 @@ elements: |
     '#type': webform_actions
     '#title': 'Submit button(s)'
     '#submit__label': 'Send message'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -293,4 +297,21 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-variants: {  }
+variants:
+  test:
+    id: override
+    label: Test
+    notes: ''
+    variant_id: test
+    element_key: variant
+    status: true
+    weight: 1
+    settings:
+      settings: {  }
+      elements: |
+        textfield:
+          '#title': 'Text field - Variant'
+          '#type': textarea
+
+      handlers: {  }
+      debug: false
