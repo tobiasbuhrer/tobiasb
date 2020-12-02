@@ -261,10 +261,17 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     $translation_elements = $values['translation']['config_names'][$config_name]['elements'];
     foreach ($translation_elements as $key => $element) {
       $translation_elements[$key] = WebformArrayHelper::addPrefix($element);
+      // Handle composite elements.
       if (isset($translation_elements[$key]['#element'])) {
         foreach ($translation_elements[$key]['#element'] as $composite_key => $composite_element)  {
           $translation_elements[$key]['#element'][$composite_key] = WebformArrayHelper::addPrefix($composite_element);
         }
+      }
+      // Handle 'text_format' elements.
+      elseif (isset($translation_elements[$key]['#text'])
+        && isset($translation_elements[$key]['#text']['value'])
+        && isset($translation_elements[$key]['#text']['format'])) {
+        $translation_elements[$key]['#text'] = $translation_elements[$key]['#text']['value'];
       }
     }
 
@@ -662,6 +669,14 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
         '#mode' => 'yaml',
       ];
     }
+    elseif ($property_type === 'text_format') {
+      $property_translation_element += [
+        '#type' => 'text_format',
+        '#title_display' => 'hidden',
+        '#format' => $element_property['#format'],
+        '#allowed_formats' => [$element_property['#format']],
+      ];
+    }
     elseif ($property_type) {
       $property_translation_element += [
         '#type' => $property_type,
@@ -691,6 +706,13 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       $property_source_element += [
         '#type' => 'item',
         'html' => WebformHtmlEditor::checkMarkup($source_element[$property_name]),
+      ];
+    }
+    elseif ($property_translation_element['#type'] === 'text_format') {
+      $property_source_element += [
+        '#type' => 'processed_text',
+        '#text' => $source_element[$property_name],
+        '#format' => $element_property['#format'],
       ];
     }
     else {

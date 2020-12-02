@@ -17,7 +17,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['block', 'webform', 'webform_ui', 'webform_test_translation'];
+  public static $modules = ['block', 'filter', 'webform', 'webform_ui', 'webform_test_translation'];
 
   /**
    * {@inheritdoc}
@@ -27,6 +27,9 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
 
     // Place blocks.
     $this->placeBlocks();
+
+    // Create filters.
+    $this->createFilters();
   }
 
   /**
@@ -61,6 +64,9 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     // Check Spanish translation.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/es/edit');
     $this->assertFieldByName('translation[config_names][webform.webform.test_translation][title]', 'Prueba: Traducción');
+
+    // Check processed text translation.
+    $this->assertFieldByName('translation[config_names][webform.webform.test_translation][elements][processed_text][text][value]', '<p><strong>Algún texto</strong></p>');
 
     // Check textfield translation.
     $this->assertFieldByName('translation[config_names][webform.webform.test_translation][elements][textfield][title]', 'Campo de texto');
@@ -101,7 +107,6 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     // Check action translation.
     $this->assertFieldByName('translation[config_names][webform.webform.test_translation][elements][actions][title]', 'Enviar botón (s)');
     $this->assertFieldByName('translation[config_names][webform.webform.test_translation][elements][actions][submit__label]', 'Enviar mensaje');
-
 
     // Check form builder is not translated.
     $this->drupalGet('/es/admin/structure/webform/manage/test_translation');
@@ -278,41 +283,6 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     // Check duplicate French translation.
     $this->drupalGet('/webform/duplicate', ['language' => $language_manager->getLanguage('fr')]);
     $this->assertRaw('<label for="edit-textfield">French</label>');
-  }
-
-  /**
-   * Tests webform translate variants.
-   */
-  public function testTranslateVariants() {
-    // Check English webform.
-    $this->drupalGet('/webform/test_translation');
-    $this->assertRaw('<label for="edit-textfield">Text field</label>');
-    $this->assertRaw('<label for="edit-select-options">Select (options)</label>');
-
-    // Check English webform with test variant.
-    $this->drupalGet('/webform/test_translation', ['query' => ['variant' => 'test']]);
-    $this->assertRaw('<label for="edit-textfield">Text field - Variant</label>');
-    $this->assertRaw('<label for="edit-select-options">Select (options)</label>');
-
-    // Check Spanish webform.
-    $this->drupalGet('/es/webform/test_translation');
-    $this->assertRaw('<label for="edit-textfield">Campo de texto</label>');
-    $this->assertRaw('<label for="edit-select-options">Seleccione (opciones)</label>');
-
-    // Check Spanish webform with test variant.
-    $this->drupalGet('/es/webform/test_translation', ['query' => ['variant' => 'test']]);
-    $this->assertRaw('<label for="edit-textfield">Campo de texto - Variante</label>');
-    $this->assertRaw('<label for="edit-select-options">Seleccione (opciones)</label>');
-
-    // Check French (not translated) webform.
-    $this->drupalGet('/fr/webform/test_translation');
-    $this->assertRaw('<label for="edit-textfield">Text field</label>');
-    $this->assertRaw('<label for="edit-select-options">Select (options)</label>');
-
-    // Check French (not translated) webform with test variant.
-    $this->drupalGet('/fr/webform/test_translation', ['query' => ['variant' => 'test']]);
-    $this->assertRaw('<label for="edit-textfield">Text field - Variant</label>');
-    $this->assertRaw('<label for="edit-select-options">Select (options)</label>');
   }
 
 }

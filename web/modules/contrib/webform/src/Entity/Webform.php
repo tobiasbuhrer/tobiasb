@@ -1408,15 +1408,13 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   }
 
   /**
-   * Initialize and parse webform elements.
+   * Initialize parse webform elements.
    */
   protected function initElements() {
     if (isset($this->elementsInitialized)) {
       return;
     }
 
-    // Reset everything excepts pages.
-    // @todo Figure out how we can call ::resetElements.
     // @see \Drupal\webform\Entity\Webform::resetElements
     $this->hasFlexboxLayout = FALSE;
     $this->hasContainer = FALSE;
@@ -1438,11 +1436,28 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     $this->elementsDefaultData = [];
 
     try {
-      // Init element translations.
-      $this->initElementsTranslation();
+      $config_translation = \Drupal::moduleHandler()->moduleExists('config_translation');
+      /** @var \Drupal\webform\WebformTranslationManagerInterface $translation_manager */
+      $translation_manager = \Drupal::service('webform.translation_manager');
+      /** @var \Drupal\Core\Language\LanguageManagerInterface $language_manager */
+      $language_manager = \Drupal::service('language_manager');
+
+      // If current webform is translated, load the base (default) webform and
+      // apply the translation to the elements.
+      if ($config_translation
+        && ($this->langcode !== $language_manager->getCurrentLanguage()->getId())) {
+        // Always get the elements in the original language.
+        $elements = $translation_manager->getElements($this);
+        // For none admin routes get the element (label) translations.
+        if (!$translation_manager->isAdminRoute()) {
+          $this->elementsTranslations = $translation_manager->getElements($this, $language_manager->getCurrentLanguage()->getId());
+        }
+      }
+      else {
+        $elements = WebformYaml::decode($this->elements);
+      }
 
       // Since YAML supports simple values.
-      $elements = WebformYaml::decode($this->elements);
       $elements = (is_array($elements)) ? $elements : [];
       $this->elementsDecoded = $elements;
     }
@@ -1464,55 +1479,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     $this->elementsInitialized = $elements;
-  }
-
-  /**
-   * Initialize elements translation.
-   */
-  protected function initElementsTranslation() {
-    // If config translation is not enabled then return.
-    if (!\Drupal::moduleHandler()->moduleExists('config_translation')) {
-      return;
-    }
-
-    // If the webform is overridden, then we no longer want to get and apply
-    // element translations.
-    // This allows variants to alter translated elements.
-    // @see \Drupal\webform\Entity\Webform::applyVariants
-    if ($this->isOverridden()) {
-      return;
-    }
-
-    // Get the current langcode.
-    $current_langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-    // If the current langcode is the same as this webform's langcode
-    // then return.
-    if ($this->langcode === $current_langcode) {
-      return;
-    }
-
-    /** @var \Drupal\webform\WebformTranslationManagerInterface $translation_manager */
-    $translation_manager = \Drupal::service('webform.translation_manager');
-
-    // For admin routes we need to get the original untranslated elements.
-    if ($translation_manager->isAdminRoute()) {
-      $this->elements = WebformYaml::encode($translation_manager->getElements($this));
-      return;
-    }
-
-    // Get the webform's decoded elements and translations.
-    $elements = Yaml::decode($this->elements);
-    $elementsTranslations = $translation_manager->getElements($this, $current_langcode);
-
-    // If the elements are empty or they are equal to the translated elements
-    // then, we need to load the elements in the original language.
-    if (empty($elementsTranslations) || ($elementsTranslations === $elements)) {
-      $this->elements = WebformYaml::encode($translation_manager->getElements($this));
-    }
-
-    // Finally set the element's translations.
-    $this->elementsTranslations = $elementsTranslations;
   }
 
   /**
@@ -2851,56 +2817,19 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       $variants += $this->getVariantsData($webform_submission);
     }
 
-    // Skip if there are no variants that need to be applied.
-    if (empty($variants)) {
-      return;
-    }
-
-    // Ensure that translated webform elements can be overridden by a variant.
-    // @see \Drupal\webform\Entity\Webform::initElementsTranslation
-    if (!$this->isOverridden()) {
-      $this->initElementsTranslation();
-      if ($this->elementsTranslations) {
-        // Apply translations to elements.
-        $elements = Yaml::decode($this->elements);
-        $this->applyVariantsElementsTranslationsRecursive($elements);
-        // Set and reset elements so that the translations
-        // are completely applied.
-        $this->setElements($elements);
-      }
-    }
-
-    // Set the webform to be override to prevent variants and
-    // translated elements from being saved.
-    $this->setOverride();
-
     // Apply variants.
+    $is_applied = FALSE;
     $variant_element_keys = $this->getElementsVariant();
     foreach ($variant_element_keys as $variant_element_key) {
       if (!empty($variants[$variant_element_key])) {
         $instance_id = $variants[$variant_element_key];
-        $this->applyVariant($variant_element_key, $instance_id, $force);
+        if ($this->applyVariant($variant_element_key, $instance_id, $force)) {
+          $is_applied = TRUE;
+        }
       }
     }
-  }
-
-  /**
-   * Apply elements translations before variants are applied.
-   *
-   * @param array $elements
-   *   The webform elements.
-   */
-  protected function applyVariantsElementsTranslationsRecursive(array &$elements) {
-    foreach ($elements as $key => &$element) {
-      if (!WebformElementHelper::isElement($element, $key)) {
-        continue;
-      }
-
-      if (isset($this->elementsTranslations[$key])) {
-        WebformElementHelper::applyTranslation($element, $this->elementsTranslations[$key]);
-      }
-
-      $this->applyVariantsElementsTranslationsRecursive($element);
+    if ($is_applied) {
+      $this->setOverride();
     }
   }
 
