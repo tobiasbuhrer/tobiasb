@@ -3390,10 +3390,11 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet_more_maps.git",
-                "reference": "fd8a83e9b459f9f0631684fe18349059d12f946c"
+                "reference": "363477b6650407d8d586d7c732df869e4d357222"
             },
             "require": {
-                "drupal/core": "~8.0"
+                "drupal/core": "^8.8 || ^9",
+                "drupal/leaflet": "^2.1.0"
             },
             "require-dev": {
                 "drupal/leaflet": "*"
@@ -3401,20 +3402,18 @@
             "type": "drupal-module",
             "extra": {
                 "branch-alias": {
-                    "dev-1.x": "1.x-dev"
+                    "dev-1.x": "1.x-dev",
+                    "dev-8.x-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-alpha2+1-dev",
-                    "datestamp": "1473328284",
+                    "version": "8.x-1.0-alpha3+11-dev",
+                    "datestamp": "1607674483",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 },
-                "patches_applied": {
-                    "Config get does not accept a default value": "https://www.drupal.org/files/issues/lmm.patch",
-                    "Update Thunderforest maps": "https://www.drupal.org/files/issues/update_thunderforest_maps_D8-2848895-6.patch"
-                }
+                "patches_applied": []
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
@@ -3426,6 +3425,10 @@
                     "homepage": "https://www.drupal.org/user/404007"
                 },
                 {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
                     "name": "rachel_norfolk",
                     "homepage": "https://www.drupal.org/user/66273"
                 }
@@ -3433,32 +3436,33 @@
             "description": "Adds a swag of map styles to Leaflet, e.g Thunderforest, Esri, Stamen, Google.",
             "homepage": "https://www.drupal.org/project/leaflet_more_maps",
             "support": {
-                "source": "https://git.drupalcode.org/project/leaflet_more_maps"
+                "source": "https://git.drupalcode.org/project/leaflet_more_maps",
+                "issues": "https://www.drupal.org/project/issues/leaflet_more_maps"
             },
-            "time": "2016-09-07T13:25:20+00:00"
+            "time": "2020-12-11T08:14:09+00:00"
         },
         {
             "name": "drupal/libraries",
-            "version": "3.0.0-alpha1",
+            "version": "3.0.0-alpha6",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/libraries.git",
-                "reference": "8.x-3.0-alpha1"
+                "reference": "8.x-3.0-alpha6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/libraries-8.x-3.0-alpha1.zip",
-                "reference": "8.x-3.0-alpha1",
-                "shasum": "bb07036b1eaeea7d736fc7e72416238830cd8d67"
+                "url": "https://ftp.drupal.org/files/projects/libraries-8.x-3.0-alpha6.zip",
+                "reference": "8.x-3.0-alpha6",
+                "shasum": "d2aaf7f0968a1864457a7741b7e38ab11ef83e2c"
             },
             "require": {
-                "drupal/core": "~8.0"
+                "drupal/core": "^8 || ^9"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.0-alpha1",
-                    "datestamp": "1517046484",
+                    "version": "8.x-3.0-alpha6",
+                    "datestamp": "1608099124",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."

@@ -1,11 +1,11 @@
 name: Leaflet Demo
 type: module
 description: Creates a block showcasing all Leaflet-powered maps available on your system. Optionally use with "IP Geolocation Views and Maps" to center the maps on your current location.
-core: 8.x
-version: VERSION
-package: Leaflet
+core_version_requirement: ^8.8 || ^9
+package: Geofield
 dependencies:
-  - leaflet
+  - leaflet:leaflet
+configure: admin/config/system/leaflet_more_maps/demo
 # While packaged with it, leaflet_more_maps does not have to be enabled, if you
 # do not wish the maps provided by leaflet_more_maps to appear, but only those
 # provided external to leaflet_more_maps.

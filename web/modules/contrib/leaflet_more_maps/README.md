@@ -2,14 +2,7 @@
 INSTALLATION
 ============
 Before you enable the Leaflet More Maps module, you need to download and enable
-the Leaflet module and the Libraries module.
-
-Then download the Leaflet javascript library from
-http://leaflet.cloudmade.com/download.html.
-
-Unzip and rename the top folder from 'Leaflet-0.x.y' to 'leaflet' and drop it in
-sites/all/libraries, so that the path to the essential javascript file
-becomes sites/all/libraries/leaflet/leaflet.js
+the Leaflet module, and use composer to download the library.
 
 If all's ok, you won't see any errors in the Status Report admin/reports/status.
 After this all you have to do is enable Leaflet More Maps to enhance your
@@ -48,7 +41,7 @@ Example:
 
 References and licensing terms:
 
-o http://leaflet.cloudmade.com
+o https://leafletjs.com
 o http://www.openstreetmap.org/copyright
 o http://mapbox.com/tos
 o http://maps.stamen.com/#watercolor/12/37.7706/-122.3782
