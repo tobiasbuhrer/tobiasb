@@ -61,6 +61,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
    */
   public function getCategories() {
     $categories = [];
+    $categories['applications'] = [
+      'title' => $this->t('Applications'),
+    ];
     $categories['element'] = [
       'title' => $this->t('Elements'),
     ];
@@ -112,6 +115,18 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     }
 
     $projects = [];
+
+    /**************************************************************************/
+    // Applications.
+    /**************************************************************************/
+
+    // Applications: Academic Applications.
+    $projects['academic_applications'] = [
+      'title' => $this->t('Academic Applications'),
+      'description' => $this->t('Provides a simple Webform-based system for applying to academic programs.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/academic_applications'),
+      'category' => 'applications',
+    ];
 
     /**************************************************************************/
     // Element.
@@ -651,6 +666,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Webform Postcode API.
+    $projects['webform_postcodeapi'] = [
+      'title' => $this->t('Webform Postcode API'),
+      'description' => $this->t('Provides a composite Webform address element with autocompletion based on PostcodeAPI.nu data.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_postcodeapi'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Rules Webform.
     $projects['rules_webform'] = [
       'title' => $this->t('Rules Webform'),
@@ -659,11 +682,27 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-    // Integrations: Sherpa Webform .
+    // Integrations: Sharpspring Webforms.
+    $projects['sharpspring_webforms'] = [
+      'title' => $this->t('Sharpspring Webforms'),
+      'description' => $this->t('Extends the SharpSpring module\'s functionality to add SharpSpring lead tracking to Webforms.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/sharpspring_webforms'),
+      'category' => 'integration',
+    ];
+
+    // Integrations: Sherpa Webform.
     $projects['sherpa_webform'] = [
       'title' => $this->t('Sherpa Webform'),
       'description' => $this->t('Captures Webform submissions, convert them to JSON, and send them to Sherpa.'),
       'url' => Url::fromUri('https://www.drupal.org/project/sherpa_webform'),
+      'category' => 'integration',
+    ];
+
+    // Integrations: Vipps Recurring Payments.
+    $projects['vipps_recurring_payments'] = [
+      'title' => $this->t('Vipps Recurring Payments'),
+      'description' => $this->t('Use Webform with Vipps Recurring Payments.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/vipps_recurring_payments'),
       'category' => 'integration',
     ];
 
@@ -1121,7 +1160,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
 
     // Spam: SpamAway.
     $projects['spamaway'] = [
-      'title' => $this->t('Honeypot'),
+      'title' => $this->t('SpamAway'),
       'description' => $this->t('Provides a webform handler which will mark submissions as SPAM'),
       'url' => Url::fromUri('https://www.drupal.org/project/spamaway'),
       'category' => 'spam',

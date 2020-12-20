@@ -87,12 +87,12 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(RouteMatchInterface $route_match, AccountInterface $current_user, UserDataInterface $user_data, ModuleHandlerInterface $module_handler, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(RouteMatchInterface $route_match, AccountInterface $current_user, UserDataInterface $user_data, ModuleHandlerInterface $module_handler = NULL, EntityTypeManagerInterface $entity_type_manager = NULL) {
     $this->routeMatch = $route_match;
     $this->currentUser = $current_user;
     $this->userData = $user_data;
-    $this->moduleHandler = $module_handler;
-    $this->entityTypeManager = $entity_type_manager;
+    $this->moduleHandler = $module_handler ?: \Drupal::moduleHandler();
+    $this->entityTypeManager = $entity_type_manager ?: \Drupal::entityTypeManager();
   }
 
   /****************************************************************************/
