@@ -5,7 +5,6 @@
 </p>
 
 <p align="center">
-	<a href="https://travis-ci.com/phpstan/phpstan"><img src="https://travis-ci.com/phpstan/phpstan.svg?branch=master" alt="Build Status"></a>
 	<a href="https://github.com/phpstan/phpstan/actions"><img src="https://github.com/phpstan/phpstan/workflows/Build/badge.svg" alt="Build Status"></a>
 	<a href="https://packagist.org/packages/phpstan/phpstan"><img src="https://poser.pugx.org/phpstan/phpstan/v/stable" alt="Latest Stable Version"></a>
 	<a href="https://packagist.org/packages/phpstan/phpstan/stats"><img src="https://poser.pugx.org/phpstan/phpstan/downloads" alt="Total Downloads"></a>
@@ -54,6 +53,20 @@ All the documentation lives on the [phpstan.org website](https://phpstan.org/):
 * [PHPDocs Basics](https://phpstan.org/writing-php-code/phpdocs-basics) & [PHPDoc Types](https://phpstan.org/writing-php-code/phpdoc-types)
 * [Extension Library](https://phpstan.org/user-guide/extension-library)
 * [Developing Extensions](https://phpstan.org/developing-extensions/extension-types)
+
+## PHPStan Pro
+
+PHPStan Pro is a paid add-on on top of open-source PHPStan Static Analysis Tool with these premium features:
+
+* Web UI for browsing found errors, you can click and open your editor of choice on the offending line.
+* Continuous analysis (watch mode): scans changed files in the background, refreshes the UI automatically.
+* Interactive fixer: lets you choose the right fix for found errors :blush:
+
+Try it on PHPStan 0.12.45 or later by running it with the `--pro` option. You can create an account either by following the on-screen instructions, or by visiting [account.phpstan.com](https://account.phpstan.com/).
+
+After 30-day free trial period it costs 7 EUR for individuals monthly, 70 EUR for teams (up to 25 members). By paying for PHPStan Pro, you're supporting the development of open-source PHPStan.
+
+You can read more about it on [PHPStan's website](https://phpstan.org/blog/introducing-phpstan-pro).
 
 ## Code of Conduct
 
