@@ -79,7 +79,7 @@ class JuiceboxConfCase extends JuiceboxCaseTestBase {
       'fields[' . $this->instFieldName . '][settings_edit_form][settings][jlib_useFullscreenExpand]' => TRUE,
     ];
     $this->submitForm($edit, 'Save');
-    $this->assertText(t('Your settings have been saved.'), 'Gallery configuration changes saved.');
+    $this->assertText($this->t('Your settings have been saved.'), 'Gallery configuration changes saved.');
     // Now check the resulting XML again as an anon user.
     $this->drupalLogout();
     // Check for correct embed markup.
@@ -115,7 +115,7 @@ class JuiceboxConfCase extends JuiceboxCaseTestBase {
       'fields[' . $this->instFieldName . '][settings_edit_form][settings][manual_config]' => "sHoWoPeNbUtToN=\"FALSE\"\nshowexpandbutton=\"TRUE\"\ngallerywidth=\"50%\"\nmyCustomSetting=\"boomsauce\"",
     ];
     $this->submitForm($edit, 'Save');
-    $this->assertText(t('Your settings have been saved.'), 'Gallery configuration changes saved.');
+    $this->assertText($this->t('Your settings have been saved.'), 'Gallery configuration changes saved.');
     $this->drupalLogout();
     // Check for correct embed markup.
     $this->drupalGet('node/' . $node->id());
@@ -153,7 +153,7 @@ class JuiceboxConfCase extends JuiceboxCaseTestBase {
       'fields[' . $this->instFieldName . '][settings_edit_form][settings][custom_parent_classes]' => 'my-custom-wrapper',
     ];
     $this->submitForm($edit, 'Save');
-    $this->assertText(t('Your settings have been saved.'), 'Gallery configuration changes saved.');
+    $this->assertText($this->t('Your settings have been saved.'), 'Gallery configuration changes saved.');
     $this->drupalLogout();
     // Check case with custom configuration.
     $this->drupalGet('juicebox/xml/field/node/' . $node->id() . '/' . $this->instFieldName . '/full');

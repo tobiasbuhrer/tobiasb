@@ -342,7 +342,7 @@
         "drupal/honeypot": "1.x-dev",
         "drupal/image_effects": "^3.0",
         "drupal/imagemagick": "^3.1",
-        "drupal/juicebox": "2.x-dev",
+        "drupal/juicebox": "^3.0@alpha",
         "drupal/leaflet": "^2.0",
         "drupal/leaflet_more_maps": "^1.0",
         "drupal/minifyhtml": "^1.7",
