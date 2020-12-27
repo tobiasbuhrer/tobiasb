@@ -3071,18 +3071,18 @@
     },
     {
         "name": "drupal/geofield",
-        "version": "1.17.0",
-        "version_normalized": "1.17.0.0",
+        "version": "1.18.0",
+        "version_normalized": "1.18.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/geofield.git",
-            "reference": "8.x-1.17"
+            "reference": "8.x-1.18"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.17.zip",
-            "reference": "8.x-1.17",
-            "shasum": "4175dd4e4351e2c566b177c256cc92ef7faff20f"
+            "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.18.zip",
+            "reference": "8.x-1.18",
+            "shasum": "d1f20ecb66c262f8fd55fea517e4e696b91f2c10"
         },
         "require": {
             "drupal/core": "^8.8 || ^9",
@@ -3091,8 +3091,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-1.17",
-                "datestamp": "1608592856",
+                "version": "8.x-1.18",
+                "datestamp": "1608852700",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -3408,18 +3408,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "2.1.5",
-        "version_normalized": "2.1.5.0",
+        "version": "2.1.8",
+        "version_normalized": "2.1.8.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "2.1.5"
+            "reference": "2.1.8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-2.1.5.zip",
-            "reference": "2.1.5",
-            "shasum": "28e37842a0afbe32da4f4da33b6210eacfe0b180"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-2.1.8.zip",
+            "reference": "2.1.8",
+            "shasum": "8e5bb85168a4351d7028e713b8467a34ccd7066e"
         },
         "require": {
             "drupal/core": "^8.8 || ^9",
@@ -3428,8 +3428,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "2.1.5",
-                "datestamp": "1605734713",
+                "version": "2.1.8",
+                "datestamp": "1609007739",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4004,18 +4004,18 @@
     },
     {
         "name": "drupal/webform",
-        "version": "6.0.0-beta3",
-        "version_normalized": "6.0.0.0-beta3",
+        "version": "6.0.0",
+        "version_normalized": "6.0.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/webform.git",
-            "reference": "6.0.0-beta3"
+            "reference": "6.0.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/webform-6.0.0-beta3.zip",
-            "reference": "6.0.0-beta3",
-            "shasum": "e3a92cb31164c2ccf07e52b72f8ba880afd30355"
+            "url": "https://ftp.drupal.org/files/projects/webform-6.0.0.zip",
+            "reference": "6.0.0",
+            "shasum": "2528636c9e90fe1623544eee433f102faa0f1b57"
         },
         "require": {
             "drupal/core": "^8.8 || ^9"
@@ -4063,11 +4063,11 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "6.0.0-beta3",
-                "datestamp": "1608425493",
+                "version": "6.0.0",
+                "datestamp": "1608855845",
                 "security-coverage": {
-                    "status": "not-covered",
-                    "message": "Beta releases are not covered by Drupal security advisories."
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
                 }
             },
             "drush": {
