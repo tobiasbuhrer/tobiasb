@@ -420,12 +420,6 @@
             "drush/contrib/{$name}": [
                 "type:drupal-drush"
             ]
-        },
-        "patches": {
-            "drupal/leaflet_more_maps": {
-                "Config get does not accept a default value": "https://www.drupal.org/files/issues/lmm.patch",
-                "Update Thunderforest maps": "https://www.drupal.org/files/issues/update_thunderforest_maps_D8-2848895-6.patch"
-            }
         }
     }
 }

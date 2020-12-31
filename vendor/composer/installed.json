@@ -2633,18 +2633,18 @@
     },
     {
         "name": "drupal/devel",
-        "version": "4.0.1",
-        "version_normalized": "4.0.1.0",
+        "version": "4.1.0",
+        "version_normalized": "4.1.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/devel.git",
-            "reference": "4.0.1"
+            "reference": "4.1.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/devel-4.0.1.zip",
-            "reference": "4.0.1",
-            "shasum": "cf2458de1cbac00a88ed26ae3da2cf331e1bc047"
+            "url": "https://ftp.drupal.org/files/projects/devel-4.1.0.zip",
+            "reference": "4.1.0",
+            "shasum": "c8c21841e03ec92a1dba102116be239554f8f20d"
         },
         "require": {
             "doctrine/common": "^2.7",
@@ -2655,16 +2655,7 @@
             "kint-php/kint": "<3"
         },
         "require-dev": {
-            "composer/installers": "^1",
-            "cweagans/composer-patches": "~1.0",
-            "drupal/core-composer-scaffold": "^8.0",
-            "drupal/core-dev": "^8.0",
-            "drupal/core-recommended": "^8.0",
-            "drush/drush": "^10",
-            "mglaman/phpstan-drupal": "^0.12",
-            "php-parallel-lint/php-parallel-lint": "^1.2",
-            "phpstan/phpstan-deprecation-rules": "^0.12",
-            "zaporylie/composer-drupal-optimizations": "^1.0"
+            "drush/drush": "^10"
         },
         "suggest": {
             "kint-php/kint": "Kint provides an informative display of arrays/objects. Useful for debugging and developing."
@@ -2672,36 +2663,11 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "4.0.1",
-                "datestamp": "1600300079",
+                "version": "4.1.0",
+                "datestamp": "1609263666",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
-                }
-            },
-            "installer-paths": {
-                "web/core": [
-                    "type:drupal-core"
-                ],
-                "web/libraries/{$name}": [
-                    "type:drupal-library"
-                ],
-                "web/modules/contrib/{$name}": [
-                    "type:drupal-module"
-                ],
-                "web/profiles/{$name}": [
-                    "type:drupal-profile"
-                ],
-                "web/themes/{$name}": [
-                    "type:drupal-theme"
-                ],
-                "drush/{$name}": [
-                    "type:drupal-drush"
-                ]
-            },
-            "drupal-scaffold": {
-                "locations": {
-                    "web-root": "web/"
                 }
             },
             "drush": {
@@ -2711,44 +2677,7 @@
             }
         },
         "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                ".spoons/ScriptHandler.php"
-            ]
-        },
         "notification-url": "https://packages.drupal.org/8/downloads",
-        "scripts": {
-            "si": [
-                "drush si -v --db-url=${SIMPLETEST_DB:-mysql://root:password@mariadb/db}"
-            ],
-            "phpcs": [
-                "phpcs --runtime-set ignore_warnings_on_exit 1 --runtime-set ignore_errors_on_exit 1 web/modules/custom"
-            ],
-            "lint": [
-                "parallel-lint --exclude web --exclude vendor ."
-            ],
-            "webserver": [
-                "cd web && php -S 0.0.0.0:8888 .ht.router.php"
-            ],
-            "chromedriver": [
-                "chromedriver --port=9515 --verbose --whitelisted-ips --log-path=/tmp/chromedriver.log --no-sandbox"
-            ],
-            "unit": [
-                "phpunit --verbose web/modules/custom"
-            ],
-            "phpstan": [
-                "phpstan analyse web/modules/custom"
-            ],
-            "stylelint": [
-                "yarn --silent --cwd web/core stylelint --formatter verbose --config ./.stylelintrc.json ../modules/custom/**/*.css"
-            ],
-            "eslint": [
-                "yarn --silent --cwd web/core eslint -c ./.eslintrc.json ../modules/custom"
-            ],
-            "post-update-cmd": [
-                "Spoons\\ScriptHandler::createSymlinks"
-            ]
-        },
         "license": [
             "GPL-2.0-or-later"
         ],
@@ -3543,70 +3472,6 @@
         "support": {
             "source": "https://git.drupalcode.org/project/leaflet_more_maps",
             "issues": "https://www.drupal.org/project/issues/leaflet_more_maps"
-        }
-    },
-    {
-        "name": "drupal/libraries",
-        "version": "3.0.0-alpha6",
-        "version_normalized": "3.0.0.0-alpha6",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupalcode.org/project/libraries.git",
-            "reference": "8.x-3.0-alpha6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/libraries-8.x-3.0-alpha6.zip",
-            "reference": "8.x-3.0-alpha6",
-            "shasum": "d2aaf7f0968a1864457a7741b7e38ab11ef83e2c"
-        },
-        "require": {
-            "drupal/core": "^8 || ^9"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "drupal": {
-                "version": "8.x-3.0-alpha6",
-                "datestamp": "1608099124",
-                "security-coverage": {
-                    "status": "not-covered",
-                    "message": "Alpha releases are not covered by Drupal security advisories."
-                }
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "Pol",
-                "homepage": "https://www.drupal.org/user/47194"
-            },
-            {
-                "name": "joseph.olstad",
-                "homepage": "https://www.drupal.org/user/1321830"
-            },
-            {
-                "name": "rjacobs",
-                "homepage": "https://www.drupal.org/user/422459"
-            },
-            {
-                "name": "sun",
-                "homepage": "https://www.drupal.org/user/54136"
-            },
-            {
-                "name": "tstoeckler",
-                "homepage": "https://www.drupal.org/user/107158"
-            }
-        ],
-        "description": "Allows version-dependent and shared usage of external libraries in Drupal.",
-        "homepage": "http://drupal.org/project/libraries",
-        "support": {
-            "source": "http://cgit.drupalcode.org/libraries",
-            "issues": "http://drupal.org/project/issues/libraries",
-            "irc": "irc://irc.freenode.org/drupal-contribute"
         }
     },
     {
