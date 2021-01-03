@@ -1,7 +1,7 @@
 include:
   - project: 'drupalspoons/composer-plugin'
     # Best practice is to pin to a tag or a SHA1. https://docs.gitlab.com/ee/ci/yaml/#includefile
-    ref: "2.0.0"
+    ref: "2.1.0"
     # The template below may be inspected at https://gitlab.com/drupalspoons/composer-plugin/-/blob/master/templates/.gitlab-ci.yml
     file: 'templates/.gitlab-ci.yml'
 
@@ -18,8 +18,8 @@ composer_node:
     DRUPAL_CORE_CONSTRAINT: ~9.1.0
   after_script:
     # See https://www.drupal.org/project/drupal/issues/3182653
-    # This will fail on PHPUnit 8- that is OK as its not needed there.
-    - vendor/bin/spoon require --dev --no-progress --no-suggest phpspec/prophecy-phpunit:^2 || true
+    # This will fail on PHPUnit 8-, that is OK as its not needed there.
+    - vendor/bin/spoon require --no-progress phpspec/prophecy-phpunit:^2 || true
 
 
 # Add /webprofiler to ignored paths.
