@@ -2317,17 +2317,17 @@
     },
     {
         "name": "drupal/core",
-        "version": "8.9.11",
-        "version_normalized": "8.9.11.0",
+        "version": "8.9.12",
+        "version_normalized": "8.9.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core.git",
-            "reference": "8fc1d510b8fcff90e2f3a7c96a893ba16bbdc62d"
+            "reference": "ec7ac2bd2b7fa7f06df654c637b7f29f019d356f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core/zipball/8fc1d510b8fcff90e2f3a7c96a893ba16bbdc62d",
-            "reference": "8fc1d510b8fcff90e2f3a7c96a893ba16bbdc62d",
+            "url": "https://api.github.com/repos/drupal/core/zipball/ec7ac2bd2b7fa7f06df654c637b7f29f019d356f",
+            "reference": "ec7ac2bd2b7fa7f06df654c637b7f29f019d356f",
             "shasum": ""
         },
         "require": {
@@ -2494,7 +2494,7 @@
             "drupal/workflows": "self.version",
             "drupal/workspaces": "self.version"
         },
-        "time": "2020-12-03T20:57:10+00:00",
+        "time": "2021-01-06T23:44:11+00:00",
         "type": "drupal-core",
         "extra": {
             "drupal-scaffold": {
@@ -2550,17 +2550,17 @@
     },
     {
         "name": "drupal/core-recommended",
-        "version": "8.9.11",
-        "version_normalized": "8.9.11.0",
+        "version": "8.9.12",
+        "version_normalized": "8.9.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core-recommended.git",
-            "reference": "c8e6bfedd8fcec50ddc9e96e0f5f3d0779e3accb"
+            "reference": "06d3680bf56fda259679f538ef90da44770f92a8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core-recommended/zipball/c8e6bfedd8fcec50ddc9e96e0f5f3d0779e3accb",
-            "reference": "c8e6bfedd8fcec50ddc9e96e0f5f3d0779e3accb",
+            "url": "https://api.github.com/repos/drupal/core-recommended/zipball/06d3680bf56fda259679f538ef90da44770f92a8",
+            "reference": "06d3680bf56fda259679f538ef90da44770f92a8",
             "shasum": ""
         },
         "require": {
@@ -2572,7 +2572,7 @@
             "doctrine/common": "v2.7.3",
             "doctrine/inflector": "v1.2.0",
             "doctrine/lexer": "1.0.2",
-            "drupal/core": "8.9.11",
+            "drupal/core": "8.9.12",
             "easyrdf/easyrdf": "0.9.1",
             "egulias/email-validator": "2.1.17",
             "guzzlehttp/guzzle": "6.5.4",
@@ -2623,7 +2623,7 @@
         "conflict": {
             "webflo/drupal-core-strict": "*"
         },
-        "time": "2020-12-03T20:57:10+00:00",
+        "time": "2021-01-06T23:44:11+00:00",
         "type": "metapackage",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -6186,17 +6186,17 @@
     },
     {
         "name": "phpstan/phpstan",
-        "version": "0.12.64",
-        "version_normalized": "0.12.64.0",
+        "version": "0.12.65",
+        "version_normalized": "0.12.65.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpstan/phpstan.git",
-            "reference": "23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa"
+            "reference": "1c7658668b28f8d647a8b874372acf14c4352688"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpstan/phpstan/zipball/23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa",
-            "reference": "23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa",
+            "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1c7658668b28f8d647a8b874372acf14c4352688",
+            "reference": "1c7658668b28f8d647a8b874372acf14c4352688",
             "shasum": ""
         },
         "require": {
@@ -6205,7 +6205,7 @@
         "conflict": {
             "phpstan/phpstan-shim": "*"
         },
-        "time": "2020-12-21T11:59:02+00:00",
+        "time": "2021-01-06T16:51:10+00:00",
         "bin": [
             "phpstan",
             "phpstan.phar"
@@ -8167,27 +8167,27 @@
     },
     {
         "name": "symfony/polyfill-php80",
-        "version": "v1.20.0",
-        "version_normalized": "1.20.0.0",
+        "version": "v1.22.0",
+        "version_normalized": "1.22.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-php80.git",
-            "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de"
+            "reference": "dc3063ba22c2a1fd2f45ed856374d79114998f91"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
-            "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
+            "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/dc3063ba22c2a1fd2f45ed856374d79114998f91",
+            "reference": "dc3063ba22c2a1fd2f45ed856374d79114998f91",
             "shasum": ""
         },
         "require": {
             "php": ">=7.1"
         },
-        "time": "2020-10-23T14:02:19+00:00",
+        "time": "2021-01-07T16:49:33+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-main": "1.20-dev"
+                "dev-main": "1.22-dev"
             },
             "thanks": {
                 "name": "symfony/polyfill",
