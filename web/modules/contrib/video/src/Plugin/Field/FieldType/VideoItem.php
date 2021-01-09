@@ -5,11 +5,10 @@ namespace Drupal\video\Plugin\Field\FieldType;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\TypedData\DataDefinition;
-use Drupal\file\Entity\File;
 use Drupal\file\Plugin\Field\FieldType\FileItem;
 use Drupal\Component\Utility\Random;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Plugin implementation of the 'video' field type.
@@ -41,9 +40,9 @@ class VideoItem extends FileItem {
   /**
    * The entity manager.
    *
-   * @var \Drupal\Core\Entity\EntityManagerInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityManager;
+  protected $entityTypeManager;
 
   /**
    * {@inheritdoc}
@@ -104,7 +103,7 @@ class VideoItem extends FileItem {
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     $properties = parent::propertyDefinitions($field_definition);
-    
+
     // unset the default values from the file module
     unset($properties['display']);
     unset($properties['description']);
@@ -130,7 +129,7 @@ class VideoItem extends FileItem {
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
     // Get base form from FileItem.
     $element = parent::fieldSettingsForm($form, $form_state);
-    
+
     // Remove the description option.
     unset($element['description_field']);
     unset($element['file_directory']);
@@ -155,12 +154,12 @@ class VideoItem extends FileItem {
 
     // Prepare destination.
     $dirname = static::doGetUploadLocation($settings);
-    file_prepare_directory($dirname, FILE_CREATE_DIRECTORY);
+    \Drupal::service('file_system')->prepareDirectory($dirname, FileSystemInterface::CREATE_DIRECTORY);
 
     // Generate a file entity.
     $destination = $dirname . '/' . $random->name(10, TRUE) . '.mp4';
     $data = $random->paragraphs(3);
-    $file = file_save_data($data, $destination, FILE_EXISTS_ERROR);
+    $file = file_save_data($data, $destination, FileSystemInterface::EXISTS_ERROR);
     $values = [
       'target_id' => $file->id(),
     ];
@@ -178,13 +177,13 @@ class VideoItem extends FileItem {
   /**
    * Gets the entity manager.
    *
-   * @return \Drupal\Core\Entity\EntityManagerInterface.
+   * @return \Drupal\Core\Entity\EntityTypeManagerInterface.
    */
-  protected function getEntityManager() {
-    if (!isset($this->entityManager)) {
-      $this->entityManager = \Drupal::entityManager();
+  protected function getEntityTypeManager() {
+    if (!isset($this->entityTypeManager)) {
+      $this->entityTypeManager = \Drupal::entityTypeManager();
     }
-    return $this->entityManager;
+    return $this->entityTypeManager;
   }
 
 }

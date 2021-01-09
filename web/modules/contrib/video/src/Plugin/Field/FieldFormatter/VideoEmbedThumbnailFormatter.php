@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\file\Entity\File;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 
 /**
  * Plugin implementation of the thumbnail field formatter.
@@ -34,6 +35,13 @@ class VideoEmbedThumbnailFormatter extends FormatterBase implements ContainerFac
   protected $providerManager;
 
   /**
+   * The stream wrapper manager.
+   *
+   * @var \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface
+   */
+  protected $streamWrapperManager;
+
+  /**
    * Class constant for linking to content.
    */
   const LINK_CONTENT = 'content';
@@ -45,22 +53,43 @@ class VideoEmbedThumbnailFormatter extends FormatterBase implements ContainerFac
 
   /**
    * {@inheritdoc}
+   *
+   * @param \Drupal\Core\Field\FieldItemListInterface $items
+   * @param $langcode
+   *
+   * @return array
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityMalformedException
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     // load widget settings
     $field_definition = $this->fieldDefinition;
-    $entity_form_display = entity_get_form_display($field_definition->getTargetEntityTypeId(), $field_definition->getTargetBundle(), 'default');
+    $form_mode = 'default';
+    $entity_form_display = \Drupal::entityTypeManager()
+      ->getStorage('entity_form_display')
+      ->load($field_definition->getTargetEntityTypeId() . '.' . $field_definition->getTargetBundle() . '.' . $form_mode);
+    if (!$entity_form_display) {
+      $entity_form_display = \Drupal::entityTypeManager()
+        ->getStorage('entity_form_display')
+        ->create([
+          'targetEntityType' => $field_definition->getTargetEntityTypeId(),
+          'bundle' => $field_definition->getTargetBundle(),
+          'mode' => $form_mode,
+          'status' => TRUE,
+        ]);
+    }
     $widget = $entity_form_display->getRenderer($field_definition->getName());
     $widget_settings = $widget->getSettings();
     $element = [];
     foreach ($items as $delta => $item) {
       $file = File::load($item->target_id);
       $metadata = isset($item->data) ? unserialize($item->data) : [];
-      $scheme = file_uri_scheme($file->getFileUri());
+      $scheme = $this->streamWrapperManager->getScheme($file->getFileUri());
       $provider = $this->providerManager->loadProviderFromStream($scheme, $file, $metadata, $widget_settings);
       $url = FALSE;
       if ($this->getSetting('link_image_to') == static::LINK_CONTENT) {
-        $url = $items->getEntity()->urlInfo();
+        $url = $items->getEntity()->toUrl();
       }
       elseif ($this->getSetting('link_image_to') == static::LINK_PROVIDER) {
         $url = Url::fromUri(file_create_url($file->getFileUri()));
@@ -84,6 +113,7 @@ class VideoEmbedThumbnailFormatter extends FormatterBase implements ContainerFac
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
+    $form = [];
     $form['image_style'] = [
       '#title' => $this->t('Image Style'),
       '#type' => 'select',
@@ -131,10 +161,13 @@ class VideoEmbedThumbnailFormatter extends FormatterBase implements ContainerFac
    *   Third party settings.
    * @param \Drupal\video\ProviderManagerInterface $provider_manager
    *   The video embed provider manager.
+   * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
+   *`  The stream wrapper manager.
    */
-  public function __construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings, ProviderManagerInterface $provider_manager) {
+  public function __construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings, ProviderManagerInterface $provider_manager, StreamWrapperManagerInterface $stream_wrapper_manager) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
     $this->providerManager = $provider_manager;
+    $this->streamWrapperManager = $stream_wrapper_manager;
   }
 
   /**
@@ -149,7 +182,8 @@ class VideoEmbedThumbnailFormatter extends FormatterBase implements ContainerFac
       $configuration['label'],
       $configuration['view_mode'],
       $configuration['third_party_settings'],
-      $container->get('video.provider_manager')
+      $container->get('video.provider_manager'),
+      $container->get('stream_wrapper_manager')
     );
   }
 
@@ -161,7 +195,20 @@ class VideoEmbedThumbnailFormatter extends FormatterBase implements ContainerFac
       return TRUE;
     }
     else{
-      $entity_form_display = entity_get_form_display($field_definition->getTargetEntityTypeId(), $field_definition->getTargetBundle(), 'default');
+      $form_mode = 'default';
+      $entity_form_display = \Drupal::entityTypeManager()
+        ->getStorage('entity_form_display')
+        ->load($field_definition->getTargetEntityTypeId() . '.' . $field_definition->getTargetBundle() . '.' . $form_mode);
+      if (!$entity_form_display) {
+        $entity_form_display = \Drupal::entityTypeManager()
+          ->getStorage('entity_form_display')
+          ->create([
+            'targetEntityType' => $field_definition->getTargetEntityTypeId(),
+            'bundle' => $field_definition->getTargetBundle(),
+            'mode' => $form_mode,
+            'status' => TRUE,
+          ]);
+      }
       $widget = $entity_form_display->getRenderer($field_definition->getName());
       $widget_id = $widget->getBaseId();
       if($widget_id == 'video_embed'){

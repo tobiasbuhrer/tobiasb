@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef9e3416ab7bf5545d5947df109c0c25",
+    "content-hash": "16eb785541bfb60a977c5c8c57d9ec0c",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3766,41 +3766,42 @@
         },
         {
             "name": "drupal/video",
-            "version": "1.4.0",
+            "version": "1.5.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/video.git",
-                "reference": "8.x-1.4"
+                "reference": "8.x-1.5-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/video-8.x-1.4.zip",
-                "reference": "8.x-1.4",
-                "shasum": "a0aad27d912d7e9d9f7c1561c6d6567e09a1cf1d"
+                "url": "https://ftp.drupal.org/files/projects/video-8.x-1.5-alpha1.zip",
+                "reference": "8.x-1.5-alpha1",
+                "shasum": "18f3985611224903c7fabd6cc0e28ea01b41f6d1"
             },
             "require": {
-                "drupal/core": "^8"
+                "drupal/core": "^8 || ^9"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.x",
-                    "datestamp": "1550692519",
+                    "version": "8.x-2.x",
+                    "datestamp": "1610098268",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
                     },
                     "package": "Field types"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
-                    "name": "Jorrit",
-                    "homepage": "https://www.drupal.org/user/161217"
+                    "name": "Heshan Wanigasooriya",
+                    "homepage": "https://www.drupal.org/u/heshanlk",
+                    "role": "Maintainer"
                 },
                 {
                     "name": "abhishek-anand",
@@ -3817,12 +3818,24 @@
                 {
                     "name": "heshanlk",
                     "homepage": "https://www.drupal.org/user/199102"
+                },
+                {
+                    "name": "podarok",
+                    "homepage": "https://www.drupal.org/user/116002"
                 }
             ],
             "description": "Video module allows you to embedded videos from YouTube, Vimeo, Facebook, Vine etc (Drupal 8 only) and upload videos and play using HTML5 video player.",
             "homepage": "https://www.drupal.org/project/video",
+            "keywords": [
+                "Drupal",
+                "embed",
+                "media",
+                "transcode",
+                "video"
+            ],
             "support": {
-                "source": "https://git.drupalcode.org/project/video"
+                "source": "https://www.drupal.org/project/video",
+                "issues": "https://www.drupal.org/project/issues/video"
             }
         },
         {
@@ -9081,7 +9094,8 @@
         "drupal/honeypot": 20,
         "drupal/juicebox": 15,
         "drupal/libraries": 15,
-        "drupal/plupload": 20
+        "drupal/plupload": 20,
+        "drupal/video": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -9,7 +9,6 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\video\ProviderManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\file\Entity\File;
-use Drupal\Core\File\FileSystem;
 use Drupal\Core\Field\FieldDefinitionInterface;
 
 /**
@@ -42,7 +41,8 @@ class VideoEmbedPlayerFormatter extends FormatterBase implements ContainerFactor
       $file = File::load($item->target_id);
       if(!$file) continue;
       $metadata = isset($item->data) ? unserialize($item->data) : [];
-      $scheme = file_uri_scheme($file->getFileUri());
+      $scheme = \Drupal::service('stream_wrapper_manager')->getScheme($file->getFileUri());
+
       $provider = $this->providerManager->loadProviderFromStream($scheme, $file, $metadata);
       if($provider){
         $element[$delta] = $provider->renderEmbedCode($settings);
@@ -59,6 +59,7 @@ class VideoEmbedPlayerFormatter extends FormatterBase implements ContainerFactor
       'width' => '854',
       'height' => '480',
       'autoplay' => TRUE,
+      'related_videos' => FALSE
     ];
   }
 
@@ -66,10 +67,16 @@ class VideoEmbedPlayerFormatter extends FormatterBase implements ContainerFactor
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
+    $form = [];
     $form['autoplay'] = [
       '#title' => t('Autoplay'),
       '#type' => 'checkbox',
       '#default_value' => $this->getSetting('autoplay'),
+    ];
+    $form['related_videos'] = [
+      '#title' => t('Related Videos'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->getSetting('related_videos'),
     ];
     $form['width'] = [
       '#title' => t('Width'),
@@ -90,9 +97,10 @@ class VideoEmbedPlayerFormatter extends FormatterBase implements ContainerFactor
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $summary[] = t('Embedded Video (@widthx@height@autoplay).', [
+    $summary[] = t('Embedded Video (@widthx@height@autoplay@related_videos).', [
       '@width' => $this->getSetting('width'),
       '@height' => $this->getSetting('height'),
+      '@related_videos' => $this->getSetting('related_videos') ? t(', showing related videos') : '' ,
       '@autoplay' => $this->getSetting('autoplay') ? t(', autoplaying') : '' ,
     ]);
     return $summary;
@@ -138,7 +146,7 @@ class VideoEmbedPlayerFormatter extends FormatterBase implements ContainerFactor
       $container->get('video.provider_manager')
     );
   }
-  
+
   /**
    * {@inheritdoc}
    */
@@ -146,8 +154,21 @@ class VideoEmbedPlayerFormatter extends FormatterBase implements ContainerFactor
     if(empty($field_definition->getTargetBundle())){
       return TRUE;
     }
-    else{
-      $entity_form_display = entity_get_form_display($field_definition->getTargetEntityTypeId(), $field_definition->getTargetBundle(), 'default');
+    else {
+      $form_mode = 'default';
+      $entity_form_display = \Drupal::entityTypeManager()
+        ->getStorage('entity_form_display')
+        ->load($field_definition->getTargetEntityTypeId() . '.' . $field_definition->getTargetBundle() . '.' . $form_mode);
+      if (!$entity_form_display) {
+        $entity_form_display = \Drupal::entityTypeManager()
+          ->getStorage('entity_form_display')
+          ->create([
+            'targetEntityType' => $field_definition->getTargetEntityTypeId(),
+            'bundle' => $field_definition->getTargetBundle(),
+            'mode' => $form_mode,
+            'status' => TRUE,
+          ]);
+      }
       $widget = $entity_form_display->getRenderer($field_definition->getName());
       $widget_id = $widget->getBaseId();
       if($widget_id == 'video_embed'){
