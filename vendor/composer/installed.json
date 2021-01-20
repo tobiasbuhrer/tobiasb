@@ -307,17 +307,17 @@
     },
     {
         "name": "composer/installers",
-        "version": "v1.9.0",
-        "version_normalized": "1.9.0.0",
+        "version": "v1.10.0",
+        "version_normalized": "1.10.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "b93bcf0fa1fccb0b7d176b0967d969691cd74cca"
+            "reference": "1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/b93bcf0fa1fccb0b7d176b0967d969691cd74cca",
-            "reference": "b93bcf0fa1fccb0b7d176b0967d969691cd74cca",
+            "url": "https://api.github.com/repos/composer/installers/zipball/1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d",
+            "reference": "1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d",
             "shasum": ""
         },
         "require": {
@@ -328,18 +328,19 @@
             "shama/baton": "*"
         },
         "require-dev": {
-            "composer/composer": "1.6.* || 2.0.*@dev",
-            "composer/semver": "1.0.* || 2.0.*@dev",
-            "phpunit/phpunit": "^4.8.36",
-            "sebastian/comparator": "^1.2.4",
+            "composer/composer": "1.6.* || ^2.0",
+            "composer/semver": "^1 || ^3",
+            "phpstan/phpstan": "^0.12.55",
+            "phpstan/phpstan-phpunit": "^0.12.16",
+            "symfony/phpunit-bridge": "^4.2 || ^5",
             "symfony/process": "^2.3"
         },
-        "time": "2020-04-07T06:57:05+00:00",
+        "time": "2021-01-14T11:07:16+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
             "branch-alias": {
-                "dev-master": "1.0-dev"
+                "dev-main": "1.x-dev"
             }
         },
         "installation-source": "dist",
@@ -378,6 +379,7 @@
             "Porto",
             "RadPHP",
             "SMF",
+            "Starbug",
             "Thelia",
             "Whmcs",
             "WolfCMS",
@@ -418,6 +420,7 @@
             "phpbb",
             "piwik",
             "ppi",
+            "processwire",
             "puppet",
             "pxcms",
             "reindex",
@@ -437,6 +440,10 @@
             {
                 "url": "https://packagist.com",
                 "type": "custom"
+            },
+            {
+                "url": "https://github.com/composer",
+                "type": "github"
             },
             {
                 "url": "https://tidelift.com/funding/github/packagist/composer/composer",
@@ -3339,18 +3346,18 @@
     },
     {
         "name": "drupal/leaflet",
-        "version": "2.1.8",
-        "version_normalized": "2.1.8.0",
+        "version": "2.1.9",
+        "version_normalized": "2.1.9.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/leaflet.git",
-            "reference": "2.1.8"
+            "reference": "2.1.9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/leaflet-2.1.8.zip",
-            "reference": "2.1.8",
-            "shasum": "8e5bb85168a4351d7028e713b8467a34ccd7066e"
+            "url": "https://ftp.drupal.org/files/projects/leaflet-2.1.9.zip",
+            "reference": "2.1.9",
+            "shasum": "de1fde07225b5139665ab748c953f0396d5e3813"
         },
         "require": {
             "drupal/core": "^8.8 || ^9",
@@ -3359,8 +3366,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "2.1.8",
-                "datestamp": "1609007739",
+                "version": "2.1.9",
+                "datestamp": "1611096358",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4998,25 +5005,29 @@
     },
     {
         "name": "laminas/laminas-servicemanager",
-        "version": "3.5.1",
-        "version_normalized": "3.5.1.0",
+        "version": "3.6.2",
+        "version_normalized": "3.6.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/laminas/laminas-servicemanager.git",
-            "reference": "0d4c8628a71fae9f7bd0b1b74b76382e5e9a04b1"
+            "reference": "69a33802574e34357da6937602622a8a8db69883"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/0d4c8628a71fae9f7bd0b1b74b76382e5e9a04b1",
-            "reference": "0d4c8628a71fae9f7bd0b1b74b76382e5e9a04b1",
+            "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/69a33802574e34357da6937602622a8a8db69883",
+            "reference": "69a33802574e34357da6937602622a8a8db69883",
             "shasum": ""
         },
         "require": {
             "container-interop/container-interop": "^1.2",
             "laminas/laminas-stdlib": "^3.2.1",
             "laminas/laminas-zendframework-bridge": "^1.0",
-            "php": "^5.6 || ^7.0",
+            "php": "^7.3 || ~8.0.0",
             "psr/container": "^1.0"
+        },
+        "conflict": {
+            "laminas/laminas-code": "<3.3.1",
+            "zendframework/zend-code": "<3.3.1"
         },
         "provide": {
             "container-interop/container-interop-implementation": "^1.2",
@@ -5026,28 +5037,25 @@
             "zendframework/zend-servicemanager": "^3.4.0"
         },
         "require-dev": {
+            "composer/package-versions-deprecated": "^1.0",
             "laminas/laminas-coding-standard": "~1.0.0",
-            "mikey179/vfsstream": "^1.6.5",
-            "ocramius/proxy-manager": "^1.0 || ^2.0",
-            "phpbench/phpbench": "^0.13.0",
-            "phpunit/phpunit": "^5.7.25 || ^6.4.4"
+            "laminas/laminas-container-config-test": "^0.3",
+            "laminas/laminas-dependency-plugin": "^2.1",
+            "mikey179/vfsstream": "^1.6.8",
+            "ocramius/proxy-manager": "^2.2.3",
+            "phpbench/phpbench": "^1.0.0-alpha3",
+            "phpspec/prophecy-phpunit": "^2.0",
+            "phpunit/phpunit": "^9.4"
         },
         "suggest": {
-            "laminas/laminas-stdlib": "laminas-stdlib ^2.5 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances",
-            "ocramius/proxy-manager": "ProxyManager 1.* to handle lazy initialization of services"
+            "ocramius/proxy-manager": "ProxyManager ^2.1.1 to handle lazy initialization of services"
         },
-        "time": "2020-05-11T14:43:22+00:00",
+        "time": "2021-01-17T17:08:19+00:00",
         "bin": [
             "bin/generate-deps-for-config-factory",
             "bin/generate-factory-for-class"
         ],
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.3-dev",
-                "dev-develop": "4.0-dev"
-            }
-        },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
@@ -5311,29 +5319,30 @@
     },
     {
         "name": "lsolesen/pel",
-        "version": "0.9.9",
-        "version_normalized": "0.9.9.0",
+        "version": "0.9.10",
+        "version_normalized": "0.9.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/pel/pel.git",
-            "reference": "95dd3c16161c588f0ac66662c1870a073159e5ec"
+            "reference": "04ecb8a29e4b1628414193b0df9294232a44f8a9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/pel/pel/zipball/95dd3c16161c588f0ac66662c1870a073159e5ec",
-            "reference": "95dd3c16161c588f0ac66662c1870a073159e5ec",
+            "url": "https://api.github.com/repos/pel/pel/zipball/04ecb8a29e4b1628414193b0df9294232a44f8a9",
+            "reference": "04ecb8a29e4b1628414193b0df9294232a44f8a9",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.4.0"
+            "php": ">=7.1.0"
         },
         "require-dev": {
+            "ext-exif": "*",
             "ext-gd": "*",
-            "phpunit/phpunit": ">=4.8.36 <8",
-            "satooshi/php-coveralls": "1.0.*",
-            "squizlabs/php_codesniffer": "^3.0.0"
+            "php-coveralls/php-coveralls": ">2.4",
+            "squizlabs/php_codesniffer": ">3.5",
+            "symfony/phpunit-bridge": "^4 || ^5"
         },
-        "time": "2020-11-07T06:04:18+00:00",
+        "time": "2021-01-01T22:15:50+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -5644,17 +5653,17 @@
     },
     {
         "name": "nette/utils",
-        "version": "v3.2.0",
-        "version_normalized": "3.2.0.0",
+        "version": "v3.2.1",
+        "version_normalized": "3.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/utils.git",
-            "reference": "d0427c1811462dbb6c503143eabe5478b26685f7"
+            "reference": "2bc2f58079c920c2ecbb6935645abf6f2f5f94ba"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/utils/zipball/d0427c1811462dbb6c503143eabe5478b26685f7",
-            "reference": "d0427c1811462dbb6c503143eabe5478b26685f7",
+            "url": "https://api.github.com/repos/nette/utils/zipball/2bc2f58079c920c2ecbb6935645abf6f2f5f94ba",
+            "reference": "2bc2f58079c920c2ecbb6935645abf6f2f5f94ba",
             "shasum": ""
         },
         "require": {
@@ -5677,7 +5686,7 @@
             "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()",
             "ext-xml": "to use Strings::length() etc. when mbstring is not available"
         },
-        "time": "2020-11-25T23:47:50+00:00",
+        "time": "2021-01-11T03:05:59+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -6199,17 +6208,17 @@
     },
     {
         "name": "phpstan/phpstan",
-        "version": "0.12.65",
-        "version_normalized": "0.12.65.0",
+        "version": "0.12.68",
+        "version_normalized": "0.12.68.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpstan/phpstan.git",
-            "reference": "1c7658668b28f8d647a8b874372acf14c4352688"
+            "reference": "ddbe01af0706ee094c3f1ce9730b35aebb508d3d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1c7658668b28f8d647a8b874372acf14c4352688",
-            "reference": "1c7658668b28f8d647a8b874372acf14c4352688",
+            "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ddbe01af0706ee094c3f1ce9730b35aebb508d3d",
+            "reference": "ddbe01af0706ee094c3f1ce9730b35aebb508d3d",
             "shasum": ""
         },
         "require": {
@@ -6218,7 +6227,7 @@
         "conflict": {
             "phpstan/phpstan-shim": "*"
         },
-        "time": "2021-01-06T16:51:10+00:00",
+        "time": "2021-01-18T12:29:17+00:00",
         "bin": [
             "phpstan",
             "phpstan.phar"
@@ -6475,17 +6484,17 @@
     },
     {
         "name": "psy/psysh",
-        "version": "v0.10.5",
-        "version_normalized": "0.10.5.0",
+        "version": "v0.10.6",
+        "version_normalized": "0.10.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/bobthecow/psysh.git",
-            "reference": "7c710551d4a2653afa259c544508dc18a9098956"
+            "reference": "6f990c19f91729de8b31e639d6e204ea59f19cf3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/bobthecow/psysh/zipball/7c710551d4a2653afa259c544508dc18a9098956",
-            "reference": "7c710551d4a2653afa259c544508dc18a9098956",
+            "url": "https://api.github.com/repos/bobthecow/psysh/zipball/6f990c19f91729de8b31e639d6e204ea59f19cf3",
+            "reference": "6f990c19f91729de8b31e639d6e204ea59f19cf3",
             "shasum": ""
         },
         "require": {
@@ -6508,14 +6517,14 @@
             "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history.",
             "hoa/console": "A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit."
         },
-        "time": "2020-12-04T02:51:30+00:00",
+        "time": "2021-01-18T15:53:43+00:00",
         "bin": [
             "bin/psysh"
         ],
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "0.10.x-dev"
+                "dev-main": "0.10.x-dev"
             }
         },
         "installation-source": "dist",

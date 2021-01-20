@@ -16,6 +16,7 @@
               // Initialize the Drupal.Leaflet.[data.mapid] object,
               // for possible external interaction.
               Drupal.Leaflet[mapid].markers = {};
+              Drupal.Leaflet[mapid].features = {};
 
               // Add Leaflet Map Features.
               $container.data('leaflet').add_features(mapid, data.features, true);
@@ -102,7 +103,6 @@
     this.start_center = null;
     this.start_zoom = null;
     this.layer_control = null;
-    this.markers = {};
     this.initialise(mapid);
   };
 
@@ -329,9 +329,11 @@
           i++;
         }
         Drupal.Leaflet[self.mapid].markers[entity_id + '-' + i] = lFeature;
+        Drupal.Leaflet[self.mapid].features[entity_id + '-' + i] = feature;
       }
       else {
         Drupal.Leaflet[self.mapid].markers[entity_id] = lFeature;
+        Drupal.Leaflet[self.mapid].features[entity_id] = feature;
       }
     }
     return lFeature;
@@ -407,8 +409,11 @@
     if (options.iconSize) {
       icon.options.iconSize = new L.Point(parseInt(options.iconSize.x, 10), parseInt(options.iconSize.y, 10));
     }
-    if (options.iconAnchor) {
+    if (options.iconAnchor && !isNaN(options.iconAnchor.x) && !isNaN(options.iconAnchor.y)) {
       icon.options.iconAnchor = new L.Point(parseFloat(options.iconAnchor.x), parseFloat(options.iconAnchor.y));
+    }
+    if (options.popupAnchor && !isNaN(options.popupAnchor.x) && !isNaN(options.popupAnchor.y)) {
+      icon.options.popupAnchor = new L.Point(parseFloat(options.popupAnchor.x), parseFloat(options.popupAnchor.y));
     }
 
     return icon;
@@ -568,15 +573,15 @@
   // @NOTE: This method used by Leaflet Markecluster module (don't remove/rename)
   Drupal.Leaflet.prototype.fitbounds = function(mapid) {
     let self = this;
-    let start_zoom = self.settings.zoom;
+    let start_zoom = self.settings.zoom ?? 12;
     // Note: self.settings.center might not be defined in case of Leaflet widget and Automatically locate user current position.
-    let start_center = self.settings.center ? new L.LatLng(self.settings.center.lat, self.settings.center.lon) : null;
+    let start_center = self.settings.center ? new L.LatLng(self.settings.center.lat, self.settings.center.lon) : new L.LatLng(0,0);
 
     //  Check whether the Zoom and Center are to be forced to use the input settings
-    if (start_center && self.settings.map_position_force) {
+    if (self.settings.map_position_force) {
       //  Set the Zoom and Center to values provided by the input settings
       Drupal.Leaflet[mapid].lMap.setView(start_center, start_zoom);
-    } else if (start_center ) {
+    } else {
       if (self.bounds.length === 0) {
         //  No features - set the Zoom and Center to values provided by the input settings, if specified
         Drupal.Leaflet[mapid].lMap.setView(start_center, start_zoom);
