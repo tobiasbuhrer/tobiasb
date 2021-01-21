@@ -5,6 +5,7 @@ namespace Drupal\plupload\Element;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
 
 /**
  * Provides a PLUpload widget for uploading and saving files.
@@ -107,7 +108,7 @@ class PlUploadFile extends FormElement {
           // be intended for public://subdirectory rather than public://, and we
           // don't want an attacker to be able to get them back into the top
           // level of public:// in that case).
-          $value = rtrim(drupal_basename($value), '.');
+          $value = rtrim(\Drupal::service('file_system')->basename($value), '.');
 
           // Based on the same feture from file_save_upload().
           if (!\Drupal::config('system.file')->get('allow_insecure_uploads') && preg_match('/\.(php|pl|py|cgi|asp|js)(\.|$)/i', $value) && (substr($value, -4) != '.txt')) {
@@ -117,7 +118,7 @@ class PlUploadFile extends FormElement {
             // We have to add it here or else the file upload will fail.
             if (!empty($extensions)) {
               $element['#upload_validators']['file_validate_extensions'][0] .= ' txt';
-              drupal_set_message(t('For security reasons, your upload has been renamed to %filename.', array('%filename' => $value)));
+              \Drupal::messenger()->addMessage(t('For security reasons, your upload has been renamed to %filename.', array('%filename' => $value)));
             }
           }
         }
@@ -264,12 +265,12 @@ class PlUploadFile extends FormElement {
       // filesize information. We manually modify filename and mime to allow
       // extension checks.
       $destination = \Drupal::config('system.file')->get('default_scheme') . '://' . $file_info['name'];
-      $destination = file_stream_wrapper_uri_normalize($destination);
-      $file = entity_create('file', array(
+      $file_uri = \Drupal::service('stream_wrapper_manager')->normalizeUri($destination);
+      $file = File::create(array(
         'uri' => $file_info['tmppath'],
         'uid' => \Drupal::currentUser()->id(),
         'status' => FILE_STATUS_PERMANENT,
-        'filename' => drupal_basename($destination),
+        'filename' => \Drupal::service('file_system')->basename($destination),
         'filemime' => \Drupal::service('file.mime_type.guesser')->guess($destination),
       ));
 

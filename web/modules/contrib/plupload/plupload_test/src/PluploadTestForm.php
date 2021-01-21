@@ -4,6 +4,7 @@ namespace Drupal\plupload_test;
 
 use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Plupload test form class.
@@ -55,24 +56,31 @@ class PluploadTestForm implements FormInterface {
     // Create target directory if necessary.
     $destination = \Drupal::config('system.file')
         ->get('default_scheme') . '://plupload-test';
-    file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    \Drupal::service('file_system')->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
 
     $saved_files = array();
 
     foreach ($form_state->getValue('plupload') as $uploaded_file) {
 
-      $file_uri = file_stream_wrapper_uri_normalize($destination . '/' . $uploaded_file['name']);
+      $file_uri = $this->loadStreamWrapper()->normalizeUri($destination . '/' . $uploaded_file['name']);
 
       // Move file without creating a new 'file' entity.
-      file_unmanaged_move($uploaded_file['tmppath'], $file_uri);
+      \Drupal::service('file_system')->move($uploaded_file['tmppath'], $file_uri);
 
       // @todo: When https://www.drupal.org/node/2245927 is resolved,
       // use a helper to save file to file_managed table
       $saved_files[] = $file_uri;
     }
     if (!empty($saved_files)) {
-      drupal_set_message('Files uploaded correctly: ' . implode(', ', $saved_files) . '.', 'status');
+      \Drupal::messenger()->addStatus('Files uploaded correctly: ' . implode(', ', $saved_files) . '.');
     }
+  }
+
+  /**
+   * Returns the Drupal stream wrapper manager service.
+   */
+  private function loadStreamWrapper() {
+     return \Drupal::service('stream_wrapper_manager');
   }
 
 }

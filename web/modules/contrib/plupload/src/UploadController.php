@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Plupload upload handling route.
@@ -40,6 +41,20 @@ class UploadController implements ContainerInjectionInterface {
   protected $filename;
 
   /**
+   * HTAccess writer service.
+   *
+   * @var object
+   */
+  protected $htaccessWriter;
+
+  /**
+   * File System service.
+   *
+   * @var object
+   */
+  protected $fileSystem;
+
+  /**
    * Constructs plupload upload controller route controller.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
@@ -48,6 +63,8 @@ class UploadController implements ContainerInjectionInterface {
   public function __construct(Request $request) {
     $this->request = $request;
     $this->temporaryUploadLocation = \Drupal::config('plupload.settings')->get('temporary_uri');
+    $this->htaccessWriter = \Drupal::service('file.htaccess_writer');
+    $this->fileSystem = \Drupal::service('file_system');
   }
 
   /**
@@ -90,13 +107,13 @@ class UploadController implements ContainerInjectionInterface {
    * @throws \Drupal\plupload\UploadException
    */
   protected function prepareTemporaryUploadDestination() {
-    $writable = file_prepare_directory($this->temporaryUploadLocation, FILE_CREATE_DIRECTORY);
+    $writable = $this->fileSystem->prepareDirectory($this->temporaryUploadLocation, FileSystemInterface::CREATE_DIRECTORY);
     if (!$writable) {
       throw new UploadException(UploadException::DESTINATION_FOLDER_ERROR);
     }
 
     // Try to make sure this is private via htaccess.
-    file_save_htaccess($this->temporaryUploadLocation, TRUE);
+    $this->htaccessWriter->write($this->temporaryUploadLocation, TRUE);
   }
 
   /**
@@ -169,7 +186,7 @@ class UploadController implements ContainerInjectionInterface {
     fclose($in);
     fclose($out);
     if ($is_multipart) {
-      drupal_unlink($multipart_file->getRealPath());
+      $this->fileSystem->unlink($multipart_file->getRealPath());
     }
   }
 
