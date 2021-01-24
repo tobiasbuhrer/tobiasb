@@ -2,15 +2,15 @@
  * @file
  */
 
-(function($) {
+(function ($) {
 
   Drupal.plupload = Drupal.plupload || {};
   // Add Plupload events for autoupload and autosubmit.
   Drupal.plupload.filesAddedCallback = function (up, files) {
-    setTimeout(function(){up.start()
+    setTimeout(function () {up.start()
     }, 100);
   };
-  Drupal.plupload.uploadCompleteCallback = function(up, files) {
+  Drupal.plupload.uploadCompleteCallback = function (up, files) {
     var $this = $(up.settings.container);
     // If there is submit_element trigger it.
     var submit_element = drupalSettings.plupload[$this.attr('id')].submit_element;
@@ -101,8 +101,8 @@
    * Attaches the Plupload behavior to each Plupload form element.
    */
   Drupal.behaviors.pluploadform = {
-    attach: function(context, settings) {
-      $('form', context).once('plupload-form').each(function() {
+    attach: function (context, settings) {
+      $('form', context).once('plupload-form').each(function () {
         if (0 < $(this).find('.plupload-element').length) {
           var $form = $(this);
           var originalFormAttributes = {
@@ -112,12 +112,12 @@
             'target': $form.attr('target')
           };
 
-          $(this).submit(function(e) {
+          $(this).submit(function (e) {
             var completedPluploaders = 0;
             var totalPluploaders = $(this).find('.plupload-element').length;
             var errors = '';
 
-            $(this).find('.plupload-element').each(function(index){
+            $(this).find('.plupload-element').each(function (index) {
               var uploader = $(this).pluploadQueue();
 
               var id = $(this).attr('id');
@@ -145,7 +145,7 @@
               }
 
               else {
-                var stateChangedHandler = function() {
+                var stateChangedHandler = function () {
                   if (uploader.total.uploaded == uploader.files.length) {
                     uploader.unbind('StateChanged', stateChangedHandler);
                     completedPluploaders++;

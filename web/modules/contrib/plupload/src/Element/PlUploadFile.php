@@ -61,14 +61,14 @@ class PlUploadFile extends FormElement {
     // $request_files = \Drupal::request()->files;
     $input = $form_state->getUserInput();
 
-    $files = array();
+    $files = [];
     foreach ($input as $key => $value) {
       if (preg_match('/' . $id . '(--([0-9A-Za-z_-]+))?_([0-9]+)_(tmpname|name|status)/', $key, $reg)) {
         $i = $reg[3];
         $key = $reg[4];
 
         // Only add the keys we expect.
-        if (!in_array($key, array('tmpname', 'name', 'status'))) {
+        if (!in_array($key, ['tmpname', 'name', 'status'])) {
           continue;
         }
 
@@ -81,14 +81,14 @@ class PlUploadFile extends FormElement {
         //
         // Note that we do the munging here in the value callback function
         // (rather than during form validation or elsewhere) because we want to
-        // actually modify the submitted values rather than reject them outright;
-        // file names that require munging can be innocent and do not necessarily
-        // indicate an attempted exploit. Actual validation of the file names is
-        // performed later, in plupload_element_validate().
-        if (in_array($key, array('tmpname', 'name'))) {
+        // actually modify the submitted values rather than reject them
+        // outright; file names that require munging can be innocent and do
+        // not necessarily indicate an attempted exploit. Actual validation of
+        // the file names is performed later, in plupload_element_validate().
+        if (in_array($key, ['tmpname', 'name'])) {
           // Find the whitelist of extensions to use when munging. If there are
-          // none, we'll be adding default ones in plupload_element_process(), so
-          // use those here.
+          // none, we'll be adding default ones in plupload_element_process(),
+          // so use those here.
           if (isset($element['#upload_validators']['file_validate_extensions'][0])) {
             $extensions = $element['#upload_validators']['file_validate_extensions'][0];
           }
@@ -100,8 +100,8 @@ class PlUploadFile extends FormElement {
           // To prevent directory traversal issues, make sure the file name does
           // not contain any directory components in it. (This more properly
           // belongs in the form validation step, but it's simpler to do here so
-          // that we don't have to deal with the temporary file names during form
-          // validation and can just focus on the final file name.)
+          // that we don't have to deal with the temporary file names during
+          // form validation and can just focus on the final file name.)
           //
           // This step is necessary since this module allows a large amount of
           // flexibility in where its files are placed (for example, they could
@@ -118,18 +118,19 @@ class PlUploadFile extends FormElement {
             // We have to add it here or else the file upload will fail.
             if (!empty($extensions)) {
               $element['#upload_validators']['file_validate_extensions'][0] .= ' txt';
-              \Drupal::messenger()->addMessage(t('For security reasons, your upload has been renamed to %filename.', array('%filename' => $value)));
+              \Drupal::messenger()->addMessage(t('For security reasons, your upload has been renamed to %filename.', ['%filename' => $value]));
             }
           }
         }
 
-        // The temporary file name has to be processed further so it matches what
-        // was used when the file was written; see plupload_handle_uploads().
+        // The temporary file name has to be processed further so it matches
+        // what was used when the file was written; see
+        // plupload_handle_uploads().
         if ($key == 'tmpname') {
           $value = _plupload_fix_temporary_filename($value);
-          // We also define an extra key 'tmppath' which is useful so that submit
-          // handlers do not need to know which directory plupload stored the
-          // temporary files in before trying to copy them.
+          // We also define an extra key 'tmppath' which is useful so that
+          // submit handlers do not need to know which directory plupload
+          // stored the temporary files in before trying to copy them.
           $files[$i]['tmppath'] = \Drupal::config('plupload.settings')->get('temporary_uri') . $value;
         }
         elseif ($key == 'name') {
@@ -160,7 +161,7 @@ class PlUploadFile extends FormElement {
     }
 
     if (!isset($element['#upload_validators'])) {
-      $element['#upload_validators'] = array();
+      $element['#upload_validators'] = [];
     }
     $element['#upload_validators'] += _plupload_default_upload_validators();
     return $element;
@@ -189,29 +190,30 @@ class PlUploadFile extends FormElement {
    * Note: based on plupload_element_pre_render().
    */
   public static function preRenderPlUploadFile($element) {
-    $settings = isset($element['#plupload_settings']) ? $element['#plupload_settings'] : array();
+    $settings = isset($element['#plupload_settings']) ? $element['#plupload_settings'] : [];
 
     // Set upload URL.
     if (empty($settings['url'])) {
-      $settings['url'] = Url::fromRoute('plupload.upload', array(), array(
-        'query' => array('token' => \Drupal::csrfToken()->get('plupload-handle-uploads')),
-      ))->toString();
+      $settings['url'] = Url::fromRoute('plupload.upload', [], [
+        'query' => ['token' => \Drupal::csrfToken()->get('plupload-handle-uploads')],
+      ])->toString();
     }
 
-    // The Plupload library supports client-side validation of file extension, so
-    // pass along the information for it to do that. However, as with all client-
-    // side validation, this is a UI enhancement only, and not a replacement for
-    // server-side validation.
+    // The Plupload library supports client-side validation of file extension,
+    // so pass along the information for it to do that. However, as with all
+    // client- side validation, this is a UI enhancement only, and not a
+    // replacement for server-side validation.
     if (empty($settings['filters']) && isset($element['#upload_validators']['file_validate_extensions'][0])) {
-      $settings['filters'][] = array(
+      $settings['filters'][] = [
         // @todo Some runtimes (e.g., flash) require a non-empty title for each
         //   filter, but I don't know what this title is used for. Seems a shame
         //   to hard-code it, but what's a good way to avoid that?
         'title' => t('Allowed files'),
         'extensions' => str_replace(' ', ',', $element['#upload_validators']['file_validate_extensions'][0]),
-      );
+      ];
     }
-    // Check for autoupload and autosubmit settings and add appropriate callback.
+    // Check for autoupload and autosubmit settings and add appropriate
+    // callback.
     if (!empty($element['#autoupload'])) {
       $settings['init']['FilesAdded'] = 'Drupal.plupload.filesAddedCallback';
       if (!empty($element['#autosubmit'])) {
@@ -222,11 +224,11 @@ class PlUploadFile extends FormElement {
     if (!empty($element['#submit_element'])) {
       $settings['submit_element'] = $element['#submit_element'];
     }
-    // Check if there are event callbacks and append them to current ones, if any.
+    // Check if there are event callbacks & append them to current ones, if any.
     if (!empty($element['#event_callbacks'])) {
       // array_merge() only accepts parameters of type array.
       if (!isset($settings['init'])) {
-        $settings['init'] = array();
+        $settings['init'] = [];
       }
       $settings['init'] = array_merge($settings['init'], $element['#event_callbacks']);
     }
@@ -234,20 +236,20 @@ class PlUploadFile extends FormElement {
     if (empty($element['#description'])) {
       $element['#description'] = '';
     }
-    $element['#description'] = array(
+    $element['#description'] = [
       '#theme' => 'file_upload_help',
       '#description' => $element['#description'],
       '#upload_validators' => $element['#upload_validators'],
-    );
+    ];
 
     // Global settings.
     $library_discovery = \Drupal::service('library.discovery');
     $library = $library_discovery->getLibraryByName('plupload', 'plupload');
 
-    $element['#attached']['drupalSettings']['plupload'] = array(
+    $element['#attached']['drupalSettings']['plupload'] = [
       '_default' => $library['settings']['plupload']['_default'],
       $element['#id'] => $settings,
-    );
+    ];
 
     return $element;
   }
@@ -261,21 +263,21 @@ class PlUploadFile extends FormElement {
     foreach ($element['#value'] as $file_info) {
       // Here we create a $file object for a file that doesn't exist yet,
       // because saving the file to its destination is done in a submit handler.
-      // Using tmp path will give validators access to the actual file on disk and
-      // filesize information. We manually modify filename and mime to allow
+      // Using tmp path will give validators access to the actual file on disk
+      // and filesize information. We manually modify filename and mime to allow
       // extension checks.
       $destination = \Drupal::config('system.file')->get('default_scheme') . '://' . $file_info['name'];
       $file_uri = \Drupal::service('stream_wrapper_manager')->normalizeUri($destination);
-      $file = File::create(array(
+      $file = File::create([
         'uri' => $file_info['tmppath'],
         'uid' => \Drupal::currentUser()->id(),
         'status' => FILE_STATUS_PERMANENT,
         'filename' => \Drupal::service('file_system')->basename($destination),
         'filemime' => \Drupal::service('file.mime_type.guesser')->guess($destination),
-      ));
+      ]);
 
       foreach (file_validate($file, $element['#upload_validators']) as $error_message) {
-        $message = t('The specified file %name could not be uploaded.', array('%name' => $file->getFilename()));
+        $message = t('The specified file %name could not be uploaded.', ['%name' => $file->getFilename()]);
         $concatenated_message = $message . ' ' . $error_message;
         $form_state->setError($element, $concatenated_message);
       }

@@ -2,11 +2,10 @@
 
 namespace Drupal\plupload;
 
-
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- *
+ * Plupload exception handling route.
  */
 class UploadException extends \Exception {
 
@@ -38,15 +37,15 @@ class UploadException extends \Exception {
   /**
    * Code to error message mapping.
    *
-   * @param array $code
+   * @var array
    */
-  public $errorMessages = array(
+  public $errorMessages = [
     self::INPUT_ERROR => 'Failed to open input stream.',
     self::OUTPUT_ERROR => 'Failed to open output stream.',
     self::MOVE_ERROR => 'Failed to move uploaded file.',
     self::DESTINATION_FOLDER_ERROR => 'Failed to open temporary directory.',
     self::FILENAME_ERROR => 'Invalid temporary file name.',
-  );
+  ];
 
   /**
    * Constructs UploadException.
@@ -67,14 +66,14 @@ class UploadException extends \Exception {
    */
   public function getErrorResponse() {
     return new JsonResponse(
-      array(
+      [
         'jsonrpc' => '2.0',
-        'error' => array(
+        'error' => [
           'code' => $this->code,
           'message' => $this->errorMessages[$this->code],
-        ),
+        ],
         'id' => 'id',
-      ),
+      ],
       500
     );
   }

@@ -5,11 +5,13 @@ namespace Drupal\plupload_test;
 use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
  * Plupload test form class.
  */
 class PluploadTestForm implements FormInterface {
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
@@ -22,18 +24,18 @@ class PluploadTestForm implements FormInterface {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['plupload'] = array(
+    $form['plupload'] = [
       '#type' => 'plupload',
       '#title' => 'Plupload',
-      '#upload_validators' => array(
-        'file_validate_extensions' => array('zip'),
-      ),
-    );
+      '#upload_validators' => [
+        'file_validate_extensions' => ['zip'],
+      ],
+    ];
 
-    $form['submit'] = array(
+    $form['submit'] = [
       '#type' => 'submit',
-      '#value' => t('Submit'),
-    );
+      '#value' => $this->t('Submit'),
+    ];
     return $form;
   }
 
@@ -43,7 +45,7 @@ class PluploadTestForm implements FormInterface {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     foreach ($form_state->getValue('plupload') as $uploaded_file) {
       if ($uploaded_file['status'] != 'done') {
-        $form_state->setErrorByName('plupload', t("Upload of %filename failed.", array('%filename' => $uploaded_file['name'])));
+        $form_state->setErrorByName('plupload', $this->t("Upload of %filename failed.", ['%filename' => $uploaded_file['name']]));
       }
     }
   }
@@ -55,10 +57,10 @@ class PluploadTestForm implements FormInterface {
 
     // Create target directory if necessary.
     $destination = \Drupal::config('system.file')
-        ->get('default_scheme') . '://plupload-test';
+      ->get('default_scheme') . '://plupload-test';
     \Drupal::service('file_system')->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
 
-    $saved_files = array();
+    $saved_files = [];
 
     foreach ($form_state->getValue('plupload') as $uploaded_file) {
 
@@ -80,7 +82,7 @@ class PluploadTestForm implements FormInterface {
    * Returns the Drupal stream wrapper manager service.
    */
   private function loadStreamWrapper() {
-     return \Drupal::service('stream_wrapper_manager');
+    return \Drupal::service('stream_wrapper_manager');
   }
 
 }

@@ -330,8 +330,8 @@
         "codemirror/codemirror": "*",
         "composer/installers": "^1.7",
         "cweagans/composer-patches": "^1.6",
-        "drupal-composer/drupal-scaffold": "^2.2",
         "drupal/console": "~1.0",
+        "drupal/core-composer-scaffold": "*",
         "drupal/core-recommended": "^8.8",
         "drupal/devel": "^4.0",
         "drupal/devel_entity_updates": "^3.0",
@@ -347,7 +347,7 @@
         "drupal/leaflet_more_maps": "^1.0",
         "drupal/libraries": "^3.0@alpha",
         "drupal/minifyhtml": "^1.7",
-        "drupal/plupload": "1.x-dev",
+        "drupal/plupload": "1.x-dev@dev",
         "drupal/smtp": "^1.0",
         "drupal/upgrade_status": "^3.0",
         "drupal/video": "^1.5@alpha",
@@ -366,8 +366,6 @@
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
     },
-    "require-dev": {
-    },
     "conflict": {
         "drupal/drupal": "*"
     },
@@ -385,7 +383,6 @@
         ]
     },
     "scripts": {
-        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
         "pre-install-cmd": [
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],

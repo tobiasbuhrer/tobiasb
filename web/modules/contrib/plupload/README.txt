@@ -32,7 +32,8 @@ $form['my_element'] = array(
   '#autosubmit' => TRUE,
   '#submit_element' => '#id-of-your-submit-element',
   '#upload_validators' => array(
-    'file_validate_extensions' => array('jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'),
+    'file_validate_extensions' => array('jpg jpeg gif png txt doc xls pdf ppt
+     pps odt ods odp'),
     'my_custom_file_validator' => array('some validation criteria'),
   );
   '#plupload_settings' => array(
@@ -60,24 +61,29 @@ There are few optional properties of this array that have special meaning:
   the form. Can also be used in combination with #autoupload and #autosubmit.
   See: http://drupal.org/node/1935256
 
-- #upload_validators - an array of validation function/validation criteria pairs,
-  that will be passed to file_validate().
+- #upload_validators - an array of validation function/validation criteria
+  pairs, that will be passed to file_validate().
   Defaults to:
   '#upload_validators' => array(
-    'file_validate_extensions' => array('jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp'),
+    'file_validate_extensions' => array('jpg jpeg gif png txt doc xls pdf ppt
+     pps odt ods odp'),
   );
 
-- #plupload_settings - array of settings, that will be passed to Plupload library.
+- #plupload_settings - array of settings, that will be passed to Plupload
+ library.
   See: http://www.plupload.com/documentation.php
   Defaults to:
   '#plupload_settings' => array(
     'runtimes' => 'html5,flash,html4',
-    'url' => url('plupload-handle-uploads', array('query' => array('plupload_token' => drupal_get_token('plupload-handle-uploads')))),
+    'url' => url('plupload-handle-uploads', array('query' =>
+      array('plupload_token' => drupal_get_token('plupload-handle-uploads')))),
     'max_file_size' => file_upload_max_size() . 'b',
     'chunk_size' => '1mb',
     'unique_names' => TRUE,
-    'flash_swf_url' => file_create_url($library_path . '/js/plupload.flash.swf'),
-    'silverlight_xap_url' => file_create_url($library_path . '/js/plupload.silverlight.xap'),
+    'flash_swf_url' => file_create_url($library_path .
+     '/js/plupload.flash.swf'),
+    'silverlight_xap_url' => file_create_url($library_path .
+     '/js/plupload.silverlight.xap'),
   ),
 
 - #event_callbacks - array of callbacks that will be passed to js.

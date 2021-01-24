@@ -17,7 +17,7 @@ class UploadController implements ContainerInjectionInterface {
   /**
    * The current request.
    *
-   * @var \Symfony\Component\HttpFoundation\Request $request
+   * @var \Symfony\Component\HttpFoundation\Request
    *   The HTTP request object.
    */
   protected $request;
@@ -89,20 +89,17 @@ class UploadController implements ContainerInjectionInterface {
 
     // Return JSON-RPC response.
     return new JsonResponse(
-      array(
+      [
         'jsonrpc' => '2.0',
         'result' => NULL,
         'id' => 'id',
-      ),
+      ],
       200
     );
   }
 
   /**
    * Prepares temporary destination folder for uploaded files.
-   *
-   * @return bool
-   *   TRUE if destination folder looks OK and FALSE otherwise.
    *
    * @throws \Drupal\plupload\UploadException
    */
@@ -131,13 +128,14 @@ class UploadController implements ContainerInjectionInterface {
         throw new UploadException(UploadException::FILENAME_ERROR);
       }
 
-      // Check the file name for security reasons; it must contain letters, numbers
-      // and underscores followed by a (single) ".tmp" extension. Since this check
-      // is more stringent than the one performed in plupload_element_value(), we
-      // do not need to run the checks performed in that function here. This is
-      // fortunate, because it would be difficult for us to get the correct list of
-      // allowed extensions to pass in to file_munge_filename() from this point in
-      // the code (outside the form API).
+      // Check the file name for security reasons; it must contain letters,
+      // numbers and underscores followed by a (single) ".tmp" extension.
+      // Since this check is more stringent than the one performed in
+      // plupload_element_value(), we do not need to run the checks performed
+      // in that function here. This is fortunate, because it would be
+      // difficult for us to get the correct list of allowed extensions
+      // to pass in to file_munge_filename() from this point in the code
+      // (outside the form API).
       if (!preg_match('/^\w+\.tmp$/', $this->filename)) {
         throw new UploadException(UploadException::FILENAME_ERROR);
       }
@@ -157,10 +155,11 @@ class UploadController implements ContainerInjectionInterface {
 
     // If this is a multipart upload there needs to be a file on the server.
     if ($is_multipart) {
-      $multipart_file = $this->request->files->get('file', array());
+      $multipart_file = $this->request->files->get('file', []);
       // TODO: Not sure if this is the best check now.
       // Originally it was:
-      // if (empty($multipart_file['tmp_name']) || !is_uploaded_file($multipart_file['tmp_name'])) {.
+      // if (empty($multipart_file['tmp_name']) ||
+      // !is_uploaded_file($multipart_file['tmp_name'])) {.
       if (!$multipart_file->getPathname() || !is_uploaded_file($multipart_file->getPathname())) {
         throw new UploadException(UploadException::MOVE_ERROR);
       }
