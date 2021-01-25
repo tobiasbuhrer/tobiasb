@@ -165,7 +165,7 @@ class ImportForm extends ConfigFormBase
                 //do convert to UTF8, otherwise we may have problems
                 if (is_array($test_title)) {
                   //all IPTC values are arrays
-                  $new_title = $this->encodeToUtf8($test_title[0]);
+                  $new_title = $this->encodeToUtf8(implode($test_title));
                 }
                 else {
                   //could be an EXIF string
@@ -200,7 +200,7 @@ class ImportForm extends ConfigFormBase
                             //do convert to UTF8, otherwise we may have problems
                             if (is_array($value)) {
                               //all IPTC values are arrays
-                            $newnode[$fieldname] = $this->encodeToUtf8($value[0]);
+                            $newnode[$fieldname] = $this->encodeToUtf8(implode($value));
                             }
                             else {
                               //could be an EXIF string

@@ -39,7 +39,10 @@ function photo_legend_node_presave(Drupal\Core\Entity\EntityInterface $entity) {
         $p_city = $entity->get('field_city')->getString();
         $p_state = $entity->get('field_state')->getString();
         $p_country = $entity->get('field_country_code')->getValue();
-        $p_country = $p_country[0]['value'];
+        if ($p_country) {
+        //if (is_array($p_country) and strlen($p_country['0']>0)) {
+          $p_country = $p_country[0]['value'];
+        };
 
 
         if ($p_caption) {
