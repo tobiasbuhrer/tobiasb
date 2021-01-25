@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66fc1fe6ec7a60b876430fac6d09a37f",
+    "content-hash": "cdf7b72d69cf04c141e22a75d0306ef5",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -5057,16 +5057,16 @@
         },
         {
             "name": "laminas/laminas-servicemanager",
-            "version": "3.6.2",
+            "version": "3.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-servicemanager.git",
-                "reference": "69a33802574e34357da6937602622a8a8db69883"
+                "reference": "04a0118731d9f3ee865c7ceb5342551491adebc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/69a33802574e34357da6937602622a8a8db69883",
-                "reference": "69a33802574e34357da6937602622a8a8db69883",
+                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/04a0118731d9f3ee865c7ceb5342551491adebc1",
+                "reference": "04a0118731d9f3ee865c7ceb5342551491adebc1",
                 "shasum": ""
             },
             "require": {
@@ -5140,7 +5140,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-01-17T17:08:19+00:00"
+            "time": "2021-01-25T00:14:52+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
@@ -9363,50 +9363,6 @@
                 }
             ],
             "time": "2021-01-20T14:39:13+00:00"
-        },
-        {
-            "name": "vvval/exiftool-reader",
-            "version": "v0.0.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vvval/exiftool-reader.git",
-                "reference": "2cbe9fc863d2c7341cb52e46c2a2db6e8735940f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vvval/exiftool-reader/zipball/2cbe9fc863d2c7341cb52e46c2a2db6e8735940f",
-                "reference": "2cbe9fc863d2c7341cb52e46c2a2db6e8735940f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6",
-                "symfony/process": "^3.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "5.5.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ExiftoolReader\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Valentin V / vvval",
-                    "email": "vintsukevich@gmail.com"
-                }
-            ],
-            "description": "Exiftool reader process wrapper",
-            "support": {
-                "issues": "https://github.com/vvval/exiftool-reader/issues",
-                "source": "https://github.com/vvval/exiftool-reader/tree/v0.0.11"
-            },
-            "time": "2017-02-27T19:46:17+00:00"
         },
         {
             "name": "webflo/drupal-finder",

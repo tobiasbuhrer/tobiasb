@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '7b75d36e9e3ab06d13a3f7f4537b2d7c2020b460',
+    'reference' => 'a09ab51f78010a28332186d1daaca7ae7dfaa862',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -361,7 +361,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '7b75d36e9e3ab06d13a3f7f4537b2d7c2020b460',
+      'reference' => 'a09ab51f78010a28332186d1daaca7ae7dfaa862',
     ),
     'drupal/action' => 
     array (
@@ -1574,12 +1574,12 @@ private static $installed = array (
     ),
     'laminas/laminas-servicemanager' => 
     array (
-      'pretty_version' => '3.6.2',
-      'version' => '3.6.2.0',
+      'pretty_version' => '3.6.3',
+      'version' => '3.6.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '69a33802574e34357da6937602622a8a8db69883',
+      'reference' => '04a0118731d9f3ee865c7ceb5342551491adebc1',
     ),
     'laminas/laminas-stdlib' => 
     array (
@@ -2197,15 +2197,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'b786088918a884258c9e3e27405c6a4cf2ee246e',
-    ),
-    'vvval/exiftool-reader' => 
-    array (
-      'pretty_version' => 'v0.0.11',
-      'version' => '0.0.11.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '2cbe9fc863d2c7341cb52e46c2a2db6e8735940f',
     ),
     'webflo/drupal-finder' => 
     array (

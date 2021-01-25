@@ -362,7 +362,6 @@
         "progress-tracker/progress-tracker": "*",
         "signature_pad/signature_pad": "*",
         "vlucas/phpdotenv": "^2.4",
-        "vvval/exiftool-reader": "^0.0.11",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
     },

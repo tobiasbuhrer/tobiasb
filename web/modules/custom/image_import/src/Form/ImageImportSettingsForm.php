@@ -68,7 +68,7 @@ class ImageImportSettingsForm extends ConfigFormBase
         $config = $this->config('image_import.imageimportsettings');
         $target_node_type = $this->entityTypeManager->getStorage('node_type')->load($config->get('contenttype'));
         $msg = '<p>' . $this->t('Images shall be imported to Node type') . ': <strong>' . $target_node_type->label() . '</strong><br />';
-
+        $msg .= $this->t('A field of type geofield will automatically be set to EXIF values GPSLatitude and GPSLongitude.');
         //can we show dependent form elements?
         $form['mapping'] = array(
             '#prefix' => $msg,
@@ -158,10 +158,108 @@ class ImageImportSettingsForm extends ConfigFormBase
     public static function readMetaTags($uri)
     {
         $fields = array();
-        $exiftoolpath = \Drupal::config('image_import.imageimportsettings')->get('exiftoolpath');
 
+        //Exif data
+        $exiftoolpath = \Drupal::config('image_import.imageimportsettings')->get('exiftoolpath');
         //Get all of the EXIF tags
-        //$exif = exif_read_data($uri, NULL, TRUE);
+        $exif = exif_read_data($uri,0, true);
+        foreach ($exif as $key => $section) {
+            foreach ($section as $name => $val) {
+              $fields[$key.'-'.$name] = $val;
+            }
+        }
+
+        //IPTC data
+        $size = getimagesize ( $uri, $info);
+        if(is_array($info)) {
+            $iptc = iptcparse($info["APP13"]);
+            foreach (array_keys($iptc) as $key) {
+                $key1 = $key;
+                switch ($key) {
+                  case '1#000':
+                    $key1 = 'EnvelopeRecordVersion';
+                    break;
+                  case '1#090':
+                    $key1 = 'CodedCharacterSet';
+                    break;
+                  case '2#000':
+                    $key1 = 'ApplicationRecordVersion';
+                    break;
+                  case '2#005':
+                    $key1 = 'DocumentTitle';
+                    break;
+                  case '2#010':
+                    $key1 = 'Urgency';
+                    break;
+                  case '2#015':
+                    $key1 = 'Category';
+                    break;
+                  case '2#020':
+                    $key1 = 'Subcategories';
+                    break;
+                  case '2#025':
+                    $key1 = 'Keywords';
+                    break;
+                  case '2#040':
+                    $key1 = 'SpecialInstructions';
+                    break;
+                  case '2#055':
+                    $key1 = 'CreationDate';
+                    break;
+                  case '2#080':
+                    $key1 = 'AuthorByline';
+                    break;
+                  case '2#085':
+                    $key1 = 'AuthorTitle';
+                    break;
+                  case '2#090':
+                    $key1 = 'City';
+                    break;
+                  case '2#092':
+                    $key1 = 'Sublocation';
+                    break;
+                  case '2#095':
+                    $key1 = 'State';
+                    break;
+                  case '2#100':
+                    $key1 = 'Country code';
+                    break;
+                  case '2#101':
+                    $key1 = 'Country';
+                    break;
+                  case '2#103':
+                    $key1 = 'OriginalTransmissionReference';
+                    break;
+                  case '2#105':
+                    $key1 = 'Headline';
+                    break;
+                  case '2#110':
+                    $key1 = 'Source';
+                    break;
+                  case '2#115':
+                    $key1 = 'PhotoSource';
+                    break;
+                  case '2#116':
+                    $key1 = 'Copyright';
+                    break;
+                  case '2#120':
+                    $key1 = 'Caption';
+                    break;
+                  case '2#122':
+                    $key1 = 'CaptionWriter';
+                    break;
+                }
+
+              //data may be in an array
+              $c = count ($iptc[$key]);
+              for ($i=0; $i <$c; $i++)
+              {
+                  $fields['IPTC-' . $key1] = $iptc[$key];
+              }
+            }
+        }
+
+/*
         $exiftoolConfig = new \ExiftoolReader\Config\Exiftool();
         $exiftoolConfig->setConfig([
             'path'    => $exiftoolpath,
@@ -175,6 +273,7 @@ class ImageImportSettingsForm extends ConfigFormBase
         foreach ($output as $key => $value) {
             $fields[$key] = $value;
         }
+*/
         return $fields;
     }
 }

@@ -151,7 +151,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         ),
         'E' => 
         array (
-            'ExiftoolReader\\' => 15,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -454,10 +453,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'FileEye\\MimeMap\\' => 
         array (
             0 => __DIR__ . '/..' . '/fileeye/mimemap/src',
-        ),
-        'ExiftoolReader\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/vvval/exiftool-reader/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (

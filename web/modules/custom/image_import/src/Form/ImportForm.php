@@ -138,7 +138,7 @@ class ImportForm extends ConfigFormBase
 
             // Create file object from a locally copied file.
             $uri = \Drupal::service('file_system')->copy($uploaded_file['tmppath'], $file_uri, \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE);
-            
+
             $file = File::Create([
                 'uid' => 1,
                 'uri' => $uri,
@@ -158,9 +158,23 @@ class ImportForm extends ConfigFormBase
             $metatags = ImageImportSettingsForm::readMetaTags($filepath);
 
             //title: if mapping is set, result needs to have at least one char
-            if (($config->get('exif_title')) and (strlen($metatags[$config->get('exif_title')]) > 0)) {
-                $title = $metatags[$config->get('exif_title')];
-            }
+            if (isset($metatags[$config->get('exif_title')]))
+            {
+              $test_title = $metatags[$config->get('exif_title')];
+
+                //do convert to UTF8, otherwise we may have problems
+                if (is_array($test_title)) {
+                  //all IPTC values are arrays
+                  $new_title = $this->encodeToUtf8($test_title[0]);
+                }
+                else {
+                  //could be an EXIF string
+                  $new_title = $this->encodeToUtf8($test_title);
+                };
+                if (strlen($new_title) > 0) {
+                  $title = $new_title;
+                };
+              };
 
             $newnode = array();
             $newnode['type'] = $config->get('contenttype');
@@ -169,7 +183,7 @@ class ImportForm extends ConfigFormBase
             $newnode[$config->get('image_field')]['alt'] = $title;
 
             $configs = $config->get();
-            
+
 
             foreach ($configs as $key => $mapping) {
                 if ((substr($key, 0, 5) == 'exif_') and ($key !== 'exif_title')) {
@@ -179,32 +193,37 @@ class ImportForm extends ConfigFormBase
                         case "string":
                         case "list_string":
                         case "string_long":
-                            $v = (string)$metatags[$mapping];
-                            //we don't write empty values. If no value is written, default will be applied.
-                            if (!empty($v)) {
-                                $newnode[$fieldname] = (string)$metatags[$mapping];
-
+                          //we don't write empty values. If no value is written, default will be applied.
+                          //IPTC values are always arrays, exif values not necessarily so
+                          if (isset($metatags[$mapping])) {
+                            $value = $metatags[$mapping];
+                            //do convert to UTF8, otherwise we may have problems
+                            if (is_array($value)) {
+                              //all IPTC values are arrays
+                            $newnode[$fieldname] = $this->encodeToUtf8($value[0]);
                             }
-                            break;
+                            else {
+                              //could be an EXIF string
+                              $newnode[$fieldname] = $this->encodeToUtf8($value);
+                            }
+                          };
+                          break;
                         case "datetime":
+                          //we don't write empty values. If no value is written, default will be applied.
+                          if (isset($metatags[$mapping])) {
                             $datetime = date_create_from_format('Y:m:d H:i:s', $metatags[$mapping]);
-
-                            //we don't write empty values. If no value is written, default will be applied.
-                            if (!empty($datetime)) {
-                                //$newnode[$fieldname] = date_format($datetime, 'Y-m-d\TH:i:s');
-                                $date = DrupalDateTime::createFromDateTime($datetime);
-                                $date->setTimezone(new \DateTimeZone('UTC'));
-                                $newnode[$fieldname] = $date->format('Y-m-d\TH:i:s');
-                            }
+                            $date = DrupalDateTime::createFromDateTime($datetime);
+                            $date->setTimezone(new \DateTimeZone('UTC'));
+                            $newnode[$fieldname] = $date->format('Y-m-d\TH:i:s');
+                            };
                             break;
                         case "geolocation":
-                        case "geofield":
-                            if (substr($mapping, 0, 3) == 'GPS') {
-                                $Latitude = $metatags['GPSLatitude'];
-                                $Longitude = $metatags['GPSLongitude'];
-                            }
-                            if ((!empty($Latitude)) and
-                                (!empty($Longitude))) {
+                      case "geofield":
+                            if ((substr($mapping, 0, 3) == 'GPS') and isset($metatags["GPS-GPSLongitude"]) and isset($metatags["GPS-GPSLatitude"])) {
+                                //we ignore any mapping, put to the GPS value in the file
+                                //we have to convert this to digital coordinates
+                                $Longitude = $this->getGps($metatags["GPS-GPSLongitude"], $metatags['GPS-GPSLongitudeRef']);
+                                $Latitude = $this->getGps($metatags["GPS-GPSLatitude"], $metatags['GPS-GPSLatitudeRef']);
 
                                 if ($fields[$fieldname]->getType() == "geolocation") {
                                     $newnode[$fieldname]['lat'] = $Latitude;
@@ -216,7 +235,7 @@ class ImportForm extends ConfigFormBase
                                     $newnode[$fieldname] = $point;
                                 }
                                 break;
-                            };
+                            }
                     }
                 }
             }
@@ -244,17 +263,27 @@ class ImportForm extends ConfigFormBase
         parent::submitForm($form, $form_state);
     }
 
-    // Convert a lat or lon 3-array to decimal degrees
-    function convertToDegree($exifcoordinates)
-    {
-        $values = explode(',', $exifcoordinates);
-        $deg = explode('/', $values[0]);
-        $degrees = $deg[0] / $deg[1];
-        $min = explode('/', $values[1]);
-        $minutes = $min[0] / $min[1];
-        $sec = explode('/', $values[2]);
-        $seconds = $sec[0] / $sec[1];
-        return $degrees + $minutes / 60.0 + $seconds / 3600;
+    private function getGps($exifCoord, $hemi) {
+        $degrees = count($exifCoord) > 0 ? $this->gps2Num($exifCoord[0]) : 0;
+        $minutes = count($exifCoord) > 1 ? $this->gps2Num($exifCoord[1]) : 0;
+        $seconds = count($exifCoord) > 2 ? $this->gps2Num($exifCoord[2]) : 0;
+
+        $flip = ($hemi == 'W' or $hemi == 'S') ? -1 : 1;
+
+        return $flip * ($degrees + $minutes / 60 + $seconds / 3600);
     }
+
+    private function gps2Num($coordPart) {
+        $parts = explode('/', $coordPart);
+        if (count($parts) <= 0)
+          return 0;
+        if (count($parts) == 1)
+          return $parts[0];
+        return floatval($parts[0]) / floatval($parts[1]);
+    }
+
+  private function encodeToUtf8($string) {
+    return mb_convert_encoding($string, "UTF-8", mb_detect_encoding($string, "UTF-8, ISO-8859-1, ISO-8859-15", true));
+  }
 
 }
