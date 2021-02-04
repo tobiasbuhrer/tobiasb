@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'e28a26103a896c5ebbf829808d4545df6a7361ff',
+    'reference' => 'd42282ddab714ed01cd7702344c5e413c68091bd',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -361,7 +361,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'e28a26103a896c5ebbf829808d4545df6a7361ff',
+      'reference' => 'd42282ddab714ed01cd7702344c5e413c68091bd',
     ),
     'drupal/action' => 
     array (
@@ -599,8 +599,8 @@ private static $installed = array (
     ),
     'drupal/core-composer-scaffold' => 
     array (
-      'pretty_version' => '9.1.3',
-      'version' => '9.1.3.0',
+      'pretty_version' => '9.1.4',
+      'version' => '9.1.4.0',
       'aliases' => 
       array (
       ),
@@ -1350,12 +1350,12 @@ private static $installed = array (
     ),
     'drupal/upgrade_status' => 
     array (
-      'pretty_version' => '3.3.0',
-      'version' => '3.3.0.0',
+      'pretty_version' => '3.4.0',
+      'version' => '3.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.3',
+      'reference' => '8.x-3.4',
     ),
     'drupal/user' => 
     array (
@@ -1574,12 +1574,12 @@ private static $installed = array (
     ),
     'laminas/laminas-servicemanager' => 
     array (
-      'pretty_version' => '3.6.3',
-      'version' => '3.6.3.0',
+      'pretty_version' => '3.6.4',
+      'version' => '3.6.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '04a0118731d9f3ee865c7ceb5342551491adebc1',
+      'reference' => 'b1445e1a7077c21b0fad0974a1b7a11b9dbe0828',
     ),
     'laminas/laminas-stdlib' => 
     array (
@@ -1761,12 +1761,12 @@ private static $installed = array (
     ),
     'phpstan/phpstan' => 
     array (
-      'pretty_version' => '0.12.70',
-      'version' => '0.12.70.0',
+      'pretty_version' => '0.12.71',
+      'version' => '0.12.71.0',
       'aliases' => 
       array (
       ),
-      'reference' => '07f0ef37f5f876e8cee44cc8ea0ec3fe80d499ee',
+      'reference' => 'd508fa3b0ecc5fc91ac70c6c7ac2862f968ba2b5',
     ),
     'phpstan/phpstan-deprecation-rules' => 
     array (
