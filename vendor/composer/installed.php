@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd42282ddab714ed01cd7702344c5e413c68091bd',
+    'reference' => '170f532f9720d12f0066f9c4c95d3b77b0733bff',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -338,7 +338,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd42282ddab714ed01cd7702344c5e413c68091bd',
+      'reference' => '170f532f9720d12f0066f9c4c95d3b77b0733bff',
     ),
     'drupal/action' => 
     array (
@@ -1366,12 +1366,12 @@
     ),
     'drupal/webform' => 
     array (
-      'pretty_version' => '6.0.0',
-      'version' => '6.0.0.0',
+      'pretty_version' => '6.0.1',
+      'version' => '6.0.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6.0.0',
+      'reference' => '6.0.1',
     ),
     'drupal/workflows' => 
     array (
@@ -1623,12 +1623,12 @@
     ),
     'mglaman/phpstan-drupal' => 
     array (
-      'pretty_version' => '0.12.7',
-      'version' => '0.12.7.0',
+      'pretty_version' => '0.12.8',
+      'version' => '0.12.8.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9c53a7be3f1b92766046469e2bf2e5f1cbfa0276',
+      'reference' => '7598084f8a0d6de21015faa9e2151cc4540f4344',
     ),
     'nette/finder' => 
     array (
