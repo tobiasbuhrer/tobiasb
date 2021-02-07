@@ -33,7 +33,7 @@ class FilterFormTest extends BrowserTestBase {
   protected $adminUser;
 
   /**
-   * An basic user account that can only access basic HTML text format.
+   * A basic user account that can only access basic HTML text format.
    *
    * @var \Drupal\user\Entity\User
    */
@@ -42,7 +42,7 @@ class FilterFormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     /** @var \Drupal\filter\FilterFormatInterface $filter_test_format */
@@ -227,7 +227,7 @@ class FilterFormTest extends BrowserTestBase {
       ]));
     }
 
-    $this->assertOptionSelected($id, $selected);
+    $this->assertTrue($this->assertSession()->optionExists($id, $selected)->isSelected());
   }
 
   /**
@@ -291,9 +291,7 @@ class FilterFormTest extends BrowserTestBase {
     ]));
     $textarea = reset($textarea);
     $expected = 'This field has been disabled because you do not have sufficient permissions to edit it.';
-    $this->assertEqual($textarea->getText(), $expected, new FormattableMarkup('Disabled textarea @id hides text in an inaccessible text format.', [
-      '@id' => $id,
-    ]));
+    $this->assertEqual($expected, $textarea->getText(), new FormattableMarkup('Disabled textarea @id hides text in an inaccessible text format.', ['@id' => $id]));
     // Make sure the text format select is not shown.
     $select_id = str_replace('value', 'format--2', $id);
     $this->assertNoSelect($select_id);

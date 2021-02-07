@@ -17,7 +17,7 @@ class ElementsLabelsTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['form_test'];
+  protected static $modules = ['form_test'];
 
   /**
    * {@inheritdoc}
@@ -90,10 +90,8 @@ class ElementsLabelsTest extends BrowserTestBase {
     $this->assertTrue(isset($elements[0]), 'Properly places the #suffix element before the form item.');
 
     // Check title attribute for radios and checkboxes.
-    $elements = $this->xpath('//div[@id="edit-form-checkboxes-title-attribute"]');
-    $this->assertEqual($elements[0]->getAttribute('title'), 'Checkboxes test' . ' (' . t('Required') . ')', 'Title attribute found.');
-    $elements = $this->xpath('//div[@id="edit-form-radios-title-attribute"]');
-    $this->assertEqual($elements[0]->getAttribute('title'), 'Radios test' . ' (' . t('Required') . ')', 'Title attribute found.');
+    $this->assertSession()->elementAttributeContains('css', '#edit-form-checkboxes-title-attribute', 'title', 'Checkboxes test (Required)');
+    $this->assertSession()->elementAttributeContains('css', '#edit-form-radios-title-attribute', 'title', 'Radios test (Required)');
 
     $elements = $this->xpath('//fieldset[@id="edit-form-checkboxes-title-invisible--wrapper"]/legend/span[contains(@class, "visually-hidden")]');
     $this->assertTrue(!empty($elements), "Title/Label not displayed when 'visually-hidden' attribute is set in checkboxes.");
@@ -123,13 +121,13 @@ class ElementsLabelsTest extends BrowserTestBase {
     $field_id = 'edit-form-textfield-test-description-after';
     $description_id = $field_id . '--description';
     $elements = $this->xpath('//input[@id="' . $field_id . '" and @aria-describedby="' . $description_id . '"]/following-sibling::div[@id="' . $description_id . '"]');
-    $this->assertTrue(isset($elements[0]), t('Properly places the #description element after the form item.'));
+    $this->assertTrue(isset($elements[0]), 'Properly places the #description element after the form item.');
 
     // Check #description placement with #description_display='before'.
     $field_id = 'edit-form-textfield-test-description-before';
     $description_id = $field_id . '--description';
     $elements = $this->xpath('//input[@id="' . $field_id . '" and @aria-describedby="' . $description_id . '"]/preceding-sibling::div[@id="' . $description_id . '"]');
-    $this->assertTrue(isset($elements[0]), t('Properly places the #description element before the form item.'));
+    $this->assertTrue(isset($elements[0]), 'Properly places the #description element before the form item.');
 
     // Check if the class is 'visually-hidden' on the form element description
     // for the option with #description_display='invisible' and also check that
@@ -137,7 +135,7 @@ class ElementsLabelsTest extends BrowserTestBase {
     $field_id = 'edit-form-textfield-test-description-invisible';
     $description_id = $field_id . '--description';
     $elements = $this->xpath('//input[@id="' . $field_id . '" and @aria-describedby="' . $description_id . '"]/following-sibling::div[contains(@class, "visually-hidden")]');
-    $this->assertTrue(isset($elements[0]), t('Properly renders the #description element visually-hidden.'));
+    $this->assertTrue(isset($elements[0]), 'Properly renders the #description element visually-hidden.');
   }
 
   /**

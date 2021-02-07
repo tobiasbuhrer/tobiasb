@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\migrate\Kernel;
 
-use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 
 /**
@@ -16,7 +15,7 @@ class MigrateStubTest extends MigrateTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'system',
     'node',
     'field',
@@ -49,7 +48,7 @@ class MigrateStubTest extends MigrateTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->setTestLogger();
     $this->migrateStub = $this->container->get('migrate.stub');
@@ -114,17 +113,8 @@ class MigrateStubTest extends MigrateTestBase {
    */
   public function testInvalidSourceIdKeys() {
     $this->expectException(\InvalidArgumentException::class);
-    $this->expectExceptionMessage('version_id is defined as a source ID but has no value.');
+    $this->expectExceptionMessage("'version_id' is defined as a source ID but has no value.");
     $this->migrateStub->createStub('sample_stubbing_migration_with_multiple_source_ids', ['id' => 17, 'not_a_key' => 17]);
-  }
-
-  /**
-   * Tests that an exception is thrown if a migration does not exist.
-   */
-  public function testErrorOnMigrationNotFound() {
-    $this->expectException(PluginNotFoundException::class);
-    $this->expectExceptionMessage("Plugin ID 'nonexistent_migration' was not found.");
-    $this->migrateStub->createStub('nonexistent_migration', [1]);
   }
 
 }

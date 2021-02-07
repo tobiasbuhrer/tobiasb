@@ -802,7 +802,7 @@ EOHTML
     /**
      * {@inheritdoc}
      */
-    public function dumpString(Cursor $cursor, $str, $bin, $cut)
+    public function dumpString(Cursor $cursor, string $str, bool $bin, int $cut)
     {
         if ('' === $str && isset($cursor->attr['img-data'], $cursor->attr['content-type'])) {
             $this->dumpKey($cursor);
@@ -819,7 +819,7 @@ EOHTML
     /**
      * {@inheritdoc}
      */
-    public function enterHash(Cursor $cursor, $type, $class, $hasChild)
+    public function enterHash(Cursor $cursor, int $type, $class, bool $hasChild)
     {
         if (Cursor::HASH_OBJECT === $type) {
             $cursor->attr['depth'] = $cursor->depth;
@@ -852,7 +852,7 @@ EOHTML
     /**
      * {@inheritdoc}
      */
-    public function leaveHash(Cursor $cursor, $type, $class, $hasChild, $cut)
+    public function leaveHash(Cursor $cursor, int $type, $class, bool $hasChild, int $cut)
     {
         $this->dumpEllipsis($cursor, $hasChild, $cut);
         if ($hasChild) {
@@ -936,13 +936,13 @@ EOHTML
                     $s .= '">';
                 }
 
-                $s .= $map[$c[$i]] ?? sprintf('\x%02X', \ord($c[$i]));
+                $s .= isset($map[$c[$i]]) ? $map[$c[$i]] : sprintf('\x%02X', \ord($c[$i]));
             } while (isset($c[++$i]));
 
             return $s.'</span>';
         }, $v).'</span>';
 
-        if (isset($attr['file']) && $href = $this->getSourceLink($attr['file'], $attr['line'] ?? 0)) {
+        if (isset($attr['file']) && $href = $this->getSourceLink($attr['file'], isset($attr['line']) ? $attr['line'] : 0)) {
             $attr['href'] = $href;
         }
         if (isset($attr['href'])) {
@@ -959,7 +959,7 @@ EOHTML
     /**
      * {@inheritdoc}
      */
-    protected function dumpLine($depth, $endOfValue = false)
+    protected function dumpLine(int $depth, bool $endOfValue = false)
     {
         if (-1 === $this->lastDepth) {
             $this->line = sprintf($this->dumpPrefix, $this->dumpId, $this->indentPad).$this->line;

@@ -112,6 +112,12 @@ CKEditor
 - Wim Leers 'Wim Leers' https://www.drupal.org/u/wim-leers
 - Marek 'mlewand' Lewandowski https://www.drupal.org/u/mlewand
 
+Claro
+- Cristina Chumillas 'ckrina' https://www.drupal.org/u/ckrina
+- Sascha Eggenberger 'saschaeggi' https://www.drupal.org/u/saschaeggi
+- Lauri Eskola 'lauriii' https://www.drupal.org/u/lauriii
+- Ben Mullins 'bnjmnm' https://www.drupal.org/u/bnjmnm
+
 Classy
 - David Hernandez 'davidhernandez' https://www.drupal.org/u/davidhernandez
 
@@ -313,6 +319,12 @@ Node Access
 - Moshe Weitzman 'moshe weitzman' https://www.drupal.org/u/moshe-weitzman
 - Jess Myrbo 'xjm' https://www.drupal.org/u/xjm
 
+Olivero
+- Mike Herchel 'mherchel' https://www.drupal.org/u/mherchel
+- Putra Bonaccorsi 'proeung' https://www.drupal.org/u/proeung
+- Jen Witkowski 'jwitkowski79' https://www.drupal.org/u/jwitkowski79
+- Konstantin Shupenko 'kostyashupenko' https://www.drupal.org/u/kostyashupenko
+
 Options
 - ?
 
@@ -401,6 +413,7 @@ Testing framework
 - Alex Pott 'alexpott' https://www.drupal.org/u/alexpott
 - Sascha Grossenbacher 'Berdir' https://www.drupal.org/u/berdir
 - Daniel Wehner 'dawehner' https://www.drupal.org/u/dawehner
+- Alberto M. 'mondrake' https://www.drupal.org/u/mondrake
 
 Text Field
 - ?
@@ -459,6 +472,7 @@ Accessibility
 - Rain Breaw Michaels 'rainbreaw' https://www.drupal.org/u/rainbreaw
 - Mike Gifford 'mgifford' https://www.drupal.org/u/mgifford
 - Andrew Macpherson 'andrewmacpherson' https://www.drupal.org/u/andrewmacpherson
+- (provisional) Ben Mullins 'bnjmnm' https://www.drupal.org/u/bnjmnm
 
 Documentation
 - ?
@@ -499,14 +513,9 @@ re-architect or otherwise improve large areas of Drupal core. See
 https://www.drupal.org/community-initiatives/drupal-core for more information on
 their responsibilities. The initiative coordinators for Drupal 8 are:
 
-API-first Initiative
-- Wim Leers 'Wim Leers' https://www.drupal.org/u/wim-leers
-- Mateu Aguiló Bosch 'e0ipso' https://www.drupal.org/u/e0ipso
+Decoupled Menus Initiative
+- Théodore Biadala 'nod_' https://www.drupal.org/u/nod_
 - Gabe Sullice 'gabesullice' https://www.drupal.org/u/gabesullice
-
-Admin UI & JavaScript Modernisation Initiative
-- Cristina Chumillas 'ckrina' https://www.drupal.org/u/ckrina
-- Sally Young 'justafish' https://www.drupal.org/u/justafish
 
 Layout Initiative
 - Tim Plunkett 'tim.plunkett' https://www.drupal.org/u/tim.plunkett
@@ -514,11 +523,6 @@ Layout Initiative
 
 Media Initiative
 - Janez Urevc 'slashrsm' https://www.drupal.org/u/slashrsm
-
-PHPUnit Initiative
-- Daniel Wehner 'dawehner' https://www.drupal.org/u/dawehner
-- (provisional) Michiel Nugter 'michielnugter' https://www.drupal.org/u/michielnugter
-- (provisional) Len Swaneveld 'Lendude' https://www.drupal.org/u/lendude
 
 Workflow Initiative
 - Dick Olsson 'dixon_' https://www.drupal.org/u/dixon_
@@ -544,5 +548,8 @@ participate in mentoring.
 - Elli Ludwigson 'ekl1773' https://www.drupal.org/u/ekl1773
 - Jess Myrbo 'xjm' https://www.drupal.org/u/xjm
 - Matthew Radcliffe 'mradcliffe' https://www.drupal.org/u/mradcliffe
+- (provisional) Chris Darke 'chrisdarke' https://www.drupal.org/u/chrisdarke
+- (provisional) Brian Gilbert 'realityloop' https://www.drupal.org/u/realityloop
+- (provisional) AmyJune Hineline 'volkswagenchick' https://www.drupal.org/u/volkswagenchick
 
 Provisional membership: None at this time.

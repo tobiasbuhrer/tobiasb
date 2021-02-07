@@ -1,0 +1,12 @@
+name: Drulma Companion Menu Item Fields
+type: module
+description: Adds compatibility between Drulma and Menu Item Content Fields module.
+package: Bulma
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - menu_item_fields:menu_item_fields
+
+# Information added by Drupal.org packaging script on 2020-07-11
+version: '8.x-1.8'
+project: 'drulma_companion'
+datestamp: 1594485384

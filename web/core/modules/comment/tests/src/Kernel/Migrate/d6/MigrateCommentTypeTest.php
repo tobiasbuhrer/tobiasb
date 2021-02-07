@@ -16,12 +16,12 @@ class MigrateCommentTypeTest extends MigrateDrupal6TestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['comment'];
+  protected static $modules = ['comment'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->installConfig(['comment']);
     $this->executeMigration('d6_comment_type');
@@ -58,6 +58,7 @@ class MigrateCommentTypeTest extends MigrateDrupal6TestBase {
     $this->assertEntity('comment_node_test_page', 'Migrate test page comment');
     $this->assertEntity('comment_node_test_planet', 'Migrate test planet comment');
     $this->assertEntity('comment_node_test_story', 'Migrate test story comment');
+    $this->assertEntity('comment_node_a_thirty_two_char', 'Test long name comment');
   }
 
 }

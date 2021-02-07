@@ -1,0 +1,43 @@
+{
+    "name": "drupal/drulma_companion",
+    "description": "Extends Drulma theme with module functionalities",
+    "homepage": "https://www.drupal.org/project/drulma_companion",
+    "support": {
+        "source": "https://gitlab.com/upstreamable/drulma-companion",
+        "issues": "https://gitlab.com/upstreamable/drulma-companion/issues"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "drupal/block_class": "^1",
+        "drupal/drulma": "^1.6",
+        "drupal/hook_event_dispatcher": "^2"
+    },
+    "require-dev": {
+        "upstreamable/md-to-html": "^1.0"
+    },
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "extra": {
+        "drush": {
+            "services": {
+                "drush.services.yml": "^9 || ^10"
+            }
+        }
+    },
+    "scripts": {
+        "md-to-html": [
+            "MdToHtml\\composer\\ScriptHandler::transform"
+        ],
+        "generate-readme": [
+            "@md-to-html --remove-first-line README.md README.html"
+        ]
+    },
+    "scripts-descriptions": {
+        "generate-readme": "Generates a README.html from the README.md to use in the module page."
+    }
+}

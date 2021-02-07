@@ -1,0 +1,18 @@
+services:
+  Drupal\drulma_companion\EventSubscriber\AddFontawesomeFiveSuggestions:
+    autowire: true
+    tags:
+      - {name: event_subscriber}
+  Drupal\drulma_companion\EventSubscriber\AddContainerClass:
+    autowire: true
+    tags:
+      - {name: event_subscriber}
+  # Set up the aliases so the autowiring works.
+  Drupal\Core\Entity\EntityTypeManagerInterface:
+    alias: 'entity_type.manager'
+  Drupal\Core\Asset\LibraryDiscoveryInterface:
+    alias: 'library.discovery'
+  Drupal\Core\Extension\ModuleHandlerInterface:
+    alias: 'module_handler'
+  Drupal\Core\Extension\ThemeHandlerInterface:
+    alias: 'theme_handler'

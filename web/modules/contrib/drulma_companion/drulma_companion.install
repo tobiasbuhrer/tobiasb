@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * @file
+ * Install functions.
+ */
+
+// Update hooks.
+include_once __DIR__ . '/includes/update.php';

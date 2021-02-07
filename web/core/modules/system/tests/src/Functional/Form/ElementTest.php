@@ -17,7 +17,7 @@ class ElementTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['form_test'];
+  protected static $modules = ['form_test'];
 
   /**
    * {@inheritdoc}
@@ -59,7 +59,7 @@ class ElementTest extends BrowserTestBase {
       $expected_values = ['0', 'foo', '1', 'bar', '>'];
       foreach ($elements as $element) {
         $expected = array_shift($expected_values);
-        $this->assertIdentical((string) $element->getAttribute('value'), $expected);
+        $this->assertSame($expected, (string) $element->getAttribute('value'));
       }
     }
 
@@ -79,7 +79,7 @@ class ElementTest extends BrowserTestBase {
       $expected_values = ['0', 'foo', 'bar', '>', '1'];
       foreach ($elements as $element) {
         $expected = array_shift($expected_values);
-        $this->assertIdentical((string) $element->getAttribute('value'), $expected);
+        $this->assertSame($expected, (string) $element->getAttribute('value'));
       }
     }
     // Verify that custom #description properties are output.
@@ -198,7 +198,7 @@ class ElementTest extends BrowserTestBase {
   }
 
   /**
-   * Tests a form with a autocomplete setting..
+   * Tests a form with an autocomplete setting..
    */
   public function testFormAutocomplete() {
     $this->drupalGet('form-test/autocomplete');

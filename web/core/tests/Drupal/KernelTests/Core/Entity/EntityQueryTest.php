@@ -27,7 +27,7 @@ class EntityQueryTest extends EntityKernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['field_test', 'language'];
+  protected static $modules = ['field_test', 'language'];
 
   /**
    * @var array
@@ -62,7 +62,7 @@ class EntityQueryTest extends EntityKernelTestBase {
    */
   protected $storage;
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->installEntitySchema('entity_test_mulrev');
@@ -319,7 +319,7 @@ class EntityQueryTest extends EntityKernelTestBase {
     // This matches both the original and new current revisions, multiple
     // revisions are returned for some entities.
     $assert = [16 => '4', 17 => '5', 18 => '6', 19 => '7', 8 => '8', 9 => '9', 10 => '10', 11 => '11', 20 => '12', 21 => '13', 22 => '14', 23 => '15'];
-    $this->assertIdentical($results, $assert);
+    $this->assertSame($assert, $results);
     $results = $this->storage
       ->getQuery()
       ->condition("$greetings.value", 'siema', 'STARTS_WITH')
@@ -327,7 +327,7 @@ class EntityQueryTest extends EntityKernelTestBase {
       ->execute();
     // Now we only get the ones that originally were siema, entity id 8 and
     // above.
-    $this->assertIdentical($results, array_slice($assert, 4, 8, TRUE));
+    $this->assertSame(array_slice($assert, 4, 8, TRUE), $results);
     $results = $this->storage
       ->getQuery()
       ->condition("$greetings.value", 'a', 'ENDS_WITH')
@@ -335,7 +335,7 @@ class EntityQueryTest extends EntityKernelTestBase {
       ->execute();
     // It is very important that we do not get the ones which only have
     // xsiemax despite originally they were merhaba, ie. ended with a.
-    $this->assertIdentical($results, array_slice($assert, 4, 8, TRUE));
+    $this->assertSame(array_slice($assert, 4, 8, TRUE), $results);
     $results = $this->storage
       ->getQuery()
       ->condition("$greetings.value", 'a', 'ENDS_WITH')
@@ -345,7 +345,7 @@ class EntityQueryTest extends EntityKernelTestBase {
       ->execute();
     // Now we get everything.
     $assert = [4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9', 10 => '10', 11 => '11', 12 => '12', 20 => '12', 13 => '13', 21 => '13', 14 => '14', 22 => '14', 15 => '15', 23 => '15'];
-    $this->assertIdentical($results, $assert);
+    $this->assertSame($assert, $results);
 
     // Check that a query on the latest revisions without any condition returns
     // the correct results.
@@ -582,7 +582,7 @@ class EntityQueryTest extends EntityKernelTestBase {
       ->condition($this->figures . '.shape', 'triangle');
 
     // We added 2 conditions so count should be 2.
-    $this->assertEqual($and_condition_group->count(), 2);
+    $this->assertEqual(2, $and_condition_group->count());
 
     // Add an OR condition group with 2 conditions in it.
     $or_condition_group = $query->orConditionGroup()
@@ -590,7 +590,7 @@ class EntityQueryTest extends EntityKernelTestBase {
       ->condition($this->figures . '.shape', 'triangle');
 
     // We added 2 conditions so count should be 2.
-    $this->assertEqual($or_condition_group->count(), 2);
+    $this->assertEqual(2, $or_condition_group->count());
   }
 
   /**
@@ -694,7 +694,7 @@ class EntityQueryTest extends EntityKernelTestBase {
     foreach ($expected as $binary) {
       $assert[$binary] = strval($binary);
     }
-    $this->assertIdentical($this->queryResults, $assert);
+    $this->assertSame($assert, $this->queryResults);
   }
 
   protected function assertRevisionResult($keys, $expected) {
@@ -702,7 +702,7 @@ class EntityQueryTest extends EntityKernelTestBase {
     foreach ($expected as $key => $binary) {
       $assert[$keys[$key]] = strval($binary);
     }
-    $this->assertIdentical($this->queryResults, $assert);
+    $this->assertSame($assert, $this->queryResults);
     return $assert;
   }
 
@@ -711,7 +711,7 @@ class EntityQueryTest extends EntityKernelTestBase {
     for ($i = 1; $i <= 15; $i += 2) {
       $ok = TRUE;
       $index1 = array_search($i, $this->queryResults);
-      $this->assertNotIdentical($index1, FALSE, "$i found at $index1.");
+      $this->assertNotFalse($index1, "$i found at $index1.");
       // This loop is for bundle2 entities.
       for ($j = 2; $j <= 15; $j += 2) {
         if ($ok) {
@@ -740,7 +740,7 @@ class EntityQueryTest extends EntityKernelTestBase {
       ->execute();
 
     global $efq_test_metadata;
-    $this->assertEqual($efq_test_metadata, 'bar', 'Tag and metadata propagated to the SQL query object.');
+    $this->assertEqual('bar', $efq_test_metadata, 'Tag and metadata propagated to the SQL query object.');
   }
 
   /**
@@ -975,7 +975,7 @@ class EntityQueryTest extends EntityKernelTestBase {
       'name' => $this->randomMachineName(),
       'vid' => 'tags',
       'description' => [
-        'value' => $this->randomString(),
+        'value' => 'description1',
         'format' => 'format1',
       ],
     ]);
@@ -985,20 +985,37 @@ class EntityQueryTest extends EntityKernelTestBase {
       'name' => $this->randomMachineName(),
       'vid' => 'tags',
       'description' => [
-        'value' => $this->randomString(),
+        'value' => 'description2',
         'format' => 'format2',
       ],
     ]);
     $term2->save();
+
+    // Test that the properties can be queried directly.
+    $ids = $this->container->get('entity_type.manager')
+      ->getStorage('taxonomy_term')
+      ->getQuery()
+      ->condition('description.value', 'description1')
+      ->execute();
+    $this->assertCount(1, $ids);
+    $this->assertEquals($term1->id(), reset($ids));
 
     $ids = $this->container->get('entity_type.manager')
       ->getStorage('taxonomy_term')
       ->getQuery()
       ->condition('description.format', 'format1')
       ->execute();
-
     $this->assertCount(1, $ids);
-    $this->assertEqual($term1->id(), reset($ids));
+    $this->assertEquals($term1->id(), reset($ids));
+
+    // Test that the main property is queried if no property is specified.
+    $ids = $this->container->get('entity_type.manager')
+      ->getStorage('taxonomy_term')
+      ->getQuery()
+      ->condition('description', 'description1')
+      ->execute();
+    $this->assertCount(1, $ids);
+    $this->assertEquals($term1->id(), reset($ids));
   }
 
   /**
@@ -1038,14 +1055,14 @@ class EntityQueryTest extends EntityKernelTestBase {
       ->condition('id', [14], 'IN')
       ->condition("$this->figures.color", $current_values[0]['color'])
       ->execute();
-    $this->assertEqual($result, [14 => '14']);
+    $this->assertEqual([14 => '14'], $result);
     $result = $this->storage
       ->getQuery()
       ->condition('id', [14], 'IN')
       ->condition("$this->figures.color", 'red')
       ->allRevisions()
       ->execute();
-    $this->assertEqual($result, [16 => '14']);
+    $this->assertEqual([16 => '14'], $result);
 
     // Add another pending revision on the same entity and repeat the checks.
     $entity->setNewRevision(TRUE);
@@ -1231,16 +1248,17 @@ class EntityQueryTest extends EntityKernelTestBase {
     $expected = $connection->select("entity_test_mulrev", "base_table");
     $expected->addField("base_table", "revision_id", "revision_id");
     $expected->addField("base_table", "id", "id");
-    $expected->join("entity_test_mulrev__$figures", "entity_test_mulrev__$figures", "entity_test_mulrev__$figures.entity_id = base_table.id");
-    $expected->join("entity_test_mulrev__$figures", "entity_test_mulrev__{$figures}_2", "entity_test_mulrev__{$figures}_2.entity_id = base_table.id");
-    $expected->addJoin("LEFT", "entity_test_mulrev__$figures", "entity_test_mulrev__{$figures}_3", "entity_test_mulrev__{$figures}_3.entity_id = base_table.id");
+    $expected->join("entity_test_mulrev__$figures", "entity_test_mulrev__$figures", '[entity_test_mulrev__' . $figures . '].[entity_id] = [base_table].[id]');
+    $expected->join("entity_test_mulrev__$figures", "entity_test_mulrev__{$figures}_2", '[entity_test_mulrev__' . $figures . '_2].[entity_id] = [base_table].[id]');
+    $expected->addJoin("LEFT", "entity_test_mulrev__$figures", "entity_test_mulrev__{$figures}_3", '[entity_test_mulrev__' . $figures . '_3].[entity_id] = [base_table].[id]');
     $expected->condition("entity_test_mulrev__$figures.{$figures}_color", ["blue"], "IN");
     $expected->condition("entity_test_mulrev__{$figures}_2.{$figures}_color", ["red"], "IN");
     $expected->isNull("entity_test_mulrev__{$figures}_3.{$figures}_color");
     $expected->orderBy("base_table.id");
 
-    // Apply table prefixes to the expected SQL.
-    $expected_string = \Drupal::database()->prefixTables((string) $expected);
+    // Apply table prefixes and quote identifiers for the expected SQL.
+    $expected_string = $connection->prefixTables((string) $expected);
+    $expected_string = $connection->quoteIdentifiers($expected_string);
     // Resolve placeholders in the expected SQL to their values.
     $quoted = [];
     foreach ($expected->getArguments() as $key => $value) {
