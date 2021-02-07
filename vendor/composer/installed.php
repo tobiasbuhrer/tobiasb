@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd1987b1ac64aaa7d8c19e8701c362f099823f879',
+    'reference' => '2f05eb2b87cc290423a1e003a007586c9edd86eb',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -358,7 +358,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd1987b1ac64aaa7d8c19e8701c362f099823f879',
+      'reference' => '2f05eb2b87cc290423a1e003a007586c9edd86eb',
     ),
     'drupal/action' => 
     array (
@@ -436,6 +436,15 @@
       array (
         0 => '9.1.4',
       ),
+    ),
+    'drupal/bulma' => 
+    array (
+      'pretty_version' => '1.0.0-rc1',
+      'version' => '1.0.0.0-RC1',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-1.0-rc1',
     ),
     'drupal/ckeditor' => 
     array (

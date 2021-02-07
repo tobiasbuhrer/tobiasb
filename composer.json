@@ -329,6 +329,7 @@
         "ckeditor/link": "*",
         "codemirror/codemirror": "*",
         "cweagans/composer-patches": "^1.6",
+        "drupal/bulma": "^1.0@RC",
         "drupal/console": "~1.0",
         "drupal/core-composer-scaffold": "^9.0.0",
         "drupal/core-project-message": "^9.0.0",

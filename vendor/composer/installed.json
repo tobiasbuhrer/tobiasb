@@ -2336,6 +2336,65 @@
             "install-path": "../doctrine/reflection"
         },
         {
+            "name": "drupal/bulma",
+            "version": "1.0.0-rc1",
+            "version_normalized": "1.0.0.0-RC1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/bulma.git",
+                "reference": "8.x-1.0-rc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/bulma-8.x-1.0-rc1.zip",
+                "reference": "8.x-1.0-rc1",
+                "shasum": "5b7af647f4582801f11f24c066cb3238cf433daa"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-rc1",
+                    "datestamp": "1603840306",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "MatijaJurcevic",
+                    "homepage": "https://www.drupal.org/user/3173519"
+                },
+                {
+                    "name": "mseric",
+                    "homepage": "https://www.drupal.org/user/3574018"
+                },
+                {
+                    "name": "nedjo",
+                    "homepage": "https://www.drupal.org/user/4481"
+                },
+                {
+                    "name": "valic",
+                    "homepage": "https://www.drupal.org/user/980550"
+                }
+            ],
+            "description": "Built to use Bulma, a modern CSS framework based on Flexbox.",
+            "homepage": "https://www.drupal.org/project/bulma",
+            "support": {
+                "source": "https://git.drupalcode.org/project/bulma"
+            },
+            "install-path": "../../web/themes/contrib/bulma"
+        },
+        {
             "name": "drupal/console",
             "version": "1.9.7",
             "version_normalized": "1.9.7.0",
