@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'e98a39f11b0cd0ce767383697e4243080ad2a757',
+    'reference' => '0fcbc80e7e0dd94df7a3d9dd1763f6d466be9c70',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -358,7 +358,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'e98a39f11b0cd0ce767383697e4243080ad2a757',
+      'reference' => '0fcbc80e7e0dd94df7a3d9dd1763f6d466be9c70',
     ),
     'drupal/action' => 
     array (
@@ -1026,12 +1026,12 @@
     ),
     'drupal/leaflet_more_maps' => 
     array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
+      'pretty_version' => '2.1.0',
+      'version' => '2.1.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.0',
+      'reference' => '2.1.0',
     ),
     'drupal/libraries' => 
     array (
