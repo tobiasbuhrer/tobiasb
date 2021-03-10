@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3585916778b5b550329b68b1407fc7092ffe3c25',
+    'reference' => '81b255c4bac4e5a29587affac1901a375192b85b',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -358,7 +358,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3585916778b5b550329b68b1407fc7092ffe3c25',
+      'reference' => '81b255c4bac4e5a29587affac1901a375192b85b',
     ),
     'drupal/action' => 
     array (
@@ -1017,12 +1017,12 @@
     ),
     'drupal/leaflet' => 
     array (
-      'pretty_version' => '2.1.12',
-      'version' => '2.1.12.0',
+      'pretty_version' => '2.1.13',
+      'version' => '2.1.13.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2.1.12',
+      'reference' => '2.1.13',
     ),
     'drupal/leaflet_more_maps' => 
     array (
@@ -1842,12 +1842,12 @@
     ),
     'symfony/config' => 
     array (
-      'pretty_version' => 'v4.4.19',
-      'version' => '4.4.19.0',
+      'pretty_version' => 'v4.4.20',
+      'version' => '4.4.20.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2c4c7827a7e143f5cf375666641b0f448eab8802',
+      'reference' => '98606c6fa1a8f55ff964ccdd704275bf5b9f71b3',
     ),
     'symfony/console' => 
     array (
@@ -1860,8 +1860,8 @@
     ),
     'symfony/css-selector' => 
     array (
-      'pretty_version' => 'v4.4.19',
-      'version' => '4.4.19.0',
+      'pretty_version' => 'v4.4.20',
+      'version' => '4.4.20.0',
       'aliases' => 
       array (
       ),
@@ -1887,12 +1887,12 @@
     ),
     'symfony/dom-crawler' => 
     array (
-      'pretty_version' => 'v4.4.19',
-      'version' => '4.4.19.0',
+      'pretty_version' => 'v4.4.20',
+      'version' => '4.4.20.0',
       'aliases' => 
       array (
       ),
-      'reference' => '21032c566558255e551d23f4a516434c9e3a9a78',
+      'reference' => 'be133557f1b0e6672367325b508e65da5513a311',
     ),
     'symfony/error-handler' => 
     array (
@@ -1930,21 +1930,21 @@
     ),
     'symfony/filesystem' => 
     array (
-      'pretty_version' => 'v4.4.19',
-      'version' => '4.4.19.0',
+      'pretty_version' => 'v4.4.20',
+      'version' => '4.4.20.0',
       'aliases' => 
       array (
       ),
-      'reference' => '83a6feed14846d2d9f3916adbaf838819e4e3380',
+      'reference' => '715e7a531bdae109a828f9e91629e5b3b2926beb',
     ),
     'symfony/finder' => 
     array (
-      'pretty_version' => 'v4.4.19',
-      'version' => '4.4.19.0',
+      'pretty_version' => 'v4.4.20',
+      'version' => '4.4.20.0',
       'aliases' => 
       array (
       ),
-      'reference' => '25d79cfccfc12e84e7a63a248c3f0720fdd92db6',
+      'reference' => '2543795ab1570df588b9bbd31e1a2bd7037b94f6',
     ),
     'symfony/http-client-contracts' => 
     array (
@@ -2196,12 +2196,12 @@
     ),
     'webmozart/assert' => 
     array (
-      'pretty_version' => '1.9.1',
-      'version' => '1.9.1.0',
+      'pretty_version' => '1.10.0',
+      'version' => '1.10.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'bafc69caeb4d49c39fd0779086c03a3738cbb389',
+      'reference' => '6964c76c7804814a842473e0c8fd15bab0f18e25',
     ),
     'webmozart/path-util' => 
     array (
