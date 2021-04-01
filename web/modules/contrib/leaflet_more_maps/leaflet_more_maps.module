@@ -6,6 +6,8 @@
  * All maps support zoom levels 0..18, except where stated otherwise.
  */
 
+use GuzzleHttp\Exception\RequestException;
+
 const LEAFLET_MORE_MAPS_NO_CUSTOM_MAPS = 3;
 
 /**
@@ -82,14 +84,13 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
   $zxy = '{z}/{x}/{y}.png';
   // As used by Esri.
   $zyx = '{z}/{y}/{x}.png';
+  $config_settings = Drupal::service('config.factory')->getEditable('leaflet_more_maps.settings');
+
   // Google and Yandex also use x, y and z, but require different URL query
   // templates, see below.
   // Bing uses the quadtree system whereby x, y and z are encoded in a sequence
   // of digits in the range 0..3. See leaflet_more_maps.js for the conversion
   // algorithm.
-
-  $config_settings = Drupal::service('config.factory')->getEditable('leaflet_more_maps.settings');
-
   $attr_bing = 'Tiles <a href="https://www.bing.com/maps">Bing</a> &copy; Microsoft and suppliers';
   $map_info['bing'] = [
     'label' => 'Bing road + satellite + hybrid (zoom 1..18)',
@@ -298,7 +299,7 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
         $id = 'mapbox/streets-v11';
     }
     $code = mb_strtolower($mapbox_name);
-    $label = t("mapbox @name (zoom 0..17)", ['@name' => $mapbox_name]);
+    $label = t("mapbox @name (zoom 0..17), requires access token", ['@name' => $mapbox_name]);
     $map_info["mapbox-$code"] = [
       'label' => $label,
       'description' => $label,
@@ -461,11 +462,12 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
   foreach ($stamen_names as $stamen_name) {
     $code = mb_strtolower($stamen_name);
     $max_zoom = ($code == 'terrain' || $code == 'watercolor') ? 17 : 18;
-    $label = "Stamen $stamen_name (zoom 0..$max_zoom)";
+    $label = t('Stamen @name (zoom 0..@zoom)',
+      ['@name' => $stamen_name, '@zoom' => $max_zoom]);
     $url_template = $prot . "stamen-tiles-{s}.a.ssl.fastly.net/$code/$zxy";
     $map_info["stamen-$code"] = [
       'label' => $label,
-      'description' => t('@label layer.', ['@label' => $label]),
+      'description' => $label,
       'settings' => ['maxZoom'=> $max_zoom] + $default_settings,
       'layers' => [
         'layer' => [
@@ -483,7 +485,7 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
   $tile_size = 256; // or 512
   $format = 'png8'; // or png or jpg (best for satellite)
   $url_template_here = "https://{s}.$code.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/$tile_size/$format?apiKey=$here_api_key";
-  $label = t('HERE Base map (zoom 0..18)');
+  $label = t('HERE Base map (zoom 0..18), requires API key');
   $map_info["here-$code"] = [
     'label' => $label,
     'description' => $label,
@@ -516,18 +518,52 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
     ],
   ];
   */
+
+  // Get Navionics token.
+  $token = _leaflet_more_maps_get_navionics_navtoken();
+  $attr_navionics = "Map data &copy; <a href='https://www.navionics.com'>Navionics</a>";
+  $label = t('Navionics (zoom 0..18), requires API key and authorized domain');
+  $map_info['navionics'] = [
+    // See https://www.navionics.com
+    'label' => $label,
+    'description' => $label,
+    'settings' => $default_settings,
+    'layers' => [
+      'nautical-non-transparent' => [
+        'urlTemplate' => $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_1_0&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
+        'options' => [
+          'attribution' => $attr_navionics,
+          'subdomains' => [1, 2, 3, 4, 5],
+        ],
+      ],
+      'sonar' => [
+        'urlTemplate' => $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_1_1&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
+        'options' => [
+          'attribution' => $attr_navionics,
+          'subdomains' => [1, 2, 3, 4, 5],
+        ],
+      ],
+      'ski' => [
+        'urlTemplate' => $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_0_0_1&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
+        'options' => [
+          'attribution' => $attr_navionics,
+          'subdomains' => [1, 2, 3, 4, 5],
+        ],
+      ],
+    ],
+  ];
 }
 
 /**
  * Assemble custom map info based on selected layers.
  *
- * @param array $custom_map_key
+ * @param string $custom_map_key
  * @param array $selected_layer_keys
  * @param array $map_info
  * @param array $default_settings
  * @param false $reverse_order
  */
-function _leaflet_more_maps_assemble_custom_map_info(array $custom_map_key, array $selected_layer_keys, array &$map_info, array $default_settings =  [], $reverse_order = FALSE) {
+function _leaflet_more_maps_assemble_custom_map_info(string $custom_map_key, array $selected_layer_keys, array &$map_info, array $default_settings =  [], $reverse_order = FALSE) {
   if (empty($custom_map_key) || empty($selected_layer_keys)) {
     return;
   }
@@ -536,6 +572,8 @@ function _leaflet_more_maps_assemble_custom_map_info(array $custom_map_key, arra
     'description' => t('Custom defined map with layer switcher'),
     'layers' =>  [],
   ];
+
+  $selected_layer_keys = array_filter($selected_layer_keys);
   $i = $reverse_order ? count($selected_layer_keys) : 1;
   foreach ($map_info as $map_key => $map) {
     foreach ($map['layers'] as $layer_key => $layer) {
@@ -553,4 +591,55 @@ function _leaflet_more_maps_assemble_custom_map_info(array $custom_map_key, arra
   }
   $has_layer_control = count($map_info["~$custom_map_key"]['layers']) > 1;
   $map_info["~$custom_map_key"]['settings'] = ['layerControl' => $has_layer_control] + $default_settings;
+}
+
+/**
+ * Helper function to get Navionics token based on api_key and authorized domain.
+ * @return string
+ *   Navionics token or blank string.
+ */
+function _leaflet_more_maps_get_navionics_navtoken() {
+
+  // Get Navionics configuration: API key and Authorized Domain.
+  $config = Drupal::service('config.factory')->getEditable('leaflet_more_maps.settings');
+
+  $api_key = $config->get('navionics_api_key');
+  $authorized_domain = $config->get('navionics_authorized_domain');
+  // Prepare url to get the token.
+  // With timestamp because Navionics invalidate the token with time.
+  $url = '//backend.navionics.com/tile/get_key/' . $api_key . '/' . $authorized_domain . '/?_=' . time();
+  // Prepare referer to send it Navionics check on referral also.
+  $referer = 'https://' . $authorized_domain;
+
+  // Prepare Client.
+  $client = \Drupal::httpClient();
+  try {
+    $request = $client->get($url, [
+        'curl' => [
+          CURLOPT_RETURNTRANSFER => TRUE,
+          CURLOPT_HEADER => 0,
+          CURLOPT_REFERER => $referer,
+        ],
+      ]
+    );
+    // Get the status code of request.
+    $status = $request->getStatusCode();
+    if ($status == 200) {
+      // Get the response.
+      return $request->getBody()->getContents();
+    }
+    \Drupal::logger('leaflet_more_maps')
+      ->warning('Could not retrieve Navionics token. Status code: @status_code.',
+        [
+          '@status_code' => $status,
+        ]);
+    return '';
+  }
+  catch (RequestException $e) {
+    \Drupal::logger('leaflet_more_maps')
+      ->error('Could not retrieve Navionics token: @error', [
+        '@error' => $e->getMessage(),
+      ]);
+    return '';
+  }
 }

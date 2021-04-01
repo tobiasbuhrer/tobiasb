@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '81b255c4bac4e5a29587affac1901a375192b85b',
+    'reference' => '520034e33d4b046f9e7ef39bc333cad57e5b858f',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -358,7 +358,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '81b255c4bac4e5a29587affac1901a375192b85b',
+      'reference' => '520034e33d4b046f9e7ef39bc333cad57e5b858f',
     ),
     'drupal/action' => 
     array (
@@ -1026,12 +1026,12 @@
     ),
     'drupal/leaflet_more_maps' => 
     array (
-      'pretty_version' => '2.1.0',
-      'version' => '2.1.0.0',
+      'pretty_version' => '2.1.1',
+      'version' => '2.1.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2.1.0',
+      'reference' => '2.1.1',
     ),
     'drupal/libraries' => 
     array (
@@ -1677,12 +1677,12 @@
     ),
     'phpmailer/phpmailer' => 
     array (
-      'pretty_version' => 'v6.3.0',
-      'version' => '6.3.0.0',
+      'pretty_version' => 'v6.4.0',
+      'version' => '6.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4a08cf4cdd2c38d12ee2b9fa69e5d235f37a6dcb',
+      'reference' => '050d430203105c27c30efd1dce7aa421ad882d01',
     ),
     'progress-tracker/progress-tracker' => 
     array (
@@ -1767,12 +1767,12 @@
     ),
     'psy/psysh' => 
     array (
-      'pretty_version' => 'v0.10.6',
-      'version' => '0.10.6.0',
+      'pretty_version' => 'v0.10.7',
+      'version' => '0.10.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6f990c19f91729de8b31e639d6e204ea59f19cf3',
+      'reference' => 'a395af46999a12006213c0c8346c9445eb31640c',
     ),
     'ralouphie/getallheaders' => 
     array (
@@ -1930,12 +1930,12 @@
     ),
     'symfony/filesystem' => 
     array (
-      'pretty_version' => 'v4.4.20',
-      'version' => '4.4.20.0',
+      'pretty_version' => 'v4.4.21',
+      'version' => '4.4.21.0',
       'aliases' => 
       array (
       ),
-      'reference' => '715e7a531bdae109a828f9e91629e5b3b2926beb',
+      'reference' => '940826c465be2690c9fae91b2793481e5cbd6834',
     ),
     'symfony/finder' => 
     array (

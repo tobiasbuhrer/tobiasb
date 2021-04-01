@@ -1,5 +1,5 @@
 leaflet_demo.demo_page:
-  title: 'Leaflet map showcase'
+  title: 'Leaflet maps showcase'
   description: 'A taste of all available maps on a single page.'
   route_name: leaflet_demo.demo_page
   weight: 16
