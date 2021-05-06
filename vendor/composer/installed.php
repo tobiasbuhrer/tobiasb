@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'afc93cde0b439296c8c2cf475bd64a312df6f314',
+    'reference' => '2b620b12c1fbf34fe09c9422c7922c704e080f98',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -349,7 +349,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'afc93cde0b439296c8c2cf475bd64a312df6f314',
+      'reference' => '2b620b12c1fbf34fe09c9422c7922c704e080f98',
     ),
     'drupal/action' => 
     array (
@@ -1368,12 +1368,12 @@
     ),
     'drupal/webform' => 
     array (
-      'pretty_version' => '6.0.2',
-      'version' => '6.0.2.0',
+      'pretty_version' => '6.0.3',
+      'version' => '6.0.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6.0.2',
+      'reference' => '6.0.3',
     ),
     'drupal/workflows' => 
     array (
@@ -1409,12 +1409,12 @@
     ),
     'enlightn/security-checker' => 
     array (
-      'pretty_version' => 'v1.8.0',
-      'version' => '1.8.0.0',
+      'pretty_version' => 'v1.9.0',
+      'version' => '1.9.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2054fbce2f8df681c8f71b36656222bcd241b77f',
+      'reference' => 'dc5bce653fa4d9c792e9dcffa728c0642847c1e1',
     ),
     'fileeye/mimemap' => 
     array (
