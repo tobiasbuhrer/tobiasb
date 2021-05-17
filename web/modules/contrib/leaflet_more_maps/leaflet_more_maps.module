@@ -84,7 +84,8 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
   $zxy = '{z}/{x}/{y}.png';
   // As used by Esri.
   $zyx = '{z}/{y}/{x}.png';
-  $config_settings = Drupal::service('config.factory')->getEditable('leaflet_more_maps.settings');
+
+  $config_settings = Drupal::config('leaflet_more_maps.settings');
 
   // Google and Yandex also use x, y and z, but require different URL query
   // templates, see below.
@@ -322,9 +323,10 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
   // Note: OpenStreetMap OSM Mapnik classic map is available via leaflet.module
   $attr_osm = 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> and contributors';
 
-  // OSM Thunderforest
+  // OSM Thunderforest.
+  // Maps still display without API key, but appear with API KEY watermark.
   $attr_thunderforest = '<a href="https://www.thunderforest.com">Thunderforest</a>. ' . $attr_osm;
-  $thunderforest_api_key = $config_settings->get('thunderforest_api_key');
+  $thunderforest_api_key = trim($config_settings->get('thunderforest_api_key'));
   $thunderforest_api_key = empty($thunderforest_api_key) ? '' : '?apikey=' . $thunderforest_api_key;
 
   $map_info['osm-cycle'] = [
@@ -480,10 +482,11 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
 
   // HERE maps.
   $attr_here = 'Data &copy; <a href="https://here.com">HERE</a> maps.';
-  $here_api_key = $config_settings->get('here_api_key');
+  $here_api_key = trim($config_settings->get('here_api_key'));
   $code = 'base'; // also 'traffic' and 'aerial'
   $tile_size = 256; // or 512
   $format = 'png8'; // or png or jpg (best for satellite)
+  // Protocol must be HTTPS for HERE maps.
   $url_template_here = "https://{s}.$code.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/$tile_size/$format?apiKey=$here_api_key";
   $label = t('HERE Base map (zoom 0..18), requires API key');
   $map_info["here-$code"] = [
@@ -492,7 +495,7 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
     'settings' => $default_settings,
     'layers' => [
       'layer' => [
-        'urlTemplate' => $url_template_here,
+        'urlTemplate' => $here_api_key ? $url_template_here : '',
         'options' => [
           'attribution' => $attr_here,
           'subdomains' => [1, 2, 3, 4],
@@ -530,21 +533,21 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
     'settings' => $default_settings,
     'layers' => [
       'nautical-non-transparent' => [
-        'urlTemplate' => $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_1_0&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
+        'urlTemplate' => !$token ? '' : $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_1_0&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
         'options' => [
           'attribution' => $attr_navionics,
           'subdomains' => [1, 2, 3, 4, 5],
         ],
       ],
       'sonar' => [
-        'urlTemplate' => $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_1_1&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
+        'urlTemplate' => !$token ? '' : $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_1_1&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
         'options' => [
           'attribution' => $attr_navionics,
           'subdomains' => [1, 2, 3, 4, 5],
         ],
       ],
       'ski' => [
-        'urlTemplate' => $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_0_0_1&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
+        'urlTemplate' => !$token ? '' : $prot . 'tile{s}.navionics.com/tile/' . $zxy . '?LAYERS=config_1_0_0_1&TRANSPARENT=TRUE&theme=0&navtoken=' . $token,
         'options' => [
           'attribution' => $attr_navionics,
           'subdomains' => [1, 2, 3, 4, 5],
@@ -596,17 +599,21 @@ function _leaflet_more_maps_assemble_custom_map_info(string $custom_map_key, arr
 /**
  * Helper function to get Navionics token based on api_key and authorized domain.
  * @return string
- *   Navionics token or blank string.
+ *   Navionics token, if successful or empty string on error.
  */
 function _leaflet_more_maps_get_navionics_navtoken() {
 
   // Get Navionics configuration: API key and Authorized Domain.
-  $config = Drupal::service('config.factory')->getEditable('leaflet_more_maps.settings');
+  $config = Drupal::config('leaflet_more_maps.settings');
 
-  $api_key = $config->get('navionics_api_key');
-  $authorized_domain = $config->get('navionics_authorized_domain');
+  $api_key = trim($config->get('navionics_api_key'));
+  $authorized_domain = trim($config->get('navionics_authorized_domain'));
+
+  if (empty($api_key) || empty($authorized_domain)) {
+    return '';
+  }
   // Prepare url to get the token.
-  // With timestamp because Navionics invalidate the token with time.
+  // With timestamp because Navionics invalidates the token over time.
   $url = '//backend.navionics.com/tile/get_key/' . $api_key . '/' . $authorized_domain . '/?_=' . time();
   // Prepare referer to send it Navionics check on referral also.
   $referer = 'https://' . $authorized_domain;
@@ -633,13 +640,12 @@ function _leaflet_more_maps_get_navionics_navtoken() {
         [
           '@status_code' => $status,
         ]);
-    return '';
   }
   catch (RequestException $e) {
     \Drupal::logger('leaflet_more_maps')
       ->error('Could not retrieve Navionics token: @error', [
         '@error' => $e->getMessage(),
       ]);
-    return '';
   }
+  return '';
 }
