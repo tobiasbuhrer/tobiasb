@@ -46,22 +46,14 @@ class GeofieldItem extends FieldItemBase {
   public static function schema(FieldStorageDefinitionInterface $field) {
     /* @var \Drupal\geofield\Plugin\GeofieldBackendManager $backend_manager */
     $backend_manager = \Drupal::service('plugin.manager.geofield_backend');
-    $backend_plugin = NULL;
-
     try {
       /* @var \Drupal\geofield\Plugin\GeofieldBackendPluginInterface $backend_plugin */
       if (!empty($field->getSetting('backend')) && $backend_manager->getDefinition($field->getSetting('backend')) != NULL) {
         $backend_plugin = $backend_manager->createInstance($field->getSetting('backend'));
       }
     }
-    catch (\Exception $e) {
-      watchdog_exception("geofiedl_backend_manager", $e);
-      try {
-        $backend_plugin = $backend_manager->createInstance('geofield_backend_default');
-      }
-      catch (PluginException $e) {
-        watchdog_exception("geofiedl_backend_manager", $e);
-      }
+    catch (PluginException $e) {
+      watchdog_exception("geofield_backend_manager", $e);
     }
     return [
       'columns' => [
@@ -251,17 +243,10 @@ class GeofieldItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public function prepareCache() {
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
-    $value = [
+    return [
       'value' => \Drupal::service('geofield.wkt_generator')->WktGenerateGeometry(),
     ];
-    return $value;
   }
 
 }
