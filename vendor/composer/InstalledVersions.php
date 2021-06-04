@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'ac1dd78207e3d323d61f8a0b3a23906a8d2fae7b',
+    'reference' => 'a93792bdfcebca6aba97fd100e44289370264289',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -372,7 +372,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'ac1dd78207e3d323d61f8a0b3a23906a8d2fae7b',
+      'reference' => 'a93792bdfcebca6aba97fd100e44289370264289',
     ),
     'drupal/action' => 
     array (
@@ -915,12 +915,12 @@ private static $installed = array (
     ),
     'drupal/geofield' => 
     array (
-      'pretty_version' => '1.30.0',
-      'version' => '1.30.0.0',
+      'pretty_version' => '1.31.0',
+      'version' => '1.31.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.30',
+      'reference' => '8.x-1.31',
     ),
     'drupal/hal' => 
     array (
@@ -978,12 +978,12 @@ private static $installed = array (
     ),
     'drupal/imagemagick' => 
     array (
-      'pretty_version' => '3.1.0',
-      'version' => '3.1.0.0',
+      'pretty_version' => '3.2.0',
+      'version' => '3.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.1',
+      'reference' => '8.x-3.2',
     ),
     'drupal/inline_form_errors' => 
     array (
@@ -1031,12 +1031,12 @@ private static $installed = array (
     ),
     'drupal/leaflet' => 
     array (
-      'pretty_version' => '2.1.13',
-      'version' => '2.1.13.0',
+      'pretty_version' => '2.1.14',
+      'version' => '2.1.14.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2.1.13',
+      'reference' => '2.1.14',
     ),
     'drupal/leaflet_more_maps' => 
     array (
