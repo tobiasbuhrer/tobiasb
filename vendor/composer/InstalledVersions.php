@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '29135ca77fce8b736dec2f66bfea975a1a8835a5',
+    'reference' => 'f6a1c1dc10f419edf620d73967be6cd494aa4273',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -372,7 +372,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '29135ca77fce8b736dec2f66bfea975a1a8835a5',
+      'reference' => 'f6a1c1dc10f419edf620d73967be6cd494aa4273',
     ),
     'drupal/action' => 
     array (
@@ -915,12 +915,12 @@ private static $installed = array (
     ),
     'drupal/geofield' => 
     array (
-      'pretty_version' => '1.31.0',
-      'version' => '1.31.0.0',
+      'pretty_version' => '1.32.0',
+      'version' => '1.32.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.31',
+      'reference' => '8.x-1.32',
     ),
     'drupal/hal' => 
     array (
