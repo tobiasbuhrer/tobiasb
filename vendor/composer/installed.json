@@ -2606,17 +2606,17 @@
         },
         {
             "name": "drupal/core",
-            "version": "9.2.0",
-            "version_normalized": "9.2.0.0",
+            "version": "9.2.1",
+            "version_normalized": "9.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "0231ec3b5a195d39ab02680672736de781a59599"
+                "reference": "20eb99aa59a265d22a21a4d6fde70901c3b5a37c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/0231ec3b5a195d39ab02680672736de781a59599",
-                "reference": "0231ec3b5a195d39ab02680672736de781a59599",
+                "url": "https://api.github.com/repos/drupal/core/zipball/20eb99aa59a265d22a21a4d6fde70901c3b5a37c",
+                "reference": "20eb99aa59a265d22a21a4d6fde70901c3b5a37c",
                 "shasum": ""
             },
             "require": {
@@ -2781,7 +2781,7 @@
                 "drupal/workflows": "self.version",
                 "drupal/workspaces": "self.version"
             },
-            "time": "2021-06-16T12:31:16+00:00",
+            "time": "2021-07-07T13:04:41+00:00",
             "type": "drupal-core",
             "extra": {
                 "drupal-scaffold": {
@@ -2857,14 +2857,14 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/9.2.0"
+                "source": "https://github.com/drupal/core/tree/9.2.1"
             },
             "install-path": "../../web/core"
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "9.2.0",
-            "version_normalized": "9.2.0.0",
+            "version": "9.2.1",
+            "version_normalized": "9.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -2910,14 +2910,14 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.2.0"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.2.1"
             },
             "install-path": "../drupal/core-composer-scaffold"
         },
         {
             "name": "drupal/core-project-message",
-            "version": "9.2.0",
-            "version_normalized": "9.2.0.0",
+            "version": "9.2.1",
+            "version_normalized": "9.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -2954,23 +2954,23 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-project-message/tree/9.2.0"
+                "source": "https://github.com/drupal/core-project-message/tree/9.2.1"
             },
             "install-path": "../drupal/core-project-message"
         },
         {
             "name": "drupal/core-recommended",
-            "version": "9.2.0",
-            "version_normalized": "9.2.0.0",
+            "version": "9.2.1",
+            "version_normalized": "9.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "436c459d1c9c8966b4d01e239da1b9165e91aa9d"
+                "reference": "f043a94e9a8aa60016974d60648508258a51bf86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/436c459d1c9c8966b4d01e239da1b9165e91aa9d",
-                "reference": "436c459d1c9c8966b4d01e239da1b9165e91aa9d",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/f043a94e9a8aa60016974d60648508258a51bf86",
+                "reference": "f043a94e9a8aa60016974d60648508258a51bf86",
                 "shasum": ""
             },
             "require": {
@@ -2979,7 +2979,7 @@
                 "doctrine/annotations": "1.13.1",
                 "doctrine/lexer": "1.2.1",
                 "doctrine/reflection": "1.2.2",
-                "drupal/core": "9.2.0",
+                "drupal/core": "9.2.1",
                 "egulias/email-validator": "2.1.25",
                 "guzzlehttp/guzzle": "6.5.5",
                 "guzzlehttp/promises": "1.4.1",
@@ -3035,7 +3035,7 @@
             "conflict": {
                 "webflo/drupal-core-strict": "*"
             },
-            "time": "2021-06-16T12:31:16+00:00",
+            "time": "2021-07-07T13:04:41+00:00",
             "type": "metapackage",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3043,7 +3043,7 @@
             ],
             "description": "Locked core dependencies; require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/9.2.0"
+                "source": "https://github.com/drupal/core-recommended/tree/9.2.1"
             },
             "install-path": null
         },
@@ -5696,17 +5696,17 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.10.5",
-            "version_normalized": "4.10.5.0",
+            "version": "v4.11.0",
+            "version_normalized": "4.11.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "4432ba399e47c66624bc73c8c0f811e5c109576f"
+                "reference": "fe14cf3672a149364fb66dfe11bf6549af899f94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4432ba399e47c66624bc73c8c0f811e5c109576f",
-                "reference": "4432ba399e47c66624bc73c8c0f811e5c109576f",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fe14cf3672a149364fb66dfe11bf6549af899f94",
+                "reference": "fe14cf3672a149364fb66dfe11bf6549af899f94",
                 "shasum": ""
             },
             "require": {
@@ -5717,7 +5717,7 @@
                 "ircmaxell/php-yacc": "^0.0.7",
                 "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
             },
-            "time": "2021-05-03T19:11:20+00:00",
+            "time": "2021-07-03T13:36:55+00:00",
             "bin": [
                 "bin/php-parse"
             ],
@@ -5749,7 +5749,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.5"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.11.0"
             },
             "install-path": "../nikic/php-parser"
         },
@@ -6750,17 +6750,17 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.4.25",
-            "version_normalized": "4.4.25.0",
+            "version": "v4.4.26",
+            "version_normalized": "4.4.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "2803882bb10353d277d4539635dd688a053d571c"
+                "reference": "1cb26cdb8a9834d8494cadd284602fa0647b73e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/2803882bb10353d277d4539635dd688a053d571c",
-                "reference": "2803882bb10353d277d4539635dd688a053d571c",
+                "url": "https://api.github.com/repos/symfony/config/zipball/1cb26cdb8a9834d8494cadd284602fa0647b73e5",
+                "reference": "1cb26cdb8a9834d8494cadd284602fa0647b73e5",
                 "shasum": ""
             },
             "require": {
@@ -6782,7 +6782,7 @@
             "suggest": {
                 "symfony/yaml": "To use the yaml reference dumper"
             },
-            "time": "2021-05-26T11:20:16+00:00",
+            "time": "2021-06-21T14:51:25+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -6810,7 +6810,7 @@
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/config/tree/v4.4.25"
+                "source": "https://github.com/symfony/config/tree/v4.4.26"
             },
             "funding": [
                 {
@@ -7536,24 +7536,24 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.4.25",
-            "version_normalized": "4.4.25.0",
+            "version": "v4.4.26",
+            "version_normalized": "4.4.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "2d926ebd76f52352deb3c9577d8c1d4b96eae429"
+                "reference": "a501126eb6ec9288a3434af01b3d4499ec1268a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/2d926ebd76f52352deb3c9577d8c1d4b96eae429",
-                "reference": "2d926ebd76f52352deb3c9577d8c1d4b96eae429",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/a501126eb6ec9288a3434af01b3d4499ec1268a0",
+                "reference": "a501126eb6ec9288a3434af01b3d4499ec1268a0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1.3",
                 "symfony/polyfill-ctype": "~1.8"
             },
-            "time": "2021-05-26T17:30:55+00:00",
+            "time": "2021-06-30T07:12:23+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -7581,7 +7581,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v4.4.25"
+                "source": "https://github.com/symfony/filesystem/tree/v4.4.26"
             },
             "funding": [
                 {
