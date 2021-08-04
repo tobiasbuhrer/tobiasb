@@ -463,7 +463,7 @@ class EntityResolverManagerTest extends UnitTestCase {
       ]));
     $this->entityTypeManager->expects($this->any())
       ->method('getDefinition')
-      ->willReturnCallback(function ($entity_type) use ($definition, $revisionable_definition) {
+      ->will($this->returnCallback(function ($entity_type) use ($definition, $revisionable_definition) {
         if ($entity_type == 'entity_test') {
           return $definition;
         }
@@ -473,7 +473,7 @@ class EntityResolverManagerTest extends UnitTestCase {
         else {
           return NULL;
         }
-      });
+      }));
   }
 
 }

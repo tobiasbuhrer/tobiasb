@@ -68,7 +68,9 @@ class DisplayPathTest extends UITestBase {
     $this->drupalGet('admin/structure/views/nojs/display/test_view/page_1/path');
     $this->submitForm(['path' => $random_path], 'Apply');
     $this->assertSession()->pageTextContains('/' . $random_path);
-    $this->clickLink('View Page');
+    $display_link_text = t('View @display', ['@display' => 'Page']);
+    $this->assertSession()->linkExists($display_link_text, 0, 'view page link found on the page.');
+    $this->clickLink($display_link_text);
     $this->assertSession()->addressEquals($random_path);
   }
 
@@ -252,7 +254,7 @@ class DisplayPathTest extends UITestBase {
     $plugin_definition = end($result)->link->getPluginDefinition();
     $this->assertEquals('view.' . $view_id . '.page_1', $plugin_definition['route_name']);
 
-    $this->clickLink('No menu');
+    $this->clickLink(t('No menu'));
 
     $this->submitForm([
       'menu[type]' => 'default tab',

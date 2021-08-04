@@ -165,25 +165,13 @@ class DefaultMenuLinkTreeManipulatorsTest extends UnitTestCase {
     // calls will be made.
     $this->accessManager->expects($this->exactly(5))
       ->method('checkNamedRoute')
-      ->willReturnMap([
+      ->will($this->returnValueMap([
         ['example1', [], $this->currentUser, TRUE, AccessResult::forbidden()],
-        [
-          'example2',
-          ['foo' => 'bar'],
-          $this->currentUser,
-          TRUE,
-          AccessResult::allowed()->cachePerPermissions(),
-        ],
-        [
-          'example3',
-          ['baz' => 'qux'],
-          $this->currentUser,
-          TRUE,
-          AccessResult::neutral(),
-        ],
+        ['example2', ['foo' => 'bar'], $this->currentUser, TRUE, AccessResult::allowed()->cachePerPermissions()],
+        ['example3', ['baz' => 'qux'], $this->currentUser, TRUE, AccessResult::neutral()],
         ['example5', [], $this->currentUser, TRUE, AccessResult::allowed()],
         ['user.logout', [], $this->currentUser, TRUE, AccessResult::allowed()],
-      ]);
+      ]));
 
     $this->mockTree();
     $this->originalTree[5]->subtree[7]->access = AccessResult::neutral();

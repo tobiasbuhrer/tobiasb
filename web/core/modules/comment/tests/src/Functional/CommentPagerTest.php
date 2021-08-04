@@ -224,7 +224,7 @@ class CommentPagerTest extends CommentTestBase {
     foreach ($comment_anchors as $anchor) {
       $result_order[] = substr($anchor->getAttribute('id'), 8);
     }
-    $this->assertEquals($expected_cids, $result_order, new FormattableMarkup('Comment order: expected @expected, returned @returned.', ['@expected' => implode(',', $expected_cids), '@returned' => implode(',', $result_order)]));
+    return $this->assertEquals($expected_cids, $result_order, new FormattableMarkup('Comment order: expected @expected, returned @returned.', ['@expected' => implode(',', $expected_cids), '@returned' => implode(',', $result_order)]));
   }
 
   /**

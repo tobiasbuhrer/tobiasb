@@ -515,7 +515,6 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
     }
     $this->container->get('stream_wrapper_manager')->unregister();
     $this->booted = FALSE;
-    $this->configStorage = NULL;
     $this->container = NULL;
     $this->moduleList = NULL;
     $this->moduleData = [];

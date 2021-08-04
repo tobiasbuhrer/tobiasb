@@ -132,16 +132,16 @@ class QuickEditEntityFieldAccessCheckTest extends UnitTestCase {
 
     $entity->expects($this->any())
       ->method('hasTranslation')
-      ->willReturnMap([
+      ->will($this->returnValueMap([
         [LanguageInterface::LANGCODE_NOT_SPECIFIED, TRUE],
         ['xx-lolspeak', FALSE],
-      ]);
+      ]));
     $entity->expects($this->any())
       ->method('hasField')
-      ->willReturnMap([
+      ->will($this->returnValueMap([
         ['valid', TRUE],
         ['not_valid', FALSE],
-      ]);
+      ]));
 
     return $entity;
   }

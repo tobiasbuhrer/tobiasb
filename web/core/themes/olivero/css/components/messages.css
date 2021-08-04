@@ -201,9 +201,9 @@
     left: 50%;
     display: block;
     width: 2.0625rem;
-    height: 0;
+    height: 2px;
     content: "";
-    border-top: solid 2px #7e96a7;
+    background-color: #7e96a7;
   }
 
 .messages__close:before {
@@ -216,7 +216,7 @@
 
 .messages__close:hover::before,
     .messages__close:hover::after {
-      border-color: #fff;
+      background-color: #fff;
     }
 
 .messages__close:focus {

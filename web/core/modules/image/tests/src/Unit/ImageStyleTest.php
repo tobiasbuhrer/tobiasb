@@ -73,7 +73,7 @@ class ImageStyleTest extends UnitTestCase {
       ->will($this->returnValue($effectManager));
     $image_style->expects($this->any())
       ->method('fileDefaultScheme')
-      ->willReturnCallback([$this, 'fileDefaultScheme']);
+      ->will($this->returnCallback([$this, 'fileDefaultScheme']));
 
     return $image_style;
   }

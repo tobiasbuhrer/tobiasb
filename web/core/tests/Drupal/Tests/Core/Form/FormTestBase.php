@@ -163,7 +163,7 @@ abstract class FormTestBase extends UnitTestCase {
       ->getMock();
     $this->elementInfo->expects($this->any())
       ->method('getInfo')
-      ->willReturnCallback([$this, 'getInfo']);
+      ->will($this->returnCallback([$this, 'getInfo']));
 
     $this->csrfToken = $this->getMockBuilder('Drupal\Core\Access\CsrfTokenGenerator')
       ->disableOriginalConstructor()

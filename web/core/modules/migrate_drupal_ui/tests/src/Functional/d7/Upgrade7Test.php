@@ -4,7 +4,6 @@ namespace Drupal\Tests\migrate_drupal_ui\Functional\d7;
 
 use Drupal\node\Entity\Node;
 use Drupal\Tests\migrate_drupal_ui\Functional\MigrateUpgradeExecuteTestBase;
-use Drupal\user\Entity\User;
 
 // cspell:ignore Multiupload Imagefield
 
@@ -249,8 +248,6 @@ class Upgrade7Test extends MigrateUpgradeExecuteTestBase {
     $this->assertSame('2', $translation->get('field_reference')->target_id);
     $this->assertSame('2', $translation->get('field_reference_2')->target_id);
 
-    $user = User::load(2);
-    $this->assertSame('2', $user->get('field_reference')->target_id);
   }
 
 }

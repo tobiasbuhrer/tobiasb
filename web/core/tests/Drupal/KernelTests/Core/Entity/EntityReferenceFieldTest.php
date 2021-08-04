@@ -333,6 +333,9 @@ class EntityReferenceFieldTest extends EntityKernelTestBase {
    *   The referencing entity.
    * @param $setter_callback
    *   A callback setting the target entity on the referencing entity.
+   *
+   * @return bool
+   *   TRUE if the user was autocreated, FALSE otherwise.
    */
   protected function assertUserAutocreate(EntityInterface $entity, $setter_callback) {
     $storage = $this->entityTypeManager->getStorage('user');
@@ -342,7 +345,7 @@ class EntityReferenceFieldTest extends EntityKernelTestBase {
     $entity->save();
     $storage->resetCache();
     $user = User::load($user_id);
-    $this->assertEquals($entity->user_id->target_id, $user->id());
+    return $this->assertEquals($entity->user_id->target_id, $user->id());
   }
 
   /**
@@ -352,6 +355,9 @@ class EntityReferenceFieldTest extends EntityKernelTestBase {
    *   The referencing entity.
    * @param $setter_callback
    *   A callback setting the target entity on the referencing entity.
+   *
+   * @return bool
+   *   TRUE if the user was autocreated, FALSE otherwise.
    */
   protected function assertUserRoleAutocreate(EntityInterface $entity, $setter_callback) {
     $storage = $this->entityTypeManager->getStorage('user_role');
@@ -361,7 +367,7 @@ class EntityReferenceFieldTest extends EntityKernelTestBase {
     $entity->save();
     $storage->resetCache();
     $role = Role::load($role_id);
-    $this->assertEquals($entity->user_role->target_id, $role->id());
+    return $this->assertEquals($entity->user_role->target_id, $role->id());
   }
 
   /**

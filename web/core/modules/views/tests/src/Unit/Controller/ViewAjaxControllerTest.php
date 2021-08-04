@@ -74,11 +74,10 @@ class ViewAjaxControllerTest extends UnitTestCase {
     $this->renderer = $this->createMock('\Drupal\Core\Render\RendererInterface');
     $this->renderer->expects($this->any())
       ->method('render')
-      ->willReturnCallback(function (array &$elements) {
+      ->will($this->returnCallback(function (array &$elements) {
         $elements['#attached'] = [];
-
         return isset($elements['#markup']) ? $elements['#markup'] : '';
-      });
+      }));
     $this->renderer->expects($this->any())
       ->method('executeInRenderContext')
       ->willReturnCallback(function (RenderContext $context, callable $callable) {

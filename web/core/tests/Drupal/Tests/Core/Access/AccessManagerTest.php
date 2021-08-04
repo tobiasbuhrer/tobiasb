@@ -113,7 +113,7 @@ class AccessManagerTest extends UnitTestCase {
     $map[] = ['test_route_4', $this->routeCollection->get('test_route_4')];
     $this->routeProvider->expects($this->any())
       ->method('getRouteByName')
-      ->willReturnMap($map);
+      ->will($this->returnValueMap($map));
 
     $map = [];
     $map[] = ['test_route_1', [], '/test-route-1'];
@@ -173,9 +173,9 @@ class AccessManagerTest extends UnitTestCase {
     $access_check->expects($this->exactly(2))
       ->method('applies')
       ->with($this->isInstanceOf('Symfony\Component\Routing\Route'))
-      ->willReturnCallback(function (Route $route) {
-        return $route->getRequirement('_bar') == 2;
-      });
+      ->will($this->returnCallback(function (Route $route) {
+         return $route->getRequirement('_bar') == 2;
+      }));
 
     $this->checkProvider->setChecks($collection);
     $this->assertEmpty($route->getOption('_access_checks'));
@@ -535,16 +535,15 @@ class AccessManagerTest extends UnitTestCase {
     }
     return $this->argumentsResolverFactory->expects($constraint)
       ->method('getArgumentsResolver')
-      ->willReturnCallback(function ($route_match, $account) {
+      ->will($this->returnCallback(function ($route_match, $account) {
         $resolver = $this->createMock('Drupal\Component\Utility\ArgumentsResolverInterface');
         $resolver->expects($this->any())
           ->method('getArguments')
           ->will($this->returnCallback(function ($callable) use ($route_match) {
             return [$route_match->getRouteObject()];
           }));
-
         return $resolver;
-      });
+      }));
   }
 
 }

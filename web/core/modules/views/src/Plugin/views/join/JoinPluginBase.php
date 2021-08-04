@@ -266,11 +266,7 @@ class JoinPluginBase extends PluginBase implements JoinPluginInterface {
     }
 
     $this->leftTable = $configuration['left_table'];
-
-    if (!empty($configuration['left_field'])) {
-      $this->leftField = $configuration['left_field'];
-    }
-
+    $this->leftField = $configuration['left_field'];
     $this->field = $configuration['field'];
 
     if (!empty($configuration['left_formula'])) {

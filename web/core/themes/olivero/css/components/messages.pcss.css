@@ -99,9 +99,9 @@
     left: 50%;
     display: block;
     width: 33px;
-    height: 0;
+    height: 2px;
     content: "";
-    border-top: solid 2px var(--color--gray-30);
+    background-color: var(--color--gray-30);
   }
 
   &:before {
@@ -115,7 +115,7 @@
   &:hover {
     &::before,
     &::after {
-      border-color: var(--color--white);
+      background-color: var(--color--white);
     }
   }
 

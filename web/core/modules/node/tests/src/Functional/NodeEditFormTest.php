@@ -81,7 +81,7 @@ class NodeEditFormTest extends NodeTestBase {
     $this->assertNotEmpty($node, 'Node found in database.');
 
     // Check that "edit" link points to correct page.
-    $this->clickLink('Edit');
+    $this->clickLink(t('Edit'));
     $this->assertSession()->addressEquals($node->toUrl('edit-form'));
 
     // Check that the title and body fields are displayed with the correct values.

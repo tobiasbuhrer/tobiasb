@@ -168,9 +168,9 @@ class MakeUniqueEntityFieldTest extends MigrateProcessTestCase {
       ->will($this->returnValue($this->entityQuery));
     $this->entityQuery->expects($this->exactly($count + 1))
       ->method('execute')
-      ->willReturnCallback(function () use (&$count) {
+      ->will($this->returnCallback(function () use (&$count) {
         return $count--;
-      });
+      }));
   }
 
   /**
@@ -198,15 +198,15 @@ class MakeUniqueEntityFieldTest extends MigrateProcessTestCase {
     }
     $this->entityQuery
       ->method('condition')
-      ->willReturnMap($map);
+      ->will($this->returnValueMap($map));
 
     // Entity 'forums' is pre-existing, entity 'test_vocab' was migrated.
     $this->idMap
       ->method('lookupSourceId')
-      ->willReturnMap([
+      ->will($this->returnValueMap([
         [['test_field' => 'forums'], FALSE],
         [['test_field' => 'test_vocab'], ['source_id' => 42]],
-      ]);
+      ]));
 
     // Existing entity 'forums' was not migrated, value should not be unique.
     $actual = $plugin->transform('forums', $this->migrateExecutable, $this->row, 'testproperty');

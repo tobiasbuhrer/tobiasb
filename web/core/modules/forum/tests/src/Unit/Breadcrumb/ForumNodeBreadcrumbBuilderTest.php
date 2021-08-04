@@ -75,7 +75,7 @@ class ForumNodeBreadcrumbBuilderTest extends UnitTestCase {
       ->will($this->returnValue($route_name));
     $route_match->expects($this->any())
       ->method('getParameter')
-      ->willReturnMap($parameter_map);
+      ->will($this->returnValueMap($parameter_map));
 
     $this->assertEquals($expected, $builder->applies($route_match));
   }
@@ -169,19 +169,19 @@ class ForumNodeBreadcrumbBuilderTest extends UnitTestCase {
     $vocab_storage = $this->createMock('Drupal\Core\Entity\EntityStorageInterface');
     $vocab_storage->expects($this->any())
       ->method('load')
-      ->willReturnMap([
+      ->will($this->returnValueMap([
         ['forums', $prophecy->reveal()],
-      ]);
+      ]));
 
     $entity_type_manager = $this->getMockBuilder(EntityTypeManagerInterface::class)
       ->disableOriginalConstructor()
       ->getMock();
     $entity_type_manager->expects($this->any())
       ->method('getStorage')
-      ->willReturnMap([
+      ->will($this->returnValueMap([
         ['taxonomy_vocabulary', $vocab_storage],
         ['taxonomy_term', $term_storage],
-      ]);
+      ]));
 
     $config_factory = $this->getConfigFactoryStub(
       [

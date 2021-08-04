@@ -60,7 +60,7 @@ class NodeActionsConfigurationTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains($action_label);
 
     // Make another POST request to the action edit page.
-    $this->clickLink('Configure');
+    $this->clickLink(t('Configure'));
     $edit = [];
     $new_action_label = $this->randomMachineName();
     $edit['label'] = $new_action_label;
@@ -79,7 +79,7 @@ class NodeActionsConfigurationTest extends BrowserTestBase {
 
     // Make sure that deletions work properly.
     $this->drupalGet('admin/config/system/actions');
-    $this->clickLink('Delete');
+    $this->clickLink(t('Delete'));
     $this->assertSession()->statusCodeEquals(200);
     $edit = [];
     $this->submitForm($edit, 'Delete');

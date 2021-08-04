@@ -188,7 +188,7 @@ class LocalActionManagerTest extends UnitTestCase {
     }
     $this->factory->expects($this->any())
       ->method('createInstance')
-      ->willReturnMap($map);
+      ->will($this->returnValueMap($map));
 
     $this->assertEquals($expected_actions, $this->localActionManager->getActionsForRoute($route_appears));
   }

@@ -31,7 +31,7 @@ class ModuleRouteSubscriberTest extends UnitTestCase {
 
     $this->moduleHandler->expects($this->any())
       ->method('moduleExists')
-      ->willReturnMap($value_map);
+      ->will($this->returnValueMap($value_map));
   }
 
   /**

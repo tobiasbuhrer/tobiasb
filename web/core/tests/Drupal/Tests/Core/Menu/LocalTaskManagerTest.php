@@ -336,7 +336,7 @@ class LocalTaskManagerTest extends UnitTestCase {
     }
     $this->factory->expects($this->any())
       ->method('createInstance')
-      ->willReturnMap($map);
+      ->will($this->returnValueMap($map));
   }
 
   /**
@@ -468,7 +468,7 @@ class LocalTaskManagerTest extends UnitTestCase {
 
     $this->factory->expects($this->any())
       ->method('createInstance')
-      ->willReturnMap($map);
+      ->will($this->returnValueMap($map));
   }
 
   protected function setupNullCacheabilityMetadataValidation() {
