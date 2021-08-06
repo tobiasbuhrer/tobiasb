@@ -82,12 +82,15 @@ class ImportForm extends ConfigFormBase
         }
         $msg .= '</p>';
         \Drupal::messenger()->addMessage($this->t('Remember to set any default values you want in all created nodes'), 'warning');
+        
+        
+        //we add tmp - it's a bit of a hack, but I don't want to re-write the plupload module
         $form['plupload'] = array(
             '#prefix' => $msg,
             '#type' => 'plupload',
             '#title' => 'Image(s) to upload',
             '#upload_validators' => array(
-                'file_validate_extensions' => array('jpg jpeg gif png'),
+                'file_validate_extensions' => array('jpg jpeg gif png tmp'),
             ),
         );
 
