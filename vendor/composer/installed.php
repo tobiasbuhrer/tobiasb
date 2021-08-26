@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '5291429427c521db91271fcb25fb5321e232b46c',
+    'reference' => 'aa49cd1a8935b04db327efe28bce51c1b4d842f5',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -349,7 +349,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '5291429427c521db91271fcb25fb5321e232b46c',
+      'reference' => 'aa49cd1a8935b04db327efe28bce51c1b4d842f5',
     ),
     'drupal/action' => 
     array (
@@ -1368,12 +1368,12 @@
     ),
     'drupal/webform' => 
     array (
-      'pretty_version' => '6.0.4',
-      'version' => '6.0.4.0',
+      'pretty_version' => '6.0.5',
+      'version' => '6.0.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6.0.4',
+      'reference' => '6.0.5',
     ),
     'drupal/workflows' => 
     array (
@@ -1391,12 +1391,12 @@
     ),
     'drush/drush' => 
     array (
-      'pretty_version' => '10.5.1',
-      'version' => '10.5.1.0',
+      'pretty_version' => '10.6.0',
+      'version' => '10.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a57390579f178d553decd3e9f92cdb37cbd27a07',
+      'reference' => 'c86d327359baddb0a2f51bb458703826469a0445',
     ),
     'egulias/email-validator' => 
     array (
@@ -1668,12 +1668,12 @@
     ),
     'phpmailer/phpmailer' => 
     array (
-      'pretty_version' => 'v6.5.0',
-      'version' => '6.5.0.0',
+      'pretty_version' => 'v6.5.1',
+      'version' => '6.5.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a5b5c43e50b7fba655f793ad27303cd74c57363c',
+      'reference' => 'dd803df5ad7492e1b40637f7ebd258fee5ca7355',
     ),
     'progress-tracker/progress-tracker' => 
     array (
