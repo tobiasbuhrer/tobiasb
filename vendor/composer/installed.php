@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c752a3baa20034e7dd94a189039fa6a0b6af3958',
+    'reference' => '7962c950b4034e3599b4af3a098d936fd926fdc3',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -333,7 +333,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c752a3baa20034e7dd94a189039fa6a0b6af3958',
+      'reference' => '7962c950b4034e3599b4af3a098d936fd926fdc3',
     ),
     'drupal/action' => 
     array (
@@ -1010,12 +1010,12 @@
     ),
     'drupal/libraries' => 
     array (
-      'pretty_version' => '3.0.0-beta1',
-      'version' => '3.0.0.0-beta1',
+      'pretty_version' => '3.0.0-beta2',
+      'version' => '3.0.0.0-beta2',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.0-beta1',
+      'reference' => '8.x-3.0-beta2',
     ),
     'drupal/link' => 
     array (
@@ -1690,8 +1690,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '^1.0',
+        0 => '^1.0',
+        1 => '1.0',
       ),
     ),
     'psr/event-dispatcher-implementation' => 
@@ -1751,12 +1751,12 @@
     ),
     'psy/psysh' => 
     array (
-      'pretty_version' => 'v0.10.8',
-      'version' => '0.10.8.0',
+      'pretty_version' => 'v0.10.9',
+      'version' => '0.10.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e4573f47750dd6c92dca5aee543fa77513cbd8d3',
+      'reference' => '01281336c4ae557fe4a994544f30d3a1bc204375',
     ),
     'ralouphie/getallheaders' => 
     array (
