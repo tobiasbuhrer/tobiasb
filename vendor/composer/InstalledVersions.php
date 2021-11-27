@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '4191c9e35d0f55d278a12f39c903728a4159de92',
+    'reference' => '2bfb7a18397465a55c4d799b8decbf01f6f1728f',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -356,7 +356,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '4191c9e35d0f55d278a12f39c903728a4159de92',
+      'reference' => '2bfb7a18397465a55c4d799b8decbf01f6f1728f',
     ),
     'drupal/action' => 
     array (
@@ -1015,12 +1015,12 @@ private static $installed = array (
     ),
     'drupal/leaflet' => 
     array (
-      'pretty_version' => '2.1.14',
-      'version' => '2.1.14.0',
+      'pretty_version' => '2.1.15',
+      'version' => '2.1.15.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2.1.14',
+      'reference' => '2.1.15',
     ),
     'drupal/leaflet_more_maps' => 
     array (
@@ -1252,12 +1252,12 @@ private static $installed = array (
     ),
     'drupal/sophron' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.2.0',
+      'version' => '1.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.1',
+      'reference' => '8.x-1.2',
     ),
     'drupal/standard' => 
     array (
