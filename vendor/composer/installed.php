@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '2bfb7a18397465a55c4d799b8decbf01f6f1728f',
+    'reference' => '77d3aa830d9ec55237613836335e242299af3062',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -333,7 +333,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '2bfb7a18397465a55c4d799b8decbf01f6f1728f',
+      'reference' => '77d3aa830d9ec55237613836335e242299af3062',
     ),
     'drupal/action' => 
     array (
@@ -939,12 +939,12 @@
     ),
     'drupal/imagemagick' => 
     array (
-      'pretty_version' => '3.2.0',
-      'version' => '3.2.0.0',
+      'pretty_version' => '3.3.0',
+      'version' => '3.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.2',
+      'reference' => '8.x-3.3',
     ),
     'drupal/inline_form_errors' => 
     array (
