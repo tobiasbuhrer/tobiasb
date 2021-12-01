@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '77d3aa830d9ec55237613836335e242299af3062',
+    'reference' => 'f1cf0b2457d85b3e779e18146c389ff7118e6b66',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -333,7 +333,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '77d3aa830d9ec55237613836335e242299af3062',
+      'reference' => 'f1cf0b2457d85b3e779e18146c389ff7118e6b66',
     ),
     'drupal/action' => 
     array (
@@ -472,12 +472,12 @@
     ),
     'drupal/console' => 
     array (
-      'pretty_version' => '1.9.7',
-      'version' => '1.9.7.0',
+      'pretty_version' => '1.9.8',
+      'version' => '1.9.8.0',
       'aliases' => 
       array (
       ),
-      'reference' => '90053d30f52427edb4e4941a9063acb65b5a2c1e',
+      'reference' => 'd292c940c07d164e32bbe9525e909311ca65e8cb',
     ),
     'drupal/console-core' => 
     array (
@@ -992,12 +992,12 @@
     ),
     'drupal/leaflet' => 
     array (
-      'pretty_version' => '2.1.15',
-      'version' => '2.1.15.0',
+      'pretty_version' => '2.1.16',
+      'version' => '2.1.16.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2.1.15',
+      'reference' => '2.1.16',
     ),
     'drupal/leaflet_more_maps' => 
     array (
@@ -1582,12 +1582,12 @@
     ),
     'nikic/php-parser' => 
     array (
-      'pretty_version' => 'v4.13.1',
-      'version' => '4.13.1.0',
+      'pretty_version' => 'v4.13.2',
+      'version' => '4.13.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '63a79e8daa781cac14e5195e63ed8ae231dd10fd',
+      'reference' => '210577fe3cf7badcc5814d99455df46564f3c077',
     ),
     'orno/di' => 
     array (
@@ -1751,12 +1751,12 @@
     ),
     'psy/psysh' => 
     array (
-      'pretty_version' => 'v0.10.11',
-      'version' => '0.10.11.0',
+      'pretty_version' => 'v0.10.12',
+      'version' => '0.10.12.0',
       'aliases' => 
       array (
       ),
-      'reference' => '38017532bba35d15d28dcc001b4274df0251c4a1',
+      'reference' => 'a0d9981aa07ecfcbea28e4bfa868031cca121e7d',
     ),
     'ralouphie/getallheaders' => 
     array (
