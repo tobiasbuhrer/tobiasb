@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '19c0f9abbc398f63a8dfc0bcae6db5a66d46c1f0',
+    'reference' => 'af7bfd664b5c9b4639a1345cc3d94cdc7e663957',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -333,7 +333,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '19c0f9abbc398f63a8dfc0bcae6db5a66d46c1f0',
+      'reference' => 'af7bfd664b5c9b4639a1345cc3d94cdc7e663957',
     ),
     'drupal/action' => 
     array (
@@ -775,12 +775,12 @@
     ),
     'drupal/devel' => 
     array (
-      'pretty_version' => '4.1.2',
-      'version' => '4.1.2.0',
+      'pretty_version' => '4.1.3',
+      'version' => '4.1.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4.1.2',
+      'reference' => '4.1.3',
     ),
     'drupal/dynamic_page_cache' => 
     array (
@@ -1382,12 +1382,12 @@
     ),
     'drush/drush' => 
     array (
-      'pretty_version' => '10.6.1',
-      'version' => '10.6.1.0',
+      'pretty_version' => '10.6.2',
+      'version' => '10.6.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd36bca3322555a6f94edc94439873afcde2bbe90',
+      'reference' => '0a570a16ec63259eb71195aba5feab532318b337',
     ),
     'egulias/email-validator' => 
     array (
@@ -1749,12 +1749,12 @@
     ),
     'psy/psysh' => 
     array (
-      'pretty_version' => 'v0.11.0',
-      'version' => '0.11.0.0',
+      'pretty_version' => 'v0.10.12',
+      'version' => '0.10.12.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c9a85cd388afde68721d304bbb3257a068f5ab05',
+      'reference' => 'a0d9981aa07ecfcbea28e4bfa868031cca121e7d',
     ),
     'ralouphie/getallheaders' => 
     array (
@@ -2178,12 +2178,12 @@
     ),
     'vlucas/phpdotenv' => 
     array (
-      'pretty_version' => 'v2.6.8',
-      'version' => '2.6.8.0',
+      'pretty_version' => 'v2.6.9',
+      'version' => '2.6.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f1e2a35e53abe9322f0ab9ada689967e30055d40',
+      'reference' => '2e93cc98e2e8e869f8d9cfa61bb3a99ba4fc4141',
     ),
     'webflo/drupal-finder' => 
     array (
