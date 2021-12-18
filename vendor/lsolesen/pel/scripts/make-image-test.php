@@ -5,8 +5,7 @@
  * PEL: PHP Exif Library. A library with support for reading and
  * writing all Exif headers in JPEG and TIFF images using PHP.
  *
- * (c) 2005, 2006 Martin Geisler.
- * (c) 2020 Johannes Weberhofer
+ * Copyright (C) 2005, 2006 Martin Geisler.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,34 +30,24 @@
  * step which will verify that a future parse of the image gives the
  * same results.
  */
-require_once 'autoload.php';
-use lsolesen\pel\Pel;
-use lsolesen\pel\PelEntry;
-use lsolesen\pel\PelExif;
-use lsolesen\pel\PelIfd;
-use lsolesen\pel\PelJpeg;
-use lsolesen\pel\PelJpegContent;
-use lsolesen\pel\PelTag;
-use lsolesen\pel\PelTiff;
-
-$argv = $_SERVER['argv'];
-
 if (count($argv) != 2) {
     exit("Usage: $argv[0] <image>\n");
 }
 
-$pathInfo = pathinfo($argv[1]);
-
+$basename = substr($argv[1], 0, - strlen(strrchr($argv[1], '.')));
 $image_filename = $argv[1];
-$test_name = str_replace('-', '_', ucfirst($pathInfo['filename'])) . 'Test';
-$test_filename = 'test/' . $test_name . '.php';
+$thumb_filename = $basename . '-thumb.jpg';
+$test_filename = $basename . '.php';
+$test_name = str_replace('-', '_', $basename);
+
 $indent = 0;
 
-function println(...$args)
+function println($args)
 {
     global $indent;
+    $args = func_get_args();
     $str = array_shift($args);
-    vprintf(str_repeat('    ', $indent) . $str . "\n", $args);
+    vprintf(str_repeat('  ', $indent) . $str . "\n", $args);
 }
 
 function quote($str)
@@ -74,7 +63,7 @@ function quote($str)
 
 function entryToTest($name, PelEntry $entry)
 {
-    println('$this->assertInstanceOf(\'\\%s\', %s);', get_class($entry), $name);
+    println('$this->assertInstanceOf(\'%s\', %s);', $name, get_class($entry));
 
     println('$this->assertEquals(%s->getValue(), %s);', $name, var_export($entry->getValue(), true));
 
@@ -126,14 +115,14 @@ function ifdToTest($name, $number, PelIfd $ifd)
     $next = $ifd->getNextIfd();
     println('%s%d = %s%d->getNextIfd();', $name, $number + 1, $name, $number);
 
-    if ($next === null) {
-        println('$this->assertNull(%s%d);', $name, $number + 1);
-        println('/* End of IFD %s%d. */', $name, $number);
-    } else {
-        println('$this->assertInstanceOf(\'\lsolesen\pel\PelIfd\', %s%d);', $name, $number + 1);
+    if ($next instanceof PelIfd) {
+        println('$this->assertInstanceOf(\'PelIfd\', %s%d);', $name, $number + 1);
         println('/* End of IFD %s%d. */', $name, $number);
 
         ifdToTest($name, $number + 1, $next);
+    } else {
+        println('$this->assertNull(%s%d);', $name, $number + 1);
+        println('/* End of IFD %s%d. */', $name, $number);
     }
 }
 
@@ -143,25 +132,23 @@ function tiffToTest($name, PelTiff $tiff)
     println('/* The first IFD. */');
     println('$ifd0 = %s->getIfd();', $name);
     $ifd = $tiff->getIfd();
-    if ($ifd === null) {
-        println('$this->assertNull($ifd0);');
-    } else {
-        println('$this->assertInstanceOf(\'\lsolesen\pel\PelIfd\', $ifd0);');
+    if ($ifd instanceof PelIfd) {
+        println('$this->assertInstanceOf(\'PelIfd\', $ifd0);');
         ifdToTest('$ifd', 0, $ifd);
+    } else {
+        println('$this->assertNull($ifd0);');
     }
 }
 
 function jpegContentToTest($name, PelJpegContent $content)
 {
     if ($content instanceof PelExif) {
-        println('$this->assertInstanceOf(\'\lsolesen\pel\PelExif\', %s);', $name);
+        println('$this->assertInstanceOf(\'PelExif\', %s);', $name);
         $tiff = $content->getTiff();
         println();
         println('$tiff = %s->getTiff();', $name);
-        if ($tiff === null) {
-            println('$this->assertNull($tiff);');
-        } else {
-            println('$this->assertInstanceOf(\'\lsolesen\pel\PelTiff\', $tiff);');
+        if ($tiff instanceof PelTiff) {
+            println('$this->assertInstanceOf(\'PelTiff\', $tiff);');
             tiffToTest('$tiff', $tiff);
         }
     }
@@ -195,47 +182,45 @@ function binstrencode($field)
 ob_start();
 
 println('<?php
-/*
- * PEL: PHP Exif Library. A library with support for reading and
- * writing all Exif headers in JPEG and TIFF images using PHP.
+
+/*  PEL: PHP Exif Library.  A library with support for reading and
+ *  writing all Exif headers in JPEG and TIFF images using PHP.
  *
- * (c) 2005, 2006 Martin Geisler.
- * (c) 2020 Johannes Weberhofer
+ *  Copyright (C) 2005, 2006  Martin Geisler.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program in the file COPYING; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program in the file COPYING; if not, write to the
+ *  Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ *  Boston, MA 02110-1301 USA
  */
 
-// Autogenerated by the make-image-test.php script
 
-namespace Pel\Test;
+/* Autogenerated by the make-image-test.php script */
 
-use PHPUnit\Framework\TestCase;
-use lsolesen\pel\Pel;
 use lsolesen\pel\PelJpeg;
+use PHPUnit\Framework\TestCase;
 
-class %s extends TestCase 
+class %s extends TestCase
 {
 
-    function testRead() 
-    {
-        Pel::clearExceptions();
-        Pel::setStrictParsing(false);
-        $jpeg = new PelJpeg(dirname(__FILE__) . \'/images/%s\');
-', $test_name, basename($image_filename), $image_filename);
+  function testRead()
+  {
+    Pel::clearExceptions();
+    Pel::setStrictParsing(false);
+    $jpeg = new PelJpeg(dirname(__FILE__) . \'/%s\');
+', $test_name, $image_filename, $image_filename);
 
+require_once(dirname(__FILE__) . '/../../src/PelJpeg.php');
 $jpeg = new PelJpeg($image_filename);
 
 $indent = 2;

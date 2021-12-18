@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'af7bfd664b5c9b4639a1345cc3d94cdc7e663957',
+    'reference' => '199c339705153c34745adcbcdd4aa4f105bd9d98',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -207,12 +207,12 @@ private static $installed = array (
     ),
     'consolidation/self-update' => 
     array (
-      'pretty_version' => '2.0.1',
-      'version' => '2.0.1.0',
+      'pretty_version' => '2.0.2',
+      'version' => '2.0.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7b9223bdfc1b23ab93489b580382accb6f0411b6',
+      'reference' => '74289cf9b37d5cf84321ebea47deeea21678b940',
     ),
     'consolidation/site-alias' => 
     array (
@@ -356,7 +356,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'af7bfd664b5c9b4639a1345cc3d94cdc7e663957',
+      'reference' => '199c339705153c34745adcbcdd4aa4f105bd9d98',
     ),
     'drupal/action' => 
     array (
@@ -865,17 +865,17 @@ private static $installed = array (
     ),
     'drupal/file_mdm' => 
     array (
-      'pretty_version' => '2.1.0',
-      'version' => '2.1.0.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-2.1',
+      'reference' => '8.x-2.2',
     ),
     'drupal/file_mdm_exif' => 
     array (
-      'pretty_version' => '2.1.0',
-      'version' => '2.1.0.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
@@ -883,8 +883,8 @@ private static $installed = array (
     ),
     'drupal/file_mdm_font' => 
     array (
-      'pretty_version' => '2.1.0',
-      'version' => '2.1.0.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
@@ -1585,12 +1585,12 @@ private static $installed = array (
     ),
     'lsolesen/pel' => 
     array (
-      'pretty_version' => '0.9.10',
-      'version' => '0.9.10.0',
+      'pretty_version' => '0.9.9',
+      'version' => '0.9.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => '04ecb8a29e4b1628414193b0df9294232a44f8a9',
+      'reference' => '95dd3c16161c588f0ac66662c1870a073159e5ec',
     ),
     'masterminds/html5' => 
     array (
@@ -1664,12 +1664,12 @@ private static $installed = array (
     ),
     'phenx/php-font-lib' => 
     array (
-      'pretty_version' => '0.5.2',
-      'version' => '0.5.2.0',
+      'pretty_version' => '0.5.4',
+      'version' => '0.5.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ca6ad461f032145fff5971b5985e5af9e7fa88d8',
+      'reference' => 'dd448ad1ce34c63d09baccd05415e361300c35b4',
     ),
     'phpmailer/phpmailer' => 
     array (
