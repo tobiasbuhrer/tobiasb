@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '199c339705153c34745adcbcdd4aa4f105bd9d98',
+    'reference' => '6ca05adea8525fc554dfb1995ea7fc1ade65741d',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -356,7 +356,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '199c339705153c34745adcbcdd4aa4f105bd9d98',
+      'reference' => '6ca05adea8525fc554dfb1995ea7fc1ade65741d',
     ),
     'drupal/action' => 
     array (
@@ -960,12 +960,12 @@ private static $installed = array (
     ),
     'drupal/image_effects' => 
     array (
-      'pretty_version' => '3.1.0',
-      'version' => '3.1.0.0',
+      'pretty_version' => '3.2.0',
+      'version' => '3.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.1',
+      'reference' => '8.x-3.2',
     ),
     'drupal/imagemagick' => 
     array (
