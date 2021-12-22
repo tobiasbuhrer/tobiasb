@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '6ca05adea8525fc554dfb1995ea7fc1ade65741d',
+    'reference' => '0ca0998fa031e412d24e9182f1c756ff6fa3a44f',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -216,12 +216,12 @@ private static $installed = array (
     ),
     'consolidation/site-alias' => 
     array (
-      'pretty_version' => '3.1.1',
-      'version' => '3.1.1.0',
+      'pretty_version' => '3.1.2',
+      'version' => '3.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e824b57253d9174f4a500f87e6d0e1e497c2a50a',
+      'reference' => '2d514a1b278a1c5f28df20df317631f9829a88f2',
     ),
     'consolidation/site-process' => 
     array (
@@ -356,7 +356,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '6ca05adea8525fc554dfb1995ea7fc1ade65741d',
+      'reference' => '0ca0998fa031e412d24e9182f1c756ff6fa3a44f',
     ),
     'drupal/action' => 
     array (
@@ -1022,12 +1022,12 @@ private static $installed = array (
     ),
     'drupal/leaflet' => 
     array (
-      'pretty_version' => '2.1.16',
-      'version' => '2.1.16.0',
+      'pretty_version' => '2.1.17',
+      'version' => '2.1.17.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2.1.16',
+      'reference' => '2.1.17',
     ),
     'drupal/leaflet_more_maps' => 
     array (
