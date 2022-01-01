@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '0ca0998fa031e412d24e9182f1c756ff6fa3a44f',
+    'reference' => '9fe9639a75c22c2686a28cd15647e866299e9ac4',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -130,12 +130,12 @@
     ),
     'consolidation/annotated-command' => 
     array (
-      'pretty_version' => '4.4.0',
-      'version' => '4.4.0.0',
+      'pretty_version' => '4.5.1',
+      'version' => '4.5.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '308f6ac178566a1ce9aa90ed908dac90a2c1e707',
+      'reference' => '701a7abe8505abe89520837be798e15a3953a367',
     ),
     'consolidation/config' => 
     array (
@@ -157,39 +157,39 @@
     ),
     'consolidation/log' => 
     array (
-      'pretty_version' => '2.0.2',
-      'version' => '2.0.2.0',
+      'pretty_version' => '2.0.4',
+      'version' => '2.0.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '82a2aaaa621a7b976e50a745a8d249d5085ee2b1',
+      'reference' => 'fc9ec5476ba13a31778695bd2d4f2fa0b0684356',
     ),
     'consolidation/output-formatters' => 
     array (
-      'pretty_version' => '4.1.2',
-      'version' => '4.1.2.0',
+      'pretty_version' => '4.2.1',
+      'version' => '4.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5821e6ae076bf690058a4de6c94dce97398a69c9',
+      'reference' => '4413d7c732afb5d7bdac565c41aa9c8c49c48888',
     ),
     'consolidation/robo' => 
     array (
-      'pretty_version' => '3.0.6',
-      'version' => '3.0.6.0',
+      'pretty_version' => '3.0.7',
+      'version' => '3.0.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => '36dce2965a67abe5cf91f2bc36d2582a64a11258',
+      'reference' => '57012db2a93c904ed0a7b9d8676c0325c0366bc8',
     ),
     'consolidation/self-update' => 
     array (
-      'pretty_version' => '2.0.2',
-      'version' => '2.0.2.0',
+      'pretty_version' => '2.0.3',
+      'version' => '2.0.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '74289cf9b37d5cf84321ebea47deeea21678b940',
+      'reference' => '117dcc9494dc970a6ae307103c41d654e6253bc4',
     ),
     'consolidation/site-alias' => 
     array (
@@ -333,7 +333,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '0ca0998fa031e412d24e9182f1c756ff6fa3a44f',
+      'reference' => '9fe9639a75c22c2686a28cd15647e866299e9ac4',
     ),
     'drupal/action' => 
     array (
@@ -999,12 +999,12 @@
     ),
     'drupal/leaflet' => 
     array (
-      'pretty_version' => '2.1.17',
-      'version' => '2.1.17.0',
+      'pretty_version' => '2.1.19',
+      'version' => '2.1.19.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2.1.17',
+      'reference' => '2.1.19',
     ),
     'drupal/leaflet_more_maps' => 
     array (
@@ -1824,12 +1824,12 @@
     ),
     'symfony/config' => 
     array (
-      'pretty_version' => 'v4.4.34',
-      'version' => '4.4.34.0',
+      'pretty_version' => 'v4.4.36',
+      'version' => '4.4.36.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e99b65a18faa34fde57078095c39a1bc91a22492',
+      'reference' => '03218ffbd5faeda5e6a97f9109acebf7973ff385',
     ),
     'symfony/console' => 
     array (
@@ -1878,12 +1878,12 @@
     ),
     'symfony/dom-crawler' => 
     array (
-      'pretty_version' => 'v4.4.30',
-      'version' => '4.4.30.0',
+      'pretty_version' => 'v4.4.36',
+      'version' => '4.4.36.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4632ae3567746c7e915c33c67a2fb6ab746090c4',
+      'reference' => '42de12bee3b5e594977209bcdf58ec4fef8dde39',
     ),
     'symfony/error-handler' => 
     array (
@@ -1930,12 +1930,12 @@
     ),
     'symfony/finder' => 
     array (
-      'pretty_version' => 'v4.4.30',
-      'version' => '4.4.30.0',
+      'pretty_version' => 'v4.4.36',
+      'version' => '4.4.36.0',
       'aliases' => 
       array (
       ),
-      'reference' => '70362f1e112280d75b30087c7598b837c1b468b6',
+      'reference' => '1fef05633cd61b629e963e5d8200fb6b67ecf42c',
     ),
     'symfony/http-client-contracts' => 
     array (
