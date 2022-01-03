@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '9fe9639a75c22c2686a28cd15647e866299e9ac4',
+    'reference' => 'b9984e0dcd5aa1fc36e8a575025b4aa58f37a4b6',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -333,7 +333,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '9fe9639a75c22c2686a28cd15647e866299e9ac4',
+      'reference' => 'b9984e0dcd5aa1fc36e8a575025b4aa58f37a4b6',
     ),
     'drupal/action' => 
     array (
@@ -883,12 +883,12 @@
     ),
     'drupal/geofield' => 
     array (
-      'pretty_version' => '1.35.0',
-      'version' => '1.35.0.0',
+      'pretty_version' => '1.36.0',
+      'version' => '1.36.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.35',
+      'reference' => '8.x-1.36',
     ),
     'drupal/hal' => 
     array (
