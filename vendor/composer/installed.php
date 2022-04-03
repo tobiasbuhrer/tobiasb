@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3d5b136b133404d91188c9df692b08d542d5c1b7',
+    'reference' => '29bf125fbc88b1843b55d4c8863f54b0a976f287',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -130,12 +130,12 @@
     ),
     'consolidation/annotated-command' => 
     array (
-      'pretty_version' => '4.5.2',
-      'version' => '4.5.2.0',
+      'pretty_version' => '4.5.3',
+      'version' => '4.5.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '24c1529436b4f4beec3d19aab71fd127817f47ef',
+      'reference' => '1941a743e63993288e09d0686a4cb7ed47813213',
     ),
     'consolidation/config' => 
     array (
@@ -333,7 +333,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3d5b136b133404d91188c9df692b08d542d5c1b7',
+      'reference' => '29bf125fbc88b1843b55d4c8863f54b0a976f287',
     ),
     'drupal/action' => 
     array (
@@ -999,12 +999,12 @@
     ),
     'drupal/leaflet' => 
     array (
-      'pretty_version' => '2.1.21',
-      'version' => '2.1.21.0',
+      'pretty_version' => '2.1.23',
+      'version' => '2.1.23.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2.1.21',
+      'reference' => '2.1.23',
     ),
     'drupal/leaflet_more_maps' => 
     array (
