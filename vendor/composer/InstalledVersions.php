@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '29bf125fbc88b1843b55d4c8863f54b0a976f287',
+    'reference' => 'b9a77c786f0a0b9fe31e4386cec6adb5f05cb749',
     'name' => 'drupal-composer/drupal-project',
   ),
   'versions' => 
@@ -153,12 +153,12 @@ private static $installed = array (
     ),
     'consolidation/annotated-command' => 
     array (
-      'pretty_version' => '4.5.3',
-      'version' => '4.5.3.0',
+      'pretty_version' => '4.5.4',
+      'version' => '4.5.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1941a743e63993288e09d0686a4cb7ed47813213',
+      'reference' => '93398c3166d9026ab93219ce23b2092b4d7b7904',
     ),
     'consolidation/config' => 
     array (
@@ -356,7 +356,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '29bf125fbc88b1843b55d4c8863f54b0a976f287',
+      'reference' => 'b9a77c786f0a0b9fe31e4386cec6adb5f05cb749',
     ),
     'drupal/action' => 
     array (
@@ -906,12 +906,12 @@ private static $installed = array (
     ),
     'drupal/geofield' => 
     array (
-      'pretty_version' => '1.38.0',
-      'version' => '1.38.0.0',
+      'pretty_version' => '1.39.0',
+      'version' => '1.39.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.38',
+      'reference' => '8.x-1.39',
     ),
     'drupal/hal' => 
     array (
