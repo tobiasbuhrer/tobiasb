@@ -254,12 +254,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/cache' => array(
-            'pretty_version' => '1.12.1',
-            'version' => '1.12.1.0',
+            'pretty_version' => '1.13.0',
+            'version' => '1.13.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/cache',
             'aliases' => array(),
-            'reference' => '4cf401d14df219fa6f38b671f5493449151c9ad8',
+            'reference' => '56cd022adb5514472cb144c087393c1821911d09',
             'dev_requirement' => false,
         ),
         'doctrine/collections' => array(
@@ -928,12 +928,12 @@
             ),
         ),
         'drupal/leaflet' => array(
-            'pretty_version' => '2.1.23',
-            'version' => '2.1.23.0',
+            'pretty_version' => '2.2.1',
+            'version' => '2.2.1.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/leaflet',
             'aliases' => array(),
-            'reference' => '2.1.23',
+            'reference' => '2.2.1',
             'dev_requirement' => false,
         ),
         'drupal/leaflet_more_maps' => array(
