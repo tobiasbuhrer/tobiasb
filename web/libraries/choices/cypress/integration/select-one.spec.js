@@ -1,6 +1,6 @@
 describe('Choices - select one', () => {
   beforeEach(() => {
-    cy.visit('/select-one.html');
+    cy.visit('/select-one');
   });
 
   describe('scenarios', () => {
@@ -10,6 +10,30 @@ describe('Choices - select one', () => {
         cy.get('[data-test-hook=basic]')
           .find('.choices')
           .click();
+      });
+
+      describe('focusing on container', () => {
+        describe('pressing enter key', () => {
+          it('toggles the dropdown', () => {
+            cy.get('[data-test-hook=basic]')
+              .find('.choices')
+              .focus()
+              .type('{enter}');
+
+            cy.get('[data-test-hook=basic]')
+              .find('.choices__list--dropdown')
+              .should('not.be.visible');
+
+            cy.get('[data-test-hook=basic]')
+              .find('.choices')
+              .focus()
+              .type('{enter}');
+
+            cy.get('[data-test-hook=basic]')
+              .find('.choices__list--dropdown')
+              .should('be.visible');
+          });
+        });
       });
 
       describe('focusing on text input', () => {
@@ -208,7 +232,7 @@ describe('Choices - select one', () => {
 
           it('updates the value of the original input', () => {
             cy.get('[data-test-hook=remove-button]')
-              .find('.choices__input.is-hidden')
+              .find('.choices__input[hidden]')
               .should($select => {
                 const val = $select.val() || [];
 
@@ -448,6 +472,102 @@ describe('Choices - select one', () => {
       });
     });
 
+    describe('placeholder via empty option value', () => {
+      describe('when no choice has been selected', () => {
+        it('displays a placeholder', () => {
+          cy.get('[data-test-hook=placeholder-via-option-value]')
+            .find('.choices__list--single')
+            .children()
+            .first()
+            .should('have.class', 'choices__placeholder')
+            .and($placeholder => {
+              expect($placeholder).to.contain('I am a placeholder');
+            });
+        });
+      });
+
+      describe('when a choice has been selected', () => {
+        it('does not display a placeholder', () => {
+          cy.get('[data-test-hook=placeholder-via-option-value]')
+            .find('.choices__input--cloned')
+            .focus();
+
+          cy.get('[data-test-hook=placeholder-via-option-value]')
+            .find('.choices__list--dropdown .choices__list')
+            .children()
+            .first()
+            .click();
+
+          cy.get('[data-test-hook=placeholder-via-option-value]')
+            .find('.choices__input--cloned')
+            .should('not.have.value', 'I am a placeholder');
+        });
+      });
+
+      describe('when choice list is open', () => {
+        it('displays the placeholder choice first', () => {
+          cy.get('[data-test-hook=placeholder-via-option-value]')
+            .find('.choices__input--cloned')
+            .focus();
+
+          cy.get('[data-test-hook=placeholder-via-option-value]')
+            .find('.choices__list--dropdown .choices__list')
+            .children()
+            .first()
+            .should('have.class', 'choices__placeholder')
+            .should('have.text', 'I am a placeholder');
+        });
+      });
+    });
+
+    describe('placeholder via option attribute', () => {
+      describe('when no choice has been selected', () => {
+        it('displays a placeholder', () => {
+          cy.get('[data-test-hook=placeholder-via-option-attr]')
+            .find('.choices__list--single')
+            .children()
+            .first()
+            .should('have.class', 'choices__placeholder')
+            .and($placeholder => {
+              expect($placeholder).to.contain('I am a placeholder');
+            });
+        });
+      });
+
+      describe('when a choice has been selected', () => {
+        it('does not display a placeholder', () => {
+          cy.get('[data-test-hook=placeholder-via-option-attr]')
+            .find('.choices__input--cloned')
+            .focus();
+
+          cy.get('[data-test-hook=placeholder-via-option-attr]')
+            .find('.choices__list--dropdown .choices__list')
+            .children()
+            .first()
+            .click();
+
+          cy.get('[data-test-hook=placeholder-via-option-attr]')
+            .find('.choices__input--cloned')
+            .should('not.have.value', 'I am a placeholder');
+        });
+      });
+
+      describe('when choice list is open', () => {
+        it('displays the placeholder choice first', () => {
+          cy.get('[data-test-hook=placeholder-via-option-attr]')
+            .find('.choices__input--cloned')
+            .focus();
+
+          cy.get('[data-test-hook=placeholder-via-option-attr]')
+            .find('.choices__list--dropdown .choices__list')
+            .children()
+            .first()
+            .should('have.class', 'choices__placeholder')
+            .should('have.text', 'I am a placeholder');
+        });
+      });
+    });
+
     describe('remote data', () => {
       beforeEach(() => {
         cy.reload(true);
@@ -458,6 +578,7 @@ describe('Choices - select one', () => {
           cy.get('[data-test-hook=remote-data]')
             .find('.choices__list--single')
             .children()
+            .should('have.length', 1)
             .first()
             .should('have.class', 'choices__placeholder')
             .and($placeholder => {
@@ -466,7 +587,7 @@ describe('Choices - select one', () => {
         });
 
         describe('on click', () => {
-          it('does not opens choice dropdown', () => {
+          it('does not open choice dropdown', () => {
             cy.get('[data-test-hook=remote-data]')
               .find('.choices')
               .click()
@@ -483,10 +604,14 @@ describe('Choices - select one', () => {
             cy.get('[data-test-hook=remote-data]')
               .find('.choices__list--dropdown .choices__list')
               .children()
-              .should('have.length', 50)
+              .should('have.length', 51) // 50 choices + 1 placeholder choice
               .each(($choice, index) => {
-                expect($choice.text().trim()).to.equal(`Label ${index + 1}`);
-                expect($choice.data('value')).to.equal(`Value ${index + 1}`);
+                if (index === 0) {
+                  expect($choice.text().trim()).to.equal('I am a placeholder');
+                } else {
+                  expect($choice.text().trim()).to.equal(`Label ${index}`);
+                  expect($choice.data('value')).to.equal(`Value ${index}`);
+                }
               });
           });
         });
@@ -818,7 +943,7 @@ describe('Choices - select one', () => {
 
       it('updates the value of the original input', () => {
         cy.get('[data-test-hook=set-choice-by-value]')
-          .find('.choices__input.is-hidden')
+          .find('.choices__input[hidden]')
           .should($select => {
             const val = $select.val() || [];
             expect(val).to.contain(dynamicallySelectedChoiceValue);
@@ -859,6 +984,76 @@ describe('Choices - select one', () => {
           .should($choice => {
             expect($choice.text().trim()).to.equal('label1');
           });
+      });
+    });
+
+    describe('disabling first choice via options', () => {
+      beforeEach(() => {
+        cy.get('[data-test-hook=disabled-first-choice-via-options]')
+          .find('.choices')
+          .click();
+      });
+
+      let disabledValue;
+
+      it('disables the first choice', () => {
+        cy.get('[data-test-hook=disabled-first-choice-via-options]')
+          .find('.choices__list--dropdown .choices__list')
+          .children()
+          .first()
+          .should('have.class', 'choices__item--disabled')
+          .then($choice => {
+            disabledValue = $choice.val();
+          });
+      });
+
+      it('selects the first enabled choice', () => {
+        cy.get('[data-test-hook=disabled-first-choice-via-options]')
+          .find('.choices__input[hidden]')
+          .then($option => {
+            expect($option.text().trim()).to.not.equal(disabledValue);
+          });
+
+        cy.get('[data-test-hook=disabled-first-choice-via-options]')
+          .find('.choices__item.choices__item--selectable')
+          .first()
+          .should($choice => {
+            expect($choice.text().trim()).to.not.equal(disabledValue);
+          });
+      });
+    });
+
+    describe('re-initialising a choices instance', () => {
+      it('preserves the choices list', () => {
+        cy.get('[data-test-hook=new-destroy-init]')
+          .find('.choices__list--dropdown .choices__list')
+          .children()
+          .should('have.length', 3);
+
+        cy.get('[data-test-hook=new-destroy-init]')
+          .find('button.destroy')
+          .click();
+        cy.get('[data-test-hook=new-destroy-init]')
+          .find('button.init')
+          .click();
+
+        cy.get('[data-test-hook=new-destroy-init]')
+          .find('.choices__list--dropdown .choices__list')
+          .children()
+          .should('have.length', 3);
+      });
+    });
+
+    describe('destroying the choices instance', () => {
+      it('preserves the original select element', () => {
+        cy.get('[data-test-hook=new-destroy-init]')
+          .find('button.destroy')
+          .click();
+
+        cy.get('[data-test-hook=new-destroy-init]')
+          .find('select')
+          .children()
+          .should('have.length', 3);
       });
     });
   });

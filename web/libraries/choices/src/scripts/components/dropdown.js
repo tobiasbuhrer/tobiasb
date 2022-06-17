@@ -1,26 +1,35 @@
-export default class Dropdown {
-  constructor({ element, type, classNames }) {
-    Object.assign(this, { element, type, classNames });
+/**
+ * @typedef {import('../../../types/index').Choices.passedElement} passedElement
+ * @typedef {import('../../../types/index').Choices.ClassNames} ClassNames
+ */
 
+export default class Dropdown {
+  /**
+   * @param {{
+   *  element: HTMLElement,
+   *  type: passedElement['type'],
+   *  classNames: ClassNames,
+   * }} args
+   */
+  constructor({ element, type, classNames }) {
+    this.element = element;
+    this.classNames = classNames;
+    this.type = type;
     this.isActive = false;
   }
 
   /**
-   * Determine how far the top of our element is from
-   * the top of the window
-   * @return {Number} Vertical position
+   * Bottom position of dropdown in viewport coordinates
+   * @returns {number} Vertical position
    */
-  distanceFromTopWindow() {
-    this.dimensions = this.element.getBoundingClientRect();
-    this.position = Math.ceil(
-      this.dimensions.top + window.pageYOffset + this.element.offsetHeight,
-    );
-    return this.position;
+  get distanceFromTopWindow() {
+    return this.element.getBoundingClientRect().bottom;
   }
 
   /**
    * Find element that matches passed selector
-   * @return {HTMLElement}
+   * @param {string} selector
+   * @returns {HTMLElement | null}
    */
   getChild(selector) {
     return this.element.querySelector(selector);
@@ -28,25 +37,25 @@ export default class Dropdown {
 
   /**
    * Show dropdown to user by adding active state class
-   * @return {Object} Class instance
-   * @public
+   * @returns {this}
    */
   show() {
     this.element.classList.add(this.classNames.activeState);
     this.element.setAttribute('aria-expanded', 'true');
     this.isActive = true;
+
     return this;
   }
 
   /**
    * Hide dropdown from user
-   * @return {Object} Class instance
-   * @public
+   * @returns {this}
    */
   hide() {
     this.element.classList.remove(this.classNames.activeState);
     this.element.setAttribute('aria-expanded', 'false');
     this.isActive = false;
+
     return this;
   }
 }

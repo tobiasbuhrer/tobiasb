@@ -1,88 +1,126 @@
 import { SCROLLING_SPEED } from '../constants';
 
+/**
+ * @typedef {import('../../../types/index').Choices.Choice} Choice
+ */
 export default class List {
+  /**
+   * @param {{ element: HTMLElement }} args
+   */
   constructor({ element }) {
-    Object.assign(this, { element });
-
+    this.element = element;
     this.scrollPos = this.element.scrollTop;
     this.height = this.element.offsetHeight;
-    this.hasChildren = !!this.element.children;
   }
 
   clear() {
     this.element.innerHTML = '';
   }
 
+  /**
+   * @param {Element | DocumentFragment} node
+   */
   append(node) {
     this.element.appendChild(node);
   }
 
+  /**
+   * @param {string} selector
+   * @returns {Element | null}
+   */
   getChild(selector) {
     return this.element.querySelector(selector);
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  hasChildren() {
+    return this.element.hasChildNodes();
   }
 
   scrollToTop() {
     this.element.scrollTop = 0;
   }
 
-  scrollToChoice(choice, direction) {
-    if (!choice) {
+  /**
+   * @param {Element} element
+   * @param {1 | -1} direction
+   */
+  scrollToChildElement(element, direction) {
+    if (!element) {
       return;
     }
 
-    const dropdownHeight = this.element.offsetHeight;
-    const choiceHeight = choice.offsetHeight;
-    // Distance from bottom of element to top of parent
-    const choicePos = choice.offsetTop + choiceHeight;
+    const listHeight = this.element.offsetHeight;
     // Scroll position of dropdown
-    const containerScrollPos = this.element.scrollTop + dropdownHeight;
-    // Difference between the choice and scroll position
-    const endpoint =
-      direction > 0
-        ? this.element.scrollTop + choicePos - containerScrollPos
-        : choice.offsetTop;
+    const listScrollPosition = this.element.scrollTop + listHeight;
 
-    requestAnimationFrame(time => {
-      this._animateScroll(time, endpoint, direction);
+    const elementHeight = element.offsetHeight;
+    // Distance from bottom of element to top of parent
+    const elementPos = element.offsetTop + elementHeight;
+
+    // Difference between the element and scroll position
+    const destination =
+      direction > 0
+        ? this.element.scrollTop + elementPos - listScrollPosition
+        : element.offsetTop;
+
+    requestAnimationFrame(() => {
+      this._animateScroll(destination, direction);
     });
   }
 
-  _scrollDown(scrollPos, strength, endpoint) {
-    const easing = (endpoint - scrollPos) / strength;
+  /**
+   * @param {number} scrollPos
+   * @param {number} strength
+   * @param {number} destination
+   */
+  _scrollDown(scrollPos, strength, destination) {
+    const easing = (destination - scrollPos) / strength;
     const distance = easing > 1 ? easing : 1;
 
     this.element.scrollTop = scrollPos + distance;
   }
 
-  _scrollUp(scrollPos, strength, endpoint) {
-    const easing = (scrollPos - endpoint) / strength;
+  /**
+   * @param {number} scrollPos
+   * @param {number} strength
+   * @param {number} destination
+   */
+  _scrollUp(scrollPos, strength, destination) {
+    const easing = (scrollPos - destination) / strength;
     const distance = easing > 1 ? easing : 1;
 
     this.element.scrollTop = scrollPos - distance;
   }
 
-  _animateScroll(time, endpoint, direction) {
+  /**
+   * @param {*} destination
+   * @param {*} direction
+   */
+  _animateScroll(destination, direction) {
     const strength = SCROLLING_SPEED;
     const choiceListScrollTop = this.element.scrollTop;
     let continueAnimation = false;
 
     if (direction > 0) {
-      this._scrollDown(choiceListScrollTop, strength, endpoint);
+      this._scrollDown(choiceListScrollTop, strength, destination);
 
-      if (choiceListScrollTop < endpoint) {
+      if (choiceListScrollTop < destination) {
         continueAnimation = true;
       }
     } else {
-      this._scrollUp(choiceListScrollTop, strength, endpoint);
+      this._scrollUp(choiceListScrollTop, strength, destination);
 
-      if (choiceListScrollTop > endpoint) {
+      if (choiceListScrollTop > destination) {
         continueAnimation = true;
       }
     }
 
     if (continueAnimation) {
       requestAnimationFrame(() => {
-        this._animateScroll(time, endpoint, direction);
+        this._animateScroll(destination, direction);
       });
     }
   }

@@ -1,6 +1,13 @@
+/* eslint-disable no-param-reassign */
+
 const { JSDOM } = require('jsdom');
 
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM(
+  '<!doctype html><html><head><meta charset="utf-8"></head><body></body></html>',
+  {
+    pretendToBeVisual: true,
+  },
+);
 const { window } = jsdom;
 
 function copyProps(src, target) {
@@ -20,26 +27,6 @@ function ignoreExtensions(extensions = [], returnValue = {}) {
   });
 }
 
-function mockRAF(global) {
-  let callbacksQueue = [];
-
-  global.setInterval(() => {
-    for (let i = 0; i < callbacksQueue.length; i++) {
-      if (callbacksQueue[i] !== false) {
-        callbacksQueue[i].call(null);
-      }
-    }
-
-    callbacksQueue = [];
-  }, 1000 / 60);
-
-  global.requestAnimationFrame = callback => callbacksQueue.push(callback) - 1;
-
-  global.cancelAnimationFrame = id => {
-    callbacksQueue[id] = false;
-  };
-}
-
 global.window = window;
 global.document = window.document;
 global.navigator = {
@@ -48,12 +35,16 @@ global.navigator = {
 global.CustomEvent = window.CustomEvent;
 global.Element = window.Element;
 global.HTMLElement = window.HTMLElement;
+global.Option = window.Option;
 global.HTMLOptionElement = window.HTMLOptionElement;
 global.HTMLOptGroupElement = window.HTMLOptGroupElement;
+global.HTMLSelectElement = window.HTMLSelectElement;
+global.HTMLInputElement = window.HTMLInputElement;
 global.DocumentFragment = window.DocumentFragment;
+global.requestAnimationFrame = window.requestAnimationFrame;
+window.matchMedia = () => true;
 
 copyProps(window, global);
-mockRAF(global);
 
 ignoreExtensions(['.scss', '.css']);
 ignoreExtensions(['.jpg', '.png', '.svg'], '');

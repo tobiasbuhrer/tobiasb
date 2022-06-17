@@ -218,13 +218,6 @@ describe('reducers/store', () => {
           expect(actualResponse).to.eql(expectedResponse);
         });
       });
-
-      describe('passing no id', () => {
-        it('returns false', () => {
-          const actualResponse = instance.getChoiceById();
-          expect(actualResponse).to.equal(false);
-        });
-      });
     });
 
     describe('placeholderChoice getter', () => {
@@ -252,10 +245,8 @@ describe('reducers/store', () => {
 
     describe('getGroupById', () => {
       it('returns group by id', () => {
-        const id = '1';
-        const expectedResponse = state.groups.find(
-          group => group.id === parseInt(id, 10),
-        );
+        const id = 1;
+        const expectedResponse = state.groups.find(group => group.id === id);
         const actualResponse = instance.getGroupById(id);
         expect(actualResponse).to.eql(expectedResponse);
       });

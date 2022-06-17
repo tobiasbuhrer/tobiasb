@@ -345,7 +345,7 @@
         "drupal/leaflet": "^2.0",
         "drupal/leaflet_more_maps": "^2.1",
         "drupal/libraries": "^3.0@alpha",
-        "drupal/minifyhtml": "^1.7",
+        "drupal/minifyhtml": "^2.0",
         "drupal/plupload": "1.x-dev@dev",
         "drupal/smtp": "^1.0",
         "drupal/video": "^1.5@alpha",
@@ -361,7 +361,8 @@
         "signature_pad/signature_pad": "*",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
-        "webmozart/path-util": "^2.3"
+        "webmozart/path-util": "^2.3",
+        "wikimedia/composer-merge-plugin": "^2.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -375,7 +376,8 @@
             "drupal/console-extend-plugin": true,
             "cweagans/composer-patches": true,
             "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true
+            "drupal/core-project-message": true,
+            "wikimedia/composer-merge-plugin": true
         }
     },
     "autoload": {
@@ -422,6 +424,11 @@
             "drush/contrib/{$name}": [
                 "type:drupal-drush"
             ]
+        },
+     "merge-plugin": {
+            "include": [
+                "web/modules/contrib/webform/composer.libraries.json"
+            ]            
         }
     }
 }

@@ -1,5 +1,11 @@
 import { sanitise, sortByAlpha } from './lib/utils';
 
+/**
+ * @typedef {import('../../types/index').Choices.ClassNames} ClassNames
+ * @typedef {import('../../types/index').Choices.Options} Options
+ */
+
+/** @type {ClassNames} */
 export const DEFAULT_CLASSNAMES = {
   containerOuter: 'choices',
   containerInner: 'choices__inner',
@@ -22,13 +28,14 @@ export const DEFAULT_CLASSNAMES = {
   openState: 'is-open',
   disabledState: 'is-disabled',
   highlightedState: 'is-highlighted',
-  hiddenState: 'is-hidden',
+  selectedState: 'is-selected',
   flippedState: 'is-flipped',
   loadingState: 'is-loading',
   noResults: 'has-no-results',
   noChoices: 'has-no-choices',
 };
 
+/** @type {Options} */
 export const DEFAULT_CONFIG = {
   items: [],
   choices: [],
@@ -36,7 +43,7 @@ export const DEFAULT_CONFIG = {
   renderChoiceLimit: -1,
   maxItemCount: -1,
   addItems: true,
-  addItemFilterFn: null,
+  addItemFilter: null,
   removeItems: true,
   removeItemButton: false,
   editItems: false,
@@ -52,7 +59,7 @@ export const DEFAULT_CONFIG = {
   resetScrollPosition: true,
   shouldSort: true,
   shouldSortItems: false,
-  sortFn: sortByAlpha,
+  sorter: sortByAlpha,
   placeholder: true,
   placeholderValue: null,
   searchPlaceholderValue: null,
@@ -67,7 +74,7 @@ export const DEFAULT_CONFIG = {
   customAddItemText: 'Only values matching specific conditions can be added',
   addItemText: value => `Press Enter to add <b>"${sanitise(value)}"</b>`,
   maxItemText: maxItemCount => `Only ${maxItemCount} values can be added`,
-  itemComparer: (choice, item) => choice === item,
+  valueComparer: (value1, value2) => value1 === value2,
   fuseOptions: {
     includeScore: true,
   },
@@ -111,5 +118,9 @@ export const KEY_CODES = {
   PAGE_UP_KEY: 33,
   PAGE_DOWN_KEY: 34,
 };
+
+export const TEXT_TYPE = 'text';
+export const SELECT_ONE_TYPE = 'select-one';
+export const SELECT_MULTIPLE_TYPE = 'select-multiple';
 
 export const SCROLLING_SPEED = 4;

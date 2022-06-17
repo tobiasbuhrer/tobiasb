@@ -2,8 +2,13 @@
 
 namespace Drupal\minifyhtml\EventSubscriber;
 
+use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelFactory;
+use Drupal\Core\Path\PathMatcherInterface;
+use Drupal\Core\Path\CurrentPathStack;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -14,27 +19,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class MinifyHTMLExit implements EventSubscriberInterface {
 
   /**
-   * The content that this class minifies.
-   *
-   * @var string
-   */
-  protected $content;
-
-  /**
-   * A list of placeholders for HTML elements that won't be minified.
-   *
-   * @var array
-   */
-  protected $placeholders = [];
-
-  /**
-   * The placeholder token.
-   *
-   * @var string
-   */
-  protected $token;
-
-  /**
    * Config Factory object.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
@@ -42,11 +26,18 @@ class MinifyHTMLExit implements EventSubscriberInterface {
   protected $config;
 
   /**
-   * Time object.
+   * The current path.
    *
-   * @var \Drupal\Component\Datetime\TimeInterface
+   * @var \Drupal\Core\Path\CurrentPathStack
    */
-  protected $time;
+  protected $currentPath;
+
+  /**
+   * The content that this class minifies.
+   *
+   * @var string
+   */
+  protected $content;
 
   /**
    * Logger Factory object.
@@ -56,41 +47,61 @@ class MinifyHTMLExit implements EventSubscriberInterface {
   protected $logger;
 
   /**
-   * Abort flag, when dependencies have not been injected.
+   * The path matcher.
    *
-   * @var bool
+   * @var \Drupal\Core\Path\PathMatcherInterface
    */
-  protected $abort = FALSE;
+  protected $pathMatcher;
+
+  /**
+   * A list of placeholders for HTML elements that won't be minified.
+   *
+   * @var array
+   */
+  protected $placeholders = [];
+
+  /**
+   * Time object.
+   *
+   * @var \Drupal\Component\Datetime\TimeInterface
+   */
+  protected $time;
+
+  /**
+   * The placeholder token.
+   *
+   * @var string
+   */
+  protected $token;
 
   /**
    * Constructs a MinifyHTMLExit object.
+   * 
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config
+   *   The config service.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   *   The time service.
+   * @param \Drupal\Core\Logger\LoggerChannelFactory $logger
+   *   The logger service.
+   * @param \Drupal\Core\Path\PathMatcherInterface $pathMatcher
+   *   The path matcher service.
+   * @param \Drupal\Core\Path\CurrentPathStack $currentPath
+   *   The current path service.
    */
-  public function __construct() {
-
-    // To prevent warnings thrown by func_get_arg(), only attempt to get the
-    // args if there are exactly 3.
-    $arg_error = TRUE;
-    if (func_num_args() == 3) {
-
-      // Assigning the arguments this way prevents a signature mismatch
-      // exception that will occur until the cache is cleared to update the
-      // service definition. However, the cache cannot be cleared due to the
-      // exception.
-      $this->config = func_get_arg(0);
-      $this->time = func_get_arg(1);
-      $this->logger = func_get_arg(2);
-
-      if ($this->config) {
-        $this->token = 'MINIFYHTML_' . md5($this->time->getRequestTime());
-        $arg_error = FALSE;
-      }
-    }
-
-    // Abort minification until cache is cleared.
-    if ($arg_error) {
-      \Drupal::messenger()->addWarning(t('Minify HTML has been disabled until the cache has been cleared.'));
-      $this->abort = TRUE;
-    }
+  public function __construct(
+    ConfigFactoryInterface $config,
+    TimeInterface $time,
+    LoggerChannelFactory $logger,
+    PathMatcherInterface $pathMatcher,
+    CurrentPathStack $currentPath
+  ) {
+    $this->config = $config;
+    $this->time = $time;
+    $this->logger = $logger;
+    $this->pathMatcher = $pathMatcher;
+    $this->currentPath = $currentPath;
+    
+    $this->token = 'MINIFYHTML_' . md5($this->time->getRequestTime());
   }
 
   /**
@@ -99,8 +110,15 @@ class MinifyHTMLExit implements EventSubscriberInterface {
    * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
    *   Response event object.
    */
-  public function response(FilterResponseEvent $event) {
-    if (!$this->abort && $this->config->get('minifyhtml.config')->get('minify')) {
+  public function response(ResponseEvent $event) {
+    if ($this->config->get('minifyhtml.config')->get('minify')) {
+
+      // Skip excluded pages.
+      $pages = $this->config->get('minifyhtml.config')->get('exclude_pages');
+      if (!empty($pages) && $this->pathMatcher->matchPath($this->currentPath->getPath(), \mb_strtolower($pages))) {
+        return;
+      }
+
       $response = $event->getResponse();
 
       // Make sure that the following render classes are the only ones that

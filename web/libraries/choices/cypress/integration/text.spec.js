@@ -1,6 +1,6 @@
 describe('Choices - text element', () => {
   beforeEach(() => {
-    cy.visit('/text.html');
+    cy.visit('/text');
   });
 
   describe('scenarios', () => {
@@ -29,7 +29,7 @@ describe('Choices - text element', () => {
             .type('{enter}');
 
           cy.get('[data-test-hook=basic]')
-            .find('.choices__input.is-hidden')
+            .find('.choices__input[hidden]')
             .should('have.value', textInput);
         });
 
@@ -151,7 +151,7 @@ describe('Choices - text element', () => {
             .click();
 
           cy.get('[data-test-hook=remove-button]')
-            .find('.choices__input.is-hidden')
+            .find('.choices__input[hidden]')
             .then($input => {
               expect($input.val()).to.not.contain(textInput);
             });

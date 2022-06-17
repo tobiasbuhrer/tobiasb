@@ -1,6 +1,6 @@
 describe('Choices - select multiple', () => {
   beforeEach(() => {
-    cy.visit('/select-multiple.html');
+    cy.visit('/select-multiple');
   });
 
   describe('scenarios', () => {
@@ -79,7 +79,7 @@ describe('Choices - select multiple', () => {
 
           it('updates the value of the original input', () => {
             cy.get('[data-test-hook=basic]')
-              .find('.choices__input.is-hidden')
+              .find('.choices__input[hidden]')
               .should($select => {
                 expect($select.val()).to.contain(selectedChoiceText);
               });
@@ -150,7 +150,7 @@ describe('Choices - select multiple', () => {
 
           it('updates the value of the original input', () => {
             cy.get('[data-test-hook=basic]')
-              .find('.choices__input.is-hidden')
+              .find('.choices__input[hidden]')
               .should($select => {
                 const val = $select.val() || [];
                 expect(val).to.not.contain(removedChoiceText);
@@ -334,7 +334,7 @@ describe('Choices - select multiple', () => {
       });
 
       describe('on click', () => {
-        it('does not opens choice dropdown', () => {
+        it('does not open choice dropdown', () => {
           cy.get('[data-test-hook=disabled-via-attr]')
             .find('.choices')
             .click()
@@ -486,18 +486,40 @@ describe('Choices - select multiple', () => {
       });
     });
 
-    describe('placeholder', () => {
-      /*
-        {
-          placeholder: true,
-          placeholderValue: 'I am a placeholder',
-        }
-      */
+    describe('placeholder via empty option value', () => {
       describe('when no value has been inputted', () => {
         it('displays a placeholder', () => {
-          cy.get('[data-test-hook=placeholder]')
+          cy.get('[data-test-hook=placeholder-via-option-value]')
             .find('.choices__input--cloned')
             .should('have.attr', 'placeholder', 'I am a placeholder');
+        });
+      });
+
+      describe('when a value has been inputted', () => {
+        it('does not display a placeholder', () => {
+          cy.get('[data-test-hook=placeholder-via-option-value]')
+            .find('.choices__input--cloned')
+            .type('test')
+            .should('not.have.value', 'I am a placeholder');
+        });
+      });
+    });
+
+    describe('placeholder via option attribute', () => {
+      describe('when no value has been inputted', () => {
+        it('displays a placeholder', () => {
+          cy.get('[data-test-hook=placeholder-via-option-attr]')
+            .find('.choices__input--cloned')
+            .should('have.attr', 'placeholder', 'I am a placeholder');
+        });
+      });
+
+      describe('when a value has been inputted', () => {
+        it('does not display a placeholder', () => {
+          cy.get('[data-test-hook=placeholder-via-option-attr]')
+            .find('.choices__input--cloned')
+            .type('test')
+            .should('not.have.value', 'I am a placeholder');
         });
       });
     });
@@ -515,7 +537,7 @@ describe('Choices - select multiple', () => {
         });
 
         describe('on click', () => {
-          it('does not opens choice dropdown', () => {
+          it('does not open choice dropdown', () => {
             cy.get('[data-test-hook=remote-data]')
               .find('.choices')
               .click()
@@ -567,6 +589,8 @@ describe('Choices - select multiple', () => {
 
       it('scrolls to next choice on down arrow', () => {
         for (let index = 0; index < choicesCount; index++) {
+          cy.wait(100);
+
           cy.get('[data-test-hook=scrolling-dropdown]')
             .find('.choices__list--dropdown .choices__list .is-highlighted')
             .should($choice => {
@@ -753,7 +777,7 @@ describe('Choices - select multiple', () => {
     describe('within form', () => {
       describe('selecting choice', () => {
         describe('on enter key', () => {
-          it('does not submit form', () => {
+          it('selects choice', () => {
             cy.get('[data-test-hook=within-form] form').then($form => {
               $form.submit(() => {
                 // this will fail the test if the form submits
@@ -763,7 +787,7 @@ describe('Choices - select multiple', () => {
 
             cy.get('[data-test-hook=within-form]')
               .find('.choices__input--cloned')
-              .focus()
+              .click()
               .type('{enter}');
 
             cy.get('[data-test-hook=within-form]')
@@ -804,7 +828,7 @@ describe('Choices - select multiple', () => {
 
       it('updates the value of the original input', () => {
         cy.get('[data-test-hook=set-choice-by-value]')
-          .find('.choices__input.is-hidden')
+          .find('.choices__input[hidden]')
           .should($select => {
             const val = $select.val() || [];
             expect(val).to.contain(dynamicallySelectedChoiceValue);

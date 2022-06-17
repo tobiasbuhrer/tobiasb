@@ -1,17 +1,23 @@
+/**
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
 export const getRandomNumber = (min, max) =>
   Math.floor(Math.random() * (max - min) + min);
 
-export const generateChars = length => {
-  let chars = '';
+/**
+ * @param {number} length
+ * @returns {string}
+ */
+export const generateChars = length =>
+  Array.from({ length }, () => getRandomNumber(0, 36).toString(36)).join('');
 
-  for (let i = 0; i < length; i++) {
-    const randomChar = getRandomNumber(0, 36);
-    chars += randomChar.toString(36);
-  }
-
-  return chars;
-};
-
+/**
+ * @param {HTMLInputElement | HTMLSelectElement} element
+ * @param {string} prefix
+ * @returns {string}
+ */
 export const generateId = (element, prefix) => {
   let id =
     element.id ||
@@ -23,53 +29,68 @@ export const generateId = (element, prefix) => {
   return id;
 };
 
+/**
+ * @param {any} obj
+ * @returns {string}
+ */
 export const getType = obj => Object.prototype.toString.call(obj).slice(8, -1);
 
+/**
+ * @param {string} type
+ * @param {any} obj
+ * @returns {boolean}
+ */
 export const isType = (type, obj) =>
   obj !== undefined && obj !== null && getType(obj) === type;
 
-export const isElement = element => element instanceof Element;
-
+/**
+ * @param {HTMLElement} element
+ * @param {HTMLElement} [wrapper={HTMLDivElement}]
+ * @returns {HTMLElement}
+ */
 export const wrap = (element, wrapper = document.createElement('div')) => {
   if (element.nextSibling) {
     element.parentNode.insertBefore(wrapper, element.nextSibling);
   } else {
     element.parentNode.appendChild(wrapper);
   }
+
   return wrapper.appendChild(element);
 };
 
-export const findAncestorByAttrName = (el, attr) => {
-  let target = el;
+/**
+ * @param {Element} startEl
+ * @param {string} selector
+ * @param {1 | -1} direction
+ * @returns {Element | undefined}
+ */
+export const getAdjacentEl = (startEl, selector, direction = 1) => {
+  if (!(startEl instanceof Element) || typeof selector !== 'string') {
+    return undefined;
+  }
 
-  while (target) {
-    if (target.hasAttribute(attr)) {
-      return target;
+  const prop = `${direction > 0 ? 'next' : 'previous'}ElementSibling`;
+
+  let sibling = startEl[prop];
+  while (sibling) {
+    if (sibling.matches(selector)) {
+      return sibling;
     }
-
-    target = target.parentElement;
+    sibling = sibling[prop];
   }
 
-  return null;
+  return sibling;
 };
 
-export const getAdjacentEl = (startEl, className, direction = 1) => {
-  if (!startEl || !className) {
-    return;
-  }
-
-  const parent = startEl.parentNode.parentNode;
-  const children = Array.from(parent.querySelectorAll(className));
-
-  const startPos = children.indexOf(startEl);
-  const operatorDirection = direction > 0 ? 1 : -1;
-
-  return children[startPos + operatorDirection];
-};
-
-export const isScrolledIntoView = (el, parent, direction = 1) => {
-  if (!el) {
-    return;
+/**
+ * @param {Element} element
+ * @param {Element} parent
+ * @param {-1 | 1} direction
+ * @returns {boolean}
+ */
+export const isScrolledIntoView = (element, parent, direction = 1) => {
+  if (!element) {
+    return false;
   }
 
   let isVisible;
@@ -77,17 +98,22 @@ export const isScrolledIntoView = (el, parent, direction = 1) => {
   if (direction > 0) {
     // In view from bottom
     isVisible =
-      parent.scrollTop + parent.offsetHeight >= el.offsetTop + el.offsetHeight;
+      parent.scrollTop + parent.offsetHeight >=
+      element.offsetTop + element.offsetHeight;
   } else {
     // In view from top
-    isVisible = el.offsetTop >= parent.scrollTop;
+    isVisible = element.offsetTop >= parent.scrollTop;
   }
 
   return isVisible;
 };
 
+/**
+ * @param {any} value
+ * @returns {any}
+ */
 export const sanitise = value => {
-  if (!isType('String', value)) {
+  if (typeof value !== 'string') {
     return value;
   }
 
@@ -98,8 +124,12 @@ export const sanitise = value => {
     .replace(/"/g, '&quot;');
 };
 
+/**
+ * @returns {() => (str: string) => Element}
+ */
 export const strToEl = (() => {
   const tmpEl = document.createElement('div');
+
   return str => {
     const cleanedInput = str.trim();
     tmpEl.innerHTML = cleanedInput;
@@ -114,69 +144,31 @@ export const strToEl = (() => {
 })();
 
 /**
- * Determines the width of a passed input based on its value and passes
- * it to the supplied callback function.
+ * @param {{ label?: string, value: string }} a
+ * @param {{ label?: string, value: string }} b
+ * @returns {number}
  */
-export const calcWidthOfInput = (input, callback) => {
-  const value = input.value || input.placeholder;
-  let width = input.offsetWidth;
+export const sortByAlpha = (
+  { value, label = value },
+  { value: value2, label: label2 = value2 },
+) =>
+  label.localeCompare(label2, [], {
+    sensitivity: 'base',
+    ignorePunctuation: true,
+    numeric: true,
+  });
 
-  if (value) {
-    const testEl = strToEl(`<span>${sanitise(value)}</span>`);
-    testEl.style.position = 'absolute';
-    testEl.style.padding = '0';
-    testEl.style.top = '-9999px';
-    testEl.style.left = '-9999px';
-    testEl.style.width = 'auto';
-    testEl.style.whiteSpace = 'pre';
-
-    if (document.body.contains(input) && window.getComputedStyle) {
-      const inputStyle = window.getComputedStyle(input);
-
-      if (inputStyle) {
-        testEl.style.fontSize = inputStyle.fontSize;
-        testEl.style.fontFamily = inputStyle.fontFamily;
-        testEl.style.fontWeight = inputStyle.fontWeight;
-        testEl.style.fontStyle = inputStyle.fontStyle;
-        testEl.style.letterSpacing = inputStyle.letterSpacing;
-        testEl.style.textTransform = inputStyle.textTransform;
-        testEl.style.padding = inputStyle.padding;
-      }
-    }
-
-    document.body.appendChild(testEl);
-
-    requestAnimationFrame(() => {
-      if (value && testEl.offsetWidth !== input.offsetWidth) {
-        width = testEl.offsetWidth + 4;
-      }
-
-      document.body.removeChild(testEl);
-
-      callback.call(this, `${width}px`);
-    });
-  } else {
-    callback.call(this, `${width}px`);
-  }
-};
-
-export const sortByAlpha = (a, b) => {
-  const labelA = `${a.label || a.value}`.toLowerCase();
-  const labelB = `${b.label || b.value}`.toLowerCase();
-
-  if (labelA < labelB) {
-    return -1;
-  }
-
-  if (labelA > labelB) {
-    return 1;
-  }
-
-  return 0;
-};
-
+/**
+ * @param {{ score: number }} a
+ * @param {{ score: number }} b
+ */
 export const sortByScore = (a, b) => a.score - b.score;
 
+/**
+ * @param {HTMLElement} element
+ * @param {string} type
+ * @param {object} customArgs
+ */
 export const dispatchEvent = (element, type, customArgs = null) => {
   const event = new CustomEvent(type, {
     detail: customArgs,
@@ -187,48 +179,33 @@ export const dispatchEvent = (element, type, customArgs = null) => {
   return element.dispatchEvent(event);
 };
 
-export const getWindowHeight = () => {
-  const body = document.body;
-  const html = document.documentElement;
-  return Math.max(
-    body.scrollHeight,
-    body.offsetHeight,
-    html.clientHeight,
-    html.scrollHeight,
-    html.offsetHeight,
-  );
-};
-
-export const fetchFromObject = (object, path) => {
-  const index = path.indexOf('.');
-
-  if (index > -1) {
-    return fetchFromObject(
-      object[path.substring(0, index)],
-      path.substr(index + 1),
-    );
-  }
-
-  return object[path];
-};
-
-export const isIE11 = () =>
-  !!(
-    navigator.userAgent.match(/Trident/) &&
-    navigator.userAgent.match(/rv[ :]11/)
-  );
-
+/**
+ * @param {array} array
+ * @param {any} value
+ * @param {string} [key="value"]
+ * @returns {boolean}
+ */
 export const existsInArray = (array, value, key = 'value') =>
   array.some(item => {
-    if (isType('String', value)) {
+    if (typeof value === 'string') {
       return item[key] === value.trim();
     }
 
     return item[key] === value;
   });
 
+/**
+ * @param {any} obj
+ * @returns {any}
+ */
 export const cloneObject = obj => JSON.parse(JSON.stringify(obj));
 
+/**
+ * Returns an array of keys present on the first but missing on the second object
+ * @param {object} a
+ * @param {object} b
+ * @returns {string[]}
+ */
 export const diff = (a, b) => {
   const aKeys = Object.keys(a).sort();
   const bKeys = Object.keys(b).sort();
