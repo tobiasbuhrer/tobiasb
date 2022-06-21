@@ -4,7 +4,7 @@ namespace Drupal\minifyhtml\EventSubscriber;
 
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Logger\LoggerChannelFactory;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Path\CurrentPathStack;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -42,7 +42,7 @@ class MinifyHTMLExit implements EventSubscriberInterface {
   /**
    * Logger Factory object.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactory
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
    */
   protected $logger;
 
@@ -81,7 +81,7 @@ class MinifyHTMLExit implements EventSubscriberInterface {
    *   The config service.
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   The time service.
-   * @param \Drupal\Core\Logger\LoggerChannelFactory $logger
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
    *   The logger service.
    * @param \Drupal\Core\Path\PathMatcherInterface $pathMatcher
    *   The path matcher service.
@@ -91,7 +91,7 @@ class MinifyHTMLExit implements EventSubscriberInterface {
   public function __construct(
     ConfigFactoryInterface $config,
     TimeInterface $time,
-    LoggerChannelFactory $logger,
+    LoggerChannelFactoryInterface $logger,
     PathMatcherInterface $pathMatcher,
     CurrentPathStack $currentPath
   ) {
