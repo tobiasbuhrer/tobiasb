@@ -928,12 +928,12 @@
             ),
         ),
         'drupal/leaflet' => array(
-            'pretty_version' => '2.2.3',
-            'version' => '2.2.3.0',
+            'pretty_version' => '2.2.4',
+            'version' => '2.2.4.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/leaflet',
             'aliases' => array(),
-            'reference' => '2.2.3',
+            'reference' => '2.2.4',
             'dev_requirement' => false,
         ),
         'drupal/leaflet_more_maps' => array(
