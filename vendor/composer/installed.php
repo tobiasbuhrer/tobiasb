@@ -821,12 +821,12 @@
             ),
         ),
         'drupal/geofield' => array(
-            'pretty_version' => '1.41.0',
-            'version' => '1.41.0.0',
+            'pretty_version' => '1.42.0',
+            'version' => '1.42.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/geofield',
             'aliases' => array(),
-            'reference' => '8.x-1.41',
+            'reference' => '8.x-1.42',
             'dev_requirement' => false,
         ),
         'drupal/hal' => array(

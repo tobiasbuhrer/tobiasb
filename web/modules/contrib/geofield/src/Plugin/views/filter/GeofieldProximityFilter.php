@@ -338,7 +338,7 @@ class GeofieldProximityFilter extends NumericFilter {
     parent::validateExposed($form, $form_state);
     $form_values = $form_state->getValues();
     $identifier = $this->options['expose']['identifier'];
-    $which = in_array($form_values["field_geofield_proximity_op"], $this->operatorValues(2)) ? 'minmax' : 'value';
+    $which = in_array($form_values[$identifier . "_op"], $this->operatorValues(2)) ? 'minmax' : 'value';
 
     // Validate the Distance field.
     if ($which !== 'minmax' && isset($form_values[$identifier]['value']) && (!empty($form_values[$identifier]['value']) && !is_numeric($form_values[$identifier]['value']))) {
