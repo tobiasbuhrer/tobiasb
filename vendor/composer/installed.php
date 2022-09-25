@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1bff38ccb1e49dc8f63aeda4e52fce0f437104a6',
+        'reference' => '8c61880adef37067472f3a218321956aec1a952e',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -340,7 +340,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1bff38ccb1e49dc8f63aeda4e52fce0f437104a6',
+            'reference' => '8c61880adef37067472f3a218321956aec1a952e',
             'dev_requirement' => false,
         ),
         'drupal/bulma' => array(
@@ -732,12 +732,12 @@
             'dev_requirement' => false,
         ),
         'drupal/video' => array(
-            'pretty_version' => '1.5.0-alpha1',
-            'version' => '1.5.0.0-alpha1',
+            'pretty_version' => '3.0.3',
+            'version' => '3.0.3.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/video',
             'aliases' => array(),
-            'reference' => '8.x-1.5-alpha1',
+            'reference' => '3.0.3',
             'dev_requirement' => false,
         ),
         'drupal/webform' => array(

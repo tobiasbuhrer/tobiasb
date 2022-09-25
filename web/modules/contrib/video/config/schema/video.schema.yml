@@ -136,3 +136,18 @@ field.formatter.settings.video_embed_player:
     related_videos:
       type: boolean
       label: 'Related Videos'
+
+field.storage_settings.video:
+  type: field.storage_settings.file
+  label: 'Video storage settings'
+  mapping:
+    default_video:
+      type: mapping
+      label: 'Default video settings'
+      mapping:
+        uuid:
+          type: string
+          label: 'UUID'
+        data:
+          type: string
+          label: 'Additional data'

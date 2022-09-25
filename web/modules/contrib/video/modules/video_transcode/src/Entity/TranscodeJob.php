@@ -186,7 +186,7 @@ class TranscodeJob extends ContentEntityBase implements TranscodeJobInterface {
         $preset_options[$key] = $preset->label;
       }
       if(empty($preset_options)){
-        $preset_options['_none'] = t('None - Please create a Video Preset @here.', ['@here' => Link::fromTextAndUrl(t('here'), Url::fromUri('internal:/admin/config/media/transcode-preset'))]);
+        $preset_options['_none'] = t('None - Please create a Video Preset @here.', ['@here' => Link::createFromRoute(t('here'), 'entity.video_transcode_preset.list')]);
       }
       $fields['transcoder_preset'] = BaseFieldDefinition::create('list_string')
         ->setLabel(t('Transcoder preset'))

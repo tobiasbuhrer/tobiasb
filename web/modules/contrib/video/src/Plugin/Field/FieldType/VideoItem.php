@@ -159,7 +159,7 @@ class VideoItem extends FileItem {
     // Generate a file entity.
     $destination = $dirname . '/' . $random->name(10, TRUE) . '.mp4';
     $data = $random->paragraphs(3);
-    $file = file_save_data($data, $destination, FileSystemInterface::EXISTS_ERROR);
+    $file = \Drupal::service('file.repository')->writeData($data, $destination, FileSystemInterface::EXISTS_ERROR);
     $values = [
       'target_id' => $file->id(),
     ];

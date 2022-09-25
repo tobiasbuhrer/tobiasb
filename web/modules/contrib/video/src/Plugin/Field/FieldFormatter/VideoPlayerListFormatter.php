@@ -42,9 +42,7 @@ class VideoPlayerListFormatter extends VideoPlayerFormatter implements Container
     // Collect cache tags to be added for each item in the field.
     $video_items = [];
     foreach ($files as $delta => $file) {
-      $video_uri = $file->getFileUri();
-      $relative_url = file_url_transform_relative(file_create_url($video_uri));
-      $video_items[] = Url::fromUserInput($relative_url);
+      $video_items[] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
     }
     $elements[] = [
       '#theme' => 'video_player_formatter',
@@ -63,9 +61,9 @@ class VideoPlayerListFormatter extends VideoPlayerFormatter implements Container
     }
     else{
       $form_mode = 'default';
-      $entity_form_display = \Drupal::entityTypeManager()
-        ->getStorage('entity_form_display')
-        ->load($field_definition->getTargetEntityTypeId() . '.' . $field_definition->getTargetBundle() . '.' . $form_mode);
+      $entity_form_display = \Drupal::service('entity_display.repository')
+      ->getFormDisplay(
+        $field_definition->getTargetEntityTypeId(), $field_definition->getTargetBundle(), $form_mode);
       if (!$entity_form_display) {
         $entity_form_display = \Drupal::entityTypeManager()
           ->getStorage('entity_form_display')

@@ -156,9 +156,9 @@ class VideoEmbedPlayerFormatter extends FormatterBase implements ContainerFactor
     }
     else {
       $form_mode = 'default';
-      $entity_form_display = \Drupal::entityTypeManager()
-        ->getStorage('entity_form_display')
-        ->load($field_definition->getTargetEntityTypeId() . '.' . $field_definition->getTargetBundle() . '.' . $form_mode);
+      $entity_form_display = \Drupal::service('entity_display.repository')
+      ->getFormDisplay(
+        $field_definition->getTargetEntityTypeId(), $field_definition->getTargetBundle(), $form_mode);
       if (!$entity_form_display) {
         $entity_form_display = \Drupal::entityTypeManager()
           ->getStorage('entity_form_display')
@@ -170,9 +170,9 @@ class VideoEmbedPlayerFormatter extends FormatterBase implements ContainerFactor
           ]);
       }
       $widget = $entity_form_display->getRenderer($field_definition->getName());
-      $widget_id = $widget->getBaseId();
-      if($widget_id == 'video_embed'){
-        return TRUE;
+      if ($widget) {
+        $widget_id = $widget->getBaseId();
+        if($widget_id == 'video_embed') return TRUE;
       }
     }
     return FALSE;

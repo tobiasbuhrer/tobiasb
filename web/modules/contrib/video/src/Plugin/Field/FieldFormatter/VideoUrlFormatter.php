@@ -100,7 +100,7 @@ class VideoUrlFormatter extends VideoPlayerFormatterBase implements ContainerFac
 
     // Collect cache tags to be added for each item in the field.
     foreach ($files as $delta => $file) {
-      $video_uri = file_create_url($file->getFileUri());
+      $video_uri = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
       $elements[$delta] = ['#markup' => $video_uri];
     }
     return $elements;
