@@ -53,7 +53,7 @@ class DevelGenerateCommandsTest extends BrowserTestBase {
   /**
    * Prepares the testing environment.
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->setUpData();
   }
@@ -84,7 +84,7 @@ class DevelGenerateCommandsTest extends BrowserTestBase {
       'languages' => 'fr',
     ]);
     $term = Term::load(60);
-    $this->assertEquals($term->language()->getId(), 'fr');
+    $this->assertEquals('fr', $term->language()->getId());
 
     // Make sure terms gets created, with proper translation.
     $this->drush('devel-generate-terms', [10], [
@@ -146,16 +146,16 @@ class DevelGenerateCommandsTest extends BrowserTestBase {
 
     // Generate content with a higher number that triggers batch running.
     $this->drush('devel-generate-content', [55], ['kill' => NULL]);
-    $nodes = \Drupal::entityQuery('node')->execute();
+    $nodes = \Drupal::entityQuery('node')->accessCheck(FALSE)->execute();
     $this->assertCount(55, $nodes);
     $messages = $this->getErrorOutput();
     $this->assertStringContainsStringIgnoringCase('Finished 55 elements created successfully.', $messages, 'devel-generate-content batch ending message not found');
 
     // Generate content with specified language.
     $this->drush('devel-generate-content', [10], ['kill' => NULL, 'languages' => 'fr']);
-    $nodes = \Drupal::entityQuery('node')->execute();
+    $nodes = \Drupal::entityQuery('node')->accessCheck(FALSE)->execute();
     $node = Node::load(end($nodes));
-    $this->assertEquals($node->language()->getId(), 'fr');
+    $this->assertEquals('fr', $node->language()->getId());
 
     // Generate content with translations.
     $this->drush('devel-generate-content', [18], [
@@ -164,8 +164,8 @@ class DevelGenerateCommandsTest extends BrowserTestBase {
       'translations' => 'de',
     ]);
     // Only articles are enabled for translations.
-    $articles = \Drupal::entityQuery('node')->condition('type', 'article')->execute();
-    $pages = \Drupal::entityQuery('node')->condition('type', 'page')->execute();
+    $articles = \Drupal::entityQuery('node')->accessCheck(FALSE)->condition('type', 'article')->execute();
+    $pages = \Drupal::entityQuery('node')->accessCheck(FALSE)->condition('type', 'page')->execute();
     $this->assertCount(18, $articles + $pages);
     // Check that the last article has 'de' and 'fr' but no 'ca' translation.
     $node = Node::load(end($articles));
@@ -183,7 +183,7 @@ class DevelGenerateCommandsTest extends BrowserTestBase {
       'add-type-label' => NULL,
     ]);
     // Count the page nodes.
-    $nodes = \Drupal::entityQuery('node')->condition('type', 'page')->execute();
+    $nodes = \Drupal::entityQuery('node')->accessCheck(FALSE)->condition('type', 'page')->execute();
     $this->assertCount(9, $nodes);
     $messages = $this->getErrorOutput();
     $this->assertStringContainsStringIgnoringCase('Created 9 nodes', $messages, 'batch end message not found');
@@ -200,7 +200,7 @@ class DevelGenerateCommandsTest extends BrowserTestBase {
     // Count the nodes assigned to user 2. We have two other users (0 and 1) so
     // if the code was broken and users were assigned randomly the chance that
     // this fauly would be detected is 1 - (1/3 ** 10) = 99.998%.
-    $nodes = \Drupal::entityQuery('node')->condition('type', 'article')->condition('uid', ['2'], 'IN')->execute();
+    $nodes = \Drupal::entityQuery('node')->accessCheck(FALSE)->condition('type', 'article')->condition('uid', ['2'], 'IN')->execute();
     $this->assertCount(10, $nodes);
 
   }
@@ -214,7 +214,7 @@ class DevelGenerateCommandsTest extends BrowserTestBase {
     $media_type2 = $this->createMediaType('audio_file');
     // Make sure media items gets created with batch process.
     $this->drush('devel-generate-media', [53], ['kill' => NULL]);
-    $this->assertCount(53, \Drupal::entityQuery('media')->execute());
+    $this->assertCount(53, \Drupal::entityQuery('media')->accessCheck(FALSE)->execute());
     $messages = $this->getErrorOutput();
     $this->assertStringContainsStringIgnoringCase('Finished 53 elements created successfully.', $messages, 'devel-generate-media batch ending message not found');
 
@@ -223,7 +223,7 @@ class DevelGenerateCommandsTest extends BrowserTestBase {
       'media-types' => $media_type1->id() . ',' . $media_type2->id(),
       'kill' => NULL,
     ]);
-    $this->assertCount(7, \Drupal::entityQuery('media')->execute());
+    $this->assertCount(7, \Drupal::entityQuery('media')->accessCheck(FALSE)->execute());
   }
 
 }

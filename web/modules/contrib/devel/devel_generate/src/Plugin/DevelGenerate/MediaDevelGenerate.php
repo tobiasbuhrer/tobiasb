@@ -324,7 +324,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
       'title' => $this->t('Generating media items'),
       'operations' => $operations,
       'finished' => 'devel_generate_batch_finished',
-      'file' => drupal_get_path('module', 'devel_generate') . '/devel_generate.batch.inc',
+      'file' => \Drupal::service('extension.path.resolver')->getPath('module', 'devel_generate') . '/devel_generate.batch.inc',
     ];
     batch_set($batch);
 
@@ -412,7 +412,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
     $values['name_length'] = 6;
     $values['num'] = array_shift($args);
 
-    $all_media_types = array_values($this->mediaTypeStorage->getQuery()->execute());
+    $all_media_types = array_values($this->mediaTypeStorage->getQuery()->accessCheck(FALSE)->execute());
     $requested_media_types = StringUtils::csvToArray($options['media-types'] ?: $all_media_types);
 
     if (empty($requested_media_types)) {
@@ -445,6 +445,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
   protected function mediaKill(array $values) {
     $mids = $this->mediaStorage->getQuery()
       ->condition('bundle', $values['media_types'], 'IN')
+      ->accessCheck(FALSE)
       ->execute();
 
     if (!empty($mids)) {
@@ -467,6 +468,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
     // Get user id.
     $users = array_values($this->userStorage->getQuery()
       ->range(0, 50)
+      ->accessCheck(FALSE)
       ->execute());
     $users = array_merge($users, ['0']);
     $results['users'] = $users;

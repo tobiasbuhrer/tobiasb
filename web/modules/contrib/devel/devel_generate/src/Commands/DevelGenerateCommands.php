@@ -227,7 +227,7 @@ class DevelGenerateCommands extends DrushCommands {
    * @option translations A comma-separated list of language codes for translations.
    * @option add-type-label Add the content type label to the front of the node title
    */
-  public function content($num = 50, $max_comments = 0, array $options = ['kill' => FALSE, 'bundles' => 'page,article', 'authors' => NULL, 'feedback' => 1000, 'languages' => NULL, 'translations' => NULL, 'add-type-label' => FALSE]) {
+  public function content($num = 50, $max_comments = 0, array $options = ['kill' => FALSE, 'bundles' => 'page,article', 'authors' => NULL, 'feedback' => 1000, 'skip-fields' => NULL, 'languages' => NULL, 'translations' => NULL, 'add-type-label' => FALSE]) {
     $this->generate();
   }
 
@@ -247,7 +247,6 @@ class DevelGenerateCommands extends DrushCommands {
    * @option kill Delete all media items before generating new media.
    * @option media-types A comma-delimited list of media types to create.
    * @option feedback An integer representing interval for insertion rate logging.
-   * @option skip-fields A comma delimited list of fields to omit when generating random values.
    * @option languages A comma-separated list of language codes
    */
   public function media($num = 50, array $options = ['kill' => FALSE, 'media-types' => NULL, 'feedback' => 1000]) {

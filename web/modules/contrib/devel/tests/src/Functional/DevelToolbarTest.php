@@ -48,7 +48,7 @@ class DevelToolbarTest extends DevelBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->drupalPlaceBlock('local_tasks_block');
@@ -100,7 +100,7 @@ class DevelToolbarTest extends DevelBrowserTestBase {
       'toolbar_items[devel.event_info]' => 'devel.event_info',
       'toolbar_items[devel.theme_registry]' => 'devel.theme_registry',
     ];
-    $this->drupalPostForm('admin/config/development/devel/toolbar', $edit, 'Save configuration');
+    $this->submitForm($edit, 'Save configuration');
     $this->assertSession()->pageTextContains('The configuration options have been saved.');
 
     $expected_items = array_merge($this->defaultToolbarItems, ['devel.event_info', 'devel.theme_registry']);

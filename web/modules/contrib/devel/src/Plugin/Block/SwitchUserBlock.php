@@ -185,6 +185,7 @@ class SwitchUserBlock extends BlockBase implements ContainerFactoryPluginInterfa
       ->condition('uid', 0, '>')
       ->condition('status', 0, '>')
       ->sort('access', 'DESC')
+      ->accessCheck(FALSE)
       ->range(0, $list_size);
 
     $roles = user_roles(TRUE, 'switch users');
@@ -202,6 +203,7 @@ class SwitchUserBlock extends BlockBase implements ContainerFactoryPluginInterfa
         ->condition('uid', 0, '>')
         ->condition('status', 0, '>')
         ->sort('access', 'DESC')
+        ->accessCheck(FALSE)
         ->range(0, $list_size);
 
       // Excludes the prioritized user ids only if the previous query return

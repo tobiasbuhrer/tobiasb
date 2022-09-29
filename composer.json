@@ -334,7 +334,7 @@
         "drupal/core-composer-scaffold": "^9.0.0",
         "drupal/core-project-message": "^9.0.0",
         "drupal/core-recommended": "^9.0.0",
-        "drupal/devel": "^4.1",
+        "drupal/devel": "^5.0",
         "drupal/entity": "^1.0",
         "drupal/file_mdm": "^2.1",
         "drupal/geofield": "^1.0",

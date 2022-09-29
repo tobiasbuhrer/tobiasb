@@ -40,7 +40,7 @@ abstract class DevelGenerateBrowserTestBase extends BrowserTestBase {
   /**
    * Prepares the testing environment.
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->setUpData();
   }

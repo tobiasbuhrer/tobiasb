@@ -38,7 +38,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     "max_comments" = 0,
  *     "title_length" = 4,
  *     "add_type_label" = FALSE
- *   }
+ *   },
+ *   dependencies = {
+ *     "node",
+ *   },
  * )
  */
 class ContentDevelGenerate extends DevelGenerateBase implements ContainerFactoryPluginInterface {
@@ -314,6 +317,12 @@ class ContentDevelGenerate extends DevelGenerateBase implements ContainerFactory
       '#min' => 1,
       '#max' => 255,
     ];
+    $form['skip_fields'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Fields to leave empty'),
+      '#description' => $this->t('Enter the field names as a comma-separated list. These will be skipped and have no value in the generated content.'),
+      '#default_value' => NULL,
+    ];
     $form['add_type_label'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Prefix the title with the content type label.'),
@@ -379,6 +388,8 @@ class ContentDevelGenerate extends DevelGenerateBase implements ContainerFactory
     if (!array_filter($form_state->getValue('node_types'))) {
       $form_state->setErrorByName('node_types', $this->t('Please select at least one content type'));
     }
+    $skip_fields = is_null($form_state->getValue('skip_fields')) ? [] : StringUtils::csvToArray($form_state->getValue('skip_fields'));
+    $form_state->setValue('skip_fields', $skip_fields);
   }
 
   /**
@@ -464,7 +475,7 @@ class ContentDevelGenerate extends DevelGenerateBase implements ContainerFactory
       'title' => $this->t('Generating Content'),
       'operations' => $operations,
       'finished' => 'devel_generate_batch_finished',
-      'file' => drupal_get_path('module', 'devel_generate') . '/devel_generate.batch.inc',
+      'file' => \Drupal::service('extension.path.resolver')->getPath('module', 'devel_generate') . '/devel_generate.batch.inc',
     ];
 
     batch_set($batch);
@@ -530,9 +541,13 @@ class ContentDevelGenerate extends DevelGenerateBase implements ContainerFactory
     $values['add_type_label'] = $options['add-type-label'];
     $values['kill'] = $options['kill'];
     $values['feedback'] = $options['feedback'];
+    $values['skip_fields'] = is_null($options['skip-fields']) ? [] : StringUtils::csvToArray($options['skip-fields']);
     $values['title_length'] = 6;
     $values['num'] = array_shift($args);
     $values['max_comments'] = array_shift($args);
+    // Do not use csvToArray here because it removes '0' values.
+    $values['authors'] = is_null($options['authors']) ? [] : explode(',', $options['authors']);
+
     $all_types = array_keys(node_type_get_names());
     $default_types = array_intersect(['page', 'article'], $all_types);
     $selected_types = StringUtils::csvToArray($options['bundles'] ?: $default_types);
@@ -552,9 +567,6 @@ class ContentDevelGenerate extends DevelGenerateBase implements ContainerFactory
     if (array_diff($node_types, $all_types)) {
       throw new \Exception(dt('One or more content types have been entered that don\'t exist on this site'));
     }
-
-    $values['authors'] = is_null($options['authors']) ? [] : explode(',',
-      $options['authors']);
 
     if ($this->isBatch($values['num'], $values['max_comments'])) {
       $this->drushBatch = TRUE;
@@ -580,6 +592,7 @@ class ContentDevelGenerate extends DevelGenerateBase implements ContainerFactory
   protected function contentKill(array $values) {
     $nids = $this->nodeStorage->getQuery()
       ->condition('type', $values['node_types'], 'IN')
+      ->accessCheck(FALSE)
       ->execute();
 
     if (!empty($nids)) {
@@ -657,6 +670,11 @@ class ContentDevelGenerate extends DevelGenerateBase implements ContainerFactory
 
     // Populate all fields with sample values.
     $this->populateFields($node);
+
+    // Remove the fields which are intended to have no value.
+    foreach ($results['skip_fields'] as $field) {
+      unset($node->$field);
+    }
 
     // See devel_generate_entity_insert() for actions that happen before and
     // after this save.

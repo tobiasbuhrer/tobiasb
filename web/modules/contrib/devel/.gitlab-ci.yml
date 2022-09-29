@@ -8,9 +8,6 @@ include:
 # copying this file to your new project.
 #
 
-# Add /webprofiler to ignored paths.
 # Set allow_failure to false so that the test fails for coding standards faults.
 phpcs:
-  script:
-    - PWD=$(pwd) && vendor/bin/phpcs --ignore=$PWD/web/,$PWD/vendor/,$PWD/webprofiler/ --report-junit=junit.xml --report-full --report-summary --report-source
   allow_failure: false

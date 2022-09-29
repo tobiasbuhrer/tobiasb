@@ -112,13 +112,6 @@ abstract class DevelGenerateBase extends PluginBase implements DevelGenerateBase
     /** @var \Drupal\field\FieldConfigInterface[] $instances */
     $instances = $field_config_storage->loadByProperties($properties);
 
-    // @todo not implemented for Drush9+. Possibly remove.
-    if ($skips = @$_REQUEST['skip-fields']) {
-      foreach (explode(',', $skips) as $skip) {
-        unset($instances[$skip]);
-      }
-    }
-
     foreach ($instances as $instance) {
       $field_storage = $instance->getFieldStorageDefinition();
       $max = $cardinality = $field_storage->getCardinality();

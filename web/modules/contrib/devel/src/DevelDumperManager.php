@@ -9,7 +9,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class DevelDumperManager.
+ * Manager class for DevelDumper.
  */
 class DevelDumperManager implements DevelDumperManagerInterface {
 

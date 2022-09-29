@@ -681,7 +681,8 @@ function ddebug_backtrace($return = FALSE, $pop = 0, $options = DEBUG_BACKTRACE_
         }
         else {
           $function = 'main()';
-          $call['args'] = $_GET;
+          $requestStack = \Drupal::service('request_stack');
+          $call['args'] = $requestStack->getCurrentRequest()->query->all();
         }
         $nicetrace[($counter <= 10 ? $nbsp : '') . --$counter . ': ' . $function] = $call;
         array_shift($backtrace);
