@@ -1152,7 +1152,7 @@
         },
         {
             "name": "dflydev/dot-access-configuration",
-            "version": "v1.0.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dflydev/dflydev-dot-access-configuration.git",
@@ -1175,6 +1175,7 @@
             "suggest": {
                 "symfony/yaml": "Required for using the YAML Configuration Builders"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1210,7 +1211,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dflydev/dflydev-dot-access-configuration/issues",
-                "source": "https://github.com/dflydev/dflydev-dot-access-configuration/tree/master"
+                "source": "https://github.com/dflydev/dflydev-dot-access-configuration/tree/v1.0.3"
             },
             "time": "2018-09-08T23:00:17+00:00"
         },
@@ -2220,16 +2221,16 @@
         },
         {
             "name": "drupal/console",
-            "version": "1.9.9",
+            "version": "1.9.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hechoendrupal/drupal-console.git",
-                "reference": "3756318780483910250e4ba78207cf960bde4545"
+                "reference": "7027117c82cd8b9d9f3fb89558a088e0575434d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hechoendrupal/drupal-console/zipball/3756318780483910250e4ba78207cf960bde4545",
-                "reference": "3756318780483910250e4ba78207cf960bde4545",
+                "url": "https://api.github.com/repos/hechoendrupal/drupal-console/zipball/7027117c82cd8b9d9f3fb89558a088e0575434d3",
+                "reference": "7027117c82cd8b9d9f3fb89558a088e0575434d3",
                 "shasum": ""
             },
             "require": {
@@ -2237,7 +2238,7 @@
                 "composer/installers": "~1.0",
                 "doctrine/annotations": "^1.2",
                 "doctrine/collections": "^1.3",
-                "drupal/console-core": "1.9.7",
+                "drupal/console-core": "^1.9.8",
                 "drupal/console-extend-plugin": "~0.9.5",
                 "php": ">=7.0.8",
                 "psy/psysh": "0.6.* || ~0.8",
@@ -2300,7 +2301,7 @@
                 "docs": "https://docs.drupalconsole.com/",
                 "forum": "https://gitter.im/hechoendrupal/DrupalConsole",
                 "issues": "https://github.com/hechoendrupal/drupal-console/issues",
-                "source": "https://github.com/hechoendrupal/drupal-console/tree/1.9.9"
+                "source": "https://github.com/hechoendrupal/drupal-console/tree/1.9.10"
             },
             "funding": [
                 {
@@ -2308,26 +2309,26 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-09-17T20:50:37+00:00"
+            "time": "2022-10-02T14:56:10+00:00"
         },
         {
             "name": "drupal/console-core",
-            "version": "1.9.7",
+            "version": "1.9.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hechoendrupal/drupal-console-core.git",
-                "reference": "ab3abc2631761c9588230ba88189d9ba4eb9ed63"
+                "reference": "7febfbd57bc946532f3b14703588c3c803231bb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hechoendrupal/drupal-console-core/zipball/ab3abc2631761c9588230ba88189d9ba4eb9ed63",
-                "reference": "ab3abc2631761c9588230ba88189d9ba4eb9ed63",
+                "url": "https://api.github.com/repos/hechoendrupal/drupal-console-core/zipball/7febfbd57bc946532f3b14703588c3c803231bb6",
+                "reference": "7febfbd57bc946532f3b14703588c3c803231bb6",
                 "shasum": ""
             },
             "require": {
-                "dflydev/dot-access-configuration": "^1.0",
+                "dflydev/dot-access-configuration": "^1.0.4",
                 "drupal/console-en": "1.9.7",
-                "guzzlehttp/guzzle": "~6.1",
+                "guzzlehttp/guzzle": "^6.5.8|^7.4.5",
                 "php": ">=7.0.8",
                 "stecman/symfony-console-completion": "~0.7",
                 "symfony/config": "~3.0|^4.4",
@@ -2335,12 +2336,12 @@
                 "symfony/debug": "~3.0|^4.4",
                 "symfony/dependency-injection": "~3.0|^4.4",
                 "symfony/event-dispatcher": "~3.0|^4.4",
-                "symfony/filesystem": "~3.0|^4.4",
-                "symfony/finder": "~3.0|^4.4",
+                "symfony/filesystem": "^4.4.9 || ^5 || ^6",
+                "symfony/finder": "^4.4.9 || ^5 || ^6",
                 "symfony/process": "~3.0|^4.4",
                 "symfony/translation": "~3.0|^4.4",
                 "symfony/yaml": "~3.0|^4.4",
-                "twig/twig": "^1.38.2|^2.12.0",
+                "twig/twig": "^2.15.3|^3.4.3",
                 "webflo/drupal-finder": "^1.0",
                 "webmozart/path-util": "^2.3"
             },
@@ -2394,9 +2395,9 @@
                 "docs": "http://docs.drupalconsole.com/",
                 "forum": "https://gitter.im/hechoendrupal/DrupalConsole",
                 "issues": "https://github.com/hechoendrupal/DrupalConsole/issues",
-                "source": "https://github.com/hechoendrupal/drupal-console-core/tree/1.9.7"
+                "source": "https://github.com/hechoendrupal/drupal-console-core/tree/1.9.8"
             },
-            "time": "2020-11-30T01:45:57+00:00"
+            "time": "2022-10-02T14:16:53+00:00"
         },
         {
             "name": "drupal/console-en",
@@ -2506,16 +2507,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "9.4.7",
+            "version": "9.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "247431af7e33a8cf7c46677a79336103c6e83db1"
+                "reference": "a627d1b2a00f2cef0572e37b94dea298800541f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/247431af7e33a8cf7c46677a79336103c6e83db1",
-                "reference": "247431af7e33a8cf7c46677a79336103c6e83db1",
+                "url": "https://api.github.com/repos/drupal/core/zipball/a627d1b2a00f2cef0572e37b94dea298800541f4",
+                "reference": "a627d1b2a00f2cef0572e37b94dea298800541f4",
                 "shasum": ""
             },
             "require": {
@@ -2667,13 +2668,13 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/9.4.7"
+                "source": "https://github.com/drupal/core/tree/9.4.8"
             },
-            "time": "2022-09-28T16:19:47+00:00"
+            "time": "2022-10-06T15:57:08+00:00"
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "9.4.7",
+            "version": "9.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -2717,13 +2718,13 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.4.7"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.4.8"
             },
             "time": "2022-06-19T16:14:23+00:00"
         },
         {
             "name": "drupal/core-project-message",
-            "version": "9.4.7",
+            "version": "9.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -2758,22 +2759,22 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-project-message/tree/9.5.0-beta1"
+                "source": "https://github.com/drupal/core-project-message/tree/9.5.0-beta2"
             },
             "time": "2022-02-24T17:40:53+00:00"
         },
         {
             "name": "drupal/core-recommended",
-            "version": "9.4.7",
+            "version": "9.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "287868a598996f1eb04ea57dbefb741d3784db23"
+                "reference": "684cc844f7b729286f5d62f1ee4b20ab12586502"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/287868a598996f1eb04ea57dbefb741d3784db23",
-                "reference": "287868a598996f1eb04ea57dbefb741d3784db23",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/684cc844f7b729286f5d62f1ee4b20ab12586502",
+                "reference": "684cc844f7b729286f5d62f1ee4b20ab12586502",
                 "shasum": ""
             },
             "require": {
@@ -2782,7 +2783,7 @@
                 "doctrine/annotations": "~1.13.2",
                 "doctrine/lexer": "~1.2.3",
                 "doctrine/reflection": "~1.2.3",
-                "drupal/core": "9.4.7",
+                "drupal/core": "9.4.8",
                 "egulias/email-validator": "~3.2",
                 "guzzlehttp/guzzle": "~6.5.8",
                 "guzzlehttp/promises": "~1.5.1",
@@ -2844,9 +2845,9 @@
             ],
             "description": "Core and its dependencies with known-compatible minor versions. Require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/9.4.7"
+                "source": "https://github.com/drupal/core-recommended/tree/9.4.8"
             },
-            "time": "2022-09-28T16:19:47+00:00"
+            "time": "2022-10-06T15:57:08+00:00"
         },
         {
             "name": "drupal/devel",
@@ -5864,16 +5865,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.6.4",
+            "version": "v6.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "a94fdebaea6bd17f51be0c2373ab80d3d681269b"
+                "reference": "8b6386d7417526d1ea4da9edb70b8352f7543627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/a94fdebaea6bd17f51be0c2373ab80d3d681269b",
-                "reference": "a94fdebaea6bd17f51be0c2373ab80d3d681269b",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/8b6386d7417526d1ea4da9edb70b8352f7543627",
+                "reference": "8b6386d7417526d1ea4da9edb70b8352f7543627",
                 "shasum": ""
             },
             "require": {
@@ -5897,8 +5898,8 @@
                 "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
                 "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
                 "psr/log": "For optional PSR-3 debug logging",
-                "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
-                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
+                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)",
+                "thenetworg/oauth2-azure": "Needed for Microsoft XOAUTH2 authentication"
             },
             "type": "library",
             "autoload": {
@@ -5930,7 +5931,7 @@
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "support": {
                 "issues": "https://github.com/PHPMailer/PHPMailer/issues",
-                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.6.4"
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.6.5"
             },
             "funding": [
                 {
@@ -5938,7 +5939,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-22T09:22:00+00:00"
+            "time": "2022-10-07T12:23:10+00:00"
         },
         {
             "name": "progress-tracker/progress-tracker",
