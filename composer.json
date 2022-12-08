@@ -426,11 +426,6 @@
                 "type:drupal-drush"
             ]
         },
-    "enable-patching": "true",
-    "patches": {
-        "drupal/leaflet_more_maps": {
-            "depreceated function trim": "https://www.drupal.org/files/issues/2022-03-23/depreceated-function-trim-3265784-3.patch"}
-        },
      "merge-plugin": {
             "include": [
                 "web/modules/contrib/webform/composer.libraries.json"
