@@ -47,6 +47,12 @@
   <rule ref="DrupalPractice.Constants.GlobalDefine.GlobalConstant"><severity>0</severity></rule>
   <!-- This module is allowed to use debug code -->
   <rule ref="MySource.Debug.DebugCode.Found"><severity>0</severity></rule>
+  <!-- Commented out code triggers this. Long lived, commented out code is useful. https://gitlab.com/drupalspoons/devel/-/jobs/3439809881 -->
+  <rule ref="Drupal.WhiteSpace.ScopeIndent.Incorrect"><severity>0</severity></rule>
+  <!-- Commented out code triggers this. Long lived, commented out code is useful. https://gitlab.com/drupalspoons/devel/-/jobs/3439809881 -->
+  <rule ref="Drupal.Commenting.InlineComment.SpacingBefore"><severity>0</severity></rule>
+  <!-- Commented out code triggers this. Long lived, commented out code is useful. https://gitlab.com/drupalspoons/devel/-/jobs/3439809881 -->
+  <rule ref="Drupal.Commenting.InlineComment.InvalidEndChar"><severity>0</severity></rule>
 
   <!-- While work is ongoing to fix coding standards faults, and to determine
        which rules and sniffs we want to ignore, the following is a list of all

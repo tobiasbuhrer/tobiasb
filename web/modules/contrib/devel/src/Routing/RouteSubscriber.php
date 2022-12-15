@@ -53,6 +53,9 @@ class RouteSubscriber extends RouteSubscriberBase {
       if ($route = $this->getEntityLoadRoute($entity_type)) {
         $collection->add("entity.$entity_type_id.devel_load", $route);
       }
+      if ($route = $this->getEntityLoadWithReferencesRoute($entity_type)) {
+        $collection->add("entity.$entity_type_id.devel_load_with_references", $route);
+      }
       if ($route = $this->getEntityRenderRoute($entity_type)) {
         $collection->add("entity.$entity_type_id.devel_render", $route);
       }
@@ -91,6 +94,37 @@ class RouteSubscriber extends RouteSubscriberBase {
       return $route;
     }
     return NULL;
+  }
+
+  /**
+   * Gets the entity load route.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
+   *   The entity type.
+   *
+   * @return \Symfony\Component\Routing\Route|null
+   *   The generated route, if available.
+   */
+  protected function getEntityLoadWithReferencesRoute(EntityTypeInterface $entity_type) {
+    if ($devel_load = $entity_type->getLinkTemplate('devel-load-with-references')) {
+      $entity_type_id = $entity_type->id();
+      $route = new Route($devel_load);
+      $route
+        ->addDefaults([
+          '_controller' => '\Drupal\devel\Controller\EntityDebugController::entityLoadWithReferences',
+          '_title' => 'Devel Load (with references)',
+        ])
+        ->addRequirements([
+          '_permission' => 'access devel information',
+        ])
+        ->setOption('_admin_route', TRUE)
+        ->setOption('_devel_entity_type_id', $entity_type_id)
+        ->setOption('parameters', [
+          $entity_type_id => ['type' => 'entity:' . $entity_type_id],
+        ]);
+
+      return $route;
+    }
   }
 
   /**
