@@ -344,7 +344,7 @@
         "drupal/juicebox": "^3.0@alpha",
         "drupal/leaflet": "^2.0",
         "drupal/leaflet_more_maps": "^2.1",
-        "drupal/libraries": "^3.0@alpha",
+        "drupal/libraries": "^4.0",
         "drupal/minifyhtml": "^2.0",
         "drupal/plupload": "1.x-dev@dev",
         "drupal/smtp": "^1.0",
