@@ -39,6 +39,8 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '2f69d3914119f042cca9e44442d5ce95' => __DIR__ . '/../..' . '/web/core/includes/bootstrap.inc',
         '6db5533840cb1ae1bc049452845aa88e' => __DIR__ . '/../..' . '/web/core/includes/guzzle_php81_shim.php',
+        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
+        'c9d07b32a2e02bc0fc582d4f0c1b56cc' => __DIR__ . '/..' . '/laminas/laminas-servicemanager/src/autoload.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '952683d815ff0a7bf322b93c0be7e4e4' => __DIR__ . '/..' . '/chi-teck/drupal-code-generator/src/bootstrap.php',
@@ -47,6 +49,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
     );
 
     public static $prefixLengthsPsr4 = array (
+        'm' => 
+        array (
+            'mglaman\\PHPStanDrupal\\' => 22,
+        ),
         'l' => 
         array (
             'lsolesen\\pel\\' => 13,
@@ -122,16 +128,20 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
             'PhpParser\\' => 10,
+            'PHPStan\\' => 8,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
+            'MathieuViossat\\Util\\' => 20,
             'Masterminds\\' => 12,
         ),
         'L' => 
         array (
             'League\\Container\\' => 17,
+            'Laminas\\Text\\' => 13,
             'Laminas\\Stdlib\\' => 15,
+            'Laminas\\ServiceManager\\' => 23,
             'Laminas\\Feed\\' => 13,
             'Laminas\\Escaper\\' => 16,
             'Laminas\\Diactoros\\' => 18,
@@ -196,6 +206,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
     );
 
     public static $prefixDirsPsr4 = array (
+        'mglaman\\PHPStanDrupal\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src',
+        ),
         'lsolesen\\pel\\' => 
         array (
             0 => __DIR__ . '/..' . '/lsolesen/pel/src',
@@ -417,9 +431,17 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'PHPStan\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'MathieuViossat\\Util\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mathieuviossat/arraytotexttable/src',
         ),
         'Masterminds\\' => 
         array (
@@ -429,9 +451,17 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         array (
             0 => __DIR__ . '/..' . '/league/container/src',
         ),
+        'Laminas\\Text\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-text/src',
+        ),
         'Laminas\\Stdlib\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-stdlib/src',
+        ),
+        'Laminas\\ServiceManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-servicemanager/src',
         ),
         'Laminas\\Feed\\' => 
         array (

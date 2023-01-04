@@ -132,7 +132,7 @@ class VideoPluploadWidget extends FileWidget
      */
     public static function validateMaxFilesize($element, FormStateInterface $form_state)
     {
-        if (!empty($element['#value']) && (Bytes::toInt($element['#value']) == 0)) {
+        if (!empty($element['#value']) && (Bytes::toNumber($element['#value']) == 0) ?? '') {
             $form_state->setError($element, t('The option must contain a valid value. You may either leave the text field empty or enter a string like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes).'));
         }
     }
@@ -180,7 +180,7 @@ class VideoPluploadWidget extends FileWidget
                 'file_validate_extensions' => array($configuration->file_extensions),
             ],
             '#plupload_settings' => [
-                'max_file_size' => Bytes::toInt($configuration->max_file_size) . 'b',
+                'max_file_size' => Bytes::toNumber($configuration->max_file_size ?? '') . 'b',
             ],
             '#event_callbacks' => [
                 'FilesAdded' => 'Drupal.video_plupload_widget.filesAddedCallback',

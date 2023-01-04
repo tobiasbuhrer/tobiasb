@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Cache\Cache;
 use Drupal\video\Plugin\Field\FieldFormatter\VideoPlayerFormatter;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 
 /**
  * Plugin implementation of the 'video_player_list_formatter_extended' formatter.
@@ -44,7 +45,7 @@ class VideoPlayerListFormatterExtended extends VideoPlayerFormatter implements C
         $video_items = array();
         foreach ($files as $delta => $file) {
             $video_uri = $file->getFileUri();
-            $video_items[] = Url::fromUri(file_create_url($video_uri));
+            $video_items[] = Url::fromUri(\Drupal::service('file_url_generator')->generateAbsoluteString($video_uri));
         }
         $elements[] = array(
             '#theme' => 'video_player_formatter',
