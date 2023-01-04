@@ -41,9 +41,10 @@ class GeneratorForm extends ConfigFormBase
     {
         $config = $this->config('image_import.imageimportsettings');
         //let's get the number of permanent image files
-        $query = \Drupal::entityQuery('file');
-        $query->condition('status', FILE_STATUS_PERMANENT);
-        $query->condition('filemime', 'image/jpeg');
+        $query = \Drupal::entityQuery('file')
+        ->accessCheck(TRUE)
+        ->condition('status', Drupal\file\FileInterface::STATUS_PERMANENT)
+        ->condition('filemime', 'image/jpeg');
         $fids = $query->execute();
         $msg = '</p><strong>' . $this->t('Number of original images') . ':</strong> ' . count($fids) . '<br />';
 
@@ -96,10 +97,11 @@ class GeneratorForm extends ConfigFormBase
         $range = $form_state->getValue('queue_range');
 
         //add things to the queue
-        $query = \Drupal::entityQuery('file');
-        $query->condition('status', FILE_STATUS_PERMANENT);
-        $query->condition('filemime', 'image/jpeg');
-        $query->range($start,$range);
+        $query = \Drupal::entityQuery('file')
+        ->accessCheck(TRUE)
+        ->condition('status', Drupal\file\FileInterface::STATUS_PERMANENT)
+        ->condition('filemime', 'image/jpeg')
+        ->range($start,$range);
         $fids = $query->execute();
         foreach ($fids as $fid) {
             $entity = \Drupal\file\Entity\File::load($fid);
@@ -118,9 +120,10 @@ class GeneratorForm extends ConfigFormBase
         $this->messenger()->addStatus($msg);
 
         //let's get the total number of permanent image files
-        $query = \Drupal::entityQuery('file');
-        $query->condition('status', FILE_STATUS_PERMANENT);
-        $query->condition('filemime', 'image/jpeg');
+        $query = \Drupal::entityQuery('file')
+        ->accessCheck(TRUE)
+        ->condition('status', Drupal\file\FileInterface::STATUS_PERMANENT)
+        ->condition('filemime', 'image/jpeg');
         $fids = $query->execute();
         $start = $start + $range;
         if ($start > count($fids)) {
