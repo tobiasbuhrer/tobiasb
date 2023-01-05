@@ -12,7 +12,7 @@
  * @ingroup themeable
  */
 #}
-{% spaceless %}
+{% apply spaceless %}
 {% if element['#id'] == 'edit-field-tags-target-id' %}
 <div class="field-body has-addon">
 {%- endif -%}
@@ -31,5 +31,5 @@
     {% endfor %}
   </select>
 </div>
-{% endspaceless %}
+{% endapply %}
 

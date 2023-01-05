@@ -15,7 +15,7 @@ function ttobias_form_system_theme_settings_alter(&$form, FormStateInterface $fo
 {
 
     // Get all menus.
-    $menus = menu_ui_get_menus(FALSE);
+    $menus = \Drupal\system\Entity\Menu::loadMultiple(NULL);;
 
     $form['ttobias'] = array(
         '#type' => 'vertical_tabs',

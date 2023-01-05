@@ -7,10 +7,9 @@ global-styling:
   js:
     js/ttobias.js: {}
   dependencies:
-    - core/jquery
-    - core/jquery.once
-    - core/drupal.ajax
     - core/drupal
+    - core/drupal.ajax
+    - core/once
     - core/drupalSettings
 fonts:
   css:
