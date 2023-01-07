@@ -1,0 +1,70 @@
+uuid: 238f67a6-5286-480c-bff8-adaf769c6f47
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.hebergement.field_infos
+    - field.field.node.hebergement.field_position
+    - field.field.node.hebergement.field_quick_evaluation
+    - field.field.node.hebergement.field_tags
+    - node.type.hebergement
+  module:
+    - geofield
+    - path
+    - text
+id: node.hebergement.default
+targetEntityType: node
+bundle: hebergement
+mode: default
+content:
+  field_infos:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_position:
+    type: geofield_latlon
+    weight: 2
+    region: content
+    settings:
+      html5_geolocation: false
+    third_party_settings: {  }
+  field_quick_evaluation:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

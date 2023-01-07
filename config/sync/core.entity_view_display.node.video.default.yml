@@ -1,0 +1,51 @@
+uuid: 35feb638-314c-4597-8e2b-dc6c6299f5aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.video.field_credit
+    - field.field.node.video.field_description
+    - field.field.node.video.field_tags
+    - field.field.node.video.field_video
+    - node.type.video
+  module:
+    - user
+    - video_plupload_widget
+id: node.video.default
+targetEntityType: node
+bundle: video
+mode: default
+content:
+  field_credit:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_description:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_video:
+    type: video_player_list_formatter_extended
+    label: hidden
+    settings:
+      width: '640'
+      height: '480'
+      controls: '1'
+      preload: auto
+      autoplay: 0
+      loop: 0
+      muted: 0
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_tags: true
+  links: true

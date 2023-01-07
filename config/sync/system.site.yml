@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
+langcode: en
+uuid: 21d3aa1c-daff-4973-93cc-10cafe8a1dbf
+name: ' Photos et voyages'
+mail: tobias.buhrer@bluewin.ch
+slogan: 'Photos et voyages'
+page:
+  403: ''
+  404: ''
+  front: /home
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en

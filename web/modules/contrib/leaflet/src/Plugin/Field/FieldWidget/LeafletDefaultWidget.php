@@ -168,14 +168,13 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
    */
   public static function defaultSettings() {
     $base_layers = self::getLeafletMaps();
-    // Inherit basic defaultSettings from GeofieldDefaultWidget:
-    return array_merge(parent::defaultSettings(), [
+
+    $options = array_merge(parent::defaultSettings(), [
       'map' => [
         'leaflet_map' => array_shift($base_layers),
         'height' => 400,
         'auto_center' => TRUE,
         'map_position' => self::getDefaultSettings()['map_position'],
-        'locate' => TRUE,
         'scroll_zoom_enabled' => TRUE,
       ],
       'input' => [
@@ -196,11 +195,12 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
         'removalMode' => TRUE,
         'rotateMode' => FALSE,
       ],
-      'reset_map' => self::getDefaultSettings()['reset_map'],
-      'path' => self::getDefaultSettings()['path'],
-      'fullscreen' => self::getDefaultSettings()['fullscreen'],
-      'geocoder' => self::getDefaultSettings()['geocoder'],
     ]);
+    $leaflet_map_default_settings = [];
+    foreach (self::getDefaultSettings() as $k => $setting) {
+      $leaflet_map_default_settings[$k] = $setting;
+    }
+    return $options + $leaflet_map_default_settings;
   }
 
   /**
@@ -211,6 +211,10 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
     $form = parent::settingsForm($form, $form_state);
     $map_settings = $this->getSetting('map');
     $default_settings = self::defaultSettings();
+
+    // Set Replacement Patterns Element.
+    $this->setReplacementPatternsElement($form);
+
     $form['map'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Map Settings'),
@@ -227,12 +231,6 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
       '#type' => 'textfield',
       '#required' => TRUE,
       '#default_value' => $map_settings['height'] ?? $default_settings['map']['height'],
-    ];
-    $form['map']['locate'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Automatically locate user current position'),
-      '#description' => $this->t("This option initially centers the map to the user position (only in case of empty map)."),
-      '#default_value' => $map_settings['locate'] ?? $default_settings['map']['locate'],
     ];
     $form['map']['auto_center'] = [
       '#type' => 'checkbox',
@@ -366,7 +364,7 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
     ];
 
     // Generate the Leaflet Map Reset Control.
-    $this->setResetMapControl($form, $this->getSettings());
+    $this->setResetMapViewControl($form, $this->getSettings());
 
     // Set Fullscreen Element.
     $this->setFullscreenElement($form, $this->getSettings());
@@ -374,8 +372,8 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
     // Set Map Geometries Options Element.
     $this->setMapPathOptionsElement($form, $this->getSettings());
 
-    // Set Replacement Patterns Element.
-    $this->setReplacementPatternsElement($form);
+    // Set Locate User Position Control Element.
+    $this->setLocateControl($form, $this->getSettings());
 
     // Set Map Geocoder Control Element, if the Geocoder Module exists,
     // otherwise output a tip on Geocoder Module Integration.
@@ -421,6 +419,12 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
     // Set the widget context info into the map.
     $map['context'] = 'widget';
 
+    // Fetch previous automatic locate setting
+    // for backward compatibility with Leaflet release < 2.x.
+    if (!empty($map_settings["locate"])) {
+      $previous_automatic_locate_settings = TRUE;
+    }
+
     // Extend map settings to additional options
     // to uniform with Leaflet Formatter and Leaflet View processing.
     $map_settings = array_merge($map_settings, [
@@ -428,7 +432,14 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
       'fullscreen' => $this->getSetting('fullscreen'),
       'path' => $this->getSetting('path'),
       'geocoder' => $this->getSetting('geocoder'),
+      'locate' => $this->getSetting('locate'),
     ]);
+
+    // Set previos automatic locate setting
+    // for backward compatibility with Leaflet release < 2.x.
+    if (!empty($previous_automatic_locate_settings)) {
+      $map_settings['locate']['automatic'] = TRUE;
+    }
 
     // Set Map additional map Settings.
     $this->setAdditionalMapOptions($map, $map_settings);
@@ -477,7 +488,7 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
     $element['map']['#attached']['library'][] = 'leaflet/leaflet-widget';
 
     // Settings and geo-data are passed to the widget keyed by field id.
-    $element['map']['#attached']['drupalSettings']['leaflet_widget'][$element['map']['#map_id']] = $leaflet_widget_js_settings;
+    $element['map']['#attached']['drupalSettings']['leaflet'][$element['map']['#map_id']]['leaflet_widget'] = $leaflet_widget_js_settings;
 
     // Convert default value to geoJSON format.
     if ($geom = $this->geoPhpWrapper->load($element['value']['#default_value'])) {

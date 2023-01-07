@@ -1,0 +1,20 @@
+uuid: 77504616-b6e7-4d47-986a-c6da62f88de9
+langcode: en
+status: false
+dependencies:
+  theme:
+    - mobile
+_core:
+  default_config_hash: 1TQP4b3ZnlzvIH9bj6cpCz_SyUHdJjLQkZnHpikjjhw
+id: mobile_page_title
+theme: mobile
+region: header
+weight: 0
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

@@ -1,0 +1,19 @@
+uuid: 04036c94-5d41-469f-b41b-780967cb2ab6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_city
+    - node.type.photo
+id: node.photo.field_city
+field_name: field_city
+entity_type: node
+bundle: photo
+label: City
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

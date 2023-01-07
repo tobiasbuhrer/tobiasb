@@ -460,7 +460,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
 
                 if (!empty($geofield_value)) {
                     $points = $this->leafletService->leafletProcessGeofield($geofield_value);
-
+                    
                     // Render the entity with the selected view mode.
                     if ($this->options['description_field'] === '#rendered_entity' && isset($result->_entity)) {
                         $entity = $result->_entity;
@@ -479,7 +479,9 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                         } else {
                             // Attach pop-ups if we have a description field.
                             foreach ($points as &$point) {
-                                $point['popup'] = $description;
+                            $point['popup']['value'] = $description;
+                            //$point['popup']['value'] = 'TEST';
+                            
                             }
                         }
                     }
@@ -532,11 +534,6 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                                 if ($this->options['clickToUrl']) {
                                     // Attach a target URL if we want clicking on the marker to open an URL
                                     $point['targetUrl'] = $targeturl;
-                                } else {
-                                    // Attach pop-ups if we have a description field.
-                                    foreach ($points as &$point) {
-                                        $point['popup'] = '<a href="' . $targeturl . '">' . strip_tags($point['label']) . '</a>';
-                                    }
                                 }
 
                             }

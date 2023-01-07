@@ -1,0 +1,53 @@
+uuid: 61eac753-5ae1-4d17-81b5-af6fdfb8d065
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.photo.field_caption
+    - field.field.node.photo.field_city
+    - field.field.node.photo.field_country_code
+    - field.field.node.photo.field_credit
+    - field.field.node.photo.field_date
+    - field.field.node.photo.field_image
+    - field.field.node.photo.field_legend
+    - field.field.node.photo.field_location
+    - field.field.node.photo.field_position
+    - field.field.node.photo.field_state
+    - field.field.node.photo.field_tags
+    - node.type.photo
+  module:
+    - image
+    - user
+id: node.photo.teaser
+targetEntityType: node
+bundle: photo
+mode: teaser
+content:
+  field_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_caption: true
+  field_city: true
+  field_country_code: true
+  field_credit: true
+  field_date: true
+  field_legend: true
+  field_location: true
+  field_position: true
+  field_state: true
+  field_tags: true

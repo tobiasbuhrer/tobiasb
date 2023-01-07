@@ -1,0 +1,37 @@
+uuid: 3e922e89-7405-43d8-b6b3-c35e58258718
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: map_icon_black_48x48_
+label: 'Map icon black (48x48)'
+effects:
+  3b04d897-36de-469a-82bd-5d2a87292839:
+    id: image_effects_strip_metadata
+    data: {  }
+    weight: -7
+    uuid: 3b04d897-36de-469a-82bd-5d2a87292839
+  0c2337ae-03ec-4baa-99c7-432dc64a1f2f:
+    id: image_scale_and_crop
+    data:
+      width: 48
+      height: 48
+      anchor: center-center
+    weight: -10
+    uuid: 0c2337ae-03ec-4baa-99c7-432dc64a1f2f
+  536fd441-aba4-492d-a139-9d0d917e7960:
+    id: image_effects_imagemagick_arguments
+    data:
+      command_line: ' -border 1 -bordercolor "#00008b" '
+      dimensions_method: keep
+      width: ''
+      height: ''
+    weight: -8
+    uuid: 536fd441-aba4-492d-a139-9d0d917e7960
+  6271b06a-d148-4836-b607-d611d89d42d3:
+    id: image_effects_auto_orient
+    data:
+      scan_exif: true
+    weight: -9
+    uuid: 6271b06a-d148-4836-b607-d611d89d42d3

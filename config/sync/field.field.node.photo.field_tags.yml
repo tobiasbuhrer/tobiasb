@@ -1,0 +1,33 @@
+uuid: 27e26800-4dc3-4a95-8900-1d030080dea7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.photo
+    - taxonomy.vocabulary.voyages
+  content:
+    - 'taxonomy_term:voyages:c13852e0-6074-4c03-9b99-87243e04c689'
+id: node.photo.field_tags
+field_name: field_tags
+entity_type: node
+bundle: photo
+label: Tags
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: c13852e0-6074-4c03-9b99-87243e04c689
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      voyages: voyages
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: animaux
+field_type: entity_reference

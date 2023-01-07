@@ -1,0 +1,37 @@
+uuid: 6e38f6da-d724-4878-aff2-44baf4ea9f38
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: tobiasb_map_icon
+label: 'Map icon red (48x48)'
+effects:
+  6630cbc9-e61e-4548-9c23-6271f7a86d21:
+    id: image_scale_and_crop
+    data:
+      width: 48
+      height: 48
+      anchor: center-center
+    weight: -10
+    uuid: 6630cbc9-e61e-4548-9c23-6271f7a86d21
+  ff7b4c7b-5b3d-4234-8d3e-50701ad1e3c4:
+    id: image_effects_strip_metadata
+    data: {  }
+    weight: -7
+    uuid: ff7b4c7b-5b3d-4234-8d3e-50701ad1e3c4
+  0e64befe-930c-40b3-a8b7-c346a018f083:
+    id: image_effects_imagemagick_arguments
+    data:
+      command_line: ' -border 1 -bordercolor "#dc143c" '
+      dimensions_method: keep
+      width: ''
+      height: ''
+    weight: -8
+    uuid: 0e64befe-930c-40b3-a8b7-c346a018f083
+  af4b0875-4e66-463e-bc8d-2f30e8abe5b9:
+    id: image_effects_auto_orient
+    data:
+      scan_exif: true
+    weight: -9
+    uuid: af4b0875-4e66-463e-bc8d-2f30e8abe5b9

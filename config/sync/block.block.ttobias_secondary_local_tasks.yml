@@ -1,0 +1,22 @@
+uuid: b9752377-19d4-4204-bad4-31148a6aeaa6
+langcode: en
+status: false
+dependencies:
+  theme:
+    - ttobias
+_core:
+  default_config_hash: QeZBeCilQfeET3GeW6ZtJkEiwROADTZktFgKWwPieD4
+id: ttobias_secondary_local_tasks
+theme: ttobias
+region: header_tabs
+weight: -3
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

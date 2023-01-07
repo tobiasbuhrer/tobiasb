@@ -1,0 +1,22 @@
+uuid: 544f4dc1-817c-40f1-a81d-4ba5faea344f
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - mobile
+_core:
+  default_config_hash: MhtNdV__HKRTab0ZPjkPNfYL4Ng4UPBucDLoC7Rg5Eo
+id: mobile_help
+theme: mobile
+region: header
+weight: -30
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '0afca4f73aec88d6854c73f6daaae48e2086cd89',
+        'reference' => '3ae0e3368c7c5e5004f097fd6909305938f60f90',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '0afca4f73aec88d6854c73f6daaae48e2086cd89',
+            'reference' => '3ae0e3368c7c5e5004f097fd6909305938f60f90',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -646,12 +646,12 @@
             'dev_requirement' => false,
         ),
         'drupal/leaflet' => array(
-            'pretty_version' => '2.2.12',
-            'version' => '2.2.12.0',
+            'pretty_version' => '10.0.5',
+            'version' => '10.0.5.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/leaflet',
             'aliases' => array(),
-            'reference' => '2.2.12',
+            'reference' => '10.0.5',
             'dev_requirement' => false,
         ),
         'drupal/leaflet_more_maps' => array(
