@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3ae0e3368c7c5e5004f097fd6909305938f60f90',
+        'reference' => 'e9887719b89c132f77da14157a11cda2081fbf59',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3ae0e3368c7c5e5004f097fd6909305938f60f90',
+            'reference' => 'e9887719b89c132f77da14157a11cda2081fbf59',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -599,12 +599,12 @@
             'dev_requirement' => false,
         ),
         'drupal/geofield' => array(
-            'pretty_version' => '1.48.0',
-            'version' => '1.48.0.0',
+            'pretty_version' => '1.49.0',
+            'version' => '1.49.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/geofield',
             'aliases' => array(),
-            'reference' => '8.x-1.48',
+            'reference' => '8.x-1.49',
             'dev_requirement' => false,
         ),
         'drupal/honeypot' => array(
