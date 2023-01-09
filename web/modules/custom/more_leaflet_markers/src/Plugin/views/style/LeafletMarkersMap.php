@@ -494,21 +494,6 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
                             // Custom logic
                             $point['icon'] = $this->options['icon'];
 
-                            // Custom logic for hébergements.
-                            if ($viewid == "hebergements") {
-                                $test = $this->rendered_fields[$id]['field_quick_evaluation'];
-                                switch ($test) {
-                                    case "green":
-                                        $point['icon']['iconUrl'] = $GLOBALS['base_url'] . "/sites/default/files/icons/hg.png";
-                                        break;
-                                    case "yellow":
-                                        $point['icon']['iconUrl'] = $GLOBALS['base_url'] . "/sites/default/files/icons/hy.png";
-                                        break;
-                                    case "red":
-                                        $point['icon']['iconUrl'] = $GLOBALS['base_url'] . "/sites/default/files/icons/hr.png";
-                                        break;
-                                }
-                            }
                             // Custom logic for photo map
                             if ($viewid == "carte_des_photos") {
                                 $test = $this->rendered_fields[$id]['nid'];
