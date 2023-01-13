@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'ee4da771efee6459d58b0fbdc2439bb84aedeca7',
+        'reference' => '5966e2c043d0ba2f0a5873ccc91bdb9260be1089',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'ee4da771efee6459d58b0fbdc2439bb84aedeca7',
+            'reference' => '5966e2c043d0ba2f0a5873ccc91bdb9260be1089',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -654,13 +654,13 @@
             'reference' => '10.0.5',
             'dev_requirement' => false,
         ),
-        'drupal/leaflet_more_markers' => array(
-            'pretty_version' => '1.1.2',
-            'version' => '1.1.2.0',
+        'drupal/leaflet_more_maps' => array(
+            'pretty_version' => '2.1.3',
+            'version' => '2.1.3.0',
             'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../web/modules/contrib/leaflet_more_markers',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/leaflet_more_maps',
             'aliases' => array(),
-            'reference' => '1.1.2',
+            'reference' => '2.1.3',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
@@ -708,15 +708,6 @@
             'install_path' => __DIR__ . '/../../web/modules/contrib/sophron',
             'aliases' => array(),
             'reference' => '8.x-1.3',
-            'dev_requirement' => false,
-        ),
-        'drupal/token' => array(
-            'pretty_version' => '1.11.0',
-            'version' => '1.11.0.0',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../web/modules/contrib/token',
-            'aliases' => array(),
-            'reference' => '8.x-1.11',
             'dev_requirement' => false,
         ),
         'drupal/upgrade_status' => array(
