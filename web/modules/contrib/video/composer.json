@@ -22,8 +22,5 @@
   "support": {
     "issues": "https://www.drupal.org/project/issues/video",
     "source": "https://www.drupal.org/project/video"
-  },
-  "require": {
-    "drupal/core": "^8 || ^9 || ^10"
   }
 }

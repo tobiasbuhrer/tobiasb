@@ -6,7 +6,7 @@ package: Field types
 dependencies:
   - drupal:file
 
-# Information added by Drupal.org packaging script on 2022-08-29
-version: '3.0.3'
+# Information added by Drupal.org packaging script on 2023-01-12
+version: '3.0.4'
 project: 'video'
-datestamp: 1661758516
+datestamp: 1673537050

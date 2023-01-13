@@ -2,6 +2,6 @@ name: Media entity video
 description: 'Media entity for video files.'
 type: module
 package: Media
-core: 8.x
+core_version_requirement: ^9 || ^10
 dependencies:
   - media_entity

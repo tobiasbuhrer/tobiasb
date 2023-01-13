@@ -2,8 +2,8 @@
 
 namespace Drupal\video\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\field\FieldConfigInterface;
-use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\file\Plugin\Field\FieldFormatter\FileFormatterBase;
 
 /**
@@ -14,7 +14,7 @@ abstract class VideoPlayerFormatterBase extends FileFormatterBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEntitiesToView(FieldItemListInterface $items, $langcode) {
+  protected function getEntitiesToView(EntityReferenceFieldItemListInterface $items, $langcode) {
     return parent::getEntitiesToView($items, $langcode);
   }
 }
