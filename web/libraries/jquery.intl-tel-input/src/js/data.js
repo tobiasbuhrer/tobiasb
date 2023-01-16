@@ -77,6 +77,11 @@ var allCountries = [
     "297"
   ],
   [
+    "Ascension Island",
+    "ac",
+    "247"
+  ],
+  [
     "Australia",
     "au",
     "61",
@@ -260,13 +265,15 @@ var allCountries = [
     "Christmas Island",
     "cx",
     "61",
-    2
+    2,
+    ["89164"]
   ],
   [
     "Cocos (Keeling) Islands",
     "cc",
     "61",
-    1
+    1,
+    ["89162"]
   ],
   [
     "Colombia",
@@ -382,6 +389,11 @@ var allCountries = [
     "Estonia (Eesti)",
     "ee",
     "372"
+  ],
+  [
+    "Eswatini",
+    "sz",
+    "268"
   ],
   [
     "Ethiopia",
@@ -686,7 +698,7 @@ var allCountries = [
     "853"
   ],
   [
-    "Macedonia (FYROM) (Македонија)",
+    "North Macedonia (Македонија)",
     "mk",
     "389"
   ],
@@ -1118,11 +1130,6 @@ var allCountries = [
     "47",
     1,
     ["79"]
-  ],
-  [
-    "Swaziland",
-    "sz",
-    "268"
   ],
   [
     "Sweden (Sverige)",

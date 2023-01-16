@@ -23,6 +23,12 @@ declare namespace Jt.Timepicker {
         className?: string;
         /**
          * Default: false
+         * Close the timepicker when the chosen element is scrolled. (Replicates <select> behavior.) Takes either a string to use as a selector, an HTMLelemtn, or a boolean (true binds to ```document``` scrolling).  
+         */
+        closeOnScroll?: boolean | string | HTMLelement;
+        /**
+         * Default: false
+         * DEPRECATED.
          * Close the timepicker when the window is scrolled. (Replicates <select> behavior.)
          */
         closeOnWindowScroll?: boolean;
@@ -115,11 +121,6 @@ declare namespace Jt.Timepicker {
          * Display a timepicker dropdown when the input fires a particular event. Set to null or an empty array to disable automatic display. Setting should be an array of strings
          */
         showOn?: string[];
-        /**
-         * @deprecated Display a timepicker dropdown when the input gains focus.
-         * Default: true
-         */
-        showOnFocus?: boolean;
         /**
          * Default: 30
          * The amount of time, in minutes, between each item in the dropdown. Alternately, you can specify a function to generate steps dynamically. The function will receive a count integer (0, 1, 2...) and is expected to return a step integer.

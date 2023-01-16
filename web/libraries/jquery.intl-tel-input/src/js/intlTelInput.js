@@ -4,6 +4,8 @@ const intlTelInputGlobals = {
     return window.intlTelInputGlobals.instances[id];
   },
   instances: {},
+  // using a global like this allows us to mock it in the tests
+  documentReady: () => document.readyState === 'complete',
 };
 
 if (typeof window === 'object') window.intlTelInputGlobals = intlTelInputGlobals;
@@ -50,15 +52,6 @@ const defaults = {
 };
 // https://en.wikipedia.org/wiki/List_of_North_American_Numbering_Plan_area_codes#Non-geographic_area_codes
 const regionlessNanpNumbers = ['800', '822', '833', '844', '855', '866', '877', '880', '881', '882', '883', '884', '885', '886', '887', '888', '889'];
-
-
-if (typeof window === 'object') {
-  // keep track of if the window.load event has fired as impossible to check after the fact
-  window.addEventListener('load', () => {
-    // UPDATE: use a public static field so we can fudge it in the tests
-    window.intlTelInputGlobals.windowLoaded = true;
-  });
-}
 
 
 // utility function to iterate over an object. can't use Object.entries or native forEach because
@@ -194,20 +187,20 @@ class Iti {
 
 
   // add a country code to this.countryCodes
-  _addCountryCode(iso2, dialCode, priority) {
-    if (dialCode.length > this.dialCodeMaxLen) {
-      this.dialCodeMaxLen = dialCode.length;
+  _addCountryCode(iso2, countryCode, priority) {
+    if (countryCode.length > this.countryCodeMaxLen) {
+      this.countryCodeMaxLen = countryCode.length;
     }
-    if (!this.countryCodes.hasOwnProperty(dialCode)) {
-      this.countryCodes[dialCode] = [];
+    if (!this.countryCodes.hasOwnProperty(countryCode)) {
+      this.countryCodes[countryCode] = [];
     }
-    // bail if we already have this country for this dialCode
-    for (let i = 0; i < this.countryCodes[dialCode].length; i++) {
-      if (this.countryCodes[dialCode][i] === iso2) return;
+    // bail if we already have this country for this countryCode
+    for (let i = 0; i < this.countryCodes[countryCode].length; i++) {
+      if (this.countryCodes[countryCode][i] === iso2) return;
     }
     // check for undefined as 0 is falsy
-    const index = (priority !== undefined) ? priority : this.countryCodes[dialCode].length;
-    this.countryCodes[dialCode][index] = iso2;
+    const index = (priority !== undefined) ? priority : this.countryCodes[countryCode].length;
+    this.countryCodes[countryCode][index] = iso2;
   }
 
 
@@ -250,12 +243,16 @@ class Iti {
 
   // process the countryCodes map
   _processCountryCodes() {
-    this.dialCodeMaxLen = 0;
+    this.countryCodeMaxLen = 0;
+    // here we store just dial codes
+    this.dialCodes = {};
+    // here we store "country codes" (both dial codes and their area codes)
     this.countryCodes = {};
 
     // first: add dial codes
     for (let i = 0; i < this.countries.length; i++) {
       const c = this.countries[i];
+      if (!this.dialCodes[c.dialCode]) this.dialCodes[c.dialCode] = true;
       this._addCountryCode(c.iso2, c.dialCode, c.priority);
     }
 
@@ -335,7 +332,8 @@ class Iti {
     this.selectedFlag = this._createEl('div', {
       class: 'iti__selected-flag',
       role: 'combobox',
-      'aria-owns': 'country-listbox',
+      'aria-controls': `iti-${this.id}__country-listbox`,
+      'aria-owns': `iti-${this.id}__country-listbox`,
       'aria-expanded': 'false',
     }, this.flagsContainer);
     this.selectedFlagInner = this._createEl('div', { class: 'iti__flag' }, this.selectedFlag);
@@ -352,11 +350,12 @@ class Iti {
       // country dropdown: preferred countries, then divider, then all countries
       this.countryList = this._createEl('ul', {
         class: 'iti__country-list iti__hide',
-        id: 'country-listbox',
+        id: `iti-${this.id}__country-listbox`,
         role: 'listbox',
+        'aria-label': 'List of countries',
       });
       if (this.preferredCountries.length) {
-        this._appendListItems(this.preferredCountries, 'iti__preferred');
+        this._appendListItems(this.preferredCountries, 'iti__preferred', true);
         this._createEl('li', {
           class: 'iti__divider',
           role: 'separator',
@@ -393,15 +392,16 @@ class Iti {
 
 
   // add a country <li> to the countryList <ul> container
-  _appendListItems(countries, className) {
+  _appendListItems(countries, className, preferred) {
     // we create so many DOM elements, it is faster to build a temp string
     // and then add everything to the DOM in one go at the end
     let tmp = '';
     // for each country
     for (let i = 0; i < countries.length; i++) {
       const c = countries[i];
+      const idSuffix = preferred ? '-preferred' : '';
       // open the list item
-      tmp += `<li class='iti__country ${className}' tabIndex='-1' id='iti-item-${c.iso2}' role='option' data-dial-code='${c.dialCode}' data-country-code='${c.iso2}'>`;
+      tmp += `<li class='iti__country ${className}' tabIndex='-1' id='iti-${this.id}__item-${c.iso2}${idSuffix}' role='option' data-dial-code='${c.dialCode}' data-country-code='${c.iso2}' aria-selected='false'>`;
       // add the flag
       tmp += `<div class='iti__flag-box'><div class='iti__flag iti__${c.iso2}'></div></div>`;
       // and the country name and dial code
@@ -420,7 +420,13 @@ class Iti {
   // 3. picking the first preferred country
   // 4. picking the first country
   _setInitialState() {
-    const val = this.telInput.value;
+    // fix firefox bug: when first load page (with input with value set to number with intl dial
+    // code) and initialising plugin removes the dial code from the input, then refresh page,
+    // and we try to init plugin again but this time on number without dial code so get grey flag
+    const attributeValue = this.telInput.getAttribute('value');
+    const inputValue = this.telInput.value;
+    const useAttribute = (attributeValue && attributeValue.charAt(0) === '+' && (!inputValue || inputValue.charAt(0) !== '+'));
+    const val = useAttribute ? attributeValue : inputValue;
     const dialCode = this._getDialCode(val);
     const isRegionlessNanp = this._isRegionlessNanp(val);
     const {
@@ -538,7 +544,7 @@ class Iti {
     // if the user has specified the path to the utils script, fetch it on window.load, else resolve
     if (this.options.utilsScript && !window.intlTelInputUtils) {
       // if the plugin is being initialised after the window.load event has already been fired
-      if (window.intlTelInputGlobals.windowLoaded) {
+      if (window.intlTelInputGlobals.documentReady()) {
         window.intlTelInputGlobals.loadUtils(this.options.utilsScript);
       } else {
         // wait until the load event so we don't block any other requests e.g. the flags image
@@ -813,7 +819,7 @@ class Iti {
   _searchForCountry(query) {
     for (let i = 0; i < this.countries.length; i++) {
       if (this._startsWith(this.countries[i].name, query)) {
-        const listItem = this.countryList.querySelector(`#iti-item-${this.countries[i].iso2}`);
+        const listItem = this.countryList.querySelector(`#iti-${this.id}__item-${this.countries[i].iso2}`);
         // update highlighting and scroll
         this._highlightListItem(listItem, false);
         this._scrollTo(listItem, true);
@@ -868,7 +874,7 @@ class Iti {
     }
 
     // try and extract valid dial code from input
-    const dialCode = this._getDialCode(number);
+    const dialCode = this._getDialCode(number, true);
     const numeric = this._getNumeric(number);
     let countryCode = null;
     if (dialCode) {
@@ -989,7 +995,8 @@ class Iti {
         prevItem.setAttribute('aria-selected', 'false');
       }
       if (countryCode) {
-        const nextItem = this.countryList.querySelector(`#iti-item-${countryCode}`);
+        // check if there is a preferred item first, else fall back to standard
+        const nextItem = this.countryList.querySelector(`#iti-${this.id}__item-${countryCode}-preferred`) || this.countryList.querySelector(`#iti-${this.id}__item-${countryCode}`);
         nextItem.setAttribute('aria-selected', 'true');
         nextItem.classList.add('iti__active');
         this.activeItem = nextItem;
@@ -1011,8 +1018,11 @@ class Iti {
     containerClone.style.visibility = 'hidden';
     document.body.appendChild(containerClone);
 
+    const flagsContainerClone = this.flagsContainer.cloneNode();
+    containerClone.appendChild(flagsContainerClone);
+
     const selectedFlagClone = this.selectedFlag.cloneNode(true);
-    containerClone.appendChild(selectedFlagClone);
+    flagsContainerClone.appendChild(selectedFlagClone);
 
     const width = selectedFlagClone.offsetWidth;
     containerClone.parentNode.removeChild(containerClone);
@@ -1149,7 +1159,7 @@ class Iti {
 
   // try and extract a valid international dial code from a full telephone number
   // Note: returns the raw string inc plus character and any whitespace/dots etc
-  _getDialCode(number) {
+  _getDialCode(number, includeAreaCode) {
     let dialCode = '';
     // only interested in international numbers (starting with a plus)
     if (number.charAt(0) === '+') {
@@ -1161,11 +1171,20 @@ class Iti {
         if (!isNaN(parseInt(c, 10))) {
           numericChars += c;
           // if current numericChars make a valid dial code
-          if (this.countryCodes[numericChars]) {
-            // store the actual raw string (useful for matching later)
-            dialCode = number.substr(0, i + 1);
+          if (includeAreaCode) {
+            if (this.countryCodes[numericChars]) {
+              // store the actual raw string (useful for matching later)
+              dialCode = number.substr(0, i + 1);
+            }
+          } else {
+            if (this.dialCodes[numericChars]) {
+              dialCode = number.substr(0, i + 1);
+              // if we're just looking for a dial code, we can break as soon as we find one
+              break;
+            }
           }
-          if (numericChars.length === this.dialCodeMaxLen) {
+          // stop searching as soon as we can - in this case when we hit max len
+          if (numericChars.length === this.countryCodeMaxLen) {
             break;
           }
         }
@@ -1424,7 +1443,8 @@ intlTelInputGlobals.loadUtils = (path) => {
     // if we have promises, then return a promise
     if (typeof Promise !== 'undefined') {
       return new Promise((resolve, reject) => injectScript(path, resolve, reject));
-    } injectScript(path);
+    }
+    injectScript(path);
   }
   return null;
 };

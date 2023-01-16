@@ -1,21 +1,22 @@
-#### IMPORTANT: since v14 we have removed the jQuery dependency. See below for how to initialise and use the plugin with pure JavaScript. If you want to stick with the jQuery version, there is now a separate jQuery wrapped version.
----
-
-# International Telephone Input [![Build Status](https://travis-ci.org/jackocnr/intl-tel-input.svg?branch=master)](https://travis-ci.org/jackocnr/intl-tel-input) <img src="https://img.shields.io/github/package-json/v/jackocnr/intl-tel-input.svg" /> <img src="https://img.shields.io/npm/dm/intl-tel-input.svg" />
+# International Telephone Input [![Build Status](https://app.travis-ci.com/jackocnr/intl-tel-input.svg?branch=master)](https://app.travis-ci.com/jackocnr/intl-tel-input) <img src="https://img.shields.io/github/package-json/v/jackocnr/intl-tel-input.svg" /> <img src="https://img.shields.io/npm/dm/intl-tel-input.svg" />
 A JavaScript plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, detects the user's country, displays a relevant placeholder and provides formatting/validation methods.
 
-<img src="https://raw.github.com/jackocnr/intl-tel-input/master/screenshots/vanilla.png" width="424px" height="246px">
+<img src="https://raw.github.com/jackocnr/intl-tel-input/master/screenshots/vanilla.png" width="424" height="246" />
 
 If you like it, please consider making a donation, which you can do from [the demo page](http://intl-tel-input.com).
+
+## Sponsored by
+<img src="https://raw.github.com/jackocnr/intl-tel-input/master/screenshots/twilio.png" height="100" />
+Use <a href="https://www.twilio.com/blog/international-telephone-input-twilio?utm_source=github&utm_medium=referral&utm_campaign=intl_tel_input">Twilio's API to build phone verification, SMS 2FA, appointment reminders, marketing notifications and so much more</a>. We can't wait to see what you build.
 
 ## Table of Contents
 
 - [Demo and Examples](#demo-and-examples)
 - [Features](#features)
 - [Browser Compatibility](#browser-compatibility)
-- [Getting Started](#getting-started)
+- [Getting Started](#getting-started-using-a-bundler-eg-webpack)
 - [Recommended Usage](#recommended-usage)
-- [Options](#options)
+- [Options](#initialisation-options)
 - [Public Methods](#public-methods)
 - [Static Methods](#static-methods)
 - [Events](#events)
@@ -47,7 +48,33 @@ You can view a live demo and some examples of how to use the various options her
 
 Note: In v12.0.0 we dropped support for IE9 and IE10, because they are no longer supported by any version of Windows - see https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8/
 
-## Getting Started
+## Getting Started (Using a bundler e.g. Webpack)
+1. Install with npm: `npm install intl-tel-input --save` or yarn: `yarn add intl-tel-input`
+
+2. Import CSS: `import 'intl-tel-input/build/css/intlTelInput.css';`
+
+3. Override the path to flags.png in your CSS
+  ```css
+  .iti__flag {background-image: url("path/to/flags.png");}
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .iti__flag {background-image: url("path/to/flags@2x.png");}
+  }
+  ```
+
+4. Import JS and initialise plugin:
+  ```js
+  import intlTelInput from 'intl-tel-input';
+
+  const input = document.querySelector("#phone");
+  intlTelInput(input, {
+      // any initialisation options go here
+  });
+  ```
+
+5. **Recommended:** initialise the plugin with the `utilsScript` option to enable formatting/validation, and to allow you to extract full international numbers using `getNumber`.
+
+## Getting Started (Not using a bundler)
 1. Download the [latest release](https://github.com/jackocnr/intl-tel-input/releases/latest), or better yet install it with [npm](https://www.npmjs.com/package/intl-tel-input)
 
 2. Include the stylesheet
@@ -142,7 +169,7 @@ intlTelInput(input, {
   initialCountry: "auto",
   geoIpLookup: function(success, failure) {
     $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-      var countryCode = (resp && resp.country) ? resp.country : "";
+      var countryCode = (resp && resp.country) ? resp.country : "us";
       success(countryCode);
     });
   },
@@ -196,7 +223,7 @@ Display the country dial code next to the selected flag so it's not part of the 
 
 **utilsScript**  
 Type: `String` Default: `""` Example: `"build/js/utils.js"`  
-Enable formatting/validation etc. by specifying the URL of the included utils.js script (or alternatively just point it to the file on [cdnjs.com](https://cdnjs.com/libraries/intl-tel-input)). The script is fetched when the page has finished loading (on the window load event) to prevent blocking (the script is ~215KB). When instantiating the plugin, if the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) object is defined, one of those is returned under the `promise` instance property, so you can do something like `iti.promise.then(callback)` to know when initialisation requests like this have finished. See [Utilities Script](#utilities-script) for more information. _Note that if you're lazy loading the plugin script itself (intlTelInput.js) this will not work and you will need to use the `loadUtils` method instead._
+Enable formatting/validation etc. by specifying the URL of the included utils.js script (or alternatively just point it to the file on [cdnjs.com](https://cdnjs.com/libraries/intl-tel-input)). The script is fetched only when the page has finished loading (on the window load event) to prevent blocking (the script is ~215KB). When instantiating the plugin, if the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) object is defined, one of those is returned under the `promise` instance property, so you can do something like `iti.promise.then(callback)` to know when initialisation requests like this have finished. See [Utilities Script](#utilities-script) for more information.
 
 
 ## Public Methods
@@ -314,8 +341,7 @@ iti.isValidNumber(); // etc
 ```
 
 **loadUtils**  
-_Note: this is only needed if you're lazy loading the plugin script itself (intlTelInput.js). If not then just use the `utilsScript` option._  
-Load the utils.js script (included in the lib directory) to enable formatting/validation etc. See [Utilities Script](#utilities-script) for more information. This method should only be called once per page. If the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) object is defined, one of those is returned so you can use `.then(callback)` to know when it's finished.
+An alternative to the `utilsScript` option, this method lets you manually load the utils.js script on demand, to enable formatting/validation etc. See [Utilities Script](#utilities-script) for more information. This method should only be called once per page. If the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) object is defined, one of those is returned so you can use `loadUtils().then(callback)` to know when it's finished.
 ```js
 window.intlTelInputGlobals.loadUtils("build/js/utils.js");
 ```
@@ -409,12 +435,10 @@ See the [contributing guide](https://github.com/jackocnr/intl-tel-input/blob/mas
 
 
 ## Links
-* List of [sites using intl-tel-input](https://github.com/jackocnr/intl-tel-input/wiki/Sites-using-intl-tel-input)
 * List of [integrations with intl-tel-input](https://github.com/jackocnr/intl-tel-input/wiki/Integrations)
 * Android native port: [IntlPhoneInput](https://github.com/Rimoto/IntlPhoneInput)
 * Typescript type definitions are available in the [DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/intl-tel-input/index.d.ts) (more info [here](https://github.com/jackocnr/intl-tel-input/issues/433#issuecomment-228517623))
 
-<a href="https://www.browserstack.com">
-<img src="https://p14.zdusercontent.com/attachment/1015988/y0Sl6KKaxGxel8uLLhHApi2qm?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..tN0cDNWdP3tkoP03Sgjf9w.knp9cYYPDLOhhv5TEVpfKc86Ymt8a4FI72PrLSflve3XuXraQhMASa6acCMZpxdJytHHR68IKeY8uHvll1mv6YgcTojspO80PL1TywO2nOW8rENDqn_cfiR0ezRgzvQe_8iLEMya-oJYIAzW7i1-5wkgz27Qw0o2BaBJtBy-sVtriApV2gwAz7cB5yNQ2ZzKGcZKhBfdwsUVpGfOr17jGQtJ4L7QVP2rnuvYXcKZ5qCiIO4hGo66fSPoCH2vLhAAY8Cj1OdBPOt9RoN2fJFWgwDzNKaz3hL7SKep7Q-32OI.p3OapnE-H2lWYIH5lMsrmg" width="200px"></a>
+<img width="200" src="https://www.browserstack.com/images/layout/browserstack-logo-600x315.png" /><br />
+Testing powered by [BrowserStack Open-Source Program](https://www.browserstack.com/open-source)
 
-Tested on [BrowserStack](https://www.browserstack.com)

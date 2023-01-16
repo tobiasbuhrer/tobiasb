@@ -1,5 +1,5 @@
 var webpack = require("webpack"),
-    terserPlugin = require("terser-webpack-plugin"),
+	terserPlugin = require("terser-webpack-plugin"),
 	_ = require("lodash"),
 	fs = require("fs");
 
@@ -42,11 +42,16 @@ module.exports = function (env, argv) {
 			"dist/inputmask.min": "./bundle.js",
 			"qunit/qunit": "./qunit/index.js"
 		},
+		// experiments: {
+		// 	outputModule: true,
+		// },
 		output: {
 			path: __dirname,
 			filename: "[name].js",
-			libraryTarget: "umd",
-			globalObject: "this"
+			library: {
+				type: "umd"
+			},
+			globalObject: "self"
 		},
 		externals: {
 			"jquery": {
@@ -95,7 +100,7 @@ module.exports = function (env, argv) {
 			extensions: [".wasm", ".mjs", ".js", ".ts", ".json"],
 			alias: {
 				// "./dependencyLibs/inputmask.dependencyLib": "./dependencyLibs/inputmask.dependencyLib.jquery"
-			}
+			},
 		},
 		devtool: env === "production" ? undefined : "source-map",
 		plugins: [

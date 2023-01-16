@@ -8,12 +8,12 @@ import {
 	translatePosition
 } from "./positioning";
 import keyCode from "./keycode.json";
-import {iemobile, iphone} from "./environment";
-import {handleRemove, isComplete, isValid} from "./validation";
-import {applyInputValue, checkVal, clearOptionalTail, HandleNativePlaceholder, writeBuffer} from "./inputHandling";
-import {getPlaceholder, getTest} from "./validation-tests";
+import { iemobile, iphone } from "./environment";
+import { handleRemove, isComplete, isSelection, isValid } from "./validation";
+import { applyInputValue, checkVal, clearOptionalTail, HandleNativePlaceholder, writeBuffer } from "./inputHandling";
+import { getPlaceholder, getTest } from "./validation-tests";
 
-export {EventHandlers};
+export { EventHandlers };
 
 var EventHandlers = {
 	keydownEvent: function (e) {
@@ -43,9 +43,11 @@ var EventHandlers = {
 		} else if (((opts.undoOnEscape && k === keyCode.ESCAPE) || (false && k === keyCode.Z && e.ctrlKey)) && e.altKey !== true) { //escape && undo && #762
 			checkVal(input, true, false, inputmask.undoValue.split(""));
 			$input.trigger("click");
-			// } else if (k === keyCode.INSERT && !(e.shiftKey || e.ctrlKey) && inputmask.userOptions.insertMode === undefined) { //insert
-			// 	opts.insertMode = !opts.insertMode;
-			// 	caret(input, pos.begin, pos.end);
+		} else if (k === keyCode.INSERT && !(e.shiftKey || e.ctrlKey) && inputmask.userOptions.insertMode === undefined) { //insert
+			if (!isSelection.call(inputmask, pos)) {
+				opts.insertMode = !opts.insertMode;
+				caret.call(inputmask, input, pos.begin, pos.begin);
+			} else opts.insertMode = !opts.insertMode;
 		} else if (opts.tabThrough === true && k === keyCode.TAB) {
 			if (e.shiftKey === true) {
 				pos.end = seekPrevious.call(inputmask, pos.end, true);
@@ -97,7 +99,7 @@ var EventHandlers = {
 
 		var input = inputmask.el,
 			$input = $(input),
-			k = e.which || e.charCode || e.keyCode;
+			k = e.keyCode;
 
 		if (checkval !== true && (!(e.ctrlKey && e.altKey) && (e.ctrlKey || e.metaKey || inputmask.ignorable))) {
 			if (k === keyCode.ENTER && inputmask.undoValue !== inputmask._valueGet(true)) {
@@ -113,11 +115,13 @@ var EventHandlers = {
 			//special treat the decimal separator
 			if ((k === 44 || k === 46) && e.location === 3 && opts.radixPoint !== "") k = opts.radixPoint.charCodeAt(0);
 			var pos = checkval ? {
-					begin: ndx,
-					end: ndx
-				} : caret.call(inputmask, input),
+				begin: ndx,
+				end: ndx
+			} : caret.call(inputmask, input),
 				forwardPosition, c = String.fromCharCode(k);
 
+			//allow for character substitution
+			c = opts.substitutes[c] || c;
 			maskset.writeOutBuffer = true;
 			var valResult = isValid.call(inputmask, pos, c, strict, undefined, undefined, undefined, checkval);
 			if (valResult !== false) {
@@ -163,8 +167,8 @@ var EventHandlers = {
 
 		if (inputmask.isRTL) {
 			tempValue = caretPos.end;
-			caretPos.end = caretPos.begin;
-			caretPos.begin = tempValue;
+			caretPos.end = translatePosition.call(inputmask, caretPos.begin);
+			caretPos.begin = translatePosition.call(inputmask, tempValue);
 		}
 
 		var valueBeforeCaret = inputValue.substr(0, caretPos.begin),
@@ -182,18 +186,25 @@ var EventHandlers = {
 		} //allow native paste event as fallback ~ masking will continue by inputfallback
 
 		var pasteValue = inputValue;
+		if (inputmask.isRTL) {
+			pasteValue = pasteValue.split("")
+			for (let c of getBufferTemplate.call(inputmask)) {
+				if (pasteValue[0] === c)
+					pasteValue.shift();
+			}
+			pasteValue = pasteValue.join("");
+		}
 		if (typeof opts.onBeforePaste === "function") {
-			pasteValue = opts.onBeforePaste.call(inputmask, inputValue, opts);
+			pasteValue = opts.onBeforePaste.call(inputmask, pasteValue, opts);
 			if (pasteValue === false) {
-				return e.preventDefault();
+				return false;
 			}
 			if (!pasteValue) {
 				pasteValue = inputValue;
 			}
 		}
 		checkVal(input, true, false, pasteValue.toString().split(""), e);
-
-		return e.preventDefault();
+		e.preventDefault()
 	},
 	inputFallBackEvent: function (e) { //fallback when keypress is not triggered
 		const inputmask = this.inputmask, opts = inputmask.opts, $ = inputmask.dependencyLib;
@@ -298,7 +309,6 @@ var EventHandlers = {
 			caretPos = caret.call(inputmask, input, undefined, undefined, true);
 
 		if (buffer !== inputValue) {
-			// inputValue = radixPointHandler(input, inputValue, caretPos);
 			inputValue = ieMobileHandler(input, inputValue, caretPos);
 
 			var changes = analyseChanges(inputValue, buffer, caretPos);
@@ -314,7 +324,7 @@ var EventHandlers = {
 				case "insertReplacementText":
 					changes.data.forEach(function (entry, ndx) {
 						var keypress = new $.Event("keypress");
-						keypress.which = entry.charCodeAt(0);
+						keypress.keyCode = entry.charCodeAt(0);
 						inputmask.ignorable = false; //make sure ignorable is ignored ;-)
 						EventHandlers.keypressEvent.call(input, keypress);
 					});
@@ -404,15 +414,15 @@ var EventHandlers = {
 			pos = caret.call(inputmask, input);
 
 		//correct clipboardData
-		var clipboardData = window.clipboardData || e.clipboardData,
-			clipData = inputmask.isRTL ? getBuffer.call(inputmask).slice(pos.end, pos.begin) : getBuffer.call(inputmask).slice(pos.begin, pos.end);
-		clipboardData.setData("text", inputmask.isRTL ? clipData.reverse().join("") : clipData.join(""));
-		if (document.execCommand) document.execCommand("copy"); // copy selected content to system clipbaord
-
+		var clipData = inputmask.isRTL ? getBuffer.call(inputmask).slice(pos.end, pos.begin) : getBuffer.call(inputmask).slice(pos.begin, pos.end),
+			clipDataText = inputmask.isRTL ? clipData.reverse().join("") : clipData.join("");
+		if (window.navigator.clipboard) window.navigator.clipboard.writeText(clipDataText);
+		else if (window.clipboardData && window.clipboardData.getData) { // IE
+			window.clipboardData.setData("Text", clipDataText);
+		}
 		handleRemove.call(inputmask, input, keyCode.DELETE, pos);
 		writeBuffer(input, getBuffer.call(inputmask), maskset.p, e, inputmask.undoValue !== inputmask._valueGet(true));
-	}
-	,
+	},
 	blurEvent: function (e) {
 		const inputmask = this.inputmask, opts = inputmask.opts, $ = inputmask.dependencyLib;
 
@@ -478,7 +488,7 @@ var EventHandlers = {
 		if (inputmask.undoValue !== inputmask._valueGet(true)) {
 			inputmask.$el.trigger("change");
 		}
-		if (opts.clearMaskOnLostFocus && getLastValidPosition.call(inputmask) === -1 && inputmask._valueGet && inputmask._valueGet() === getBufferTemplate.call(inputmask).join("")) {
+		if (/*opts.clearMaskOnLostFocus && */getLastValidPosition.call(inputmask) === -1 && inputmask._valueGet && inputmask._valueGet() === getBufferTemplate.call(inputmask).join("")) {
 			inputmask._valueSet(""); //clear masktemplete on submit and still has focus
 		}
 		if (opts.clearIncomplete && isComplete.call(inputmask, getBuffer.call(inputmask)) === false) {
@@ -490,7 +500,8 @@ var EventHandlers = {
 				writeBuffer(inputmask.el, getBuffer.call(inputmask));
 			}, 0);
 		}
-	},
+	}
+	,
 	resetEvent: function () {
 		const inputmask = this.inputmask;
 

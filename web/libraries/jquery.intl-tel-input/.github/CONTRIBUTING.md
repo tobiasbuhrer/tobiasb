@@ -4,22 +4,34 @@ I'm very open to contributions, big and small! For general instructions on submi
 
 ### Changes to the plugin
 
-In order to build the project, you will first need to install [npm](https://www.npmjs.org), and then globally install a package called evenizer with `npm install -g evenizer`. Then run `npm install` to install the project's dependencies, and then you should be good to run `npm run build` to build the project. At this point, the included `demo.html` should be working. You should make your changes in the `src` directory and be sure to run `npm run build` again before committing.
+In order to build the project, you will first need to install [npm](https://www.npmjs.org), and then run `npm install` to install the project's dependencies (for now you must be using node v16 due to our node-sass dependency). At this point, the included `demo.html` should be working, if you open it in your browser. Then you should make your changes in the `src` directory, and be sure to run the build script before committing your changes - see below for more information on this.
+
+In most cases, you will only need to make changes to the JavaScript, in which case you can just run `npm run build:js` to build the JavaScript before committing.
+
+If you want to make changes to the CSS or the flags sprite, you will need to globally install a package called evenizer with `npm install -g evenizer` and then run `npm run build` to build all of the assets (warning: this can take a while), before committing.
 
 ### Updating to a new version of libphonenumber
 
 #### Step 1: Setup
+(Taken from the [libphonenumber JavaScript setup instructions](https://github.com/google/libphonenumber/blob/master/javascript/README.md))  
 Create a new dir (e.g. ~/workspace/libphonenumber-tools) where you will clone the libphonenumber project and a few other dependencies, and cd into it, and then:
 
 ```
-git clone https://github.com/googlei18n/libphonenumber
+git clone https://github.com/google/libphonenumber
 git clone https://github.com/google/closure-library
 git clone https://github.com/google/closure-compiler
 git clone https://github.com/google/closure-linter
 git clone https://github.com/google/python-gflags
 ```
 
-Build Closure's compiler.jar in closure-compiler directory: `mvn -DskipTests` (requires maven to be installed - on MacOS, you can do this with `brew install maven`)
+Update 29/11/2021: the recommended versions of these dependencies didn't work for me, when trying to build against the latest version of libphonenumber (v8.12.38 at the time of writing), so I had to use the following versions to get it working:
+
+- closure-compiler v20210302
+- closure-library v20201006
+- closure-linter v2.3.19
+- python-gflags 3.1.2
+
+You also need to build Closure's compiler.jar in the closure-compiler directory: `bazelisk build :all` (requires 2 things to be installed: (1) bazelisk - on MacOS, you can do this with `brew install bazelisk`, and (2) a JDK)
 
 #### Step 2: Updating libphonenumber
 

@@ -2,9 +2,12 @@
 
 Copyright (c) 2010 - 2021 Robin Herbots Licensed under the MIT license (<https://opensource.org/licenses/MIT>)
 
+The Inputmask has a very permissive license and this will stay that way.  But when you use the Inputmask in a commercial setting, be so honest to make a small donation.
+This will be appreciated very much.
+
 [![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZNR3EB6JTMMSS)
   
-[![NPM Version][npm-image]][npm-url] [![Dependency Status][david-image]][david-url] [![devDependency Status][david-dev-image]][david-dev-url]
+![npm](https://img.shields.io/npm/v/inputmask) ![npm (tag)](https://img.shields.io/npm/v/inputmask/next) ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/inputmask)
 
 Inputmask is a javascript library that creates an input mask.  Inputmask can run against vanilla javascript, jQuery, and jqlite.
 
@@ -90,6 +93,11 @@ var Inputmask = require('inputmask');
 
 //es6
 import Inputmask from "inputmask";
+```
+
+### ES6
+```
+import Inputmask from "inputmask.es6.js";
 ```
 
 ## Usage
@@ -195,7 +203,7 @@ $(document).ready(function(){
 ```
 
 ### Optional masks
-It is possible to define some parts in the mask is optional.  This is done by using [ ].
+It is possible to define some parts in the mask as optional.  This is done by using [ ].
 
 Example:
 
@@ -289,7 +297,8 @@ The alternator syntax is like an **OR** statement.  The mask can be one of the 3
 To define an alternator use the |.
 ex: "a|9" => a or 9
 "(aaa)|(999)" => aaa or 999
-"(aaa|999|9AA)" => aaa or 999 or 9AA
+"(aaa|999|9AA)" => aaa or 999 or 9AA  
+"aaaa|9999" => aaa a or 9 999
 
 **Also make sure to read about the [keepStatic](#keepStatic) option.**
 
@@ -402,7 +411,20 @@ Inputmask.extendDefinitions({
 ### placeholder
 Specify a placeholder for a definition.  This can also be a function.
 
-### set defaults
+### optional
+Mark the definition as optional
+
+### static
+Mark the definition as static
+
+### casing (definition option)
+Specify casing options.  
+The options are the same as the [Casing option](#casing)
+
+### generated
+Mark the definition as generated
+
+## set defaults
 The defaults can be set as below.
 
 ```javascript
@@ -990,7 +1012,11 @@ ex. $(selector).inputmask({ mask: ["+55-99-9999-9999", "+55-99-99999-9999", ], k
 
 typing 1212345123 => should result in +55-12-1234-5123 type extra 4 => switch to +55-12-12345-1234
 
-**When the option is not set, it will default to false, except for multiple masks it will default to true!!**
+**When the option is not set, it will default to false.**  
+**Except:**
+- for multiple masks it will default to true
+- when the first alternation is shorter then the next it will also default to true.
+  - ex: (9|999), (99)|(aaaa)
 
 ### positionCaretOnTab
 When enabled the caret position is set after the latest valid position on TAB Default: true
@@ -1122,6 +1148,15 @@ Time to show html5 validation error on form submit.
 
 Default: 3000
 
+### substitutes
+Define character substitutes.
+```
+substitutes: {
+  ",": "."
+}
+```
+Default: {}
+
 ## General
 ### set a value and apply the mask
 this can be done with the traditional jquery.val function (all browsers) or JavaScript value property for browsers which implement lookupGetter or getOwnPropertyDescriptor
@@ -1241,11 +1276,4 @@ Be sure to pass true in the jQuery.clone fn to clone with data and events and us
 (https://api.jquery.com/clone/)
 
 
-
-[npm-url]: https://npmjs.org/package/inputmask
-[npm-image]: https://img.shields.io/npm/v/inputmask.svg
-[david-url]: https://david-dm.org/RobinHerbots/inputmask#info=dependencies
-[david-image]: https://img.shields.io/david/RobinHerbots/inputmask.svg
-[david-dev-url]: https://david-dm.org/RobinHerbots/inputmask#info=devDependencies
-[david-dev-image]: https://img.shields.io/david/dev/RobinHerbots/inputmask.svg
 [input-type-ref]: https://html.spec.whatwg.org/multipage/forms.html#do-not-apply

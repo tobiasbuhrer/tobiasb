@@ -1075,7 +1075,7 @@ export default function (qunit, Inputmask) {
 		assert.equal(testmask.value, "30/mm/yyyy", "Result " + testmask.value);
 	});
 
-	qunit.test("leapyear bug - when placeholder is defined to space cant type 2 after type 20/0 - #2451", function (assert) {
+	qunit.test("leapyear bug - when placeholder is defined to space cant type 2 after type 29/0 - #2451", function (assert) {
 		var $fixture = $("#qunit-fixture");
 		$fixture.append("<input type=\"text\" id=\"testmask\" />");
 		var testmask = document.getElementById("testmask");
@@ -1103,5 +1103,73 @@ export default function (qunit, Inputmask) {
 		$("#testmask").Type("02/29/2012");
 
 		assert.equal(testmask.value, "02/29/2012", "Result " + testmask.value);
+	});
+
+	qunit.test("H2:MM min 12:59- #2297", function (assert) {
+		var $fixture = $("#qunit-fixture");
+		$fixture.append("<input type=\"text\" id=\"testmask\" />");
+		var testmask = document.getElementById("testmask");
+		Inputmask("datetime", {
+			inputFormat: "H2:MM",
+			placeholder: "0",
+			min: "12:59",
+			max: "33:33"
+		}).mask(testmask);
+
+		testmask.focus();
+		$("#testmask").Type("12:44");
+
+		assert.equal(testmask.value, "12:00", "Result " + testmask.value);
+	});
+
+	qunit.test("Min Max AMPM- #2297", function (assert) {
+		var $fixture = $("#qunit-fixture");
+		$fixture.append("<input type=\"text\" id=\"testmask\" />");
+		var testmask = document.getElementById("testmask");
+		Inputmask("datetime", {
+			inputFormat: "dd/mm/yyyy hh:MM:ss TT",
+			placeholder: "DD/MM/YYYY hh:mm:ss XM",
+			min: "30/03/2020 12:00:00 AM",
+			max: "30/03/2020 11:59:59 PM",
+		}).mask(testmask);
+
+		testmask.focus();
+		$("#testmask").Type("30/03/2020 11:00:00 AM");
+
+		assert.equal(testmask.value, "30/03/2020 11:00:00 AM", "Result " + testmask.value);
+	});
+
+	qunit.test("Min Max AMPM- #2297", function (assert) {
+		var $fixture = $("#qunit-fixture");
+		$fixture.append("<input type=\"text\" id=\"testmask\" />");
+		var testmask = document.getElementById("testmask");
+		Inputmask("datetime", {
+			inputFormat: "dd/mm/yyyy hh:MM:ss TT",
+			placeholder: "DD/MM/YYYY hh:mm:ss XM",
+			min: "30/03/2020 12:00:00 AM",
+			max: "30/03/2020 11:59:59 PM",
+		}).mask(testmask);
+
+		testmask.focus();
+		$("#testmask").Type("30/03/2020 12:00:00 AM");
+
+		assert.equal(testmask.value, "30/03/2020 12:00:00 AM", "Result " + testmask.value);
+	});
+
+	qunit.test("Min Max AMPM- #2297", function (assert) {
+		var $fixture = $("#qunit-fixture");
+		$fixture.append("<input type=\"text\" id=\"testmask\" />");
+		var testmask = document.getElementById("testmask");
+		Inputmask("datetime", {
+			inputFormat: "dd/mm/yyyy hh:MM:ss TT",
+			placeholder: "DD/MM/YYYY hh:mm:ss XM",
+			min: "30/03/2020 12:00:00 AM",
+			max: "30/03/2020 11:59:59 PM",
+		}).mask(testmask);
+
+		testmask.focus();
+		$("#testmask").Type("30/03/2020 11:00:00 PM");
+
+		assert.equal(testmask.value, "30/03/2020 11:00:00 PM", "Result " + testmask.value);
 	});
 }

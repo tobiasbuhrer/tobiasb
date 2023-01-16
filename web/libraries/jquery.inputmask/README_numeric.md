@@ -101,12 +101,17 @@ Other examples:
 Default: "decimal"
 
 ### shortcuts: 
-Default: {k: "000", m: "000000"}
+Default: {k: "1000", m: "1000000"}
 
 Define shortcuts. 
 This will allow typing 1k => 1000, 2m => 2000000
  
 To disable just pass shortcuts: null as option
+
+### stripLeadingZeroes
+Default: true
+
+Strip leading zeroes.
 
 ### Setting initial values
 

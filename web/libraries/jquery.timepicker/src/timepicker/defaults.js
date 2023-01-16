@@ -1,9 +1,10 @@
-import roundingFunction from "./rounding";
+import { roundingFunction } from "./rounding";
 
 const DEFAULT_SETTINGS = {
   appendTo: "body",
   className: null,
-  closeOnWindowScroll: false,
+  closeOnWindow: false,
+  closeOnScroll: false,
   disableTextInput: false,
   disableTimeRanges: [],
   disableTouchKeyboard: false,
@@ -21,7 +22,6 @@ const DEFAULT_SETTINGS = {
   show2400: false,
   showDuration: false,
   showOn: ["click", "focus"],
-  showOnFocus: true,
   step: 30,
   stopScrollPropagation: false,
   timeFormat: "g:ia",

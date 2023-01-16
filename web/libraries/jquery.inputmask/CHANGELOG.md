@@ -1,5 +1,51 @@
 # Change Log
 
+## [5.0.8 - UNRELEASED]
+
+### Addition
+### Updates
+### Fixed
+
+## [5.0.7 - 30/12/2021]
+
+### Addition
+- Numeric alias
+  - stripLeadingZeroes option - #2523
+- Correctly handle nested optionals (email alias)
+- character substitution
+- extend definition options - #2524
+  - optional
+  - static
+  - generated
+- add casing definition option to the readme
+
+### Updates
+- change behavior of keepStatic option (see readme)
+- update ip alias to correctly handle the greedy: true option
+- fix greedy option with quantifiers
+- fix error in mask-lexer for \\w in regex
+- currency alias: add character substitution for the radixpoint
+- alias \\d to [0-9] in regex masks
+- clear masktemplate before submitting regardsless of the clearMaskOnLostFocus option
+
+### Fixed
+- Add new option "stripLeadingZeroes" to the numeric extension #2523
+- Alternation like (9|999) shows extra placeholder #2277
+- Numeric shortcut not working for decimal places #2553
+- Fix backspace bug with insertMode: false #2572
+- InsertMode toggle not functioning #2565
+- Uncaught InternalError: too much recursion freezes the browser #2570 (Regex issue)
+- Different behaviour configuration by attribute vs initialization #2530
+- The requested module './inputmask.js' does not provide an export named 'default' #2560
+- Issue with leapday #2546
+- Not removing the decimal separator in suffixed inputs #2511
+- Cant type dot on iphone #2541
+- How can I replace the dot for comma while tipping? #2542
+- Issue with global Inputmask.prototype reference (easy fix) #2544
+- crash the input value #2529 - part 1
+- fix datetime with jitmasking - #2297
+- min and max not working in datetime for 12 Hours format i.e. dd/mm/yyyy hh:MM:ss TT #2297
+
 ## [5.0.6 - 01/06/2021]
 
 ### Addition

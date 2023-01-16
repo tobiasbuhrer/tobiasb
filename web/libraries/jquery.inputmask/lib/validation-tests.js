@@ -8,6 +8,7 @@ export {
 	getTestTemplate,
 	isSubsetOf
 };
+import Inputmask from "./inputmask";
 
 function getLocator(tst, align) { //need to align the locators to be correct
 	var locator = (tst.alternation != undefined ? tst.mloc[getDecisionTaker(tst)] : tst.locator).join("");
@@ -68,14 +69,17 @@ function getMaskTemplate(baseOnInput, minimalPos, includeMode, noJit, clearOptio
 
 
 	var greedy = opts.greedy;
-	if (clearOptionalTail) opts.greedy = false;
+	if (clearOptionalTail && opts.greedy) {
+		opts.greedy = false;
+		inputmask.maskset.tests = {};
+	}
 	minimalPos = minimalPos || 0;
 	var maskTemplate = [],
 		ndxIntlzr, pos = 0,
 		test, testPos, jitRenderStatic;
 	do {
 		if (baseOnInput === true && maskset.validPositions[pos]) {
-			testPos = (clearOptionalTail && maskset.validPositions[pos].match.optionality === true
+			testPos = (clearOptionalTail && maskset.validPositions[pos].match.optionality
 				&& maskset.validPositions[pos + 1] === undefined
 				&& (maskset.validPositions[pos].generatedInput === true || (maskset.validPositions[pos].input == opts.skipOptionalPartCharacter && pos > 0)))
 				? determineTestTemplate.call(inputmask, pos, getTests.call(inputmask, pos, ndxIntlzr, pos - 1))
@@ -124,23 +128,49 @@ function getTestTemplate(pos, ndxIntlzr, tstPs) {
 function determineTestTemplate(pos, tests) {
 	var inputmask = this,
 		opts = this.opts;
-
+	var optionalityLevel = determineOptionalityLevel(pos, tests);
 	pos = pos > 0 ? pos - 1 : 0;
 	var altTest = getTest.call(inputmask, pos), targetLocator = getLocator(altTest), tstLocator, closest, bestMatch;
+	if (opts.greedy && tests.length > 1 && tests[tests.length - 1].match.def === "")
+		tests.pop();
+	// console.log(" optionality = " + optionalityLevel);
+	// console.log(" - " + JSON.stringify(tests));
 	for (var ndx = 0; ndx < tests.length; ndx++) { //find best matching
 		var tst = tests[ndx];
 		tstLocator = getLocator(tst, targetLocator.length);
 		var distance = Math.abs(tstLocator - targetLocator);
+
 		if (closest === undefined
 			|| (tstLocator !== "" && distance < closest)
-			|| (bestMatch && !opts.greedy && bestMatch.match.optionality && bestMatch.match.newBlockMarker === "master" && (!tst.match.optionality || !tst.match.newBlockMarker))
-			|| (bestMatch && bestMatch.match.optionalQuantifier && !tst.match.optionalQuantifier)) {
+			|| (bestMatch && !opts.greedy &&
+				(bestMatch.match.optionality && bestMatch.match.optionality - optionalityLevel > 0) &&
+				bestMatch.match.newBlockMarker === "master" &&
+				((!tst.match.optionality || tst.match.optionality - optionalityLevel < 1) || !tst.match.newBlockMarker))
+			|| (bestMatch && !opts.greedy && bestMatch.match.optionalQuantifier && !tst.match.optionalQuantifier)) {
 			closest = distance;
 			bestMatch = tst;
 		}
 	}
-
 	return bestMatch;
+}
+
+function determineOptionalityLevel(pos, tests) {
+	let optionalityLevel = 0, differentOptionalLevels = false;
+	tests.forEach(test => {
+		if (test.match.optionality) {
+			if (optionalityLevel !== 0 && optionalityLevel !== test.match.optionality)
+				differentOptionalLevels = true;
+			if (optionalityLevel === 0 || optionalityLevel > test.match.optionality) {
+				optionalityLevel = test.match.optionality;
+			}
+		}
+	});
+	if (optionalityLevel) {
+		if (pos == 0) optionalityLevel = 0;
+		else if (tests.length == 1) optionalityLevel = 0;
+		else if (!differentOptionalLevels) optionalityLevel = 0;
+	}
+	return optionalityLevel;
 }
 
 //tobe put on prototype?
@@ -298,7 +328,14 @@ function getTests(pos, ndxIntlzr, tstPs) {
 					"cd": cacheDependency,
 					"mloc": {}
 				});
-				return true;
+				if (match.optionality && quantifierRecurse === undefined &&
+					((opts.definitions && opts.definitions[match.nativeDef] && opts.definitions[match.nativeDef].optional) ||
+						(Inputmask.prototype.definitions[match.nativeDef] && Inputmask.prototype.definitions[match.nativeDef].optional))) { //prevent loop see #698
+					insertStop = true; //insert a stop
+					testPos = pos; //match the position after the group
+				} else {
+					return true;
+				}
 			} else if (match.matches !== undefined) {
 				if (match.isGroup && quantifierRecurse !== match) { //when a group pass along to the quantifier
 					match = handleMatch(maskToken.matches[maskToken.matches.indexOf(match) + 1], loopNdx, quantifierRecurse);
@@ -310,10 +347,11 @@ function getTests(pos, ndxIntlzr, tstPs) {
 						//mark optionality in matches
 						matches.forEach(function (mtch, ndx) {
 							if (ndx >= mtchsNdx) {
-								mtch.match.optionality = true;
+								mtch.match.optionality = mtch.match.optionality ? mtch.match.optionality + 1 : 1;
 							}
 						});
 						latestMatch = matches[matches.length - 1].match;
+
 						if (quantifierRecurse === undefined && isFirstMatch(latestMatch, optionalToken)) { //prevent loop see #698
 							insertStop = true; //insert a stop
 							testPos = pos; //match the position after the group
@@ -541,11 +579,19 @@ function getTests(pos, ndxIntlzr, tstPs) {
 			cd: cacheDependency
 		});
 	}
-
+	var result;
 	if (ndxIntlzr !== undefined && maskset.tests[pos]) { //prioritize full tests for caching
-		return $.extend(true, [], matches);
+		result = $.extend(true, [], matches);
+	} else {
+		maskset.tests[pos] = $.extend(true, [], matches); //set a clone to prevent overwriting some props
+		result = maskset.tests[pos];
 	}
-	maskset.tests[pos] = $.extend(true, [], matches); //set a clone to prevent overwriting some props
+
 	// console.log(pos + " - " + JSON.stringify(matches));
-	return maskset.tests[pos];
+	//cleanup optionality marking
+	matches.forEach(t => {
+		t.match.optionality = false;
+	});
+
+	return result;
 }

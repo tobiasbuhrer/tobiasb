@@ -14,11 +14,11 @@ import {
 	isMask,
 	resetMaskSet,
 	seekNext,
-	seekPrevious, translatePosition
+	seekPrevious
 } from "./positioning";
-import {EventHandlers} from "./eventhandlers";
+import { EventHandlers } from "./eventhandlers";
 
-export {alternate, checkAlternationMatch, isComplete, isValid, refreshFromBuffer, revalidateMask, handleRemove};
+export { alternate, checkAlternationMatch, isComplete, isSelection, isValid, refreshFromBuffer, revalidateMask, handleRemove };
 
 //tobe put on prototype?
 function alternate(maskPos, c, strict, fromIsValid, rAltPos, selection) { //pos == true => generalize
@@ -103,7 +103,7 @@ function alternate(maskPos, c, strict, fromIsValid, rAltPos, selection) { //pos 
 					returnRslt = isValidRslt;
 				}
 				if (maskPos == true && isValidRslt) {  //return validposition on generalise
-					returnRslt = {caretPos: i};
+					returnRslt = { caretPos: i };
 				}
 			}
 			if (!isValidRslt) {
@@ -240,7 +240,7 @@ function handleRemove(input, k, pos, strict, fromIsValid) {
 			maskset.p = determineNewCaretPosition.call(inputmask, {
 				begin: maskset.p,
 				end: maskset.p
-			}, false).begin;
+			}, false, opts.insertMode === false && k === keyCode.BACKSPACE ? "none" : undefined).begin;
 		}
 	}
 }
@@ -268,17 +268,18 @@ function isComplete(buffer) { //return true / false / undefined (repeat *)
 	return complete;
 }
 
+function isSelection(posObj) {
+	const inputmask = this,
+		opts = this.opts, insertModeOffset = opts.insertMode ? 0 : 1;
+	return inputmask.isRTL ? (posObj.begin - posObj.end) > insertModeOffset : (posObj.end - posObj.begin) > insertModeOffset;
+}
+
 //tobe put on prototype?
 function isValid(pos, c, strict, fromIsValid, fromAlternate, validateOnly, fromCheckval) { //strict true ~ no correction or autofill
 	const inputmask = this,
 		$ = this.dependencyLib,
 		opts = this.opts,
 		maskset = inputmask.maskset;
-
-	function isSelection(posObj) {
-		return inputmask.isRTL ? (posObj.begin - posObj.end) > 1 || ((posObj.begin - posObj.end) === 1) :
-			(posObj.end - posObj.begin) > 1 || ((posObj.end - posObj.begin) === 1);
-	}
 
 	strict = strict === true; //always set a value to strict to prevent possible strange behavior in the extensions
 
@@ -294,7 +295,7 @@ function isValid(pos, c, strict, fromIsValid, fromAlternate, validateOnly, fromC
 				commandObj.remove.sort(function (a, b) {
 					return b.pos - a.pos;
 				}).forEach(function (lmnt) {
-					revalidateMask.call(inputmask, {begin: lmnt, end: lmnt + 1});
+					revalidateMask.call(inputmask, { begin: lmnt, end: lmnt + 1 });
 				});
 				commandObj.remove = undefined;
 			}
@@ -337,7 +338,7 @@ function isValid(pos, c, strict, fromIsValid, fromAlternate, validateOnly, fromC
 			} else {
 				//return is false or a json object => { pos: ??, c: ??} or true
 				rslt = test.fn != null ?
-					test.fn.test(c, maskset, position, strict, opts, isSelection(pos)) : (c === test.def || c === opts.skipOptionalPartCharacter) && test.def !== "" ? //non mask
+					test.fn.test(c, maskset, position, strict, opts, isSelection.call(inputmask, pos)) : (c === test.def || c === opts.skipOptionalPartCharacter) && test.def !== "" ? //non mask
 						{
 							c: getPlaceholder.call(inputmask, position, test, true) || test.def,
 							pos: position
@@ -384,7 +385,7 @@ function isValid(pos, c, strict, fromIsValid, fromAlternate, validateOnly, fromC
 	}
 
 	if (typeof opts.preValidation === "function" && fromIsValid !== true && validateOnly !== true) {
-		result = opts.preValidation.call(inputmask, getBuffer.call(inputmask), maskPos, c, isSelection(pos), opts, maskset, pos, strict || fromAlternate);
+		result = opts.preValidation.call(inputmask, getBuffer.call(inputmask), maskPos, c, isSelection.call(inputmask, pos), opts, maskset, pos, strict || fromAlternate);
 		result = processCommandObject(result);
 	}
 	if (result === true) { //preValidation result
@@ -427,7 +428,7 @@ function isValid(pos, c, strict, fromIsValid, fromAlternate, validateOnly, fromC
 
 		if (result === false && opts.keepStatic && (isComplete.call(inputmask, getBuffer.call(inputmask)) || maskPos === 0) && !strict && fromAlternate !== true) { //try fuzzy alternator logic
 			result = alternate.call(inputmask, maskPos, c, strict, fromIsValid, undefined, pos);
-		} else if (isSelection(pos) && maskset.tests[maskPos] && maskset.tests[maskPos].length > 1 && opts.keepStatic && !strict && fromAlternate !== true) { //selection clears an alternated keepstatic mask ~ #2189
+		} else if (isSelection.call(inputmask, pos) && maskset.tests[maskPos] && maskset.tests[maskPos].length > 1 && opts.keepStatic && !strict && fromAlternate !== true) { //selection clears an alternated keepstatic mask ~ #2189
 			result = alternate.call(inputmask, true);
 		}
 
@@ -509,7 +510,7 @@ function refreshFromBuffer(start, end, buffer) {
 		maskset.tests = {}; //refresh tests after possible alternating
 		start = 0;
 		end = buffer.length;
-		p = determineNewCaretPosition.call(inputmask, {begin: 0, end: 0}, false).begin;
+		p = determineNewCaretPosition.call(inputmask, { begin: 0, end: 0 }, false).begin;
 	} else {
 		for (i = start; i < end; i++) {
 			delete maskset.validPositions[i];
@@ -519,7 +520,7 @@ function refreshFromBuffer(start, end, buffer) {
 
 	var keypress = new $.Event("keypress");
 	for (i = start; i < end; i++) {
-		keypress.which = bffr[i].toString().charCodeAt(0);
+		keypress.keyCode = bffr[i].toString().charCodeAt(0);
 		inputmask.ignorable = false; //make sure ignorable is ignored ;-)
 		var valResult = EventHandlers.keypressEvent.call(inputmask, keypress, true, false, false, p);
 		if (valResult !== false && valResult !== undefined) {
@@ -595,7 +596,7 @@ function revalidateMask(pos, validTest, fromIsValid, validatedPos) {
 	}
 
 	validatedPos = validatedPos !== undefined ? validatedPos : begin;
-	if (begin !== end || (opts.insertMode && maskset.validPositions[validatedPos] !== undefined && fromIsValid === undefined) || validTest === undefined) {
+	if (begin !== end || (opts.insertMode && maskset.validPositions[validatedPos] !== undefined && fromIsValid === undefined) || validTest === undefined || validTest.match.optionalQuantifier || validTest.match.optionality) {
 		//reposition & revalidate others
 		var positionsClone = $.extend(true, {}, maskset.validPositions),
 			lvp = getLastValidPosition.call(inputmask, undefined, true),
@@ -608,7 +609,7 @@ function revalidateMask(pos, validTest, fromIsValid, validatedPos) {
 		}
 
 		var j = validatedPos,
-			posMatch = j, t, canMatch;
+			posMatch = j, t, canMatch, test;
 
 		if (validTest) {
 			maskset.validPositions[validatedPos] = $.extend(true, {}, validTest);
@@ -622,7 +623,7 @@ function revalidateMask(pos, validTest, fromIsValid, validatedPos) {
 					begin: begin,
 					end: end
 				})))) {
-				while (getTest.call(inputmask, posMatch).match.def !== "") { //loop needed to match further positions
+				while (test = getTest.call(inputmask, posMatch), test.match.def !== "") { //loop needed to match further positions
 					if ((canMatch = positionCanMatchDefinition.call(inputmask, posMatch, t, opts)) !== false || t.match.def === "+") { //validated match //we still need some hackery for the + validator (numeric alias)
 						if (t.match.def === "+") getBuffer.call(inputmask, true);
 						var result = isValid.call(inputmask, posMatch, t.input, t.match.def !== "+", /*t.match.def !== "+"*/ true);
@@ -636,7 +637,7 @@ function revalidateMask(pos, validTest, fromIsValid, validatedPos) {
 						if (validTest === undefined && t.match.static && i === pos.begin) offset++;
 						break;
 					}
-					if (!valid && posMatch > maskset.maskLength) {
+					if (!valid && getBuffer.call(inputmask), posMatch > maskset.maskLength) {
 						break;
 					}
 					posMatch++;

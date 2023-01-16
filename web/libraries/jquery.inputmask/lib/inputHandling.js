@@ -9,7 +9,7 @@ import {
 	resetMaskSet,
 	seekNext
 } from "./positioning";
-import {isComplete, isValid, refreshFromBuffer} from "./validation";
+import {isComplete, refreshFromBuffer} from "./validation";
 import {ie} from "./environment";
 import {EventHandlers} from "./eventhandlers";
 
@@ -89,7 +89,7 @@ function checkVal(input, writeOut, strict, nptvl, initiatingEvent) {
 			} else*/
 			{
 				var keypress = new $.Event("_checkval");
-				keypress.which = charCode.toString().charCodeAt(0);
+				keypress.keyCode = charCode.toString().charCodeAt(0);
 				charCodes += charCode;
 				var lvp = getLastValidPosition.call(inputmask, undefined, true);
 				if (!isTemplateMatch(initialNdx, charCodes)) {
@@ -129,7 +129,7 @@ function checkVal(input, writeOut, strict, nptvl, initiatingEvent) {
 				var keypress = new $.Event("_checkval");
 				validPos = maskset.validPositions[sndx];
 				validPos.generatedInput = true;
-				keypress.which = validPos.input.charCodeAt(0);
+				keypress.keyCode = validPos.input.charCodeAt(0);
 				result = EventHandlers.keypressEvent.call(inputmask, keypress, true, false, strict, nextSndx);
 				if (result && result.pos !== undefined && result.pos !== sndx && maskset.validPositions[result.pos] && maskset.validPositions[result.pos].match.static === true) {
 					staticMatches.push(result.pos);
@@ -146,7 +146,12 @@ function checkVal(input, writeOut, strict, nptvl, initiatingEvent) {
 		}
 	}
 	if (writeOut) {
-		writeBuffer.call(inputmask, input, getBuffer.call(inputmask), result ? result.forwardPosition : inputmask.caretPos.begin, initiatingEvent || new $.Event("checkval"), initiatingEvent && initiatingEvent.type === "input" && inputmask.undoValue !== inputmask._valueGet(true));
+		writeBuffer.call(
+			inputmask,
+			input,
+			getBuffer.call(inputmask), result ? result.forwardPosition : inputmask.caretPos.begin,
+			initiatingEvent || new $.Event("checkval"),
+			initiatingEvent && ((initiatingEvent.type === "input" && inputmask.undoValue !== getBuffer.call(inputmask).join("")) || initiatingEvent.type === "paste"));
 		// for (var vndx in maskset.validPositions) {
 		// 	if (maskset.validPositions[vndx].match.generated !== true) { //only remove non forced generated
 		// 		delete maskset.validPositions[vndx].generatedInput; //clear generated markings ~ consider initializing with a  value as fully typed

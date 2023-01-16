@@ -77,7 +77,6 @@ class Timepicker {
 
     var out = false;
     var value = this.settings.roundingFunction(value, this.settings);
-
     if (!this.list) {
       return false;
     }
@@ -238,20 +237,28 @@ class Timepicker {
     }
 
     var time = timeString.match(pattern);
+
     if (!time) {
       return null;
     }
 
     var hour = parseInt(time[3] * 1, 10);
     var ampm = time[2] || time[9];
-    var hours = hour;
-    var minutes = time[5] * 1 || 0;
+    var minutes = this.parseMinuteString(time[5]);
     var seconds = time[7] * 1 || 0;
 
     if (!ampm && time[3].length == 2 && time[3][0] == "0") {
       // preceding '0' implies AM
       ampm = "am";
     }
+
+    if (hour > 24 && !minutes) {
+      // if someone types in something like "83", turn it into "8h 30m"
+      hour = time[3][0] * 1;
+      minutes = this.parseMinuteString(time[3][1]);
+    }
+
+    var hours = hour;
 
     if (hour <= 12 && ampm) {
       ampm = ampm.trim();
@@ -289,6 +296,20 @@ class Timepicker {
     }
 
     return timeInt;
+  }
+
+  parseMinuteString(minutesString) {
+    if (!minutesString) {
+      minutesString = 0;
+    }
+
+    let multiplier = 1;
+
+    if (minutesString.length == 1) {
+      multiplier = 10;
+    }
+
+    return parseInt(minutesString) * multiplier || 0;
   }
 
   intStringDateOrFunc2func(input) {
@@ -329,56 +350,63 @@ class Timepicker {
       settings._twelveHourTime = true;
     }
 
-    if (
-      settings.showOnFocus === false &&
-      settings.showOn.indexOf("focus") != -1
-    ) {
-      settings.showOn.splice(settings.showOn.indexOf("focus"), 1);
+    if (typeof settings.step != 'function') {
+      const curryStep = settings.step;
+      settings.step = function() {
+        return curryStep;
+      };
     }
 
-    if (!settings.disableTimeRanges) {
-      settings.disableTimeRanges = [];
+    settings.disableTimeRanges = this._parseDisableTimeRanges(settings.disableTimeRanges);
+
+    if (settings.closeOnWindowScroll && !settings.closeOnScroll) {
+      settings.closeOnScroll = settings.closeOnWindowScroll;
     }
 
-    if (settings.disableTimeRanges.length > 0) {
-      // convert string times to integers
-      for (var i in settings.disableTimeRanges) {
-        settings.disableTimeRanges[i] = [
-          this.anytime2int(settings.disableTimeRanges[i][0]),
-          this.anytime2int(settings.disableTimeRanges[i][1])
-        ];
-      }
-
-      // sort by starting time
-      settings.disableTimeRanges = settings.disableTimeRanges.sort(function(
-        a,
-        b
-      ) {
-        return a[0] - b[0];
-      });
-
-      // merge any overlapping ranges
-      for (var i = settings.disableTimeRanges.length - 1; i > 0; i--) {
-        if (
-          settings.disableTimeRanges[i][0] <=
-          settings.disableTimeRanges[i - 1][1]
-        ) {
-          settings.disableTimeRanges[i - 1] = [
-            Math.min(
-              settings.disableTimeRanges[i][0],
-              settings.disableTimeRanges[i - 1][0]
-            ),
-            Math.max(
-              settings.disableTimeRanges[i][1],
-              settings.disableTimeRanges[i - 1][1]
-            )
-          ];
-          settings.disableTimeRanges.splice(i, 1);
-        }
-      }
+    if (settings.closeOnScroll === true) {
+      settings.closeOnScroll = window.document;
     }
 
     return settings;
+  }
+
+  _parseDisableTimeRanges(disableTimeRanges) {
+    if (!disableTimeRanges || disableTimeRanges.length == 0) {
+      return [];
+    }
+
+    // convert string times to integers
+    for (var i in disableTimeRanges) {
+      disableTimeRanges[i] = [
+        this.anytime2int(disableTimeRanges[i][0]),
+        this.anytime2int(disableTimeRanges[i][1])
+      ];
+    }
+
+    // sort by starting time
+    disableTimeRanges = disableTimeRanges.sort((a, b) => a[0] - b[0]);
+
+    // merge any overlapping ranges
+    for (var i = disableTimeRanges.length - 1; i > 0; i--) {
+      if (
+        disableTimeRanges[i][0] <=
+        disableTimeRanges[i - 1][1]
+      ) {
+        disableTimeRanges[i - 1] = [
+          Math.min(
+            disableTimeRanges[i][0],
+            disableTimeRanges[i - 1][0]
+          ),
+          Math.max(
+            disableTimeRanges[i][1],
+            disableTimeRanges[i - 1][1]
+          )
+        ];
+        disableTimeRanges.splice(i, 1);
+      }
+    }
+
+    return disableTimeRanges;
   }
 
   /*
@@ -431,6 +459,7 @@ class Timepicker {
   }
 
   _roundAndFormatTime(seconds) {
+    // console.log('_roundAndFormatTime')
     seconds = this.settings.roundingFunction(seconds, this.settings);
     if (seconds !== null) {
       return this._int2time(seconds);
@@ -608,7 +637,7 @@ class Timepicker {
         rangeError = true;
         break;
       }
-    };
+    }
 
     if (settings.forceRoundTime) {
       var roundSeconds = settings.roundingFunction(seconds, settings);
