@@ -73,7 +73,7 @@ class GeofieldLatLonWidget extends GeofieldBaseWidget {
         $latlon_value[$component] = isset($items[$delta]->{$component}) ? floatval($items[$delta]->{$component}) : '';
       }
 
-      $element += [
+      $element['value'] += [
         '#type' => 'geofield_latlon',
         '#default_value' => $latlon_value,
         '#geolocation' => $this->getSetting('html5_geolocation'),
@@ -82,7 +82,7 @@ class GeofieldLatLonWidget extends GeofieldBaseWidget {
     }
     else {
       $widget_label = $this->getPluginDefinition()['label']->render();
-      $element += [
+      $element['value'] += [
         '#prefix' => '<div class="geofield-warning">' . $this->t('The "@widget_label" widget cannot be applied because it doesn\'t support Geometries (Polylines, Polygons, etc.).', [
           '@widget_label' => $widget_label,
         ]) . '</div>',
@@ -90,7 +90,7 @@ class GeofieldLatLonWidget extends GeofieldBaseWidget {
         '#default_value' => $items[$delta]->value ?: NULL,
       ];
     }
-    return ['value' => $element];
+    return $element;
   }
 
   /**

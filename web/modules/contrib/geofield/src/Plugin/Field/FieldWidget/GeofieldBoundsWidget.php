@@ -37,12 +37,12 @@ class GeofieldBoundsWidget extends GeofieldBaseWidget {
       $bounds_value[$component] = isset($items[$delta]->{$component}) ? floatval($items[$delta]->{$component}) : '';
     }
 
-    $element += [
+    $element['value'] += [
       '#type' => 'geofield_bounds',
       '#default_value' => $bounds_value,
     ];
 
-    return ['value' => $element];
+    return $element;
   }
 
   /**
