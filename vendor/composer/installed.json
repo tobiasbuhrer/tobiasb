@@ -1877,17 +1877,17 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.1.3",
-            "version_normalized": "3.1.3.0",
+            "version": "3.1.4",
+            "version_normalized": "3.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "920da294b4bb0bb527f2a91ed60c18213435880f"
+                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/920da294b4bb0bb527f2a91ed60c18213435880f",
-                "reference": "920da294b4bb0bb527f2a91ed60c18213435880f",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119",
+                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119",
                 "shasum": ""
             },
             "require": {
@@ -1909,7 +1909,7 @@
                 "symfony/cache": "^4.4 || ^5.4 || ^6.0",
                 "vimeo/psalm": "4.30.0 || 5.3.0"
             },
-            "time": "2023-01-19T13:39:42+00:00",
+            "time": "2023-02-03T11:13:07+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1958,7 +1958,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.1.3"
+                "source": "https://github.com/doctrine/persistence/tree/3.1.4"
             },
             "funding": [
                 {
@@ -2347,17 +2347,17 @@
         },
         {
             "name": "drupal/core",
-            "version": "9.5.2",
-            "version_normalized": "9.5.2.0",
+            "version": "9.5.3",
+            "version_normalized": "9.5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "2ce2d9dbc3d248d7fd6bf9c9a50cce7e8dc799a6"
+                "reference": "67e34a5e8f48cafdd5c26e778a9570860e2d44a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/2ce2d9dbc3d248d7fd6bf9c9a50cce7e8dc799a6",
-                "reference": "2ce2d9dbc3d248d7fd6bf9c9a50cce7e8dc799a6",
+                "url": "https://api.github.com/repos/drupal/core/zipball/67e34a5e8f48cafdd5c26e778a9570860e2d44a5",
+                "reference": "67e34a5e8f48cafdd5c26e778a9570860e2d44a5",
                 "shasum": ""
             },
             "require": {
@@ -2437,7 +2437,7 @@
                 "drupal/core-uuid": "self.version",
                 "drupal/core-version": "self.version"
             },
-            "time": "2023-01-18T12:48:20+00:00",
+            "time": "2023-02-01T19:47:31+00:00",
             "type": "drupal-core",
             "extra": {
                 "drupal-scaffold": {
@@ -2511,14 +2511,14 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/9.5.2"
+                "source": "https://github.com/drupal/core/tree/9.5.3"
             },
             "install-path": "../../web/core"
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "9.5.2",
-            "version_normalized": "9.5.2.0",
+            "version": "9.5.3",
+            "version_normalized": "9.5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -2564,14 +2564,14 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.5.2"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.5.3"
             },
             "install-path": "../drupal/core-composer-scaffold"
         },
         {
             "name": "drupal/core-project-message",
-            "version": "9.5.2",
-            "version_normalized": "9.5.2.0",
+            "version": "9.5.3",
+            "version_normalized": "9.5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -2608,23 +2608,23 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-project-message/tree/9.5.2"
+                "source": "https://github.com/drupal/core-project-message/tree/9.5.3"
             },
             "install-path": "../drupal/core-project-message"
         },
         {
             "name": "drupal/core-recommended",
-            "version": "9.5.2",
-            "version_normalized": "9.5.2.0",
+            "version": "9.5.3",
+            "version_normalized": "9.5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "eab84e96280017f11e0dfba7f9995facaa803d13"
+                "reference": "3dc8d9757c6c4a0457d32dd58a755532504ad959"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/eab84e96280017f11e0dfba7f9995facaa803d13",
-                "reference": "eab84e96280017f11e0dfba7f9995facaa803d13",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/3dc8d9757c6c4a0457d32dd58a755532504ad959",
+                "reference": "3dc8d9757c6c4a0457d32dd58a755532504ad959",
                 "shasum": ""
             },
             "require": {
@@ -2633,7 +2633,7 @@
                 "doctrine/annotations": "~1.13.3",
                 "doctrine/lexer": "~1.2.3",
                 "doctrine/reflection": "~1.2.3",
-                "drupal/core": "9.5.2",
+                "drupal/core": "9.5.3",
                 "egulias/email-validator": "~3.2.1",
                 "guzzlehttp/guzzle": "~6.5.8",
                 "guzzlehttp/promises": "~1.5.2",
@@ -2664,7 +2664,7 @@
                 "symfony/event-dispatcher-contracts": "~v1.1.13",
                 "symfony/http-client-contracts": "~v2.5.2",
                 "symfony/http-foundation": "~v4.4.49",
-                "symfony/http-kernel": "~v4.4.49",
+                "symfony/http-kernel": "~v4.4.50",
                 "symfony/mime": "~v5.4.13",
                 "symfony/polyfill-ctype": "~v1.27.0",
                 "symfony/polyfill-iconv": "~v1.27.0",
@@ -2680,7 +2680,7 @@
                 "symfony/translation": "~v4.4.47",
                 "symfony/translation-contracts": "~v2.5.2",
                 "symfony/validator": "~v4.4.48",
-                "symfony/var-dumper": "~v5.4.14",
+                "symfony/var-dumper": "~v5.4.19",
                 "symfony/yaml": "~v4.4.45",
                 "twig/twig": "~v2.15.4",
                 "typo3/phar-stream-wrapper": "~v3.1.7"
@@ -2688,7 +2688,7 @@
             "conflict": {
                 "webflo/drupal-core-strict": "*"
             },
-            "time": "2023-01-18T12:48:20+00:00",
+            "time": "2023-02-01T19:47:31+00:00",
             "type": "metapackage",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2696,7 +2696,7 @@
             ],
             "description": "Core and its dependencies with known-compatible minor versions. Require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/9.5.2"
+                "source": "https://github.com/drupal/core-recommended/tree/9.5.3"
             },
             "install-path": null
         },
@@ -5823,17 +5823,17 @@
         },
         {
             "name": "mglaman/phpstan-drupal",
-            "version": "1.1.27",
-            "version_normalized": "1.1.27.0",
+            "version": "1.1.28",
+            "version_normalized": "1.1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mglaman/phpstan-drupal.git",
-                "reference": "61daa574664fa138f42dc7e883de9a12a7703462"
+                "reference": "55c3f437e52d0e10e7ac59ffb20e338625b79594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/61daa574664fa138f42dc7e883de9a12a7703462",
-                "reference": "61daa574664fa138f42dc7e883de9a12a7703462",
+                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/55c3f437e52d0e10e7ac59ffb20e338625b79594",
+                "reference": "55c3f437e52d0e10e7ac59ffb20e338625b79594",
                 "shasum": ""
             },
             "require": {
@@ -5861,7 +5861,7 @@
                 "phpstan/phpstan-deprecation-rules": "For catching deprecations, especially in Drupal core.",
                 "phpstan/phpstan-phpunit": "PHPUnit extensions and rules for PHPStan."
             },
-            "time": "2023-01-25T22:02:09+00:00",
+            "time": "2023-02-01T21:17:43+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -5910,7 +5910,7 @@
             "description": "Drupal extension and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/mglaman/phpstan-drupal/issues",
-                "source": "https://github.com/mglaman/phpstan-drupal/tree/1.1.27"
+                "source": "https://github.com/mglaman/phpstan-drupal/tree/1.1.28"
             },
             "funding": [
                 {
