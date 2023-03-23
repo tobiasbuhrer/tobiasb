@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '4c9e10b7d4a7384699ee5b18ba46d28276457078',
+        'reference' => '0806810b5ab8db17ac7710a30da1bd11137363fe',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '4c9e10b7d4a7384699ee5b18ba46d28276457078',
+            'reference' => '0806810b5ab8db17ac7710a30da1bd11137363fe',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -664,12 +664,12 @@
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
-            'pretty_version' => '4.0.0',
-            'version' => '4.0.0.0',
+            'pretty_version' => '4.0.1',
+            'version' => '4.0.1.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/libraries',
             'aliases' => array(),
-            'reference' => '4.0.0',
+            'reference' => '4.0.1',
             'dev_requirement' => false,
         ),
         'drupal/minifyhtml' => array(
