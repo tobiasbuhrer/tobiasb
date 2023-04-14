@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6d1fcc9c2ba4309f27d93d19f2222f9dd803d9b7',
+        'reference' => '01517dc3a575e13eff4fd268f12b3f5a43470bc8',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6d1fcc9c2ba4309f27d93d19f2222f9dd803d9b7',
+            'reference' => '01517dc3a575e13eff4fd268f12b3f5a43470bc8',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -637,12 +637,12 @@
             'dev_requirement' => false,
         ),
         'drupal/juicebox' => array(
-            'pretty_version' => '3.0.0-alpha2',
-            'version' => '3.0.0.0-alpha2',
+            'pretty_version' => '4.0.0-alpha1',
+            'version' => '4.0.0.0-alpha1',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/juicebox',
             'aliases' => array(),
-            'reference' => '8.x-3.0-alpha2',
+            'reference' => '4.0.0-alpha1',
             'dev_requirement' => false,
         ),
         'drupal/leaflet' => array(

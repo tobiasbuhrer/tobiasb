@@ -2,11 +2,9 @@ name: 'Juicebox Mimic Article'
 type: module
 description: 'Provides an article content type, with image field, that is similar to the one provided by the "standard" profile.'
 package: Testing
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^8 || ^9 || ^10
 dependencies:
   - drupal:node
   - drupal:image
   - drupal:text
   - drupal:user
-  - drupal:entity_reference

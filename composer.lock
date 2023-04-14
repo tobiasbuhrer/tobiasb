@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "657c05bd4ea75f7803973af9e1723a2d",
+    "content-hash": "b9fc402cdfb507533a54aea6fc7cd9a6",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3141,26 +3141,26 @@
         },
         {
             "name": "drupal/juicebox",
-            "version": "3.0.0-alpha2",
+            "version": "4.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/juicebox.git",
-                "reference": "8.x-3.0-alpha2"
+                "reference": "4.0.0-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/juicebox-8.x-3.0-alpha2.zip",
-                "reference": "8.x-3.0-alpha2",
-                "shasum": "ff73f99e8285c2f8eccfb6b3563a3de1dc17c144"
+                "url": "https://ftp.drupal.org/files/projects/juicebox-4.0.0-alpha1.zip",
+                "reference": "4.0.0-alpha1",
+                "shasum": "60faa116c2ab718ba35f60327d709828f33aee91"
             },
             "require": {
-                "drupal/core": "^8 || ^9"
+                "drupal/core": "^9.3 || ^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.0-alpha2",
-                    "datestamp": "1608186236",
+                    "version": "4.0.0-alpha1",
+                    "datestamp": "1680373324",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -3192,7 +3192,8 @@
             "description": "Provides an integration between the Juicebox HTML5 responsive gallery library and Drupal.",
             "homepage": "https://www.drupal.org/project/juicebox",
             "support": {
-                "source": "https://git.drupalcode.org/project/juicebox"
+                "source": "https://git.drupalcode.org/project/juicebox",
+                "issues": "https://www.drupal.org/project/issues/juicebox"
             }
         },
         {
