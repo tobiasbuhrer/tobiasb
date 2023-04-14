@@ -107,7 +107,7 @@ class MinifyHTMLExit implements EventSubscriberInterface {
   /**
    * Minifies the HTML.
    *
-   * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\ResponseEvent $event
    *   Response event object.
    */
   public function response(ResponseEvent $event) {
@@ -162,8 +162,8 @@ class MinifyHTMLExit implements EventSubscriberInterface {
     $callbacks = [
       'minifyhtmlPlaceholderCallbackTextarea' => '/\\s*<textarea(\\b[^>]*?>[\\s\\S]*?<\\/textarea>)\\s*/i',
       'minifyhtmlPlaceholderCallbackPre' => '/\\s*<pre(\\b[^>]*?>[\\s\\S]*?<\\/pre>)\\s*/i',
-      'minifyhtmlPlaceholderCallbackScript' => '/\\s*<script(\\b[^>]*?>[\\s\\S]*?<\\/script>)\\s*/i',
       'minifyhtmlPlaceholderCallbackIframe' => '/\\s*<iframe(\\b[^>]*?>[\\s\\S]*?<\\/iframe>)\\s*/i',
+      'minifyhtmlPlaceholderCallbackScript' => '/\\s*<script(\\b[^>]*?>[\\s\\S]*?<\\/script>)\\s*/i',
       'minifyhtmlPlaceholderCallbackStyle' => '/\\s*<style(\\b[^>]*?>[\\s\\S]*?<\\/style>)\\s*/i',
     ];
 
@@ -184,7 +184,9 @@ class MinifyHTMLExit implements EventSubscriberInterface {
 
     // Restore all values that are currently represented by a placeholder.
     if (!empty($this->placeholders)) {
-      $this->content = str_replace(array_keys($this->placeholders), array_values($this->placeholders), $this->content);
+      foreach (array_reverse($this->placeholders, TRUE) as $placeholder => $value) {
+        $this->content = str_replace($placeholder, $value, $this->content);
+      }
     }
   }
 

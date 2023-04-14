@@ -2,6 +2,9 @@
 
 namespace Drupal\plupload_test;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\File\FileSystemInterface;
@@ -32,10 +35,23 @@ class PluploadTestForm implements FormInterface {
       ],
     ];
 
+    $form['result_message'] = [
+      '#markup' => '<div class="result_message"></div>',
+    ];
+
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
     ];
+
+    $form['ajax_submit'] = [
+      '#type' => 'button',
+      '#value' => $this->t('Ajax submit'),
+      '#ajax' => [
+        'callback' => '::ajaxSubmit',
+      ],
+    ];
+
     return $form;
   }
 
@@ -76,6 +92,26 @@ class PluploadTestForm implements FormInterface {
     if (!empty($saved_files)) {
       \Drupal::messenger()->addStatus('Files uploaded correctly: ' . implode(', ', $saved_files) . '.');
     }
+  }
+
+  /**
+   * Custom ajax form submission.
+   */
+  public function ajaxSubmit(array $form, FormStateInterface $form_state) {
+
+    $num_files = count($form_state->getValue('plupload'));
+
+    $response = new AjaxResponse();
+    $response->addCommand(
+      new HtmlCommand(
+        '.result_message',
+        '<div class="my_top_message">' . t('Uploaded @num_files files', [
+          '@num_files' => $num_files,
+        ]) . '</div>'),
+    );
+    $response->addCommand(new ReplaceCommand(NULL, $form));
+    return $response;
+
   }
 
   /**

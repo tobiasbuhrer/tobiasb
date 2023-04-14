@@ -6,7 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Render\HtmlResponse;
 
 /**
- * Class Cases.
+ * Provides test cases for minifyhtml module.
  *
  * @package Drupal\minifyhtml_test\Controller
  */

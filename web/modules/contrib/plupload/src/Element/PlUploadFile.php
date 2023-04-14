@@ -52,8 +52,8 @@ class PlUploadFile extends FormElement {
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
 
     $id = $element['#id'];
-    // If a unique identifier added with '--', we need to exclude it.
-    if (preg_match('/(.*)(--[0-9A-Za-z]+)$/', $id, $reg)) {
+    // Exclude unique identifier added with '--' in Ajax requests.
+    if (preg_match('/(.*?)(--[0-9A-Za-z_-]+)$/', $id, $reg)) {
       $id = $reg[1];
     }
 
