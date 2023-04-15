@@ -337,7 +337,7 @@
         "drupal/entity": "^1.0",
         "drupal/file_mdm": "^2.1",
         "drupal/geofield": "^1.0",
-        "drupal/honeypot": "1.x-dev",
+        "drupal/honeypot": "^2.1",
         "drupal/image_effects": "^3.0",
         "drupal/imagemagick": "^3.1",
         "drupal/juicebox": "^4.0@alpha",
