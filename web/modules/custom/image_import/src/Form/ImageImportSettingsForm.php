@@ -92,7 +92,8 @@ class ImageImportSettingsForm extends ConfigFormBase
             '#options' => $options,
         );
 
-        $filepath = Drupal\Core\Extension\ExtensionPathResolver::getPath('module', 'image_import') . '/sample.jpg';
+        //$filepath = Drupal\Core\Extension\ExtensionPathResolver::getPath('module', 'image_import') . '/sample.jpg';
+        $filepath = \Drupal::service('extension.list.module')->getPath('image_import') . '/sample.jpg';
         $tags = $this->readMetaTags($filepath);
 
         $tagoptions = array();

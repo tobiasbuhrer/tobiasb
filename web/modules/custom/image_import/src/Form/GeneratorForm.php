@@ -43,7 +43,7 @@ class GeneratorForm extends ConfigFormBase
         //let's get the number of permanent image files
         $query = \Drupal::entityQuery('file')
         ->accessCheck(TRUE)
-        ->condition('status', Drupal\file\FileInterface::STATUS_PERMANENT)
+        ->condition('status', FileInterface::STATUS_PERMANENT)
         ->condition('filemime', 'image/jpeg');
         $fids = $query->execute();
         $msg = '</p><strong>' . $this->t('Number of original images') . ':</strong> ' . count($fids) . '<br />';
@@ -99,7 +99,7 @@ class GeneratorForm extends ConfigFormBase
         //add things to the queue
         $query = \Drupal::entityQuery('file')
         ->accessCheck(TRUE)
-        ->condition('status', Drupal\file\FileInterface::STATUS_PERMANENT)
+        ->condition('status', FileInterface::STATUS_PERMANENT)
         ->condition('filemime', 'image/jpeg')
         ->range($start,$range);
         $fids = $query->execute();
@@ -122,7 +122,7 @@ class GeneratorForm extends ConfigFormBase
         //let's get the total number of permanent image files
         $query = \Drupal::entityQuery('file')
         ->accessCheck(TRUE)
-        ->condition('status', Drupal\file\FileInterface::STATUS_PERMANENT)
+        ->condition('status', FileInterface::STATUS_PERMANENT)
         ->condition('filemime', 'image/jpeg');
         $fids = $query->execute();
         $start = $start + $range;
