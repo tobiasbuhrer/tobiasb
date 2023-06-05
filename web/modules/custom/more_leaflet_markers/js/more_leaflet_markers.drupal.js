@@ -3,7 +3,7 @@
  */
 
 (function ($) {
-    Drupal.Leaflet.prototype.create_point = function (marker) {
+    Drupal.Leaflet.prototype.create_point = function(marker) {
         var self = this;
         var latLng = new L.LatLng(marker.lat, marker.lon);
         this.bounds.push(latLng);
@@ -58,7 +58,7 @@
 
     // Set Map position, fitting Bounds in case of more than one feature
     // @NOTE: This method used by Leaflet Markecluster module (don't remove/rename)
-    Drupal.Leaflet.prototype.fitbounds = function () {
+    Drupal.Leaflet.prototype.fitbounds = function() {
         var self = this;
 
         // Fit Bounds if both them and features exist, and the Map Position in not forced.

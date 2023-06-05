@@ -289,12 +289,13 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
             $map_options[$key] = $map['label'];
         }
         $form['map'] = [
-            '#title' => $this->t('Map'),
+            '#title' => $this->t('Map'),         
             '#type' => 'select',
             '#options' => $map_options,
             '#default_value' => $this->options['map'] ?: '',
             '#required' => TRUE,
         ];
+        
 
         $zoom_options = [];
         for ($i = $this->options['minPossibleZoom']; $i <= $this->options['maxPossibleZoom']; $i++) {
@@ -537,7 +538,7 @@ class LeafletMarkersMap extends StylePluginBase implements ContainerFactoryPlugi
         // Always render the map, even if we do not have any data.
         $map = leaflet_map_get_info($this->options['map']);
 
-        $map['settings']['leaflet_markercluster']['control'] = 1;
+        $map['settings']['leaflet_markercluster']['control'] = 0;
         $map['settings']['leaflet_markercluster']['options'] = '{"spiderfyOnMaxZoom":true,"showCoverageOnHover":true,"removeOutsideVisibleBounds": true}';
 
 
