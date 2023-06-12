@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Contains leaflet_urlmarkers.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function leaflet_urlmarkers_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the more_leaflet_markers module.
+    case 'help.page.leaflet_urlmarkers':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Allows to use different markers in views, based on field value conditions') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+
+ * Preprocess the leaflet_map theme function to add
+
+ * the markercluster libraries.
+
+ *
+
+ * @param  [type] &$vars [description]
+
+ * @return [type]        [description]
+
+ */
+
+function leaflet_urlmarkers_preprocess_leaflet_map(&$vars) {
+
+    $vars['#attached']['library'][] = 'leaflet_urlmarkers/leaflet_urlmarkers-drupal';
+
+}
