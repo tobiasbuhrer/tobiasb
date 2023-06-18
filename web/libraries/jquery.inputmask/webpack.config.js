@@ -49,9 +49,9 @@ module.exports = function (env, argv) {
 			path: __dirname,
 			filename: "[name].js",
 			library: {
-				type: "umd"
+				"type": "umd2",
 			},
-			globalObject: "self"
+			globalObject: "typeof self !== 'undefined' ? self : this"
 		},
 		externals: {
 			"jquery": {
