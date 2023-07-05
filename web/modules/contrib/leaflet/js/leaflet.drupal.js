@@ -700,7 +700,6 @@
       title: marker_title,
       className: marker.className || '',
       alt: marker_title,
-      zIndexOffset: marker.zIndexOffset
     };
 
     lMarker = new L.Marker(latLng, options);
