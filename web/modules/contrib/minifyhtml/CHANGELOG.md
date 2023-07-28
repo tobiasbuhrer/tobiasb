@@ -1,5 +1,12 @@
 # Changelog
 
+## Minifyhtml 2.0.3, 2023-07-25
+
+Changes since 2.0.2:
+
+- Swap md5 for random_int when generating placeholder token.
+- Issue #3376670: Tests are not compatible with D10
+
 ## Minifyhtml 2.0.2, 2023-04-12
 
 Changes since 2.0.1:

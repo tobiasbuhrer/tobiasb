@@ -5,8 +5,8 @@ namespace Drupal\minifyhtml\EventSubscriber;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Path\CurrentPathStack;
+use Drupal\Core\Path\PathMatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -76,7 +76,7 @@ class MinifyHTMLExit implements EventSubscriberInterface {
 
   /**
    * Constructs a MinifyHTMLExit object.
-   * 
+   *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config
    *   The config service.
    * @param \Drupal\Component\Datetime\TimeInterface $time
@@ -100,8 +100,8 @@ class MinifyHTMLExit implements EventSubscriberInterface {
     $this->logger = $logger;
     $this->pathMatcher = $pathMatcher;
     $this->currentPath = $currentPath;
-    
-    $this->token = 'MINIFYHTML_' . md5($this->time->getRequestTime());
+
+    $this->token = 'MINIFYHTML_' . random_int(0, $this->time->getRequestTime()) . '-';
   }
 
   /**

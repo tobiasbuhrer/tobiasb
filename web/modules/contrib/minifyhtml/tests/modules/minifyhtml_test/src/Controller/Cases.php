@@ -144,7 +144,7 @@ EOT;
       default:
     }
 
-    return HtmlResponse::create($input);
+    return new HtmlResponse($input);
   }
 
 }

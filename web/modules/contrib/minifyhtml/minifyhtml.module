@@ -57,7 +57,7 @@ function minifyhtml_form_system_performance_settings_alter(array &$form, FormSta
     '#type' => 'checkbox',
     '#default_value' => $config->get('strip_comments'),
     '#states' => [
-      'enabled' => [
+      'visible' => [
         ':input[name="minifyhtml_minify"]' => ['checked' => TRUE],
       ],
     ],
