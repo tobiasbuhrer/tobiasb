@@ -2,6 +2,10 @@
 
 namespace Drupal\plupload\Element;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Mime\MimeTypeGuesserInterface;
+use Drupal\Core\File\Event\FileUploadSanitizeNameEvent;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Url;
@@ -51,6 +55,9 @@ class PlUploadFile extends FormElement {
    */
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
 
+    /** @var EventDispatcherInterface $event_dispatcher */
+    $event_dispatcher = \Drupal::service('event_dispatcher');
+
     $id = $element['#id'];
     // Exclude unique identifier added with '--' in Ajax requests.
     if (preg_match('/(.*?)(--[0-9A-Za-z_-]+)$/', $id, $reg)) {
@@ -96,7 +103,11 @@ class PlUploadFile extends FormElement {
             $validators = _plupload_default_upload_validators();
             $extensions = $validators['file_validate_extensions'][0];
           }
-          $value = file_munge_filename($value, $extensions, FALSE);
+
+          $event = new FileUploadSanitizeNameEvent($value, $extensions);
+          $event_dispatcher->dispatch($event);
+          $value = $event->getFilename();
+
           // To prevent directory traversal issues, make sure the file name does
           // not contain any directory components in it. (This more properly
           // belongs in the form validation step, but it's simpler to do here so
@@ -190,7 +201,7 @@ class PlUploadFile extends FormElement {
    * Note: based on plupload_element_pre_render().
    */
   public static function preRenderPlUploadFile($element) {
-    $settings = isset($element['#plupload_settings']) ? $element['#plupload_settings'] : [];
+    $settings = $element['#plupload_settings'] ?? [];
 
     // Set upload URL.
     if (empty($settings['url'])) {
@@ -260,6 +271,13 @@ class PlUploadFile extends FormElement {
    * Note: based on plupload_element_validate().
    */
   public static function validatePlUploadFile(&$element, FormStateInterface $form_state, &$complete_form) {
+
+    /** @var FileSystemInterface $file_system */
+    $file_system = \Drupal::service('file_system');
+
+    /** @var MimeTypeGuesserInterface $guesser */
+    $guesser = \Drupal::service('file.mime_type.guesser');
+
     foreach ($element['#value'] as $file_info) {
       // Here we create a $file object for a file that doesn't exist yet,
       // because saving the file to its destination is done in a submit handler.
@@ -267,13 +285,12 @@ class PlUploadFile extends FormElement {
       // and filesize information. We manually modify filename and mime to allow
       // extension checks.
       $destination = \Drupal::config('system.file')->get('default_scheme') . '://' . $file_info['name'];
-      $file_uri = \Drupal::service('stream_wrapper_manager')->normalizeUri($destination);
       $file = File::create([
         'uri' => $file_info['tmppath'],
         'uid' => \Drupal::currentUser()->id(),
-        'status' => FILE_STATUS_PERMANENT,
-        'filename' => \Drupal::service('file_system')->basename($destination),
-        'filemime' => \Drupal::service('file.mime_type.guesser')->guess($destination),
+        'filename' => $file_system->basename($destination),
+        'filemime' => $guesser->guessMimeType($destination),
+        'filesize' => filesize($file_info['tmppath']),
       ]);
 
       foreach (file_validate($file, $element['#upload_validators']) as $error_message) {

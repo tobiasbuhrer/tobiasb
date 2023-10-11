@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\HtaccessWriter;
+use Drupal\Core\File\FileSystem;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Plupload upload handling route.
@@ -43,42 +46,60 @@ class UploadController implements ContainerInjectionInterface {
   /**
    * HTAccess writer service.
    *
-   * @var object
+   * @var \Drupal\Core\File\HtaccessWriter
    */
   protected $htaccessWriter;
 
   /**
    * File System service.
    *
-   * @var object
+   * @var \Drupal\Core\File\FileSystem
    */
   protected $fileSystem;
+
+  /**
+   * Drupal\Core\Config\ConfigFactoryInterface definition.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
 
   /**
    * Constructs plupload upload controller route controller.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   Request object.
+   * @param \Drupal\Core\File\HtaccessWriter $htaccessWriter
+   *   HTAccess writer service.
+   * @param \Drupal\Core\File\FileSystem $fileSystem
+   *   File System service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config factory.
    */
-  public function __construct(Request $request) {
+  public function __construct(Request $request, HtaccessWriter $htaccessWriter, FileSystem $fileSystem, ConfigFactoryInterface $config_factory) {
     $this->request = $request;
-    $this->temporaryUploadLocation = \Drupal::config('plupload.settings')->get('temporary_uri');
-    $this->htaccessWriter = \Drupal::service('file.htaccess_writer');
-    $this->fileSystem = \Drupal::service('file_system');
+    $this->temporaryUploadLocation = $config_factory->get('plupload.settings')->get('temporary_uri');
+    $this->htaccessWriter = $htaccessWriter;
+    $this->fileSystem = $fileSystem;
   }
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('request_stack')->getCurrentRequest());
+    return new static(
+      $container->get('request_stack')->getCurrentRequest(),
+      $container->get('file.htaccess_writer'),
+      $container->get('file_system'),
+      $container->get('config.factory')
+    );
   }
 
   /**
    * Handles Plupload uploads.
    */
   public function handleUploads() {
-    // @todo: Implement file_validate_size();
+    // @todo Implement file_validate_size();
     try {
       $this->prepareTemporaryUploadDestination();
       $this->handleUpload();
@@ -150,13 +171,13 @@ class UploadController implements ContainerInjectionInterface {
    * @throws \Drupal\plupload\UploadException
    */
   protected function handleUpload() {
-    /* @var $multipart_file \Symfony\Component\HttpFoundation\File\UploadedFile */
+    /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $multipart_file */
     $is_multipart = strpos($this->request->headers->get('Content-Type'), 'multipart') !== FALSE;
 
     // If this is a multipart upload there needs to be a file on the server.
     if ($is_multipart) {
       $multipart_file = $this->request->files->get('file', []);
-      // TODO: Not sure if this is the best check now.
+      // @todo Not sure if this is the best check now.
       // Originally it was:
       // if (empty($multipart_file['tmp_name']) ||
       // !is_uploaded_file($multipart_file['tmp_name'])) {.

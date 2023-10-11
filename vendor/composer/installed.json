@@ -3586,27 +3586,30 @@
         },
         {
             "name": "drupal/plupload",
-            "version": "dev-1.x",
-            "version_normalized": "dev-1.x",
+            "version": "2.1.0-beta2",
+            "version_normalized": "2.1.0.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/plupload.git",
-                "reference": "562da615e84994a3baeb2202f5e5c006db7a06c3"
+                "reference": "2.1.0-beta2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/plupload-2.1.0-beta2.zip",
+                "reference": "2.1.0-beta2",
+                "shasum": "1684d368743dac3b570cdadad6caf3327606c99b"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9"
+                "drupal/core": "^9 || ^10"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-1.x-dev",
-                    "datestamp": "1681067326",
+                    "version": "2.1.0-beta2",
+                    "datestamp": "1687102518",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -3647,8 +3650,9 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "muri",
-                    "homepage": "https://www.drupal.org/user/1358960"
+                    "name": "Marc Orcau (budalokko)",
+                    "homepage": "https://www.drupal.org/u/budalokko",
+                    "role": "Maintainer"
                 },
                 {
                     "name": "paranojik",
@@ -3965,47 +3969,47 @@
         },
         {
             "name": "drupal/webform",
-            "version": "6.1.6",
-            "version_normalized": "6.1.6.0",
+            "version": "6.2.0-rc1",
+            "version_normalized": "6.2.0.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "6.1.6"
+                "reference": "6.2.0-rc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-6.1.6.zip",
-                "reference": "6.1.6",
-                "shasum": "a84ab882bf28892729c1613173a58dcbf36a506a"
+                "url": "https://ftp.drupal.org/files/projects/webform-6.2.0-rc1.zip",
+                "reference": "6.2.0-rc1",
+                "shasum": "66dbff946292e7e196c733fc6f8a4b0d63a3d9cc"
             },
             "require": {
-                "drupal/core": "^9.3"
+                "drupal/core": "^9.4 || ^10"
             },
             "require-dev": {
                 "drupal/address": "1.x-dev",
                 "drupal/bootstrap": "3.x-dev",
-                "drupal/captcha": "1.x-dev",
+                "drupal/captcha": "^1 || ^2",
                 "drupal/chosen": "3.0.x-dev",
-                "drupal/clientside_validation": "*",
+                "drupal/ckeditor": "1.0.x-dev",
+                "drupal/clientside_validation": "^3 || ^4",
                 "drupal/clientside_validation_jquery": "*",
-                "drupal/devel": "*",
+                "drupal/devel": "5.x-dev",
                 "drupal/entity": "1.x-dev",
-                "drupal/entity_print": "*",
-                "drupal/gnode": "^1.5.0",
-                "drupal/group": "^1.5.0",
+                "drupal/entity_print": "2.x-dev",
+                "drupal/group": "1.x-dev",
+                "drupal/hal": "1 - 2",
                 "drupal/jquery_ui": "1.x-dev",
-                "drupal/jquery_ui_checkboxradio": "*",
-                "drupal/jquery_ui_datepicker": "1.x-dev",
-                "drupal/lingotek": "4.0.x-dev",
+                "drupal/jquery_ui_checkboxradio": "2.x-dev",
+                "drupal/jquery_ui_datepicker": "2.x-dev",
                 "drupal/mailsystem": "4.x-dev",
+                "drupal/metatag": "1.x-dev",
                 "drupal/paragraphs": "1.x-dev",
                 "drupal/select2": "1.x-dev",
                 "drupal/smtp": "1.x-dev",
-                "drupal/styleguide": "1.x-dev",
+                "drupal/styleguide": "^1 || ^2",
                 "drupal/telephone_validation": "2.x-dev",
-                "drupal/token": "*",
+                "drupal/token": "1.x-dev",
                 "drupal/variationcache": "1.x-dev",
-                "drupal/webform-webform_group": "*",
                 "drupal/webform_access": "*",
                 "drupal/webform_attachment": "*",
                 "drupal/webform_clientside_validation": "*",
@@ -4024,16 +4028,16 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.1.6",
-                    "datestamp": "1696543413",
+                    "version": "6.2.0-rc1",
+                    "datestamp": "1696976940",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
                     }
                 },
                 "drush": {
                     "services": {
-                        "drush.services.yml": "^9 || ^10"
+                        "drush.services.yml": ">=9"
                     }
                 }
             },
@@ -6484,6 +6488,24 @@
                 "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/1.1.4"
             },
             "install-path": "../phpstan/phpstan-deprecation-rules"
+        },
+        {
+            "name": "popperjs/popperjs",
+            "version": "2.11.6",
+            "version_normalized": "2.11.6.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@popperjs/core/-/core-2.11.6.tgz"
+            },
+            "type": "drupal-library",
+            "extra": {
+                "installer-name": "popperjs"
+            },
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "install-path": "../../web/libraries/popperjs"
         },
         {
             "name": "progress-tracker/progress-tracker",
@@ -10342,37 +10364,22 @@
             "install-path": "../../web/libraries/tabby"
         },
         {
-            "name": "tippyjs/5.x",
-            "version": "5.2.1",
-            "version_normalized": "5.2.1.0",
-            "dist": {
-                "type": "file",
-                "url": "https://unpkg.com/tippy.js@5.2.1/dist/tippy-bundle.iife.min.js"
-            },
-            "type": "drupal-library",
-            "extra": {
-                "installer-name": "tippyjs/5.x"
-            },
-            "installation-source": "dist",
-            "install-path": "../../web/libraries/tippyjs/5.x"
-        },
-        {
-            "name": "tippyjs/6.x",
+            "name": "tippyjs/tippyjs",
             "version": "6.3.7",
             "version_normalized": "6.3.7.0",
             "dist": {
-                "type": "file",
-                "url": "https://unpkg.com/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js"
+                "type": "tar",
+                "url": "https://registry.npmjs.org/tippy.js/-/tippy.js-6.3.7.tgz"
             },
             "type": "drupal-library",
             "extra": {
-                "installer-name": "tippyjs/6.x"
+                "installer-name": "tippyjs"
             },
             "installation-source": "dist",
             "license": [
                 "MIT"
             ],
-            "install-path": "../../web/libraries/tippyjs/6.x"
+            "install-path": "../../web/libraries/tippyjs"
         },
         {
             "name": "twig/twig",

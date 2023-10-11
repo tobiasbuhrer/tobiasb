@@ -85,7 +85,7 @@ class PluploadTestForm implements FormInterface {
       // Move file without creating a new 'file' entity.
       \Drupal::service('file_system')->move($uploaded_file['tmppath'], $file_uri);
 
-      // @todo: When https://www.drupal.org/node/2245927 is resolved,
+      // @todo When https://www.drupal.org/node/2245927 is resolved,
       // use a helper to save file to file_managed table
       $saved_files[] = $file_uri;
     }

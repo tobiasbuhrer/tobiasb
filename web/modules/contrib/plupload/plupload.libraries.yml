@@ -11,7 +11,7 @@ plupload:
       plupload.css: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/once
     - core/drupal
   settings:
     plupload:

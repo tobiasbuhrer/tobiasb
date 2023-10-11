@@ -2,7 +2,7 @@ name: 'Plupload test'
 type: module
 description: 'Support module for plupload test.'
 package: Testing
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9 || ^10
 #hidden: true
 dependencies:
   - plupload:plupload

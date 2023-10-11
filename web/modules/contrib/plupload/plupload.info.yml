@@ -1,5 +1,5 @@
 name: 'Plupload Integration Module'
 description: 'Provides a plupload Form API element.'
 type: module
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9 || ^10
 package: Media
