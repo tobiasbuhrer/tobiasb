@@ -1,8 +1,0 @@
-name: 'More leaflet markers'
-type: module
-description: 'Allows to use different markers in views, based on field value conditions'
-core: 8.x
-core_version_requirement: ^8 || ^9 || ^10  
-package: 'Custom'
-dependencies:
-  - leaflet
