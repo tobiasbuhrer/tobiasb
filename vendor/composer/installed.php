@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '56755484803cdd1d083bdd5f1ce674b8f61b0b48',
+        'reference' => 'b4dd40222c195446d9b559d241ce8f2ee204ffae',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '56755484803cdd1d083bdd5f1ce674b8f61b0b48',
+            'reference' => 'b4dd40222c195446d9b559d241ce8f2ee204ffae',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -707,12 +707,12 @@
             'dev_requirement' => false,
         ),
         'drupal/upgrade_status' => array(
-            'pretty_version' => '3.19.0',
-            'version' => '3.19.0.0',
+            'pretty_version' => '4.0.0',
+            'version' => '4.0.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/upgrade_status',
             'aliases' => array(),
-            'reference' => '8.x-3.19',
+            'reference' => '4.0.0',
             'dev_requirement' => false,
         ),
         'drupal/video' => array(
