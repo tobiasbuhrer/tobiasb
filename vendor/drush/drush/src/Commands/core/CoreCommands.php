@@ -1,4 +1,5 @@
 <?php
+
 namespace Drush\Commands\core;
 
 use Consolidation\OutputFormatters\StructuredData\PropertyList;
@@ -10,7 +11,6 @@ use Consolidation\SiteAlias\SiteAliasManagerAwareTrait;
 
 class CoreCommands extends DrushCommands implements SiteAliasManagerAwareInterface
 {
-
     use SiteAliasManagerAwareTrait;
 
     /**
@@ -27,14 +27,13 @@ class CoreCommands extends DrushCommands implements SiteAliasManagerAwareInterfa
      * @aliases core-global-options
      *
      * @filter-default-field name
-     * @return \Consolidation\OutputFormatters\StructuredData\RowsOfFields
      */
-    public function globalOptions($options = ['format' => 'table'])
+    public function globalOptions($options = ['format' => 'table']): RowsOfFields
     {
         $application = Drush::getApplication();
         $def = $application->getDefinition();
         foreach ($def->getOptions() as $key => $value) {
-            $name = '--'. $key;
+            $name = '--' . $key;
             if ($value->getShortcut()) {
                 $name = '-' . $value->getShortcut() . ', ' . $name;
             }
@@ -68,10 +67,9 @@ class CoreCommands extends DrushCommands implements SiteAliasManagerAwareInterfa
      * @field-labels
      *   drush-version: Drush version
      *
-     * @return \Consolidation\OutputFormatters\StructuredData\PropertyList
      *
      */
-    public function version($options = ['format' => 'table'])
+    public function version($options = ['format' => 'table']): PropertyList
     {
         return new PropertyList(['drush-version' => Drush::getVersion()]);
     }

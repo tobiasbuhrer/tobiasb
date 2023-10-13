@@ -1,4 +1,5 @@
 <?php
+
 namespace Drush;
 
 use Composer\Autoload\ClassLoader;
@@ -10,7 +11,6 @@ use Drush\Boot\BootstrapManager;
 use Drush\Command\RemoteCommandProxy;
 use Drush\Commands\DrushCommands;
 use Drush\Config\ConfigAwareTrait;
-use Drush\Log\LogLevel;
 use Drush\Runtime\RedispatchHook;
 use Drush\Runtime\TildeExpansionHook;
 use Psr\Log\LoggerAwareInterface;
@@ -226,9 +226,9 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
                 throw $e;
             }
 
-            $this->logger->log(LogLevel::DEBUG, 'Bootstrap further to find {command}', ['command' => $name]);
+            $this->logger->debug('Bootstrap further to find {command}', ['command' => $name]);
             $this->bootstrapManager->bootstrapMax();
-            $this->logger->log(LogLevel::DEBUG, 'Done with bootstrap max in Application::bootstrapAndFind(): trying to find {command} again.', ['command' => $name]);
+            $this->logger->debug('Done with bootstrap max in Application::bootstrapAndFind(): trying to find {command} again.', ['command' => $name]);
 
             if (!$this->bootstrapManager()->hasBootstrapped(DRUSH_BOOTSTRAP_DRUPAL_ROOT)) {
                 // Unable to progress in the bootstrap. Give friendly error message.

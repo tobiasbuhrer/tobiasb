@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b026a25aeb13c5dbe87e8f3c2db0a344cf3b16fc',
+        'reference' => '028c1590174c04ebc910df31ae25bca80145e151',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -38,12 +38,12 @@
             'dev_requirement' => false,
         ),
         'chi-teck/drupal-code-generator' => array(
-            'pretty_version' => '1.33.1',
-            'version' => '1.33.1.0',
+            'pretty_version' => '2.6.2',
+            'version' => '2.6.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../chi-teck/drupal-code-generator',
             'aliases' => array(),
-            'reference' => '5f814e980b6f9cf1ca8c74cc9385c3d81090d388',
+            'reference' => '22ed1cc02dc47814e8239de577da541e9b9bd980',
             'dev_requirement' => false,
         ),
         'choices/choices' => array(
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b026a25aeb13c5dbe87e8f3c2db0a344cf3b16fc',
+            'reference' => '028c1590174c04ebc910df31ae25bca80145e151',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -734,12 +734,12 @@
             'dev_requirement' => false,
         ),
         'drush/drush' => array(
-            'pretty_version' => '10.6.2',
-            'version' => '10.6.2.0',
+            'pretty_version' => '11.0.0',
+            'version' => '11.0.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../drush/drush',
             'aliases' => array(),
-            'reference' => '0a570a16ec63259eb71195aba5feab532318b337',
+            'reference' => '3992c6d2cffef21f48a8b686bb1eae6deaac2e7c',
             'dev_requirement' => false,
         ),
         'egulias/email-validator' => array(
@@ -1230,12 +1230,12 @@
             ),
         ),
         'psy/psysh' => array(
-            'pretty_version' => 'v0.10.12',
-            'version' => '0.10.12.0',
+            'pretty_version' => 'v0.11.21',
+            'version' => '0.11.21.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psy/psysh',
             'aliases' => array(),
-            'reference' => 'a0d9981aa07ecfcbea28e4bfa868031cca121e7d',
+            'reference' => 'bcb22101107f3bf770523b65630c9d547f60c540',
             'dev_requirement' => false,
         ),
         'ralouphie/getallheaders' => array(
@@ -1511,6 +1511,15 @@
             'reference' => '927013f3aac555983a5059aada98e1907d842695',
             'dev_requirement' => false,
         ),
+        'symfony/polyfill-intl-grapheme' => array(
+            'pretty_version' => 'v1.28.0',
+            'version' => '1.28.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-intl-grapheme',
+            'aliases' => array(),
+            'reference' => '875e90aeea2777b6f135677f618529449334a612',
+            'dev_requirement' => false,
+        ),
         'symfony/polyfill-intl-idn' => array(
             'pretty_version' => 'v1.27.0',
             'version' => '1.27.0.0',
@@ -1624,6 +1633,15 @@
             'provided' => array(
                 0 => '1.0|2.0',
             ),
+        ),
+        'symfony/string' => array(
+            'pretty_version' => 'v6.3.5',
+            'version' => '6.3.5.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/string',
+            'aliases' => array(),
+            'reference' => '13d76d0fb049051ed12a04bef4f9de8715bea339',
+            'dev_requirement' => false,
         ),
         'symfony/translation' => array(
             'pretty_version' => 'v4.4.47',
