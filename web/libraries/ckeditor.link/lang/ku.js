@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'ku', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'ku', {
 		title: 'خاسیەتی لەنگەر',
 		name: 'ناوی لەنگەر',
 		errorName: 'تکایه ناوی لەنگەر بنووسه',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'لابردنی لەنگەر'
 	},
 	anchorId: 'بەپێی ناسنامەی توخم',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'ku', {
 	noAnchors: '(هیچ جۆرێکی لەنگەر ئامادە نیە لەم پەڕەیه)',
 	noEmail: 'تکایە ناونیشانی ئیمەیل بنووسە',
 	noUrl: 'تکایە ناونیشانی بەستەر بنووسە',
-	noTel: 'تکایە ژمارەی تەلەفۆن دابنێ',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<هیتر>',
-	phoneNumber: 'ژمارەی تەلەفۆن',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'پێوەبەستراو (Netscape)',
 	popupFeatures: 'خاسیەتی پەنجەرەی سەرهەڵدەر',
 	popupFullScreen: 'پڕ بەپڕی شاشە (IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'ku', {
 	toAnchor: 'بەستەر بۆ لەنگەر له دەق',
 	toEmail: 'ئیمەیل',
 	toUrl: 'ناونیشانی بەستەر',
-	toPhone: 'تەلەفۆن',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'دانان/ڕێکخستنی بەستەر',
 	type: 'جۆری بەستەر',
 	unlink: 'لابردنی بەستەر',

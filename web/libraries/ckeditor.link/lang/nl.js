@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'nl', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'nl', {
 		title: 'Eigenschappen interne link',
 		name: 'Naam interne link',
 		errorName: 'Geef de naam van de interne link op',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Interne link verwijderen'
 	},
 	anchorId: 'Op kenmerk interne link',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'nl', {
 	noAnchors: '(Geen interne links in document gevonden)',
 	noEmail: 'Geef een e-mailadres',
 	noUrl: 'Geef de link van de URL',
-	noTel: 'Geef een telefoonnummer',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<ander>',
-	phoneNumber: 'Telefoonnummer',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Afhankelijk (Netscape)',
 	popupFeatures: 'Instellingen popupvenster',
 	popupFullScreen: 'Volledig scherm (IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'nl', {
 	toAnchor: 'Interne link in pagina',
 	toEmail: 'E-mail',
 	toUrl: 'URL',
-	toPhone: 'Telefoon',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Link invoegen/wijzigen',
 	type: 'Linktype',
 	unlink: 'Link verwijderen',

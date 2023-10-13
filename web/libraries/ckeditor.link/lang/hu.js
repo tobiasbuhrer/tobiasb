@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'hu', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'hu', {
 		title: 'Horgony tulajdonságai',
 		name: 'Horgony neve',
 		errorName: 'Kérem adja meg a horgony nevét',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Horgony eltávolítása'
 	},
 	anchorId: 'Azonosító szerint',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'hu', {
 	noAnchors: '(Nincs horgony a dokumentumban)',
 	noEmail: 'Adja meg az E-Mail címet',
 	noUrl: 'Adja meg a hivatkozás webcímét',
-	noTel: 'Adja meg a telefonszámot',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<más>',
-	phoneNumber: 'Telefonszám',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Szülőhöz kapcsolt (csak Netscape)',
 	popupFeatures: 'Felugró ablak jellemzői',
 	popupFullScreen: 'Teljes képernyő (csak IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'hu', {
 	toAnchor: 'Horgony az oldalon',
 	toEmail: 'E-Mail',
 	toUrl: 'URL',
-	toPhone: 'Telefon',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Hivatkozás beillesztése/módosítása',
 	type: 'Hivatkozás típusa',
 	unlink: 'Hivatkozás törlése',

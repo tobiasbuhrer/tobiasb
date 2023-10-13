@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'et', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'et', {
 		title: 'Ankru omadused',
 		name: 'Ankru nimi',
 		errorName: 'Palun sisesta ankru nimi',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Eemalda ankur'
 	},
 	anchorId: 'Elemendi id järgi',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'et', {
 	noAnchors: '(Selles dokumendis pole ankruid)',
 	noEmail: 'Palun kirjuta e-posti aadress',
 	noUrl: 'Palun kirjuta lingi URL',
-	noTel: 'Palun sisesta telefoninumber',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<muu>',
-	phoneNumber: 'Telefoninumber',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Sõltuv (Netscape)',
 	popupFeatures: 'Hüpikakna omadused',
 	popupFullScreen: 'Täisekraan (IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'et', {
 	toAnchor: 'Ankur sellel lehel',
 	toEmail: 'E-post',
 	toUrl: 'URL',
-	toPhone: 'Telefon',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Lingi lisamine/muutmine',
 	type: 'Lingi liik',
 	unlink: 'Lingi eemaldamine',

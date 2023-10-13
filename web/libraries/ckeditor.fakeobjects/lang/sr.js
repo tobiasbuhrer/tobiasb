@@ -1,10 +1,11 @@
 /*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'fakeobjects', 'sr', {
-	anchor: 'Сидро',
-	hiddenfield: 'Скривено полје',
-	iframe: 'IFrame',
-	unknown: 'Непознат објекат'
+	anchor: 'Anchor', // MISSING
+	flash: 'Flash Animation', // MISSING
+	hiddenfield: 'Hidden Field', // MISSING
+	iframe: 'IFrame', // MISSING
+	unknown: 'Unknown Object' // MISSING
 } );

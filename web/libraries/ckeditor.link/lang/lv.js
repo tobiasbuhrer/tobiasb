@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'lv', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'lv', {
 		title: 'Iezīmes uzstādījumi',
 		name: 'Iezīmes nosaukums',
 		errorName: 'Lūdzu norādiet iezīmes nosaukumu',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Noņemt iezīmi'
 	},
 	anchorId: 'Pēc elementa ID',
@@ -23,22 +22,22 @@ CKEDITOR.plugins.setLang( 'link', 'lv', {
 	download: 'Piespiedu ielāde',
 	displayText: 'Attēlot tekstu',
 	emailAddress: 'E-pasta adrese',
-	emailBody: 'Ziņojuma pamatteksts',
-	emailSubject: 'Ziņojuma tēma',
+	emailBody: 'Ziņas saturs',
+	emailSubject: 'Ziņas tēma',
 	id: 'ID',
-	info: 'Saites informācija',
+	info: 'Hipersaites informācija',
 	langCode: 'Valodas kods',
 	langDir: 'Valodas lasīšanas virziens',
 	langDirLTR: 'No kreisās uz labo (LTR)',
 	langDirRTL: 'No labās uz kreiso (RTL)',
-	menu: 'Rediģēt saiti',
+	menu: 'Labot hipersaiti',
 	name: 'Nosaukums',
 	noAnchors: '(Šajā dokumentā nav iezīmju)',
-	noEmail: 'Lūdzu, ievadiet e-pasta adresi',
-	noUrl: 'Lūdzu, ievadiet saites URL',
-	noTel: 'Lūdzu, ievadiet tālruņa numuru',
+	noEmail: 'Lūdzu norādi e-pasta adresi',
+	noUrl: 'Lūdzu norādi hipersaiti',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<cits>',
-	phoneNumber: 'Tālruņa numurs',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Atkarīgs (Netscape)',
 	popupFeatures: 'Uznirstošā loga nosaukums īpašības',
 	popupFullScreen: 'Pilnā ekrānā (IE)',
@@ -59,13 +58,13 @@ CKEDITOR.plugins.setLang( 'link', 'lv', {
 	targetFrameName: 'Mērķa ietvara nosaukums',
 	targetPopup: '<uznirstošā logā>',
 	targetPopupName: 'Uznirstošā loga nosaukums',
-	title: 'Saite',
+	title: 'Hipersaite',
 	toAnchor: 'Iezīme šajā lapā',
 	toEmail: 'E-pasts',
 	toUrl: 'Adrese',
-	toPhone: 'Tālrunis',
-	toolbar: 'Saite',
-	type: 'Saites tips',
-	unlink: 'Atsaistīt',
+	toPhone: 'Phone', // MISSING
+	toolbar: 'Ievietot/Labot hipersaiti',
+	type: 'Hipersaites tips',
+	unlink: 'Noņemt hipersaiti',
 	upload: 'Augšupielādēt'
 } );

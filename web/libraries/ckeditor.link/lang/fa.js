@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'fa', {
@@ -8,39 +8,38 @@ CKEDITOR.plugins.setLang( 'link', 'fa', {
 	advisoryContentType: 'نوع محتوای کمکی',
 	advisoryTitle: 'عنوان کمکی',
 	anchor: {
-		toolbar: 'گنجاندن/ویرایش لینک',
-		menu: 'ویرایش لینک',
-		title: 'ویژگی​های لینک',
-		name: 'نام لینک',
+		toolbar: 'گنجاندن/ویرایش لنگر',
+		menu: 'ویژگی​های لنگر',
+		title: 'ویژگی​های لنگر',
+		name: 'نام لنگر',
 		errorName: 'لطفا نام لنگر را بنویسید',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
-		remove: 'حذف لینک'
+		remove: 'حذف لنگر'
 	},
 	anchorId: 'با شناسهٴ المان',
-	anchorName: 'با نام لینک ',
+	anchorName: 'با نام لنگر',
 	charset: 'نویسه​گان منبع پیوند شده',
-	cssClasses: 'کلاس​های شیوه​نامه (Style sheet)',
-	download: 'بارگیری اجباری',
+	cssClasses: 'کلاس​های شیوه​نامه(Stylesheet)',
+	download: 'Force Download', // MISSING
 	displayText: 'نمایش متن',
 	emailAddress: 'نشانی پست الکترونیکی',
 	emailBody: 'متن پیام',
 	emailSubject: 'موضوع پیام',
 	id: 'شناسه',
 	info: 'اطلاعات پیوند',
-	langCode: 'کد زبان',
+	langCode: 'جهت​نمای زبان',
 	langDir: 'جهت​نمای زبان',
 	langDirLTR: 'چپ به راست (LTR)',
 	langDirRTL: 'راست به چپ (RTL)',
 	menu: 'ویرایش پیوند',
 	name: 'نام',
-	noAnchors: '(در این سند لینکی دردسترس نیست)',
+	noAnchors: '(در این سند لنگری دردسترس نیست)',
 	noEmail: 'لطفا نشانی پست الکترونیکی را بنویسید',
-	noUrl: 'لطفا آدرس پیوند را بنویسید',
-	noTel: 'لطفا شماره تلفن را وارد کنید',
+	noUrl: 'لطفا URL پیوند را بنویسید',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<سایر>',
-	phoneNumber: 'شماره تلفن',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'وابسته (Netscape)',
-	popupFeatures: 'ویژگی​های پنجره ی پاپاپ',
+	popupFeatures: 'ویژگی​های پنجرهٴ پاپاپ',
 	popupFullScreen: 'تمام صفحه (IE)',
 	popupLeft: 'موقعیت چپ',
 	popupLocationBar: 'نوار موقعیت',
@@ -51,19 +50,19 @@ CKEDITOR.plugins.setLang( 'link', 'fa', {
 	popupToolbar: 'نوار ابزار',
 	popupTop: 'موقعیت بالا',
 	rel: 'وابستگی',
-	selectAnchor: 'یک لینک برگزینید',
+	selectAnchor: 'یک لنگر برگزینید',
 	styles: 'شیوه (style)',
 	tabIndex: 'نمایهٴ دسترسی با برگه',
 	target: 'مقصد',
-	targetFrame: '<قاب>',
-	targetFrameName: 'نام قاب مقصد',
+	targetFrame: '<فریم>',
+	targetFrameName: 'نام فریم مقصد',
 	targetPopup: '<پنجرهٴ پاپاپ>',
-	targetPopupName: 'نام پنجره ی پاپاپ',
+	targetPopupName: 'نام پنجرهٴ پاپاپ',
 	title: 'پیوند',
 	toAnchor: 'لنگر در همین صفحه',
 	toEmail: 'پست الکترونیکی',
-	toUrl: 'آدرس',
-	toPhone: 'تلفن',
+	toUrl: 'URL',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'گنجاندن/ویرایش پیوند',
 	type: 'نوع پیوند',
 	unlink: 'برداشتن پیوند',

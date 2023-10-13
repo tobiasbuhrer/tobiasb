@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'pt', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'pt', {
 		title: 'Propriedades da âncora',
 		name: 'Nome da âncora',
 		errorName: 'Por favor, introduza o nome da âncora',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Remover âncora'
 	},
 	anchorId: 'Por ID do elemento',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'pt', {
 	noAnchors: '(Não existem âncoras no documento)',
 	noEmail: 'Por favor, escreva o endereço de email',
 	noUrl: 'Por favor, introduza o endereço URL',
-	noTel: 'Por favor, escreva o número de telefone',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<outro>',
-	phoneNumber: 'Número de telefone',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Dependente (Netscape)',
 	popupFeatures: 'Características de janela flutuante',
 	popupFullScreen: 'Janela completa (IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'pt', {
 	toAnchor: 'Ligar a âncora no texto',
 	toEmail: 'Email',
 	toUrl: 'URL',
-	toPhone: 'Telefone',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Hiperligação',
 	type: 'Tipo de hiperligação',
 	unlink: 'Eliminar hiperligação',

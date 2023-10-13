@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'pt-br', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'pt-br', {
 		title: 'Formatar Âncora',
 		name: 'Nome da Âncora',
 		errorName: 'Por favor, digite o nome da âncora',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Remover Âncora'
 	},
 	anchorId: 'Id da âncora',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'pt-br', {
 	noAnchors: '(Não há âncoras no documento)',
 	noEmail: 'Por favor, digite o endereço de e-mail',
 	noUrl: 'Por favor, digite o endereço do Link',
-	noTel: 'Por favor, informe o número do telefone',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<outro>',
-	phoneNumber: 'Número de telefone',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Dependente (Netscape)',
 	popupFeatures: 'Propriedades da Janela Pop-up',
 	popupFullScreen: 'Modo Tela Cheia (IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'pt-br', {
 	toAnchor: 'Âncora nesta página',
 	toEmail: 'E-Mail',
 	toUrl: 'URL',
-	toPhone: 'Telefone',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Inserir/Editar Link',
 	type: 'Tipo de hiperlink',
 	unlink: 'Remover Link',

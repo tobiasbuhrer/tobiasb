@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'uk', {
@@ -13,15 +13,14 @@ CKEDITOR.plugins.setLang( 'link', 'uk', {
 		title: 'Властивості якоря',
 		name: 'Ім\'я якоря',
 		errorName: 'Будь ласка, вкажіть ім\'я якоря',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Прибрати якір'
 	},
 	anchorId: 'За ідентифікатором елементу',
 	anchorName: 'За ім\'ям елементу',
 	charset: 'Кодування',
 	cssClasses: 'Клас CSS',
-	download: 'Завантажити як файл',
-	displayText: 'Відображуваний текст',
+	download: 'Force Download', // MISSING
+	displayText: 'Display Text', // MISSING
 	emailAddress: 'Адреса ел. пошти',
 	emailBody: 'Тіло повідомлення',
 	emailSubject: 'Тема листа',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'uk', {
 	noAnchors: '(В цьому документі немає якорів)',
 	noEmail: 'Будь ласка, вкажіть адрес ел. пошти',
 	noUrl: 'Будь ласка, вкажіть URL посилання',
-	noTel: 'Будь ласка, введіть номер телефону',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<інший>',
-	phoneNumber: 'Номер телефону',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Залежний (Netscape)',
 	popupFeatures: 'Властивості випливаючого вікна',
 	popupFullScreen: 'Повний екран (IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'uk', {
 	toAnchor: 'Якір на цю сторінку',
 	toEmail: 'Ел. пошта',
 	toUrl: 'URL',
-	toPhone: 'Телефон',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Вставити/Редагувати посилання',
 	type: 'Тип посилання',
 	unlink: 'Видалити посилання',

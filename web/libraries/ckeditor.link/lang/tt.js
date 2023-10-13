@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'tt', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'tt', {
 		title: 'Якорь үзлекләре',
 		name: 'Якорь исеме',
 		errorName: 'Якорьнең исемен языгыз',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Якорьне бетерү'
 	},
 	anchorId: 'Элемент идентификаторы буенча',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'tt', {
 	noAnchors: '(Әлеге документта якорьләр табылмады)',
 	noEmail: 'Электрон почта адресын языгыз',
 	noUrl: 'Сылталаманы языгыз',
-	noTel: 'Телефон номерыгызны языгыз',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<бүтән>',
-	phoneNumber: 'Телефон номеры',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Бәйле (Netscape)',
 	popupFeatures: 'Popup Window Features', // MISSING
 	popupFullScreen: 'Тулы экран (IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'tt', {
 	toAnchor: 'Якорьне текст белән бәйләү',
 	toEmail: 'Электрон почта',
 	toUrl: 'Сылталама',
-	toPhone: 'Телефон',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Сылталама',
 	type: 'Сылталама төре',
 	unlink: 'Сылталаманы бетерү',

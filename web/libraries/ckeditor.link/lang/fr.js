@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'fr', {
@@ -13,7 +13,6 @@ CKEDITOR.plugins.setLang( 'link', 'fr', {
 		title: 'Propriétés de l\'ancre',
 		name: 'Nom de l\'ancre',
 		errorName: 'Veuillez entrer le nom de l\'ancre.',
-		errorWhitespace: 'Anchor name cannot contain space characters', // MISSING
 		remove: 'Supprimer l\'ancre'
 	},
 	anchorId: 'Par ID d\'élément',
@@ -36,9 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'fr', {
 	noAnchors: '(Aucune ancre disponible dans ce document)',
 	noEmail: 'Veuillez entrer l\'adresse électronique',
 	noUrl: 'Veuillez entrer l\'URL du lien',
-	noTel: 'Veuillez entrer le numéro de téléphone',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<autre>',
-	phoneNumber: 'Numéro de téléphone',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Dépendante (Netscape)',
 	popupFeatures: 'Caractéristiques de la fenêtre surgissante',
 	popupFullScreen: 'Plein écran (IE)',
@@ -63,7 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'fr', {
 	toAnchor: 'Ancre',
 	toEmail: 'Courriel',
 	toUrl: 'URL',
-	toPhone: 'Téléphone',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Lien',
 	type: 'Type de lien',
 	unlink: 'Supprimer le lien',
