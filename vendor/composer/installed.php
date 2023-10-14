@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '028c1590174c04ebc910df31ae25bca80145e151',
+        'reference' => '51a57981558126eac7ac83f89b661d7d7af00e91',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '028c1590174c04ebc910df31ae25bca80145e151',
+            'reference' => '51a57981558126eac7ac83f89b661d7d7af00e91',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -686,6 +686,15 @@
             'install_path' => __DIR__ . '/../../web/modules/contrib/plupload',
             'aliases' => array(),
             'reference' => '2.1.0-beta2',
+            'dev_requirement' => false,
+        ),
+        'drupal/seven' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'drupal-theme',
+            'install_path' => __DIR__ . '/../../web/themes/contrib/seven',
+            'aliases' => array(),
+            'reference' => '1.0.0',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
