@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '51a57981558126eac7ac83f89b661d7d7af00e91',
+        'reference' => '5de2c0379f290b7bb7a0c7aa02c3daec08f8f7b9',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '51a57981558126eac7ac83f89b661d7d7af00e91',
+            'reference' => '5de2c0379f290b7bb7a0c7aa02c3daec08f8f7b9',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
@@ -1239,12 +1239,12 @@
             ),
         ),
         'psy/psysh' => array(
-            'pretty_version' => 'v0.11.21',
-            'version' => '0.11.21.0',
+            'pretty_version' => 'v0.11.22',
+            'version' => '0.11.22.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psy/psysh',
             'aliases' => array(),
-            'reference' => 'bcb22101107f3bf770523b65630c9d547f60c540',
+            'reference' => '128fa1b608be651999ed9789c95e6e2a31b5802b',
             'dev_requirement' => false,
         ),
         'ralouphie/getallheaders' => array(
