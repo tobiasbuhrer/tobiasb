@@ -1,5 +1,0 @@
-name: leaflet_marker_map
-type: module
-description: useless boilerplate module for uninstalling
-package: Custom
-core_version_requirement: ^9 || ^10
