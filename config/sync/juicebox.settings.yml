@@ -1,9 +1,0 @@
-_core:
-  default_config_hash: bWO6SM83RWkQcqI5ALeNV1b23-TN8x25u4q5lz5J0Ag
-apply_markup_filter: true
-enable_cors: false
-translate_interface: false
-base_languagelist: 'Show Thumbnails|Hide Thumbnails|Expand Gallery|Close Gallery|Open Image in New Window|Images|Next Image|Previous Image|Play Audio|Pause Audio|Show Information|Hide Information|Start AutoPlay|Stop AutoPlay|AutoPlay ON|AutoPlay OFF|Go Back|Buy this Image|Share on Facebook|Share on Twitter|Share on Google+|Share on Pinterest|Share on Tumblr|of|Send Email|Download'
-juicebox_multisize_small: juicebox_small
-juicebox_multisize_medium: juicebox_medium
-juicebox_multisize_large: juicebox_large

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'd449efa54227f6e393bca052287fa2f1d7b4c9db',
+        'reference' => '51db7093208c2f20f91d027d2d9d0449648c90e8',
         'name' => 'drupal-composer/drupal-project',
         'dev' => true,
     ),
@@ -328,7 +328,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'd449efa54227f6e393bca052287fa2f1d7b4c9db',
+            'reference' => '51db7093208c2f20f91d027d2d9d0449648c90e8',
             'dev_requirement' => false,
         ),
         'drupal/console' => array(
