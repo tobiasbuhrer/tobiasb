@@ -8,8 +8,8 @@ use Consolidation\SiteProcess\ProcessManager as ConsolidationProcessManager;
 use Consolidation\SiteProcess\SiteProcess;
 use Drush\Drush;
 use Drush\Style\DrushStyle;
+use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Process\Process;
-use Webmozart\PathUtil\Path;
 
 /**
  * The Drush ProcessManager adds a few Drush-specific service methods.
@@ -68,7 +68,7 @@ class ProcessManager extends ConsolidationProcessManager
         // If the target is a local Drupal site that has a vendor/bin/drush,
         // then use that.
         if ($siteAlias->hasRoot()) {
-            $localDrushScript = Path::join($siteAlias->root(), 'vendor/bin/drush');
+            $localDrushScript = Path::join($siteAlias->root(), '../vendor/bin/drush');
             if (file_exists($localDrushScript)) {
                 return $localDrushScript;
             }

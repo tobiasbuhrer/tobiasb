@@ -90,12 +90,8 @@ class SqlCommands extends DrushCommands implements StdinAwareInterface
     {
         $sql = SqlBase::create($options);
         $db_spec = $sql->getDbSpec();
-        // Prompt for confirmation.
 
-        // @todo odd - maybe for sql-sync.
-        $txt_destination = (isset($db_spec['remote-host']) ? $db_spec['remote-host'] . '/' : '') . $db_spec['database'];
-        $this->output()->writeln(dt("Creating database !target. Any existing database will be dropped!", ['!target' => $txt_destination]));
-
+        $this->output()->writeln(dt("Creating database !target. Any existing database will be dropped!", ['!target' => $db_spec['database']]));
         if (!$this->getConfig()->simulate() && !$this->io()->confirm(dt('Do you really want to continue?'))) {
             throw new UserAbortException();
         }
@@ -172,12 +168,14 @@ class SqlCommands extends DrushCommands implements StdinAwareInterface
      *   Browse user record. Table prefixes, if used, must be added to table names by hand.
      * @usage drush sql:query --db-prefix "SELECT * FROM {users}"
      *   Browse user record. Table prefixes are honored.  Caution: All curly-braces will be stripped.
-     * @usage $(drush sql-connect) < example.sql
+     * @usage $(drush sql:connect) < example.sql
      *   Import sql statements from a file into the current database.
      * @usage drush sql:query --file=example.sql
      *   Alternate way to import sql statements from a file.
      * @usage drush ev "return db_query('SELECT * FROM users')->fetchAll()" --format=json
      *   Get data back in JSON format. See https://github.com/drush-ops/drush/issues/3071#issuecomment-347929777.
+     * @usage `drush sql:connect` -e "select * from users limit 5;"
+     *   Results are formatted in a pretty table with borders and column headers.
      * @bootstrap max configuration
      *
      */
@@ -222,7 +220,7 @@ class SqlCommands extends DrushCommands implements StdinAwareInterface
      * @usage drush sql:dump --result-file=../18.sql
      *   Save SQL dump to the directory above Drupal root.
      * @usage drush sql:dump --skip-tables-key=common
-     *   Skip standard tables. See [Drush configuration](../using-drush-configuration)
+     *   Skip standard tables. See [Drush configuration](../../using-drush-configuration)
      * @usage drush sql:dump --extra-dump=--no-data
      *   Pass extra option to <info>mysqldump</info> command.
      * @hidden-options create-db

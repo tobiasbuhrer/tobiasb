@@ -16,6 +16,7 @@
     ],
     "require": {
         "composer/installers": "^1.9",
+        "drupal/backup_migrate": "^5.0",
         "drupal/core-composer-scaffold": "^9.5",
         "drupal/core-project-message": "^9.5",
         "drupal/core-recommended": "^9.5",
@@ -37,7 +38,7 @@
         "drupal/upgrade_status": "^4.0",
         "drupal/video": "^3.0",
         "drupal/webform": "^6.2@RC",
-        "drush/drush": "11"
+        "drush/drush": "^11.4.0"
     },
     "conflict": {
         "drupal/drupal": "*"

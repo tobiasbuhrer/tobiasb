@@ -9,8 +9,8 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -54,11 +54,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'l' => 
         array (
             'lsolesen\\pel\\' => 13,
-        ),
-        'W' => 
-        array (
-            'Webmozart\\PathUtil\\' => 19,
-            'Webmozart\\Assert\\' => 17,
         ),
         'T' => 
         array (
@@ -137,7 +132,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
-            'Grasmash\\YamlExpander\\' => 22,
             'Grasmash\\Expander\\' => 18,
         ),
         'F' => 
@@ -164,6 +158,7 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
+            'Dflydev\\DotAccessData\\' => 22,
         ),
         'C' => 
         array (
@@ -191,14 +186,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'lsolesen\\pel\\' => 
         array (
             0 => __DIR__ . '/..' . '/fileeye/pel/src',
-        ),
-        'Webmozart\\PathUtil\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/path-util/src',
-        ),
-        'Webmozart\\Assert\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
         'Twig\\' => 
         array (
@@ -429,10 +416,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'Grasmash\\YamlExpander\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/grasmash/yaml-expander/src',
-        ),
         'Grasmash\\Expander\\' => 
         array (
             0 => __DIR__ . '/..' . '/grasmash/expander/src',
@@ -503,6 +486,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
             1 => __DIR__ . '/..' . '/doctrine/event-manager/src',
             2 => __DIR__ . '/..' . '/doctrine/reflection/lib/Doctrine/Common',
         ),
+        'Dflydev\\DotAccessData\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
+        ),
         'Consolidation\\SiteProcess\\' => 
         array (
             0 => __DIR__ . '/..' . '/consolidation/site-process/src',
@@ -558,13 +545,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
             'Stack' => 
             array (
                 0 => __DIR__ . '/..' . '/stack/builder/src',
-            ),
-        ),
-        'D' => 
-        array (
-            'Dflydev\\DotAccessData' => 
-            array (
-                0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
             ),
         ),
         'C' => 

@@ -8,7 +8,6 @@ class LegacyCommands extends DrushCommands
      * The core:init command was removed. Please edit your .bashrc manually.
      *
      * @command core:init
-     * @aliases init
      * @hidden
      * @obsolete
      */
@@ -17,7 +16,7 @@ class LegacyCommands extends DrushCommands
     }
 
     /**
-     * Drupal 8 does not support disabling modules. See pm:uninstall command.
+     * Drupal 8+ does not support disabling modules. See pm:uninstall command.
      *
      * @command pm:disable
      * @aliases dis,pm-disable
@@ -114,18 +113,6 @@ class LegacyCommands extends DrushCommands
      * @obsolete
      */
     public function releases(): void
-    {
-    }
-
-    /**
-     * Make has been removed, in favor of Composer. Use the make-convert command in Drush 8 to quickly upgrade your build to Composer.
-     *
-     * @command make
-     * @aliases make-convert,make-generate,make-lock,make-update
-     * @hidden
-     * @obsolete
-     */
-    public function make(): void
     {
     }
 

@@ -9,6 +9,7 @@ use Consolidation\AnnotatedCommand\Events\CustomEventAwareTrait;
 use Consolidation\OutputFormatters\StructuredData\PropertyList;
 use Drush\Boot\AutoloaderAwareInterface;
 use Drush\Boot\AutoloaderAwareTrait;
+use Drush\Boot\DrupalBoot;
 use Drush\Commands\DrushCommands;
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Site\Settings;
@@ -194,11 +195,9 @@ class CacheCommands extends DrushCommands implements CustomEventAwareInterface, 
     }
 
     /**
-     * Rebuild a Drupal 8 site.
+     * Rebuild all caches.
      *
-     * This is a copy of core/rebuild.php. Additionally
-     * it also clears Drush cache and Drupal's render cache.
-
+     * This is a copy of core/rebuild.php.
      *
      * @command cache:rebuild
      * @option cache-clear Set to 0 to suppress normal cache clearing; the caller should then clear if needed.
@@ -212,19 +211,16 @@ class CacheCommands extends DrushCommands implements CustomEventAwareInterface, 
             $this->logger()->info(dt("Skipping cache-clear operation due to --no-cache-clear option."));
             return true;
         }
-        chdir(DRUPAL_ROOT);
 
         // We no longer clear APC and similar caches as they are useless on CLI.
         // See https://github.com/drush-ops/drush/pull/2450
-
-        $autoloader = $this->loadDrupalAutoloader(DRUPAL_ROOT);
+        $root  = Drush::bootstrapManager()->getRoot();
+        $autoloader = $this->loadDrupalAutoloader($root);
         require_once DRUSH_DRUPAL_CORE . '/includes/utility.inc';
 
         $request = Drush::bootstrap()->getRequest();
         DrupalKernel::bootEnvironment();
 
-        // Avoid 'Only variables should be passed by reference'
-        $root  = DRUPAL_ROOT;
         $site_path = DrupalKernel::findSitePath($request);
         Settings::initialize($root, $site_path, $autoloader);
 
@@ -244,7 +240,7 @@ class CacheCommands extends DrushCommands implements CustomEventAwareInterface, 
         // Check if the provided type ($type) is a valid cache type.
         if ($type && !array_key_exists($type, $types)) {
             if ($type === 'all') {
-                throw new \Exception(dt('`cache-clear all` is deprecated for Drupal 8 and later. Please use the `cache-rebuild` command instead.'));
+                throw new \Exception(dt('`cache-clear all` is deprecated for Drupal 8 and later. Please use the `cache:rebuild` command instead.'));
             }
             // If we haven't done a full bootstrap, provide a more
             // specific message with instructions to the user on
@@ -277,6 +273,7 @@ class CacheCommands extends DrushCommands implements CustomEventAwareInterface, 
                 'render' => [$this, 'clearRender'],
                 'plugin' => [$this, 'clearPlugin'],
                 'bin' => [$this, 'clearBins'],
+                'container' => [$this, 'clearContainer'],
             ];
         }
 
@@ -331,6 +328,13 @@ class CacheCommands extends DrushCommands implements CustomEventAwareInterface, 
         _drupal_flush_css_js();
         \Drupal::service('asset.css.collection_optimizer')->deleteAll();
         \Drupal::service('asset.js.collection_optimizer')->deleteAll();
+    }
+
+    public static function clearContainer(): void
+    {
+        /** @var DrupalBoot $boot_object */
+        $boot_object = Drush::bootstrap();
+        $boot_object->getKernel()->invalidateContainer();
     }
 
     /**

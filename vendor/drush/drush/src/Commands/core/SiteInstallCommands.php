@@ -2,7 +2,6 @@
 
 namespace Drush\Commands\core;
 
-use Composer\Semver\Comparator;
 use Consolidation\AnnotatedCommand\CommandData;
 use Drupal\Component\FileCache\FileCacheFactory;
 use Drupal\Core\Database\Database;
@@ -17,7 +16,7 @@ use Consolidation\SiteAlias\SiteAliasManagerAwareTrait;
 use Drush\Exec\ExecTrait;
 use Drush\Sql\SqlBase;
 use Drush\Utils\StringUtils;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 
 class SiteInstallCommands extends DrushCommands implements SiteAliasManagerAwareInterface
 {
@@ -48,6 +47,8 @@ class SiteInstallCommands extends DrushCommands implements SiteAliasManagerAware
      *   Install using the specified DB params.
      * @usage drush si --db-url=sqlite://sites/example.com/files/.ht.sqlite
      *   Install using SQLite
+     * @usage drush si --db-url=sqlite://:memory:
+     *   Install using SQLite in-memory database.
      * @usage drush si --account-pass=mom
      *   Re-install with specified uid1 password.
      * @usage drush si --existing-config
@@ -171,13 +172,6 @@ class SiteInstallCommands extends DrushCommands implements SiteAliasManagerAware
 
     protected function determineProfile($profile, $options, $class_loader)
     {
-        // --config-dir fails with Standard profile and any other one that carries content entities.
-        // Force to minimal install profile only for drupal < 8.6.
-        if ($options['config-dir'] && Comparator::lessThan(self::getVersion(), '8.6')) {
-            $this->logger()->info(dt("Using 'minimal' install profile since --config-dir option was provided."));
-            $profile = 'minimal';
-        }
-
         // Try to get profile from existing config if not provided as an argument.
         // @todo Arguably Drupal core [$boot->getKernel()->getInstallProfile()] could do this - https://github.com/drupal/drupal/blob/8.6.x/core/lib/Drupal/Core/DrupalKernel.php#L1606 reads from DB storage but not file storage.
         if (empty($profile) && $options['existing-config']) {
@@ -220,27 +214,6 @@ class SiteInstallCommands extends DrushCommands implements SiteAliasManagerAware
             $profile = 'standard';
         }
         return $profile;
-    }
-
-    /**
-     * Post installation, run the configuration import.
-     *
-     * @hook post-command site-install
-     */
-    public function post($result, CommandData $commandData): void
-    {
-        if ($config = $commandData->input()->getOption('config-dir') && Comparator::lessThan(self::getVersion(), '8.6')) {
-            // Set the destination site UUID to match the source UUID, to bypass a core fail-safe.
-            $source_storage = new FileStorage($config);
-            $options = array_merge(Drush::redispatchOptions(), ['yes' => true, 'strict' => 0]);
-            $selfRecord = $this->siteAliasManager()->getSelf();
-
-            $process = $this->processManager()->drush($selfRecord, 'config-set', ['system.site', 'uuid', $source_storage->read('system.site')['uuid']], $options);
-            $process->mustRun();
-
-            $process = $this->processManager()->drush($selfRecord, 'config-import', [], ['source' => $config] + $options);
-            $process->mustRun($process->showRealtime());
-        }
     }
 
     /**
@@ -436,12 +409,6 @@ class SiteInstallCommands extends DrushCommands implements SiteAliasManagerAware
             return 'default';
         }
         return false;
-    }
-
-    public static function getVersion(): ?string
-    {
-        $drupal_root = Drush::bootstrapManager()->getRoot();
-        return Drush::bootstrap()->getVersion($drupal_root);
     }
 
     /**

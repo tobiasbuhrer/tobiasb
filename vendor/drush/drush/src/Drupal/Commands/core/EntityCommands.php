@@ -67,7 +67,7 @@ class EntityCommands extends DrushCommands
             $this->io()->progressStart(count($result));
             foreach (array_chunk($result, $options['chunks'], true) as $chunk) {
                 drush_op([$this, 'doDelete'], $entity_type, $chunk);
-                $this->io()->progressAdvance($options['chunks']);
+                $this->io()->progressAdvance(count($chunk));
             }
             $this->io()->progressFinish();
             $this->logger()->success(dt("Deleted !type entity Ids: !ids", ['!type' => $entity_type, '!ids' => implode(', ', array_values($result))]));
@@ -130,7 +130,7 @@ class EntityCommands extends DrushCommands
             $this->io()->progressStart(count($result));
             foreach (array_chunk($result, $options['chunks'], true) as $chunk) {
                 drush_op([$this, 'doSave'], $entity_type, $chunk);
-                $this->io()->progressAdvance($options['chunks']);
+                $this->io()->progressAdvance(count($chunk));
             }
             $this->io()->progressFinish();
             $this->logger()->success(dt("Saved !type entity ids: !ids", ['!type' => $entity_type, '!ids' => implode(', ', array_values($result))]));
@@ -167,12 +167,12 @@ class EntityCommands extends DrushCommands
     protected function getQuery(string $entity_type, ?string $ids, array $options): QueryInterface
     {
         $storage = $this->entityTypeManager->getStorage($entity_type);
-        $query = $storage->getQuery();
+        $query = $storage->getQuery()->accessCheck(false);
         if ($ids = StringUtils::csvToArray((string) $ids)) {
             $idKey = $this->entityTypeManager->getDefinition($entity_type)->getKey('id');
             $query = $query->condition($idKey, $ids, 'IN');
         } elseif ($options['bundle'] || $options['exclude']) {
-            if ($exclude = StringUtils::csvToArray($options['exclude'])) {
+            if ($exclude = StringUtils::csvToArray((string) $options['exclude'])) {
                 $idKey = $this->entityTypeManager->getDefinition($entity_type)->getKey('id');
                 $query = $query->condition($idKey, $exclude, 'NOT IN');
             }

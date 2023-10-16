@@ -60,6 +60,8 @@ class DrupalCommands extends DrushCommands
      *
      * @command core:cron
      * @aliases cron,core-cron
+     * @usage drush maint:status && drush core:cron
+     *  Run cron unless maintenance mode is enabled
      * @topics docs:cron
      */
     public function cron(): void
@@ -101,6 +103,7 @@ class DrupalCommands extends DrushCommands
         drupal_load_updates();
 
         $requirements = $this->getModuleHandler()->invokeAll('requirements', ['runtime']);
+        $this->getModuleHandler()->alter('requirements', $requirements);
         // If a module uses "$requirements[] = " instead of
         // "$requirements['label'] = ", then build a label from
         // the title.
@@ -143,10 +146,12 @@ class DrupalCommands extends DrushCommands
      *   View all routes.
      * @usage drush route --name=update.status
      *   View details about the <info>update.status</info> route.
-     * @usage drush route --path=user/1
+     * @usage drush route --path=/user/1
      *   View details about the <info>entity.user.canonical</info> route.
+     * @usage drush route --url=https://example.com/node/1
+     *   View details about the <info>entity.node.canonical</info> route.
      * @option name A route name.
-     * @option path An internal path.
+     * @option path An internal path or URL.
      * @version 10.5
      */
     public function route($options = ['name' => self::REQ, 'path' => self::REQ, 'format' => 'yaml'])
@@ -154,6 +159,11 @@ class DrupalCommands extends DrushCommands
         $route = $items = null;
         $provider = $this->getRouteProvider();
         if ($path = $options['path']) {
+            if (filter_var($path, FILTER_VALIDATE_URL)) {
+                $path = parse_url($path, PHP_URL_PATH);
+                // Strip base path.
+                $path = '/' . substr_replace($path, '', 0, strlen(base_path()));
+            }
             $name = Url::fromUserInput($path)->getRouteName();
             $route = $provider->getRouteByName($name);
         } elseif ($name = $options['name']) {
