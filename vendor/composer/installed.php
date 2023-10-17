@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b999970a7dbf6bc644f91fc01261fccc3af60cf5',
+        'reference' => '23ac83be61449000640a3b0f400b4e5cc65cf191',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -532,7 +532,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b999970a7dbf6bc644f91fc01261fccc3af60cf5',
+            'reference' => '23ac83be61449000640a3b0f400b4e5cc65cf191',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -836,12 +836,12 @@
             'dev_requirement' => false,
         ),
         'phpstan/phpstan' => array(
-            'pretty_version' => '1.10.38',
-            'version' => '1.10.38.0',
+            'pretty_version' => '1.10.39',
+            'version' => '1.10.39.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpstan',
             'aliases' => array(),
-            'reference' => '5302bb402c57f00fb3c2c015bac86e0827e4b691',
+            'reference' => 'd9dedb0413f678b4d03cbc2279a48f91592c97c4',
             'dev_requirement' => false,
         ),
         'phpstan/phpstan-deprecation-rules' => array(
