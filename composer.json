@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "composer/installers": "^1.9",
+        "composer/installers": "^2.0",
         "drupal/backup_migrate": "^5.0",
         "drupal/core-composer-scaffold": "^9.5",
         "drupal/core-project-message": "^9.5",

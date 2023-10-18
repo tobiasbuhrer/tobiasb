@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '23ac83be61449000640a3b0f400b4e5cc65cf191',
+        'reference' => '9fee6b0ed53b7b2a1d50713274c4691c2d978870',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -29,12 +29,12 @@
             'dev_requirement' => false,
         ),
         'composer/installers' => array(
-            'pretty_version' => 'v1.12.0',
-            'version' => '1.12.0.0',
+            'pretty_version' => 'v2.2.0',
+            'version' => '2.2.0.0',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/./installers',
             'aliases' => array(),
-            'reference' => 'd20a64ed3c94748397ff5973488761b22f6d3f19',
+            'reference' => 'c29dc4b93137acb82734f672c37e029dfbd95b35',
             'dev_requirement' => false,
         ),
         'composer/semver' => array(
@@ -532,7 +532,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '23ac83be61449000640a3b0f400b4e5cc65cf191',
+            'reference' => '9fee6b0ed53b7b2a1d50713274c4691c2d978870',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -947,22 +947,10 @@
             'reference' => '120b605dfeb996808c31b6477290a714d356e822',
             'dev_requirement' => false,
         ),
-        'roundcube/plugin-installer' => array(
-            'dev_requirement' => false,
-            'replaced' => array(
-                0 => '*',
-            ),
-        ),
         'rsky/pear-core-min' => array(
             'dev_requirement' => false,
             'replaced' => array(
                 0 => 'v1.10.13',
-            ),
-        ),
-        'shama/baton' => array(
-            'dev_requirement' => false,
-            'replaced' => array(
-                0 => '*',
             ),
         ),
         'stack/builder' => array(
