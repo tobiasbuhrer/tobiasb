@@ -8,3 +8,8 @@ dependencies:
   - drupal:image
   - drupal:text
   - drupal:user
+
+# Information added by Drupal.org packaging script on 2023-04-01
+version: '4.0.0-alpha1'
+project: 'juicebox'
+datestamp: 1680373325
