@@ -419,7 +419,6 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/floating-ui/floating-ui'),
       'download_url' => Url::fromUri('https://registry.npmjs.org/@popperjs/core/-/core-2.11.6.tgz'),
       'version' => '2.11.6',
-      'core' => 9,
       'license' => 'MIT',
     ];
     $libraries['tippyjs'] = [
@@ -429,7 +428,6 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/atomiks/tippyjs'),
       'download_url' => Url::fromUri('https://registry.npmjs.org/tippy.js/-/tippy.js-6.3.7.tgz'),
       'version' => '6.3.7',
-      'core' => 9,
       'license' => 'MIT',
     ];
     $libraries['jquery.select2'] = [
