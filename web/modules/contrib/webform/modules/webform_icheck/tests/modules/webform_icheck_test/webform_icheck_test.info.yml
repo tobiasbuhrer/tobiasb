@@ -6,7 +6,7 @@ core_version_requirement: ^9.4 || ^10
 dependencies:
   - 'webform:webform_icheck'
 
-# Information added by Drupal.org packaging script on 2023-10-23
-version: '6.2.0-rc3'
+# Information added by Drupal.org packaging script on 2023-10-27
+version: '6.2.0-rc4'
 project: 'webform'
-datestamp: 1698075167
+datestamp: 1698417160
