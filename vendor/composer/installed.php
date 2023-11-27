@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '638bc4ed8c61d4614edbed4f5b311b64d63d5f27',
+        'reference' => '166e5196c9fe10ea5dffdbcebe1fa158d6f5d764',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -431,12 +431,12 @@
             'dev_requirement' => false,
         ),
         'drupal/geofield' => array(
-            'pretty_version' => '1.56.0',
-            'version' => '1.56.0.0',
+            'pretty_version' => '1.57.0',
+            'version' => '1.57.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/geofield',
             'aliases' => array(),
-            'reference' => '8.x-1.56',
+            'reference' => '8.x-1.57',
             'dev_requirement' => false,
         ),
         'drupal/honeypot' => array(
@@ -526,7 +526,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '638bc4ed8c61d4614edbed4f5b311b64d63d5f27',
+            'reference' => '166e5196c9fe10ea5dffdbcebe1fa158d6f5d764',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -593,12 +593,12 @@
             'dev_requirement' => false,
         ),
         'enlightn/security-checker' => array(
-            'pretty_version' => 'v1.10.0',
-            'version' => '1.10.0.0',
+            'pretty_version' => 'v1.11.0',
+            'version' => '1.11.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../enlightn/security-checker',
             'aliases' => array(),
-            'reference' => '196bacc76e7a72a63d0e1220926dbb190272db97',
+            'reference' => '68df5c7256c84b428bf8fcff0d249de06ce362d2',
             'dev_requirement' => false,
         ),
         'fileeye/mimemap' => array(
@@ -728,12 +728,12 @@
             'dev_requirement' => false,
         ),
         'mglaman/phpstan-drupal' => array(
-            'pretty_version' => '1.2.2',
-            'version' => '1.2.2.0',
+            'pretty_version' => '1.2.4',
+            'version' => '1.2.4.0',
             'type' => 'phpstan-extension',
             'install_path' => __DIR__ . '/../mglaman/phpstan-drupal',
             'aliases' => array(),
-            'reference' => 'bde6445d8102954d94e88492c60206a499c21889',
+            'reference' => '57b2cc67fb4416e8484db37a3d8502ac8fb3c0d6',
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
@@ -770,12 +770,12 @@
             'dev_requirement' => false,
         ),
         'pear/pear-core-minimal' => array(
-            'pretty_version' => 'v1.10.13',
-            'version' => '1.10.13.0',
+            'pretty_version' => 'v1.10.14',
+            'version' => '1.10.14.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pear/pear-core-minimal',
             'aliases' => array(),
-            'reference' => 'aed862e95fd286c53cc546734868dc38ff4b5b1d',
+            'reference' => 'a86fc145edb5caedbf96527214ce3cadc9de4a32',
             'dev_requirement' => false,
         ),
         'pear/pear_exception' => array(
@@ -815,12 +815,12 @@
             'dev_requirement' => false,
         ),
         'phpmailer/phpmailer' => array(
-            'pretty_version' => 'v6.8.1',
-            'version' => '6.8.1.0',
+            'pretty_version' => 'v6.9.1',
+            'version' => '6.9.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpmailer/phpmailer',
             'aliases' => array(),
-            'reference' => 'e88da8d679acc3824ff231fdc553565b802ac016',
+            'reference' => '039de174cd9c17a8389754d3b877a2ed22743e18',
             'dev_requirement' => false,
         ),
         'phpowermove/docblock' => array(
@@ -833,12 +833,12 @@
             'dev_requirement' => false,
         ),
         'phpstan/phpstan' => array(
-            'pretty_version' => '1.10.41',
-            'version' => '1.10.41.0',
+            'pretty_version' => '1.10.44',
+            'version' => '1.10.44.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpstan',
             'aliases' => array(),
-            'reference' => 'c6174523c2a69231df55bdc65b61655e72876d76',
+            'reference' => 'bf84367c53a23f759513985c54ffe0d0c249825b',
             'dev_requirement' => false,
         ),
         'phpstan/phpstan-deprecation-rules' => array(
@@ -972,7 +972,7 @@
         'rsky/pear-core-min' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.10.13',
+                0 => 'v1.10.14',
             ),
         ),
         'sebastian/diff' => array(
