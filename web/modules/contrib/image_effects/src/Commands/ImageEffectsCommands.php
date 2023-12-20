@@ -81,7 +81,7 @@ class ImageEffectsCommands extends DrushCommands {
         $this->logger()->success(dt('Image style !style_name converted.', ['!style_name' => $style_name]));
       }
       else {
-        $this->logger()->fail(dt('Image style !style_name conversion failed.', ['!style_name' => $style_name]));
+        $this->logger()->error(dt('Image style !style_name conversion failed.', ['!style_name' => $style_name]));
       }
     }
   }

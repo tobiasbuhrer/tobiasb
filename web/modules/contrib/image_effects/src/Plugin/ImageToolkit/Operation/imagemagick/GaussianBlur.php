@@ -24,17 +24,11 @@ class GaussianBlur extends ImagemagickImageToolkitOperationBase {
    * {@inheritdoc}
    */
   protected function execute(array $arguments) {
-    switch ($this->getToolkit()->getExecManager()->getPackage()) {
-      case 'imagemagick':
-        $op = '-channel RGBA -blur ' . $arguments['radius'];
-        break;
-
-      case 'graphicsmagick':
-        $op = '-gaussian ' . $arguments['radius'];
-        break;
-
-    }
-    $sigma = $arguments['sigma'] !== NULL ? $arguments['sigma'] : $arguments['radius'] / 3 * 2;
+    $op = match ($this->getToolkit()->getExecManager()->getPackage()) {
+      'imagemagick' => '-channel RGBA -blur ' . $arguments['radius'],
+      'graphicsmagick' => '-gaussian ' . $arguments['radius'],
+    };
+    $sigma = $arguments['sigma'] ?? $arguments['radius'] / 3 * 2;
     $op .= 'x' . number_format($sigma, 1, '.', '');
     $this->addArgument($op);
     return TRUE;

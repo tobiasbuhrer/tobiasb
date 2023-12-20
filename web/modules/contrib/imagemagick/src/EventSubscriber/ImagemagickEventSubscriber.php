@@ -3,8 +3,9 @@
 namespace Drupal\imagemagick\EventSubscriber;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\file_mdm\FileMetadataManagerInterface;
 use Drupal\imagemagick\Event\ImagemagickExecutionEvent;
@@ -19,68 +20,32 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class ImagemagickEventSubscriber implements EventSubscriberInterface {
 
   /**
-   * The logger service.
-   *
-   * @var \Psr\Log\LoggerInterface
+   * The module configuration settings.
    */
-  protected $logger;
-
-  /**
-   * The configuration factory.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * The mudule configuration settings.
-   *
-   * @var \Drupal\Core\Config\ImmutableConfig
-   */
-  protected $imagemagickSettings;
-
-  /**
-   * The file system service.
-   *
-   * @var \Drupal\Core\File\FileSystemInterface
-   */
-  protected $fileSystem;
-
-  /**
-   * The stream wrapper manager service.
-   *
-   * @var \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface
-   */
-  protected $streamWrapperManager;
-
-  /**
-   * The file metadata manager service.
-   *
-   * @var \Drupal\file_mdm\FileMetadataManagerInterface
-   */
-  protected $fileMetadataManager;
+  protected ImmutableConfig $imagemagickSettings;
 
   /**
    * Constructs an ImagemagickEventSubscriber object.
    *
    * @param \Psr\Log\LoggerInterface $logger
    *   A logger instance.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory.
-   * @param \Drupal\Core\File\FileSystemInterface $file_system
+   * @param \Drupal\Core\File\FileSystemInterface $fileSystem
    *   The file system service.
-   * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
+   * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $streamWrapperManager
    *   The stream wrapper manager service.
-   * @param \Drupal\file_mdm\FileMetadataManagerInterface $file_metadata_manager
+   * @param \Drupal\file_mdm\FileMetadataManagerInterface $fileMetadataManager
    *   The file metadata manager service.
    */
-  public function __construct(LoggerInterface $logger, ConfigFactoryInterface $config_factory, FileSystemInterface $file_system, StreamWrapperManagerInterface $stream_wrapper_manager, FileMetadataManagerInterface $file_metadata_manager) {
-    $this->logger = $logger;
-    $this->configFactory = $config_factory;
+  public function __construct(
+    protected readonly LoggerInterface $logger,
+    protected readonly ConfigFactoryInterface $configFactory,
+    protected readonly FileSystemInterface $fileSystem,
+    protected readonly StreamWrapperManagerInterface $streamWrapperManager,
+    protected readonly FileMetadataManagerInterface $fileMetadataManager,
+  ) {
     $this->imagemagickSettings = $this->configFactory->get('imagemagick.settings');
-    $this->fileSystem = $file_system;
-    $this->streamWrapperManager = $stream_wrapper_manager;
-    $this->fileMetadataManager = $file_metadata_manager;
   }
 
   /**
@@ -313,7 +278,10 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
     $this->doEnsureDestinationLocalPath($arguments);
 
     // Coalesce Animated GIFs, if required.
-    if (empty($arguments->find('/^\-coalesce/')) && (bool) $this->imagemagickSettings->get('advanced.coalesce') && in_array($arguments->getSourceFormat(), ['GIF', 'GIF87'])) {
+    if (empty($arguments->find('/^\-coalesce/')) && (bool) $this->imagemagickSettings->get('advanced.coalesce') && in_array($arguments->getSourceFormat(), [
+      'GIF',
+      'GIF87',
+    ])) {
       $file_md = $this->fileMetadataManager->uri($arguments->getSource());
       if ($file_md && $file_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'frames_count') > 1) {
         $arguments->add("-coalesce", ImagemagickExecArguments::POST_SOURCE, 0);

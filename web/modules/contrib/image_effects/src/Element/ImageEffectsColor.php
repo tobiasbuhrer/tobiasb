@@ -38,8 +38,8 @@ class ImageEffectsColor extends FormElement {
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
     if ($input !== FALSE && $input !== NULL) {
       // Make sure element properties are set.
-      $element['#allow_null'] = isset($element['#allow_null']) ? $element['#allow_null'] : FALSE;
-      $element['#allow_opacity'] = isset($element['#allow_opacity']) ? $element['#allow_opacity'] : FALSE;
+      $element['#allow_null'] ??= FALSE;
+      $element['#allow_opacity'] ??= FALSE;
 
       // Normalize returned element values to a RGBA hex value.
       $val = '';

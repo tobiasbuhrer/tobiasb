@@ -24,83 +24,38 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
 
   /**
    * Whether we are running on Windows OS.
-   *
-   * @var bool
    */
-  protected $isWindows;
-
-  /**
-   * The app root.
-   *
-   * @var string
-   */
-  protected $appRoot;
+  protected bool $isWindows;
 
   /**
    * The execution timeout.
-   *
-   * @var int
    */
-  protected $timeout = 60;
-
-  /**
-   * The current user.
-   *
-   * @var \Drupal\Core\Session\AccountProxyInterface
-   */
-  protected $currentUser;
-
-  /**
-   * The logger service.
-   *
-   * @var \Psr\Log\LoggerInterface
-   */
-  protected $logger;
-
-  /**
-   * The configuration factory.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * The format mapper service.
-   *
-   * @var \Drupal\imagemagick\ImagemagickFormatMapperInterface
-   */
-  protected $formatMapper;
-
-  /**
-   * The messenger service.
-   *
-   * @var \Drupal\Core\Messenger\MessengerInterface
-   */
-  protected $messenger;
+  protected int $timeout = 60;
 
   /**
    * Constructs an ImagemagickExecManager object.
    *
    * @param \Psr\Log\LoggerInterface $logger
    *   A logger instance.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory.
-   * @param string $app_root
+   * @param string $appRoot
    *   The app root.
-   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
    *   The current user.
-   * @param \Drupal\imagemagick\ImagemagickFormatMapperInterface $format_mapper
+   * @param \Drupal\imagemagick\ImagemagickFormatMapperInterface $formatMapper
    *   The format mapper service.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
    */
-  public function __construct(LoggerInterface $logger, ConfigFactoryInterface $config_factory, string $app_root, AccountProxyInterface $current_user, ImagemagickFormatMapperInterface $format_mapper, MessengerInterface $messenger) {
-    $this->logger = $logger;
-    $this->configFactory = $config_factory;
-    $this->appRoot = $app_root;
-    $this->currentUser = $current_user;
-    $this->formatMapper = $format_mapper;
-    $this->messenger = $messenger;
+  public function __construct(
+    protected readonly LoggerInterface $logger,
+    protected readonly ConfigFactoryInterface $configFactory,
+    protected readonly string $appRoot,
+    protected readonly AccountProxyInterface $currentUser,
+    protected readonly ImagemagickFormatMapperInterface $formatMapper,
+    protected readonly MessengerInterface $messenger,
+  ) {
     $this->isWindows = substr(PHP_OS, 0, 3) === 'WIN';
   }
 
@@ -165,11 +120,17 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
     if (!empty($path)) {
       // Check whether the given file exists.
       if (!is_file($executable)) {
-        $status['errors'][] = $this->t('The @suite executable %file does not exist.', ['@suite' => $this->getPackageLabel($package), '%file' => $executable]);
+        $status['errors'][] = $this->t('The @suite executable %file does not exist.', [
+          '@suite' => $this->getPackageLabel($package),
+          '%file' => $executable,
+        ]);
       }
       // If it exists, check whether we can execute it.
       elseif (!is_executable($executable)) {
-        $status['errors'][] = $this->t('The @suite file %file is not executable.', ['@suite' => $this->getPackageLabel($package), '%file' => $executable]);
+        $status['errors'][] = $this->t('The @suite file %file is not executable.', [
+          '@suite' => $this->getPackageLabel($package),
+          '%file' => $executable,
+        ]);
       }
     }
 
@@ -198,16 +159,10 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    * {@inheritdoc}
    */
   public function execute(string $command, ImagemagickExecArguments $arguments, string &$output = NULL, string &$error = NULL, string $path = NULL): bool {
-    switch ($command) {
-      case 'convert':
-        $binary = $this->getPackage() === 'imagemagick' ? 'convert' : 'gm';
-        break;
-
-      case 'identify':
-        $binary = $this->getPackage() === 'imagemagick' ? 'identify' : 'gm';
-        break;
-
-    }
+    $binary = match ($command) {
+      'convert' => $this->getPackage() === 'imagemagick' ? 'convert' : 'gm',
+      'identify' => $this->getPackage() === 'imagemagick' ? 'identify' : 'gm',
+    };
     $cmd = $this->getExecutable($binary, $path);
 
     if ($source_path = $arguments->getSourceLocalPath()) {
@@ -227,60 +182,14 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
       }
     }
 
-    switch ($command) {
-      case 'identify':
-        switch ($this->getPackage()) {
-          case 'imagemagick':
-            // @codingStandardsIgnoreStart
-            // ImageMagick syntax:
-            // identify [arguments] source
-            // @codingStandardsIgnoreEnd
-            $cmdline = $arguments->toString(ImagemagickExecArguments::PRE_SOURCE) . ' ' . $source_path;
-            break;
-
-          case 'graphicsmagick':
-            // @codingStandardsIgnoreStart
-            // GraphicsMagick syntax:
-            // gm identify [arguments] source
-            // @codingStandardsIgnoreEnd
-            $cmdline = 'identify ' . $arguments->toString(ImagemagickExecArguments::PRE_SOURCE) . ' ' . $source_path;
-            break;
-
-        }
-        break;
-
-      case 'convert':
-        switch ($this->getPackage()) {
-          case 'imagemagick':
-            // @codingStandardsIgnoreStart
-            // ImageMagick syntax:
-            // convert input [arguments] output
-            // @see http://www.imagemagick.org/Usage/basics/#cmdline
-            // @codingStandardsIgnoreEnd
-            $cmdline = '';
-            if (($pre = $arguments->toString(ImagemagickExecArguments::PRE_SOURCE)) !== '') {
-              $cmdline .= $pre . ' ';
-            }
-            $cmdline .= $source_path . ' ' . $arguments->toString(ImagemagickExecArguments::POST_SOURCE) . ' ' . $destination_path;
-            break;
-
-          case 'graphicsmagick':
-            // @codingStandardsIgnoreStart
-            // GraphicsMagick syntax:
-            // gm convert [arguments] input output
-            // @see http://www.graphicsmagick.org/GraphicsMagick.html
-            // @codingStandardsIgnoreEnd
-            $cmdline = 'convert ';
-            if (($pre = $arguments->toString(ImagemagickExecArguments::PRE_SOURCE)) !== '') {
-              $cmdline .= $pre . ' ';
-            }
-            $cmdline .= $arguments->toString(ImagemagickExecArguments::POST_SOURCE) . ' ' . $source_path . ' ' . $destination_path;
-            break;
-
-        }
-        break;
-
-    }
+    $cmdline = match ($command . '-' . $this->getPackage()) {
+      // ImageMagick syntax: identify [arguments] source.
+      'identify-imagemagick' => $arguments->toString(ImagemagickExecArguments::PRE_SOURCE) . ' ' . $source_path,
+      // GraphicsMagick syntax: gm identify [arguments] source.
+      'identify-graphicsmagick' => 'identify ' . $arguments->toString(ImagemagickExecArguments::PRE_SOURCE) . ' ' . $source_path,
+      'convert-imagemagick' => $this->buildImagemagickConvertCommand($arguments, $source_path, $destination_path),
+      'convert-graphicsmagick' => $this->buildGraphicsmagickConvertCommand($arguments, $source_path, $destination_path),
+    };
 
     $return_code = $this->runOsShell($cmd, $cmdline, $this->getPackage(), $output, $error);
 
@@ -318,6 +227,58 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
     }
     // The shell command could not be executed.
     return FALSE;
+  }
+
+  /**
+   * Builds a convert command for Imagemagick.
+   *
+   * ImageMagick syntax: convert input [arguments] output.
+   *
+   * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
+   *   An ImageMagick execution arguments object.
+   * @param string $sourcePath
+   *   The source image file path.
+   * @param string $destinationPath
+   *   The destination image file path.
+   *
+   * @return string
+   *   The command to be executed.
+   *
+   * @see http://www.imagemagick.org/Usage/basics/#cmdline
+   */
+  private function buildImagemagickConvertCommand(ImagemagickExecArguments $arguments, string $sourcePath, string $destinationPath): string {
+    $cmdline = '';
+    if (($pre = $arguments->toString(ImagemagickExecArguments::PRE_SOURCE)) !== '') {
+      $cmdline .= $pre . ' ';
+    }
+    $cmdline .= $sourcePath . ' ' . $arguments->toString(ImagemagickExecArguments::POST_SOURCE) . ' ' . $destinationPath;
+    return $cmdline;
+  }
+
+  /**
+   * Builds a convert command for Graphicsmagick.
+   *
+   * GraphicsMagick syntax: gm convert [arguments] input output.
+   *
+   * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
+   *   An ImageMagick execution arguments object.
+   * @param string $sourcePath
+   *   The source image file path.
+   * @param string $destinationPath
+   *   The destination image file path.
+   *
+   * @return string
+   *   The command to be executed.
+   *
+   * @see http://www.graphicsmagick.org/GraphicsMagick.html
+   */
+  private function buildGraphicsmagickConvertCommand(ImagemagickExecArguments $arguments, string $sourcePath, string $destinationPath): string {
+    $cmdline = 'convert ';
+    if (($pre = $arguments->toString(ImagemagickExecArguments::PRE_SOURCE)) !== '') {
+      $cmdline .= $pre . ' ';
+    }
+    $cmdline .= $arguments->toString(ImagemagickExecArguments::POST_SOURCE) . ' ' . $sourcePath . ' ' . $destinationPath;
+    return $cmdline;
   }
 
   /**
@@ -468,9 +429,13 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
     $current_locale = setlocale(LC_CTYPE, 0);
 
     if (!isset($config_locale)) {
-      $config_locales = explode(' ', $this->configFactory->get('imagemagick.settings')->get('locale'));
-      $temp_locale = !empty($config_locales) ? setlocale(LC_CTYPE, $config_locales) : FALSE;
-      $config_locale = $temp_locale ?: $current_locale;
+      $setting = $this->configFactory->get('imagemagick.settings')->get('locale');
+      if ($setting) {
+        $config_locale = setlocale(LC_CTYPE, explode(' ', $setting)) ?: $current_locale;
+      }
+      else {
+        $config_locale = $current_locale;
+      }
     }
 
     if ($this->isWindows) {

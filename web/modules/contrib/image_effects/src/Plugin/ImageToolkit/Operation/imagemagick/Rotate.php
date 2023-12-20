@@ -2,9 +2,9 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\imagemagick;
 
-use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 use Drupal\image_effects\Component\Rectangle;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\RotateTrait;
+use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 
 /**
  * Defines ImageMagick Rotate operation.

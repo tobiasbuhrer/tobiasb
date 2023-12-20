@@ -2,9 +2,9 @@
 
 namespace Drupal\image_effects\Plugin\ImageEffect;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageFactory;
 use Drupal\Core\Image\ImageInterface;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\image_effects\Component\ImageUtility;
@@ -186,7 +186,10 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
     // Get the mask image object.
     $mask_image = $this->imageFactory->get($this->configuration['mask_image']);
     if (!$mask_image->isValid()) {
-      $this->logger->error('Image mask failed using the %toolkit toolkit on %path', ['%toolkit' => $image->getToolkitId(), '%path' => $this->configuration['mask_image']]);
+      $this->logger->error('Image mask failed using the %toolkit toolkit on %path', [
+        '%toolkit' => $image->getToolkitId(),
+        '%path' => $this->configuration['mask_image'],
+      ]);
       return FALSE;
     }
 
@@ -208,7 +211,7 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
     }
 
     // Calculate position of mask on source image based on placement option.
-    list($x, $y) = explode('-', $this->configuration['placement']);
+    [$x, $y] = explode('-', $this->configuration['placement']);
     $x_pos = ImageUtility::getKeywordOffset($x, $image->getWidth(), $mask_width);
     $y_pos = ImageUtility::getKeywordOffset($y, $image->getHeight(), $mask_height);
 

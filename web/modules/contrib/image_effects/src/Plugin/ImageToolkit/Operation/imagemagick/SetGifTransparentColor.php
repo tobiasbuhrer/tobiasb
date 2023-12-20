@@ -36,6 +36,7 @@ class SetGifTransparentColor extends ImagemagickImageToolkitOperationBase {
       }
       $this->addArgument('-alpha off -transparent-color ' . $this->escapeArgument($arguments['transparent_color']) . ' -transparent ' . $this->escapeArgument($arguments['transparent_color']));
     }
+    return TRUE;
   }
 
 }

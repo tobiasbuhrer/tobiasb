@@ -22,8 +22,8 @@ class HtmlColor extends ImageEffectsPluginBase {
   public function selectionElement(array $options = []) {
     return [
       '#type' => 'color',
-      '#title'   => isset($options['#title']) ? $options['#title'] : $this->t('Color'),
-      '#description' => isset($options['#description']) ? $options['#description'] : NULL,
+      '#title'   => $options['#title'] ?? $this->t('Color'),
+      '#description' => $options['#description'] ?? NULL,
       '#default_value' => $options['#default_value'],
       '#field_suffix' => $options['#default_value'],
       '#wrapper_attributes' => ['class' => ['image-effects-html-color-selector']],

@@ -3,8 +3,8 @@
 namespace Drupal\image_effects\Plugin\ImageEffect;
 
 use Drupal\Component\Utility\NestedArray;
-use Drupal\Core\Image\ImageInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\image_effects\Component\ImageUtility;
 
@@ -223,7 +223,7 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
 
     // Get offset of original image.
     if ($this->configuration['canvas_size'] === 'exact') {
-      list($x_pos, $y_pos) = explode('-', $this->configuration['exact']['placement']);
+      [$x_pos, $y_pos] = explode('-', $this->configuration['exact']['placement']);
       $data['x_pos'] = ImageUtility::getKeywordOffset($x_pos, $data['width'], $image->getWidth()) + $this->configuration['exact']['x_offset'];
       $data['y_pos'] = ImageUtility::getKeywordOffset($y_pos, $data['height'], $image->getHeight()) + $this->configuration['exact']['y_offset'];
     }

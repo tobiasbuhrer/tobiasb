@@ -2,15 +2,15 @@
 
 namespace Drupal\image_effects\Plugin\ImageEffect;
 
-use Drupal\Core\Image\ImageInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Image\ImageFactory;
+use Drupal\Core\Image\ImageInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\image_effects\Component\ImageUtility;
 use Drupal\image_effects\Plugin\ImageEffectsPluginBaseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Image\ImageFactory;
 
 /**
  * Places the source image anywhere over a selected background image.
@@ -183,10 +183,13 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
   public function applyEffect(ImageInterface $image) {
     $background_image = $this->imageFactory->get($this->configuration['background_image']);
     if (!$background_image->isValid()) {
-      $this->logger->error('Image background failed using the %toolkit toolkit on %path', ['%toolkit' => $image->getToolkitId(), '%path' => $this->configuration['background_image']]);
+      $this->logger->error('Image background failed using the %toolkit toolkit on %path', [
+        '%toolkit' => $image->getToolkitId(),
+        '%path' => $this->configuration['background_image'],
+      ]);
       return FALSE;
     }
-    list($x, $y) = explode('-', $this->configuration['placement']);
+    [$x, $y] = explode('-', $this->configuration['placement']);
     $x_pos = ImageUtility::getKeywordOffset($x, $background_image->getWidth(), $image->getWidth());
     $y_pos = ImageUtility::getKeywordOffset($y, $background_image->getHeight(), $image->getHeight());
     return $image->apply('background', [

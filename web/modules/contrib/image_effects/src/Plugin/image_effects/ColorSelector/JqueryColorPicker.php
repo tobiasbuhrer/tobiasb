@@ -22,7 +22,7 @@ class JqueryColorPicker extends ImageEffectsPluginBase {
   public function selectionElement(array $options = []) {
     return [
       '#type' => 'jquery_colorpicker',
-      '#title' => isset($options['#title']) ? $options['#title'] : $this->t('Color'),
+      '#title' => $options['#title'] ?? $this->t('Color'),
       '#default_value' => $options['#default_value'],
       '#attributes' => ['class' => ['image-effects-jquery-colorpicker']],
       '#wrapper_attributes' => ['class' => ['image-effects-jquery-colorpicker-color-selector']],

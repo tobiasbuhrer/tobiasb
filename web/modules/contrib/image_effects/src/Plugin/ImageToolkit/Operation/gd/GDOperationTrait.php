@@ -24,8 +24,10 @@ trait GDOperationTrait {
    *   A GD color index.
    */
   protected function allocateColorFromRgba($rgba_hex) {
-    list($r, $g, $b, $alpha) = array_values($this->hexToRgba($rgba_hex));
-    return imagecolorallocatealpha($this->getToolkit()->getResource(), $r, $g, $b, $alpha);
+    /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $toolkit */
+    $toolkit = $this->getToolkit();
+    [$r, $g, $b, $alpha] = array_values($this->hexToRgba($rgba_hex));
+    return imagecolorallocatealpha($toolkit->getResource(), $r, $g, $b, $alpha);
   }
 
   /**
@@ -121,12 +123,8 @@ trait GDOperationTrait {
       // to preserve watermark alpha.
       // --------------------------------------
       // Create a cut resource.
-      // @todo when #2583041 is committed, add a check for memory
-      // availability before creating the resource.
       $cut = imagecreatetruecolor($src_w, $src_h);
-      // @todo remove the is_resource check once Drupal 9 is no longer
-      // supported.
-      if (!is_object($cut) && !is_resource($cut)) {
+      if (!is_object($cut)) {
         return FALSE;
       }
 
@@ -185,10 +183,7 @@ trait GDOperationTrait {
       return imagettftext($image, $size, $angle, $x, $y, $color, $fontfile, $text);
     }
     else {
-      // @todo \InvalidArgumentException is incorrect, but other exceptions
-      // would not be managed by toolkits that implement ImageToolkitBase.
-      // Change to \RuntimeException when #2583041 is committed.
-      throw new \InvalidArgumentException("The imagettftext() PHP function is not available, and image effects using fonts cannot be executed");
+      throw new \RuntimeException("The imagettftext() PHP function is not available, and image effects using fonts cannot be executed");
     }
   }
 
@@ -218,10 +213,7 @@ trait GDOperationTrait {
       return imagettfbbox($size, $angle, $fontfile, $text);
     }
     else {
-      // @todo \InvalidArgumentException is incorrect, but other exceptions
-      // would not be managed by toolkits that implement ImageToolkitBase.
-      // Change to \RuntimeException when #2583041 is committed.
-      throw new \InvalidArgumentException("The imagettfbbox() PHP function is not available, and image effects using fonts cannot be executed");
+      throw new \RuntimeException("The imagettfbbox() PHP function is not available, and image effects using fonts cannot be executed");
     }
   }
 
@@ -242,9 +234,6 @@ trait GDOperationTrait {
    * @see http://php.net/manual/en/function.imagefilter.php#82162
    */
   protected function filterOpacity($img, $pct) {
-    if (!isset($pct)) {
-      return FALSE;
-    }
     $pct /= 100;
 
     // Get image width and height.
@@ -345,8 +334,6 @@ trait GDOperationTrait {
     $h = imagesy($src);
 
     // Apply the filter horizontally.
-    // @todo when #2583041 is committed, add a check for memory
-    // availability before creating the resource.
     $tmp = imagecreatetruecolor($w, $h);
     imagealphablending($tmp, FALSE);
     if (!$tmp) {
@@ -355,8 +342,6 @@ trait GDOperationTrait {
     GdGaussianBlur::applyCoeffs($src, $tmp, $coeffs, $radius, 'HORIZONTAL');
 
     // Apply the filter vertically.
-    // @todo when #2583041 is committed, add a check for memory
-    // availability before creating the resource.
     $result = imagecreatetruecolor($w, $h);
     imagealphablending($result, FALSE);
     if ($result) {
@@ -386,8 +371,6 @@ trait GDOperationTrait {
    *   The entropy of the selected area image.
    */
   protected function getAreaEntropy($src, $x, $y, $width, $height) {
-    // @todo when #2583041 is committed, add a check for memory
-    // availability before creating the resource.
     $window = imagecreatetruecolor($width, $height);
     imagecopy($window, $src, 0, 0, $x, $y, $width, $height);
     $entropy = GdImageAnalysis::entropy($window);
@@ -474,9 +457,9 @@ trait GDOperationTrait {
    *
    * @param resource $src
    *   The source image resource.
-   * @param string $crop_width
+   * @param int $crop_width
    *   The width of the crop.
-   * @param string $crop_height
+   * @param int $crop_height
    *   The height of the crop.
    * @param bool $simulate
    *   If TRUE, the crop will be simulated, and image markers will be overlaid
@@ -505,8 +488,6 @@ trait GDOperationTrait {
     // If simulating, create an image serving as the layer for the visual
     // markers.
     if ($simulate) {
-      // @todo when #2583041 is committed, add a check for memory
-      // availability before creating the resource.
       $marker_layer_resource = imagecreatetruecolor(imagesx($src), imagesy($src));
       imagefill($marker_layer_resource, 0, 0, imagecolorallocatealpha($marker_layer_resource, 0, 0, 0, 127));
     }
@@ -553,8 +534,6 @@ trait GDOperationTrait {
       // Create the grid window.
       $grid_rect = new PositionedRectangle($work_window_width, $work_window_height);
       $grid_rect->addGrid('grid_0', 0, 0, $work_window_width, $work_window_height, $grid_rows, $grid_columns);
-      // @todo when #2583041 is committed, add a check for memory
-      // availability before creating the resource.
       $grid_resource = imagecreatetruecolor($work_window_width, $work_window_height);
       imagefill($grid_resource, 0, 0, imagecolorallocatealpha($grid_resource, 0, 0, 0, 127));
       imagecopyresampled($grid_resource, $src, 0, 0, $window_x_offset, $window_y_offset, $work_window_width, $work_window_height, $window_width, $window_height);
@@ -574,8 +553,8 @@ trait GDOperationTrait {
       $max_sum_position = MatrixUtility::findMaxSumSubmatrix($entropy_sum_matrix, $grid_sub_rows, $grid_sub_columns);
 
       // Position the highest entropy sub-matrix on the source image.
-      list($window_x_offset, $window_y_offset) = $source_rect->getPoint('grid_' . $window_nesting . '_' . $max_sum_position[0] . '_' . $max_sum_position[1]);
-      list($window_width, $window_height) = $source_rect->getSubGridDimensions('grid_' . $window_nesting, $max_sum_position[0], $max_sum_position[1], $grid_sub_rows, $grid_sub_columns);
+      [$window_x_offset, $window_y_offset] = $source_rect->getPoint('grid_' . $window_nesting . '_' . $max_sum_position[0] . '_' . $max_sum_position[1]);
+      [$window_width, $window_height] = $source_rect->getSubGridDimensions('grid_' . $window_nesting, $max_sum_position[0], $max_sum_position[1], $grid_sub_rows, $grid_sub_columns);
 
       if ($simulate) {
         switch ($window_nesting % 3) {

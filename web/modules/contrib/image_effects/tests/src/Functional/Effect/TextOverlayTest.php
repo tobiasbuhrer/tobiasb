@@ -159,6 +159,7 @@ class TextOverlayTest extends ImageEffectsTestBase {
     $uuid = $this->addEffectToTestStyle($effect_config);
 
     // Test text and HTML tags and entities.
+    /** @var \Drupal\image_effects\Plugin\ImageEffect\TextOverlayImageEffect $effect */
     $effect = $this->testImageStyle->getEffect($uuid);
     $this->assertEquals('the quick brown fox jumps over the lazy dog', $effect->getAlteredText($effect->getConfiguration()['data']['text_string']));
     $this->assertEquals('Para1 Para2', $effect->getAlteredText('<p>Para1</p><!-- Comment --> Para2'));
@@ -169,6 +170,7 @@ class TextOverlayTest extends ImageEffectsTestBase {
       'text_default][decode_entities' => FALSE,
     ];
     $uuid = $this->addEffectToTestStyle($effect_config);
+    /** @var \Drupal\image_effects\Plugin\ImageEffect\TextOverlayImageEffect $effect */
     $effect = $this->testImageStyle->getEffect($uuid);
     $this->assertEquals('<p>Para1</p><!-- Comment --> Para2', $effect->getAlteredText('<p>Para1</p><!-- Comment --> Para2'));
     $this->assertEquals('&quot;Title&quot; One &hellip;', $effect->getAlteredText('&quot;Title&quot; One &hellip;'));
@@ -180,6 +182,7 @@ class TextOverlayTest extends ImageEffectsTestBase {
       'text][case_format' => 'upper',
     ];
     $uuid = $this->addEffectToTestStyle($effect_config);
+    /** @var \Drupal\image_effects\Plugin\ImageEffect\TextOverlayImageEffect $effect */
     $effect = $this->testImageStyle->getEffect($uuid);
     $this->assertEquals('THE QUICK…', $effect->getAlteredText($effect->getConfiguration()['data']['text_string']));
 
@@ -188,6 +191,7 @@ class TextOverlayTest extends ImageEffectsTestBase {
     $effect_config['data']['text][case_format'] = 'ucwords';
     $effect_config['data']['text][maximum_chars'] = '';
     $uuid = $this->addEffectToTestStyle($effect_config);
+    /** @var \Drupal\image_effects\Plugin\ImageEffect\TextOverlayImageEffect $effect */
     $effect = $this->testImageStyle->getEffect($uuid);
     $this->assertEquals('The Quick Brown Fox Jumps Over The Lazy Dog', $effect->getAlteredText($effect->getConfiguration()['data']['text_string']));
 
@@ -195,6 +199,7 @@ class TextOverlayTest extends ImageEffectsTestBase {
     $this->removeEffectFromTestStyle($uuid);
     $effect_config['data']['text][case_format'] = 'ucfirst';
     $uuid = $this->addEffectToTestStyle($effect_config);
+    /** @var \Drupal\image_effects\Plugin\ImageEffect\TextOverlayImageEffect $effect */
     $effect = $this->testImageStyle->getEffect($uuid);
     $this->assertEquals('The quick brown fox jumps over the lazy dog', $effect->getAlteredText($effect->getConfiguration()['data']['text_string']));
   }

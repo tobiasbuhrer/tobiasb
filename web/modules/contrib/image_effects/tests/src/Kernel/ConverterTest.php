@@ -45,7 +45,7 @@ class ConverterTest extends KernelTestBase {
    * Tests conversion of core 'rotate' image effects.
    */
   public function testConvertRotate() {
-    $this->installConfig(['image']);
+    $this->installConfig(['image', 'image_effects']);
 
     // Create a test ImageStyle.
     $this->testImageStyle = ImageStyle::create([

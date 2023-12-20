@@ -2,9 +2,9 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\imagemagick;
 
-use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
-use Drupal\image_effects\Plugin\ImageToolkit\Operation\SmartCropTrait;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\gd\GDOperationTrait;
+use Drupal\image_effects\Plugin\ImageToolkit\Operation\SmartCropTrait;
+use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 
 /**
  * Defines Imagemagick Scale and Smart Crop operation.
@@ -38,16 +38,12 @@ class SmartCrop extends ImagemagickImageToolkitOperationBase {
     $this->getToolkit()->arguments()->setDestinationFormat($current_destination_format);
 
     $temp_image = $image_factory->get($temp_path, 'gd');
-    switch ($arguments['algorithm']) {
-      case 'entropy_slice':
-        $rect = $this->getEntropyCropBySlicing($temp_image->getToolkit()->getResource(), $arguments['width'], $arguments['height']);
-        break;
-
-      case 'entropy_grid':
-        $rect = $this->getEntropyCropByGridding($temp_image->getToolkit()->getResource(), $arguments['width'], $arguments['height'], $arguments['simulate'], $arguments['algorithm_params']['grid_width'], $arguments['algorithm_params']['grid_height'], $arguments['algorithm_params']['grid_rows'], $arguments['algorithm_params']['grid_cols'], $arguments['algorithm_params']['grid_sub_rows'], $arguments['algorithm_params']['grid_sub_cols']);
-        break;
-
-    }
+    /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $temp_toolkit */
+    $temp_toolkit = $temp_image->getToolkit();
+    $rect = match ($arguments['algorithm']) {
+      'entropy_slice' => $this->getEntropyCropBySlicing($temp_toolkit->getResource(), $arguments['width'], $arguments['height']),
+      'entropy_grid' => $this->getEntropyCropByGridding($temp_toolkit->getResource(), $arguments['width'], $arguments['height'], $arguments['simulate'], $arguments['algorithm_params']['grid_width'], $arguments['algorithm_params']['grid_height'], $arguments['algorithm_params']['grid_rows'], $arguments['algorithm_params']['grid_cols'], $arguments['algorithm_params']['grid_sub_rows'], $arguments['algorithm_params']['grid_sub_cols']),
+    };
     $points = $this->getRectangleCorners($rect);
 
     // Do not need the temporary image file any longer.

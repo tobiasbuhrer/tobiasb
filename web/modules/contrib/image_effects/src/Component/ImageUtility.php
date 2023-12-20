@@ -31,7 +31,7 @@ abstract class ImageUtility {
       if ($current_length === NULL) {
         return NULL;
       }
-      return (int) (str_replace('%', '', $length_specification) * 0.01 * $current_length);
+      return (int) (((float) str_replace('%', '', $length_specification)) * 0.01 * $current_length);
     }
     return (int) $length_specification;
   }

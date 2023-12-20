@@ -3,11 +3,13 @@
 namespace Drupal\Tests\image_effects\Functional;
 
 use Drupal\Core\Database\Database;
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\Image\ImageInterface;
-use Drupal\Tests\BrowserTestBase;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\image_effects\Component\GdImageAnalysis;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Base test class for image_effects tests.
@@ -66,14 +68,14 @@ abstract class ImageEffectsTestBase extends BrowserTestBase {
   protected $fileSystem;
 
   /**
-   * @var \Drupal\Core\Extension\ModuleExtensionList
+   * The module extension list service.
    */
-  protected $moduleList;
+  protected ModuleExtensionList $moduleList;
 
   /**
-   * @var \Drupal\Core\File\FileUrlGeneratorInterface
+   * The file Url generator service.
    */
-  protected $fileUrlGenerator;
+  protected FileUrlGeneratorInterface $fileUrlGenerator;
 
   /**
    * Admin user.
@@ -352,6 +354,7 @@ abstract class ImageEffectsTestBase extends BrowserTestBase {
    * Function for finding a pixel's RGBa values.
    */
   protected function getPixelColor(ImageInterface $image, $x, $y) {
+    /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $toolkit */
     $toolkit = $image->getToolkit();
     $color_index = imagecolorat($toolkit->getResource(), $x, $y);
 
@@ -376,7 +379,7 @@ abstract class ImageEffectsTestBase extends BrowserTestBase {
     $query = Database::getConnection()->select('cachetags', 'a');
     $query->addField('a', 'invalidations');
     $query->condition('tag', 'config:image.style.' . $image_style_name);
-    return (int) $query->execute()->fetchColumn();
+    return (int) $query->execute()->fetchField();
   }
 
   /**
@@ -408,15 +411,18 @@ abstract class ImageEffectsTestBase extends BrowserTestBase {
     // Only works with GD.
     $this->assertSame('gd', $expected_image->getToolkitId());
     $this->assertSame('gd', $actual_image->getToolkitId());
+    /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $expected_image_toolkit */
+    $expected_image_toolkit = $expected_image->getToolkit();
+    /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $actual_image_toolkit */
+    $actual_image_toolkit = $actual_image->getToolkit();
 
     // Check dimensions.
     $this->assertSame($expected_image->getWidth(), $actual_image->getWidth());
     $this->assertSame($expected_image->getHeight(), $actual_image->getHeight());
 
     // Image difference.
-    $difference = GdImageAnalysis::difference($expected_image->getToolkit()->getResource(), $actual_image->getToolkit()->getResource());
+    $difference = GdImageAnalysis::difference($expected_image_toolkit->getResource(), $actual_image_toolkit->getResource());
     $mean = GdImageAnalysis::mean($difference);
-    imagedestroy($difference);
     $this->assertTrue($mean < $max_diff, $message);
   }
 
@@ -439,6 +445,10 @@ abstract class ImageEffectsTestBase extends BrowserTestBase {
     // Only works with GD.
     $this->assertSame('gd', $expected_image->getToolkitId());
     $this->assertSame('gd', $actual_image->getToolkitId());
+    /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $expected_image_toolkit */
+    $expected_image_toolkit = $expected_image->getToolkit();
+    /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $actual_image_toolkit */
+    $actual_image_toolkit = $actual_image->getToolkit();
 
     // Check dimensions.
     if ($expected_image->getWidth() !== $actual_image->getWidth()) {
@@ -449,9 +459,8 @@ abstract class ImageEffectsTestBase extends BrowserTestBase {
     }
 
     // Image difference.
-    $difference = GdImageAnalysis::difference($expected_image->getToolkit()->getResource(), $actual_image->getToolkit()->getResource());
+    $difference = GdImageAnalysis::difference($expected_image_toolkit->getResource(), $actual_image_toolkit->getResource());
     $mean = GdImageAnalysis::mean($difference);
-    imagedestroy($difference);
     $this->assertGreaterThan($max_diff, $mean, $message);
   }
 

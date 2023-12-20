@@ -2,6 +2,8 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\imagemagick;
 
+use Drupal\imagemagick\ImagemagickFormatMapperInterface;
+
 /**
  * Trait for ImageMagick image toolkit operations.
  */
@@ -22,7 +24,7 @@ trait ImagemagickOperationTrait {
    */
   protected function getFormatMapper() {
     if (!$this->formatMapper) {
-      $this->formatMapper = \Drupal::service('imagemagick.format_mapper');
+      $this->formatMapper = \Drupal::service(ImagemagickFormatMapperInterface::class);
     }
     return $this->formatMapper;
   }

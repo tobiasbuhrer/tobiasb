@@ -2,11 +2,11 @@
 
 namespace Drupal\image_effects\Plugin\ImageEffect;
 
-use Drupal\Core\Image\ImageInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Image\ImageInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\file_mdm\FileMetadataManagerInterface;
+use Drupal\image\ConfigurableImageEffectBase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -63,7 +63,7 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
       $plugin_id,
       $plugin_definition,
       $container->get('logger.factory')->get('image'),
-      $container->get('file_metadata_manager')
+      $container->get(FileMetadataManagerInterface::class),
     );
   }
 

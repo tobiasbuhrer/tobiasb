@@ -192,7 +192,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
 
     if ($this->getTextimageFactory()) {
       // Preview effect.
-      list($success, $preview) = $this->buildPreviewRender($this->configuration);
+      [$success, $preview] = $this->buildPreviewRender($this->configuration);
       $form['preview'] = [
         '#type'   => 'item',
         '#title' => $this->t('Preview'),
@@ -550,7 +550,10 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
         'right-bottom' => $this->t('Bottom right'),
       ],
       '#theme' => 'image_anchor',
-      '#default_value' => implode('-', [$this->configuration['layout']['x_pos'], $this->configuration['layout']['y_pos']]),
+      '#default_value' => implode('-', [
+        $this->configuration['layout']['x_pos'],
+        $this->configuration['layout']['y_pos'],
+      ]),
       '#description' => $this->t('Position of the text on the underlying image.'),
     ];
     $form['layout']['position']['x_offset'] = [
@@ -652,7 +655,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
    * Preview Ajax callback.
    */
   public function processAjaxPreview($form, FormStateInterface $form_state) {
-    list($success, $preview) = $this->buildPreviewRender($form_state->getValue(['data', 'ajax_config']));
+    [$success, $preview] = $this->buildPreviewRender($form_state->getValue(['data', 'ajax_config']));
     $preview_render = [
       '#theme' => 'image_effects_text_overlay_preview',
       '#success' => $success,
@@ -725,7 +728,10 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
     // Save the updated configuration in a FormState value to enable Ajax
     // preview generation.
     $form_state->setValue(['ajax_config'], $this->configuration);
-    $form_state->setValue(['ajax_config', 'preview_bar', 'debug_visuals'], $form_state->getValue(['preview_bar', 'debug_visuals']));
+    $form_state->setValue(
+      ['ajax_config', 'preview_bar', 'debug_visuals'],
+      $form_state->getValue(['preview_bar', 'debug_visuals']),
+    );
   }
 
   /**
@@ -974,7 +980,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
       'text_align'                 => $this->configuration['text']['align'],
       'text_line_spacing'          => $this->configuration['text']['line_spacing'],
       'text_string'                => $this->configuration['text_string'],
-      'debug_visuals'              => isset($this->configuration['debug_visuals']) ? $this->configuration['debug_visuals'] : FALSE,
+      'debug_visuals'              => $this->configuration['debug_visuals'] ?? FALSE,
       'canvas_width'               => $this->info['image_width'],
       'canvas_height'              => $this->info['image_height'],
     ]);
@@ -1113,7 +1119,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
     $data['layout']['y_offset'] = 0;
     $data['layout']['overflow_action'] = 'extend';
     $data['layout']['extended_color'] = NULL;
-    $data['debug_visuals'] = isset($data['preview_bar']['debug_visuals']) ? $data['preview_bar']['debug_visuals'] : FALSE;
+    $data['debug_visuals'] ??= FALSE;
     try {
       $textimage = $textimage_factory->get()
         ->setEffects([

@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\imagemagick\Kernel;
 
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\imagemagick\ImagemagickExecArguments;
+use Drupal\KernelTests\KernelTestBase;
 
 /**
  * Tests for ImagemagickExecArguments.

@@ -4,8 +4,8 @@ namespace Drupal\Tests\image_effects\Functional\Effect;
 
 use Drupal\Core\Config\ConfigValueException;
 use Drupal\Core\File\FileSystemInterface;
-use Drupal\Tests\image_effects\Functional\ImageEffectsTestBase;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\Tests\image_effects\Functional\ImageEffectsTestBase;
 
 /**
  * AspectSwitcher effect test.

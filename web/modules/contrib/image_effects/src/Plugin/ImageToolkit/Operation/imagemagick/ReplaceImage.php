@@ -2,8 +2,8 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\imagemagick;
 
-use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\ReplaceImageTrait;
+use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 
 /**
  * Defines Imagemagick image replace operation.

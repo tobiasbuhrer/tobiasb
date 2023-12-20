@@ -2,8 +2,8 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\imagemagick;
 
-use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\WatermarkTrait;
+use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 
 /**
  * Defines ImageMagick Watermark operation.
@@ -44,18 +44,19 @@ class Watermark extends ImagemagickImageToolkitOperationBase {
 
     // Compose it with the destination.
     switch ($this->getToolkit()->getExecManager()->getPackage()) {
+      case 'graphicsmagick':
+        // @todo see if GraphicsMagick can support opacity setting.
+        $op = "-draw 'image Over {$arguments['x_offset']},{$arguments['y_offset']} {$w},{$h} {$image_path}'";
+        break;
+
       case 'imagemagick':
+      default:
         if ($arguments['opacity'] == 100) {
           $op = "-gravity None {$image_path} -geometry {$w}x{$h}!{$x}{$y} -compose src-over -composite";
         }
         else {
           $op = "-gravity None {$image_path} -geometry {$w}x{$h}!{$x}{$y} -compose blend -define compose:args={$arguments['opacity']} -composite";
         }
-        break;
-
-      case 'graphicsmagick':
-        // @todo see if GraphicsMagick can support opacity setting.
-        $op = "-draw 'image Over {$arguments['x_offset']},{$arguments['y_offset']} {$w},{$h} {$image_path}'";
         break;
 
     }

@@ -2,9 +2,9 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
-use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 use Drupal\image_effects\Component\Rectangle;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\RotateTrait;
+use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 
 /**
  * Defines GD Rotate operation.

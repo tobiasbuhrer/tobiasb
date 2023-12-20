@@ -18,6 +18,11 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
    * The configuration object.
    *
    * @var \Drupal\Core\Config\Config
+   *
+   * @deprecated in image_effects:8.x-3.5 and is removed from
+   *   image_effects:4.0.0. Access the config factory directly instead.
+   *
+   * @see https://www.drupal.org/project/image_effects/issues/3399654
    */
   protected $config;
 
@@ -33,12 +38,19 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
    *   The module handler.
    * @param string $type
    *   The plugin type, for example 'color_selector'.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The configuration factory.
    */
-  public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler, $type, ConfigFactoryInterface $config_factory) {
+  public function __construct(
+    \Traversable $namespaces,
+    CacheBackendInterface $cache_backend,
+    ModuleHandlerInterface $module_handler,
+    $type,
+    protected readonly ConfigFactoryInterface $configFactory
+  ) {
     $path = Container::camelize($type);
-    $this->config = $config_factory->get('image_effects.settings');
+    // @phpstan-ignore-next-line
+    $this->config = $this->configFactory->get('image_effects.settings');
     parent::__construct("Plugin/image_effects/{$path}", $namespaces, $module_handler);
     $this->alterInfo("image_effects_{$type}_plugin_info");
     $this->setCacheBackend($cache_backend, "image_effects_{$type}_plugins");
@@ -67,7 +79,7 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
    *   An instance of the specified 'image_effects' plugin.
    */
   public function getPlugin($plugin_id = NULL) {
-    $plugin_id = $plugin_id ?: $this->config->get($this->getType() . '.plugin_id');
+    $plugin_id = $plugin_id ?: $this->configFactory->get('image_effects.settings')->get($this->getType() . '.plugin_id');
     $plugins = $this->getAvailablePlugins();
 
     // Check if plugin is available.
@@ -106,7 +118,10 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
   public function getPluginOptions() {
     $options = [];
     foreach ($this->getAvailablePlugins() as $plugin) {
-      $options[$plugin['id']] = new FormattableMarkup('<b>@title</b> - @description', ['@title' => $plugin['short_title'], '@description' => $plugin['help']]);
+      $options[$plugin['id']] = new FormattableMarkup('<b>@title</b> - @description', [
+        '@title' => $plugin['short_title'],
+        '@description' => $plugin['help'],
+      ]);
     }
     return $options;
   }

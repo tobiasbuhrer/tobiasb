@@ -2,8 +2,8 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\imagemagick;
 
-use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\OpacityTrait;
+use Drupal\imagemagick\Plugin\ImageToolkit\Operation\imagemagick\ImagemagickImageToolkitOperationBase;
 
 /**
  * Defines ImageMagick Opacity operation.

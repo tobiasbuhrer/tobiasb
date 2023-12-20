@@ -19,7 +19,7 @@ abstract class ColorUtility {
    */
   public static function matchLuma($rgba, $soft = FALSE) {
     $rgb = mb_substr($rgba, 0, 7);
-    list($r, $g, $b) = array_values(Color::hexToRgb($rgb));
+    [$r, $g, $b] = array_values(Color::hexToRgb($rgb));
     $luma = 1 - (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
     if ($luma < 0.5) {
       // Bright colors - black.

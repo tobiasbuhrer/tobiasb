@@ -35,12 +35,12 @@ class ExecManagerTest extends KernelTestBase {
     $exec_manager = \Drupal::service('imagemagick.exec_manager');
     $output = '';
     $error = '';
-    $expected = substr(PHP_OS, 0, 3) !== 'WIN' ? 143 : 1;
+    $expected = substr(PHP_OS, 0, 3) !== 'WIN' ? [143, -1] : [1];
     // Set a short timeout (1 sec.) and run a process that is expected to last
     // longer (10 secs.). Should return a 'terminate' exit code.
     $exec_manager->setTimeout(1);
     $ret = $exec_manager->runOsShell('sleep', '10', 'sleep', $output, $error);
-    $this->assertEquals($expected, $ret, $error);
+    $this->assertTrue(in_array($ret, $expected, TRUE), $error);
   }
 
 }

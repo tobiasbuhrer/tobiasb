@@ -2,6 +2,7 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
+use Drupal\file_mdm\FileMetadataManagerInterface;
 use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 
 /**
@@ -35,7 +36,7 @@ class AutoOrient extends GDImageToolkitOperationBase {
     }
 
     // Read EXIF data.
-    $file = \Drupal::service('file_metadata_manager')->uri($source_path);
+    $file = \Drupal::service(FileMetadataManagerInterface::class)->uri($source_path);
     $exif_orientation = $file->getMetadata('exif', 'Orientation');
     if ($exif_orientation && $exif_orientation['value'] !== NULL) {
       // http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/EXIF.html:
@@ -81,6 +82,8 @@ class AutoOrient extends GDImageToolkitOperationBase {
           return TRUE;
       }
     }
+
+    return TRUE;
   }
 
 }

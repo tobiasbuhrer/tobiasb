@@ -3,8 +3,8 @@
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
 use Drupal\Component\Utility\Color;
-use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\SetGifTransparentColorTrait;
+use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 
 /**
  * Defines GD2 set_gif_transparent_color image operation.

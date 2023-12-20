@@ -32,7 +32,7 @@ abstract class GdGaussianBlur {
    *   The array of coefficients to use for the blur.
    */
   public static function gaussianCoeffs($radius, $sigma_arg = NULL) {
-    $sigma = $sigma_arg === NULL ? $radius * 2 / 3 : $sigma_arg;
+    $sigma = $sigma_arg ?? $radius * 2 / 3;
     $s = $sigma * $sigma * 2;
 
     $result = [];

@@ -10,7 +10,7 @@ To submit bug reports and feature suggestions, or to track changes: https://drup
 * The module **must** be downloaded or updated using Composer, see [Download contributed modules and themes using Composer](https://www.drupal.org/node/2718229#adding-modules).
 This ensures the all dependency modules get downloaded as well.
 
-* Drupal 9.3.x and higher or 10.0.x and higher
+* Drupal 10.1.x and higher
 
 * Either ImageMagick (http://www.imagemagick.org) or GraphicsMagick
   (http://www.graphicsmagick.org) need to be installed on your server and the

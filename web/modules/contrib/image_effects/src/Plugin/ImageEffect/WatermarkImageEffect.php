@@ -2,9 +2,9 @@
 
 namespace Drupal\image_effects\Plugin\ImageEffect;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageFactory;
 use Drupal\Core\Image\ImageInterface;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\image_effects\Component\ImageUtility;
@@ -197,7 +197,10 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
     // Get the watermark image object.
     $watermark_image = $this->imageFactory->get($this->configuration['watermark_image']);
     if (!$watermark_image->isValid()) {
-      $this->logger->error('Image watermark failed using the %toolkit toolkit on %path', ['%toolkit' => $image->getToolkitId(), '%path' => $this->configuration['watermark_image']]);
+      $this->logger->error('Image watermark failed using the %toolkit toolkit on %path', [
+        '%toolkit' => $image->getToolkitId(),
+        '%path' => $this->configuration['watermark_image'],
+      ]);
       return FALSE;
     }
 
@@ -220,7 +223,7 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
 
     // Calculate position of watermark on source image based on placement
     // option.
-    list($x, $y) = explode('-', $this->configuration['placement']);
+    [$x, $y] = explode('-', $this->configuration['placement']);
     $x_pos = ImageUtility::getKeywordOffset($x, $image->getWidth(), $watermark_width);
     $y_pos = ImageUtility::getKeywordOffset($y, $image->getHeight(), $watermark_height);
 

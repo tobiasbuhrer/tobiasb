@@ -2,9 +2,9 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
-use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\FontOperationTrait;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\TextOverlayTrait;
+use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 
 /**
  * Defines GD2 text overlay operation.

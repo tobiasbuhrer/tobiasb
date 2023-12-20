@@ -20,7 +20,7 @@ interface ImagemagickExecManagerInterface {
    *
    * To disable the timeout, set this value to null.
    *
-   * @param int|null $timeout
+   * @param int $timeout
    *   The timeout in seconds.
    *
    * @return $this
@@ -108,9 +108,8 @@ interface ImagemagickExecManagerInterface {
    *   (optional) A variable to assign the shell stderr to, passed by
    *   reference.
    *
-   * @return int|bool
-   *   The operating system returned code, or FALSE if it was not possible to
-   *   execute the command.
+   * @return int
+   *   The operating system returned code.
    */
   public function runOsShell(string $command, string $arguments, string $id, string &$output = NULL, string &$error = NULL): int;
 

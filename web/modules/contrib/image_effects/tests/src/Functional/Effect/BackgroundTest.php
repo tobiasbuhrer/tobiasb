@@ -88,8 +88,6 @@ class BackgroundTest extends ImageEffectsTestBase {
         // For the GD toolkit, test we are not left with orphan resource after
         // applying the operation.
         $image = $this->imageFactory->get($original_uri);
-        // Store the original GD resource.
-        $old_res = $image->getToolkit()->getResource();
         // Apply the operation.
         $image->apply('background', [
           'x_offset' => 0,
@@ -97,15 +95,6 @@ class BackgroundTest extends ImageEffectsTestBase {
           'opacity' => 100,
           'background_image' => $this->imageFactory->get($background_uri),
         ]);
-        // The operation replaced the resource, check that the old one has
-        // been destroyed.
-        // @todo remove once Drupal 9 is no longer supported.
-        if (PHP_VERSION_ID < 80000) {
-          $new_res = $image->getToolkit()->getResource();
-          $this->assertIsResource($new_res);
-          $this->assertNotEquals($new_res, $old_res);
-          $this->assertFalse(is_resource($old_res));
-        }
         // Save image and compare against original, should differ.
         $this->assertTrue($image->save($original_uri . '.modified.png'));
         $image_original = $this->imageFactory->get($original_uri);

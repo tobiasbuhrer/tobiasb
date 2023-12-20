@@ -57,14 +57,14 @@ class StripMetadataTest extends ImageEffectsTestBase {
 
       // Test source image EXIF data.
       $exif = @exif_read_data(\Drupal::service('file_system')->realpath($original_uri));
-      $this->assertEquals($data['original_orientation'], isset($exif['Orientation']) ? $exif['Orientation'] : NULL);
+      $this->assertEquals($data['original_orientation'], $exif['Orientation'] ?? NULL);
 
       // Process source image.
       $this->testImageStyle->createDerivative($original_uri, $derivative_uri);
 
       // Check that ::applyEffect strips EXIF metadata.
       $exif = @exif_read_data(\Drupal::service('file_system')->realpath($derivative_uri));
-      $this->assertEquals(NULL, isset($exif['Orientation']) ? $exif['Orientation'] : NULL);
+      $this->assertEquals(NULL, $exif['Orientation'] ?? NULL);
     }
   }
 

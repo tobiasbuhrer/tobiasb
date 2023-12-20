@@ -26,16 +26,10 @@ class SmartCrop extends GDImageToolkitOperationBase {
    */
   protected function execute(array $arguments) {
 
-    switch ($arguments['algorithm']) {
-      case 'entropy_slice':
-        $rect = $this->getEntropyCropBySlicing($this->getToolkit()->getResource(), $arguments['width'], $arguments['height']);
-        break;
-
-      case 'entropy_grid':
-        $rect = $this->getEntropyCropByGridding($this->getToolkit()->getResource(), $arguments['width'], $arguments['height'], $arguments['simulate'], $arguments['algorithm_params']['grid_width'], $arguments['algorithm_params']['grid_height'], $arguments['algorithm_params']['grid_rows'], $arguments['algorithm_params']['grid_cols'], $arguments['algorithm_params']['grid_sub_rows'], $arguments['algorithm_params']['grid_sub_cols']);
-        break;
-
-    }
+    $rect = match ($arguments['algorithm']) {
+      'entropy_slice' => $this->getEntropyCropBySlicing($this->getToolkit()->getResource(), $arguments['width'], $arguments['height']),
+      'entropy_grid' => $this->getEntropyCropByGridding($this->getToolkit()->getResource(), $arguments['width'], $arguments['height'], $arguments['simulate'], $arguments['algorithm_params']['grid_width'], $arguments['algorithm_params']['grid_height'], $arguments['algorithm_params']['grid_rows'], $arguments['algorithm_params']['grid_cols'], $arguments['algorithm_params']['grid_sub_rows'], $arguments['algorithm_params']['grid_sub_cols']),
+    };
     $points = $this->getRectangleCorners($rect);
 
     // Crop the image using the coordinates found above. If simulating, draw

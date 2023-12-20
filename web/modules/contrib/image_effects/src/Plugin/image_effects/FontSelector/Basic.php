@@ -62,7 +62,7 @@ class Basic extends ImageEffectsPluginBase implements ImageEffectsFontSelectorPl
       $plugin_definition,
       $container->get('config.factory'),
       $container->get('logger.channel.image_effects'),
-      $container->get('file_metadata_manager')
+      $container->get(FileMetadataManagerInterface::class)
     );
   }
 

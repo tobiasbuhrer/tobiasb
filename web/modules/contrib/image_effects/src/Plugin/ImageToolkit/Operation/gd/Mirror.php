@@ -2,8 +2,8 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
-use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\MirrorTrait;
+use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 
 /**
  * Defines GD Mirror operation.
@@ -33,6 +33,7 @@ class Mirror extends GDImageToolkitOperationBase {
     elseif ($arguments['y_axis'] === TRUE) {
       return imageflip($this->getToolkit()->getResource(), IMG_FLIP_VERTICAL);
     }
+    return FALSE;
   }
 
 }

@@ -41,7 +41,7 @@ class ImagemagickArgumentsTest extends ImageEffectsTestBase {
 
     // Test source image EXIF data.
     $exif = @exif_read_data(\Drupal::service('file_system')->realpath($original_uri));
-    $this->assertEquals(8, isset($exif['Orientation']) ? $exif['Orientation'] : NULL);
+    $this->assertEquals(8, $exif['Orientation'] ?? NULL);
 
     // 1. Test effect with 'keep' dimensions.
     $effect = [
@@ -73,7 +73,7 @@ class ImagemagickArgumentsTest extends ImageEffectsTestBase {
     $this->assertEquals(640, $image->getWidth());
     $this->assertEquals(480, $image->getHeight());
     $exif = @exif_read_data(\Drupal::service('file_system')->realpath($derivative_uri));
-    $this->assertEquals(NULL, isset($exif['Orientation']) ? $exif['Orientation'] : NULL);
+    $this->assertEquals(NULL, $exif['Orientation'] ?? NULL);
 
     // Remove effect.
     $this->removeEffectFromTestStyle($uuid);

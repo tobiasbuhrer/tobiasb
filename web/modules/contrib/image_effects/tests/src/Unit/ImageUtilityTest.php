@@ -84,7 +84,7 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @covers ::getKeywordOffset()
+   * @covers ::getKeywordOffset
    */
   public function testInvalidGetKeywordOffset(): void {
     $this->expectException(\InvalidArgumentException::class);
@@ -93,7 +93,7 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @covers ::getKeywordOffset()
+   * @covers ::getKeywordOffset
    *
    * @dataProvider providerTestGetKeywordOffset
    */

@@ -37,81 +37,41 @@ class ImagemagickToolkit extends ImageToolkitBase {
   const FILE_METADATA_PLUGIN_ID = 'imagemagick_identify';
 
   /**
-   * The event dispatcher.
-   *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
-   */
-  protected $eventDispatcher;
-
-  /**
-   * The format mapper service.
-   *
-   * @var \Drupal\imagemagick\ImagemagickFormatMapperInterface
-   */
-  protected $formatMapper;
-
-  /**
-   * The file metadata manager service.
-   *
-   * @var \Drupal\file_mdm\FileMetadataManagerInterface
-   */
-  protected $fileMetadataManager;
-
-  /**
-   * The ImageMagick execution manager service.
-   *
-   * @var \Drupal\imagemagick\ImagemagickExecManagerInterface
-   */
-  protected $execManager;
-
-  /**
    * The execution arguments object.
-   *
-   * @var \Drupal\imagemagick\ImagemagickExecArguments
    */
-  protected $arguments;
+  protected ImagemagickExecArguments $arguments;
 
   /**
    * The width of the image.
-   *
-   * @var int
    */
-  protected $width;
+  protected ?int $width;
 
   /**
    * The height of the image.
-   *
-   * @var int
    */
-  protected $height;
+  protected ?int $height;
 
   /**
    * The number of frames of the source image, for multi-frame images.
-   *
-   * @var int
    */
-  protected $frames;
+  protected ?int $frames;
 
   /**
    * Image orientation retrieved from EXIF information.
-   *
-   * @var int
    */
-  protected $exifOrientation;
+  protected ?int $exifOrientation;
 
   /**
    * The source image colorspace.
-   *
-   * @var string
    */
-  protected $colorspace;
+  protected ?string $colorspace;
 
   /**
    * The source image profiles.
    *
    * @var string[]
    */
-  protected $profiles = [];
+  protected array $profiles = [];
 
   /**
    * Constructs an ImagemagickToolkit object.
@@ -128,22 +88,29 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   A logger instance.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
-   * @param \Drupal\imagemagick\ImagemagickFormatMapperInterface $format_mapper
+   * @param \Drupal\imagemagick\ImagemagickFormatMapperInterface $formatMapper
    *   The format mapper service.
-   * @param \Drupal\file_mdm\FileMetadataManagerInterface $file_metadata_manager
+   * @param \Drupal\file_mdm\FileMetadataManagerInterface $fileMetadataManager
    *   The file metadata manager service.
-   * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $exec_manager
+   * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $execManager
    *   The ImageMagick execution manager service.
-   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
    *   The event dispatcher.
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, ImageToolkitOperationManagerInterface $operation_manager, LoggerInterface $logger, ConfigFactoryInterface $config_factory, ImagemagickFormatMapperInterface $format_mapper, FileMetadataManagerInterface $file_metadata_manager, ImagemagickExecManagerInterface $exec_manager, EventDispatcherInterface $dispatcher) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    array $plugin_definition,
+    ImageToolkitOperationManagerInterface $operation_manager,
+    LoggerInterface $logger,
+    ConfigFactoryInterface $config_factory,
+    protected readonly ImagemagickFormatMapperInterface $formatMapper,
+    protected readonly FileMetadataManagerInterface $fileMetadataManager,
+    protected readonly ImagemagickExecManagerInterface $execManager,
+    protected readonly EventDispatcherInterface $eventDispatcher,
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $operation_manager, $logger, $config_factory);
-    $this->formatMapper = $format_mapper;
-    $this->fileMetadataManager = $file_metadata_manager;
-    $this->execManager = $exec_manager;
     $this->arguments = new ImagemagickExecArguments($this->execManager);
-    $this->eventDispatcher = $dispatcher;
   }
 
   /**
@@ -157,9 +124,9 @@ class ImagemagickToolkit extends ImageToolkitBase {
       $container->get('image.toolkit.operation.manager'),
       $container->get('logger.channel.image'),
       $container->get('config.factory'),
-      $container->get('imagemagick.format_mapper'),
-      $container->get('file_metadata_manager'),
-      $container->get('imagemagick.exec_manager'),
+      $container->get(ImagemagickFormatMapperInterface::class),
+      $container->get(FileMetadataManagerInterface::class),
+      $container->get(ImagemagickExecManagerInterface::class),
       $container->get('event_dispatcher')
     );
   }
@@ -324,7 +291,9 @@ class ImagemagickToolkit extends ImageToolkitBase {
       '#description' => $this->t("The locale to be used to prepare the command passed to executables. The default, <kbd>'en_US.UTF-8'</kbd>, should work in most cases. If that is not available on the server, enter another locale. 'Installed Locales' below provides a list of locales installed on the server."),
     ];
     // Installed locales.
-    $locales = $this->getExecManager()->getInstalledLocales();
+    /** @var \Drupal\imagemagick\ImagemagickExecManager $manager */
+    $manager = $this->getExecManager();
+    $locales = $manager->getInstalledLocales();
     $locales_info = implode('<br />', explode("\n", preg_replace('/\r/', '', Html::escape($locales))));
     $form['exec']['installed_locales'] = [
       '#type' => 'details',
@@ -572,7 +541,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The source EXIF orientation.
    */
   public function getExifOrientation() {
-    return $this->exifOrientation;
+    return $this->exifOrientation ?? NULL;
   }
 
   /**
@@ -595,7 +564,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The source colorspace.
    */
   public function getColorspace() {
-    return $this->colorspace;
+    return $this->colorspace ?? NULL;
   }
 
   /**
@@ -637,11 +606,11 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * Gets the source image number of frames.
    *
-   * @return int
+   * @return int|null
    *   The number of frames of the image.
    */
   public function getFrames() {
-    return $this->frames;
+    return $this->frames ?? NULL;
   }
 
   /**
@@ -661,7 +630,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * {@inheritdoc}
    */
   public function getWidth() {
-    return $this->width;
+    return $this->width ?? NULL;
   }
 
   /**
@@ -681,7 +650,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * {@inheritdoc}
    */
   public function getHeight() {
-    return $this->height;
+    return $this->height ?? NULL;
   }
 
   /**
@@ -779,7 +748,6 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   TRUE if the file could be converted, FALSE otherwise.
    */
   protected function convert(): bool {
-    $config = $this->configFactory->get('imagemagick.settings');
 
     // Ensure sourceLocalPath is prepared.
     $this->ensureSourceLocalPath();
@@ -854,7 +822,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
     $requirements = [
       'imagemagick' => [
         'title' => $this->t('ImageMagick'),
-        'value' => isset($value) ? $value : NULL,
+        'value' => $value ?? NULL,
         'description' => [
           '#markup' => implode('<br />', $reported_info),
         ],
@@ -876,20 +844,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * {@inheritdoc}
    */
   public static function getSupportedExtensions() {
-    return \Drupal::service('imagemagick.format_mapper')->getEnabledExtensions();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function apply($operation, array $arguments = []) {
-    try {
-      return parent::apply($operation, $arguments);
-    }
-    catch (\Throwable $t) {
-      $this->logger->error(get_class($t) . ': ' . $t->getMessage(), []);
-      return FALSE;
-    }
+    return \Drupal::service(ImagemagickFormatMapperInterface::class)->getEnabledExtensions();
   }
 
 }

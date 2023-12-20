@@ -28,76 +28,56 @@ class ImagemagickExecArguments {
   const INTERNAL = 2;
 
   /**
-   * The ImageMagick execution manager service.
-   *
-   * @var \Drupal\imagemagick\ImagemagickExecManagerInterface
-   */
-  protected $execManager;
-
-  /**
    * The array of command line arguments to be used by 'convert'.
    *
    * @var string[]
    */
-  protected $arguments = [];
+  protected array $arguments = [];
 
   /**
    * Path of the image file.
-   *
-   * @var string
    */
-  protected $source = '';
+  protected string $source = '';
 
   /**
    * The local filesystem path to the source image file.
-   *
-   * @var string
    */
-  protected $sourceLocalPath = '';
+  protected string $sourceLocalPath = '';
 
   /**
    * The source image format.
-   *
-   * @var string
    */
-  protected $sourceFormat = '';
+  protected string $sourceFormat = '';
 
   /**
    * The source image frames to access.
-   *
-   * @var string
    */
-  protected $sourceFrames;
+  protected string $sourceFrames;
 
   /**
    * The image destination URI/path on saving.
-   *
-   * @var string
    */
-  protected $destination = NULL;
+  protected ?string $destination = NULL;
 
   /**
    * The local filesystem path to the image destination.
-   *
-   * @var string
    */
-  protected $destinationLocalPath = '';
+  protected string $destinationLocalPath = '';
 
   /**
    * The image destination format on saving.
-   *
-   * @var string
    */
-  protected $destinationFormat = '';
+  protected string $destinationFormat = '';
 
   /**
    * Constructs an ImagemagickExecArguments object.
    *
-   * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $exec_manager
+   * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $execManager
    *   The ImageMagick execution manager service.
    */
-  public function __construct(ImagemagickExecManagerInterface $exec_manager) {
-    $this->execManager = $exec_manager;
+  public function __construct(
+    protected readonly ImagemagickExecManagerInterface $execManager,
+  ) {
   }
 
   /**
@@ -328,7 +308,7 @@ class ImagemagickExecArguments {
    * @see http://www.imagemagick.org/script/command-line-processing.php
    */
   public function getSourceFrames() {
-    return $this->sourceFrames;
+    return $this->sourceFrames ?? NULL;
   }
 
   /**
@@ -436,7 +416,9 @@ class ImagemagickExecArguments {
    *   ImagemagickExecManagerInterface::execute method.
    */
   public function escape(string $argument): string {
-    return $this->execManager->escapeShellArg($argument);
+    /** @var \Drupal\imagemagick\ImagemagickExecManager $manager */
+    $manager = $this->execManager;
+    return $manager->escapeShellArg($argument);
   }
 
 }

@@ -325,7 +325,7 @@ class PositionedRectangle {
     $rad = deg2rad($angle);
     $sin = sin($rad);
     $cos = cos($rad);
-    list($x, $y) = $point;
+    [$x, $y] = $point;
     $tx = round(($x * $cos + $y * -$sin), 3);
     $ty = round(($y * $cos - $x * -$sin), 3);
     $point[0] = ($tx >= 0) ? ceil($tx) : -ceil(-$tx);

@@ -2,16 +2,13 @@
 
 namespace Drupal\imagemagick\Plugin\FileMetadata;
 
-use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\file_mdm\FileMetadataException;
 use Drupal\file_mdm\Plugin\FileMetadata\FileMetadataPluginBase;
 use Drupal\imagemagick\Event\ImagemagickExecutionEvent;
 use Drupal\imagemagick\ImagemagickExecArguments;
 use Drupal\imagemagick\ImagemagickExecManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * FileMetadata plugin for ImageMagick's identify results.
@@ -26,62 +23,23 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
 
   /**
    * The event dispatcher.
-   *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
-  protected $eventDispatcher;
+  protected readonly EventDispatcherInterface $eventDispatcher;
 
   /**
    * The ImageMagick execution manager service.
-   *
-   * @var \Drupal\imagemagick\ImagemagickExecManagerInterface
    */
-  protected $execManager;
+  protected readonly ImagemagickExecManagerInterface $execManager;
 
-  /**
-   * Constructs an ImagemagickIdentify plugin.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param array $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache_service
-   *   The cache service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The config factory.
-   * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $exec_manager
-   *   The ImageMagick execution manager service.
-   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
-   *   The event dispatcher.
-   * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
-   *   The stream wrapper manager service.
-   */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, CacheBackendInterface $cache_service, ConfigFactoryInterface $config_factory, ImagemagickExecManagerInterface $exec_manager, EventDispatcherInterface $dispatcher, StreamWrapperManagerInterface $stream_wrapper_manager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $cache_service, $config_factory, $stream_wrapper_manager);
-    $this->execManager = $exec_manager;
-    $this->eventDispatcher = $dispatcher;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('cache.file_mdm'),
-      $container->get('config.factory'),
-      $container->get('imagemagick.exec_manager'),
-      $container->get('event_dispatcher'),
-      $container->get('stream_wrapper_manager')
-    );
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->execManager = $container->get(ImagemagickExecManagerInterface::class);
+    $instance->eventDispatcher = $container->get(EventDispatcherInterface::class);
+    return $instance;
   }
 
   /**
-   * {@inheritdoc}
+   * Returns a list of metadata keys supported by the plugin.
    *
    * Supported keys are:
    *   'format' - ImageMagick's image format identifier.
@@ -94,7 +52,7 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
    *     parsed.
    *   'frames_count' - Number of frames in the image.
    */
-  public function getSupportedKeys($options = NULL) {
+  public function getSupportedKeys(?array $options = NULL): array {
     return [
       'format',
       'width',
@@ -107,10 +65,7 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
     ];
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function doGetMetadataFromFile() {
+  protected function doGetMetadataFromFile(): mixed {
     $data = $this->identify();
     return !empty($data) ? $data : NULL;
   }
@@ -134,10 +89,7 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
     return TRUE;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function doGetMetadata($key = NULL) {
+  protected function doGetMetadata(mixed $key = NULL): mixed {
     if ($key === NULL) {
       return $this->metadata;
     }
@@ -145,22 +97,19 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
       $this->validateKey($key, __FUNCTION__);
       switch ($key) {
         case 'source_local_path':
-          return isset($this->metadata['source_local_path']) ? $this->metadata['source_local_path'] : NULL;
+          return $this->metadata['source_local_path'] ?? NULL;
 
         case 'frames_count':
           return isset($this->metadata['frames']) ? count($this->metadata['frames']) : 0;
 
         default:
-          return isset($this->metadata['frames'][0][$key]) ? $this->metadata['frames'][0][$key] : NULL;
+          return $this->metadata['frames'][0][$key] ?? NULL;
 
       }
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function doSetMetadata($key, $value) {
+  protected function doSetMetadata(mixed $key, mixed $value): bool {
     $this->validateKey($key, __FUNCTION__);
     switch ($key) {
       case 'source_local_path':
@@ -177,10 +126,7 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function doRemoveMetadata($key) {
+  protected function doRemoveMetadata(mixed $key): bool {
     $this->validateKey($key, __FUNCTION__);
     switch ($key) {
       case 'source_local_path':
@@ -196,10 +142,7 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function getMetadataToCache() {
+  protected function getMetadataToCache(): mixed {
     $metadata = $this->metadata;
     // Avoid caching the source_local_path.
     unset($metadata['source_local_path']);
@@ -262,7 +205,7 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
       foreach ($frames_tmp as $i => $frame) {
         $info = explode('|', $frame);
         foreach ($info as $item) {
-          list($key, $value) = explode(':', $item);
+          [$key, $value] = explode(':', $item);
           if (trim($key) === 'profiles') {
             $profiles_tmp = empty($value) ? [] : explode(',', $value);
             $frames[$i][trim($key)] = $profiles_tmp;

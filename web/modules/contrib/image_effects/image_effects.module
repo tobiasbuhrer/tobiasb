@@ -8,8 +8,8 @@
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Config\ConfigValueException;
 use Drupal\image\ConfigurableImageEffectBase;
-use Drupal\image_effects\Component\ColorUtility;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\image_effects\Component\ColorUtility;
 
 /**
  * Implements hook_theme().

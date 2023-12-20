@@ -2,8 +2,8 @@
 
 namespace Drupal\image_effects\Plugin\ImageEffect;
 
-use Drupal\Core\Image\ImageInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Image\ImageInterface;
 use Drupal\image\ConfigurableImageEffectBase;
 
 /**

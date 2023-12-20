@@ -2,13 +2,13 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
-use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 use Drupal\image_effects\Component\ColorUtility;
 use Drupal\image_effects\Component\ImageUtility;
 use Drupal\image_effects\Component\PositionedRectangle;
 use Drupal\image_effects\Component\TextUtility;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\FontOperationTrait;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\TextToWrapperTrait;
+use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 
 /**
  * Defines GD Text Overlay text-to-wrapper operation.
@@ -54,9 +54,9 @@ class TextToWrapper extends GDImageToolkitOperationBase {
       $arguments['layout_padding_left'] += ($arguments['font_shadow_x_offset'] < 0 ? -$arguments['font_shadow_x_offset'] : 0);
       $shadow_width = ($arguments['font_shadow_x_offset'] != 0) ? $arguments['font_shadow_width'] + 1 : $arguments['font_shadow_width'];
       $shadow_height = ($arguments['font_shadow_y_offset'] != 0) ? $arguments['font_shadow_height'] + 1 : $arguments['font_shadow_height'];
-      $net_right = $shadow_width + ($arguments['font_shadow_x_offset'] >= 0 ? 0 : $arguments['font_shadow_x_offset']);
+      $net_right = $shadow_width + ($arguments['font_shadow_x_offset'] >= 0 ? 0 : (int) $arguments['font_shadow_x_offset']);
       $arguments['layout_padding_right'] += ($net_right > 0 ? $net_right : 0);
-      $net_bottom = $shadow_height + ($arguments['font_shadow_y_offset'] >= 0 ? 0 : $arguments['font_shadow_y_offset']);
+      $net_bottom = $shadow_height + ($arguments['font_shadow_y_offset'] >= 0 ? 0 : (int) $arguments['font_shadow_y_offset']);
       $arguments['layout_padding_bottom'] += ($net_bottom > 0 ? $net_bottom : 0);
     }
 
@@ -67,7 +67,6 @@ class TextToWrapper extends GDImageToolkitOperationBase {
         $arguments['font_size'],
         $arguments['font_uri'],
         $arguments['text_maximum_width'] - $arguments['layout_padding_left'] - $arguments['layout_padding_right'] - 1,
-        $arguments['text_align']
       );
     }
 
@@ -184,7 +183,10 @@ class TextToWrapper extends GDImageToolkitOperationBase {
       }
 
       // Get details for the rotated/translated text line box.
-      $text_line_rect->translate([$arguments['layout_padding_left'] + $x_offset, $arguments['layout_padding_top'] + $current_y - $line_height]);
+      $text_line_rect->translate([
+        $arguments['layout_padding_left'] + $x_offset,
+        $arguments['layout_padding_top'] + $current_y - $line_height,
+      ]);
       $text_line_rect->rotate($arguments['font_angle']);
       $text_line_rect->translate($outer_rect->getRotationOffset());
 

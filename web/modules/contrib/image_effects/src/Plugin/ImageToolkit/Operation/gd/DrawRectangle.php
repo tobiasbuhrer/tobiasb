@@ -28,23 +28,11 @@ class DrawRectangle extends GDImageToolkitOperationBase {
     $success = TRUE;
     if ($arguments['fill_color']) {
       $color = $this->allocateColorFromRgba($arguments['fill_color']);
-      // @todo cleanup once once Drupal 9 is no longer  supported.
-      if (PHP_VERSION_ID >= 80000) {
-        $success = imagefilledpolygon($this->getToolkit()->getResource(), $this->getRectangleCorners($arguments['rectangle']), $color);
-      }
-      else {
-        $success = imagefilledpolygon($this->getToolkit()->getResource(), $this->getRectangleCorners($arguments['rectangle']), 4, $color);
-      }
+      $success = imagefilledpolygon($this->getToolkit()->getResource(), $this->getRectangleCorners($arguments['rectangle']), $color);
     }
     if ($success && $arguments['border_color']) {
       $color = $this->allocateColorFromRgba($arguments['border_color']);
-      // @todo cleanup once once Drupal 9 is no longer  supported.
-      if (PHP_VERSION_ID >= 80000) {
-        $success = imagepolygon($this->getToolkit()->getResource(), $this->getRectangleCorners($arguments['rectangle']), $color);
-      }
-      else {
-        $success = imagepolygon($this->getToolkit()->getResource(), $this->getRectangleCorners($arguments['rectangle']), 4, $color);
-      }
+      $success = imagepolygon($this->getToolkit()->getResource(), $this->getRectangleCorners($arguments['rectangle']), $color);
     }
     return $success;
   }

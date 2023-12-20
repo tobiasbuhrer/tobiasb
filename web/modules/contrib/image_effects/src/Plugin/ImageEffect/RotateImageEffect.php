@@ -35,10 +35,6 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
    */
   public function applyEffect(ImageInterface $image) {
     switch ($this->configuration['method']) {
-      case static::EXACT:
-        $degrees = $this->configuration['degrees'];
-        break;
-
       case static::PSEUDO_RANDOM:
         $degrees = $this->getRotationFromUri($image->getSource(), $this->configuration['degrees']);
         break;
@@ -46,6 +42,11 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
       case static::RANDOM:
         $max = abs((float) $this->configuration['degrees']);
         $degrees = rand(-$max, $max);
+        break;
+
+      case static::EXACT:
+      default:
+        $degrees = $this->configuration['degrees'];
         break;
 
     }
@@ -75,10 +76,6 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
     // determined.
     if ($dimensions['width'] && $dimensions['height']) {
       switch ($this->configuration['method']) {
-        case static::EXACT:
-          $degrees = $this->configuration['degrees'];
-          break;
-
         case static::PSEUDO_RANDOM:
           $degrees = $this->getRotationFromUri($uri, $this->configuration['degrees']);
           break;
@@ -87,6 +84,11 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
           // For a random rotate, the new dimensions can not be determined.
           $dimensions['width'] = $dimensions['height'] = NULL;
           return;
+
+        case static::EXACT:
+        default:
+          $degrees = $this->configuration['degrees'];
+          break;
 
       }
 
@@ -191,7 +193,10 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
 
     $this->configuration['degrees'] = $form_state->getValue('degrees');
     $this->configuration['background_color'] = $form_state->getValue('background_color');
-    $this->configuration['fallback_transparency_color'] = $form_state->getValue(['transparency_fallback', 'fallback_transparency_color']);
+    $this->configuration['fallback_transparency_color'] = $form_state->getValue([
+      'transparency_fallback',
+      'fallback_transparency_color',
+    ]);
     $this->configuration['method'] = $form_state->getValue('method');
   }
 

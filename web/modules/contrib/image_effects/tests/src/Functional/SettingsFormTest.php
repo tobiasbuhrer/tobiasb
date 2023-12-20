@@ -102,7 +102,9 @@ class SettingsFormTest extends BrowserTestBase {
    *
    * @see https://www.drupal.org/project/image_effects/issues/3296336
    */
-  public function __testJqueryColorpickerSelector(): void {
+  public function testJqueryColorpickerSelector(): void {
+    $this->markTestIncomplete('This test is not executed since the jquery_colorpicker module is throwing deprecations in D9');
+
     $admin_path = '/admin/config/media/image_effects';
 
     // Get the settings form.
