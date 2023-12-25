@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '30b84c846bff8a4d70c02bb1186d974c66c89046',
+        'reference' => 'aefbc8fdfe42b91e5ab6c3f83ea54984ab6be4ae',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -476,12 +476,12 @@
             'dev_requirement' => false,
         ),
         'drupal/leaflet' => array(
-            'pretty_version' => '10.2.6',
-            'version' => '10.2.6.0',
+            'pretty_version' => '10.2.7',
+            'version' => '10.2.7.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/leaflet',
             'aliases' => array(),
-            'reference' => '10.2.6',
+            'reference' => '10.2.7',
             'dev_requirement' => false,
         ),
         'drupal/leaflet_more_maps' => array(
@@ -526,7 +526,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '30b84c846bff8a4d70c02bb1186d974c66c89046',
+            'reference' => 'aefbc8fdfe42b91e5ab6c3f83ea54984ab6be4ae',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
