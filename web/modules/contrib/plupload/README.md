@@ -27,7 +27,7 @@ information, see
 
 To install the Plupload library:
 
-1. Download it (version 2.1.9 or later) from
+1. Download version 2.3.9 of it from
    https://github.com/moxiecode/plupload/releases
 1. Unzip it into libraries folder, so that there's a
    `libraries/plupload/js/plupload.full.min.js` file, in addition to the other
@@ -36,11 +36,9 @@ To install the Plupload library:
    security risk to your site. See https://drupal.org/node/1895328 and
    https://drupal.org/node/1189632 for more info.
 
-If you would like to use an alternate library location, you can add
-```
-$conf['plupload.settings']['library_path'] = PATH/TO/PLUPLOAD;
-```
-to your `settings.php` file.
+Additional instructions for installing the Plupload library via `composer` can
+be found at
+[this documentation page](https://www.drupal.org/docs/extending-drupal/contributed-modules/contributed-module-documentation/plupload-and-related-modules/using-composer-to-install-the-plupload-library).
 
 
 ## Configuration
@@ -90,7 +88,8 @@ There are few optional properties of this array that have special meaning:
   Has to be used in combination with `#autoupload`.
 
 - `#submit_element`: Specify which submit element Plupload shall use to submit
-  the form. Can also be used in combination with `#autoupload` and `#autosubmit`.
+  the form. Can also be used in combination with `#autoupload`
+  and `#autosubmit`.
   See: https://drupal.org/node/1935256.
 
 - `#upload_validators`: An array of validation function/validation criteria

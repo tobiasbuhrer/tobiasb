@@ -2,10 +2,7 @@
 
 namespace Drupal\plupload\Element;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Mime\MimeTypeGuesserInterface;
 use Drupal\Core\File\Event\FileUploadSanitizeNameEvent;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Url;
@@ -55,7 +52,7 @@ class PlUploadFile extends FormElement {
    */
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
 
-    /** @var EventDispatcherInterface $event_dispatcher */
+    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher */
     $event_dispatcher = \Drupal::service('event_dispatcher');
 
     $id = $element['#id'];
@@ -272,10 +269,10 @@ class PlUploadFile extends FormElement {
    */
   public static function validatePlUploadFile(&$element, FormStateInterface $form_state, &$complete_form) {
 
-    /** @var FileSystemInterface $file_system */
+    /** @var \Drupal\Core\File\FileSystemInterface $file_system */
     $file_system = \Drupal::service('file_system');
 
-    /** @var MimeTypeGuesserInterface $guesser */
+    /** @var \Symfony\Component\Mime\MimeTypeGuesserInterface $guesser */
     $guesser = \Drupal::service('file.mime_type.guesser');
 
     foreach ($element['#value'] as $file_info) {
@@ -293,6 +290,8 @@ class PlUploadFile extends FormElement {
         'filesize' => filesize($file_info['tmppath']),
       ]);
 
+      // @todo Replace with \Drupal::service('file.validator')::validate()
+      // but then we will only be compatible with drupal >=10.2.
       foreach (file_validate($file, $element['#upload_validators']) as $error_message) {
         $message = t('The specified file %name could not be uploaded.', ['%name' => $file->getFilename()]);
         $concatenated_message = $message . ' ' . $error_message;

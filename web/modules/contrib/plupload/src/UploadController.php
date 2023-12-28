@@ -2,15 +2,14 @@
 
 namespace Drupal\plupload;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\HtaccessWriterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use Drupal\Core\File\FileSystemInterface;
-use Drupal\Core\File\HtaccessWriter;
-use Drupal\Core\File\FileSystem;
-use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Plupload upload handling route.
@@ -46,14 +45,14 @@ class UploadController implements ContainerInjectionInterface {
   /**
    * HTAccess writer service.
    *
-   * @var \Drupal\Core\File\HtaccessWriter
+   * @var \Drupal\Core\File\HtaccessWriterInterface
    */
   protected $htaccessWriter;
 
   /**
    * File System service.
    *
-   * @var \Drupal\Core\File\FileSystem
+   * @var \Drupal\Core\File\FileSystemInterface
    */
   protected $fileSystem;
 
@@ -69,18 +68,18 @@ class UploadController implements ContainerInjectionInterface {
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   Request object.
-   * @param \Drupal\Core\File\HtaccessWriter $htaccessWriter
+   * @param \Drupal\Core\File\HtaccessWriterInterface $htaccess_writer
    *   HTAccess writer service.
-   * @param \Drupal\Core\File\FileSystem $fileSystem
+   * @param \Drupal\Core\File\FileSystemInterface $file_system
    *   File System service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
    */
-  public function __construct(Request $request, HtaccessWriter $htaccessWriter, FileSystem $fileSystem, ConfigFactoryInterface $config_factory) {
+  public function __construct(Request $request, HtaccessWriterInterface $htaccess_writer, FileSystemInterface $file_system, ConfigFactoryInterface $config_factory) {
     $this->request = $request;
     $this->temporaryUploadLocation = $config_factory->get('plupload.settings')->get('temporary_uri');
-    $this->htaccessWriter = $htaccessWriter;
-    $this->fileSystem = $fileSystem;
+    $this->htaccessWriter = $htaccess_writer;
+    $this->fileSystem = $file_system;
   }
 
   /**
@@ -181,7 +180,7 @@ class UploadController implements ContainerInjectionInterface {
       // Originally it was:
       // if (empty($multipart_file['tmp_name']) ||
       // !is_uploaded_file($multipart_file['tmp_name'])) {.
-      if (!$multipart_file->getPathname() || !is_uploaded_file($multipart_file->getPathname())) {
+      if (!$multipart_file->getPathname() || !$this->isUploadedFile($multipart_file->getPathname())) {
         throw new UploadException(UploadException::MOVE_ERROR);
       }
     }
@@ -208,6 +207,19 @@ class UploadController implements ContainerInjectionInterface {
     if ($is_multipart) {
       $this->fileSystem->unlink($multipart_file->getRealPath());
     }
+  }
+
+  /**
+   * Check if passed URI is an uploaded file.
+   *
+   * @param string $filename
+   *   The URI to check.
+   *
+   * @return bool
+   *   Whether the URI is an uploaded file.
+   */
+  protected function isUploadedFile(string $filename): bool {
+    return is_uploaded_file($filename);
   }
 
 }
