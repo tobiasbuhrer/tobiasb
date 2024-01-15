@@ -488,7 +488,6 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
         $grouping_field_value,
         $grouping_rendered_value,
       );
-      $overlays = ['none' => ' - none - '];
       foreach ($view_results_groups as $group_label => $view_results_group) {
         $group_label = str_replace(["\n", "\r"], "", strip_tags($group_label));
         // Add a Layer Option only if there is a group label value not empty.
@@ -496,6 +495,8 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
           $overlays[$group_label] = $group_label;
         }
       }
+      asort($overlays);
+      $overlays = ['none' => ' - none - '] + $overlays;
     }
     return $overlays;
   }
@@ -870,6 +871,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
         $this->options['grouping'],
         TRUE
       );
+      asort($view_results_groups);
 
       foreach ($view_results_groups as $group_label => $view_results_group) {
         $features_group = [];
@@ -1139,8 +1141,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
                               "\n",
                               "\r",
                             ], "", $this->viewsTokenReplace($this->options['icon']['iconUrl'], $tokens));
-                            // Generate correct Absolute iconUrl & shadowUrl,
-                            // if not external.
+                            // Generate Absolute iconUrl if not external.
                             if (!empty($feature['icon']['iconUrl'])) {
                               $feature['icon']['iconUrl'] = $this->leafletService->generateAbsoluteString($feature['icon']['iconUrl']);
                             }
@@ -1150,6 +1151,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
                               "\n",
                               "\r",
                             ], "", $this->viewsTokenReplace($this->options['icon']['shadowUrl'], $tokens));
+                            // Generate Absolute shadowUrl if not external.
                             if (!empty($feature['icon']['shadowUrl'])) {
                               $feature['icon']['shadowUrl'] = $this->leafletService->generateAbsoluteString($feature['icon']['shadowUrl']);
                             }
@@ -1248,9 +1250,9 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
       }
 
       // Order the data features based on the 'weight' element.
-      if (isset($features_group) && count($features_group) > 1) {
+      if (isset($features_groups) && count($features_groups) > 1) {
         // Order the data features groups based on the 'weight' element.
-        uasort($features_group, [
+        uasort($features_groups, [
           'Drupal\Component\Utility\SortArray',
           'sortByWeightElement',
         ]);

@@ -2423,27 +2423,27 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.7",
+            "version": "10.2.9",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.7"
+                "reference": "10.2.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.7.zip",
-                "reference": "10.2.7",
-                "shasum": "7ec2a63d391b24830735a2de6cff0cb186e9e51e"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.9.zip",
+                "reference": "10.2.9",
+                "shasum": "777245ffc42bd50070dcf753cb2c6e2c4d6b3892"
             },
             "require": {
-                "drupal/core": "^9 || ^10",
+                "drupal/core": "^9.3 || ^10",
                 "drupal/geofield": "^1.31"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.7",
-                    "datestamp": "1703431709",
+                    "version": "10.2.9",
+                    "datestamp": "1705246519",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4437,16 +4437,16 @@
         },
         {
             "name": "mglaman/phpstan-drupal",
-            "version": "1.2.4",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mglaman/phpstan-drupal.git",
-                "reference": "57b2cc67fb4416e8484db37a3d8502ac8fb3c0d6"
+                "reference": "a5a001a71b3b7ba99d552fc9490d31e0cc27422b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/57b2cc67fb4416e8484db37a3d8502ac8fb3c0d6",
-                "reference": "57b2cc67fb4416e8484db37a3d8502ac8fb3c0d6",
+                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/a5a001a71b3b7ba99d552fc9490d31e0cc27422b",
+                "reference": "a5a001a71b3b7ba99d552fc9490d31e0cc27422b",
                 "shasum": ""
             },
             "require": {
@@ -4521,7 +4521,7 @@
             "description": "Drupal extension and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/mglaman/phpstan-drupal/issues",
-                "source": "https://github.com/mglaman/phpstan-drupal/tree/1.2.4"
+                "source": "https://github.com/mglaman/phpstan-drupal/tree/1.2.5"
             },
             "funding": [
                 {
@@ -4537,7 +4537,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-11-14T22:47:32+00:00"
+            "time": "2024-01-10T16:56:53+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -4836,23 +4836,23 @@
         },
         {
             "name": "phenx/php-font-lib",
-            "version": "0.5.4",
+            "version": "0.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/php-font-lib.git",
-                "reference": "dd448ad1ce34c63d09baccd05415e361300c35b4"
+                "reference": "671df0f3516252011aa94f9e8e3b3b66199339f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/dd448ad1ce34c63d09baccd05415e361300c35b4",
-                "reference": "dd448ad1ce34c63d09baccd05415e361300c35b4",
+                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/671df0f3516252011aa94f9e8e3b3b66199339f8",
+                "reference": "671df0f3516252011aa94f9e8e3b3b66199339f8",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^3 || ^4 || ^5"
+                "symfony/phpunit-bridge": "^3 || ^4 || ^5 || ^6"
             },
             "type": "library",
             "autoload": {
@@ -4862,7 +4862,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-3.0"
+                "LGPL-2.1-or-later"
             ],
             "authors": [
                 {
@@ -4874,9 +4874,9 @@
             "homepage": "https://github.com/PhenX/php-font-lib",
             "support": {
                 "issues": "https://github.com/dompdf/php-font-lib/issues",
-                "source": "https://github.com/dompdf/php-font-lib/tree/0.5.4"
+                "source": "https://github.com/dompdf/php-font-lib/tree/0.5.5"
             },
-            "time": "2021-12-17T19:44:54+00:00"
+            "time": "2024-01-07T18:13:29+00:00"
         },
         {
             "name": "phootwork/collection",
@@ -5117,16 +5117,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.54",
+            "version": "1.10.55",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3e25f279dada0adc14ffd7bad09af2e2fc3523bb"
+                "reference": "9a88f9d18ddf4cf54c922fbeac16c4cb164c5949"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3e25f279dada0adc14ffd7bad09af2e2fc3523bb",
-                "reference": "3e25f279dada0adc14ffd7bad09af2e2fc3523bb",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9a88f9d18ddf4cf54c922fbeac16c4cb164c5949",
+                "reference": "9a88f9d18ddf4cf54c922fbeac16c4cb164c5949",
                 "shasum": ""
             },
             "require": {
@@ -5175,7 +5175,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-05T15:50:47+00:00"
+            "time": "2024-01-08T12:32:40+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
