@@ -46,7 +46,7 @@ class Watermark extends ImagemagickImageToolkitOperationBase {
     switch ($this->getToolkit()->getExecManager()->getPackage()) {
       case 'graphicsmagick':
         // @todo see if GraphicsMagick can support opacity setting.
-        $op = "-draw 'image Over {$arguments['x_offset']},{$arguments['y_offset']} {$w},{$h} {$image_path}'";
+        $op = "-draw 'image Over {$arguments['x_offset']},{$arguments['y_offset']} {$w},{$h} {$local_path}'";
         break;
 
       case 'imagemagick':
