@@ -5,6 +5,7 @@ namespace Drupal\Tests\imagemagick\Functional;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\imagemagick\EventSubscriber\ImagemagickEventSubscriber;
+use Drupal\imagemagick\PackageSuite;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\imagemagick\Kernel\ToolkitSetupTrait;
 
@@ -334,8 +335,8 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         $this->assertTrue($image->isValid());
 
         // @todo Suite specifics, temporarily adjust tests.
-        $package = $toolkit->getExecManager()->getPackage();
-        if ($package === 'graphicsmagick') {
+        $package = $toolkit->getExecManager()->getPackageSuite();
+        if ($package === PackageSuite::Graphicsmagick) {
           // @todo Issues with crop and convert on GIF files, investigate.
           if (in_array($file, [
             'image-test.gif', 'image-test-no-transparency.gif',
@@ -345,7 +346,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
             continue;
           }
         }
-        if ($package === 'imagemagick') {
+        if ($package === PackageSuite::Imagemagick) {
           // @todo Issues with crop and convert on GIF files, investigate.
           if (in_array($file, [
             'image-test.gif', 'image-test-no-transparency.gif',
@@ -391,7 +392,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         $this->assertTrue($correct_dimensions_object, "Image '$file' object after '$op' action is reporting the proper height and width values.  Expected {$values['width']}x{$values['height']}, actual {$actual_image_width}x{$actual_image_height}.");
 
         // GraphicsMagick on WEBP requires higher tolerance.
-        if ($file === 'img-test.webp' && $package === 'graphicsmagick') {
+        if ($file === 'img-test.webp' && $package === PackageSuite::Graphicsmagick) {
           $values['tolerance'] += 4800;
         }
 
@@ -474,38 +475,6 @@ class ToolkitImagemagickTest extends BrowserTestBase {
       else {
         $this->assertEquals(NULL, $gd_toolkit->getTransparentColor(), "Image file '$file' has no color channel set.");
       }
-    }
-
-    // Test saving image files with filenames having non-ascii characters.
-    $file_names = [
-      'greek εικόνα δοκιμής.png',
-      'russian Тестовое изображение.png',
-      'simplified chinese 测试图片.png',
-      'japanese 試験画像.png',
-      'arabic صورة الاختبار.png',
-      'armenian փորձարկման պատկերը.png',
-      'bengali পরীক্ষা ইমেজ.png',
-      'hebraic תמונת בדיקה.png',
-      'hindi परीक्षण छवि.png',
-      'viet hình ảnh thử nghiệm.png',
-      'viet \'with quotes\' hình ảnh thử nghiệm.png',
-      'viet "with double quotes" hình ảnh thử nghiệm.png',
-    ];
-    foreach ($file_names as $file) {
-      // @todo on Windows, GraphicsMagick fails.
-      if (substr(PHP_OS, 0, 3) === 'WIN' && $toolkit_settings['binaries'] === 'graphicsmagick') {
-        continue;
-      }
-      // On Windows, skip filenames with non-allowed characters.
-      if (substr(PHP_OS, 0, 3) === 'WIN' && preg_match('/[:*?"<>|]/', $file)) {
-        continue;
-      }
-      $image = $this->imageFactory->get();
-      $this->assertTrue($image->createNew(50, 20, 'png'));
-      $file_path = $this->testDirectory . '/' . $file;
-      $this->assertTrue($image->save($file_path), $file);
-      $image_reloaded = $this->imageFactory->get($file_path, 'gd');
-      $this->assertTrue($image_reloaded->isValid(), "Image file '$file' loaded successfully.");
     }
 
     // Test handling a file stored through a remote stream wrapper.
@@ -600,6 +569,57 @@ class ToolkitImagemagickTest extends BrowserTestBase {
       $this->assertSame($image_file['scaled_width'], $image->getWidth());
       $this->assertSame($image_file['scaled_height'], $image->getHeight());
       $this->assertSame(1, $toolkit->getFrames());
+    }
+  }
+
+  /**
+   * Test saving image files with filenames having non-ascii characters.
+   *
+   * @param string $toolkit_id
+   *   The id of the toolkit to set up.
+   * @param string $toolkit_config
+   *   The config object of the toolkit to set up.
+   * @param array $toolkit_settings
+   *   The settings of the toolkit to set up.
+   *
+   * @dataProvider providerToolkitConfiguration
+   */
+  public function testNonAsciiFileNames(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
+    // @todo on Windows, GraphicsMagick fails.
+    if (substr(PHP_OS, 0, 3) === 'WIN' && $toolkit_settings['binaries'] === 'graphicsmagick') {
+      $this->markTestSkipped('On Windows, GraphicsMagick fails.');
+    }
+
+    $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
+    $this->prepareImageFileHandling();
+
+    $file_names = [
+      'ascii_test.png',
+      'εικόναδοκιμής.png',
+      'greek εικόνα δοκιμής.png',
+      'russian Тестовое изображение.png',
+      'simplified chinese 测试图片.png',
+      'japanese 試験画像.png',
+      'arabic صورة الاختبار.png',
+      'armenian փորձարկման պատկերը.png',
+      'bengali পরীক্ষা ইমেজ.png',
+      'hebraic תמונת בדיקה.png',
+      'hindi परीक्षण छवि.png',
+      'viet hình ảnh thử nghiệm.png',
+      'viet \'with quotes\' hình ảnh thử nghiệm.png',
+      'viet "with double quotes" hình ảnh thử nghiệm.png',
+    ];
+    foreach ($file_names as $file) {
+      // On Windows, skip filenames with non-allowed characters.
+      if (substr(PHP_OS, 0, 3) === 'WIN' && preg_match('/[:*?"<>|]/', $file)) {
+        continue;
+      }
+      $image = $this->imageFactory->get();
+      $this->assertTrue($image->createNew(50, 20, 'png'));
+      $file_path = $this->testDirectory . '/' . $file;
+      $this->assertTrue($image->save($file_path), $file);
+      $image_reloaded = $this->imageFactory->get($file_path, 'gd');
+      $this->assertTrue($image_reloaded->isValid(), "Image file '$file' loaded successfully.");
     }
   }
 
@@ -717,7 +737,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         $toolkit = $image->getToolkit();
         $this->assertTrue($image->isValid());
 
-        $package = $toolkit->getExecManager()->getPackage();
+        $package = $toolkit->getExecManager()->getPackageSuite();
 
         // Reload with GD to be able to check results at pixel level.
         $image = $this->imageFactory->get($file_path, 'gd');
@@ -754,7 +774,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         $this->assertTrue($correct_dimensions_object, "Image '$file' object after '$op' action is reporting the proper height and width values.  Expected {$values['width']}x{$values['height']}, actual {$actual_image_width}x{$actual_image_height}.");
 
         // GraphicsMagick on WEBP requires higher tolerance.
-        if ($file === 'img-test.webp' && $package === 'graphicsmagick') {
+        if ($file === 'img-test.webp' && $package === PackageSuite::Graphicsmagick) {
           $values['tolerance'] += 4800;
         }
 

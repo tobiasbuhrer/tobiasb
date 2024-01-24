@@ -145,6 +145,8 @@ class ToolkitImagemagickFormTest extends BrowserTestBase {
 
   /**
    * Test status report.
+   *
+   * @group legacy
    */
   public function testStatusReport(): void {
     $statusReportPath = 'admin/reports/status';
@@ -171,6 +173,7 @@ class ToolkitImagemagickFormTest extends BrowserTestBase {
       ->save();
 
     // Create a test image style with Rotate effect.
+    $this->expectDeprecation('\\Drupal\\imagemagick\\Plugin\\ImageToolkit\\Operation\\imagemagick\\Rotate is deprecated in imagemagick:8.x-3.3 and is removed from imagemagick:4.0.0. Use the rotate operation provided by the Image Effects module instead. See https://www.drupal.org/project/imagemagick/issues/3251438');
     $testImageStyle = ImageStyle::create([
       'name' => 'test_rotate',
       'label' => 'Test image style with Rotate effect',

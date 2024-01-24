@@ -5,7 +5,7 @@ namespace Drupal\Tests\imagemagick\Functional;
 use Drupal\Core\Cache\Cache;
 use Drupal\file_mdm\FileMetadataInterface;
 use Drupal\file_mdm\FileMetadataManagerInterface;
-use Drupal\imagemagick\ImagemagickExecArguments;
+use Drupal\imagemagick\ArgumentMode;
 use Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\imagemagick\Kernel\ToolkitSetupTrait;
@@ -85,20 +85,15 @@ class EventSubscriberTest extends BrowserTestBase {
 
     // Setup a list of arguments.
     $toolkit->arguments()
-      ->add("-resize 100x75!")
-      ->add("-quality 75");
+      ->add(["-resize", "100x75!"])
+      ->add(["-quality", "75"]);
 
     // Save the derived image.
     $image->save($image_uri . '.derived');
 
     // Check expected command line.
-    if (substr(PHP_OS, 0, 3) === 'WIN') {
-      $expected = "-resize 100x75! -quality 75 -colorspace \"GRAY\"";
-    }
-    else {
-      $expected = "-resize 100x75! -quality 75 -colorspace 'GRAY'";
-    }
-    $this->assertSame($expected, $toolkit->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
+    $expected = "[-resize] [100x75!] [-quality] [75] [-colorspace] [GRAY]";
+    $this->assertSame($expected, $toolkit->arguments()->toDebugString(ArgumentMode::PostSource));
 
     // Check that the colorspace has been actually changed in the file.
     Cache::InvalidateTags([
@@ -125,17 +120,12 @@ class EventSubscriberTest extends BrowserTestBase {
     /** @var \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit $toolkit */
     $toolkit = $image->getToolkit();
     $toolkit->arguments()
-      ->add("-resize 100x75!")
-      ->add("-quality 75");
+      ->add(["-resize", "100x75!"])
+      ->add(["-quality", "75"]);
     $image->save($image_uri . '.derived');
-    if (substr(PHP_OS, 0, 3) === 'WIN') {
-      $expected = "-resize 100x75! -quality 75 -colorspace \"GRAY\"";
-    }
-    else {
-      $expected = "-resize 100x75! -quality 75 -colorspace 'GRAY'";
-    }
-    $this->assertSame('-debug All', $toolkit->arguments()->toString(ImagemagickExecArguments::PRE_SOURCE));
-    $this->assertSame($expected, $toolkit->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
+    $expected = "[-resize] [100x75!] [-quality] [75] [-colorspace] [GRAY]";
+    $this->assertSame('[-debug] [All]', $toolkit->arguments()->toDebugString(ArgumentMode::PreSource));
+    $this->assertSame($expected, $toolkit->arguments()->toDebugString(ArgumentMode::PostSource));
   }
 
   /**
@@ -160,10 +150,10 @@ class EventSubscriberTest extends BrowserTestBase {
     $image = $this->imageFactory->get($image_uri);
     /** @var \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit $toolkit */
     $toolkit = $image->getToolkit();
-    $toolkit->arguments()->add("-resize 100x75!");
+    $toolkit->arguments()->add(["-resize", "100x75!"]);
     $image->save("public://imagetest/coalesced.gif");
-    $expected = "-resize 100x75! -quality 100";
-    $this->assertSame($expected, $toolkit->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
+    $expected = "[-resize] [100x75!] [-quality] [100]";
+    $this->assertSame($expected, $toolkit->arguments()->toDebugString(ArgumentMode::PostSource));
 
     // Change the Advanced Coalesce setting, '-coalesce' must now be included
     // in the command line.
@@ -173,28 +163,28 @@ class EventSubscriberTest extends BrowserTestBase {
     $image = $this->imageFactory->get($image_uri);
     /** @var \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit $toolkit */
     $toolkit = $image->getToolkit();
-    $toolkit->arguments()->add("-resize 100x75!");
+    $toolkit->arguments()->add(["-resize", "100x75!"]);
     $image->save("public://imagetest/coalesced.gif");
-    $expected = "-coalesce -resize 100x75! -quality 100";
-    $this->assertSame($expected, $toolkit->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
+    $expected = "[-coalesce] [-resize] [100x75!] [-quality] [100]";
+    $this->assertSame($expected, $toolkit->arguments()->toDebugString(ArgumentMode::PostSource));
 
     // Single frame GIF should not be coalesceable.
     $image = $this->imageFactory->get("public://image-test.gif");
     /** @var \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit $toolkit */
     $toolkit = $image->getToolkit();
-    $toolkit->arguments()->add("-resize 100x75!");
+    $toolkit->arguments()->add(["-resize", "100x75!"]);
     $image->save("public://imagetest/coalesced.gif");
-    $expected = "-resize 100x75! -quality 100";
-    $this->assertSame($expected, $toolkit->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
+    $expected = "[-resize] [100x75!] [-quality] [100]";
+    $this->assertSame($expected, $toolkit->arguments()->toDebugString(ArgumentMode::PostSource));
 
     // PNG should not be coalesceable.
     $image = $this->imageFactory->get("public://image-test.png");
     /** @var \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit $toolkit */
     $toolkit = $image->getToolkit();
-    $toolkit->arguments()->add("-resize 100x75!");
+    $toolkit->arguments()->add(["-resize", "100x75!"]);
     $image->save("public://imagetest/coalesced.png");
-    $expected = "-resize 100x75! -quality 100";
-    $this->assertSame($expected, $toolkit->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
+    $expected = "[-resize] [100x75!] [-quality] [100]";
+    $this->assertSame($expected, $toolkit->arguments()->toDebugString(ArgumentMode::PostSource));
   }
 
 }

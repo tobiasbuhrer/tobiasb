@@ -90,9 +90,6 @@ trait ToolkitSetupTrait {
           'binaries' => 'imagemagick',
           'quality' => 100,
           'debug' => TRUE,
-          // Add a fallback locale for DrupalCI testbots that do not have
-          // en_US.UTF-8 installed.
-          'locale' => 'en_US.UTF-8 C.UTF-8',
         ],
       ],
       'ImageMagick-graphicsmagick' => [
@@ -102,9 +99,6 @@ trait ToolkitSetupTrait {
           'binaries' => 'graphicsmagick',
           'quality' => 100,
           'debug' => TRUE,
-          // Add a fallback locale for DrupalCI testbots that do not have
-          // en_US.UTF-8 installed.
-          'locale' => 'en_US.UTF-8 C.UTF-8',
         ],
       ],
     ];

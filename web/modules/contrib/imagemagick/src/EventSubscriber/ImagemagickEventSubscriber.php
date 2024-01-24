@@ -8,6 +8,7 @@ use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\file_mdm\FileMetadataManagerInterface;
+use Drupal\imagemagick\ArgumentMode;
 use Drupal\imagemagick\Event\ImagemagickExecutionEvent;
 use Drupal\imagemagick\ImagemagickExecArguments;
 use Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit;
@@ -155,7 +156,20 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
   protected function prependArguments(ImagemagickExecArguments $arguments) {
     // Add prepended arguments if needed.
     if ($prepend = $this->imagemagickSettings->get('prepend')) {
-      $arguments->add($prepend, ImagemagickExecArguments::PRE_SOURCE, 0);
+      // Split the prepend string in multiple space-separated tokens. Quotes,
+      // both " and ', can delimit tokens with spaces inside. Such tokens can
+      // contain escaped quotes too.
+      // @see https://stackoverflow.com/questions/366202/regex-for-splitting-a-string-using-space-when-not-surrounded-by-single-or-double
+      // @see https://stackoverflow.com/questions/6525556/regular-expression-to-match-escaped-characters-quotes
+      $re = '/[^\s"\']+|"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\'/m';
+      preg_match_all($re, $prepend, $tokens, PREG_SET_ORDER);
+      $args = [];
+      foreach ($tokens as $token) {
+        // The escape character needs to be removed, Symfony Process will
+        // escape the quote character again.
+        $args[] = str_replace("\\", "", end($token));
+      }
+      $arguments->add($args, ArgumentMode::PreSource, 0);
     }
   }
 
@@ -284,32 +298,32 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
     ])) {
       $file_md = $this->fileMetadataManager->uri($arguments->getSource());
       if ($file_md && $file_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'frames_count') > 1) {
-        $arguments->add("-coalesce", ImagemagickExecArguments::POST_SOURCE, 0);
+        $arguments->add(["-coalesce"], ArgumentMode::PostSource, 0);
       }
     }
 
     // Change output image resolution to 72 ppi, if specified in settings.
     if (empty($arguments->find('/^\-density/')) && $density = (int) $this->imagemagickSettings->get('advanced.density')) {
-      $arguments->add("-density {$density} -units PixelsPerInch");
+      $arguments->add(["-density", $density, "-units", "PixelsPerInch"]);
     }
 
     // Apply color profile.
     if ($profile = $this->imagemagickSettings->get('advanced.profile')) {
       if (file_exists($profile)) {
-        $arguments->add('-profile ' . $arguments->escape($profile));
+        $arguments->add(['-profile', $profile]);
       }
     }
     // Or alternatively apply colorspace.
     elseif ($colorspace = $this->imagemagickSettings->get('advanced.colorspace')) {
       // Do not hi-jack settings made by effects.
       if (empty($arguments->find('/^\-colorspace/'))) {
-        $arguments->add('-colorspace ' . $arguments->escape($colorspace));
+        $arguments->add(['-colorspace', $colorspace]);
       }
     }
 
     // Change image quality.
     if (empty($arguments->find('/^\-quality/'))) {
-      $arguments->add('-quality ' . $this->imagemagickSettings->get('quality'));
+      $arguments->add(['-quality', (string) $this->imagemagickSettings->get('quality')]);
     }
   }
 

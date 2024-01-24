@@ -102,3 +102,13 @@ function imagemagick_update_8303() {
  */
 function imagemagick_update_8304() {
 }
+
+/**
+ * Remove the 'locale' config setting.
+ */
+function imagemagick_update_8305() {
+  $config_factory = \Drupal::configFactory();
+  $config_factory->getEditable('imagemagick.settings')
+    ->clear('locale')
+    ->save(TRUE);
+}

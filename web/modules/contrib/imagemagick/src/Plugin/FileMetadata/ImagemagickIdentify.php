@@ -4,9 +4,12 @@ namespace Drupal\imagemagick\Plugin\FileMetadata;
 
 use Drupal\file_mdm\FileMetadataException;
 use Drupal\file_mdm\Plugin\FileMetadata\FileMetadataPluginBase;
+use Drupal\imagemagick\ArgumentMode;
 use Drupal\imagemagick\Event\ImagemagickExecutionEvent;
 use Drupal\imagemagick\ImagemagickExecArguments;
 use Drupal\imagemagick\ImagemagickExecManagerInterface;
+use Drupal\imagemagick\PackageCommand;
+use Drupal\imagemagick\PackageSuite;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -163,31 +166,30 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
     $arguments->setSource($this->getLocalTempPath());
 
     // Prepare the -format argument according to the graphics package in use.
-    switch ($this->execManager->getPackage()) {
-      case 'imagemagick':
-        $arguments->add(
-          '-format ' . $arguments->escape("format:%[magick]|width:%[width]|height:%[height]|colorspace:%[colorspace]|profiles:%[profiles]|exif_orientation:%[EXIF:Orientation]\\n"),
-          ImagemagickExecArguments::PRE_SOURCE
-        );
-        break;
-
-      case 'graphicsmagick':
-        $arguments->add(
-          '-format ' . $arguments->escape("format:%m|width:%w|height:%h|exif_orientation:%[EXIF:Orientation]\\n"),
-          ImagemagickExecArguments::PRE_SOURCE
-        );
-        break;
-
-    }
+    match ($this->execManager->getPackageSuite()) {
+      PackageSuite::Imagemagick => $arguments->add(
+        [
+          '-format',
+          'format:%[magick]|width:%[width]|height:%[height]|colorspace:%[colorspace]|profiles:%[profiles]|exif_orientation:%[EXIF:Orientation]\\n',
+        ],
+        ArgumentMode::PreSource
+      ),
+      PackageSuite::Graphicsmagick => $arguments->add(
+        [
+          '-format',
+          'format:%m|width:%w|height:%h|exif_orientation:%[EXIF:Orientation]\\n',
+        ],
+        ArgumentMode::PreSource
+      ),
+    };
 
     // Allow modules to alter source file and the command line parameters.
-    $command = 'identify';
     $this->eventDispatcher->dispatch(new ImagemagickExecutionEvent($arguments), ImagemagickExecutionEvent::ENSURE_SOURCE_LOCAL_PATH);
     $this->eventDispatcher->dispatch(new ImagemagickExecutionEvent($arguments), ImagemagickExecutionEvent::PRE_IDENTIFY_EXECUTE);
 
     // Execute the 'identify' command.
     $output = NULL;
-    $ret = $this->execManager->execute($command, $arguments, $output);
+    $ret = $this->execManager->execute(PackageCommand::Identify, $arguments, $output);
 
     // Process results.
     $data = [];
