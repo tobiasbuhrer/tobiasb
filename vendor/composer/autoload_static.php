@@ -24,7 +24,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         '2f69d3914119f042cca9e44442d5ce95' => __DIR__ . '/../..' . '/web/core/includes/bootstrap.inc',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
-        'c9d07b32a2e02bc0fc582d4f0c1b56cc' => __DIR__ . '/..' . '/laminas/laminas-servicemanager/src/autoload.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
     );
 
@@ -42,6 +41,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'l' => 
         array (
             'lsolesen\\pel\\' => 13,
+        ),
+        'd' => 
+        array (
+            'dekor\\' => 6,
         ),
         'T' => 
         array (
@@ -103,15 +106,11 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         ),
         'M' => 
         array (
-            'MathieuViossat\\Util\\' => 20,
             'Masterminds\\' => 12,
         ),
         'L' => 
         array (
             'League\\Container\\' => 17,
-            'Laminas\\Text\\' => 13,
-            'Laminas\\Stdlib\\' => 15,
-            'Laminas\\ServiceManager\\' => 23,
         ),
         'G' => 
         array (
@@ -184,6 +183,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'lsolesen\\pel\\' => 
         array (
             0 => __DIR__ . '/..' . '/fileeye/pel/src',
+        ),
+        'dekor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dekor/php-array-table/src',
         ),
         'Twig\\' => 
         array (
@@ -370,10 +373,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'MathieuViossat\\Util\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/mathieuviossat/arraytotexttable/src',
-        ),
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
@@ -381,18 +380,6 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'League\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/container/src',
-        ),
-        'Laminas\\Text\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laminas/laminas-text/src',
-        ),
-        'Laminas\\Stdlib\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laminas/laminas-stdlib/src',
-        ),
-        'Laminas\\ServiceManager\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laminas/laminas-servicemanager/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
