@@ -6,7 +6,7 @@ dependencies:
   - minifyhtml:minifyhtml
 hidden: TRUE
 
-# Information added by Drupal.org packaging script on 2023-07-25
-version: '2.0.3'
+# Information added by Drupal.org packaging script on 2024-03-06
+version: '2.0.4'
 project: 'minifyhtml'
-datestamp: 1690307647
+datestamp: 1709761864

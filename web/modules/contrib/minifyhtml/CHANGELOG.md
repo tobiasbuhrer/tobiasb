@@ -1,5 +1,11 @@
 # Changelog
 
+## Minifyhtml 2.0.4, 2024-03-06
+
+Changes since 2.0.3:
+
+- Issue #3421156: Provide a human-readable error message when minify callback has an error
+
 ## Minifyhtml 2.0.3, 2023-07-25
 
 Changes since 2.0.2:

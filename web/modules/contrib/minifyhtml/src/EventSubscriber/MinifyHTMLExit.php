@@ -205,7 +205,11 @@ class MinifyHTMLExit implements EventSubscriberInterface {
     $content = preg_replace_callback($pattern, [$this, $callback], $this->content);
 
     if ($error = preg_last_error()) {
-      $this->logger->get('minifyhtml')->error('Preg error. The error code is @error. You can view what this error code is by viewing http://php.net/manual/en/function.preg-last-error.php', ['@error' => $error]);
+      $this->logger->get('minifyhtml')->error('@error_message in regular expression "@pattern" (code: @error).', [
+        '@error_message' => preg_last_error_msg(),
+        '@pattern' => $pattern,
+        '@error' => $error,
+      ]);
     }
 
     return $content;

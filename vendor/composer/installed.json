@@ -1597,17 +1597,17 @@
         },
         {
             "name": "drupal/core",
-            "version": "10.2.3",
-            "version_normalized": "10.2.3.0",
+            "version": "10.2.4",
+            "version_normalized": "10.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "cc8c7952f7013795b735f5c15290e76937163bb7"
+                "reference": "d1c5b44adfc79bda03252471491b0fba89d87eff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/cc8c7952f7013795b735f5c15290e76937163bb7",
-                "reference": "cc8c7952f7013795b735f5c15290e76937163bb7",
+                "url": "https://api.github.com/repos/drupal/core/zipball/d1c5b44adfc79bda03252471491b0fba89d87eff",
+                "reference": "d1c5b44adfc79bda03252471491b0fba89d87eff",
                 "shasum": ""
             },
             "require": {
@@ -1687,7 +1687,7 @@
             "suggest": {
                 "ext-zip": "Needed to extend the plugin.manager.archiver service capability with the handling of files in the ZIP format."
             },
-            "time": "2024-02-07T22:44:48+00:00",
+            "time": "2024-03-06T08:23:56+00:00",
             "type": "drupal-core",
             "extra": {
                 "drupal-scaffold": {
@@ -1757,14 +1757,14 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/10.2.3"
+                "source": "https://github.com/drupal/core/tree/10.2.4"
             },
             "install-path": "../../web/core"
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "10.2.3",
-            "version_normalized": "10.2.3.0",
+            "version": "10.2.4",
+            "version_normalized": "10.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -1810,14 +1810,14 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/10.2.3"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/10.2.4"
             },
             "install-path": "../drupal/core-composer-scaffold"
         },
         {
             "name": "drupal/core-project-message",
-            "version": "10.2.3",
-            "version_normalized": "10.2.3.0",
+            "version": "10.2.4",
+            "version_normalized": "10.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -1854,23 +1854,23 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-project-message/tree/10.2.3"
+                "source": "https://github.com/drupal/core-project-message/tree/10.2.4"
             },
             "install-path": "../drupal/core-project-message"
         },
         {
             "name": "drupal/core-recommended",
-            "version": "10.2.3",
-            "version_normalized": "10.2.3.0",
+            "version": "10.2.4",
+            "version_normalized": "10.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "ee5d148455ca5792108a1fd007ae162ea2ffe859"
+                "reference": "550c4cb19afda15ef892d88469ab93dc38bf0b46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/ee5d148455ca5792108a1fd007ae162ea2ffe859",
-                "reference": "ee5d148455ca5792108a1fd007ae162ea2ffe859",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/550c4cb19afda15ef892d88469ab93dc38bf0b46",
+                "reference": "550c4cb19afda15ef892d88469ab93dc38bf0b46",
                 "shasum": ""
             },
             "require": {
@@ -1879,7 +1879,7 @@
                 "doctrine/annotations": "~1.14.3",
                 "doctrine/deprecations": "~1.1.2",
                 "doctrine/lexer": "~2.1.0",
-                "drupal/core": "10.2.3",
+                "drupal/core": "10.2.4",
                 "egulias/email-validator": "~4.0.2",
                 "guzzlehttp/guzzle": "~7.8.1",
                 "guzzlehttp/promises": "~2.0.2",
@@ -1933,7 +1933,7 @@
             "conflict": {
                 "webflo/drupal-core-strict": "*"
             },
-            "time": "2024-02-07T22:44:48+00:00",
+            "time": "2024-03-06T08:23:56+00:00",
             "type": "metapackage",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1941,7 +1941,7 @@
             ],
             "description": "Core and its dependencies with known-compatible minor versions. Require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/10.2.3"
+                "source": "https://github.com/drupal/core-recommended/tree/10.2.4"
             },
             "install-path": null
         },
@@ -2571,18 +2571,18 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.11",
-            "version_normalized": "10.2.11.0",
+            "version": "10.2.12",
+            "version_normalized": "10.2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.11"
+                "reference": "10.2.12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.11.zip",
-                "reference": "10.2.11",
-                "shasum": "f45d21554e787d4ff8cf6b641a3a2b3788a96506"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.12.zip",
+                "reference": "10.2.12",
+                "shasum": "0c78c96e5438e9b3047f1541083e324e03b67040"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10",
@@ -2591,8 +2591,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.11",
-                    "datestamp": "1706297882",
+                    "version": "10.2.12",
+                    "datestamp": "1709558282",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2786,18 +2786,18 @@
         },
         {
             "name": "drupal/minifyhtml",
-            "version": "2.0.3",
-            "version_normalized": "2.0.3.0",
+            "version": "2.0.4",
+            "version_normalized": "2.0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/minifyhtml.git",
-                "reference": "2.0.3"
+                "reference": "2.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/minifyhtml-2.0.3.zip",
-                "reference": "2.0.3",
-                "shasum": "d4b7a6c91b493808ed0b85d0c4ab116218f2f0ac"
+                "url": "https://ftp.drupal.org/files/projects/minifyhtml-2.0.4.zip",
+                "reference": "2.0.4",
+                "shasum": "9c40f6304b0ec6986280b709de6c847dbc92fb02"
             },
             "require": {
                 "drupal/core": "^9 || ^10"
@@ -2810,8 +2810,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.3",
-                    "datestamp": "1690401494",
+                    "version": "2.0.4",
+                    "datestamp": "1709761859",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5109,17 +5109,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.59",
-            "version_normalized": "1.10.59.0",
+            "version": "1.10.60",
+            "version_normalized": "1.10.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e607609388d3a6d418a50a49f7940e8086798281"
+                "reference": "95dcea7d6c628a3f2f56d091d8a0219485a86bbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e607609388d3a6d418a50a49f7940e8086798281",
-                "reference": "e607609388d3a6d418a50a49f7940e8086798281",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/95dcea7d6c628a3f2f56d091d8a0219485a86bbe",
+                "reference": "95dcea7d6c628a3f2f56d091d8a0219485a86bbe",
                 "shasum": ""
             },
             "require": {
@@ -5128,7 +5128,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2024-02-20T13:59:13+00:00",
+            "time": "2024-03-07T13:30:19+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -6510,17 +6510,17 @@
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v6.4.4",
-            "version_normalized": "6.4.4.0",
+            "version": "v6.4.5",
+            "version_normalized": "6.4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "7a186f64a7f02787c04e8476538624d6aa888e42"
+                "reference": "f6947cb939d8efee137797382cb4db1af653ef75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/7a186f64a7f02787c04e8476538624d6aa888e42",
-                "reference": "7a186f64a7f02787c04e8476538624d6aa888e42",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/f6947cb939d8efee137797382cb4db1af653ef75",
+                "reference": "f6947cb939d8efee137797382cb4db1af653ef75",
                 "shasum": ""
             },
             "require": {
@@ -6578,7 +6578,7 @@
                 "symfony/var-exporter": "^6.2|^7.0",
                 "twig/twig": "^2.13|^3.0.4"
             },
-            "time": "2024-02-27T06:32:13+00:00",
+            "time": "2024-03-04T21:00:47+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -6606,7 +6606,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v6.4.4"
+                "source": "https://github.com/symfony/http-kernel/tree/v6.4.5"
             },
             "funding": [
                 {
@@ -7785,17 +7785,17 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v6.4.3",
-            "version_normalized": "6.4.3.0",
+            "version": "v6.4.5",
+            "version_normalized": "6.4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "3b2957ad54902f0f544df83e3d58b38d7e8e5842"
+                "reference": "7fe30068e207d9c31c0138501ab40358eb2d49a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/3b2957ad54902f0f544df83e3d58b38d7e8e5842",
-                "reference": "3b2957ad54902f0f544df83e3d58b38d7e8e5842",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/7fe30068e207d9c31c0138501ab40358eb2d49a4",
+                "reference": "7fe30068e207d9c31c0138501ab40358eb2d49a4",
                 "shasum": ""
             },
             "require": {
@@ -7817,7 +7817,7 @@
                 "symfony/http-foundation": "^5.4|^6.0|^7.0",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-01-30T13:55:02+00:00",
+            "time": "2024-02-27T12:33:30+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -7851,7 +7851,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/v6.4.3"
+                "source": "https://github.com/symfony/routing/tree/v6.4.5"
             },
             "funding": [
                 {
