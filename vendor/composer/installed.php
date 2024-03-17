@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'ad9e6e82c8feca3875c9d789ff6e68220591ebb5',
+        'reference' => 'b1f3a6e94d1dd427b73c940fd7545abe3735b98d',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -20,12 +20,12 @@
             'dev_requirement' => false,
         ),
         'chi-teck/drupal-code-generator' => array(
-            'pretty_version' => '3.3.0',
-            'version' => '3.3.0.0',
+            'pretty_version' => '3.4.0',
+            'version' => '3.4.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../chi-teck/drupal-code-generator',
             'aliases' => array(),
-            'reference' => '56da9209b24a5a5b5d27bec9e523f02bdd101770',
+            'reference' => 'b8136b945dc3446894e6cd2b2f055e147140faed',
             'dev_requirement' => false,
         ),
         'composer/installers' => array(
@@ -191,12 +191,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/persistence' => array(
-            'pretty_version' => '3.3.1',
-            'version' => '3.3.1.0',
+            'pretty_version' => '3.3.2',
+            'version' => '3.3.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/persistence',
             'aliases' => array(),
-            'reference' => 'b6fd1f126b13c1f7e7321f7338b14a19116b5de4',
+            'reference' => '477da35bd0255e032826f440b94b3e37f2d56f42',
             'dev_requirement' => false,
         ),
         'drupal/backup_migrate' => array(
@@ -515,12 +515,12 @@
             'dev_requirement' => false,
         ),
         'drupal/plupload' => array(
-            'pretty_version' => '2.1.0-rc1',
-            'version' => '2.1.0.0-RC1',
+            'pretty_version' => '2.1.0-rc2',
+            'version' => '2.1.0.0-RC2',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/plupload',
             'aliases' => array(),
-            'reference' => '2.1.0-rc1',
+            'reference' => '2.1.0-rc2',
             'dev_requirement' => false,
         ),
         'drupal/recommended-project' => array(
@@ -529,7 +529,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'ad9e6e82c8feca3875c9d789ff6e68220591ebb5',
+            'reference' => 'b1f3a6e94d1dd427b73c940fd7545abe3735b98d',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -578,12 +578,12 @@
             'dev_requirement' => false,
         ),
         'drush/drush' => array(
-            'pretty_version' => '12.4.3',
-            'version' => '12.4.3.0',
+            'pretty_version' => '12.4.4',
+            'version' => '12.4.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../drush/drush',
             'aliases' => array(),
-            'reference' => '8245acede57ecc62a90aa0f19ff3b29e5f11f971',
+            'reference' => 'a6585cddae47144413565f3c1cd29debc69f6b41',
             'dev_requirement' => false,
         ),
         'egulias/email-validator' => array(
@@ -668,12 +668,12 @@
             'dev_requirement' => false,
         ),
         'league/container' => array(
-            'pretty_version' => '4.2.0',
-            'version' => '4.2.0.0',
+            'pretty_version' => '4.2.2',
+            'version' => '4.2.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/container',
             'aliases' => array(),
-            'reference' => '375d13cb828649599ef5d48a339c4af7a26cd0ab',
+            'reference' => 'ff346319ca1ff0e78277dc2311a42107cc1aab88',
             'dev_requirement' => false,
         ),
         'masterminds/html5' => array(
@@ -704,12 +704,12 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v4.18.0',
-            'version' => '4.18.0.0',
+            'pretty_version' => 'v4.19.1',
+            'version' => '4.19.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
-            'reference' => '1bcbb2179f97633e98bbbc87044ee2611c7d7999',
+            'reference' => '4e1b88d21c69391150ace211e9eaf05810858d0b',
             'dev_requirement' => false,
         ),
         'orno/di' => array(
@@ -737,12 +737,12 @@
             'dev_requirement' => false,
         ),
         'pear/pear-core-minimal' => array(
-            'pretty_version' => 'v1.10.14',
-            'version' => '1.10.14.0',
+            'pretty_version' => 'v1.10.15',
+            'version' => '1.10.15.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pear/pear-core-minimal',
             'aliases' => array(),
-            'reference' => 'a86fc145edb5caedbf96527214ce3cadc9de4a32',
+            'reference' => 'ce0adade8b97561656ace07cdaac4751c271ea8c',
             'dev_requirement' => false,
         ),
         'pear/pear_exception' => array(
@@ -800,12 +800,12 @@
             'dev_requirement' => false,
         ),
         'phpstan/phpstan' => array(
-            'pretty_version' => '1.10.60',
-            'version' => '1.10.60.0',
+            'pretty_version' => '1.10.62',
+            'version' => '1.10.62.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpstan',
             'aliases' => array(),
-            'reference' => '95dcea7d6c628a3f2f56d091d8a0219485a86bbe',
+            'reference' => 'cd5c8a1660ed3540b211407c77abf4af193a6af9',
             'dev_requirement' => false,
         ),
         'phpstan/phpstan-deprecation-rules' => array(
@@ -838,8 +838,8 @@
         'psr/container-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '^1.0',
-                1 => '1.1|2.0',
+                0 => '1.1|2.0',
+                1 => '^1.0',
             ),
         ),
         'psr/event-dispatcher' => array(
@@ -918,12 +918,12 @@
             ),
         ),
         'psy/psysh' => array(
-            'pretty_version' => 'v0.12.0',
-            'version' => '0.12.0.0',
+            'pretty_version' => 'v0.12.2',
+            'version' => '0.12.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psy/psysh',
             'aliases' => array(),
-            'reference' => '750bf031a48fd07c673dbe3f11f72362ea306d0d',
+            'reference' => '9185c66c2165bbf4d71de78a69dccf4974f9538d',
             'dev_requirement' => false,
         ),
         'ralouphie/getallheaders' => array(
@@ -938,7 +938,7 @@
         'rsky/pear-core-min' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.10.14',
+                0 => 'v1.10.15',
             ),
         ),
         'sebastian/diff' => array(

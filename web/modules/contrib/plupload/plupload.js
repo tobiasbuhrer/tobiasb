@@ -124,7 +124,7 @@
    */
   Drupal.behaviors.pluploadform = {
     attach(context, settings) {
-      $(once('plupload-form', 'form'), context).each(() => {
+      $(once('plupload-form', 'form'), context).each(function () {
         if ($(this).find('.plupload-element').length > 0) {
           const $form = $(this);
           const originalFormAttributes = {
@@ -141,7 +141,7 @@
 
             $(this)
               .find('.plupload-element')
-              .each((index) => {
+              .each(function (index) {
                 const uploader = $(this).pluploadQueue();
 
                 const id = $(this).attr('id');

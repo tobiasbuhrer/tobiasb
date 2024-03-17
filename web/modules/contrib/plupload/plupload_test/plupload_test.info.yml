@@ -7,7 +7,7 @@ core_version_requirement: ^9 || ^10
 dependencies:
   - plupload:plupload
 
-# Information added by Drupal.org packaging script on 2023-12-27
-version: '2.1.0-rc1'
+# Information added by Drupal.org packaging script on 2024-03-16
+version: '2.1.0-rc2'
 project: 'plupload'
-datestamp: 1703702396
+datestamp: 1710604604

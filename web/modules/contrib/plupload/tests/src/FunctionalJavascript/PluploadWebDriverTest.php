@@ -69,4 +69,29 @@ class PluploadWebDriverTest extends PluploadWebDriverTestBase {
     $web_assert->pageTextContains('Files uploaded correctly: public://plupload-test/plupload-test-file.zip.');
   }
 
+  /**
+   * Tests the submit works just submitting the form.
+   */
+  public function testOnlyPressSubmit() {
+    $this->drupalGet('plupload-test');
+
+    $web_assert = $this->assertSession();
+    $page = $this->getSession()->getPage();
+
+    // Wait for DOM load finished.
+    $web_assert->waitForElementVisible('css', '.plupload_wrapper');
+    $web_assert->pageTextContains('Drag files here.');
+
+    // Add test file.
+    $this->addFile($this->getTestFilePath('plupload-test-file.zip'));
+
+    // Submit form.
+    $web_assert->waitForElementRemoved('css', '.plupload_start.plupload_disabled');
+    $page->pressButton('Submit');
+
+    // Phpunit checks texts before form submit, need to reload the page.
+    $this->drupalGet('plupload-test');
+    $web_assert->pageTextContains('Files uploaded correctly: public://plupload-test/plupload-test-file.zip.');
+  }
+
 }
