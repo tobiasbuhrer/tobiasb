@@ -4,7 +4,7 @@ type: module
 core_version_requirement: ^9 || ^10
 package: Media
 
-# Information added by Drupal.org packaging script on 2024-03-16
-version: '2.1.0-rc2'
+# Information added by Drupal.org packaging script on 2024-04-26
+version: '2.1.0'
 project: 'plupload'
-datestamp: 1710604604
+datestamp: 1714147182
