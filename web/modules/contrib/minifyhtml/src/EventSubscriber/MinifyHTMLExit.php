@@ -376,6 +376,7 @@ class MinifyHTMLExit implements EventSubscriberInterface {
     $search[] = '/\\s+(<\\/?(?:area|base(?:font)?|blockquote|body'
       . '|caption|center|col(?:group)?|dd|dir|div|dl|dt|fieldset|form'
       . '|frame(?:set)?|h[1-6]|head|hr|html|legend|li|link|map|menu|meta'
+      // cspell:disable-next-line 'itle' is part of the regex.
       . '|ol|opt(?:group|ion)|p|param|t(?:able|body|head|d|h||r|foot|itle)'
       . '|ul)\\b[^>]*>)/i';
     $replace[] = '$1';

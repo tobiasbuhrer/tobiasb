@@ -1,5 +1,13 @@
 # Changelog
 
+## Minifyhtml 2.0.5, 2024-05-01
+
+Changes since 2.0.4:
+
+- Issue #3442131: Mark words as safe for cspell
+- Issue #3442060: Add GitLab CI template
+- Added Drupal 11 compatibility.
+
 ## Minifyhtml 2.0.4, 2024-03-06
 
 Changes since 2.0.3:
