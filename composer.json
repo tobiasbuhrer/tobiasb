@@ -28,7 +28,7 @@
         "drupal/image_effects": "^3.5",
         "drupal/imagemagick": "^3.6",
         "drupal/juicebox": "^4.0@alpha",
-        "drupal/leaflet": "^10.0",
+        "drupal/leaflet": "^10.2",
         "drupal/leaflet_more_maps": "^2.1",
         "drupal/libraries": "^4.0",
         "drupal/minifyhtml": "^2.0",

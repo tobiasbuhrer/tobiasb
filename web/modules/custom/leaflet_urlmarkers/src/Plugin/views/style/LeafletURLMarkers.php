@@ -9,6 +9,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Render\BubbleableMetadata;
 
 
+
 /**
  * Style plugin, extends Leaflet_views
  *
@@ -22,8 +23,9 @@ use Drupal\Core\Render\BubbleableMetadata;
  *   display_types = { "normal" }
  * )
  */
-class LeafletURLMarkers extends LeafletMap {
-
+class LeafletURLMarkers extends LeafletMap {    
+    
+    
   /**
    * {@inheritdoc}
    */
@@ -46,6 +48,7 @@ class LeafletURLMarkers extends LeafletMap {
       ];
   }
   
+
   /**
    * Renders the View.
    */
@@ -97,13 +100,12 @@ class LeafletURLMarkers extends LeafletMap {
         $this->options['grouping'],
         TRUE
       );
+      asort($view_results_groups);
 
       foreach ($view_results_groups as $group_label => $view_results_group) {
         $features_group = [];
         // Sanitize the Group Label from Tags and invisible characters.
         $group_label = str_replace(["\n", "\r"], "", strip_tags($group_label));
-        
-
 
         // Iterate on each geofields set as source of Leaflet View geodata.
         foreach ($geofield_names as $geofield_name) {
@@ -115,7 +117,6 @@ class LeafletURLMarkers extends LeafletMap {
               //count rows, even if they don't have geofield values
               $counter++;
               //END NEW CODE 
-              
               // For proper processing make sure the geofield_value is created
               // as an array, also if single value.
               $geofield_value = $this->view->field[$geofield_name] ? (array) $this->getFieldValue($id, $geofield_name) : [];
@@ -152,7 +153,7 @@ class LeafletURLMarkers extends LeafletMap {
                     $entity_language = $entity->language()->getId();
                   }
                 }
-                elseif ($result instanceof ResultRow) {
+                elseif ($result instanceof SearchApiResultRow) {
                   $id = $result->_item->getId();
                   $search_api_id_parts = explode(':', $result->_item->getId());
                   $id_parts = explode('/', $search_api_id_parts[1]);
@@ -164,7 +165,7 @@ class LeafletURLMarkers extends LeafletMap {
                 // Render the entity with the selected view mode.
                 if (!empty($entity_id) && !empty($entity_type)) {
                   // Get and set (if not set) the Geofield cardinality.
-                  /* @var \Drupal\Core\Field\FieldItemList $geofield_entity */
+                  /** @var \Drupal\Core\Field\FieldItemList $geofield_entity */
                   if (!isset($map['geofield_cardinality']) && isset($entity)) {
                     try {
                       $geofield_entity = $entity->get($geofield_name);
@@ -199,7 +200,7 @@ class LeafletURLMarkers extends LeafletMap {
                   ];
                   if (isset($dynamic_renderers[$rendering_language])) {
                     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
-                    $langcode = isset($result->$entity_type_langcode_attribute) ? $result->$entity_type_langcode_attribute : $entity_language;
+                    $langcode = $result->$entity_type_langcode_attribute ?? $entity_language;
                   }
                   else {
                     if (strpos($rendering_language, '***LANGUAGE_') !== FALSE) {
@@ -278,11 +279,10 @@ class LeafletURLMarkers extends LeafletMap {
                     $tokens[$field_name] = $field_value;
                   }
 
-                  $icon_type = isset($this->options['icon']['iconType']) ? $this->options['icon']['iconType'] : 'marker';
+                  $icon_type = $this->options['icon']['iconType'] ?? 'marker';
 
                   // Relates each result feature with additional properties.
                   foreach ($features as &$feature) {
-                    
 
                     // Attach pop-ups if we have a description field.
                     // Add its entity id, so it might be referenced from
@@ -322,7 +322,7 @@ class LeafletURLMarkers extends LeafletMap {
                       $feature['popup']['options'] = $this->options['leaflet_popup'] ? $this->options['leaflet_popup']['options'] : NULL;
                     }
                     /* END OLD CODE */
-                    
+
                     // Attach tooltip data (value & options),
                     // if tooltip value is not empty.
                     if (!empty($this->options['leaflet_tooltip']['value'])) {
@@ -340,6 +340,7 @@ class LeafletURLMarkers extends LeafletMap {
 
                     // Eventually set the custom Marker icon (DivIcon, Icon Url
                     // or Circle Marker).
+                    // START NEW CODE
                     // Custom behaviour for photo map
                     if ($feature['type'] === 'point' && $viewid == "carte_des_photos") {
                         $test = $this->rendered_fields[$id]['nid'];
@@ -361,8 +362,8 @@ class LeafletURLMarkers extends LeafletMap {
                     elseif ($feature['type'] === 'point' && isset($this->options['icon'])) {
                     // END NEW CODE
                     // START OLD CODE
-                    ////if ($feature['type'] === 'point' && isset($this->options['icon'])) {
-                    // END OLD CODE
+                    //// if ($feature['type'] === 'point' && isset($this->options['icon'])) {
+                    // END OLD CODE    
                       // Set Feature Icon properties.
                       $feature['icon'] = $this->options['icon'];
 
@@ -373,6 +374,18 @@ class LeafletURLMarkers extends LeafletMap {
                       }
                       if (!empty($this->options["icon"]["iconSize"]["y"])) {
                         $feature['icon']["iconSize"]["y"] = $this->viewsTokenReplace($this->options["icon"]["iconSize"]["y"], $tokens);
+                      }
+                      if (!empty($this->options["icon"]["iconAnchor"]["x"])) {
+                        $feature['icon']["iconAnchor"]["x"] = $this->viewsTokenReplace($this->options["icon"]["iconAnchor"]["x"], $tokens);
+                      }
+                      if (!empty($this->options["icon"]["iconAnchor"]["y"])) {
+                        $feature['icon']["iconAnchor"]["y"] = $this->viewsTokenReplace($this->options["icon"]["iconAnchor"]["y"], $tokens);
+                      }
+                      if (!empty($this->options["icon"]["popupAnchor"]["x"])) {
+                        $feature['icon']["popupAnchor"]["x"] = $this->viewsTokenReplace($this->options["icon"]["popupAnchor"]["x"], $tokens);
+                      }
+                      if (!empty($this->options["icon"]["popupAnchor"]["y"])) {
+                        $feature['icon']["popupAnchor"]["y"] = $this->viewsTokenReplace($this->options["icon"]["popupAnchor"]["y"], $tokens);
                       }
                       if (!empty($this->options["icon"]["shadowSize"]["x"])) {
                         $feature['icon']["shadowSize"]["x"] = $this->viewsTokenReplace($this->options["icon"]["shadowSize"]["x"], $tokens);
@@ -391,7 +404,7 @@ class LeafletURLMarkers extends LeafletMap {
                           break;
 
                         case 'circle_marker':
-                          $feature['icon']['options'] = str_replace([
+                          $feature['icon']['circle_marker_options'] = str_replace([
                             "\n",
                             "\r",
                           ], "", $this->viewsTokenReplace($this->options['icon']['circle_marker_options'], $tokens));
@@ -404,8 +417,7 @@ class LeafletURLMarkers extends LeafletMap {
                               "\n",
                               "\r",
                             ], "", $this->viewsTokenReplace($this->options['icon']['iconUrl'], $tokens));
-                            // Generate correct Absolute iconUrl & shadowUrl,
-                            // if not external.
+                            // Generate Absolute iconUrl if not external.
                             if (!empty($feature['icon']['iconUrl'])) {
                               $feature['icon']['iconUrl'] = $this->leafletService->generateAbsoluteString($feature['icon']['iconUrl']);
                             }
@@ -415,6 +427,7 @@ class LeafletURLMarkers extends LeafletMap {
                               "\n",
                               "\r",
                             ], "", $this->viewsTokenReplace($this->options['icon']['shadowUrl'], $tokens));
+                            // Generate Absolute shadowUrl if not external.
                             if (!empty($feature['icon']['shadowUrl'])) {
                               $feature['icon']['shadowUrl'] = $this->leafletService->generateAbsoluteString($feature['icon']['shadowUrl']);
                             }
@@ -468,19 +481,35 @@ class LeafletURLMarkers extends LeafletMap {
 
                     // Allow modules to adjust the single feature (marker).
                     $this->moduleHandler->alter('leaflet_views_feature', $feature, $result, $this->view->rowPlugin);
-                  }                  
+                  }
                 }
 
-                // Generate a single Features Group as incremental Features.
-                $features_group = array_merge($features_group, $features);
+                // Increment Features Group with new Features element.
+                $features_group[] = $features;
               }
             }
-            
           }
         }
-        // Order the data features based on the 'weight' element.
-        uasort($features_group, ['Drupal\Component\Utility\SortArray', 'sortByWeightElement']);
 
+        // Generate a single Features Group as incremental merged Features.
+        $features_group = array_merge(...$features_group);
+
+        // Order the data features based on the 'weight' element.
+        uasort($features_group, [
+          'Drupal\Component\Utility\SortArray',
+          'sortByWeightElement',
+        ]
+        );
+
+        //NEW CODE - CUSTOM SETTINGS FOR PHOTOMAP
+        if ($viewid == "carte_des_photos") {
+           //center map on the photo we clicked. By default, only zooming out
+           $map['settings']['zoom'] = 18;
+           $map['settings']['center'] = $center;
+           $map['settings']['map_position_force'] = 1;
+        }
+        //END NEW CODE
+        
         // Generate Features Groups in case of Grouping.
         if (count($view_results_groups) > 1) {
           // Generate the Features Group.
@@ -508,18 +537,15 @@ class LeafletURLMarkers extends LeafletMap {
         }
       }
 
-      // Order the data features groups based on the 'weight' element.
-      uasort($features_group, ['Drupal\Component\Utility\SortArray', 'sortByWeightElement']);
-
-      //NEW CODE - CUSTOM SETTINGS FOR PHOTOMAP
-      if ($viewid == "carte_des_photos") {
-           //center map on the photo we clicked. By default, only zooming out
-           $map['settings']['zoom'] = 18;
-           $map['settings']['center'] = $center;
-           $map['settings']['map_position_force'] = 1;
+      // Order the data features based on the 'weight' element.
+      if (isset($features_groups) && count($features_groups) > 1) {
+        // Order the data features groups based on the 'weight' element.
+        uasort($features_groups, [
+          'Drupal\Component\Utility\SortArray',
+          'sortByWeightElement',
+        ]);
       }
-      //END NEW CODE
-      
+
       // Define the Js Settings.
       // Features is defined as Features Groups or single Features in case of a
       // single Features Group (no Grouping active)
@@ -530,7 +556,7 @@ class LeafletURLMarkers extends LeafletMap {
 
       // Allow other modules to add/alter the map js settings.
       $this->moduleHandler->alter('leaflet_map_view_style', $js_settings, $this);
-      
+
       $map_height = !empty($this->options['height']) ? $this->options['height'] . $this->options['height_unit'] : '';
       $element = $this->leafletService->leafletRenderMap($js_settings['map'], $js_settings['features'], $map_height);
 
@@ -541,7 +567,6 @@ class LeafletURLMarkers extends LeafletMap {
       BubbleableMetadata::createFromRenderArray($element)
         ->merge(BubbleableMetadata::createFromRenderArray($build_for_bubbleable_metadata))
         ->applyTo($element);
-       
     }
     return $element;
   }

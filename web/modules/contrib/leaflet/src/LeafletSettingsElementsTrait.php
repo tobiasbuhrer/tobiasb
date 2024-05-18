@@ -2,9 +2,9 @@
 
 namespace Drupal\leaflet;
 
-use Drupal\Component\Serialization\Json;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\Component\Serialization\Json;
 use Drupal\views\Plugin\views\ViewsPluginInterface;
 
 /**
@@ -342,6 +342,7 @@ trait LeafletSettingsElementsTrait {
       '#type' => 'number',
       '#min' => 0,
       '#max' => 22,
+      '#description' => $this->t('The initial Zoom level for the Leaflet Map (when empty or when Forced).<br>Admitted values usually range from 0 (the whole world) to 20 - 22, depending on the max zoom supported by the specific Map Tile in use.<br>As a reference consider Zoom 5 for a large country, 10 for a city, 15 for a road or a district, etc.'),
       '#default_value' => $map_position_options['zoom'] ?? $this->getDefaultSettings()['map_position']['zoom'],
       '#required' => TRUE,
       '#element_validate' => [[get_class($this), 'zoomLevelValidate']],
@@ -533,7 +534,7 @@ trait LeafletSettingsElementsTrait {
       '#type' => 'textarea',
       '#rows' => 2,
       '#title' => $this->t('Circle Marker Options'),
-      '#description' => $this->t('An object literal of Circle Marker options, that comply with the @leaflet_circle_marker_object.<br>The syntax should respect the javascript object notation (json) format.<br>As suggested in the field placeholder, always use double quotes (") both for the indexes and the string values.<br><b>Note: </b> Use <strong>Replacement Patterns</strong> to input dynamic values.<br>Empty value will fallback to default Leaflet Circle Marker style.', [
+      '#description' => $this->t('An object literal of Circle Marker options, that comply with the @leaflet_circle_marker_object.<br>The syntax should respect the javascript object notation (json) format.<br>As suggested in the field placeholder, always use double quotes (") both for the indexes and the string values.<br><b>Note: </b> Use <strong>Replacement Patterns</strong> to input dynamic values.<br>Empty value will fall back to default Leaflet Circle Marker style.', [
         '@leaflet_circle_marker_object' => $this->link->generate('Leaflet Circle Marker object', Url::fromUri('https://leafletjs.com/reference.html#circlemarker', [
           'absolute' => TRUE,
           'attributes' => ['target' => 'blank'],
@@ -564,7 +565,7 @@ trait LeafletSettingsElementsTrait {
       $element['iconUrl']['#description'] = $icon_url_description;
       $element['shadowUrl']['#description'] = $icon_url_description;
 
-      // Setup the tokens for views fields.
+      // Set up the tokens for views fields.
       // Code is snatched from Drupal\views\Plugin\views\field\FieldPluginBase.
       $options = [];
       $optgroup_fields = (string) t('Fields');
@@ -1452,7 +1453,9 @@ trait LeafletSettingsElementsTrait {
 
       // Set a validation for the providers' selection.
       $element['geocoder']['settings']['providers']['#element_validate'] = [
-        [get_class($this), 'validateGeocoderProviders'],
+        [
+          get_class($this), 'validateGeocoderProviders',
+        ],
       ];
 
       $element['geocoder']['settings']['min_terms'] = [

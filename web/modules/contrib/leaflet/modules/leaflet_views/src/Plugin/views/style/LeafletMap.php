@@ -21,20 +21,20 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\LinkGeneratorInterface;
-use Drupal\Leaflet\LeafletService;
+use Drupal\leaflet\LeafletService;
 use Drupal\leaflet\LeafletSettingsElementsTrait;
 use Drupal\leaflet_views\Controller\LeafletAjaxPopupController;
 use Drupal\search_api\Datasource\DatasourceInterface;
 use Drupal\search_api\Entity\Index;
+use Drupal\views\Plugin\views\display\DisplayPluginBase;
+use Drupal\views\Plugin\views\style\StylePluginBase;
+use Drupal\views\ViewExecutable;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\views\Plugin\views\PluginBase;
+use Drupal\views\Views;
 use Drupal\search_api\Plugin\search_api\data_type\value\TextValue;
 use Drupal\search_api\Plugin\views\ResultRow as SearchApiResultRow;
-use Drupal\views\Plugin\views\display\DisplayPluginBase;
-use Drupal\views\Plugin\views\PluginBase;
-use Drupal\views\Plugin\views\style\StylePluginBase;
 use Drupal\views\ResultRow;
-use Drupal\views\ViewExecutable;
-use Drupal\views\Views;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Style plugin to render a View output as a Leaflet map.
@@ -133,7 +133,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
   /**
    * The Renderer service property.
    *
-   * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface
+   * @var \Drupal\Core\Render\RendererInterface
    */
   protected $renderer;
 
@@ -147,7 +147,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
   /**
    * Leaflet service.
    *
-   * @var \Drupal\Leaflet\LeafletService
+   * @var \Drupal\leaflet\LeafletService
    */
   protected $leafletService;
 
@@ -195,7 +195,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    *   The renderer.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
-   * @param \Drupal\Leaflet\LeafletService $leaflet_service
+   * @param \Drupal\leaflet\LeafletService $leaflet_service
    *   The Leaflet service.
    * @param \Drupal\Core\Utility\LinkGeneratorInterface $link_generator
    *   The Link Generator service.
@@ -313,36 +313,28 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function getFieldValue($index, $field) {
+    $values = NULL;
     $result = $this->view->result[$index];
 
-    if ($result instanceof SearchApiResultRow) {
+    // Check and return values coming from normal Search API View.
+    if (isset($this->view->field[$field]) && $result instanceof SearchApiResultRow) {
       $real_geofield_name = $this->view->field[$field]->field;
       $search_api_field = $result->_item->getField($real_geofield_name);
       if ($search_api_field !== NULL) {
         $values = $search_api_field->getValues();
-      }
-
-      if (!empty($values)) {
         foreach ($values as $key => $value) {
           if ($value instanceof TextValue) {
-            $value = $value->getText();
+            $values[$key] = $value->getText();
           }
-          $values[$key] = $value;
         }
-        return $values;
       }
-    }
 
-    // Check and return values coming from normal View or Search Api View,
-    // or return NULL Otherwise.
-    if (isset($this->view->field[$field]) &&
-      ($this->view->result[$index] instanceof ResultRow || $this->view->result[$index] instanceof SearchApiResultRow)
-    ) {
-      return $this->view->field[$field]->getValue($this->view->result[$index]);
     }
-    else {
-      return NULL;
+    // Check and return values coming from normal View.
+    elseif (isset($this->view->field[$field]) && $result instanceof ResultRow) {
+      $values = (array) $this->view->field[$field]->getValue($result);
     }
+    return $values;
   }
 
   /**
@@ -1128,7 +1120,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
                           break;
 
                         case 'circle_marker':
-                          $feature['icon']['options'] = str_replace([
+                          $feature['icon']['circle_marker_options'] = str_replace([
                             "\n",
                             "\r",
                           ], "", $this->viewsTokenReplace($this->options['icon']['circle_marker_options'], $tokens));
