@@ -1,0 +1,4 @@
+photomap-drupal:
+  version: VERSION
+  js:
+    js/photomap.drupal.js: {}

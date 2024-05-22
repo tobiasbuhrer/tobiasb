@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '0159044c0632fa117cce082a325144444fcf5067',
+        'reference' => '5ec60ccd2416202822e05fdb65910beca7951544',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -397,6 +397,15 @@
             'reference' => '5.2.1',
             'dev_requirement' => false,
         ),
+        'drupal/devel_entity_updates' => array(
+            'pretty_version' => '4.1.1',
+            'version' => '4.1.1.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/devel_entity_updates',
+            'aliases' => array(),
+            'reference' => '4.1.1',
+            'dev_requirement' => false,
+        ),
         'drupal/entity' => array(
             'pretty_version' => '1.4.0',
             'version' => '1.4.0.0',
@@ -529,7 +538,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '0159044c0632fa117cce082a325144444fcf5067',
+            'reference' => '5ec60ccd2416202822e05fdb65910beca7951544',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
