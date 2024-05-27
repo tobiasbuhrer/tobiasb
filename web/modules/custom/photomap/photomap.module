@@ -54,83 +54,95 @@ function photomap_preprocess_leaflet_map(&$vars) {
  * implements hook_leaflet_views_feature_alter
  */
 function photomap_leaflet_views_feature_alter(array &$feature, ResultRow $row, ViewsPluginInterface $rowPlugin = NULL): void {
+    //we get the path of the current view
+    $view_path = \Drupal::service('path.current')->getPath();
     
-   // photos are always of type 'point' 
-   if ($feature["type"] === 'point')
-   { 
+    $args  = explode('/',$view_path);
+  
+    //only change these settings for photomap
+    if ($args[1] === 'photomap')
+    {       
+       // photos are always of type 'point' 
+       if ($feature["type"] === 'point')
+       { 
 
-       // This gives the node id of the photo (works)
-       $photoid = $row->_entity->nid->value;
-       
-       //we get the path of the current view
-       $view_path = \Drupal::service('path.current')->getPath(); 
-       //and then the node id of the photo that has been clicked on
-       $args  = explode('/',$view_path);
-       
-       /* we check whether the image to display is the clicked image
-        * if so, we load tobiasb_map_icon
-        * if not, we load map_icon_black_48x48_
-        */
-       if ($args[3] === $photoid)
-       {
-           $image_style = ImageStyle::load('tobiasb_map_icon');
-           //in this case, put the icon in front of all others (we suppose we won't have over 1000 photos in a gallery)
-           $feature['zIndexOffset'] = 1000;
-       }
-       else
-       {
-           $image_style = ImageStyle::load('map_icon_black_48x48_');
-       }
+           // This gives the node id of the photo (works)
+           $photoid = $row->_entity->nid->value;
 
-       //Getting the node
-       $node = \Drupal\node\Entity\Node::load($photoid); 
+           /* we check whether the image to display is the clicked image
+            * if so, we load tobiasb_map_icon
+            * if not, we load map_icon_black_48x48_
+            */
+           if ($args[3] === $photoid)
+           {
+               $image_style = ImageStyle::load('tobiasb_map_icon');
+               //in this case, put the icon in front of all others (we suppose we won't have over 1000 photos in a gallery)
+               $feature['zIndexOffset'] = 1000;
+           }
+           else
+           {
+               $image_style = ImageStyle::load('map_icon_black_48x48_');
+           }
 
-       //getting the image file
-       $file = $node->get('field_image')->entity;
+           //Getting the node
+           $node = \Drupal\node\Entity\Node::load($photoid); 
 
-       // Get origin image URI.
-       $image_uri = $file->getFileUri();
+           //getting the image file
+           $file = $node->get('field_image')->entity;
 
-       // Get styled image URI
-       $destination_uri = $image_style->buildUri($file->uri->value);
+           // Get origin image URI.
+           $image_uri = $file->getFileUri();
 
-       // Create the styled image if it doesn't exist
-       if (!file_exists($destination_uri))
-       {
-           $image_style->createDerivative($image_uri, $destination_uri); 
-       }
+           // Get styled image URI
+           $destination_uri = $image_style->buildUri($file->uri->value);
 
-       // Get styled (relative) image URL
-       $destination_url = \Drupal::service('file_url_generator')->generateString($destination_uri);
-       
-       //we set the icon to the photo with image style selected above
-       $feature['icon']['iconUrl'] = $destination_url;
-       
-       $position_in_gallery = $row->index + 1;
-       
-       //we add code that allows clicking back to the gallery
-       $feature['targetUrl'] = $GLOBALS['base_url'] . '/photos?field_tags_target_id=' . $args[2] .'#' . (string) $position_in_gallery;
-   } 
+           // Create the styled image if it doesn't exist
+           if (!file_exists($destination_uri))
+           {
+               $image_style->createDerivative($image_uri, $destination_uri); 
+           }
+
+           // Get styled (relative) image URL
+           $destination_url = \Drupal::service('file_url_generator')->generateString($destination_uri);
+
+           //we set the icon to the photo with image style selected above
+           $feature['icon']['iconUrl'] = $destination_url;
+
+           $position_in_gallery = $row->index + 1;
+
+           //we add code that allows clicking back to the gallery
+           $feature['targetUrl'] = $GLOBALS['base_url'] . '/photos?field_tags_target_id=' . $args[2] .'#' . (string) $position_in_gallery;
+           }
+    }   
+    
 }
 
  /**
  * implements photomap_leaflet_map_view_style_alter
  * */
 function photomap_leaflet_map_view_style_alter(array &$map_settings, ViewsPluginInterface &$view_style): void {
+    //we get the path of the current view
+    $view_path = \Drupal::service('path.current')->getPath();
+    //and then the node id of the photo that has been clicked on
+    $args  = explode('/',$view_path);
+    if ($args[1] === 'photomap')
+        {  
 
-    //we search the central icon. If we find it, we put the center of the map to it.
-    $id_of_center_icon = findFirstOccurrenceOfKey($map_settings['features'], 'zIndexOffset');
-    If ($id_of_center_icon) {
-        $center = array('lat' => $map_settings['features'][$id_of_center_icon]['lat'],
-                    'lon' => $map_settings['features'][$id_of_center_icon]['lon']);
-        $map_settings['map']['settings']['center'] = $center;
+
+        //we search the central icon. If we find it, we put the center of the map to it.
+        $id_of_center_icon = findFirstOccurrenceOfKey($map_settings['features'], 'zIndexOffset');
+        If ($id_of_center_icon) {
+            $center = array('lat' => $map_settings['features'][$id_of_center_icon]['lat'],
+                        'lon' => $map_settings['features'][$id_of_center_icon]['lon']);
+            $map_settings['map']['settings']['center'] = $center;
+        }
+
+
+        //we don't want to show all the markers
+        $map_settings['map']['settings']['map_position_force'] = 1;
+        //we zoom in a maximum (uncommented, will zoom to the level defined in settings).
+        //$map_settings['map']['settings']['zoom'] = 18;
     }
-   
-    
-    //we don't want to show all the markers
-    $map_settings['map']['settings']['map_position_force'] = 1;
-    //we zoom in a maximum (uncommented, will zoom to the level defined in settings).
-    //$map_settings['map']['settings']['zoom'] = 18;
 }
 
  /**
