@@ -51,9 +51,9 @@ class SettingsForm extends ConfigFormBase {
   public function __construct(
     ConfigFactoryInterface $config_factory,
     protected MimeMapManagerInterface $mimeMapManager,
-    protected TypedConfigManagerInterface $typedConfig,
+    protected TypedConfigManagerInterface $typedConfig
   ) {
-    parent::__construct($config_factory, $typedConfig);
+    parent::__construct($config_factory);
   }
 
   /**
@@ -62,7 +62,7 @@ class SettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get(MimeMapManagerInterface::class),
+      $container->get('sophron.mime_map.manager'),
       $container->get('config.typed')
     );
   }
@@ -264,12 +264,11 @@ class SettingsForm extends ConfigFormBase {
     }
 
     // Mapping commands.
-    $mapCommands = trim($form_state->getValue('map_commands'));
-    if ($mapCommands !== '') {
+    if ($form_state->getValue('map_commands') !== '') {
       try {
-        $parsedCommands = Yaml::parse($mapCommands);
+        $map_commands = Yaml::parse($form_state->getValue('map_commands'));
         $data = $this->configFactory->get('sophron.settings')->get();
-        $data['map_commands'] = $parsedCommands;
+        $data['map_commands'] = $map_commands;
         $schema_errors = $this->checkConfigSchema($this->typedConfig, 'sophron.settings', $data);
         if (is_array($schema_errors)) {
           $fail_items = [];

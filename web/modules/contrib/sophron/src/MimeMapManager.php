@@ -16,7 +16,7 @@ use FileEye\MimeMap\Map\AbstractMap;
 use FileEye\MimeMap\Map\DefaultMap;
 use FileEye\MimeMap\MapHandler;
 use FileEye\MimeMap\Type;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Provides a sensible mapping between filename extensions and MIME types.
@@ -27,11 +27,15 @@ class MimeMapManager implements MimeMapManagerInterface {
 
   /**
    * The module configuration settings.
+   *
+   * @var \Drupal\Core\Config\ImmutableConfig
    */
   protected ImmutableConfig $sophronSettings;
 
   /**
    * The FQCN of the map currently in use.
+   *
+   * @var string
    */
   protected string $currentMapClass;
 
@@ -44,10 +48,20 @@ class MimeMapManager implements MimeMapManagerInterface {
    */
   protected array $initializedMapClasses = [];
 
+  /**
+   * Constructs a MimeMapManager object.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory.
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+   *   The event dispatcher.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler service.
+   */
   public function __construct(
     protected ConfigFactoryInterface $configFactory,
     protected EventDispatcherInterface $eventDispatcher,
-    protected ModuleHandlerInterface $moduleHandler,
+    protected ModuleHandlerInterface $moduleHandler
   ) {
     $this->sophronSettings = $this->configFactory->get('sophron.settings');
   }

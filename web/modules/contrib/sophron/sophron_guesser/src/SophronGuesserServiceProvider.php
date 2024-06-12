@@ -6,7 +6,6 @@ namespace Drupal\sophron_guesser;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
-use Drupal\sophron\MimeMapManagerInterface;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -22,7 +21,7 @@ class SophronGuesserServiceProvider extends ServiceProviderBase {
     $definition = $container->getDefinition('file.mime_type.guesser.extension');
     $definition->setClass(SophronMimeTypeGuesser::class)
       ->setArguments([
-        new Reference(MimeMapManagerInterface::class),
+        new Reference('sophron.mime_map.manager'),
         new Reference('file_system'),
       ]);
   }

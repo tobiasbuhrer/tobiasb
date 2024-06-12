@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6d5e7e8e483c0a91db1933e1d1f5b0b045754295',
+        'reference' => 'c39063b29f8f4a5733f428ada807668ae0f3a08d',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -538,7 +538,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6d5e7e8e483c0a91db1933e1d1f5b0b045754295',
+            'reference' => 'c39063b29f8f4a5733f428ada807668ae0f3a08d',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -551,12 +551,12 @@
             'dev_requirement' => false,
         ),
         'drupal/sophron' => array(
-            'pretty_version' => '2.1.0',
-            'version' => '2.1.0.0',
+            'pretty_version' => '2.0.2',
+            'version' => '2.0.2.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/sophron',
             'aliases' => array(),
-            'reference' => '2.1.0',
+            'reference' => '2.0.2',
             'dev_requirement' => false,
         ),
         'drupal/upgrade_status' => array(

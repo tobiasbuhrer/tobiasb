@@ -6,13 +6,10 @@ namespace Drupal\Tests\sophron\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\sophron\Map\DrupalMap;
-use Drupal\sophron\MimeMapManager;
 use Drupal\sophron\MimeMapManagerInterface;
 use FileEye\MimeMap\MalformedTypeException;
 use FileEye\MimeMap\Map\DefaultMap;
 use FileEye\MimeMap\MappingException;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests for Sophron API.
@@ -21,8 +18,6 @@ use PHPUnit\Framework\Attributes\Group;
  *
  * @group sophron
  */
-#[CoversClass(MimeMapManager::class)]
-#[Group('sophron')]
 class SophronApiTest extends KernelTestBase {
 
   /**
@@ -39,15 +34,13 @@ class SophronApiTest extends KernelTestBase {
   }
 
   /**
-   * Tests get Extension.
-   *
-   * @legacy-covers ::getMapClass
-   * @legacy-covers ::setMapClass
-   * @legacy-covers ::listExtensions
-   * @legacy-covers ::getExtension
+   * @covers ::getMapClass
+   * @covers ::setMapClass
+   * @covers ::listExtensions
+   * @covers ::getExtension
    */
   public function testGetExtension(): void {
-    $manager = \Drupal::service(MimeMapManagerInterface::class);
+    $manager = \Drupal::service('sophron.mime_map.manager');
     $this->assertEquals(DrupalMap::class, $manager->getMapClass());
     $this->assertContains('atomsrv', $manager->listExtensions());
     $this->assertEquals('application/atomserv+xml', $manager->getExtension('atomsrv')->getDefaultType());
@@ -58,46 +51,38 @@ class SophronApiTest extends KernelTestBase {
   }
 
   /**
-   * Tests get Type.
-   *
-   * @legacy-covers ::listTypes
-   * @legacy-covers ::getType
+   * @covers ::listTypes
+   * @covers ::getType
    */
   public function testGetType(): void {
-    $manager = \Drupal::service(MimeMapManagerInterface::class);
+    $manager = \Drupal::service('sophron.mime_map.manager');
     $this->assertContains('application/atomserv+xml', $manager->listTypes());
     $this->assertEquals(['atomsrv'], $manager->getType('application/atomserv+xml')->getExtensions());
   }
 
   /**
-   * Tests get missing Type.
-   *
-   * @legacy-covers ::getType
+   * @covers ::getType
    */
   public function testGetMissingType(): void {
-    $manager = \Drupal::service(MimeMapManagerInterface::class);
+    $manager = \Drupal::service('sophron.mime_map.manager');
     // No extensions for type.
     $this->expectException(MappingException::class);
     $manager->getType('a/b')->getExtensions();
   }
 
   /**
-   * Tests get malformed Type.
-   *
-   * @legacy-covers ::getType
+   * @covers ::getType
    */
   public function testGetMalformedType(): void {
-    $manager = \Drupal::service(MimeMapManagerInterface::class);
+    $manager = \Drupal::service('sophron.mime_map.manager');
     // Malformed MIME type.
     $this->expectException(MalformedTypeException::class);
     $manager->getType('application/');
   }
 
   /**
-   * Tests get mapping errors.
-   *
-   * @legacy-covers ::getMapClass
-   * @legacy-covers ::getMappingErrors
+   * @covers ::getMapClass
+   * @covers ::getMappingErrors
    */
   public function testGetMappingErrors(): void {
     $config = \Drupal::configFactory()->getEditable('sophron.settings');
@@ -122,7 +107,7 @@ class SophronApiTest extends KernelTestBase {
         ],
       ])
       ->save();
-    $manager = \Drupal::service(MimeMapManagerInterface::class);
+    $manager = \Drupal::service('sophron.mime_map.manager');
     $this->assertSame(DefaultMap::class, $manager->getMapClass());
     $this->assertCount(4, $manager->getMappingErrors(DefaultMap::class));
   }
