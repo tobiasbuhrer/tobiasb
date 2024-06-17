@@ -172,6 +172,7 @@ class LeafletDemoForm extends FormBase {
       $map['id'] = $feature['leaflet_id'] = str_replace(' ', '-', $map_id);
       $map['settings']['map_position'] = $center;
       $map['settings']['zoom'] = $zoom;
+      $map['settings']['zoomControlPosition'] = 'topleft';
 
       $render_object = $this->leafletService->leafletRenderMap($map, [$feature], '350px');
 

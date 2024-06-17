@@ -12,7 +12,7 @@ configure: admin/config/system/leaflet-more-maps/demo
 # IP Geolocation Views and Maps (ip_geoloc) is required if you wish to center
 # the demo maps on your current location, using HTML5 for position retrieval.
 
-# Information added by Drupal.org packaging script on 2024-05-28
-version: '2.2.0'
+# Information added by Drupal.org packaging script on 2024-06-14
+version: '2.2.1'
 project: 'leaflet_more_maps'
-datestamp: 1716927975
+datestamp: 1718368647

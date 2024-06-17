@@ -82,6 +82,8 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
   $zxy = '{z}/{x}/{y}{r}.png';
   // As used by Esri.
   $zyx = '{z}/{y}/{x}.png';
+  // As used by OpenStreetMap.de.
+  $simple_zxy = '{z}/{x}/{y}.png';
 
   $config_settings = Drupal::config('leaflet_more_maps.settings');
 
@@ -385,7 +387,7 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
     'settings' => $default_settings,
     'layers' => [
       'layer' => [
-        'urlTemplate' => $prot . "tile.openstreetmap.de/$zxy",
+        'urlTemplate' => $prot . "tile.openstreetmap.de/$simple_zxy",
         'options' => ['attribution' => $attr_osm],
         'detectRetina' => TRUE,
       ],
