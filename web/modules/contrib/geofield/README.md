@@ -82,7 +82,7 @@ derived from the WKT column. Columns are as follows:
 
 ### Save or Updated a Geofield programmatically
 
-To save or update programatically a Geofield (both single and multivalue) it is
+To save or update programmatically a Geofield (both single and multivalue) it is
 
 sufficient to pass the WKT values/geometries to the
 
@@ -106,7 +106,7 @@ following way:
   ];
 
   // Generate the (second) geofield value in the proper format.
-  // The permiter of Bryant Park, in New York City (US)
+  // The perimeter of Bryant Park, in New York City (US)
   $geofield_polygon = [
     'value' => "POLYGON((-73.98411932014324 40.754779803566606," +
       "-73.98502054237224 40.75354445673964," +
@@ -126,7 +126,7 @@ following way:
 
 ## Maintainers
 
-Drupal 8, 9,10:
+Drupal 8, 9, 10:
 - Italo Mairo (itamair) - https://www.drupal.org/u/itamair
 
 Drupal 7:

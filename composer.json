@@ -35,7 +35,7 @@
         "drupal/minifyhtml": "^2.0",
         "drupal/plupload": "^2.1@beta",
         "drupal/smtp": "^1.0",
-        "drupal/sophron": "2.0.2",
+        "drupal/sophron": "^2.1",
         "drupal/upgrade_status": "^4.0",
         "drupal/video": "^3.0",
         "drupal/webform": "^6.2@RC",
