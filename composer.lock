@@ -2571,17 +2571,17 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.18",
+            "version": "10.2.19",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.18"
+                "reference": "10.2.19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.18.zip",
-                "reference": "10.2.18",
-                "shasum": "9ed0b3f60877726bbe2072ec3aca553f3d3fe0ad"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.19.zip",
+                "reference": "10.2.19",
+                "shasum": "6ad48c4c3730adf0e9e6cda811b706181f8275a7"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10 || ^11",
@@ -2590,8 +2590,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.18",
-                    "datestamp": "1718871493",
+                    "version": "10.2.19",
+                    "datestamp": "1719911106",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3526,16 +3526,16 @@
         },
         {
             "name": "fileeye/mimemap",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FileEye/MimeMap.git",
-                "reference": "7992d33502de8a82065fd9fe2d2e2b1f7f33d1ce"
+                "reference": "2cb60da59d5c6fb881a78b481d513c4c68a1a93c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FileEye/MimeMap/zipball/7992d33502de8a82065fd9fe2d2e2b1f7f33d1ce",
-                "reference": "7992d33502de8a82065fd9fe2d2e2b1f7f33d1ce",
+                "url": "https://api.github.com/repos/FileEye/MimeMap/zipball/2cb60da59d5c6fb881a78b481d513c4c68a1a93c",
+                "reference": "2cb60da59d5c6fb881a78b481d513c4c68a1a93c",
                 "shasum": ""
             },
             "require": {
@@ -3578,9 +3578,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FileEye/MimeMap/issues",
-                "source": "https://github.com/FileEye/MimeMap/tree/2.1.1"
+                "source": "https://github.com/FileEye/MimeMap/tree/2.1.2"
             },
-            "time": "2024-05-17T19:22:06+00:00"
+            "time": "2024-06-29T16:52:07+00:00"
         },
         {
             "name": "fileeye/pel",
@@ -4428,16 +4428,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.0.2",
+            "version": "v5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13"
+                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/139676794dc1e9231bf7bcd123cfc0c99182cb13",
-                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/683130c2ff8c2739f4822ff7ac5c873ec529abd1",
+                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1",
                 "shasum": ""
             },
             "require": {
@@ -4448,7 +4448,7 @@
             },
             "require-dev": {
                 "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+                "phpunit/phpunit": "^9.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -4480,9 +4480,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.1.0"
             },
-            "time": "2024-03-05T20:51:40+00:00"
+            "time": "2024-07-01T20:03:41+00:00"
         },
         {
             "name": "pear/archive_tar",
@@ -4952,16 +4952,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.5",
+            "version": "1.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443"
+                "reference": "6ac78f1165346c83b4a753f7e4186d969c6ad0ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/490f0ae1c92b082f154681d7849aee776a7c1443",
-                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6ac78f1165346c83b4a753f7e4186d969c6ad0ee",
+                "reference": "6ac78f1165346c83b4a753f7e4186d969c6ad0ee",
                 "shasum": ""
             },
             "require": {
@@ -5006,7 +5006,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-17T15:10:54+00:00"
+            "time": "2024-07-01T15:33:06+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
