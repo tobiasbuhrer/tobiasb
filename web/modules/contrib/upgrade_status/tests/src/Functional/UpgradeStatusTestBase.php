@@ -20,6 +20,7 @@ abstract class UpgradeStatusTestBase extends BrowserTestBase {
   protected static $modules = [
     'upgrade_status',
     'upgrade_status_test_error',
+    'upgrade_status_test_fatal',
     'upgrade_status_test_10_compatible',
     'upgrade_status_test_11_compatible',
     'upgrade_status_test_submodules_a',
@@ -48,6 +49,7 @@ abstract class UpgradeStatusTestBase extends BrowserTestBase {
   protected function runFullScan() {
     $edit = [
       'scan[data][list][upgrade_status_test_error]' => TRUE,
+      'scan[data][list][upgrade_status_test_fatal]' => TRUE,
       'scan[data][list][upgrade_status_test_10_compatible]' => TRUE,
       'scan[data][list][upgrade_status_test_11_compatible]' => TRUE,
       'scan[data][list][upgrade_status_test_submodules]' => TRUE,

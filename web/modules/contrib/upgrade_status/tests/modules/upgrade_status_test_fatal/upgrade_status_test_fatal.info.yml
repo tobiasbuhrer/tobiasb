@@ -1,8 +1,7 @@
-name: 'Upgrade status test root module'
+name: 'Upgrade status test fatal'
 type: module
-description: 'Support module for update module testing.'
+description: 'Support module for upgrade status module testing.'
 package: Testing
-core_version_requirement: ^9 || ^10
 
 # Information added by Drupal.org packaging script on 2024-07-04
 version: '4.3.3'

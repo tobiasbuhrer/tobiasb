@@ -18,6 +18,7 @@ class UpgradeStatusAnalyzeTest extends UpgradeStatusTestBase {
 
     // Check if the project has scan result in the keyValueStorage.
     $this->assertTrue($key_value->has('upgrade_status_test_error'));
+    $this->assertTrue($key_value->has('upgrade_status_test_fatal'));
     $this->assertTrue($key_value->has('upgrade_status_test_10_compatible'));
     $this->assertTrue($key_value->has('upgrade_status_test_11_compatible'));
     $this->assertTrue($key_value->has('upgrade_status_test_submodules'));
@@ -36,14 +37,9 @@ class UpgradeStatusAnalyzeTest extends UpgradeStatusTestBase {
 
     $report = $key_value->get('upgrade_status_test_error');
     $this->assertNotEmpty($report);
-    $this->assertEquals(8, $report['data']['totals']['file_errors']);
-    $this->assertCount(8, $report['data']['files']);
+    $this->assertEquals(7, $report['data']['totals']['file_errors']);
+    $this->assertCount(7, $report['data']['files']);
     $file = reset($report['data']['files']);
-    $message = $file['messages'][0];
-    $this->assertEquals('fatal.php', basename(key($report['data']['files'])));
-    $this->assertEquals("Syntax error, unexpected T_STRING on line 5", $message['message']);
-    $this->assertEquals(5, $message['line']);
-    $file = next($report['data']['files']);
     $this->assertEquals('UpgradeStatusTestErrorController.php', basename(key($report['data']['files'])));
     $message = $file['messages'][0];
     $this->assertEquals("Call to deprecated function upgrade_status_test_contrib_error_function_9_to_10(). Deprecated in drupal:9.1.0 and is removed from drupal:10.0.0. Use the replacement instead.", $message['message']);
@@ -75,6 +71,21 @@ class UpgradeStatusAnalyzeTest extends UpgradeStatusTestBase {
     $this->assertEquals(109, $message['line']);
     $file = next($report['data']['files']);
     $this->assertEquals('upgrade_status_test_error.info.yml', basename(key($report['data']['files'])));
+    $message = $file['messages'][0];
+    $this->assertEquals("Add core_version_requirement to designate which Drupal versions is the extension compatible with. See https://drupal.org/node/3070687.", $message['message']);
+    $this->assertEquals(1, $message['line']);
+
+    $report = $key_value->get('upgrade_status_test_fatal');
+    $this->assertNotEmpty($report);
+    $this->assertEquals(2, $report['data']['totals']['file_errors']);
+    $this->assertCount(2, $report['data']['files']);
+    $file = reset($report['data']['files']);
+    $message = $file['messages'][0];
+    $this->assertEquals('fatal.php', basename(key($report['data']['files'])));
+    $this->assertEquals("Syntax error, unexpected T_STRING on line 5", $message['message']);
+    $this->assertEquals(5, $message['line']);
+    $file = next($report['data']['files']);
+    $this->assertEquals('upgrade_status_test_fatal.info.yml', basename(key($report['data']['files'])));
     $message = $file['messages'][0];
     $this->assertEquals("Add core_version_requirement to designate which Drupal versions is the extension compatible with. See https://drupal.org/node/3070687.", $message['message']);
     $this->assertEquals(1, $message['line']);
