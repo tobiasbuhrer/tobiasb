@@ -242,16 +242,7 @@ final class DeprecationAnalyzer {
     $this->vendorPath = $this->finder->getVendorDir();
     $this->binPath = $this->findBinPath();
 
-    if (function_exists('file_directory_temp')) {
-      // This is fallback code for 8.7.x and below. It's not called on later
-      // versions, so we don't nee to "fix" it.
-      // @noRector
-      // @phpstan-ignore-next-line
-      $system_temporary = file_directory_temp();
-    }
-    else {
-      $system_temporary = $this->fileSystem->getTempDirectory();
-    }
+    $system_temporary = $this->fileSystem->getTempDirectory();
     $this->temporaryDirectory = $system_temporary . '/upgrade_status';
     if (!file_exists($this->temporaryDirectory)) {
       $this->prepareTempDirectory();

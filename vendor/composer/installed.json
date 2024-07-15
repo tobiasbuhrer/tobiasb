@@ -273,17 +273,17 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.4.0",
-            "version_normalized": "3.4.0.0",
+            "version": "3.4.2",
+            "version_normalized": "3.4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "35e8d0af4486141bc745f23a29cc2091eb624a32"
+                "reference": "c51258e759afdb17f1fd1fe83bc12baaef6309d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/35e8d0af4486141bc745f23a29cc2091eb624a32",
-                "reference": "35e8d0af4486141bc745f23a29cc2091eb624a32",
+                "url": "https://api.github.com/repos/composer/semver/zipball/c51258e759afdb17f1fd1fe83bc12baaef6309d6",
+                "reference": "c51258e759afdb17f1fd1fe83bc12baaef6309d6",
                 "shasum": ""
             },
             "require": {
@@ -293,7 +293,7 @@
                 "phpstan/phpstan": "^1.4",
                 "symfony/phpunit-bridge": "^4.2 || ^5"
             },
-            "time": "2023-08-31T09:50:34+00:00",
+            "time": "2024-07-12T11:35:52+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -337,7 +337,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.4.0"
+                "source": "https://github.com/composer/semver/tree/3.4.2"
             },
             "funding": [
                 {
@@ -952,17 +952,17 @@
         },
         {
             "name": "dflydev/dot-access-data",
-            "version": "v3.0.2",
-            "version_normalized": "3.0.2.0",
+            "version": "v3.0.3",
+            "version_normalized": "3.0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dflydev/dflydev-dot-access-data.git",
-                "reference": "f41715465d65213d644d3141a6a93081be5d3549"
+                "reference": "a23a2bf4f31d3518f3ecb38660c95715dfead60f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/f41715465d65213d644d3141a6a93081be5d3549",
-                "reference": "f41715465d65213d644d3141a6a93081be5d3549",
+                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/a23a2bf4f31d3518f3ecb38660c95715dfead60f",
+                "reference": "a23a2bf4f31d3518f3ecb38660c95715dfead60f",
                 "shasum": ""
             },
             "require": {
@@ -975,7 +975,7 @@
                 "squizlabs/php_codesniffer": "^3.5",
                 "vimeo/psalm": "^4.0.0"
             },
-            "time": "2022-10-27T11:44:00+00:00",
+            "time": "2024-07-08T12:26:09+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1024,7 +1024,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dflydev/dflydev-dot-access-data/issues",
-                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
+                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.3"
             },
             "install-path": "../dflydev/dot-access-data"
         },
@@ -2676,18 +2676,18 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.19",
-            "version_normalized": "10.2.19.0",
+            "version": "10.2.20",
+            "version_normalized": "10.2.20.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.19"
+                "reference": "10.2.20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.19.zip",
-                "reference": "10.2.19",
-                "shasum": "6ad48c4c3730adf0e9e6cda811b706181f8275a7"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.20.zip",
+                "reference": "10.2.20",
+                "shasum": "0998b9bb5e6ca22a6125a46321542a19ca1ca8e6"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10 || ^11",
@@ -2696,8 +2696,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.19",
-                    "datestamp": "1719911106",
+                    "version": "10.2.20",
+                    "datestamp": "1720793068",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3174,36 +3174,36 @@
         },
         {
             "name": "drupal/upgrade_status",
-            "version": "4.3.3",
-            "version_normalized": "4.3.3.0",
+            "version": "4.3.4",
+            "version_normalized": "4.3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/upgrade_status.git",
-                "reference": "4.3.3"
+                "reference": "4.3.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/upgrade_status-4.3.3.zip",
-                "reference": "4.3.3",
-                "shasum": "b03fa553041b22358e9c6d0733bd3b8ddb2e7dd1"
+                "url": "https://ftp.drupal.org/files/projects/upgrade_status-4.3.4.zip",
+                "reference": "4.3.4",
+                "shasum": "4f4839fbda706784c36fc5abb61665032f46a55d"
             },
             "require": {
                 "dekor/php-array-table": "^2.0",
-                "drupal/core": "^9 || ^10",
+                "drupal/core": "^9 || ^10 || ^11",
                 "mglaman/phpstan-drupal": "^1.2.11",
                 "nikic/php-parser": "^4.0.0|^5.0.0",
                 "phpstan/phpstan-deprecation-rules": "^1.0.0",
-                "symfony/process": "^3.4|^4.0|^5.0|^6.0",
+                "symfony/process": "^3.4|^4.0|^5.0|^6.0|^7.0",
                 "webflo/drupal-finder": "^1.2"
             },
             "require-dev": {
-                "drush/drush": "^11|^12"
+                "drush/drush": "^11|^12|^13"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.3.3",
-                    "datestamp": "1720099746",
+                    "version": "4.3.4",
+                    "datestamp": "1720121263",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3222,28 +3222,8 @@
             ],
             "authors": [
                 {
-                    "name": "colan",
-                    "homepage": "https://www.drupal.org/user/58704"
-                },
-                {
                     "name": "Gábor Hojtsy",
                     "homepage": "https://www.drupal.org/user/4166"
-                },
-                {
-                    "name": "herczogzoltan",
-                    "homepage": "https://www.drupal.org/user/3528391"
-                },
-                {
-                    "name": "sun",
-                    "homepage": "https://www.drupal.org/user/54136"
-                },
-                {
-                    "name": "webchick",
-                    "homepage": "https://www.drupal.org/user/24967"
-                },
-                {
-                    "name": "xjm",
-                    "homepage": "https://www.drupal.org/user/65776"
                 }
             ],
             "description": "Review Drupal major upgrade readiness of the environment and components of the site.",
@@ -5156,17 +5136,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.6",
-            "version_normalized": "1.11.6.0",
+            "version": "1.11.7",
+            "version_normalized": "1.11.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "6ac78f1165346c83b4a753f7e4186d969c6ad0ee"
+                "reference": "52d2bbfdcae7f895915629e4694e9497d0f8e28d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6ac78f1165346c83b4a753f7e4186d969c6ad0ee",
-                "reference": "6ac78f1165346c83b4a753f7e4186d969c6ad0ee",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/52d2bbfdcae7f895915629e4694e9497d0f8e28d",
+                "reference": "52d2bbfdcae7f895915629e4694e9497d0f8e28d",
                 "shasum": ""
             },
             "require": {
@@ -5175,7 +5155,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2024-07-01T15:33:06+00:00",
+            "time": "2024-07-06T11:17:41+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
