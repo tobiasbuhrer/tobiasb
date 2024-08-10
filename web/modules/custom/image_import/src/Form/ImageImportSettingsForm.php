@@ -172,7 +172,7 @@ class ImageImportSettingsForm extends ConfigFormBase
 
         //IPTC data
         $size = getimagesize ( $uri, $info);
-        if(is_array($info)) {
+        if(isset($info['APP13'])) {
             $iptc = iptcparse($info["APP13"]);
             foreach (array_keys($iptc) as $key) {
                 $key1 = $key;

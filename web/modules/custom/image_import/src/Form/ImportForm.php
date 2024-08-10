@@ -21,6 +21,13 @@ use Drupal\Core\Datetime\DrupalDateTime;
 class ImportForm extends ConfigFormBase
 {
     /**
+    * List of entity type managers.
+    *
+    * @var array
+    */
+    protected $entityTypeManager;
+  
+    /**
      * Constructs the ConfigFormBase object.
      *
      * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -92,6 +99,10 @@ class ImportForm extends ConfigFormBase
             '#upload_validators' => array(
                 'file_validate_extensions' => array('jpg jpeg gif png tmp'),
             ),
+            '#plupload_settings' => array(
+            'chunk_size' => '1mb',
+            'max_file_size' => '0'
+             ),
         );
 
         return parent::buildForm($form, $form_state);
@@ -140,7 +151,7 @@ class ImportForm extends ConfigFormBase
 	    $file_uri = \Drupal::service('stream_wrapper_manager')->normalizeUri($destination . '/' . $uploaded_file['name']);
 
             // Create file object from a locally copied file.
-            $uri = \Drupal::service('file_system')->copy($uploaded_file['tmppath'], $file_uri, \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE);
+            $uri = \Drupal::service('file_system')->copy($uploaded_file['tmppath'], $file_uri, \Drupal\Core\File\FileExists::Replace);
 
             $file = File::Create([
                 'uid' => 1,
