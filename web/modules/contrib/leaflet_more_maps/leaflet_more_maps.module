@@ -162,6 +162,9 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
       case 'Ocean/World Ocean Base':
         $label = 'Esri Ocean (zoom 0..10)';
         $settings['maxZoom'] = 10;
+        // Remove the / from the map ID otherwise,
+        // it will generate an incorrect HTML ID.
+        $code  = str_replace('/', '_', $code);
         break;
 
       default:

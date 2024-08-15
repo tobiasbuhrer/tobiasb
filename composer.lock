@@ -2045,26 +2045,26 @@
         },
         {
             "name": "drupal/entity",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity.git",
-                "reference": "8.x-1.4"
+                "reference": "8.x-1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.4.zip",
-                "reference": "8.x-1.4",
-                "shasum": "1cf7712318fad144eab106a8fcfcd396aeb5676f"
+                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.5.zip",
+                "reference": "8.x-1.5",
+                "shasum": "86c0b75c173144aaedde3e3258dc0d3ce11d1a22"
             },
             "require": {
-                "drupal/core": "^9.2|^10.0"
+                "drupal/core": "^10.1 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.4",
-                    "datestamp": "1661898023",
+                    "version": "8.x-1.5",
+                    "datestamp": "1723380062",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2077,7 +2077,7 @@
             ],
             "authors": [
                 {
-                    "name": "Berdir",
+                    "name": "berdir",
                     "homepage": "https://www.drupal.org/user/214652"
                 },
                 {
@@ -2294,29 +2294,29 @@
         },
         {
             "name": "drupal/honeypot",
-            "version": "2.1.3",
+            "version": "2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/honeypot.git",
-                "reference": "2.1.3"
+                "reference": "2.1.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/honeypot-2.1.3.zip",
-                "reference": "2.1.3",
-                "shasum": "101105029a10a574ef6017824182500ab9905856"
+                "url": "https://ftp.drupal.org/files/projects/honeypot-2.1.4.zip",
+                "reference": "2.1.4",
+                "shasum": "adf76c3520c0e458177dbe6d638aa2d6ae40a95b"
             },
             "require": {
                 "drupal/core": "^9.2 || ^10"
             },
             "require-dev": {
-                "drupal/rules": "^3.0"
+                "drupal/rules": "^3.x-dev"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.1.3",
-                    "datestamp": "1695604754",
+                    "version": "2.1.4",
+                    "datestamp": "1723489062",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2574,17 +2574,17 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.23",
+            "version": "10.2.24",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.23"
+                "reference": "10.2.24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.23.zip",
-                "reference": "10.2.23",
-                "shasum": "baa139378f1e04636f00d143ddd7b2a5a87d1dcc"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.24.zip",
+                "reference": "10.2.24",
+                "shasum": "af9cb5e6ec56d8154896e20538b79d6a27ab17e1"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10 || ^11",
@@ -2593,8 +2593,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.23",
-                    "datestamp": "1722955435",
+                    "version": "10.2.24",
+                    "datestamp": "1723476033",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2646,20 +2646,20 @@
         },
         {
             "name": "drupal/leaflet_more_maps",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet_more_maps.git",
-                "reference": "2.2.1"
+                "reference": "2.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet_more_maps-2.2.1.zip",
-                "reference": "2.2.1",
-                "shasum": "5b859ec8b9c2db086d1113503add4f778bca3db1"
+                "url": "https://ftp.drupal.org/files/projects/leaflet_more_maps-2.2.2.zip",
+                "reference": "2.2.2",
+                "shasum": "40e34fd0e930a9497f0506c895d17a4261943281"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9 || ^10",
+                "drupal/core": "^8.8 || ^9 || ^10 || ^11",
                 "drupal/leaflet": "^2.1.0 || ^10.0"
             },
             "require-dev": {
@@ -2668,8 +2668,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.2.1",
-                    "datestamp": "1718368645",
+                    "version": "2.2.2",
+                    "datestamp": "1723673168",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
