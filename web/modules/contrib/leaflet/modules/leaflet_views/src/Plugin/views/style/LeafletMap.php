@@ -113,7 +113,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    *
    * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface
    */
-  protected $entityDisplay;
+  protected $entityDisplayRepository;
 
   /**
    * Current user service.
@@ -128,7 +128,6 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    * @var \Drupal\Core\Messenger\MessengerInterface
    */
   protected $messenger;
-
 
   /**
    * The Renderer service property.
@@ -185,8 +184,8 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
    *   The entity manager.
    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
    *   The entity field manager.
-   * @param \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entity_display
-   *   The entity display manager.
+   * @param \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entity_display_repository
+   *   The entity display repository.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   Current user service.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
@@ -208,7 +207,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
           $plugin_definition,
     EntityTypeManagerInterface $entity_manager,
     EntityFieldManagerInterface $entity_field_manager,
-    EntityDisplayRepositoryInterface $entity_display,
+    EntityDisplayRepositoryInterface $entity_display_repository,
     AccountInterface $current_user,
     MessengerInterface $messenger,
     RendererInterface $renderer,
@@ -222,7 +221,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
     $this->defaultSettings = self::getDefaultSettings();
     $this->entityManager = $entity_manager;
     $this->entityFieldManager = $entity_field_manager;
-    $this->entityDisplay = $entity_display;
+    $this->entityDisplayRepository = $entity_display_repository;
     $this->currentUser = $current_user;
     $this->messenger = $messenger;
     $this->renderer = $renderer;
@@ -713,11 +712,8 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
       ],
     ];
 
-    // Get the human-readable labels for the entity view modes.
-    $view_mode_options = [];
-    foreach ($this->entityDisplay->getViewModes($this->entityType) as $key => $view_mode) {
-      $view_mode_options[$key] = $view_mode['label'];
-    }
+    // Get the entity view modes options.
+    $view_mode_options = $this->entityDisplayRepository->getViewModeOptions($this->entityType);
 
     // Set Leaflet Popup Element.
     $this->setPopupElement($form, $this->options, $this->viewFields, $this->entityType, $view_mode_options);
@@ -1307,6 +1303,7 @@ class LeafletMap extends StylePluginBase implements ContainerFactoryPluginInterf
     $options['data_source'] = ['default' => ''];
     $options['entity_source'] = ['default' => '__base_table'];
     $options['name_field'] = ['default' => ''];
+    $options['weight'] = ['default' => NULL];
 
     $leaflet_map_default_settings = [];
     foreach (self::getDefaultSettings() as $k => $setting) {
