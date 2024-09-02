@@ -1,4 +1,0 @@
-leaflet_urlmarkers-drupal:
-  version: VERSION
-  js:
-    js/leaflet_urlmarkers.drupal.js: {}

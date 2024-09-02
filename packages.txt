@@ -1,0 +1,142 @@
+ii  libapache2-mod-php                         2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          server-side, HTML-embedded scripting language (Apache 2 module) (default)
+ii  libapache2-mod-php7.4                      1:7.4.33-14+ubuntu22.04.1+deb.sury.org+1     amd64        server-side, HTML-embedded scripting language (Apache 2 module)
+ii  libapache2-mod-php8.1                      8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        server-side, HTML-embedded scripting language (Apache 2 module)
+ii  libapache2-mod-php8.2                      8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        server-side, HTML-embedded scripting language (Apache 2 module)
+ii  libapache2-mod-php8.3                      8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        server-side, HTML-embedded scripting language (Apache 2 module)
+ii  libphp-phpmailer                           6.2.0-2                                      all          full featured email transfer class for PHP
+ii  php-bz2                                    2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          bzip2 module for PHP [default]
+ii  php-cli                                    2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          command-line interpreter for the PHP scripting language (default)
+ii  php-codecoverage                           9.2.11+dfsg-1                                all          collection, processing, and rendering for code coverage
+ii  php-common                                 2:94+ubuntu22.04.1+deb.sury.org+2            all          Common files for PHP packages
+ii  php-curl                                   2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          CURL module for PHP [default]
+ii  php-deepcopy                               1.10.2-3                                     all          create deep copies (clones) of objects
+ii  php-doctrine-instantiator                  1.4.0-1                                      all          lightweight utility to instantiate objects in PHP
+ii  php-file-iterator                          3.0.6-1                                      all          FilterIterator implementation for PHP
+ii  php-gd                                     2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          GD module for PHP [default]
+ii  php-google-recaptcha                       1.2.4-3                                      all          reCAPTCHA PHP client library
+ii  php-invoker                                3.1.1-2                                      all          Invoke callables with a timeout
+ii  php-json                                   2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          JSON module for PHP [default]
+ii  php-mariadb-mysql-kbs                      1.2.12-1                                     all          Knowledge base about MariaDB and MySQL server variables
+ii  php-mbstring                               2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          MBSTRING module for PHP [default]
+ii  php-mysql                                  2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          MySQL module for PHP [default]
+ii  php-nikic-fast-route                       1.3.0-3                                      all          Fast request router for PHP
+ii  php-parser                                 4.13.2-1ubuntu1                              all          convert PHP code into abstract syntax tree
+ii  php-pear                                   1:1.10.12+submodules+notgz+20210212-1ubuntu3 all          PEAR Base System
+ii  php-phar-io-manifest                       2.0.3-1                                      all          reading phar.io manifest information from a PHP Archive (Phar)
+ii  php-phar-io-version                        3.2.1-1                                      all          handling version information and constraint
+ii  php-phpdocumentor-reflection-common        2.2.0-1                                      all          Common reflection classes - phpDocumentor component
+ii  php-phpdocumentor-reflection-docblock      5.3.0-1                                      all          DocBlock parser - phpDocumentor component
+ii  php-phpdocumentor-type-resolver            1.6.0-1                                      all          TypeResolver and FqsenResolver - phpDocumentor component
+ii  php-phpmyadmin-motranslator                5.2.0-1build1                                all          translation API for PHP using Gettext MO files
+ii  php-phpmyadmin-shapefile                   2.1-5                                        all          translation API for PHP using Gettext MO files
+ii  php-phpmyadmin-sql-parser                  5.4.1-2                                      all          validating SQL lexer and parser
+ii  php-phpseclib                              2.0.36-1                                     all          implementations of an arbitrary-precision integer arithmetic library
+ii  php-phpspec-prophecy                       1.15.0-1                                     all          object mocking framework - phpspec component
+ii  php-psr-cache                              3.0.0-1                                      all          Common interface for caching libraries
+ii  php-psr-container                          2.0.2-1                                      all          Common Container Interface (PHP FIG PSR-11)
+ii  php-psr-log                                3.0.0-1                                      all          common interface for logging libraries
+ii  php-sqlite3                                2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          SQLite3 module for PHP [default]
+ii  php-symfony-cache                          5.4.4+dfsg-1ubuntu8                          all          provides an extended PSR-6, PSR-16 (and tags) implementation
+ii  php-symfony-cache-contracts                2.4.0-1ubuntu2                               all          Generic abstractions related to caching
+ii  php-symfony-config                         5.4.4+dfsg-1ubuntu8                          all          load configurations from different data sources
+ii  php-symfony-dependency-injection           5.4.4+dfsg-1ubuntu8                          all          standardize and centralize construction of objects
+ii  php-symfony-deprecation-contracts          2.4.0-1ubuntu2                               all          A generic function and convention to trigger deprecation notices
+ii  php-symfony-expression-language            5.4.4+dfsg-1ubuntu8                          all          compile and evaluate expressions
+ii  php-symfony-filesystem                     5.4.4+dfsg-1ubuntu8                          all          basic filesystem utilities
+ii  php-symfony-polyfill-php80                 1.24.0-1ubuntu2                              all          Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions
+ii  php-symfony-polyfill-php81                 1.24.0-1ubuntu2                              all          Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions
+ii  php-symfony-service-contracts              2.4.0-1ubuntu2                               all          Generic abstractions related to writing services
+ii  php-symfony-var-exporter                   5.4.4+dfsg-1ubuntu8                          all          export serializable PHP data structure to plain PHP code
+ii  php-tcpdf                                  6.4.4+dfsg1-1                                all          PHP class for generating PDF files on-the-fly
+ii  php-text-template                          2.0.4-1                                      all          Simple template engine
+ii  php-timer                                  5.0.3-2                                      all          Utility class for timing
+ii  php-tokenizer                              1.2.1-1                                      all          tokenized PHP source to XML converter
+ii  php-twig                                   3.3.8-2ubuntu4                               all          Flexible, fast, and secure template engine for PHP
+ii  php-twig-i18n-extension                    3.0.0-2                                      all          i18n extension for the Twig template system
+ii  php-uploadprogress                         2.0.2++-1+ubuntu22.04.1+deb.sury.org+2       amd64        file upload progress tracking extension for PHP
+ii  php-webmozart-assert                       1.9.1-2                                      all          Assertions to validate method input/output with nice error messages
+ii  php-xml                                    2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          DOM, SimpleXML, WDDX, XML, and XSL module for PHP [default]
+ii  php-zip                                    2:8.3+94+ubuntu22.04.1+deb.sury.org+2        all          Zip module for PHP [default]
+ii  php7.4                                     1:7.4.33-14+ubuntu22.04.1+deb.sury.org+1     all          server-side, HTML-embedded scripting language (metapackage)
+rc  php7.4-bcmath                              7.4.3-4ubuntu2.13                            amd64        Bcmath module for PHP
+rc  php7.4-bz2                                 7.4.3-4ubuntu2.13                            amd64        bzip2 module for PHP
+ii  php7.4-cli                                 1:7.4.33-14+ubuntu22.04.1+deb.sury.org+1     amd64        command-line interpreter for the PHP scripting language
+ii  php7.4-common                              1:7.4.33-14+ubuntu22.04.1+deb.sury.org+1     amd64        documentation, examples and common module for PHP
+rc  php7.4-curl                                7.4.3-4ubuntu2.13                            amd64        CURL module for PHP
+rc  php7.4-gd                                  7.4.3-4ubuntu2.13                            amd64        GD module for PHP
+rc  php7.4-gmp                                 7.4.3-4ubuntu2.13                            amd64        GMP module for PHP
+rc  php7.4-intl                                7.4.3-4ubuntu2.13                            amd64        Internationalisation module for PHP
+ii  php7.4-json                                1:7.4.33-14+ubuntu22.04.1+deb.sury.org+1     amd64        JSON module for PHP
+rc  php7.4-mbstring                            7.4.3-4ubuntu2.13                            amd64        MBSTRING module for PHP
+rc  php7.4-mysql                               7.4.3-4ubuntu2.13                            amd64        MySQL module for PHP
+ii  php7.4-opcache                             1:7.4.33-14+ubuntu22.04.1+deb.sury.org+1     amd64        Zend OpCache module for PHP
+ii  php7.4-readline                            1:7.4.33-14+ubuntu22.04.1+deb.sury.org+1     amd64        readline module for PHP
+rc  php7.4-xml                                 7.4.3-4ubuntu2.13                            amd64        DOM, SimpleXML, XML, and XSL module for PHP
+rc  php7.4-xmlrpc                              7.4.3-4ubuntu2.13                            amd64        XMLRPC-EPI module for PHP
+rc  php7.4-zip                                 7.4.3-4ubuntu2.13                            amd64        Zip module for PHP
+ii  php8.1-bcmath                              8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        Bcmath module for PHP
+ii  php8.1-bz2                                 8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        bzip2 module for PHP
+ii  php8.1-cgi                                 8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        server-side, HTML-embedded scripting language (CGI binary)
+ii  php8.1-cli                                 8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        command-line interpreter for the PHP scripting language
+ii  php8.1-common                              8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        documentation, examples and common module for PHP
+ii  php8.1-curl                                8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        CURL module for PHP
+ii  php8.1-fpm                                 8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        server-side, HTML-embedded scripting language (FPM-CGI binary)
+ii  php8.1-gd                                  8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        GD module for PHP
+ii  php8.1-intl                                8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        Internationalisation module for PHP
+ii  php8.1-ldap                                8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        LDAP module for PHP
+ii  php8.1-mbstring                            8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        MBSTRING module for PHP
+ii  php8.1-mysql                               8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        MySQL module for PHP
+ii  php8.1-opcache                             8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        Zend OpCache module for PHP
+ii  php8.1-pgsql                               8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        PostgreSQL module for PHP
+ii  php8.1-phpdbg                              8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        server-side, HTML-embedded scripting language (PHPDBG binary)
+ii  php8.1-readline                            8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        readline module for PHP
+ii  php8.1-soap                                8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        SOAP module for PHP
+ii  php8.1-sqlite3                             8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        SQLite3 module for PHP
+rc  php8.1-uploadprogress                      2.0.2++-1+ubuntu22.04.1+deb.sury.org+1       amd64        file upload progress tracking extension for PHP
+ii  php8.1-xml                                 8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        DOM, SimpleXML, XML, and XSL module for PHP
+ii  php8.1-zip                                 8.1.29-1+ubuntu22.04.1+deb.sury.org+1        amd64        Zip module for PHP
+ii  php8.2                                     8.2.22-1+ubuntu22.04.1+deb.sury.org+1        all          server-side, HTML-embedded scripting language (metapackage)
+ii  php8.2-bz2                                 8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        bzip2 module for PHP
+ii  php8.2-cli                                 8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        command-line interpreter for the PHP scripting language
+ii  php8.2-common                              8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        documentation, examples and common module for PHP
+ii  php8.2-curl                                8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        CURL module for PHP
+ii  php8.2-gd                                  8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        GD module for PHP
+ii  php8.2-mbstring                            8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        MBSTRING module for PHP
+rc  php8.2-mysql                               8.2.17-1+ubuntu22.04.1+deb.sury.org+1        amd64        MySQL module for PHP
+ii  php8.2-opcache                             8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        Zend OpCache module for PHP
+ii  php8.2-readline                            8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        readline module for PHP
+rc  php8.2-sqlite3                             8.2.17-1+ubuntu22.04.1+deb.sury.org+1        amd64        SQLite3 module for PHP
+rc  php8.2-uploadprogress                      2.0.2++-1+ubuntu22.04.1+deb.sury.org+2       amd64        file upload progress tracking extension for PHP
+ii  php8.2-xml                                 8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        DOM, SimpleXML, XML, and XSL module for PHP
+ii  php8.2-zip                                 8.2.22-1+ubuntu22.04.1+deb.sury.org+1        amd64        Zip module for PHP
+ii  php8.3-bz2                                 8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        bzip2 module for PHP
+ii  php8.3-cli                                 8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        command-line interpreter for the PHP scripting language
+ii  php8.3-common                              8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        documentation, examples and common module for PHP
+ii  php8.3-curl                                8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        CURL module for PHP
+ii  php8.3-gd                                  8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        GD module for PHP
+ii  php8.3-mbstring                            8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        MBSTRING module for PHP
+ii  php8.3-mysql                               8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        MySQL module for PHP
+ii  php8.3-opcache                             8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        Zend OpCache module for PHP
+ii  php8.3-readline                            8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        readline module for PHP
+ii  php8.3-sqlite3                             8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        SQLite3 module for PHP
+ii  php8.3-uploadprogress                      2.0.2++-1+ubuntu22.04.1+deb.sury.org+2       amd64        file upload progress tracking extension for PHP
+ii  php8.3-xml                                 8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        DOM, SimpleXML, XML, and XSL module for PHP
+ii  php8.3-zip                                 8.3.10-1+ubuntu22.04.1+deb.sury.org+1        amd64        Zip module for PHP
+ii  phpmyadmin                                 4:5.1.1+dfsg1-5ubuntu1.1                     all          MySQL web administration tool
+ii  phpunit                                    9.5.10-1ubuntu2                              all          Unit testing suite for PHP
+ii  phpunit-cli-parser                         1.0.1-1                                      all          Library for parsing CLI options
+ii  phpunit-code-unit                          1.0.8-1                                      all          Collection of value objects that represent the PHP code units
+ii  phpunit-code-unit-reverse-lookup           2.0.3-2                                      all          look up what a line of code belongs to - PHPUnit component
+ii  phpunit-comparator                         4.0.6-1build2                                all          functionality to compare PHP values for equality - PHPUnit component
+ii  phpunit-complexity                         2.0.2-1                                      all          Library for calculating the complexity of PHP code units
+ii  phpunit-diff                               4.0.4-1                                      all          diff implementation - stand-alone component from PHPUnit
+ii  phpunit-environment                        5.1.3-2                                      all          functionality to handle HHVM/PHP environments - PHPUnit component
+ii  phpunit-exporter                           4.0.4-1                                      all          export variables for visualization - PHPUnit component
+ii  phpunit-global-state                       5.0.5-1                                      all          snapshotting of global state - PHPUnit component
+ii  phpunit-lines-of-code                      1.0.3-1                                      all          Library for counting the lines of code in PHP source code
+ii  phpunit-object-enumerator                  4.0.4-1                                      all          enumerate all referenced objects - PHPUnit component
+ii  phpunit-object-reflector                   2.0.4-1                                      all          reflection of object attributes - PHPUnit component
+ii  phpunit-recursion-context                  4.0.4-1                                      all          recursively process PHP variables - PHPUnit component
+ii  phpunit-resource-operations                3.0.3-2                                      all          provide a list of PHP built-in functions that operate on resources
+ii  phpunit-type                               2.3.4-3                                      all          Collection of value objects that represent the types of the PHP type system
+ii  phpunit-version                            3.0.2-2                                      all          Library that helps with managing the version number of Git-hosted PHP projects

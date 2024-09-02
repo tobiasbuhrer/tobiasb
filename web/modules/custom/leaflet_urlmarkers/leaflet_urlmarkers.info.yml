@@ -1,7 +1,0 @@
-name: Leaflet URL Markers
-type: module
-description: 'Leaflet map. Markers may be clicked to open an URL. Custom behaviour for carte_des_photos'
-package: Custom
-core_version_requirement: '>=9'
-dependencies:
-  - drupal:leaflet_views
