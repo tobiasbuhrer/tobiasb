@@ -17,6 +17,17 @@ use Drupal\views\Plugin\views\ViewsPluginInterface;
 trait LeafletSettingsElementsTrait {
 
   /**
+   * Get maps available for use with Leaflet.
+   */
+  protected static function getLeafletMaps() {
+    $options = [];
+    foreach (leaflet_map_get_info() as $key => $map) {
+      $options[$key] = $map['label'];
+    }
+    return $options;
+  }
+
+  /**
    * Leaflet Controls Positions Options.
    *
    * @var array
@@ -46,9 +57,11 @@ trait LeafletSettingsElementsTrait {
    *   The default settings.
    */
   public static function getDefaultSettings() {
+    $base_layers = self::getLeafletMaps();
+
     return [
       'multiple_map' => FALSE,
-      'leaflet_map' => 'OSM Mapnik',
+      'leaflet_map' => $base_layers['OSM Mapnik'] ? 'OSM Mapnik' : array_shift($base_layers),
       'height' => 400,
       'height_unit' => 'px',
       'hide_empty_map' => FALSE,
@@ -82,6 +95,7 @@ trait LeafletSettingsElementsTrait {
         'maxZoom' => 18,
         'zoomFiner' => 0,
       ],
+      'weight' => 0,
       'icon' => [
         'iconType' => 'marker',
         'iconUrl' => '',
@@ -337,19 +351,15 @@ trait LeafletSettingsElementsTrait {
     ];
 
     $element['zoom'] = [
-      '#title' => $this->t('Zoom'),
+      '#title' => $this->t('Initial Zoom'),
       '#type' => 'number',
       '#min' => 0,
       '#max' => 22,
-      '#description' => $this->t('The initial Zoom level for the Leaflet Map (when empty or when Forced).<br>Admitted values usually range from 0 (the whole world) to 20 - 22, depending on the max zoom supported by the specific Map Tile in use.<br>As a reference consider Zoom 5 for a large country, 10 for a city, 15 for a road or a district, etc.'),
+      '#description' => $this->t('The initial Zoom level for the Map in case of a Single Marker or when Forced (or when empty).<br><u>In case of multiple Markers/Features, the initial Zoom will automatically set so to extend the Map to the boundaries of all of them.</u><br>Admitted values usually range from 0 (the whole world) to 20 - 22, depending on the max zoom supported by the specific Map Tile in use.<br>As a reference consider Zoom 5 for a large country, 10 for a city, 15 for a road or a district.'),
       '#default_value' => $map_position_options['zoom'] ?? $this->getDefaultSettings()['map_position']['zoom'],
       '#required' => TRUE,
       '#element_validate' => [[get_class($this), 'zoomLevelValidate']],
     ];
-
-    if ($this instanceof ViewsPluginInterface) {
-      $element['zoom']['#description'] = $this->t('These setting will be applied (anyway) to a single Marker Map.');
-    }
 
     $element['minZoom'] = [
       '#title' => $this->t('Min. Zoom'),
@@ -376,7 +386,7 @@ trait LeafletSettingsElementsTrait {
       '#max' => 5,
       '#min' => -5,
       '#step' => 1,
-      '#description' => $this->t('Value that might/will be added to default Fit Elements Bounds Zoom. (-5 / +5)'),
+      '#description' => $this->t('Use this selector (-5 | +5) to <u>zoom in or out on the Initial Zoom level, in case of multiple Markers/Features on the Map</u>.<br>Example: -2 will zoom out, adding padding around the markers, while 2 will zoom in, leaving out peripheral markers.<br>Note: This will still be constrained according with your Max & Min Zoom settings.'),
       '#default_value' => $map_position_options['zoomFiner'] ?? $this->getDefaultSettings()['map_position']['zoomFiner'],
       '#states' => [
         'invisible' => isset($force_checkbox_selector_widget) ? [

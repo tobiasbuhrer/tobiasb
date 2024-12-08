@@ -2,13 +2,15 @@
 
 namespace Drupal\video\Plugin\Field\FieldWidget;
 
-use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Render\PlainTextOutput;
+use Drupal\Component\Utility\Bytes;
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Component\Utility\Environment;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\file\Plugin\Field\FieldWidget\FileWidget;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
-use Drupal\Component\Utility\Environment;
+use Drupal\Core\StringTranslation\ByteSizeMarkup;
+use Drupal\file\Plugin\Field\FieldWidget\FileWidget;
 
 /**
  * Plugin implementation of the 'video_upload' widget.
@@ -71,7 +73,7 @@ class VideoUploadWidget extends FileWidget {
       '#type' => 'textfield',
       '#title' => t('Maximum upload size'),
       '#default_value' => $settings['max_filesize'],
-      '#description' => t('Enter a value like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes) in order to restrict the allowed file size. If left empty the file sizes will be limited only by PHP\'s maximum post and file upload sizes (current limit <strong>%limit</strong>).', array('%limit' => format_size(Environment::getUploadMaxSize()))),
+      '#description' => t('Enter a value like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes) in order to restrict the allowed file size. If left empty the file sizes will be limited only by PHP\'s maximum post and file upload sizes (current limit <strong>%limit</strong>).', array('%limit' => ByteSizeMarkup::create(Environment::getUploadMaxSize()))),
       '#size' => 10,
       '#element_validate' => [[get_class($this), 'validateMaxFilesize']],
       '#weight' => 5,
@@ -178,7 +180,7 @@ class VideoUploadWidget extends FileWidget {
       // If there's only one field, return it as delta 0.
       if (empty($elements[0]['#default_value']['fids'])) {
         $file_upload_help['#description'] = $this->fieldDefinition->getDescription();
-        $elements[0]['#description'] = \Drupal::service('renderer')->renderPlain($file_upload_help);
+        $elements[0]['#description'] = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.3.0', fn() => \Drupal::service('renderer')->renderInIsolation($file_upload_help), fn() => \Drupal::service('renderer')->renderPlain($file_upload_help));
       }
     }
     else {
@@ -256,11 +258,11 @@ class VideoUploadWidget extends FileWidget {
     }
 
     // There is always a file size limit due to the PHP server limit.
-    $validators['file_validate_size'] = [$max_filesize];
+    $validators['FileSizeLimit'] = ['fileLimit' => $max_filesize];
 
     // Add the extension check if necessary.
     if (!empty($settings['file_extensions'])) {
-      $validators['file_validate_extensions'] = [$settings['file_extensions']];
+      $validators['FileExtension'] = ['extensions' => $settings['file_extensions']];
     }
 
     return $validators;
