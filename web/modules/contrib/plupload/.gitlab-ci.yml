@@ -50,6 +50,9 @@ include:
 ################
 variables:
   SKIP_STYLELINT: 1
+  # Broaden test coverage.
+  OPT_IN_TEST_PREVIOUS_MINOR: 1
+  OPT_IN_TEST_NEXT_MAJOR: 1
 
 phpunit:
   extends: .phpunit-base

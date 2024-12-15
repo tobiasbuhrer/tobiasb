@@ -48,6 +48,6 @@
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
     "require": {
-        "drupal/core": "^9 || ^10"
+        "drupal/core": "^10.3 || ^11"
     }
 }

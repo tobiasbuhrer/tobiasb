@@ -52,28 +52,28 @@ forms. It does not provide any end-user functionality on its own.
 
 Plupload from element can be used like this:
 
-```
-$form['my_element'] = array(
+```php
+$form['my_element'] = [
   '#type' => 'plupload',
   '#title' => t('Upload files'),
   '#description' => t('This multi-upload widget uses Plupload library.'),
   '#autoupload' => TRUE,
   '#autosubmit' => TRUE,
   '#submit_element' => '#id-of-your-submit-element',
-  '#upload_validators' => array(
-    'file_validate_extensions' => array('jpg jpeg gif png txt doc xls pdf ppt
-     pps odt ods odp'),
-    'my_custom_file_validator' => array('some validation criteria'),
-  );
-  '#plupload_settings' => array(
+  '#upload_validators' => [
+    'FileExtension' => ['extensions' => 'jpg jpeg gif png txt doc xls pdf ppt
+     pps odt ods odp'],
+    'MyCustomValidatorPlugin' => ['my_argument' => 'some validation criteria'],
+  ];
+  '#plupload_settings' => [
     'runtimes' => 'html5',
     'chunk_size' => '1mb',
-  ),
-  '#event_callbacks' => array(
+  ],
+  '#event_callbacks' => [
     'FilesAdded' => 'Drupal.mymodule.filesAddedCallback',
     'UploadComplete' => 'Drupal.mymodule.uploadCompleteCallback',
-  ),
-);
+  ],
+];
 ```
 
 There are few optional properties of this array that have special meaning:
@@ -92,14 +92,14 @@ There are few optional properties of this array that have special meaning:
   and `#autosubmit`.
   See: https://drupal.org/node/1935256.
 
-- `#upload_validators`: An array of validation function/validation criteria
-  pairs, that will be passed to `file_validate()`.
+- `#upload_validators`: An associative array of Validation Constraint plugins and their options
+used to validate the file. They will be passed to `file.validator` service.
   Defaults to:
-```
-  '#upload_validators' => array(
-    'file_validate_extensions' => array('jpg jpeg gif png txt doc xls pdf ppt
-     pps odt ods odp'),
-  );
+```php
+  '#upload_validators' => [
+    'FileExtension' => ['extensions' => 'jpg jpeg gif png txt doc xls pdf ppt
+     pps odt ods odp'],
+  ];
 ```
 
 - `#plupload_settings`: Array of settings, that will be passed to Plupload
@@ -117,7 +117,7 @@ There are few optional properties of this array that have special meaning:
      '/js/plupload.flash.swf'),
     'silverlight_xap_url' => file_create_url($library_path .
      '/js/plupload.silverlight.xap'),
-  ),
+  ],
 ```
 
 - `#event_callbacks`: Array of callbacks that will be passed to js.

@@ -2,12 +2,17 @@
 
 namespace Drupal\Tests\plupload\FunctionalJavascript;
 
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use Drupal\Tests\plupload\Traits\PluploadWebDriverTrait;
+
 /**
  * Test Plupload Widget.
  *
  * @group plupload
  */
-class PluploadWebDriverTest extends PluploadWebDriverTestBase {
+class PluploadWebDriverTest extends WebDriverTestBase {
+
+  use PluploadWebDriverTrait;
 
   /**
    * {@inheritdoc}
@@ -56,7 +61,7 @@ class PluploadWebDriverTest extends PluploadWebDriverTestBase {
     $web_assert->pageTextContains('Drag files here.');
 
     // Add test file.
-    $this->addFile($this->getTestFilePath('plupload-test-file.zip'));
+    $this->addFile($this->getTestFilePath('plupload-test-file.zip'), '#edit-plupload');
 
     // Upload file.
     $web_assert->waitForElementRemoved('css', '.plupload_start.plupload_disabled');
@@ -83,7 +88,7 @@ class PluploadWebDriverTest extends PluploadWebDriverTestBase {
     $web_assert->pageTextContains('Drag files here.');
 
     // Add test file.
-    $this->addFile($this->getTestFilePath('plupload-test-file.zip'));
+    $this->addFile($this->getTestFilePath('plupload-test-file.zip'), '#edit-plupload');
 
     // Submit form.
     $web_assert->waitForElementRemoved('css', '.plupload_start.plupload_disabled');
@@ -92,6 +97,20 @@ class PluploadWebDriverTest extends PluploadWebDriverTestBase {
     // Phpunit checks texts before form submit, need to reload the page.
     $this->drupalGet('plupload-test');
     $web_assert->pageTextContains('Files uploaded correctly: public://plupload-test/plupload-test-file.zip.');
+  }
+
+  /**
+   * Returns the path to a test file.
+   *
+   * @param string $name
+   *   The name of the file.
+   *
+   * @return string
+   *   Path of the test file.
+   */
+  protected function getTestFilePath(string $name): string {
+    return \Drupal::service('extension.list.module')
+      ->getPath('plupload') . '/tests/fixtures/files/' . $name;
   }
 
 }

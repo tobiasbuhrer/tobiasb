@@ -4,7 +4,8 @@ namespace Drupal\plupload\Element;
 
 use Drupal\Core\File\Event\FileUploadSanitizeNameEvent;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\FormElement;
+use Drupal\Core\Render\Element\FormElementBase;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 
@@ -15,7 +16,7 @@ use Drupal\file\Entity\File;
  *
  * @FormElement("plupload")
  */
-class PlUploadFile extends FormElement {
+class PlUploadFile extends FormElementBase {
 
   /**
    * {@inheritdoc}
@@ -93,12 +94,12 @@ class PlUploadFile extends FormElement {
           // Find the whitelist of extensions to use when munging. If there are
           // none, we'll be adding default ones in plupload_element_process(),
           // so use those here.
-          if (isset($element['#upload_validators']['file_validate_extensions'][0])) {
-            $extensions = $element['#upload_validators']['file_validate_extensions'][0];
+          if (isset($element['#upload_validators']['FileExtension']['extensions'])) {
+            $extensions = $element['#upload_validators']['FileExtension']['extensions'];
           }
           else {
             $validators = _plupload_default_upload_validators();
-            $extensions = $validators['file_validate_extensions'][0];
+            $extensions = $validators['FileExtension']['extensions'];
           }
 
           $event = new FileUploadSanitizeNameEvent($value, $extensions);
@@ -125,7 +126,7 @@ class PlUploadFile extends FormElement {
             // The .txt extension may not be in the allowed list of extensions.
             // We have to add it here or else the file upload will fail.
             if (!empty($extensions)) {
-              $element['#upload_validators']['file_validate_extensions'][0] .= ' txt';
+              $element['#upload_validators']['FileExtension']['extensions'] .= ' txt';
               \Drupal::messenger()->addMessage(t('For security reasons, your upload has been renamed to %filename.', ['%filename' => $value]));
             }
           }
@@ -211,13 +212,13 @@ class PlUploadFile extends FormElement {
     // so pass along the information for it to do that. However, as with all
     // client- side validation, this is a UI enhancement only, and not a
     // replacement for server-side validation.
-    if (empty($settings['filters']) && isset($element['#upload_validators']['file_validate_extensions'][0])) {
+    if (empty($settings['filters']) && isset($element['#upload_validators']['FileExtension']['extensions'])) {
       $settings['filters'][] = [
         // @todo Some runtimes (e.g., flash) require a non-empty title for each
         //   filter, but I don't know what this title is used for. Seems a shame
         //   to hard-code it, but what's a good way to avoid that?
         'title' => t('Allowed files'),
-        'extensions' => str_replace(' ', ',', $element['#upload_validators']['file_validate_extensions'][0]),
+        'extensions' => str_replace(' ', ',', $element['#upload_validators']['FileExtension']['extensions']),
       ];
     }
     // Check for autoupload and autosubmit settings and add appropriate
@@ -275,6 +276,9 @@ class PlUploadFile extends FormElement {
     /** @var \Symfony\Component\Mime\MimeTypeGuesserInterface $guesser */
     $guesser = \Drupal::service('file.mime_type.guesser');
 
+    /** @var \Drupal\file\Validation\FileValidatorInterface $file_validator */
+    $file_validator = \Drupal::service('file.validator');
+
     foreach ($element['#value'] as $file_info) {
       // Here we create a $file object for a file that doesn't exist yet,
       // because saving the file to its destination is done in a submit handler.
@@ -290,12 +294,13 @@ class PlUploadFile extends FormElement {
         'filesize' => filesize($file_info['tmppath']),
       ]);
 
-      // @todo Replace with \Drupal::service('file.validator')::validate()
-      // but then we will only be compatible with drupal >=10.2.
-      foreach (file_validate($file, $element['#upload_validators']) as $error_message) {
-        $message = t('The specified file %name could not be uploaded.', ['%name' => $file->getFilename()]);
-        $concatenated_message = $message . ' ' . $error_message;
-        $form_state->setError($element, $concatenated_message);
+      $violations = $file_validator->validate($file, $element['#upload_validators']);
+      if ($violations->count() > 0) {
+        $errors = [t('The specified file %name could not be uploaded.', ['%name' => $file->getFilename()])];
+        foreach ($violations as $violation) {
+          $errors[] = $violation->getMessage();
+        }
+        $form_state->setError($element, Markup::create(implode(' ', $errors)));
       }
     }
   }

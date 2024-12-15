@@ -1,10 +1,12 @@
 name: 'Plupload Integration Module'
 description: 'Provides a plupload Form API element.'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^10.3 || ^11
 package: Media
+dependencies:
+  - drupal:file
 
-# Information added by Drupal.org packaging script on 2024-04-26
-version: '2.1.0'
+# Information added by Drupal.org packaging script on 2024-12-14
+version: '2.2.0'
 project: 'plupload'
-datestamp: 1714147182
+datestamp: 1734181238

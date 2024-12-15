@@ -68,7 +68,7 @@ class PluploadTestForm extends FormBase {
       '#type' => 'plupload',
       '#title' => 'Plupload',
       '#upload_validators' => [
-        'file_validate_extensions' => ['zip'],
+        'FileExtension' => ['extensions' => 'zip'],
       ],
     ];
 
