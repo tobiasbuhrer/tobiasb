@@ -2,6 +2,7 @@
 
 namespace Drupal\juicebox\Controller;
 
+use Drupal\Core\Utility\Error;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -119,7 +120,7 @@ abstract class JuiceboxXmlControllerBase implements ContainerInjectionInterface 
         // Otherwise we have an error. Log it and trigger a general 404
         // response.
         $message = 'Exception building Juicebox XML: !message in %function (line %line of %file).';
-        watchdog_exception('juicebox', $e, $message);
+        Error::logException(\Drupal::logger('juicebox'), $e, $message);
         throw new NotFoundHttpException();
       }
     }

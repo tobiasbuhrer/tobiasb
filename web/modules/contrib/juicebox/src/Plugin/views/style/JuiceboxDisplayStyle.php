@@ -2,6 +2,7 @@
 
 namespace Drupal\juicebox\Plugin\views\style;
 
+use Drupal\Core\Utility\Error;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\views\Plugin\views\style\StylePluginBase;
@@ -262,7 +263,7 @@ class JuiceboxDisplayStyle extends StylePluginBase {
     }
     catch (\Exception $e) {
       $message = 'Exception building Juicebox embed code for view: !message in %function (line %line of %file).';
-      watchdog_exception('juicebox', $e, $message);
+      Error::logException(\Drupal::logger('juicebox'), $e, $message);
     }
     return $element;
   }

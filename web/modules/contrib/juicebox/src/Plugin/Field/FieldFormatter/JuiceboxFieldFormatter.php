@@ -2,6 +2,10 @@
 
 namespace Drupal\juicebox\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Utility\Error;
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\media\Entity\MediaType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Field\FieldItemListInterface;
@@ -220,6 +224,33 @@ class JuiceboxFieldFormatter extends FormatterBase implements ContainerFactoryPl
 
   /**
    * {@inheritdoc}
+   *
+   * We must further check that any media references only target bundles that
+   * have a source plugin ID of "image".
+   */
+  public static function isApplicable(FieldDefinitionInterface $field_definition) {
+    $applicable = parent::isApplicable($field_definition);
+    if ($applicable && $field_definition->getSetting('target_type') === 'media') {
+      $handler_settings = $field_definition->getSetting('handler_settings');
+
+      // If no target bundles are set, assume all are allowed.
+      $allowed_bundles = $handler_settings['target_bundles'] ??
+        array_keys(\Drupal::service('entity_type.bundle.info')->getBundleInfo('media'));
+
+      // Filter out all valid bundles.
+      $invalid_bundles = array_filter($allowed_bundles, static function ($allowed_bundle) {
+        return MediaType::load($allowed_bundle)->getSource()->getPluginId() !== 'image';
+      });
+
+      // Only apply to this field if there are no invalid bundles!
+      $applicable = empty($invalid_bundles);
+    }
+
+    return $applicable;
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $element = [];
@@ -238,10 +269,38 @@ class JuiceboxFieldFormatter extends FormatterBase implements ContainerFactoryPl
     if ($display_name == 'search_result' || $display_name == 'search_index') {
       $add_js = FALSE;
     }
-    // The gallery shown in preview view will only display field data from the
-    // previously saved version (that is the only version the XML generation
-    // methods will have access to). Display a warning because of this.
-    if (!empty($entity->in_preview)) {
+    if ($entity->isNew()) {
+      // If an entity has yet to be saved, it will not have an ID. Furthermore,
+      // the entity is unlikely to have any data that could form an intuitive
+      // preview.  Because it's likely that there isn't enough data, we'll use
+      // a "dummy" image to provide a best-effort representation of what might
+      // be seen by end-users.
+      $gallery = $this->juicebox->newGallery(['id' => Html::getUniqueId('juicebox-preview')]);
+      $src = 'data:image/png;base64,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';
+      $gallery->addImage([
+        'juicebox_compatible' => true,
+        'unstyled_src' => $src,
+        'imageURL' => $src,
+        'thumbURL' => $src,
+        'linkURL' => $src,
+        'linkTarget' => '_blank',
+      ]);
+      $xml_route_info = [
+        'route_name' => 'juicebox.xml_field',
+        'route_parameters' => [
+          'entityType' => $entity_type_id,
+          'entityId' => 0,
+          'fieldName' => $field_name,
+          'displayName' => $display_name,
+        ],
+        'options' => ['query' => $this->request->query->all()],
+      ];
+      return $this->juicebox->buildEmbed($gallery, $this->getSettings(), $xml_route_info, TRUE, TRUE, []);
+    }
+    elseif (!empty($entity->in_preview)) {
+      // The gallery shown in preview view will only display field data from the
+      // previously saved version (that is the only version the XML generation
+      // methods will have access to). Display a warning because of this.
       $this->messenger()->addWarning($this->t('Juicebox galleries may not display correctly in preview mode. Any edits made to gallery data will only be visible after all changes are saved.'), FALSE);
     }
     // Generate xml details.
@@ -268,7 +327,7 @@ class JuiceboxFieldFormatter extends FormatterBase implements ContainerFactoryPl
     }
     catch (\Exception $e) {
       $message = 'Exception building Juicebox embed code for field: !message in %function (line %line of %file).';
-      watchdog_exception('juicebox', $e, $message);
+      Error::logException(\Drupal::logger('juicebox'), $e, $message);
     }
     return $element;
   }

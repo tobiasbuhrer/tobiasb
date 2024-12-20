@@ -16,9 +16,12 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\Render\Element;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 
 /**
  * Class to define a Drupal service with common formatter methods.
+ *
+ * @internal
  */
 class JuiceboxFormatter implements JuiceboxFormatterInterface, TrustedCallbackInterface {
   use StringTranslationTrait;
@@ -80,6 +83,13 @@ class JuiceboxFormatter implements JuiceboxFormatterInterface, TrustedCallbackIn
   protected $entityTypeManager;
 
   /**
+   * The file URL generator.
+   *
+   * @var \Drupal\Core\File\FileUrlGeneratorInterface
+   */
+  protected $fileUrlGenerator;
+
+  /**
    * Constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -99,6 +109,8 @@ class JuiceboxFormatter implements JuiceboxFormatterInterface, TrustedCallbackIn
    *   The messenger interface.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
+   *  @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
+   *   The file URL generator.
    */
   public function __construct(ConfigFactoryInterface $config_factory,
   TranslationInterface $string_translation,
@@ -107,7 +119,8 @@ class JuiceboxFormatter implements JuiceboxFormatterInterface, TrustedCallbackIn
   CurrentPathStack $currentPathStack,
   RequestStack $request_stack,
   MessengerInterface $messenger_interface,
-  EntityTypeManagerInterface $entity_type_manager) {
+  EntityTypeManagerInterface $entity_type_manager,
+  FileUrlGeneratorInterface $file_url_generator) {
     $this->configFactory = $config_factory;
     $this->stringTranslation = $string_translation;
     $this->urlGenerator = $url_generator;
@@ -116,6 +129,7 @@ class JuiceboxFormatter implements JuiceboxFormatterInterface, TrustedCallbackIn
     $this->request = $request_stack->getCurrentRequest();
     $this->messenger = $messenger_interface;
     $this->entityTypeManager = $entity_type_manager;
+    $this->fileUrlGenerator = $file_url_generator;
   }
 
   /**
@@ -360,23 +374,23 @@ class JuiceboxFormatter implements JuiceboxFormatterInterface, TrustedCallbackIn
     $image_data = [];
     $image_data['juicebox_compatible'] = TRUE;
     // Set the normal, unstyled, url for reference.
-    $image_data['unstyled_src'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
+    $image_data['unstyled_src'] = $this->fileUrlGenerator->generateAbsoluteString($file->getFileUri());
     // Check compatibility if configured and if the library info contains
     // mimetype compatibitly information.
     if ($check_compatible && !empty($library['compatible_mimetypes']) && !in_array($mimetype, $library['compatible_mimetypes'])) {
       // If the item is not compatible, find the substitute mimetype icon.
       $image_data['juicebox_compatible'] = FALSE;
-      $icon_dir = \Drupal::service('extension.list.module')->getPath('juicebox') . '/images/mimetypes';
+      $icon_dir = $this->moduleManager->getModule('juicebox')->getPath() . '/images/mimetypes';
       // We only have icons for each major type, so simplify accordingly.
       // file_icon_class() could also be useful here but would require
       // supporting icons for more package types.
       $type_parts = explode('/', $mimetype);
       $icon_path = $icon_dir . '/' . reset($type_parts) . '.png';
       if (file_exists($icon_path)) {
-        $image_data['imageURL'] = \Drupal::service('file_url_generator')->generateAbsoluteString($icon_path);
+        $image_data['imageURL'] =  $this->fileUrlGenerator->generateAbsoluteString($icon_path);
       }
       else {
-        $image_data['imageURL'] = \Drupal::service('file_url_generator')->generateAbsoluteString($icon_dir . '/general.png');
+        $image_data['imageURL'] =  $this->fileUrlGenerator->generateAbsoluteString($icon_dir . '/general.png');
       }
     }
     // If the item is compatible, style it.
