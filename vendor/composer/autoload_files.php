@@ -25,5 +25,9 @@ return array(
     'def43f6c87e4f8dfd0c9e1b1bab14fe8' => $vendorDir . '/symfony/polyfill-iconv/bootstrap.php',
     '2f69d3914119f042cca9e44442d5ce95' => $baseDir . '/web/core/includes/bootstrap.inc',
     '9b38cf48e83f5d8f60375221cd213eee' => $vendorDir . '/phpstan/phpstan/bootstrap.php',
+    '23f09fe3194f8c2f70923f90d6702129' => $vendorDir . '/illuminate/collections/functions.php',
+    '60799491728b879e74601d83e38b2cad' => $vendorDir . '/illuminate/collections/helpers.php',
+    '47e1160838b5e5a10346ac4084b58c23' => $vendorDir . '/laravel/prompts/src/helpers.php',
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
+    '38143a9afc50997d55e4815db8489d1c' => $vendorDir . '/rector/rector/bootstrap.php',
 );

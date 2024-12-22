@@ -13,7 +13,7 @@
  */
 #}
 {% set classes = bulma_button_classes %}
-{% apply spaceless %}
+{# {% apply spaceless %} #}
 <div class="control">
   <button{{ attributes.addClass(classes) }}>
     {% if icon %}
@@ -29,4 +29,4 @@
 {% if element['#id'] in ['edit-submit-hebergements','edit-submit-photos'] %}
     </div>
 {% endif %}
-{% endapply %}
+{# {% endapply %} #}

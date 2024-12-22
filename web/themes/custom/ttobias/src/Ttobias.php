@@ -2,6 +2,8 @@
 
 namespace Drupal\ttobias;
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\file\IconMimeTypes;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Unicode;
@@ -379,7 +381,7 @@ class Ttobias {
     $mime_type = $file->getMimeType();
 
     // Retrieve the generic mime type from core.
-    $generic_mime_type = file_icon_class($mime_type);
+    $generic_mime_type = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.3.0', fn() => IconMimeTypes::getIconClass($mime_type), fn() => file_icon_class($mime_type));
 
     // Map the generic mime types to an icon.
     $icon_map = [

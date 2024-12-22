@@ -31,7 +31,7 @@
     size,
   ]
 -%}
-{% apply spaceless %}
+{# {% apply spaceless %} #}
 {% if title is not empty and title_display == 'invisible' and (is_checkbox or is_radio) -%}
   {#
     Clear but preserve label text as attribute (e.g. for screen readers) for
@@ -57,4 +57,4 @@
 {% if element['#id'] == 'edit-field-tags-target-id' %}
   </div>
 {%- endif -%}
-{% endapply %}
+{# // {% endapply %} #}

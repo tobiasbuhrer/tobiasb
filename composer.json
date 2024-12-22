@@ -25,7 +25,7 @@
         "drupal/file_mdm": "^3.0",
         "drupal/geofield": "^1.0",
         "drupal/honeypot": "^2.1",
-        "drupal/image_effects": "^3.5",
+        "drupal/image_effects": "^4.0",
         "drupal/imagemagick": "^4.0",
         "drupal/juicebox": "^4.0@alpha",
         "drupal/leaflet": "^10.2",
@@ -38,7 +38,7 @@
         "drupal/upgrade_status": "^4.0",
         "drupal/video": "^3.0",
         "drupal/webform": "^6.2@RC",
-        "drush/drush": "^12.5"
+        "drush/drush": "^13.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -92,5 +92,8 @@
                 "type:drupal-custom-theme"
             ]
         }
+    },
+    "require-dev": {
+        "palantirnet/drupal-rector": "^0.20.3"
     }
 }

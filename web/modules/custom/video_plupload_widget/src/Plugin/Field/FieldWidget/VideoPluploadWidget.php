@@ -12,6 +12,7 @@ use Drupal\file\Plugin\Field\FieldWidget\FileWidget;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Component\Utility\Environment;
 use Drupal\Core\StringTranslation\ByteSizeMarkup;
+use Drupal\Core\Render\RendererInterface;
 
 
 
@@ -167,7 +168,9 @@ class VideoPluploadWidget extends FileWidget
             '#upload_validators' => '',
             '#cardinality' => $configuration->cardinality,
         );
-        $element['#description'] = \Drupal::service('renderer')->renderPlain($file_upload_help);
+        //$element['#description'] = \Drupal::service('renderer')->renderPlain($file_upload_help);
+        $element['#description'] =renderInIsolation($file_upload_help);
+         
 
         // Replace the upload HTML element with PLUPLOAD
         // for a single file.
@@ -262,7 +265,7 @@ class VideoPluploadWidget extends FileWidget
 
             // Create file object from a locally copied file.
             //$uri = file_unmanaged_copy($uploaded_file['tmppath'], $file_uri, FILE_EXISTS_REPLACE);
-            $uri = \Drupal::service('file_system')->copy($uploaded_file['tmppath'], $file_uri, \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE);
+            $uri = \Drupal::service('file_system')->copy($uploaded_file['tmppath'], $file_uri, Drupal\Core\File\FileExists::Replace);
             
             $f = File::Create([
                 'uri' => $uri,
