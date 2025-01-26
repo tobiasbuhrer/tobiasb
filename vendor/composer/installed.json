@@ -2686,18 +2686,18 @@
         },
         {
             "name": "drupal/leaflet_more_maps",
-            "version": "2.2.2",
-            "version_normalized": "2.2.2.0",
+            "version": "2.2.3",
+            "version_normalized": "2.2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet_more_maps.git",
-                "reference": "2.2.2"
+                "reference": "2.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet_more_maps-2.2.2.zip",
-                "reference": "2.2.2",
-                "shasum": "40e34fd0e930a9497f0506c895d17a4261943281"
+                "url": "https://ftp.drupal.org/files/projects/leaflet_more_maps-2.2.3.zip",
+                "reference": "2.2.3",
+                "shasum": "73b39b8acb7cfe68a2a9251eff32f64fb4851bc7"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9 || ^10 || ^11",
@@ -2709,8 +2709,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.2.2",
-                    "datestamp": "1723673168",
+                    "version": "2.2.3",
+                    "datestamp": "1737668201",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2743,7 +2743,7 @@
                     "homepage": "https://www.drupal.org/user/66273"
                 },
                 {
-                    "name": "RdeBoer",
+                    "name": "rdeboer",
                     "homepage": "https://www.drupal.org/user/404007"
                 }
             ],
@@ -4162,17 +4162,17 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v11.38.2",
-            "version_normalized": "11.38.2.0",
+            "version": "v11.40.0",
+            "version_normalized": "11.40.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "9100b083eeb85d38d78fc1de28f7326596ab2eda"
+                "reference": "80c85f81573cc4c024da05312119f9149a6b64c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/9100b083eeb85d38d78fc1de28f7326596ab2eda",
-                "reference": "9100b083eeb85d38d78fc1de28f7326596ab2eda",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/80c85f81573cc4c024da05312119f9149a6b64c1",
+                "reference": "80c85f81573cc4c024da05312119f9149a6b64c1",
                 "shasum": ""
             },
             "require": {
@@ -4184,7 +4184,7 @@
             "suggest": {
                 "symfony/var-dumper": "Required to use the dump method (^7.0)."
             },
-            "time": "2024-12-18T14:14:45+00:00",
+            "time": "2025-01-24T15:40:32+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4221,8 +4221,8 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v11.38.2",
-            "version_normalized": "11.38.2.0",
+            "version": "v11.40.0",
+            "version_normalized": "11.40.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -4270,8 +4270,8 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v11.38.2",
-            "version_normalized": "11.38.2.0",
+            "version": "v11.40.0",
+            "version_normalized": "11.40.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -4321,8 +4321,8 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v11.38.2",
-            "version_normalized": "11.38.2.0",
+            "version": "v11.40.0",
+            "version_normalized": "11.40.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -4687,17 +4687,17 @@
         },
         {
             "name": "mglaman/phpstan-drupal",
-            "version": "1.3.2",
-            "version_normalized": "1.3.2.0",
+            "version": "1.3.3",
+            "version_normalized": "1.3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mglaman/phpstan-drupal.git",
-                "reference": "bbb92dee546da3988da851122cb2925f72c149f3"
+                "reference": "2a30d8d3ca170d86b1829e3cb8037ad87b82f20d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/bbb92dee546da3988da851122cb2925f72c149f3",
-                "reference": "bbb92dee546da3988da851122cb2925f72c149f3",
+                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/2a30d8d3ca170d86b1829e3cb8037ad87b82f20d",
+                "reference": "2a30d8d3ca170d86b1829e3cb8037ad87b82f20d",
                 "shasum": ""
             },
             "require": {
@@ -4725,7 +4725,7 @@
                 "phpstan/phpstan-deprecation-rules": "For catching deprecations, especially in Drupal core.",
                 "phpstan/phpstan-phpunit": "PHPUnit extensions and rules for PHPStan."
             },
-            "time": "2024-11-19T15:26:05+00:00",
+            "time": "2025-01-23T15:21:21+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -4774,7 +4774,7 @@
             "description": "Drupal extension and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/mglaman/phpstan-drupal/issues",
-                "source": "https://github.com/mglaman/phpstan-drupal/tree/1.3.2"
+                "source": "https://github.com/mglaman/phpstan-drupal/tree/1.3.3"
             },
             "funding": [
                 {
@@ -5433,17 +5433,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.15",
-            "version_normalized": "1.12.15.0",
+            "version": "1.12.16",
+            "version_normalized": "1.12.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "c91d4e8bc056f46cf653656e6f71004b254574d1"
+                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c91d4e8bc056f46cf653656e6f71004b254574d1",
-                "reference": "c91d4e8bc056f46cf653656e6f71004b254574d1",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e0bb5cb78545aae631220735aa706eac633a6be9",
+                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9",
                 "shasum": ""
             },
             "require": {
@@ -5452,7 +5452,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2025-01-05T16:40:22+00:00",
+            "time": "2025-01-21T14:50:05+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"

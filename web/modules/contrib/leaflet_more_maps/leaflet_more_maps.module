@@ -519,7 +519,7 @@ function _leaflet_more_maps_assemble_default_map_info(array &$map_info, array $d
     'settings' => $default_settings,
     'layers' => [
       'layer' => [
-        'urlTemplate' => $prot . "{s}.tile.opentopomap.org/$zxy",
+        'urlTemplate' => $prot . "{s}.tile.opentopomap.org/$simple_zxy",
         'options' => ['attribution' => $attr_opentopomap],
       ],
     ],
