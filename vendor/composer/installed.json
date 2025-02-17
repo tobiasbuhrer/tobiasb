@@ -2612,18 +2612,18 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.38",
-            "version_normalized": "10.2.38.0",
+            "version": "10.2.40",
+            "version_normalized": "10.2.40.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.38"
+                "reference": "10.2.40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.38.zip",
-                "reference": "10.2.38",
-                "shasum": "ded7ba77f02fd20ec1ada971851a807ce4986505"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.40.zip",
+                "reference": "10.2.40",
+                "shasum": "bcc24d29bc03aabf04ef3636493a7684bb3d1645"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10 || ^11",
@@ -2632,8 +2632,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.38",
-                    "datestamp": "1739118675",
+                    "version": "10.2.40",
+                    "datestamp": "1739712453",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4163,17 +4163,17 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v11.41.3",
-            "version_normalized": "11.41.3.0",
+            "version": "v11.42.1",
+            "version_normalized": "11.42.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "80c85f81573cc4c024da05312119f9149a6b64c1"
+                "reference": "6fd628d32a0989211c4f2829bf0a6a6175b2f3fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/80c85f81573cc4c024da05312119f9149a6b64c1",
-                "reference": "80c85f81573cc4c024da05312119f9149a6b64c1",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/6fd628d32a0989211c4f2829bf0a6a6175b2f3fd",
+                "reference": "6fd628d32a0989211c4f2829bf0a6a6175b2f3fd",
                 "shasum": ""
             },
             "require": {
@@ -4185,7 +4185,7 @@
             "suggest": {
                 "symfony/var-dumper": "Required to use the dump method (^7.0)."
             },
-            "time": "2025-01-24T15:40:32+00:00",
+            "time": "2025-02-05T10:23:21+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4222,8 +4222,8 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v11.41.3",
-            "version_normalized": "11.41.3.0",
+            "version": "v11.42.1",
+            "version_normalized": "11.42.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -4271,17 +4271,17 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v11.41.3",
-            "version_normalized": "11.41.3.0",
+            "version": "v11.42.1",
+            "version_normalized": "11.42.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "534b697fc1dd9fbdd9fbf2f33fc9dcbb943dea75"
+                "reference": "b350a3cd8450846325cb49e1cbc1293598b18898"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/534b697fc1dd9fbdd9fbf2f33fc9dcbb943dea75",
-                "reference": "534b697fc1dd9fbdd9fbf2f33fc9dcbb943dea75",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/b350a3cd8450846325cb49e1cbc1293598b18898",
+                "reference": "b350a3cd8450846325cb49e1cbc1293598b18898",
                 "shasum": ""
             },
             "require": {
@@ -4289,7 +4289,7 @@
                 "psr/container": "^1.1.1|^2.0.1",
                 "psr/simple-cache": "^1.0|^2.0|^3.0"
             },
-            "time": "2025-01-10T20:57:00+00:00",
+            "time": "2025-02-10T14:20:57+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4322,8 +4322,8 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v11.41.3",
-            "version_normalized": "11.41.3.0",
+            "version": "v11.42.1",
+            "version_normalized": "11.42.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -5434,17 +5434,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.17",
-            "version_normalized": "1.12.17.0",
+            "version": "1.12.18",
+            "version_normalized": "1.12.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7027b3b0270bf392de0cfba12825979768d728bf"
+                "reference": "fef9f07814a573399229304bb0046affdf558812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7027b3b0270bf392de0cfba12825979768d728bf",
-                "reference": "7027b3b0270bf392de0cfba12825979768d728bf",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fef9f07814a573399229304bb0046affdf558812",
+                "reference": "fef9f07814a573399229304bb0046affdf558812",
                 "shasum": ""
             },
             "require": {
@@ -5453,7 +5453,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2025-02-07T15:01:57+00:00",
+            "time": "2025-02-13T12:44:44+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
