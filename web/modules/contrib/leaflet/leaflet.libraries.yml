@@ -19,8 +19,8 @@ leaflet:
 
 # MapLibre GL JS
 maplibre-gl-js:
-  remote: https://github.com/maplibre/maplibre-gl-js
-  version: 5.1.0
+  remote: https://maplibre.org/
+  version: 3.6.2
   license:
     name: MapLibre-Js License
     url: https://github.com/maplibre/maplibre-gl-js/blob/main/LICENSE.txt
@@ -29,18 +29,19 @@ maplibre-gl-js:
     # that somehow breaks the Leaflet Map rendering
     # @see: https://www.drupal.org/project/leaflet/issues/3410672
     # Source: Original js file coming from:
-    # https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js
+    # https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js
     # NOTE: it was removed the last code line
     # #sourceMappingURL=maplibre-gl.js.map
     # at the end of the original js file to make the js debugger not look for the
     # maplibre-gl.js.map file (that is 5 MB big)
     # and make the all Drupal Leaflet module much lighter.
-    js/maplibre-gl-js-5.1.0/maplibre-gl.js: {minified: true, preprocess: false }
+    # NOTE (2): we tried to upgrade all this to 5.1.0 but we rolled it back as
+    # weird things happening during the pan action (the tiles were not panning,
+    # under the features elements) thus we aborted it.
+    js/maplibre-gl-js-3.6.2/maplibre-gl.js: { preprocess: false }
   css:
     component:
-      # Source: Original js file coming from:
-      # https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css
-      js/maplibre-gl-js-5.1.0/maplibre-gl.css: {}
+      js/maplibre-gl-js-3.6.2/maplibre-gl.css: {}
   dependencies:
     - leaflet/leaflet
 

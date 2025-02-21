@@ -148,8 +148,10 @@ class HoneypotService implements HoneypotServiceInterface {
       // If this is a Webform form, ensure the honeypot element has
       // a unique name in the 'elements' array.
       if (!empty($form['#webform_id'])) {
-        while (array_key_exists($honeypot_element, $form['elements'])) {
-          $honeypot_element .= '_';
+        if (!empty($form['elements'])) {
+          while (array_key_exists($honeypot_element, $form['elements'])) {
+            $honeypot_element .= '_';
+          }
         }
       }
 

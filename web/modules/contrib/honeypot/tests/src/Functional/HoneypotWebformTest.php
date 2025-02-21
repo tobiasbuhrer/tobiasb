@@ -65,7 +65,8 @@ class HoneypotWebformTest extends BrowserTestBase {
     // Visit the webform page.
     $this->drupalGet('/webform/' . $webform->id());
 
-    // Honeypot field with the name "url_" should exist.
+    // Honeypot field with the name "non_unique_field_name_"
+    // should exist.
     $this->assertSession()->fieldExists('non_unique_field_name_');
   }
 
@@ -95,7 +96,8 @@ class HoneypotWebformTest extends BrowserTestBase {
     // Visit the webform page.
     $this->drupalGet('/webform/' . $webform->id());
 
-    // Honeypot field with the name "url__" should exist.
+    // Honeypot field with the name "non_unique_field_name__"
+    // should exist.
     $this->assertSession()->fieldExists('non_unique_field_name__');
   }
 
@@ -121,8 +123,46 @@ class HoneypotWebformTest extends BrowserTestBase {
     // Visit the webform page.
     $this->drupalGet('/webform/' . $webform->id());
 
-    // Check if the honeypot field with the name "url" exists (no renaming).
+    // Check if the honeypot field with the name
+    // "unique_field_name" exists (no renaming).
     $this->assertSession()->fieldExists('unique_field_name');
+  }
+
+  /**
+   * Test if honeypot field name is not altered (Webform closed).
+   */
+  public function testHoneypotFieldWithClosedWebform(): void {
+    // Create new webform with a conflicting field name.
+    $webform = Webform::create([
+      'langcode' => 'en',
+      'status' => WebformInterface::STATUS_CLOSED,
+      'id' => 'test_closed_webform',
+      'title' => 'Test closed webform',
+      'elements' => Yaml::encode([
+        'non_unique_field_name' => [
+          '#type' => 'textfield',
+          '#title' => 'Unique field name',
+        ],
+        'unique_field_name' => [
+          '#type' => 'textfield',
+          '#title' => 'Unique field name',
+        ],
+      ]),
+    ]);
+    $webform->save();
+
+    // Visit the webform page.
+    $this->drupalGet('/webform/' . $webform->id());
+
+    // Honeypot field with the name "non_unique_field_name"
+    // should exist.
+    $this->assertSession()->fieldExists('non_unique_field_name');
+    // Honeypot field with the name "non_unique_field_name_"
+    // should NOT exist.
+    $this->assertSession()->fieldNotExists('non_unique_field_name_');
+    // Webform field with the name "unique_field_name"
+    // should NOT exist.
+    $this->assertSession()->fieldNotExists('unique_field_name');
   }
 
 }
