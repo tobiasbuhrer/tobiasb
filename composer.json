@@ -37,7 +37,7 @@
         "drupal/sophron": "^2.1",
         "drupal/upgrade_status": "^4.0",
         "drupal/video": "^3.0",
-        "drupal/webform": "^6.2@RC",
+        "drupal/webform": "^6.3@beta",
         "drush/drush": "^13.0"
     },
     "conflict": {
