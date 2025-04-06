@@ -149,6 +149,7 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
             'Dflydev\\DotAccessData\\' => 22,
+            'Defuse\\Crypto\\' => 14,
         ),
         'C' => 
         array (
@@ -474,6 +475,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'Dflydev\\DotAccessData\\' => 
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
+        ),
+        'Defuse\\Crypto\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/defuse/php-encryption/src',
         ),
         'Consolidation\\SiteProcess\\' => 
         array (

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'edfa8a7c102c62eee890967adc26ca20ccfbe0d5',
+        'reference' => 'ad212b406d4008a57f049702c870ca3a28bdcd14',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -125,6 +125,15 @@
             'install_path' => __DIR__ . '/../consolidation/site-process',
             'aliases' => array(),
             'reference' => 'e7fafc40ebfddc1a5ee99ee66e5d186fc1bed4da',
+            'dev_requirement' => false,
+        ),
+        'defuse/php-encryption' => array(
+            'pretty_version' => 'v2.4.0',
+            'version' => '2.4.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../defuse/php-encryption',
+            'aliases' => array(),
+            'reference' => 'f53396c2d34225064647a05ca76c1da9d99e5828',
             'dev_requirement' => false,
         ),
         'dekor/php-array-table' => array(
@@ -538,7 +547,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'edfa8a7c102c62eee890967adc26ca20ccfbe0d5',
+            'reference' => 'ad212b406d4008a57f049702c870ca3a28bdcd14',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -756,6 +765,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'paragonie/random_compat' => array(
+            'pretty_version' => 'v9.99.100',
+            'version' => '9.99.100.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../paragonie/random_compat',
+            'aliases' => array(),
+            'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
+            'dev_requirement' => false,
         ),
         'pear/archive_tar' => array(
             'pretty_version' => '1.5.0',

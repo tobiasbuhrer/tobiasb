@@ -60,7 +60,11 @@ class ImageImportImageStyle extends QueueWorkerBase implements ContainerFactoryP
         /** @var \Drupal\file\Entity\File $entity */
         $entity = $data['entity'];
         $styles = $this->imageStyleStorage->loadMultiple();
-        $image_uri = $entity->getFileUri();
+        //old
+        //$image_uri = $entity->getFileUri();
+        //maybe try:
+        $image_uri =\Drupal::service('file_system')->realpath($file->getFileUri());
+        
         /** @var \Drupal\image\Entity\ImageStyle $style */
         foreach ($styles as $style) {
             $destination = $style->buildUri($image_uri);
