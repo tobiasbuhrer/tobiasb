@@ -86,11 +86,11 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
             'Symfony\\Component\\DependencyInjection\\' => 38,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
-            'SelfUpdate\\' => 11,
         ),
         'R' => 
         array (
             'Robo\\' => 5,
+            'Revolt\\' => 7,
         ),
         'P' => 
         array (
@@ -101,6 +101,7 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
             'Psr\\EventDispatcher\\' => 20,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
+            'PhpTuf\\ComposerStager\\' => 22,
             'PhpParser\\' => 10,
             'Peast\\' => 6,
             'PHPStan\\' => 8,
@@ -318,13 +319,13 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         array (
             0 => __DIR__ . '/..' . '/symfony/psr-http-message-bridge',
         ),
-        'SelfUpdate\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/consolidation/self-update/src',
-        ),
         'Robo\\' => 
         array (
             0 => __DIR__ . '/..' . '/consolidation/robo/src',
+        ),
+        'Revolt\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/revolt/event-loop/src',
         ),
         'Psy\\' => 
         array (
@@ -354,6 +355,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'PhpTuf\\ComposerStager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-tuf/composer-stager/src',
         ),
         'PhpParser\\' => 
         array (
