@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '92da863cf587960297e8da6d4dfee8c91b67e554',
+        'reference' => 'fa5168a4996369515cf0256b5bd881f2f60b2493',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -164,12 +164,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/deprecations' => array(
-            'pretty_version' => '1.1.4',
-            'version' => '1.1.4.0',
+            'pretty_version' => '1.1.5',
+            'version' => '1.1.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/deprecations',
             'aliases' => array(),
-            'reference' => '31610dbb31faa98e6b5447b62340826f54fbc4e9',
+            'reference' => '459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38',
             'dev_requirement' => false,
         ),
         'doctrine/event-manager' => array(
@@ -538,7 +538,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '92da863cf587960297e8da6d4dfee8c91b67e554',
+            'reference' => 'fa5168a4996369515cf0256b5bd881f2f60b2493',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
