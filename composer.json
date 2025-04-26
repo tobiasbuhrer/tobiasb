@@ -30,7 +30,7 @@
         "drupal/image_effects": "^4.0",
         "drupal/imagemagick": "^4.0",
         "drupal/juicebox": "^4.0@alpha",
-        "drupal/leaflet": "^10.2",
+        "drupal/leaflet": "10.2.44",
         "drupal/leaflet_more_maps": "^2.1",
         "drupal/libraries": "^4.0",
         "drupal/minifyhtml": "^2.0",
