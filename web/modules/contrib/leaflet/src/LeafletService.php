@@ -113,7 +113,7 @@ class LeafletService {
     StreamWrapperManagerInterface $stream_wrapper_manager,
     RequestStack $request_stack,
     CacheBackendInterface $cache,
-    FileUrlGeneratorInterface $file_url_generator
+    FileUrlGeneratorInterface $file_url_generator,
   ) {
     $this->currentUser = $current_user;
     $this->geoPhpWrapper = $geophp_wrapper;
@@ -154,7 +154,7 @@ class LeafletService {
     }
 
     // Add the Leaflet Reset View library, if requested.
-    if (isset($map['settings']['reset_map']) && $map['settings']['reset_map']['control']) {
+    if (is_array($map['settings']['reset_map']) && array_key_exists('control', $map['settings']['reset_map']) && $map['settings']['reset_map']['control']) {
       $attached_libraries[] = 'leaflet/leaflet.reset_map_view';
     }
 
@@ -279,7 +279,7 @@ class LeafletService {
    * Process the Geometry Collection.
    *
    * @param \Geometry $geom
-   *   The Geometry Collection.
+   *   The Geometry.
    *
    * @return array
    *   The return array.
@@ -311,9 +311,9 @@ class LeafletService {
       case 'polygon':
         /** @var \GeometryCollection $geom */
         $polygon_components = $geom->getComponents();
+        /** @var \GeometryCollection $geom */
         foreach ($polygon_components as $k => $geom) {
           $points = $geom->getComponents();
-          /** @var \Geometry $component */
           foreach ($points as $point) {
             $datum['points'][$k][] = [
               'lat' => $point->getY(),
@@ -353,7 +353,6 @@ class LeafletService {
           $polygon_components = $polygon->getComponents();
           foreach ($polygon_components as $k => $geom) {
             $points = $geom->getComponents();
-            /** @var \Geometry $component */
             foreach ($points as $point) {
               $datum['points'][$j][$k][] = [
                 'lat' => $point->getY(),

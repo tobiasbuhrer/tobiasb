@@ -112,7 +112,7 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
     ModuleHandlerInterface $module_handler,
     LinkGeneratorInterface $link_generator,
     Token $token,
-    LanguageManagerInterface $languageManager
+    LanguageManagerInterface $languageManager,
   ) {
     parent::__construct(
       $plugin_id,
@@ -411,7 +411,7 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
     $delta,
     array $element,
     array &$form,
-    FormStateInterface $form_state
+    FormStateInterface $form_state,
   ) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
@@ -518,6 +518,7 @@ class LeafletDefaultWidget extends GeofieldDefaultWidget {
     $element['map']['#attached']['drupalSettings']['leaflet'][$element['map']['#map_id']]['leaflet_widget'] = $leaflet_widget_js_settings;
 
     // Convert default value to geoJSON format.
+    /** @var \Geometry|null $geom */
     if ($geom = $this->geoPhpWrapper->load($element['value']['#default_value'])) {
       $element['value']['#default_value'] = $geom->out('json');
     }

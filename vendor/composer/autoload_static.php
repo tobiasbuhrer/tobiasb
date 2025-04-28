@@ -50,6 +50,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         array (
             'dekor\\' => 6,
         ),
+        'c' => 
+        array (
+            'cweagans\\Composer\\' => 18,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -194,6 +198,10 @@ class ComposerStaticInit6519cd7c0282d7a2e75fb3c7b12273c3
         'dekor\\' => 
         array (
             0 => __DIR__ . '/..' . '/dekor/php-array-table/src',
+        ),
+        'cweagans\\Composer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cweagans/composer-patches/src',
         ),
         'Twig\\' => 
         array (

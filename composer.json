@@ -16,6 +16,7 @@
     ],
     "require": {
         "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
         "defuse/php-encryption": "^2.4",
         "drupal/backup_migrate": "^5.0",
         "drupal/core": "^11.0",
@@ -30,7 +31,7 @@
         "drupal/image_effects": "^4.0",
         "drupal/imagemagick": "^4.0",
         "drupal/juicebox": "^4.0@alpha",
-        "drupal/leaflet": "10.2.44",
+        "drupal/leaflet": "^10.2",
         "drupal/leaflet_more_maps": "^2.1",
         "drupal/libraries": "^4.0",
         "drupal/minifyhtml": "^2.0",
@@ -93,6 +94,11 @@
             "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
+        },
+        "patches": {
+           "drupal/leaflet": {
+            "leaflet markup cast into string": "patches/leaflet_markup_cast_into_string_3521371_2.patch"
+                             }
         }
     },
     "require-dev": {
