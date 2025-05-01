@@ -94,11 +94,6 @@
             "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
-        },
-        "patches": {
-           "drupal/leaflet": {
-            "leaflet markup cast into string": "patches/leaflet_markup_cast_into_string_3521371_2.patch"
-                             }
         }
     },
     "require-dev": {
