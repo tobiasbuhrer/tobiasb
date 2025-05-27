@@ -1,4 +1,4 @@
-(function($, Drupal, drupalSettings) {
+(function($, Drupal, drupalSettings, once) {
 
   "use strict";
 
@@ -7,33 +7,35 @@
 
       // For each Leaflet Map/id defined process with Leaflet Map and Features
       // generation.
-      $.each(settings.leaflet, function(m, data) {
+      $.each(settings.leaflet, function(mapid, leaflet_settings) {
 
         // Ensure the Leaflet Behavior is attached only once to each Leaflet map
         // id element.
         // @see https://www.drupal.org/project/leaflet/issues/3314762#comment-15044223
-        const leaflet_elements = $(once('behaviour-leaflet', '#' + data.mapid));
+        const leaflet_elements = $(once('behaviour-leaflet', '#' + mapid,));
         leaflet_elements.each(function() {
           const map_container = $(this);
-          const mapid = data.mapid;
 
           // Function to load the Leaflet Map, based on the provided mapid.
           function loadMap(mapid) {
             // Process a new Leaflet Map only if the map container is empty.
             // Avoid reprocessing a Leaflet Map already initialised.
             if (map_container.data('leaflet') === undefined) {
-              map_container.data('leaflet', new Drupal.Leaflet(L.DomUtil.get(mapid), mapid, data.map));
-              if (data.features.length > 0) {
+              map_container.data('leaflet', new Drupal.Leaflet(L.DomUtil.get(mapid), mapid, leaflet_settings.map));
+              if (leaflet_settings.features.length > 0) {
                 // Add Leaflet Map Features.
-                map_container.data('leaflet').add_features(data.features, true);
+                map_container.data('leaflet').add_features(leaflet_settings.features, true);
               }
 
-              // Add the Leaflet map to data settings object to make it accessible.
-              // @NOTE: This is used by the Leaflet Widget module.
-              data.lMap = map_container.data('leaflet').lMap;
+              // Add the Leaflet map to data settings object to make it
+              // accessible and extendable from other Drupal.behaviors attached
+              // functions.
+              // @NOTE: i.e. this is used by the leaflet.widget.js.
+              leaflet_settings.lMap = map_container.data('leaflet').lMap;
 
-              // Add the Leaflet Map Markers to data settings object to make it accessible.
-              data.markers = map_container.data('leaflet').markers;
+              // Add the Leaflet Map Markers to data settings object to make it
+              // also accessible and extendable.
+              leaflet_settings.markers = map_container.data('leaflet').markers;
 
               // Set initial Map position to wrap its defined bounds.
               map_container.data('leaflet').fitBounds();
@@ -95,7 +97,7 @@
                   .addTo(map_container.data('leaflet').lMap);
 
                 // In case this Leaflet Map is not in a Widget Context, eventually perform the Automatic User Locate, if requested.
-                if (!data.hasOwnProperty('leaflet_widget') &&
+                if (!leaflet_settings.hasOwnProperty('leaflet_widget') &&
                     map_container.data('leaflet').map_settings.hasOwnProperty('locate') &&
                     map_container.data('leaflet').map_settings.locate.automatic) {
                   Drupal.Leaflet[mapid].locate_control.start();
@@ -113,7 +115,7 @@
               }
 
               // Attach Leaflet Map listeners On Popup Open.
-              data.lMap.on('popupopen', function(e) {
+              leaflet_settings.lMap.on('popupopen', function(e) {
                 // On leaflet-ajax-popup selector, fetch and set Ajax content.
                 const element = e.popup._contentNode;
                 const content = $('*[data-leaflet-ajax-popup]', element);
@@ -147,7 +149,7 @@
               });
 
               // Attach Leaflet Map listeners On Popup Close.
-              data.lMap.on('popupclose', function(e) {
+              leaflet_settings.lMap.on('popupclose', function(e) {
                 // Make the (eventually present) Tooltip re-appear on Popup Close.
                 // in case the Popup is generated from a _source.
                 if (e.popup._source) {
@@ -164,10 +166,10 @@
               // properties and contents / features.
               // NOTE: don't change this trigger arguments,
               // to preserve backwards compatibility.
-              $(document).trigger('leafletMapInit', [data.map, data.lMap, mapid, data.markers]);
+              $(document).trigger('leafletMapInit', [leaflet_settings.map, leaflet_settings.lMap, mapid, leaflet_settings.markers]);
               // NOTE: Keep also this pre-existing event for backwards
               // compatibility with Leaflet < 2.1.0.
-              $(document).trigger('leaflet.map', [data.map, data.lMap, mapid, data.markers]);
+              $(document).trigger('leaflet.map', [leaflet_settings.map, leaflet_settings.lMap, mapid, leaflet_settings.markers]);
             }
           }
 
@@ -186,7 +188,7 @@
           }
 
           // Load the Leaflet Map, lazy based on the mapObserver, or not.
-          if (mapObserver && data.map.settings.map_lazy_load?.lazy_load) {
+          if (mapObserver && leaflet_settings.map.settings.map_lazy_load?.lazy_load) {
             mapObserver.observe(this);
           } else {
             loadMap(mapid);
@@ -473,8 +475,14 @@
    *   The Feature coming from Drupal settings.
    */
   Drupal.Leaflet.prototype.set_feature_path_style = function(lFeature, feature) {
-    const lFeature_path_style = feature.path ?
-      (feature.path instanceof Object ? feature.path : JSON.parse(feature.path)) : {};
+    let lFeature_path_style;
+    try {
+      lFeature_path_style = feature.path ?
+        (feature.path instanceof Object ? feature.path : JSON.parse(feature.path)) : {};
+    }
+    catch (e) {
+      lFeature_path_style = {};
+    }
 
     // Make sure that the weight property is cast into integer, for avoiding
     // polygons eventually disappearing with pan and zooming.
@@ -1098,4 +1106,4 @@
     setLatLng: function () {}
   });
 
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);

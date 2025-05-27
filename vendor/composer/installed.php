@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '5b8d549ed3c38492b375f93a7210c6eb04df76aa',
+        'reference' => 'f4ecaaf5f942509f985714664fa11755404ff117',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -497,12 +497,12 @@
             'dev_requirement' => false,
         ),
         'drupal/leaflet' => array(
-            'pretty_version' => '10.2.46',
-            'version' => '10.2.46.0',
+            'pretty_version' => '10.2.48',
+            'version' => '10.2.48.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/leaflet',
             'aliases' => array(),
-            'reference' => '10.2.46',
+            'reference' => '10.2.48',
             'dev_requirement' => false,
         ),
         'drupal/leaflet_more_maps' => array(
@@ -547,7 +547,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '5b8d549ed3c38492b375f93a7210c6eb04df76aa',
+            'reference' => 'f4ecaaf5f942509f985714664fa11755404ff117',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -701,12 +701,12 @@
             'dev_requirement' => false,
         ),
         'league/container' => array(
-            'pretty_version' => '4.2.4',
-            'version' => '4.2.4.0',
+            'pretty_version' => '4.2.5',
+            'version' => '4.2.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/container',
             'aliases' => array(),
-            'reference' => '7ea728b013b9a156c409c6f0fc3624071b742dec',
+            'reference' => 'd3cebb0ff4685ff61c749e54b27db49319e2ec00',
             'dev_requirement' => false,
         ),
         'masterminds/html5' => array(
@@ -728,12 +728,12 @@
             'dev_requirement' => false,
         ),
         'mglaman/phpstan-drupal' => array(
-            'pretty_version' => '1.3.7',
-            'version' => '1.3.7.0',
+            'pretty_version' => '1.3.9',
+            'version' => '1.3.9.0',
             'type' => 'phpstan-extension',
             'install_path' => __DIR__ . '/../mglaman/phpstan-drupal',
             'aliases' => array(),
-            'reference' => '91cb3860d816316dd98503ef258bc386f5fc22b7',
+            'reference' => '973a4e89e19ea7dbd60af0aa939b18a873cf7f2f',
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
@@ -857,12 +857,12 @@
             'dev_requirement' => false,
         ),
         'phpstan/phpstan' => array(
-            'pretty_version' => '1.12.25',
-            'version' => '1.12.25.0',
+            'pretty_version' => '1.12.27',
+            'version' => '1.12.27.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpstan',
             'aliases' => array(),
-            'reference' => 'e310849a19e02b8bfcbb63147f495d8f872dd96f',
+            'reference' => '3a6e423c076ab39dfedc307e2ac627ef579db162',
             'dev_requirement' => false,
         ),
         'phpstan/phpstan-deprecation-rules' => array(
@@ -895,8 +895,8 @@
         'psr/container-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '^1.0',
-                1 => '1.1|2.0',
+                0 => '1.1|2.0',
+                1 => '^1.0',
             ),
         ),
         'psr/event-dispatcher' => array(

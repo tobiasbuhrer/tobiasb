@@ -2579,17 +2579,17 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.46",
+            "version": "10.2.48",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.46"
+                "reference": "10.2.48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.46.zip",
-                "reference": "10.2.46",
-                "shasum": "536b40178aeb5111f5880c5f4c0c8bfff40c3144"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.48.zip",
+                "reference": "10.2.48",
+                "shasum": "97ed5d38b066194c405772d72da91bc05b6986e7"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10 || ^11",
@@ -2598,8 +2598,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.46",
-                    "datestamp": "1746011249",
+                    "version": "10.2.48",
+                    "datestamp": "1748189091",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4173,16 +4173,16 @@
         },
         {
             "name": "league/container",
-            "version": "4.2.4",
+            "version": "4.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/container.git",
-                "reference": "7ea728b013b9a156c409c6f0fc3624071b742dec"
+                "reference": "d3cebb0ff4685ff61c749e54b27db49319e2ec00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/container/zipball/7ea728b013b9a156c409c6f0fc3624071b742dec",
-                "reference": "7ea728b013b9a156c409c6f0fc3624071b742dec",
+                "url": "https://api.github.com/repos/thephpleague/container/zipball/d3cebb0ff4685ff61c749e54b27db49319e2ec00",
+                "reference": "d3cebb0ff4685ff61c749e54b27db49319e2ec00",
                 "shasum": ""
             },
             "require": {
@@ -4243,7 +4243,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/container/issues",
-                "source": "https://github.com/thephpleague/container/tree/4.2.4"
+                "source": "https://github.com/thephpleague/container/tree/4.2.5"
             },
             "funding": [
                 {
@@ -4251,7 +4251,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-10T12:42:13+00:00"
+            "time": "2025-05-20T12:55:37+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -4371,16 +4371,16 @@
         },
         {
             "name": "mglaman/phpstan-drupal",
-            "version": "1.3.7",
+            "version": "1.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mglaman/phpstan-drupal.git",
-                "reference": "91cb3860d816316dd98503ef258bc386f5fc22b7"
+                "reference": "973a4e89e19ea7dbd60af0aa939b18a873cf7f2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/91cb3860d816316dd98503ef258bc386f5fc22b7",
-                "reference": "91cb3860d816316dd98503ef258bc386f5fc22b7",
+                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/973a4e89e19ea7dbd60af0aa939b18a873cf7f2f",
+                "reference": "973a4e89e19ea7dbd60af0aa939b18a873cf7f2f",
                 "shasum": ""
             },
             "require": {
@@ -4455,7 +4455,7 @@
             "description": "Drupal extension and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/mglaman/phpstan-drupal/issues",
-                "source": "https://github.com/mglaman/phpstan-drupal/tree/1.3.7"
+                "source": "https://github.com/mglaman/phpstan-drupal/tree/1.3.9"
             },
             "funding": [
                 {
@@ -4471,7 +4471,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-15T16:10:17+00:00"
+            "time": "2025-05-22T16:48:16+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -5122,16 +5122,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.25",
+            "version": "1.12.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e310849a19e02b8bfcbb63147f495d8f872dd96f"
+                "reference": "3a6e423c076ab39dfedc307e2ac627ef579db162"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e310849a19e02b8bfcbb63147f495d8f872dd96f",
-                "reference": "e310849a19e02b8bfcbb63147f495d8f872dd96f",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3a6e423c076ab39dfedc307e2ac627ef579db162",
+                "reference": "3a6e423c076ab39dfedc307e2ac627ef579db162",
                 "shasum": ""
             },
             "require": {
@@ -5176,7 +5176,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-27T12:20:45+00:00"
+            "time": "2025-05-21T20:51:45+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",

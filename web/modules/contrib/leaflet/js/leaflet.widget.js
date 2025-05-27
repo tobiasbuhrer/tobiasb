@@ -1,26 +1,28 @@
 /**
  * Attach functionality for Leaflet Widget behaviours.
  */
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, once) {
   Drupal.behaviors.leaflet_widget = {
     attach: function (context, settings) {
       if (!settings.leaflet) {
         return;
       }
-      
-      $.each(settings.leaflet, function (map_id, settings) {
+
+      // For each Leaflet Map defined in the settings (in the actual document).
+      $.each(settings.leaflet, function (map_id, leaflet_settings) {
         if (!map_id.includes("leaflet-map-widget")) {
           return;
         }
-        
+
+        // Define the leaflet-map-widget elements.
         const leaflet_elements = $(once('behaviour-leaflet-widget', '#' + map_id));
         leaflet_elements.each(function () {
+          // For each element define a new Drupal.Leaflet_Widget,
+          // if not already defined.
           const map_container = $(this);
-          // If the attached context contains any leaflet maps with widgets, make sure we have a
-          // Drupal.Leaflet_Widget object.
-          if (map_container.data('leaflet_widget') === undefined) {
-            const lMap = drupalSettings.leaflet[map_id].lMap;
-            map_container.data('leaflet_widget', new Drupal.Leaflet_Widget(map_container, lMap, settings));
+          if (map_container.data('leaflet_widget') === undefined && leaflet_settings.lMap) {
+            const lMap = leaflet_settings.lMap;
+            map_container.data('leaflet_widget', new Drupal.Leaflet_Widget(map_container, lMap, leaflet_settings));
             // Define the global Drupal.Leaflet[mapid] object to be accessible
             // from outside.
             Drupal.Leaflet_Widget[map_id] = map_container.data('leaflet_widget');
@@ -43,7 +45,14 @@
     this.drawnItems = new L.LayerGroup();
     this.map_container = map_container;
     this.container = $(map_container).parent();
-    this.widgetsettings.path_style = this.map_settings.path ? JSON.parse(this.map_settings.path) : {};
+    try {
+      this.widgetsettings.path_style = this.map_settings.path ? JSON.parse(this.map_settings.path) : {};
+    }
+    catch (e) {
+      this.widgetsettings.path_style = {};
+    }{
+
+    }
     this.json_selector = this.widgetsettings.jsonElement;
 
     if (settings.langcode && lMap.pm) {
@@ -75,7 +84,7 @@
     if (map === undefined) {
       return;
     }
-    
+
     this.map = map;
     map.addLayer(this.drawnItems);
 
@@ -99,12 +108,12 @@
     map.pm.addControls(this.widgetsettings.toolbarSettings);
 
     map.on('pm:create', function(event) {
-      const layer = event.layer;
-      this.drawnItems.addLayer(layer);
-      layer.pm.enable({ allowSelfIntersection: false });
+      // Add the new Layer to the drawnItems.
+      this.drawnItems.addLayer(event.layer);
+      // Update Geojson Content text.
       this.update_text();
-      // Listen to changes on the new layer
-      this.add_layer_listeners(layer);
+      // Listen to changes on the new layer.
+      this.add_layer_listeners(event.layer);
     }, this);
 
     // Start updating the Leaflet Map.
@@ -116,7 +125,7 @@
    */
   Drupal.Leaflet_Widget.prototype.update_text = function () {
     const $selector = $(this.json_selector, this.container);
-    
+
     if (this.drawnItems.getLayers().length === 0) {
       $selector.val('');
     }
@@ -176,7 +185,7 @@
     this.map.pm.setGlobalOptions({
       pathOptions: this.widgetsettings.path_style
     });
-    
+
     // Nothing to do if we don't have any data.
     if (value.length === 0) {
       // If no layer available, and the Map Center is not forced, locate the user position.
@@ -192,16 +201,16 @@
           return self.widgetsettings.path_style;
         }
       };
-      
+
       // Use circleMarkers if specified.
       if (this.widgetsettings.toolbarSettings.marker === "circleMarker") {
         layerOpts.pointToLayer = function (feature, latlng) {
           return L.circleMarker(latlng);
         };
       }
-      
+
       const obj = L.geoJson(JSON.parse(value), layerOpts);
-      
+
       // See https://github.com/Leaflet/Leaflet.draw/issues/398
       obj.eachLayer(function(layer) {
         if (typeof layer.getLayers === "function") {
@@ -221,7 +230,7 @@
       if (this.widgetsettings.autoCenter) {
         let start_zoom;
         let start_center;
-        
+
         if (obj.getBounds !== undefined && typeof obj.getBounds === 'function') {
           // For objects that have defined bounds or a way to get them
           const bounds = obj.getBounds();
@@ -248,8 +257,8 @@
 
         // In case of map initial position not forced, and zoomFiner not null/neutral,
         // adapt the Map Zoom and the Start Zoom accordingly.
-        if (!this.widgetsettings.map_position.force && 
-            this.widgetsettings.map_position.hasOwnProperty('zoomFiner') && 
+        if (!this.widgetsettings.map_position.force &&
+            this.widgetsettings.map_position.hasOwnProperty('zoomFiner') &&
             parseInt(this.widgetsettings.map_position.zoomFiner) !== 0) {
           start_zoom += parseFloat(this.widgetsettings.map_position.zoomFiner);
           this.map.setView(start_center, start_zoom);
@@ -269,10 +278,10 @@
   Drupal.Leaflet_Widget.prototype.reset_start_zoom_and_center = function (mapid, start_zoom, start_center) {
     Drupal.Leaflet[mapid].start_zoom = start_zoom;
     Drupal.Leaflet[mapid].start_center = start_center;
-    
+
     if (Drupal.Leaflet[mapid].reset_view_control) {
       Drupal.Leaflet[mapid].reset_view_control.remove();
-      const map_reset_view_options = this.map_container.data('leaflet').map_settings.reset_map.options ? 
+      const map_reset_view_options = this.map_container.data('leaflet').map_settings.reset_map.options ?
         JSON.parse(this.map_container.data('leaflet').map_settings.reset_map.options) : {};
       map_reset_view_options.latlng = start_center;
       map_reset_view_options.zoom = start_zoom;
@@ -281,4 +290,4 @@
     }
   };
 
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);
