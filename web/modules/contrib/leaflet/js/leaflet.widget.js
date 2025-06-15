@@ -110,7 +110,7 @@
     map.on('pm:create', function(event) {
       // Add the new Layer to the drawnItems.
       this.drawnItems.addLayer(event.layer);
-      // Update Geojson Content text.
+      // Update GeoJSON Content text.
       this.update_text();
       // Listen to changes on the new layer.
       this.add_layer_listeners(event.layer);
@@ -172,11 +172,18 @@
   };
 
   /**
+   * Returns the json selector value.
+   */
+  Drupal.Leaflet_Widget.prototype.get_json_value = function () {
+    return $(this.json_selector, this.container).val();
+  }
+
+  /**
    * Update the Leaflet Widget Map from value element.
    */
   Drupal.Leaflet_Widget.prototype.update_leaflet_widget_map = function () {
     const self = this;
-    const value = $(this.json_selector, this.container).val();
+    const value = this.get_json_value();
 
     // Always clear the layers in drawnItems on map updates.
     this.drawnItems.clearLayers();
@@ -281,12 +288,12 @@
 
     if (Drupal.Leaflet[mapid].reset_view_control) {
       Drupal.Leaflet[mapid].reset_view_control.remove();
-      const map_reset_view_options = this.map_container.data('leaflet').map_settings.reset_map.options ?
-        JSON.parse(this.map_container.data('leaflet').map_settings.reset_map.options) : {};
+      const map_reset_view_options = Drupal.Leaflet[mapid].map_settings.reset_map.options ?
+        JSON.parse(Drupal.Leaflet[mapid].map_settings.reset_map.options) : {};
       map_reset_view_options.latlng = start_center;
       map_reset_view_options.zoom = start_zoom;
       Drupal.Leaflet[mapid].reset_view_control = L.control.resetView(map_reset_view_options)
-        .addTo(this.map_container.data('leaflet').lMap);
+        .addTo(Drupal.Leaflet[mapid].lMap);
     }
   };
 
