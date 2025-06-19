@@ -167,6 +167,9 @@ class Image extends File
         mixed $payload = null,
         array|string|null $extensions = null,
         ?string $extensionsMessage = null,
+        ?string $filenameCharset = null,
+        ?string $filenameCountUnit = null,
+        ?string $filenameCharsetMessage = null,
     ) {
         parent::__construct(
             $options,
@@ -192,6 +195,9 @@ class Image extends File
             $payload,
             $extensions,
             $extensionsMessage,
+            $filenameCharset,
+            $filenameCountUnit,
+            $filenameCharsetMessage,
         );
 
         $this->minWidth = $minWidth ?? $this->minWidth;
