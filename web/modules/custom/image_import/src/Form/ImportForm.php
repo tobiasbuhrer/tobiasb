@@ -14,6 +14,7 @@ use Drupal\file\FileInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\file\Plugin\Validation\Constraint;
 
 /**
  * Class ImportForm.
@@ -97,7 +98,7 @@ class ImportForm extends ConfigFormBase
             '#type' => 'plupload',
             '#title' => 'Image(s) to upload',
             '#upload_validators' => array(
-                'file_validate_extensions' => array('jpg jpeg gif png tmp'),
+                'FileExtension' => ['extensions' => 'jpg jpeg gif png tmp']
             ),
             '#plupload_settings' => array(
             'chunk_size' => '1mb',
