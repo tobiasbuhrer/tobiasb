@@ -358,17 +358,17 @@
         },
         {
             "name": "consolidation/annotated-command",
-            "version": "4.10.1",
-            "version_normalized": "4.10.1.0",
+            "version": "4.10.2",
+            "version_normalized": "4.10.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/annotated-command.git",
-                "reference": "362310b13ececa9f6f0a4a880811fa08fecc348b"
+                "reference": "e550ea4f177f199e0e9451168342bf3f321d92b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/annotated-command/zipball/362310b13ececa9f6f0a4a880811fa08fecc348b",
-                "reference": "362310b13ececa9f6f0a4a880811fa08fecc348b",
+                "url": "https://api.github.com/repos/consolidation/annotated-command/zipball/e550ea4f177f199e0e9451168342bf3f321d92b0",
+                "reference": "e550ea4f177f199e0e9451168342bf3f321d92b0",
                 "shasum": ""
             },
             "require": {
@@ -385,7 +385,7 @@
                 "squizlabs/php_codesniffer": "^3",
                 "yoast/phpunit-polyfills": "^0.2.0"
             },
-            "time": "2024-12-13T19:55:40+00:00",
+            "time": "2025-07-16T20:54:09+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -411,7 +411,7 @@
             "description": "Initialize Symfony Console commands from annotated command class methods.",
             "support": {
                 "issues": "https://github.com/consolidation/annotated-command/issues",
-                "source": "https://github.com/consolidation/annotated-command/tree/4.10.1"
+                "source": "https://github.com/consolidation/annotated-command/tree/4.10.2"
             },
             "install-path": "../consolidation/annotated-command"
         },
@@ -5427,17 +5427,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.27",
-            "version_normalized": "1.12.27.0",
+            "version": "1.12.28",
+            "version_normalized": "1.12.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3a6e423c076ab39dfedc307e2ac627ef579db162"
+                "reference": "fcf8b71aeab4e1a1131d1783cef97b23a51b87a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3a6e423c076ab39dfedc307e2ac627ef579db162",
-                "reference": "3a6e423c076ab39dfedc307e2ac627ef579db162",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fcf8b71aeab4e1a1131d1783cef97b23a51b87a9",
+                "reference": "fcf8b71aeab4e1a1131d1783cef97b23a51b87a9",
                 "shasum": ""
             },
             "require": {
@@ -5446,7 +5446,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2025-05-21T20:51:45+00:00",
+            "time": "2025-07-17T17:15:39+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
