@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @QueueWorker(
  *   id = "image_import_image_style",
  *   title = @Translation("Generate image styles"),
- *   cron = {"time" = 1500'}
+ *   cron = {"time" = 1500 }
  * )
  */
 class ImageImportImageStyle extends QueueWorkerBase implements ContainerFactoryPluginInterface {
