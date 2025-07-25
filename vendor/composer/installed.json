@@ -2687,18 +2687,18 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.3.5",
-            "version_normalized": "10.3.5.0",
+            "version": "10.3.7",
+            "version_normalized": "10.3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.3.5"
+                "reference": "10.3.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.3.5.zip",
-                "reference": "10.3.5",
-                "shasum": "9707462243b2f344e5d85341084d33fdd296ef7b"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.3.7.zip",
+                "reference": "10.3.7",
+                "shasum": "b12389e1e2124f8d25eeff214669e8fe5d636cc3"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10 || ^11",
@@ -2707,8 +2707,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.3.5",
-                    "datestamp": "1751834089",
+                    "version": "10.3.7",
+                    "datestamp": "1753394354",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3327,18 +3327,18 @@
         },
         {
             "name": "drupal/webform",
-            "version": "6.3.0-beta2",
-            "version_normalized": "6.3.0.0-beta2",
+            "version": "6.3.0-beta3",
+            "version_normalized": "6.3.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "6.3.0-beta2"
+                "reference": "6.3.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-6.3.0-beta2.zip",
-                "reference": "6.3.0-beta2",
-                "shasum": "02e45bf3716c6e81846a9b77837782a43053e6f9"
+                "url": "https://ftp.drupal.org/files/projects/webform-6.3.0-beta3.zip",
+                "reference": "6.3.0-beta3",
+                "shasum": "60af12e66a7898c81a34400979973b046867582e"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11.0"
@@ -3383,8 +3383,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.3.0-beta2",
-                    "datestamp": "1742582977",
+                    "version": "6.3.0-beta3",
+                    "datestamp": "1753217750",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
