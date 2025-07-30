@@ -3195,17 +3195,17 @@
         },
         {
             "name": "drupal/webform",
-            "version": "6.3.0-beta3",
+            "version": "6.3.0-beta4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "6.3.0-beta3"
+                "reference": "6.3.0-beta4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-6.3.0-beta3.zip",
-                "reference": "6.3.0-beta3",
-                "shasum": "60af12e66a7898c81a34400979973b046867582e"
+                "url": "https://ftp.drupal.org/files/projects/webform-6.3.0-beta4.zip",
+                "reference": "6.3.0-beta4",
+                "shasum": "9f5390f1eb507cdc9b591595c12d91f7f51c7b81"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11.0"
@@ -3214,16 +3214,16 @@
                 "drupal/address": "^2.0",
                 "drupal/captcha": "^2.0",
                 "drupal/chosen": "^4.0",
-                "drupal/clientside_validation": "^4.1",
+                "drupal/clientside_validation": "*",
                 "drupal/clientside_validation_jquery": "*",
-                "drupal/devel": "^5.3",
+                "drupal/devel": "*",
                 "drupal/entity": "^1.5",
-                "drupal/entity_print": "^2.15",
+                "drupal/entity_print": "*",
                 "drupal/hal": "^2.0",
                 "drupal/jquery_ui": "^1.7",
-                "drupal/jquery_ui_button": "^2.1",
+                "drupal/jquery_ui_button": "*",
                 "drupal/jquery_ui_checkboxradio": "^2.1",
-                "drupal/jquery_ui_datepicker": "^2.1",
+                "drupal/jquery_ui_datepicker": "*",
                 "drupal/mailsystem": "^4.5",
                 "drupal/metatag": "^2.0",
                 "drupal/paragraphs": "^1.18",
@@ -3231,7 +3231,7 @@
                 "drupal/smtp": "^1.4",
                 "drupal/styleguide": "^2.1",
                 "drupal/telephone_validation": "2.x-dev",
-                "drupal/token": "^1.15",
+                "drupal/token": "*",
                 "drupal/webform_access": "*",
                 "drupal/webform_attachment": "*",
                 "drupal/webform_clientside_validation": "*",
@@ -3250,8 +3250,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.3.0-beta3",
-                    "datestamp": "1753217750",
+                    "version": "6.3.0-beta4",
+                    "datestamp": "1753796919",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -3302,16 +3302,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "13.6.0",
+            "version": "13.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "570a05dce7aea9770f17306808804290764127ad"
+                "reference": "fde8e2593fe78824acf7305c8faf8ff6c3ac352c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/570a05dce7aea9770f17306808804290764127ad",
-                "reference": "570a05dce7aea9770f17306808804290764127ad",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/fde8e2593fe78824acf7305c8faf8ff6c3ac352c",
+                "reference": "fde8e2593fe78824acf7305c8faf8ff6c3ac352c",
                 "shasum": ""
             },
             "require": {
@@ -3351,7 +3351,7 @@
                 "drupal/semver_example": "2.3.0",
                 "jetbrains/phpstorm-attributes": "^1.0",
                 "mglaman/phpstan-drupal": "^1.2",
-                "phpunit/phpunit": "^9 || ^10",
+                "phpunit/phpunit": "^9 || ^10 || ^11",
                 "rector/rector": "^1",
                 "squizlabs/php_codesniffer": "^3.7"
             },
@@ -3438,7 +3438,7 @@
                 "issues": "https://github.com/drush-ops/drush/issues",
                 "security": "https://github.com/drush-ops/drush/security/advisories",
                 "slack": "https://drupal.slack.com/messages/C62H9CWQM",
-                "source": "https://github.com/drush-ops/drush/tree/13.6.0"
+                "source": "https://github.com/drush-ops/drush/tree/13.6.1"
             },
             "funding": [
                 {
@@ -3446,7 +3446,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-22T12:14:13+00:00"
+            "time": "2025-07-24T10:42:08+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -4479,16 +4479,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.5.0",
+            "version": "v5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
+                "reference": "221b0d0fdf1369c71047ad1d18bb5880017bbc56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
-                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/221b0d0fdf1369c71047ad1d18bb5880017bbc56",
+                "reference": "221b0d0fdf1369c71047ad1d18bb5880017bbc56",
                 "shasum": ""
             },
             "require": {
@@ -4531,9 +4531,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.0"
             },
-            "time": "2025-05-31T08:24:38+00:00"
+            "time": "2025-07-27T20:03:57+00:00"
         },
         {
             "name": "paragonie/random_compat",
