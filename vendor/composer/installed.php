@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c779b62a393011c54503d5835244932cbe8db1fb',
+        'reference' => 'db74eee725f1c690c2d2ae317c1dcc1ea2fdc9de',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -227,30 +227,30 @@
             'dev_requirement' => false,
         ),
         'drupal/core' => array(
-            'pretty_version' => '11.2.3',
-            'version' => '11.2.3.0',
+            'pretty_version' => '11.2.4',
+            'version' => '11.2.4.0',
             'type' => 'drupal-core',
             'install_path' => __DIR__ . '/../../web/core',
             'aliases' => array(),
-            'reference' => '2e115b19fcff820bd7e2ba41aeaa23ff04cfe8a8',
+            'reference' => '6d684b0407541c61df4e3bd47b33de475d9f0418',
             'dev_requirement' => false,
         ),
         'drupal/core-annotation' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-assertion' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-class-finder' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-composer-scaffold' => array(
@@ -265,90 +265,90 @@
         'drupal/core-datetime' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-dependency-injection' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-diff' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-discovery' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-event-dispatcher' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-file-cache' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-file-security' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-filesystem' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-front-matter' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-gettext' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-graph' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-http-foundation' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-php-storage' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-plugin' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-project-message' => array(
-            'pretty_version' => '10.5.2',
-            'version' => '10.5.2.0',
+            'pretty_version' => '10.5.3',
+            'version' => '10.5.3.0',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../drupal/core-project-message',
             'aliases' => array(),
@@ -358,52 +358,52 @@
         'drupal/core-proxy-builder' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-recommended' => array(
-            'pretty_version' => '11.2.3',
-            'version' => '11.2.3.0',
+            'pretty_version' => '11.2.4',
+            'version' => '11.2.4.0',
             'type' => 'metapackage',
             'install_path' => NULL,
             'aliases' => array(),
-            'reference' => '07ed2ffda41e106017a8b4ed450c8bb0d775bd35',
+            'reference' => '53d63022e07ded81964d295c50ffd76279869b07',
             'dev_requirement' => false,
         ),
         'drupal/core-render' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-serialization' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-transliteration' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-utility' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-uuid' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/core-version' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '11.2.3',
+                0 => '11.2.4',
             ),
         ),
         'drupal/devel' => array(
@@ -497,12 +497,12 @@
             'dev_requirement' => false,
         ),
         'drupal/leaflet' => array(
-            'pretty_version' => '10.3.8',
-            'version' => '10.3.8.0',
+            'pretty_version' => '10.3.9',
+            'version' => '10.3.9.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/leaflet',
             'aliases' => array(),
-            'reference' => '10.3.8',
+            'reference' => '10.3.9',
             'dev_requirement' => false,
         ),
         'drupal/leaflet_more_maps' => array(
@@ -547,7 +547,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c779b62a393011c54503d5835244932cbe8db1fb',
+            'reference' => 'db74eee725f1c690c2d2ae317c1dcc1ea2fdc9de',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
