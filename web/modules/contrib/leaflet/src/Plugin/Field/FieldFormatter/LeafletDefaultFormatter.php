@@ -143,7 +143,7 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new self(
+    return new static(
       $plugin_id,
       $plugin_definition,
       $configuration['field_definition'],
@@ -376,7 +376,11 @@ class LeafletDefaultFormatter extends FormatterBase implements ContainerFactoryP
 
       // Eventually set the custom Marker icon (DivIcon, Icon Url or
       // Circle Marker).
-      if ($feature['type'] === 'point' && isset($settings['icon'])) {
+      if (in_array($feature['type'], [
+        'point',
+        'multipoint',
+        'geometrycollection',
+      ]) && isset($settings['icon'])) {
 
         // Set Feature Icon properties.
         $feature['icon'] = $settings['icon'];
