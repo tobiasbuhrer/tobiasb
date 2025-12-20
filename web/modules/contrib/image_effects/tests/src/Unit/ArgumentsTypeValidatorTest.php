@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Drupal\Tests\image_effects\Unit;
 
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\ArgumentsTypeValidator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \Drupal\image_effects\Plugin\ImageToolkit\Operation\ArgumentsTypeValidator
- * @group image_effects
+ * Tests the ArgumentsTypeValidator class.
  */
+#[CoversClass(ArgumentsTypeValidator::class)]
+#[Group('image_effects')]
 class ArgumentsTypeValidatorTest extends TestCase {
 
   /**
@@ -20,9 +24,8 @@ class ArgumentsTypeValidatorTest extends TestCase {
    *   The arguments.
    * @param array $expected
    *   The expected result of validation.
-   *
-   * @dataProvider providerValidCases
    */
+  #[DataProvider('providerValidCases')]
   public function testValidCases(array $arguments, array $expected): void {
     $this->assertSame($expected, ArgumentsTypeValidator::validate(self::argumentsDefinition(), $arguments));
   }
@@ -78,9 +81,8 @@ class ArgumentsTypeValidatorTest extends TestCase {
    *   The argument value.
    * @param string $expected
    *   The expected exception message.
-   *
-   * @dataProvider providerInvalidCases
    */
+  #[DataProvider('providerInvalidCases')]
   public function testInvalidCases(array $arguments, string $expected): void {
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage($expected);

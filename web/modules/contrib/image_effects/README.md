@@ -76,7 +76,7 @@ information.
 ## Requirements
 
 1. Image module from Drupal core
-1. One of the supported image toolkits:
+2. One of the supported image toolkits:
   - GD toolkit from Drupal core.
   - [ImageMagick](https://drupal.org/project/imagemagick) toolkit.
 

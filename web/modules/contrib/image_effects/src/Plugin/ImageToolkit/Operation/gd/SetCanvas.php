@@ -57,14 +57,7 @@ class SetCanvas extends GDImageToolkitOperationBase {
     imagesavealpha($original_image, TRUE);
     imagealphablending($this->getToolkit()->getImage(), TRUE);
     imagesavealpha($this->getToolkit()->getImage(), TRUE);
-    if (imagecopy($this->getToolkit()->getImage(), $original_image, $arguments['x_pos'], $arguments['y_pos'], 0, 0, imagesx($original_image), imagesy($original_image))) {
-      return TRUE;
-    }
-    else {
-      // In case of failure, restore the original image.
-      $this->getToolkit()->setimage($original_image);
-    }
-    return FALSE;
+    return imagecopy($this->getToolkit()->getImage(), $original_image, $arguments['x_pos'], $arguments['y_pos'], 0, 0, imagesx($original_image), imagesy($original_image));
   }
 
 }

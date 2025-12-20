@@ -5,27 +5,27 @@ declare(strict_types=1);
 namespace Drupal\Tests\image_effects\Unit;
 
 use Drupal\image_effects\Component\ColorUtility;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the color utility helper methods.
- *
- * @coversDefaultClass \Drupal\image_effects\Component\ColorUtility
- *
- * @group image_effects
  */
+#[CoversClass(ColorUtility::class)]
+#[Group('image_effects')]
 class ColorUtilityTest extends TestCase {
 
   /**
-   * @covers ::validateRgba
    *
    * @param bool $expected
    *   The expected result of validation.
    * @param string $value
    *   The hex color value.
-   *
-   * @dataProvider providerTestValidateRgba
+   * @legacy-covers ::validateRgba
    */
+  #[DataProvider('providerTestValidateRgba')]
   public function testValidateRgba(bool $expected, string $value): void {
     $this->assertSame($expected, ColorUtility::validateRgba($value));
   }

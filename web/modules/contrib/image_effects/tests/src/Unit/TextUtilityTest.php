@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\image_effects\Unit;
 
-use Drupal\Tests\UnitTestCase;
 use Drupal\image_effects\Component\TextUtility;
+use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests the UTF-8 character-based wrapper of the preg_match function.
- *
- * @group image_effects
  */
+#[Group('image_effects')]
 class TextUtilityTest extends UnitTestCase {
 
   /**

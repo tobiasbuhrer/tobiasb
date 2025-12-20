@@ -147,11 +147,7 @@ class Rotate extends GDImageToolkitOperationBase {
           // that the current image results centered on the canvas.
           $x_pos = (int) ($expected_width / 2 - imagesx($temp_image) / 2);
           $y_pos = (int) ($expected_height / 2 - imagesy($temp_image) / 2);
-          if (!imagecopy($this->getToolkit()->getImage(), $temp_image, $x_pos, $y_pos, 0, 0, imagesx($temp_image), imagesy($temp_image))) {
-            // In case of failure, restore the original image.
-            $this->getToolkit()->setImage($temp_image);
-            return FALSE;
-          }
+          return imagecopy($this->getToolkit()->getImage(), $temp_image, $x_pos, $y_pos, 0, 0, imagesx($temp_image), imagesy($temp_image));
         }
       }
       return TRUE;

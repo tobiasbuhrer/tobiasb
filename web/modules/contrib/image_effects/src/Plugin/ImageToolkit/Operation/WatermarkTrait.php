@@ -34,19 +34,19 @@ trait WatermarkTrait {
       ],
       'x_offset' => [
         'description' => 'X offset for watermark image.',
-        'type' => 'int',
+        'type' => '?int',
         'required' => FALSE,
         'default' => 0,
       ],
       'y_offset' => [
         'description' => 'Y offset for watermark image.',
-        'type' => 'int',
+        'type' => '?int',
         'required' => FALSE,
         'default' => 0,
       ],
       'opacity' => [
         'description' => 'Opacity for watermark image.',
-        'type' => 'int',
+        'type' => '?int',
         'required' => FALSE,
         'default' => 100,
       ],

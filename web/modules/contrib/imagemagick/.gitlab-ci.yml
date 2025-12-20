@@ -8,107 +8,36 @@
 #   * DrupalSpoons
 ################
 
-################
-# Guidelines
-#
-# This template is designed to give any Contrib maintainer everything they need to test, without requiring modification. It is also designed to keep up to date with Core Development automatically through the use of include files that can be centrally maintained.
-#
-# However, you can modify this template if you have additional needs for your project.
-################
-
-################
-# Includes
-#
-# Additional configuration can be provided through includes.
-# One advantage of include files is that if they are updated upstream, the changes affect all pipelines using that include.
-#
-# Includes can be overridden by re-declaring anything provided in an include, here in gitlab-ci.yml
-# https://docs.gitlab.com/ee/ci/yaml/includes.html#override-included-configuration-values
-################
-
 include:
-  ################
-  # DrupalCI includes:
-  # As long as you include this, any future includes added by the Drupal Association will be accessible to your pipelines automatically.
   # View these include files at https://git.drupalcode.org/project/gitlab_templates/
-  ################
   - project: $_GITLAB_TEMPLATES_REPO
     ref: $_GITLAB_TEMPLATES_REF
     file:
       - '/includes/include.drupalci.main.yml'
-      # EXPERIMENTAL: For Drupal 7, remove the above line and uncomment the below.
-      # - '/includes/include.drupalci.main-d7.yml'
       - '/includes/include.drupalci.variables.yml'
       - '/includes/include.drupalci.workflows.yml'
 
-################
-# Pipeline configuration variables
-#
-# These are the variables provided to the Run Pipeline form that a user may want to override.
-#
-# Docs at https://git.drupalcode.org/project/gitlab_templates/-/blob/1.0.x/includes/include.drupalci.variables.yml
-################
 variables:
   _PHPUNIT_CONCURRENT: '0'
-  _PHPUNIT_EXTRA: '-c $CI_PROJECT_DIR/$_WEB_ROOT/core --testdox --colors=always'
+  _PHPUNIT_EXTRA: '-c $CI_PROJECT_DIR/$_WEB_ROOT/core --testdox --colors=always --fail-on-phpunit-deprecation --fail-on-deprecation'
   BROWSERTEST_OUTPUT_VERBOSE: 'false'
+  OPT_IN_TEST_PREVIOUS_MAJOR: '0'
   OPT_IN_TEST_PREVIOUS_MINOR: '0'
-  OPT_IN_TEST_NEXT_MINOR: '0'
-  OPT_IN_TEST_NEXT_MAJOR: '1'
+  OPT_IN_TEST_NEXT_MINOR: '1'
+  OPT_IN_TEST_NEXT_MAJOR: '0'
 
 phpunit:
   extends: .phpunit-base
   variables:
-    SYMFONY_DEPRECATIONS_HELPER: "ignoreFile=$CI_PROJECT_DIR/$_WEB_ROOT/core/.deprecation-ignore.txt"
+    SYMFONY_DEPRECATIONS_HELPER: "ignoreFile=$CI_PROJECT_DIR/$_WEB_ROOT/modules/custom/imagemagick/.deprecation-ignore.txt"
   before_script:
+    # Merge core's deprecation ignore file into module's.
+    - cat $CI_PROJECT_DIR/$_WEB_ROOT/core/.deprecation-ignore.txt >> $CI_PROJECT_DIR/$_WEB_ROOT/modules/custom/imagemagick/.deprecation-ignore.txt
+    - echo -e "\e[0Ksection_start:`date +%s`:package_install[collapsed=true]\r\e[0K\e[0;30;103m *** ImageMagick and GraphicsMagick packages install *** \e[0m"
     - sudo apt-get update
-    - sudo apt-get install -y --no-install-recommends imagemagick graphicsmagick
-    - convert -version
-    - gm -version
-
-
-###################################################################################
-#
-#                                        *
-#                                       /(
-#                                      ((((,
-#                                    /(((((((
-#                                   ((((((((((*
-#                                ,(((((((((((((((
-#                              ,(((((((((((((((((((
-#                            ((((((((((((((((((((((((*
-#                         *(((((((((((((((((((((((((((((
-#                       ((((((((((((((((((((((((((((((((((*
-#                    *((((((((((((((((((  .((((((((((((((((((
-#                  ((((((((((((((((((.       /(((((((((((((((((*
-#                /(((((((((((((((((            .(((((((((((((((((,
-#             ,((((((((((((((((((                 ((((((((((((((((((
-#           .((((((((((((((((((((                   .(((((((((((((((((
-#          (((((((((((((((((((((((                     ((((((((((((((((/
-#        (((((((((((((((((((((((((((/                    ,(((((((((((((((*
-#      .((((((((((((((/  /(((((((((((((.                   ,(((((((((((((((
-#     *((((((((((((((      ,(((((((((((((/                   *((((((((((((((.
-#    ((((((((((((((,          /(((((((((((((.                  ((((((((((((((,
-#   (((((((((((((/              ,(((((((((((((*                 ,(((((((((((((,
-#  *(((((((((((((                .(((((((((((((((                ,(((((((((((((
-#  ((((((((((((/                /((((((((((((((((((.              ,((((((((((((/
-# (((((((((((((              *(((((((((((((((((((((((*             *((((((((((((
-# (((((((((((((            ,(((((((((((((..(((((((((((((           *((((((((((((
-# ((((((((((((,          /((((((((((((*      /((((((((((((/         ((((((((((((
-# (((((((((((((        /((((((((((((/          (((((((((((((*       ((((((((((((
-# (((((((((((((/     /((((((((((((               ,((((((((((((,    *((((((((((((
-#  ((((((((((((((  *(((((((((((/                   *((((((((((((.  ((((((((((((/
-#  *((((((((((((((((((((((((((,                      /(((((((((((((((((((((((((
-#   (((((((((((((((((((((((((                         ((((((((((((((((((((((((,
-#   .(((((((((((((((((((((((/                         ,(((((((((((((((((((((((
-#     ((((((((((((((((((((((/                         ,(((((((((((((((((((((/
-#      *(((((((((((((((((((((                         (((((((((((((((((((((,
-#       ,(((((((((((((((((((((,                      ((((((((((((((((((((/
-#         ,(((((((((((((((((((((*                  /((((((((((((((((((((
-#            ((((((((((((((((((((((,           ,/((((((((((((((((((((,
-#              ,(((((((((((((((((((((((((((((((((((((((((((((((((((
-#                 .(((((((((((((((((((((((((((((((((((((((((((((
-#                     .((((((((((((((((((((((((((((((((((((,.
-#                          .,(((((((((((((((((((((((((.
-#
-###################################################################################
+    - sudo apt-get install -y --no-install-recommends imagemagick graphicsmagick ghostscript-x
+    - echo -e "\e[0Ksection_end:`date +%s`:package_install\r\e[0K"
+    - |
+      convert -version | head -n1
+      gm -version | head -n1
+      gs -version | head -n1

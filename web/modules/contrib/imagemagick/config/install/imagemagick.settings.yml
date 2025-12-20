@@ -39,6 +39,7 @@ image_formats:
   PDF:
     mime_type: application/pdf
     enabled: false
+    identify_frames: '[0]'
   HEIC:
     mime_type: image/heif
     enabled: false

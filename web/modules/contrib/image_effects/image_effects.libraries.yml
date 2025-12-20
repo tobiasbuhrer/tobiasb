@@ -6,17 +6,6 @@ image_effects.admin.ui:
     component:
       css/image_effects.admin.ui.css: {}
 
-image_effects.farbtastic_color_selector_v2:
-  version: VERSION
-  js:
-    js/image_effects.farbtastic_color_selector_v2.js: {}
-  css:
-    component:
-      css/image_effects.farbtastic_color_selector.css: {}
-  dependencies:
-    - core/once
-    - color/jquery.farbtastic
-
 image_effects.html_color_selector:
   version: VERSION
   js:

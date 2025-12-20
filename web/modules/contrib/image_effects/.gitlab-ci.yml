@@ -27,17 +27,15 @@
 ################
 
 include:
-  ################
+  #################
   # DrupalCI includes:
   # As long as you include this, any future includes added by the Drupal Association will be accessible to your pipelines automatically.
   # View these include files at https://git.drupalcode.org/project/gitlab_templates/
-  ################
+  #################
   - project: $_GITLAB_TEMPLATES_REPO
     ref: $_GITLAB_TEMPLATES_REF
     file:
       - '/includes/include.drupalci.main.yml'
-      # EXPERIMENTAL: For Drupal 7, remove the above line and uncomment the below.
-      # - '/includes/include.drupalci.main-d7.yml'
       - '/includes/include.drupalci.variables.yml'
       - '/includes/include.drupalci.workflows.yml'
 
@@ -48,16 +46,18 @@ include:
 #
 # Docs at https://git.drupalcode.org/project/gitlab_templates/-/blob/1.0.x/includes/include.drupalci.variables.yml
 ################
+
 variables:
+  SKIP_CSPELL: "1"
   _PHPUNIT_CONCURRENT: '1'
 #  _PHPUNIT_EXTRA: '-c $CI_PROJECT_DIR/$_WEB_ROOT/core --testdox --colors=always'
 #  SKIP_PHPUNIT: '0'
   BROWSERTEST_OUTPUT_VERBOSE: 'false'
-  SKIP_CSPELL: "1"
-  OPT_IN_TEST_PREVIOUS_MAJOR: '1'
-  OPT_IN_TEST_PREVIOUS_MINOR: '1'
-  OPT_IN_TEST_NEXT_MINOR: '0'
+  OPT_IN_TEST_PREVIOUS_MAJOR: '0'
+  OPT_IN_TEST_PREVIOUS_MINOR: '0'
+  OPT_IN_TEST_NEXT_MINOR: '1'
   OPT_IN_TEST_NEXT_MAJOR: '0'
+  PHPUNIT_FAIL_ON_PHPUNIT_DEPRECATION: true
 
 phpunit:
   extends: .phpunit-base
@@ -67,55 +67,12 @@ phpunit:
     # Merge core's deprecation ignore file into module's.
     - cat $CI_PROJECT_DIR/$_WEB_ROOT/core/.deprecation-ignore.txt >> $CI_PROJECT_DIR/$_WEB_ROOT/modules/custom/image_effects/.deprecation-ignore.txt
     # Install both ImageMagick and GraphicsMagick packages.
+    - echo -e "\e[0Ksection_start:`date +%s`:package_install[collapsed=true]\r\e[0K\e[0;30;103m *** ImageMagick and GraphicsMagick packages install *** \e[0m"
     - sudo apt-get update
-    - sudo apt-get install -y --no-install-recommends imagemagick graphicsmagick
+    - sudo apt-get install -y --no-install-recommends imagemagick graphicsmagick ghostscript-x
+    - echo -e "\e[0Ksection_end:`date +%s`:package_install\r\e[0K"
     # Print packages' versions.
-    - convert -version
-    - gm -version
-
-
-###################################################################################
-#
-#                                        *
-#                                       /(
-#                                      ((((,
-#                                    /(((((((
-#                                   ((((((((((*
-#                                ,(((((((((((((((
-#                              ,(((((((((((((((((((
-#                            ((((((((((((((((((((((((*
-#                         *(((((((((((((((((((((((((((((
-#                       ((((((((((((((((((((((((((((((((((*
-#                    *((((((((((((((((((  .((((((((((((((((((
-#                  ((((((((((((((((((.       /(((((((((((((((((*
-#                /(((((((((((((((((            .(((((((((((((((((,
-#             ,((((((((((((((((((                 ((((((((((((((((((
-#           .((((((((((((((((((((                   .(((((((((((((((((
-#          (((((((((((((((((((((((                     ((((((((((((((((/
-#        (((((((((((((((((((((((((((/                    ,(((((((((((((((*
-#      .((((((((((((((/  /(((((((((((((.                   ,(((((((((((((((
-#     *((((((((((((((      ,(((((((((((((/                   *((((((((((((((.
-#    ((((((((((((((,          /(((((((((((((.                  ((((((((((((((,
-#   (((((((((((((/              ,(((((((((((((*                 ,(((((((((((((,
-#  *(((((((((((((                .(((((((((((((((                ,(((((((((((((
-#  ((((((((((((/                /((((((((((((((((((.              ,((((((((((((/
-# (((((((((((((              *(((((((((((((((((((((((*             *((((((((((((
-# (((((((((((((            ,(((((((((((((..(((((((((((((           *((((((((((((
-# ((((((((((((,          /((((((((((((*      /((((((((((((/         ((((((((((((
-# (((((((((((((        /((((((((((((/          (((((((((((((*       ((((((((((((
-# (((((((((((((/     /((((((((((((               ,((((((((((((,    *((((((((((((
-#  ((((((((((((((  *(((((((((((/                   *((((((((((((.  ((((((((((((/
-#  *((((((((((((((((((((((((((,                      /(((((((((((((((((((((((((
-#   (((((((((((((((((((((((((                         ((((((((((((((((((((((((,
-#   .(((((((((((((((((((((((/                         ,(((((((((((((((((((((((
-#     ((((((((((((((((((((((/                         ,(((((((((((((((((((((/
-#      *(((((((((((((((((((((                         (((((((((((((((((((((,
-#       ,(((((((((((((((((((((,                      ((((((((((((((((((((/
-#         ,(((((((((((((((((((((*                  /((((((((((((((((((((
-#            ((((((((((((((((((((((,           ,/((((((((((((((((((((,
-#              ,(((((((((((((((((((((((((((((((((((((((((((((((((((
-#                 .(((((((((((((((((((((((((((((((((((((((((((((
-#                     .((((((((((((((((((((((((((((((((((((,.
-#                          .,(((((((((((((((((((((((((.
-#
-###################################################################################
+    - |
+      convert -version | head -n1
+      gm -version | head -n1
+      gs -version | head -n1

@@ -7,6 +7,7 @@ namespace Drupal\sophron;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\File\MimeType\MimeTypeMap;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\sophron\Event\MapEvent;
@@ -151,29 +152,20 @@ class MimeMapManager implements MimeMapManagerInterface {
   }
 
   /**
-   * Returns an array of gaps of a map vs Drupal's core mapping.
-   *
-   * @param class-string<\FileEye\MimeMap\Map\MimeMapInterface> $mapClass
-   *   A FQCN.
-   *
-   * @return array
-   *   An array of simple arrays, each having a file extension, its Drupal MIME
-   *   type guess, and a gap information.
-   *
-   * @todo add to interface in sophron:3.0.0
+   * {@inheritdoc}
    */
   public function determineMapGaps(string $mapClass): array {
     $currentMapClass = $this->getMapClass();
     $this->setMapClass($mapClass);
 
-    $core_extended_guesser = new CoreExtensionMimeTypeGuesserExtended();
+    $coreMimeTypeMap = new MimeTypeMap();
 
-    $extensions = $core_extended_guesser->listExtensions();
+    $extensions = $coreMimeTypeMap->listExtensions();
     sort($extensions);
 
     $rows = [];
     foreach ($extensions as $ext) {
-      $drupal_mime_type = $core_extended_guesser->guessMimeType('a.' . (string) $ext);
+      $drupal_mime_type = $coreMimeTypeMap->getMimeTypeForExtension((string) $ext);
 
       $extension = $this->getExtension((string) $ext);
       try {

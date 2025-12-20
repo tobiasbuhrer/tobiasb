@@ -61,8 +61,14 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
     return [
       ImagemagickExecutionEvent::ENSURE_SOURCE_LOCAL_PATH => 'ensureSourceLocalPath',
       ImagemagickExecutionEvent::POST_SAVE => 'postSave',
-      ImagemagickExecutionEvent::PRE_CONVERT_EXECUTE => 'preConvertExecute',
-      ImagemagickExecutionEvent::PRE_IDENTIFY_EXECUTE => 'preIdentifyExecute',
+      ImagemagickExecutionEvent::PRE_CONVERT_EXECUTE => [
+        ['preConvertExecute'],
+        ['setDefaultSourceFramesForConvert'],
+      ],
+      ImagemagickExecutionEvent::PRE_IDENTIFY_EXECUTE => [
+        ['preIdentifyExecute'],
+        ['setDefaultSourceFramesForIdentify'],
+      ],
     ];
   }
 
@@ -153,6 +159,43 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
   }
 
   /**
+   * Ensures that the source format is set to a suitable value.
+   *
+   * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
+   *    The ImageMagick/GraphicsMagick execution arguments object.
+   *
+   * @return string
+   *  The source format.
+   */
+  protected function ensureSourceFormat(ImagemagickExecArguments $arguments): string {
+    $source_format = $arguments->getSourceFormat();
+    if (!$source_format && ($source_path = $arguments->getSourceLocalPath())) {
+      // Attempt to resolve the source format from the extension instead.
+      $extension = pathinfo($source_path, PATHINFO_EXTENSION);
+      $source_format = $arguments->setSourceFormatFromExtension($extension)->getSourceFormat();
+    }
+    return $source_format;
+  }
+
+  /**
+   * Ensures that the destination format is set to a suitable value.
+   *
+   * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
+   *    The ImageMagick/GraphicsMagick execution arguments object.
+   *
+   * @return string
+   *   The destination format.
+   */
+  protected function ensureDestinationFormat(ImagemagickExecArguments $arguments): string {
+    $destination_format = $arguments->getDestinationFormat();
+    if (!$destination_format && ($destination_path = $arguments->getDestinationLocalPath())) {
+      $extension = pathinfo($destination_path, PATHINFO_EXTENSION);
+      $destination_format = $arguments->setDestinationFormatFromExtension($extension)->getDestinationFormat();
+    }
+    return $destination_format;
+  }
+
+  /**
    * Adds configured arguments at the beginning of the list.
    *
    * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
@@ -199,6 +242,7 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
   public function ensureSourceLocalPath(ImagemagickExecutionEvent $event): void {
     $arguments = $event->getExecArguments();
     $this->doEnsureSourceLocalPath($arguments);
+    $this->ensureSourceFormat($arguments);
   }
 
   /**
@@ -295,6 +339,7 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
     $arguments = $event->getExecArguments();
     $this->prependArguments($arguments);
     $this->doEnsureDestinationLocalPath($arguments);
+    $this->ensureDestinationFormat($arguments);
 
     // Coalesce Animated GIFs, if required.
     if (empty($arguments->find('/^\-coalesce/')) && (bool) $this->imagemagickSettings->get('advanced.coalesce') && in_array($arguments->getSourceFormat(), [
@@ -329,6 +374,91 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
     // Change image quality.
     if (empty($arguments->find('/^\-quality/'))) {
       $arguments->add(['-quality', (string) $this->imagemagickSettings->get('quality')]);
+    }
+  }
+
+  /**
+   * Fires before the 'identify' command is executed.
+   *
+   * It specifies the default source frames to use for the 'identify' command.
+   *
+   * This is useful for limiting the max number of pages that will be detected,
+   * this is because certain file types can be potentially expensive to process,
+   * e.g., PDFs with hundreds of pages.
+   *
+   * @param \Drupal\imagemagick\Event\ImagemagickExecutionEvent $event
+   *    Imagemagick execution event.
+   */
+  public function setDefaultSourceFramesForIdentify(ImagemagickExecutionEvent $event): void {
+    // Set the default source frames to apply for the 'identify' command.
+    $this->applyDefaultSourceFrames($event->getExecArguments(), 'identify');
+  }
+
+  /**
+   * Fires before the 'convert' command is executed.
+   *
+   * It specifies the default source frames to use for the 'convert' command.
+   *
+   * When the destination format differs from the source format, then only the
+   * first frame will be converted by default.
+   *
+   * @param \Drupal\imagemagick\Event\ImagemagickExecutionEvent $event
+   *   Imagemagick execution event.
+   */
+  public function setDefaultSourceFramesForConvert(ImagemagickExecutionEvent $event): void {
+    $arguments = $event->getExecArguments();
+    if ($arguments->getSourceFrames() === NULL) {
+      $source_format = $arguments->getSourceFormat();
+      $destination_format = $arguments->getDestinationFormat() ?: $source_format;
+      if ($source_format !== $destination_format) {
+        // When the destination format differs from source format, convert only
+        // the first frame.
+        $arguments->setSourceFrames('[0]');
+      }
+      else {
+        $this->applyDefaultSourceFrames($arguments, 'convert');
+      }
+    }
+  }
+
+  /**
+   * Applies the default source frame for the file as configured.
+   *
+   * In order for the source frame to be resolved properly, the source and
+   * destination formats must already be resolved before this is called.
+   *
+   * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
+   *   The ImageMagick/GraphicsMagick execution arguments object.
+   * @param string $operation
+   *   The ImageMagick/GraphicsMagick operation, either 'identify' or 'convert'.
+   */
+  protected function applyDefaultSourceFrames(ImagemagickExecArguments $arguments, string $operation): void {
+    if ($arguments->getSourceFrames() === NULL) {
+      $source_format = $arguments->getSourceFormat();
+      if (!$source_format && $operation === 'identify') {
+        // Attempt to get the source format from the local source path
+        // extension during 'identify'. This is necessary if the image
+        // toolkit is used to load a disabled file type, as for optimization
+        // reasons, the frame limitation is still desired.
+        // We're also unable to set ImagemagickExecArguments::setSourceFormat()
+        // in an earlier event subscriber because it only allows the user to set
+        // enabled formats.
+        $source_format = strtoupper(pathinfo($arguments->getSourceLocalPath(), PATHINFO_EXTENSION));
+      }
+      if ($source_format) {
+        if ($operation === 'identify') {
+          $frames = $this->imagemagickSettings->get("image_formats.$source_format.identify_frames");
+        }
+        elseif ($operation === 'convert') {
+          $frames = $this->imagemagickSettings->get("image_formats.$source_format.convert_frames");
+        }
+        else {
+          throw new \InvalidArgumentException("Unsupported operation '$operation' provided");
+        }
+        if ($frames !== NULL) {
+          $arguments->setSourceFrames($frames);
+        }
+      }
     }
   }
 

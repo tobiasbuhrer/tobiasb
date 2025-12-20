@@ -9,13 +9,15 @@ use Drupal\imagemagick\Event\ImagemagickExecutionEvent;
 use Drupal\imagemagick\ImagemagickExecArguments;
 use Drupal\imagemagick\ImagemagickExecManagerInterface;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Tests for ImagemagickExecArguments.
- *
- * @group imagemagick
  */
+#[Group('imagemagick')]
+#[RunTestsInSeparateProcesses]
 class ExecArgumentsTest extends KernelTestBase {
 
   /**

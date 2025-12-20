@@ -2,7 +2,6 @@
 
 includes:
   - phpstan-baseline.neon
-  - phar://phpstan.phar/conf/bleedingEdge.neon
 
 parameters:
 
@@ -14,6 +13,9 @@ parameters:
   ignoreErrors:
     - "#^Unsafe usage of new static#"
     - "#Drupal calls should be avoided in classes, use dependency injection instead#"
+    -
+      identifier: classExtendsInternalClass.classExtendsInternalClass
+      reportUnmatched: false
     -
       # This is due to Drush 13 doing runtime conditional classloading.
       message: "#^Call to method choice\\(\\) on an unknown class Drush\\\\Style\\\\DrushStyle\\.$#"

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\image_effects\Plugin;
 
+use Drupal\Component\Plugin\FallbackPluginManagerInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -12,7 +13,7 @@ use Drupal\image_effects\Plugin\Attribute\ColorSelector;
 /**
  * Plugin manager for ColorSelector plugins.
  */
-class ColorSelectorPluginManager extends ImageEffectsPluginManagerBase {
+class ColorSelectorPluginManager extends ImageEffectsPluginManagerBase implements FallbackPluginManagerInterface {
 
   public function __construct(
     \Traversable $namespaces,
@@ -36,6 +37,13 @@ class ColorSelectorPluginManager extends ImageEffectsPluginManagerBase {
    */
   public function getType(): string {
     return 'color_selector';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFallbackPluginId($plugin_id, array $configuration = []) {
+    return 'html_color';
   }
 
 }

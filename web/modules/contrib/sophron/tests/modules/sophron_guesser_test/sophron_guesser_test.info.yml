@@ -1,0 +1,12 @@
+name: 'Sophron guesser test'
+type: module
+description: 'Support module for Sophron guesser tests.'
+package: Testing
+core_version_requirement: ^11.2
+dependencies:
+  - sophron:sophron
+
+# Information added by Drupal.org packaging script on 2025-07-09
+version: '3.0.0'
+project: 'sophron'
+datestamp: 1752094643

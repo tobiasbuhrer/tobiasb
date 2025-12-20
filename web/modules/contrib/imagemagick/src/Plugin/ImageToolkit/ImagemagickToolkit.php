@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Drupal\imagemagick\Plugin\ImageToolkit;
 
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\ImageToolkit\Attribute\ImageToolkit;
 use Drupal\Core\ImageToolkit\ImageToolkitBase;
@@ -383,6 +385,41 @@ class ImagemagickToolkit extends ImageToolkitBase {
    */
   public function getExecManager(): ImagemagickExecManagerInterface {
     return $this->execManager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function apply($operation, array $arguments = []) {
+    if ($operation === 'rotate' && !empty($arguments['background']) && strlen($arguments['background']) === 7) {
+      try {
+        if ($this->getToolkitOperation('rotate')->getPluginDefinition()['operation'] === 'rotate_ie') {
+          // Convert #rrggbb to #rrggbbaa as that is the format the plugin is
+          // expecting.
+          $arguments['background'] .= 'FF';
+        }
+      }
+      catch (PluginNotFoundException) {
+      }
+    }
+    return parent::apply($operation, $arguments);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getToolkitOperation($operation) {
+    if ($operation === 'rotate') {
+      try {
+        return $this->operationManager->getToolkitOperation($this, 'rotate');
+      }
+      catch (PluginNotFoundException) {
+        // Fallback to using the 'rotate_ie' operation defined within
+        // the image_effects module.
+        $operation = 'rotate_ie';
+      }
+    }
+    return $this->operationManager->getToolkitOperation($this, $operation);
   }
 
   /**
@@ -763,13 +800,6 @@ class ImagemagickToolkit extends ImageToolkitBase {
     $this->fileMetadataManager->deleteCachedMetadata($this->arguments()->getDestination());
     $this->fileMetadataManager->release($this->arguments()->getDestination());
 
-    // When destination format differs from source format, and source image
-    // is multi-frame, convert only the first frame.
-    $destination_format = $this->arguments()->getDestinationFormat() ?: $this->arguments()->getSourceFormat();
-    if ($this->arguments()->getSourceFormat() !== $destination_format && ($this->getFrames() === NULL || $this->getFrames() > 1)) {
-      $this->arguments()->setSourceFrames('[0]');
-    }
-
     // Execute the command and return.
     $output = '';
     $error = '';
@@ -783,7 +813,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
     $reported_info = [];
     if (stripos(ini_get('disable_functions'), 'proc_open') !== FALSE) {
       // proc_open() is disabled.
-      $severity = REQUIREMENT_ERROR;
+      $severity = RequirementSeverity::Error;
       $reported_info[] = $this->t("The <a href=':proc_open_url'>proc_open()</a> PHP function is disabled. It must be enabled for the toolkit to work. Edit the <a href=':disable_functions_url'>disable_functions</a> entry in your php.ini file, or consult your hosting provider.", [
         ':proc_open_url' => 'http://php.net/manual/en/function.proc-open.php',
         ':disable_functions_url' => 'http://php.net/manual/en/ini.core.php#ini.disable-functions',
@@ -795,7 +825,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       );
       if (!empty($status['errors'])) {
         // Can not execute 'convert'.
-        $severity = REQUIREMENT_ERROR;
+        $severity = RequirementSeverity::Error;
         foreach ($status['errors'] as $error) {
           $reported_info[] = $error;
         }
@@ -803,7 +833,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       }
       else {
         // No errors, report the version information.
-        $severity = REQUIREMENT_INFO;
+        $severity = RequirementSeverity::Info;
         $version_info = explode("\n", preg_replace('/\r/', '', Html::escape($status['output'])));
         $value = array_shift($version_info);
         $more_info_available = FALSE;

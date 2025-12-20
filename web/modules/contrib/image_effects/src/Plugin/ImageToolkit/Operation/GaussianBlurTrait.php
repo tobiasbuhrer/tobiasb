@@ -20,7 +20,7 @@ trait GaussianBlurTrait {
       ],
       'sigma' => [
         'description' => 'The blur sigma value.',
-        'type' => 'float',
+        'type' => '?float',
         'required' => FALSE,
         'default' => NULL,
       ],

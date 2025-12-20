@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\image_effects\Functional;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
 /**
  * Selector plugins test.
- *
- * @group image_effects
  */
+#[Group('image_effects')]
+#[RunTestsInSeparateProcesses]
 class SelectorPluginTest extends ImageEffectsTestBase {
 
   /**
@@ -69,7 +72,7 @@ class SelectorPluginTest extends ImageEffectsTestBase {
   }
 
   /**
-   * Image selector test.
+   * Font selector test.
    */
   public function testFontSelector(): void {
     $font_path = 'vendor://fileeye/linuxlibertine-fonts/';

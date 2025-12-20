@@ -12,7 +12,7 @@ Sophron of Drupal is a module to enhance MIME type management, based on the
   1200+ MIME types from 1600+ file extensions (vs Drupal's 360 MIME types and
   475 file extensions).
 * Provides an extensive MIME type management API through [FileEye/MimeMap](https://github.com/FileEye/MimeMap).
-* Optionally replaces Drupal's core MIME type extension-based guesser.
+* Optionally replaces Drupal's core MIME type extension-based guesser map.
 
 ## Installation
 
@@ -32,15 +32,27 @@ $ composer require drupal/sophron
 
 The Sophron module by itself just provides a service and an API for MIME type
 management. You can enable the complimentary **Sophron guesser** module to let
-Sophron manage the MIME type guessing, overriding Drupal core's guesser.
+Sophron replace Drupal core's MIME type map, overriding core's guessing
+results.
 
-**NOTE:** The Sophron guesser module does not invoke the
-```hook_file_mimetype_mapping_alter``` hook to allow altering the mapping of
-MIME types to file extensions. If you need to modify mappings, use the
-Sophron configuration UI (see below) to replicate any mapping changes.
-Alternatively, modules can implement event subscribers that react to a
-```Drupal\sophron\Event\MapEvent::INIT``` event that is fired when a map
-is initialised, and make the necessary changes to the mappings.
+## Alter MIME type mapping at runtime
+
+Sopron can manage alternative MIME type maps through FileEye/MimeMap features,
+but also allows runtime changes to the map in use, through three combinable
+methods:
+
+* Using the Sophron configuration UI (see below) to indicate any mapping
+  changes.
+* Via code, implementing event subscribers that react to the
+  ```Drupal\sophron\Event\MapEvent::INIT``` event that is **fired by Sophron**
+  when a map is initialised, and making the changes through the FileEye/MimeMap
+  API.
+* When the _Sophron guesser_ module is installed, implementing event subscribers
+  that react to the ```Drupal\Core\File\Event\MimeTypeMapLoadedEvent``` event
+  that is **fired by Drupal core** when the map is loaded, and making the
+  changes through the ```Drupal\Core\File\MimeType\MimeTypeMapInterface``` API.
+* **NOTE** The Sophron guesser module does not invoke the legacy (deprecated in
+  Drupal 11.2, removed in 12.0) ```hook_file_mimetype_mapping_alter``` hook.
 
 ## Configuration
 

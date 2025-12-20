@@ -11,6 +11,9 @@ To submit bug reports and feature suggestions, or to track changes: https://drup
   (http://www.graphicsmagick.org) must be installed on your server and the
   convert binary needs to be accessible and executable from PHP.
 
+* If Postscript or PDF support is required, then Ghostscript (https://ghostscript.com/releases/index.html)
+  must also be installed on your server.
+
 * The PHP configuration must allow invocation of _proc_open()_, which is
   security-wise identical to _exec()_.
 
@@ -47,6 +50,22 @@ these requirements.
 * Enable and/or disable the image formats that the toolkit needs to support,
   see below.
 
+## Overriding the process time limit
+
+The execution process is time limited to 60 seconds in
+[ImagemagickExecManager::runProcess](./src/ImagemagickExecManager.php). This
+duration should be more than enough for normal use cases.
+
+If more time is required, for example to do a one time downsizing of images, you
+can increase it by adding
+```php
+  $settings['imagemagick.process.timeout'] = [max value in seconds as integer];
+```
+to the project's `settings.php`.
+
+Be aware this comes with an overall performance risk, and is not recommended for
+production usage.
+
 # Enable/disable supported image formats
 
 ImageMagick and GraphicsMagick support a wide range of image formats. The image
@@ -71,6 +90,14 @@ extensions.
       enabled: true
       weight: 0
       exclude_extensions: jpe, jpg
+    PDF:
+      mime_type: application/pdf
+      enabled: true
+      weight: 0
+      # Limit identification to just the first 5 pages by default.
+      identify_frames: '[0-4]'
+      # Limit all conversions to just the first page by default.
+      convert_frames: '[0]'
   ```
   The 'internal' format should be entered with no spaces in front, and with a
   trailing colon. For each format there are more variables that can be
@@ -92,6 +119,14 @@ extensions.
   to be supported by the toolkit if the mapping MIME type <-> file extension
   returns more extensions than needed and we do not want to alter the MIME type
   mapping.
+  * _identify_frames_: (OPTIONAL), defaults to NULL. This is used in edge cases
+  where it's potentially expensive/time-consuming to process certain files with
+  a large number of frames, e.g., PDFs. This provides a way to specify a default
+  frame limit to use during the `identify` process.
+  * _convert_frames_: (OPTIONAL), defaults to NULL. This provides a way to
+  specify the default frames to use for this file format during the `convert`
+  process. The default frames can be ignored for a specific operation by calling
+  `ImagemagickExecArguments::setSourceFrames('');` before the conversion is done.
 
 # ImageMagick and Drupal's image API revealed
 

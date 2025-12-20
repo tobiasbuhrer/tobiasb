@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\image_effects\Kernel;
 
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Converter test.
- *
- * @group image_effects
  */
+#[Group('image_effects')]
+#[RunTestsInSeparateProcesses]
 class ConverterTest extends KernelTestBase {
 
   /**

@@ -16,7 +16,7 @@ trait InterlaceTrait {
     return [
       'type' => [
         'description' => 'The interlace type.',
-        'type' => 'string',
+        'type' => '?string',
         'required' => FALSE,
         'default' => 'Plane',
       ],

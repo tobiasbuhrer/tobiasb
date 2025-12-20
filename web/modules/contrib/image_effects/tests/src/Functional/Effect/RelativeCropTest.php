@@ -6,12 +6,15 @@ namespace Drupal\Tests\image_effects\Functional\Effect;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Tests\image_effects\Functional\ImageEffectsTestBase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the functionality provided by the relative crop image effect.
- *
- * @group image_effects
  */
+#[Group('image_effects')]
+#[RunTestsInSeparateProcesses]
 class RelativeCropTest extends ImageEffectsTestBase {
 
   /**
@@ -23,9 +26,8 @@ class RelativeCropTest extends ImageEffectsTestBase {
    *   The configuration object of the toolkit to set up.
    * @param array $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkits
    */
+  #[DataProvider('providerToolkits')]
   public function testRelativeCrop(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->changeToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
 

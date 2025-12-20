@@ -48,7 +48,6 @@
  * @ingroup themeable
  */
 #}
-{% apply spaceless %}
   - {{ 'Font'|t }}: {{ data.font.name }} - {{ 'Size'|t  }}: {{ data.font.size }}
   {% if data.font.angle %}
     - {{ 'Rotate'|t }}: {{ data.font.angle }}°
@@ -60,4 +59,3 @@
   {% if data.background_color_detail %}
     - {{ 'Background color'|t }}: {{ data.background_color_detail }}
   {% endif %}
-{% endapply %}

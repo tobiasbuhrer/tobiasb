@@ -16,10 +16,6 @@ use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests for Sophron API.
- *
- * @coversDefaultClass \Drupal\sophron\MimeMapManager
- *
- * @group sophron
  */
 #[CoversClass(MimeMapManager::class)]
 #[Group('sophron')]

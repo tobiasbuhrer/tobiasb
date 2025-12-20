@@ -6,12 +6,14 @@ namespace Drupal\Tests\imagemagick\Kernel;
 
 use Drupal\imagemagick\ImagemagickExecManagerInterface;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests for ImagemagickExecManager.
- *
- * @group imagemagick
  */
+#[Group('imagemagick')]
+#[RunTestsInSeparateProcesses]
 class ExecManagerTest extends KernelTestBase {
 
   /**

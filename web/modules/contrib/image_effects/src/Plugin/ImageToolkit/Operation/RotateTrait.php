@@ -23,19 +23,19 @@ trait RotateTrait {
       ],
       'background' => [
         'description' => "A string specifying the hexadecimal color code to use as background for the uncovered area of the image after the rotation, in RGBA format",
-        'type' => 'string',
+        'type' => '?string',
         'required' => FALSE,
         'default' => NULL,
       ],
       'fallback_transparency_color' => [
         'description' => "A string specifying the hexadecimal color code to use as fallback for transparent background, in RGB format",
-        'type' => 'string',
+        'type' => '?string',
         'required' => FALSE,
         'default' => '#FFFFFF',
       ],
       'resize_filter' => [
         'description' => 'An optional filter to apply for the resize',
-        'type' => 'string',
+        'type' => '?string',
         'required' => FALSE,
         'default' => '',
       ],

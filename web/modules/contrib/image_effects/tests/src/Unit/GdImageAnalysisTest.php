@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Drupal\Tests\image_effects\Unit;
 
 use Drupal\image_effects\Component\GdImageAnalysis;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the image analysis helper methods.
- *
- * @group image_effects
  */
+#[Group('image_effects')]
 class GdImageAnalysisTest extends TestCase {
 
   /**

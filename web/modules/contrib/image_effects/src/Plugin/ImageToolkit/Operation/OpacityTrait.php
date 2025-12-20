@@ -16,7 +16,7 @@ trait OpacityTrait {
     return [
       'opacity' => [
         'description' => 'Opacity.',
-        'type' => 'int',
+        'type' => '?int',
         'required' => FALSE,
         'default' => 100,
       ],

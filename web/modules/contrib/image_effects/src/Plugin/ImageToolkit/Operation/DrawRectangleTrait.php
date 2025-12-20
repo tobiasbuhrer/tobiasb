@@ -29,7 +29,7 @@ trait DrawRectangleTrait {
       ],
       'fill_color_luma' => [
         'description' => 'If TRUE, convert RGBA of the polygon fill to best match using luma.',
-        'type' => 'bool',
+        'type' => '?bool',
         'required' => FALSE,
         'default' => FALSE,
       ],
@@ -41,7 +41,7 @@ trait DrawRectangleTrait {
       ],
       'border_color_luma' => [
         'description' => 'If TRUE, convert RGBA of the polygon line to best match using luma.',
-        'type' => 'bool',
+        'type' => '?bool',
         'required' => FALSE,
         'default' => FALSE,
       ],

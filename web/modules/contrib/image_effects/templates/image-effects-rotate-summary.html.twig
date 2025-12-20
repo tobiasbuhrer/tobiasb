@@ -18,7 +18,6 @@
  * @ingroup themeable
  */
 #}
-{% apply spaceless %}
   {{ data.degrees }}°
   {% if data.method == 'random' %}
     - {{ 'Random'|t }}
@@ -29,4 +28,3 @@
   {% if data.background_color_detail %}
     - {{ 'Background color'|t }}: {{ data.background_color_detail }}
   {% endif %}
-{% endapply %}

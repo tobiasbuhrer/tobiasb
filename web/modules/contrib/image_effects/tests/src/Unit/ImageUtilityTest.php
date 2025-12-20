@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace Drupal\Tests\image_effects\Unit;
 
 use Drupal\image_effects\Component\ImageUtility;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the image utility helper methods.
- *
- * @coversDefaultClass \Drupal\image_effects\Component\ImageUtility
- *
- * @group image_effects
  */
+#[CoversClass(ImageUtility::class)]
+#[Group('image_effects')]
 class ImageUtilityTest extends TestCase {
 
   /**
@@ -36,9 +37,9 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @covers ::percentFilter
-   * @dataProvider percentFilterProvider
+   * @legacy-covers ::percentFilter
    */
+  #[DataProvider('percentFilterProvider')]
   public function testPercentFilter(int|string|NULL $length_specification, ?int $current_length, ?int $expected_result): void {
     $this->assertSame($expected_result, ImageUtility::percentFilter($length_specification, $current_length));
   }
@@ -76,9 +77,9 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @covers ::resizeDimensions
-   * @dataProvider resizeDimensionsProvider
+   * @legacy-covers ::resizeDimensions
    */
+  #[DataProvider('resizeDimensionsProvider')]
   public function testResizeDimensions(?int $source_width, ?int $source_height, int|string|NULL $width_specification, int|string|NULL $height_specification, bool $square, ?int $expected_width, ?int $expected_height): void {
     $result = ImageUtility::resizeDimensions($source_width, $source_height, $width_specification, $height_specification, $square);
     $this->assertSame($expected_width, $result['width']);
@@ -86,7 +87,7 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @covers ::getKeywordOffset
+   * @legacy-covers ::getKeywordOffset
    */
   public function testInvalidGetKeywordOffset(): void {
     $this->expectException(\InvalidArgumentException::class);
@@ -95,10 +96,9 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @covers ::getKeywordOffset
-   *
-   * @dataProvider providerTestGetKeywordOffset
+   * @legacy-covers ::getKeywordOffset
    */
+  #[DataProvider('providerTestGetKeywordOffset')]
   public function testGetKeywordOffset(array $input, int $expected): void {
     $this->assertSame($expected, ImageUtility::getKeywordOffset($input['anchor'], $input['current'], $input['new']));
   }

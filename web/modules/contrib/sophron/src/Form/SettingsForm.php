@@ -9,9 +9,7 @@ use Drupal\Core\Config\Schema\SchemaCheckTrait;
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\sophron\CoreExtensionMimeTypeGuesserExtended;
 use Drupal\sophron\MimeMapManagerInterface;
-use FileEye\MimeMap\MappingException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -168,15 +166,7 @@ class SettingsForm extends ConfigFormBase {
     }
 
     // Mapping gaps.
-    // @todo BC starts. Resolve in sophron:3.0.0.
-    if (method_exists($this->mimeMapManager, 'determineMapGaps')) {
-      $gaps = $this->mimeMapManager->determineMapGaps($this->mimeMapManager->getMapClass());
-    }
-    else {
-      // @phpstan-ignore method.deprecated
-      $gaps = $this->determineMapGaps();
-    }
-    // @todo BC ends.
+    $gaps = $this->mimeMapManager->determineMapGaps($this->mimeMapManager->getMapClass());
     if ($gaps !== []) {
       $form['mapping']['gaps'] = [
         '#type' => 'details',
@@ -318,54 +308,6 @@ class SettingsForm extends ConfigFormBase {
     }
 
     parent::submitForm($form, $form_state);
-  }
-
-  /**
-   * Returns an array of gaps of current map vs Drupal's core mapping.
-   *
-   * @return array
-   *   An array of simple arrays, each having a file extension, its Drupal MIME
-   *   type guess, and a gap information.
-   *
-   * @deprecated in sophron:2.2.0 and is removed from sophron:3.0.0. Use
-   *   MimeMapManager::determineMapGaps() instead.
-   *
-   * @see https://www.drupal.org/project/sophron/issues/3494318
-   */
-  protected function determineMapGaps(): array {
-    @trigger_error(__METHOD__ . '() is deprecated in sophron:2.2.0 and is removed from sophron:3.0.0. Use MimeMapManager::determineMapGaps() instead. See https://www.drupal.org/project/sophron/issues/3494318', E_USER_DEPRECATED);
-
-    $core_extended_guesser = new CoreExtensionMimeTypeGuesserExtended();
-
-    $extensions = $core_extended_guesser->listExtensions();
-    sort($extensions);
-
-    $rows = [];
-    foreach ($extensions as $ext) {
-      $drupal_mime_type = $core_extended_guesser->guessMimeType('a.' . (string) $ext);
-
-      $extension = $this->mimeMapManager->getExtension((string) $ext);
-      try {
-        $mimemap_mime_type = $extension->getDefaultType();
-      }
-      catch (MappingException $e) {
-        $mimemap_mime_type = '';
-      }
-
-      $gap = '';
-      if ($mimemap_mime_type === '') {
-        $gap = $this->t('No MIME type mapped to this file extension.');
-      }
-      elseif (mb_strtolower($drupal_mime_type) != mb_strtolower($mimemap_mime_type)) {
-        $gap = $this->t("File extension mapped to '@type' instead.", ['@type' => $mimemap_mime_type]);
-      }
-
-      if ($gap !== '') {
-        $rows[] = [(string) $ext, $drupal_mime_type, $gap];
-      }
-    }
-
-    return $rows;
   }
 
 }

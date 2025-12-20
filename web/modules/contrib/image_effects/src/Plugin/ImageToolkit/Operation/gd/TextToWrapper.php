@@ -171,7 +171,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
       $current_y += $line_height;
       switch ($arguments['text_align']) {
         case 'center':
-          $x_offset = round($x_delta / 2);
+          $x_offset = (int) round($x_delta / 2);
           break;
 
         case 'right':

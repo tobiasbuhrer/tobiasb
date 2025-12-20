@@ -6,12 +6,14 @@ namespace Drupal\Tests\image_effects\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use Drupal\user\UserInterface;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Settings form test.
- *
- * @group image_effects
  */
+#[Group('image_effects')]
+#[RunTestsInSeparateProcesses]
 class SettingsFormTest extends BrowserTestBase {
 
   /**
@@ -19,7 +21,6 @@ class SettingsFormTest extends BrowserTestBase {
    */
   protected static $modules = [
     'image_effects',
-    'color',
     'file_mdm',
     'file_mdm_exif',
     'file_mdm_font',
@@ -56,15 +57,6 @@ class SettingsFormTest extends BrowserTestBase {
 
     // Get the settings form.
     $this->drupalGet($admin_path);
-
-    // Change the default color selector.
-    $edit = [
-      'settings[color_selector][plugin_id]' => 'farbtastic',
-    ];
-    $this->submitForm($edit, 'Save configuration');
-
-    // Check config changed.
-    $this->assertEquals('farbtastic', \Drupal::config('image_effects.settings')->get('color_selector.plugin_id'));
 
     // Change the default image selector.
     $config = \Drupal::configFactory()->getEditable('image_effects.settings');

@@ -16,7 +16,7 @@ class DrupalMap extends AbstractMap {
   /**
    * Singleton instance.
    *
-   * @var \FileEye\MimeMap\Map\MapInterface
+   * @var \FileEye\MimeMap\Map\MapInterface<MimeMap>
    */
   protected static $instance;
 
@@ -46,7 +46,7 @@ class DrupalMap extends AbstractMap {
    *
    * DO NOT CHANGE THE MAPPING ARRAY MANUALLY.
    *
-   * @var array<string, array<int|string, array<string, array<int, string>>>>
+   * @var MimeMap
    *
    * @internal
    */
@@ -154,6 +154,17 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'atomsvc',
+      ),
+    ),
+    'application/buildstream+yaml' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'BuildStream element',
+      ),
+      'e' =>
+      array (
+        0 => 'bst',
       ),
     ),
     'application/cbor' =>
@@ -1552,6 +1563,19 @@ class DrupalMap extends AbstractMap {
         0 => 'trig',
       ),
     ),
+    'application/typescript' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'TypeScript program',
+      ),
+      'e' =>
+      array (
+        0 => 'cts',
+        1 => 'mts',
+        2 => 'ts',
+      ),
+    ),
     'application/vnd.3gpp.pic-bw-large' =>
     array (
       'e' =>
@@ -1859,6 +1883,17 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'pkpass',
+      ),
+    ),
+    'application/vnd.apple.pkpasses' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Apple Wallet passes bundle',
+      ),
+      'e' =>
+      array (
+        0 => 'pkpasses',
       ),
     ),
     'application/vnd.aristanetworks.swi' =>
@@ -7727,6 +7762,10 @@ class DrupalMap extends AbstractMap {
     ),
     'application/x-ns-proxy-autoconfig' =>
     array (
+      'desc' =>
+      array (
+        0 => 'Proxy Auto-Configuration file',
+      ),
       'e' =>
       array (
         0 => 'pac',
@@ -7736,11 +7775,11 @@ class DrupalMap extends AbstractMap {
     array (
       'a' =>
       array (
-        0 => 'text/x-nu',
+        0 => 'text/x-nushell',
       ),
       'desc' =>
       array (
-        0 => 'Nu shell script',
+        0 => 'Nushell script',
       ),
       'e' =>
       array (
@@ -7890,7 +7929,8 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'pcapng',
-        1 => 'ntar',
+        1 => 'scap',
+        2 => 'ntar',
       ),
     ),
     'application/x-perl' =>
@@ -10886,6 +10926,17 @@ class DrupalMap extends AbstractMap {
         0 => 'astc',
       ),
     ),
+    'image/avci' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'AVC-encoded image encapsulated in HEIF',
+      ),
+      'e' =>
+      array (
+        0 => 'avci',
+      ),
+    ),
     'image/avif' =>
     array (
       'a' =>
@@ -11402,6 +11453,20 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'npx',
+      ),
+    ),
+    'image/vnd.radiance' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Radiance HDR image',
+      ),
+      'e' =>
+      array (
+        0 => 'hdr',
+        1 => 'pic',
+        2 => 'rgbe',
+        3 => 'xyze',
       ),
     ),
     'image/vnd.rn-realpix' =>
@@ -11982,6 +12047,17 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'pfm',
+      ),
+    ),
+    'image/x-phm' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Portable HalfMap',
+      ),
+      'e' =>
+      array (
+        0 => 'phm',
       ),
     ),
     'image/x-photo-cd' =>
@@ -12613,7 +12689,8 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'js',
         1 => 'mjs',
-        2 => 'jsm',
+        2 => 'cjs',
+        3 => 'jsm',
       ),
     ),
     'text/jscript.encode' =>
@@ -13009,6 +13086,21 @@ class DrupalMap extends AbstractMap {
         0 => 'ts',
       ),
     ),
+    'text/vnd.typst' =>
+    array (
+      'a' =>
+      array (
+        0 => 'text/x-typst',
+      ),
+      'desc' =>
+      array (
+        0 => 'Typst document',
+      ),
+      'e' =>
+      array (
+        0 => 'typ',
+      ),
+    ),
     'text/vnd.wap.wml' =>
     array (
       'desc' =>
@@ -13300,6 +13392,17 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'dts',
         1 => 'dtsi',
+      ),
+    ),
+    'text/x-dockerfile' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Docker container build file',
+      ),
+      'e' =>
+      array (
+        0 => 'dockerfile',
       ),
     ),
     'text/x-dsl' =>
@@ -14125,6 +14228,17 @@ class DrupalMap extends AbstractMap {
         1 => 'ass',
       ),
     ),
+    'text/x-ssh-public-key' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'OpenSSH public key',
+      ),
+      'e' =>
+      array (
+        0 => 'pub',
+      ),
+    ),
     'text/x-subviewer' =>
     array (
       'desc' =>
@@ -14265,17 +14379,6 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 't2t',
-      ),
-    ),
-    'text/x-typst' =>
-    array (
-      'desc' =>
-      array (
-        0 => 'Typst document',
-      ),
-      'e' =>
-      array (
-        0 => 'typ',
       ),
     ),
     'text/x-uil' =>
@@ -14562,7 +14665,8 @@ class DrupalMap extends AbstractMap {
         3 => 'm4v',
         4 => 'f4v',
         5 => 'lrv',
-        6 => 'f4p',
+        6 => 'lrf',
+        7 => 'f4p',
       ),
     ),
     'video/mpeg' =>
@@ -15809,6 +15913,13 @@ class DrupalMap extends AbstractMap {
         0 => 'text/x-systemd-unit',
       ),
     ),
+    'avci' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/avci',
+      ),
+    ),
     'avf' =>
     array (
       't' =>
@@ -16115,6 +16226,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-bsdiff',
+      ),
+    ),
+    'bst' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/buildstream+yaml',
       ),
     ),
     'btif' =>
@@ -16568,6 +16686,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/vnd.ms-artgalry',
       ),
     ),
+    'cjs' =>
+    array (
+      't' =>
+      array (
+        0 => 'text/javascript',
+      ),
+    ),
     'cl' =>
     array (
       't' =>
@@ -16923,6 +17048,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'chemical/x-cactvs-binary',
+      ),
+    ),
+    'cts' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/typescript',
       ),
     ),
     'ctx' =>
@@ -17345,6 +17477,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/docbook+xml',
+      ),
+    ),
+    'dockerfile' =>
+    array (
+      't' =>
+      array (
+        0 => 'text/x-dockerfile',
       ),
     ),
     'docm' =>
@@ -19146,6 +19285,13 @@ class DrupalMap extends AbstractMap {
         0 => 'image/jxr',
       ),
     ),
+    'hdr' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/vnd.radiance',
+      ),
+    ),
     'heic' =>
     array (
       't' =>
@@ -20459,7 +20605,8 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/octet-stream',
-        1 => 'application/x-sony-bbeb',
+        1 => 'video/mp4',
+        2 => 'application/x-sony-bbeb',
       ),
     ),
     'lrm' =>
@@ -21688,6 +21835,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'video/mp2t',
+        1 => 'application/typescript',
       ),
     ),
     'mup' =>
@@ -22852,6 +23000,13 @@ class DrupalMap extends AbstractMap {
         2 => 'application/pgp-keys',
       ),
     ),
+    'phm' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-phm',
+      ),
+    ),
     'php' =>
     array (
       't' =>
@@ -22920,6 +23075,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'image/x-pict',
+        1 => 'image/vnd.radiance',
       ),
     ),
     'pict' =>
@@ -22977,6 +23133,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/vnd.apple.pkpass',
+      ),
+    ),
+    'pkpasses' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/vnd.apple.pkpasses',
       ),
     ),
     'pkr' =>
@@ -23345,6 +23508,7 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'application/x-mspublisher',
         1 => 'application/vnd.ms-publisher',
+        2 => 'text/x-ssh-public-key',
       ),
     ),
     'pvb' =>
@@ -23834,6 +23998,13 @@ class DrupalMap extends AbstractMap {
         0 => 'image/x-rgb',
       ),
     ),
+    'rgbe' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/vnd.radiance',
+      ),
+    ),
     'rhtml' =>
     array (
       't' =>
@@ -24198,6 +24369,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'text/x-scala',
+      ),
+    ),
+    'scap' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-pcapng',
       ),
     ),
     'scd' =>
@@ -25843,7 +26021,8 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'text/texmacs',
         1 => 'video/mp2t',
-        2 => 'text/vnd.trolltech.linguist',
+        2 => 'application/typescript',
+        3 => 'text/vnd.trolltech.linguist',
       ),
     ),
     'tscn' =>
@@ -25969,7 +26148,7 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'text/x-typst',
+        0 => 'text/vnd.typst',
       ),
     ),
     'tzo' =>
@@ -27714,6 +27893,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'chemical/x-xyz',
+      ),
+    ),
+    'xyze' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/vnd.radiance',
       ),
     ),
     'xz' =>
@@ -30166,7 +30352,7 @@ class DrupalMap extends AbstractMap {
         0 => 'text/markdown',
       ),
     ),
-    'text/x-nu' =>
+    'text/x-nushell' =>
     array (
       't' =>
       array (
@@ -30248,6 +30434,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'text/troff',
+      ),
+    ),
+    'text/x-typst' =>
+    array (
+      't' =>
+      array (
+        0 => 'text/vnd.typst',
       ),
     ),
     'text/x-vcalendar' =>

@@ -11,12 +11,15 @@ use Drupal\imagemagick\EventSubscriber\ImagemagickEventSubscriber;
 use Drupal\imagemagick\PackageSuite;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\imagemagick\Kernel\ToolkitSetupTrait;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests that core image manipulations work properly through Imagemagick.
- *
- * @group imagemagick
  */
+#[Group('imagemagick')]
+#[RunTestsInSeparateProcesses]
 class ToolkitImagemagickTest extends BrowserTestBase {
 
   use ToolkitSetupTrait;
@@ -87,9 +90,8 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The config object of the toolkit to set up.
    * @param array $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testTemporaryRemoteCopiesDeletion(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
     $this->prepareImageFileHandling();
@@ -125,9 +127,8 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The config object of the toolkit to set up.
    * @param array $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testDoubleCropping(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
     $this->prepareImageFileHandling();
@@ -165,9 +166,8 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The config object of the toolkit to set up.
    * @param array $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testManipulations(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
     $this->prepareImageFileHandling();
@@ -581,9 +581,8 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The config object of the toolkit to set up.
    * @param array $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testNonAsciiFileNames(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     // @todo on Windows, GraphicsMagick fails.
     if (substr(PHP_OS, 0, 3) === 'WIN' && $toolkit_settings['binaries'] === 'graphicsmagick') {
@@ -632,9 +631,8 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The config object of the toolkit to set up.
    * @param array $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testInvalidImage(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
 

@@ -26,7 +26,7 @@ naming convention
 4. an implementation of `::transformDimensions` if the effect changes
 height/width of the image
 5. if the effect has parameters:
-    1. an `image_effects_[effect]_summary` entry in `image_effects_theme()` in `image_effects.module`
+    1. an `image_effects_[effect]_summary` entry in `theme()` in `ImageEffectsThemeHooks`
     2. a Twig template for the effect summary under
     `templates/image-effects-[effect]-summary.html.twig`
     3. the effect form using `'#type' => 'image_effects_color'` form elements to

@@ -37,6 +37,11 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
    */
   protected readonly ImagemagickExecManagerInterface $execManager;
 
+  /**
+   * The ImageMagick execution arguments.
+   */
+  protected ?ImagemagickExecArguments $arguments;
+
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $instance->execManager = $container->get(ImagemagickExecManagerInterface::class);
@@ -229,7 +234,20 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
       $data['source_local_path'] = $arguments->getSourceLocalPath();
     }
 
+    $this->arguments = $arguments;
     return $data;
+  }
+
+  /**
+   * Returns the ImageMagick/GraphicsMagick execution arguments object.
+   *
+   * This represents the arguments used to identify the image.
+   *
+   * @return \Drupal\imagemagick\ImagemagickExecArguments|null
+   *   The ImageMagick/GraphicsMagick execution arguments object.
+   */
+  public function getArguments(): ?ImagemagickExecArguments {
+    return $this->arguments;
   }
 
 }

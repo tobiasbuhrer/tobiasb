@@ -130,7 +130,6 @@ interface MimeMapManagerInterface {
    */
   public function requirements(string $phase): array;
 
-  // phpcs:disable
   /**
    * Returns an array of gaps of a map vs Drupal's core mapping.
    *
@@ -140,10 +139,7 @@ interface MimeMapManagerInterface {
    * @return array
    *   An array of simple arrays, each having a file extension, its Drupal MIME
    *   type guess, and a gap information.
-   *
-   * @todo add to interface in sophron:3.0.0
    */
-  // public function determineMapGaps(string $mapClass): array;
-  // phpcs:enable
+  public function determineMapGaps(string $mapClass): array;
 
 }

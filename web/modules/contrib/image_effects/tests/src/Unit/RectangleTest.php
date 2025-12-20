@@ -5,18 +5,23 @@ declare(strict_types=1);
 namespace Drupal\Tests\image_effects\Unit;
 
 use Drupal\image_effects\Component\Rectangle;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \Drupal\image_effects\Component\Rectangle
- * @group image_effects
+ * Tests Drupal\image_effects\Component\Rectangle.
  */
+#[CoversClass(Rectangle::class)]
+#[Group('image_effects')]
 class RectangleTest extends TestCase {
 
   /**
    * Tests wrong rectangle width.
    *
-   * @covers ::rotate
+   * @legacy-covers ::rotate
    */
   public function testWrongWidth(): void {
     $this->expectException(\InvalidArgumentException::class);
@@ -26,7 +31,7 @@ class RectangleTest extends TestCase {
   /**
    * Tests wrong rectangle height.
    *
-   * @covers ::rotate
+   * @legacy-covers ::rotate
    */
   public function testWrongHeight(): void {
     $this->expectException(\InvalidArgumentException::class);
@@ -47,12 +52,11 @@ class RectangleTest extends TestCase {
    * @param int $exp_height
    *   The expected height of the rotated rectangle.
    *
-   * @covers ::rotate
-   * @covers ::getBoundingWidth
-   * @covers ::getBoundingHeight
-   *
-   * @dataProvider providerGd222RotateDimensions
+   * @legacy-covers ::rotate
+   * @legacy-covers ::getBoundingWidth
+   * @legacy-covers ::getBoundingHeight
    */
+  #[DataProvider('providerGd222RotateDimensions')]
   public function testRotateDimensions(int $width, int $height, float $angle, int $exp_width, int $exp_height): void {
     $rect = new Rectangle($width, $height);
     $rect->rotate($angle);
@@ -73,11 +77,9 @@ class RectangleTest extends TestCase {
    *   The expected width of the rotated rectangle.
    * @param int $exp_height
    *   The expected height of the rotated rectangle.
-   *
-   * @requires gd
-   *
-   * @dataProvider providerGd222RotateDimensions
    */
+  #[DataProvider('providerGd222RotateDimensions')]
+  #[RequiresPhpExtension('gd')]
   public function testGdRotate(int $width, int $height, float $angle, int $exp_width, int $exp_height): void {
     $libgd_version_from_info = gd_info()['GD Version'];
     $libgd_version_found = preg_match('/.*((0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*))/', $libgd_version_from_info, $matches);

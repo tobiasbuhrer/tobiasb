@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Drupal\Tests\image_effects\Functional\Effect;
 
 use Drupal\Tests\image_effects\Functional\ImageEffectsTestBase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Watermark effect test.
- *
- * @group image_effects
  */
+#[Group('image_effects')]
+#[RunTestsInSeparateProcesses]
 class WatermarkTest extends ImageEffectsTestBase {
 
   /**
@@ -22,9 +25,8 @@ class WatermarkTest extends ImageEffectsTestBase {
    *   The config object of the toolkit to set up.
    * @param array $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkits
    */
+  #[DataProvider('providerToolkits')]
   public function testWatermarkEffect(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->changeToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
 

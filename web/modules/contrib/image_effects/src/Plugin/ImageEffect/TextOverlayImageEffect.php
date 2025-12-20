@@ -20,6 +20,7 @@ use Drupal\image_effects\Component\ImageUtility;
 use Drupal\image_effects\Component\PositionedRectangle;
 use Drupal\image_effects\Plugin\FontSelectorPluginManager;
 use Drupal\image_effects\Plugin\ImageEffectsFontSelectorPluginInterface;
+use Drupal\textimage\TextimageFactoryInterface;
 use Drupal\token\TreeBuilderInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -96,10 +97,13 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * Returns the textimage.factory service, if available.
    *
-   * @return \Drupal\textimage\TextimageFactory|null
+   * @return \Drupal\textimage\TextimageFactoryInterface|null
    *   The textimage.factory service if available, NULL otherwise.
    */
-  protected function getTextimageFactory() {
+  protected function getTextimageFactory(): ?TextimageFactoryInterface {
+    if (interface_exists(TextimageFactoryInterface::class) && \Drupal::hasService(TextimageFactoryInterface::class)) {
+      return \Drupal::service(TextimageFactoryInterface::class);
+    }
     return \Drupal::hasService('textimage.factory') ? \Drupal::service('textimage.factory') : NULL;
   }
 
@@ -810,7 +814,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
             ]);
             if (!$image->apply('draw_rectangle', ['rectangle' => $rectangle, 'fill_color' => $main_bg_color])) {
               return FALSE;
-            };
+            }
           }
           // Bottom rectangle.
           if ($this->info['frame_bottom']) {
@@ -822,7 +826,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
             ]);
             if (!$image->apply('draw_rectangle', ['rectangle' => $rectangle, 'fill_color' => $main_bg_color])) {
               return FALSE;
-            };
+            }
           }
           // Left rectangle.
           if ($this->info['frame_left']) {
@@ -834,7 +838,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
             ]);
             if (!$image->apply('draw_rectangle', ['rectangle' => $rectangle, 'fill_color' => $main_bg_color])) {
               return FALSE;
-            };
+            }
           }
           // Right rectangle.
           if ($this->info['frame_right']) {
@@ -846,7 +850,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
             ]);
             if (!$image->apply('draw_rectangle', ['rectangle' => $rectangle, 'fill_color' => $main_bg_color])) {
               return FALSE;
-            };
+            }
           }
         }
       }

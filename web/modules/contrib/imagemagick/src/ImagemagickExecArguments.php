@@ -39,7 +39,7 @@ class ImagemagickExecArguments {
   /**
    * The source image frames to access.
    */
-  protected string $sourceFrames;
+  protected ?string $sourceFrames = NULL;
 
   /**
    * The image destination URI/path on saving.
@@ -295,14 +295,18 @@ class ImagemagickExecArguments {
   /**
    * Sets the source image frames to access.
    *
-   * @param string $frames
+   * Setting this to an empty string will ensure that the default source
+   * frames configured for the file type (if any) will no longer be applied.
+   *
+   * @param string|null $frames
    *   The frames in '[n]' string format.
    *
    * @return $this
    *
    * @see http://www.imagemagick.org/script/command-line-processing.php
+   * @see http://www.graphicsmagick.org/GraphicsMagick.html#files
    */
-  public function setSourceFrames(string $frames): static {
+  public function setSourceFrames(?string $frames): static {
     $this->sourceFrames = $frames;
     return $this;
   }
@@ -314,6 +318,7 @@ class ImagemagickExecArguments {
    *   The frames in '[n]' string format.
    *
    * @see http://www.imagemagick.org/script/command-line-processing.php
+   * @see http://www.graphicsmagick.org/GraphicsMagick.html#files
    */
   public function getSourceFrames(): ?string {
     return $this->sourceFrames ?? NULL;
@@ -322,12 +327,12 @@ class ImagemagickExecArguments {
   /**
    * Sets the image destination URI/path on saving.
    *
-   * @param string $destination
+   * @param string|null $destination
    *   The image destination URI/path.
    *
    * @return $this
    */
-  public function setDestination(string $destination): static {
+  public function setDestination(?string $destination): static {
     $this->destination = $destination;
     return $this;
   }
@@ -335,10 +340,10 @@ class ImagemagickExecArguments {
   /**
    * Gets the image destination URI/path on saving.
    *
-   * @return string
+   * @return string|null
    *   The image destination URI/path.
    */
-  public function getDestination(): string {
+  public function getDestination(): ?string {
     return $this->destination;
   }
 

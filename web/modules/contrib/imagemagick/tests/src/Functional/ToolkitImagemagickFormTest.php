@@ -11,12 +11,14 @@ use Drupal\imagemagick\ImagemagickExecManagerInterface;
 use Drupal\imagemagick\PackageSuite;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\user\Entity\Role;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests ImageMagick subform and settings.
- *
- * @group imagemagick
  */
+#[Group('imagemagick')]
+#[RunTestsInSeparateProcesses]
 class ToolkitImagemagickFormTest extends BrowserTestBase {
 
   /**

@@ -16,3 +16,17 @@ imagemagick.image_format:
     exclude_extensions:
       type: string
       label: 'Image file extensions to be excluded'
+    identify_frames:
+      type: imagemagick.frame
+      label: 'Default frames to use for the identify operation for this format'
+    convert_frames:
+      type: imagemagick.frame
+      label: 'Default frames to use for the convert operation to this format'
+
+imagemagick.frame:
+  type: string
+  label: 'ImageMagick/GraphicsMagick frame'
+  constraints:
+    Regex:
+      pattern: '/^\[.+\]$/'
+      message: '%value is not a valid frame value. It must match the %pattern regex.'

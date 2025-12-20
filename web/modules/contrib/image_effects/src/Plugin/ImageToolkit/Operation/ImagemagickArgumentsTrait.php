@@ -20,11 +20,11 @@ trait ImagemagickArgumentsTrait {
       ],
       'width' => [
         'description' => 'Width of image after operation.',
-        'type' => 'int',
+        'type' => '?int',
       ],
       'height' => [
         'description' => 'Height of image after operation.',
-        'type' => 'int',
+        'type' => '?int',
       ],
     ];
   }

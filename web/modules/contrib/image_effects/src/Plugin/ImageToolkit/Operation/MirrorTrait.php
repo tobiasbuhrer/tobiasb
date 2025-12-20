@@ -16,13 +16,13 @@ trait MirrorTrait {
     return [
       'x_axis' => [
         'description' => 'Flop the source image horizontally.',
-        'type' => 'bool',
+        'type' => '?bool',
         'required' => FALSE,
         'default' => FALSE,
       ],
       'y_axis' => [
         'description' => 'Flip the source image vertically.',
-        'type' => 'bool',
+        'type' => '?bool',
         'required' => FALSE,
         'default' => FALSE,
       ],

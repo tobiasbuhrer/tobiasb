@@ -34,13 +34,13 @@ trait MaskTrait {
       ],
       'x_offset' => [
         'description' => 'X offset for mask image.',
-        'type' => 'int',
+        'type' => '?int',
         'required' => FALSE,
         'default' => 0,
       ],
       'y_offset' => [
         'description' => 'Y offset for mask image.',
-        'type' => 'int',
+        'type' => '?int',
         'required' => FALSE,
         'default' => 0,
       ],

@@ -131,14 +131,10 @@ trait GDOperationTrait {
       }
 
       // Copy relevant section from destination image to the cut image.
-      if (!imagecopy($cut, $dst_im, 0, 0, $dst_x, $dst_y, $src_w, $src_h)) {
-        return FALSE;
-      }
+      imagecopy($cut, $dst_im, 0, 0, $dst_x, $dst_y, $src_w, $src_h);
 
       // Copy relevant section from merged image to the cut image.
-      if (!imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h)) {
-        return FALSE;
-      }
+      imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h);
 
       // Insert cut image to destination image.
       return imagecopymerge($dst_im, $cut, $dst_x, $dst_y, 0, 0, $src_w, $src_h, $pct);
@@ -269,9 +265,7 @@ trait GDOperationTrait {
         // Get the color index with new alpha.
         $alpha_color_xy = imagecolorallocatealpha($img, ($color_xy >> 16) & 0xFF, ($color_xy >> 8) & 0xFF, $color_xy & 0xFF, (int) $alpha);
         // Set pixel with the new color + opacity.
-        if (!imagesetpixel($img, $x, $y, $alpha_color_xy)) {
-          return FALSE;
-        }
+        imagesetpixel($img, $x, $y, $alpha_color_xy);
       }
     }
 

@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace Drupal\Tests\image_effects\Unit;
 
 use Drupal\image_effects\Component\MatrixUtility;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the matrix utility helper methods.
- *
- * @coversDefaultClass \Drupal\image_effects\Component\MatrixUtility
- *
- * @group image_effects
  */
+#[CoversClass(MatrixUtility::class)]
+#[Group('image_effects')]
 class MatrixUtilityTest extends TestCase {
 
   /**
@@ -71,9 +72,9 @@ class MatrixUtilityTest extends TestCase {
   }
 
   /**
-   * @covers ::cumulativeSum
-   * @dataProvider cumulativeSumProvider
+   * @legacy-covers ::cumulativeSum
    */
+  #[DataProvider('cumulativeSumProvider')]
   public function testCumulativeSum(array $input, array $expected): void {
     $this->assertSame($expected, MatrixUtility::cumulativeSum($input));
   }
@@ -123,9 +124,9 @@ class MatrixUtilityTest extends TestCase {
   }
 
   /**
-   * @covers ::findMaxSumSubmatrix
-   * @dataProvider findMaxSumSubmatrixProvider
+   * @legacy-covers ::findMaxSumSubmatrix
    */
+  #[DataProvider('findMaxSumSubmatrixProvider')]
   public function testFindMaxSumSubmatrix(array $input, int $rows, int $columns, array $expected): void {
     $this->assertSame($expected, MatrixUtility::findMaxSumSubmatrix($input, $rows, $columns));
   }

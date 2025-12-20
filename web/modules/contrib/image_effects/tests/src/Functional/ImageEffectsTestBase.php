@@ -285,7 +285,7 @@ abstract class ImageEffectsTestBase extends BrowserTestBase {
     $this->fileSystem->prepareDirectory($test_directory, FileSystemInterface::CREATE_DIRECTORY);
     $source_uri = $name ? $this->moduleList->getPath($name) : '';
     $source_uri .= $path;
-    $target_uri = $test_directory . \Drupal::service('file_system')->basename($source_uri);
+    $target_uri = $test_directory . basename($source_uri);
     return $this->fileSystem->copy($source_uri, $target_uri, FileExists::Replace);
   }
 

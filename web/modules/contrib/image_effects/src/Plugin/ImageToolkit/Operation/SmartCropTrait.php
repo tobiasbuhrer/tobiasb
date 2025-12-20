@@ -21,13 +21,13 @@ trait SmartCropTrait {
       ],
       'algorithm_params' => [
         'description' => 'The calculation algorithm parameters',
-        'type' => 'array',
+        'type' => '?array',
         'required' => FALSE,
         'default' => [],
       ],
       'simulate' => [
         'description' => 'Boolean indicating the crop shall not be executed, but just the crop area highlighted on the source image',
-        'type' => 'bool',
+        'type' => '?bool',
         'required' => FALSE,
         'default' => FALSE,
       ],
@@ -43,13 +43,13 @@ trait SmartCropTrait {
       ],
       'upscale' => [
         'description' => 'Boolean indicating that files smaller than the dimensions will be scaled up. This generally results in a low quality image',
-        'type' => 'bool',
+        'type' => '?bool',
         'required' => FALSE,
         'default' => FALSE,
       ],
       'resize' => [
         'description' => 'Resizing width and heigth.',
-        'type' => 'array',
+        'type' => '?array',
         'required' => FALSE,
         'default' => [],
       ],

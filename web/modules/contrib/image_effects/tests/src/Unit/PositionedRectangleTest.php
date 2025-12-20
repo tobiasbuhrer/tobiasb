@@ -5,21 +5,22 @@ declare(strict_types=1);
 namespace Drupal\Tests\image_effects\Unit;
 
 use Drupal\image_effects\Component\PositionedRectangle;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Rectangle algebra class.
- *
- * @coversDefaultClass \Drupal\image_effects\Component\PositionedRectangle
- *
- * @group image_effects
  */
+#[CoversClass(PositionedRectangle::class)]
+#[Group('image_effects')]
 class PositionedRectangleTest extends TestCase {
 
   /**
-   * @covers ::resize
-   * @covers ::setPoint
-   * @covers ::getPoint
+   * @legacy-covers ::resize
+   * @legacy-covers ::setPoint
+   * @legacy-covers ::getPoint
    */
   public function testResize(): void {
     $rect = new PositionedRectangle(200, 100);
@@ -389,11 +390,11 @@ class PositionedRectangleTest extends TestCase {
   }
 
   /**
-   * @covers ::addGrid
-   * @covers ::getSubGridDimensions
-   * @covers ::getPoints
-   * @dataProvider addGridProvider
+   * @legacy-covers ::addGrid
+   * @legacy-covers ::getSubGridDimensions
+   * @legacy-covers ::getPoints
    */
+  #[DataProvider('addGridProvider')]
   public function testAddGrid(int $rect_width, int $rect_height, int $x, int $y, int $width, int $height, int $rows, int $columns, array $expected_points, array $expected_subgrid_dimensions): void {
     $rect = new PositionedRectangle($rect_width, $rect_height);
     $rect->addGrid('test_a', $x, $y, $width, $height, $rows, $columns);

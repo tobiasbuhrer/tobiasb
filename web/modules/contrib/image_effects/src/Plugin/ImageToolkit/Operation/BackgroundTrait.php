@@ -26,7 +26,7 @@ trait BackgroundTrait {
       ],
       'opacity' => [
         'description' => 'Opacity for source image.',
-        'type' => 'int',
+        'type' => '?int',
         'required' => FALSE,
         'default' => 100,
       ],

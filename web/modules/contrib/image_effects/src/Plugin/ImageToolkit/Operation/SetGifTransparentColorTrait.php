@@ -18,7 +18,7 @@ trait SetGifTransparentColorTrait {
     return [
       'transparent_color' => [
         'description' => 'The RGB hex color for GIF transparency',
-        'type' => 'string',
+        'type' => '?string',
         'required' => FALSE,
         'default' => '#ffffff',
       ],
