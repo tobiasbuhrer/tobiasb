@@ -77,18 +77,18 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * The source image profiles.
    *
-   * @var string[]
+   * @var list<string>
    */
   protected array $profiles = [];
 
   /**
    * Constructs an ImagemagickToolkit object.
    *
-   * @param array $configuration
+   * @param array<string, mixed> $configuration
    *   A configuration array containing information about the plugin instance.
    * @param string $pluginId
    *   The plugin_id for the plugin instance.
-   * @param array $pluginDefinition
+   * @param array<string, mixed> $pluginDefinition
    *   The plugin implementation definition.
    * @param \Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface $operationManager
    *   The toolkit operation manager.
@@ -620,7 +620,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * Gets the source profiles.
    *
-   * @return string[]
+   * @return list<string>
    *   The source profiles.
    */
   public function getProfiles(): array {
@@ -630,7 +630,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * Sets the source profiles.
    *
-   * @param array $profiles
+   * @param list<string> $profiles
    *   The image profiles.
    *
    * @return $this

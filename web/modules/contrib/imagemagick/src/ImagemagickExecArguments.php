@@ -6,6 +6,8 @@ namespace Drupal\imagemagick;
 
 /**
  * Stores arguments for execution of ImageMagick/GraphicsMagick commands.
+ *
+ * @phpstan-type Arguments array<int,array{mode: ArgumentMode, argument: string, info: array<string, mixed>}>
  */
 class ImagemagickExecArguments {
 
@@ -17,7 +19,7 @@ class ImagemagickExecArguments {
   /**
    * The array of command line arguments to be used by 'convert'.
    *
-   * @var array<int,array{mode: ArgumentMode, argument: string, info: array}>
+   * @var Arguments
    */
   protected array $arguments = [];
 
@@ -115,7 +117,7 @@ class ImagemagickExecArguments {
    *   (optional) The position of the argument in the arguments array.
    *   Reflects the sequence of arguments in the command line. Defaults to
    *   self::APPEND.
-   * @param array $info
+   * @param array<string, mixed> $info
    *   (optional) An optional array with information about the argument.
    *   Defaults to an empty array.
    *
@@ -156,11 +158,11 @@ class ImagemagickExecArguments {
    * @param ?ArgumentMode $mode
    *   (optional) If set, limits the search to the mode of the argument.
    *   Defaults to NULL.
-   * @param array $info
+   * @param array<string, mixed> $info
    *   (optional) If set, limits the search to the arguments whose $info array
    *   key/values match the key/values specified. Defaults to an empty array.
    *
-   * @return array
+   * @return Arguments
    *   Returns an array with the matching arguments.
    */
   public function find(string $regex, ?ArgumentMode $mode = NULL, array $info = []): array {

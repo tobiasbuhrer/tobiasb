@@ -9,6 +9,13 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines imagemagick resize operation.
+ *
+ * @phpstan-type ResizeArguments array{
+ *   width: positive-int,
+ *   height: positive-int,
+ *   upscale?: bool,
+ *   filter: string,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_resize",
@@ -20,7 +27,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class Resize extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -39,7 +46,8 @@ class Resize extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param ResizeArguments $arguments
+   * @return ResizeArguments
    */
   protected function validateArguments(array $arguments): array {
     // Assure integers for all arguments.
@@ -58,9 +66,9 @@ class Resize extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param ResizeArguments $arguments
    */
-  protected function execute(array $arguments = []): bool {
+  protected function execute(array $arguments): bool {
     if (!empty($arguments['filter'])) {
       $this->addArguments(['-filter', $arguments['filter']]);
     }

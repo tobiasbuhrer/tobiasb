@@ -9,6 +9,15 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines imagemagick Scale and crop operation.
+ *
+ * @phpstan-type ScaleAndCropArguments array{
+ *   x: ?positive-int,
+ *   y: ?positive-int,
+ *   width: int,
+ *   height: int,
+ *   resize: array{width: positive-int, height: positive-int, filter: string},
+ *   filter: string,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_scale_and_crop",
@@ -20,7 +29,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class ScaleAndCrop extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -49,7 +58,8 @@ class ScaleAndCrop extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param ScaleAndCropArguments $arguments
+   * @return ScaleAndCropArguments
    */
   protected function validateArguments(array $arguments): array {
     // Fail if no dimensions available for current image.
@@ -86,9 +96,9 @@ class ScaleAndCrop extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param ScaleAndCropArguments $arguments
    */
-  protected function execute(array $arguments = []): bool {
+  protected function execute(array $arguments): bool {
     return $this->getToolkit()->apply('resize', $arguments['resize'])
         && $this->getToolkit()->apply('crop', $arguments);
   }

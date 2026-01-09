@@ -56,7 +56,7 @@ class EventSubscriberTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -139,7 +139,7 @@ class EventSubscriberTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -197,7 +197,7 @@ class EventSubscriberTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -277,8 +277,8 @@ class EventSubscriberTest extends BrowserTestBase {
     }
     else {
       // GraphicsMagick will only create the single file by default because it
-      // relies on the user explicitly specifying the '+adjoin' option - which is
-      // the default behavior in ImageMagick.
+      // relies on the user explicitly specifying the '+adjoin' option - which
+      // is the default behavior in ImageMagick.
       static::assertTrue($image->save('public://imagetest/test-multipage.pdf.png'));
       static::assertFileDoesNotExist('public://imagetest/test-multipage.pdf-1.png');
       static::assertFileDoesNotExist('public://imagetest/test-multipage.pdf-2.png');
@@ -302,7 +302,8 @@ class EventSubscriberTest extends BrowserTestBase {
     $pdf_toolkit = $pdf_image->getToolkit();
     static::assertEquals(10, $pdf_toolkit->getFrames());
 
-    // Test PDF to PDF conversions will use the default 'convert' frames settings.
+    // Test PDF to PDF conversions will use the default 'convert' frames
+    // settings.
     \Drupal::configFactory()->getEditable('imagemagick.settings')
       ->set('image_formats.PDF.identify_frames', '[0-1]')
       // Process at most 5 pages within the PDFs.

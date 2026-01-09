@@ -243,7 +243,7 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    * Builds a convert command for Imagemagick.
    *
    * ImageMagick v6 syntax: convert input [arguments] output.
-   * ImageMagick v7 syntax: magick convert input [arguments] output.
+   * ImageMagick v7 syntax: magick input [arguments] output.
    *
    * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
    *   An ImageMagick execution arguments object.
@@ -258,10 +258,7 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    * @see http://www.imagemagick.org/Usage/basics/#cmdline
    */
   private function buildImagemagickConvertCommand(ImagemagickExecArguments $arguments, string $sourcePath, string $destinationPath): array {
-    $cmdline = match ($this->getPackageSuiteVersion(PackageSuite::Imagemagick)) {
-      'v7' => ['convert'],
-      default => [],
-    };
+    $cmdline = [];
     if (($pre = $arguments->toArray(ArgumentMode::PreSource)) !== []) {
       array_push($cmdline, ...$pre);
     }
@@ -357,7 +354,12 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    *
    * @param string $message
    *   The debug message.
-   * @param array{'@suite': string|\Drupal\Core\StringTranslation\TranslatableMarkup, '@raw': string, '@return_code'?: int, '@execution_time'?: array} $context
+   * @param array{
+   *   '@suite': string|\Drupal\Core\StringTranslation\TranslatableMarkup,
+   *   '@raw': string,
+   *   '@return_code'?: int,
+   *   '@execution_time'?: array<string, mixed>
+   * } $context
    *   Context information.
    */
   public function debugMessage(string $message, array $context): void {

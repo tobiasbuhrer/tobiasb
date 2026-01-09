@@ -16,6 +16,13 @@
   <rule ref="Drupal.Commenting.FunctionComment">
     <exclude name="Drupal.Commenting.FileComment.Missing"/>
     <exclude name="Drupal.Commenting.FunctionComment.Missing"/>
+    <exclude name="Drupal.Commenting.FunctionComment.ParamMissingDefinition"/>
+    <exclude name="Drupal.Commenting.FunctionComment.MissingParamName"/>
+    <exclude name="Drupal.Commenting.FunctionComment.ParamCommentIndentation"/>
+    <exclude name="Drupal.Commenting.FunctionComment.MissingParamComment"/>
+    <exclude name="Drupal.Commenting.FunctionComment.MissingReturnComment"/>
+    <exclude name="Drupal.Commenting.FunctionComment.ReturnCommentIndentation"/>
+    <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
   </rule>
 
 </ruleset>

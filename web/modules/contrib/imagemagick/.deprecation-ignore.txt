@@ -2,5 +2,4 @@
 # deprecated code.
 # See https://www.drupal.org/node/3285162 for more details.
 
-%image_effects_requirements without a #\[LegacyRequirementsHook\] attribute is deprecated%
 %sophron_requirements without a #\[LegacyRequirementsHook\] attribute is deprecated%

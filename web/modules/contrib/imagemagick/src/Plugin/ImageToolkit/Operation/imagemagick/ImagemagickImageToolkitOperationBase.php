@@ -41,7 +41,7 @@ abstract class ImagemagickImageToolkitOperationBase extends ImageToolkitOperatio
    *   (optional) The position of the argument in the arguments array.
    *   Reflects the sequence of arguments in the command line. Defaults to
    *   ImagemagickExecArguments::APPEND.
-   * @param array $info
+   * @param array<string, mixed> $info
    *   (optional) An optional array with information about the argument.
    *   Defaults to an empty array.
    *

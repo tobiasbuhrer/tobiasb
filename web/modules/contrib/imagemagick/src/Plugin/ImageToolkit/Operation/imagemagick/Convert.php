@@ -9,6 +9,10 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines imagemagick Convert operation.
+ *
+ * @phpstan-type ConvertArguments array{
+ *   extension: string,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_convert",
@@ -20,7 +24,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class Convert extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -31,7 +35,8 @@ class Convert extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param ConvertArguments $arguments
+   * @return ConvertArguments
    */
   protected function validateArguments(array $arguments): array {
     if (!in_array($arguments['extension'], $this->getToolkit()->getSupportedExtensions())) {
@@ -41,7 +46,7 @@ class Convert extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param ConvertArguments $arguments
    */
   protected function execute(array $arguments): bool {
     $this->getToolkit()->arguments()->setDestinationFormatFromExtension($arguments['extension']);

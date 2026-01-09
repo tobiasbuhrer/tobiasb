@@ -165,9 +165,19 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
   /**
    * Calls the identify executable on the specified file.
    *
-   * @return array
+   * @return array{
+   *     'source_local_path'?: string,
+   *     'data'?: array{
+   *       'format': string,
+   *       'width': int,
+   *       'height': int,
+   *       'colorspace'?: string,
+   *       'profiles'?: list<string>,
+   *       'exif_orientation'?: int,
+   *     }
+   *   }
    *   The array with identify metadata, if the file was parsed correctly.
-   *   NULL otherwise.
+   *   An empty array otherwise.
    */
   protected function identify(): array {
     $arguments = new ImagemagickExecArguments($this->execManager);

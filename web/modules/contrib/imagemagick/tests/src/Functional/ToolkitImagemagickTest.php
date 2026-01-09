@@ -26,16 +26,27 @@ class ToolkitImagemagickTest extends BrowserTestBase {
 
   // Colors that are used in testing.
   // @codingStandardsIgnoreStart
+  /** @var list<non-negative-int> $black */
   protected array $black             = [  0,   0,   0,   0];
+  /** @var list<non-negative-int> $red */
   protected array $red               = [255,   0,   0,   0];
+  /** @var list<non-negative-int> $green */
   protected array $green             = [  0, 255,   0,   0];
+  /** @var list<non-negative-int> $blue */
   protected array $blue              = [  0,   0, 255,   0];
+  /** @var list<non-negative-int> $yellow */
   protected array $yellow            = [255, 255,   0,   0];
+  /** @var list<non-negative-int> $fuchsia */
   protected array $fuchsia           = [255,   0, 255,   0];
+  /** @var list<non-negative-int> $cyan */
   protected array $cyan              = [  0, 255, 255,   0];
+  /** @var list<non-negative-int> $white */
   protected array $white             = [255, 255, 255,   0];
+  /** @var list<non-negative-int> $grey */
   protected array $grey              = [128, 128, 128,   0];
+  /** @var list<non-negative-int> $transparent */
   protected array $transparent       = [  0,   0,   0, 127];
+  /** @var list<non-negative-int> $rotateTransparent */
   protected array $rotateTransparent = [255, 255, 255, 127];
 
   protected int $width = 40;
@@ -88,7 +99,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -125,7 +136,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -164,7 +175,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -579,7 +590,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -629,7 +640,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -654,6 +665,9 @@ class ToolkitImagemagickTest extends BrowserTestBase {
 
   /**
    * Function for finding a pixel's RGBa values.
+   *
+   * @return list<non-negative-int>
+   *   The color as an RGBA array.
    */
   protected function getPixelColor(ImageInterface $image, int $x, int $y): array {
     /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $toolkit */

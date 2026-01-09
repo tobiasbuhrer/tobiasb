@@ -8,6 +8,6 @@
         "drupal/sophron": "^3"
     },
     "require-dev": {
-        "drupal/image_effects": "5.0.x-dev@dev"
+        "drupal/image_effects": "^5"
     }
 }

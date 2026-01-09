@@ -38,7 +38,7 @@ trait ToolkitSetupTrait {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   protected function setUpToolkit(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
@@ -71,7 +71,11 @@ trait ToolkitSetupTrait {
   /**
    * Provides toolkit configuration data for tests.
    *
-   * @return array[]
+   * @return array<string, array{
+   *     'toolkit_id': string,
+   *     'toolkit_config': string,
+   *     'toolkit_settings': array<string, mixed>,
+   *   }>
    *   An associative array, with key the toolkit scenario to be tested, and
    *   value an associative array with the following keys:
    *   - 'toolkit_id': the toolkit to be used in the test.

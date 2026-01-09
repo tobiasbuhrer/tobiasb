@@ -11,6 +11,13 @@ use Drupal\imagemagick\PackageSuite;
 
 /**
  * Defines imagemagick CreateNew operation.
+ *
+ * @phpstan-type CreateNewArguments array{
+ *   width: int,
+ *   height: int,
+ *   extension: string,
+ *   transparent_color: string,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_create_new",
@@ -22,7 +29,7 @@ use Drupal\imagemagick\PackageSuite;
 class CreateNew extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -46,7 +53,8 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param CreateNewArguments $arguments
+   * @return CreateNewArguments
    */
   protected function validateArguments(array $arguments): array {
     // Assure extension is supported.
@@ -75,7 +83,7 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param CreateNewArguments $arguments
    */
   protected function execute(array $arguments): bool {
     // Reset the image properties and any processing argument.

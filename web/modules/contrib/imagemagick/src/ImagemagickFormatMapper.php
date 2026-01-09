@@ -67,7 +67,8 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
           // Validation errors may contain HTML, so they need to be stripped
           // before being encoded back to YAML.
           $value = trim(Xss::filter(Html::decodeEntities($value), []));
-        } else {
+        }
+        else {
           [, $path] = explode(':', $key);
           $components = explode('.', $path);
         }
@@ -162,7 +163,7 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
    * Results are cached for subsequent access. Saving the config will
    * invalidate the cache.
    *
-   * @return array
+   * @return array<string, string>
    *   An associative array with ImageMagick formats as keys and their MIME
    *   type as values.
    */
@@ -198,7 +199,7 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
    * Results are cached for subsequent access. Saving the config will
    * invalidate the cache.
    *
-   * @return array
+   * @return array<string, string>
    *   An associative array with file extensions as keys and their ImageMagick
    *   format as values.
    */

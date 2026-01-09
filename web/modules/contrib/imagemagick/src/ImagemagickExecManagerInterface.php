@@ -61,7 +61,7 @@ interface ImagemagickExecManagerInterface {
    * @param ?string $packageSuiteVersion
    *   (optional) The graphics package version.
    *
-   * @return array
+   * @return array{output: string, errors: string[]}
    *   An associative array containing:
    *   - output: The shell output of 'convert -version', if any.
    *   - errors: A list of error messages indicating if the executable could

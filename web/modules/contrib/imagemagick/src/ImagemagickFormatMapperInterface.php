@@ -40,12 +40,28 @@ interface ImagemagickFormatMapperInterface {
    *   to be supported by the toolkit, if the mapping MIME type <-> file
    *   extension returns more extensions than needed, and we do not want to
    *   alter the MIME type mapping.
+   * - 'identify_frames': (OPTIONAL), defaults to NULL. This is used in edge
+   *   cases where it's potentially expensive/time-consuming to process certain
+   *   files with a large number of frames, e.g., PDFs. This provides a way to
+   *   specify a default frame limit to use during the `identify` process.
+   * - 'convert_frames': (OPTIONAL), defaults to NULL. This provides a way to
+   *   specify the default frames to use for this file format during the
+   *   `convert` process. The default frames can be ignored for a specific
+   *   operation by calling `ImagemagickExecArguments::setSourceFrames('');`
+   *   before the conversion is done.
    *
-   * @param array[] $map
+   * @param array<string, array{
+   *     'mime_type'?: string,
+   *     'enabled'?: bool,
+   *     'weight'?: int,
+   *     'exclude_extensions'?: string,
+   *     'identify_frames'?: string,
+   *     'convert_frames'?: string,
+   *   }> $map
    *   An associative array with formats as keys and an associative array
    *   of format variables as value.
    *
-   * @return array[][]
+   * @return array<string, mixed>
    *   An array of arrays of error strings.
    */
   public function validateMap(array $map): array;
@@ -53,7 +69,7 @@ interface ImagemagickFormatMapperInterface {
   /**
    * Gets the list of currently enabled image formats.
    *
-   * @return array
+   * @return list<string>
    *   A simple array of image formats.
    */
   public function getEnabledFormats(): array;
@@ -61,7 +77,7 @@ interface ImagemagickFormatMapperInterface {
   /**
    * Gets the list of currently enabled image file extensions.
    *
-   * @return array
+   * @return list<string>
    *   A simple array of image file extensions.
    */
   public function getEnabledExtensions(): array;

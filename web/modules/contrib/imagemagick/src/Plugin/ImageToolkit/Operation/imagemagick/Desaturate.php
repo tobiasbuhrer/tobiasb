@@ -20,7 +20,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class Desaturate extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array{}
    */
   protected function arguments(): array {
     // This operation does not use any parameters.
@@ -28,7 +28,7 @@ class Desaturate extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param array{} $arguments
    */
   protected function execute(array $arguments): bool {
     $this->addArguments(['-colorspace', 'GRAY']);

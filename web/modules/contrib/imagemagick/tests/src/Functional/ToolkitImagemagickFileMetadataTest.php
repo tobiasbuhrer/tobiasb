@@ -65,7 +65,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -542,7 +542,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -583,7 +583,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
   /**
    * Specifies the default image magick configurations.
    *
-   * @param array $default_configs
+   * @param array<string, mixed> $default_configs
    *   The default magick configurations to set, keyed by the configuration key.
    */
   protected function setDefaultImageMagickSettings(array $default_configs): void {

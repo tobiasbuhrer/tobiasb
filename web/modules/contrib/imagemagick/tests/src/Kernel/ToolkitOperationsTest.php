@@ -46,7 +46,7 @@ class ToolkitOperationsTest extends KernelTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -69,7 +69,7 @@ class ToolkitOperationsTest extends KernelTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -93,7 +93,7 @@ class ToolkitOperationsTest extends KernelTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -132,7 +132,7 @@ class ToolkitOperationsTest extends KernelTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -158,7 +158,7 @@ class ToolkitOperationsTest extends KernelTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]
@@ -179,7 +179,7 @@ class ToolkitOperationsTest extends KernelTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   #[DataProvider('providerToolkitConfiguration')]

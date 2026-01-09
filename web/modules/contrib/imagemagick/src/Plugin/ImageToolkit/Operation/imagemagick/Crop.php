@@ -9,6 +9,13 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines imagemagick Crop operation.
+ *
+ * @phpstan-type CropArguments array{
+ *   x: positive-int,
+ *   y: positive-int,
+ *   width: int,
+ *   height: int,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_crop",
@@ -20,7 +27,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class Crop extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -44,7 +51,8 @@ class Crop extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param CropArguments $arguments
+   * @return CropArguments
    */
   protected function validateArguments(array $arguments): array {
     // Fail if no dimensions available for current image.
@@ -79,7 +87,7 @@ class Crop extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param CropArguments $arguments
    */
   protected function execute(array $arguments): bool {
     // Even though the crop effect in Drupal core does not allow for negative
