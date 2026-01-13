@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c312dfaed7cffe50f6b734af430f9cf7d89d93e1',
+        'reference' => 'b0d09e2329b70c0362da3bff244a95cc14b6fb33',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -529,7 +529,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c312dfaed7cffe50f6b734af430f9cf7d89d93e1',
+            'reference' => 'b0d09e2329b70c0362da3bff244a95cc14b6fb33',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -674,12 +674,12 @@
             'dev_requirement' => false,
         ),
         'laravel/prompts' => array(
-            'pretty_version' => 'v0.3.8',
-            'version' => '0.3.8.0',
+            'pretty_version' => 'v0.3.9',
+            'version' => '0.3.9.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/prompts',
             'aliases' => array(),
-            'reference' => '096748cdfb81988f60090bbb839ce3205ace0d35',
+            'reference' => '5c41bf0555b7cfefaad4e66d3046675829581ac4',
             'dev_requirement' => false,
         ),
         'league/container' => array(
