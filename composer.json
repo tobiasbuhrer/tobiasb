@@ -26,7 +26,7 @@
         "drupal/devel": "^5.0",
         "drupal/entity": "^1.0",
         "drupal/file_mdm": "^3.0",
-        "drupal/geofield": "^1.0",
+        "drupal/geofield": "^10.3",
         "drupal/honeypot": "^2.1",
         "drupal/image_effects": "^5.0@RC",
         "drupal/imagemagick": "^5.0@RC",
