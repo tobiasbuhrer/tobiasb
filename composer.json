@@ -29,7 +29,7 @@
         "drupal/geofield": "^10.3",
         "drupal/honeypot": "^2.1",
         "drupal/image_effects": "^5.0@RC",
-        "drupal/imagemagick": "^5.0@RC",
+        "drupal/imagemagick": "^5.0",
         "drupal/juicebox": "^4.0@alpha",
         "drupal/leaflet": "^10.2",
         "drupal/leaflet_more_maps": "^2.1",

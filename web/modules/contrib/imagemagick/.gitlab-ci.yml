@@ -18,13 +18,14 @@ include:
       - '/includes/include.drupalci.workflows.yml'
 
 variables:
+  SKIP_CSPELL: '1'
   _PHPUNIT_CONCURRENT: '1'
   BROWSERTEST_OUTPUT_VERBOSE: 'false'
   OPT_IN_TEST_PREVIOUS_MAJOR: '0'
   OPT_IN_TEST_PREVIOUS_MINOR: '0'
   OPT_IN_TEST_NEXT_MINOR: '1'
   OPT_IN_TEST_NEXT_MAJOR: '0'
-  PHP_VERSION: $CORE_PHP_NEXT
+  OPT_IN_TEST_MAX_PHP: '1'
 
 phpunit:
   extends: .phpunit-base

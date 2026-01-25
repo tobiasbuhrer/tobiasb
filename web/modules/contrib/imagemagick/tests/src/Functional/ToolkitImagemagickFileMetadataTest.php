@@ -210,7 +210,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID), $message);
         }
         else {
-          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID), $message);
+          $this->assertEquals(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID), $message);
         }
         $source_image = $this->imageFactory->get($source_uri);
         /** @var \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit $toolkit */
@@ -295,7 +295,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         }
         else {
           // Further loads, metadata loaded from cache.
-          $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID), $message);
+          $this->assertEquals(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID), $message);
         }
         $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType(), $message);
         if ($toolkit_settings['binaries'] === 'imagemagick') {
