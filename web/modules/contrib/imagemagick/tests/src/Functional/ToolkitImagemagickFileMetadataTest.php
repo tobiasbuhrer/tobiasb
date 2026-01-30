@@ -19,6 +19,17 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests that Imagemagick integrates properly with File Metadata Manager.
+ *
+ * @phpstan-type TestFileData array{
+ *     skip_dimensions_check?: bool,
+ *     default_configs?: array<string, mixed>,
+ *     width?: positive-int,
+ *     height?: positive-int,
+ *     frames: positive-int,
+ *     mimetype: string,
+ *     colorspace: string,
+ *     profiles: list<string>,
+ *   }
  */
 #[Group('imagemagick')]
 #[RunTestsInSeparateProcesses]
@@ -87,6 +98,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
       ->save();
 
     // A list of files that will be tested.
+    /** @var array<string, TestFileData> $files */
     $files = [
       'dummy-remote://test-multipage.pdf' => [
         'skip_dimensions_check' => TRUE,
@@ -221,7 +233,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $this->assertSame($source_image_data['colorspace'], $toolkit->getColorspace(), $message);
           $this->assertEquals($source_image_data['profiles'], $toolkit->getProfiles(), $message);
         }
-        if (!isset($source_image_data['skip_dimensions_check'])) {
+        if (!isset($source_image_data['skip_dimensions_check']) && isset($source_image_data['width']) && isset($source_image_data['height'])) {
           $this->assertSame($source_image_data['height'], $source_image->getHeight(), $message);
           $this->assertSame($source_image_data['width'], $source_image->getWidth(), $message);
         }
@@ -302,7 +314,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $this->assertSame($source_image_data['colorspace'], $toolkit->getColorspace(), $message);
           $this->assertEquals($source_image_data['profiles'], $toolkit->getProfiles(), $message);
         }
-        if (!isset($source_image_data['skip_dimensions_check'])) {
+        if (!isset($source_image_data['skip_dimensions_check']) && isset($source_image_data['width']) && isset($source_image_data['height'])) {
           $this->assertSame($source_image_data['height'], $source_image->getHeight(), $message);
           $this->assertSame($source_image_data['width'], $source_image->getWidth(), $message);
         }
@@ -387,7 +399,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $this->assertSame($source_image_data['colorspace'], $toolkit->getColorspace(), $message);
           $this->assertEquals($source_image_data['profiles'], $toolkit->getProfiles(), $message);
         }
-        if (!isset($source_image_data['skip_dimensions_check'])) {
+        if (!isset($source_image_data['skip_dimensions_check']) && isset($source_image_data['width']) && isset($source_image_data['height'])) {
           $this->assertSame($source_image_data['height'], $source_image->getHeight(), $message);
           $this->assertSame($source_image_data['width'], $source_image->getWidth(), $message);
         }
@@ -485,7 +497,7 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $this->assertSame($source_image_data['colorspace'], $toolkit->getColorspace(), $message);
           $this->assertEquals($source_image_data['profiles'], $toolkit->getProfiles(), $message);
         }
-        if (!isset($source_image_data['skip_dimensions_check'])) {
+        if (!isset($source_image_data['skip_dimensions_check']) && isset($source_image_data['width']) && isset($source_image_data['height'])) {
           $this->assertSame($source_image_data['height'], $source_image->getHeight(), $message);
           $this->assertSame($source_image_data['width'], $source_image->getWidth(), $message);
         }

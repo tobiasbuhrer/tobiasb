@@ -14,6 +14,8 @@ class ImagemagickHooks {
 
   /**
    * Implements hook_runtime_requirements().
+   *
+   * @phpstan-ignore missingType.iterableValue
    */
   #[Hook('runtime_requirements')]
   public function runtime(): array {

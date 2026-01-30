@@ -51,7 +51,9 @@ abstract class ImagemagickImageToolkitOperationBase extends ImageToolkitOperatio
   protected function addArguments(array $arguments, ArgumentMode $mode = ArgumentMode::PostSource, int $index = ImagemagickExecArguments::APPEND, array $info = []): ImagemagickExecArguments {
     $plugin_definition = $this->getPluginDefinition();
     $info = array_merge($info, [
+      // @phpstan-ignore offsetAccess.nonOffsetAccessible
       'image_toolkit_operation' => $plugin_definition['operation'],
+      // @phpstan-ignore offsetAccess.nonOffsetAccessible
       'image_toolkit_operation_plugin_id' => $plugin_definition['id'],
     ]);
     return $this->getToolkit()->arguments()->add($arguments, $mode, $index, $info);

@@ -462,8 +462,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
     // Test creation of image from scratch, and saving to storage.
     foreach ([IMAGETYPE_PNG, IMAGETYPE_GIF, IMAGETYPE_JPEG] as $type) {
       $image = $this->imageFactory->get();
-      $image->createNew(50, 20, image_type_to_extension($type, FALSE), '#ffff00');
-      $file = 'from_null' . image_type_to_extension($type);
+      $extension = image_type_to_extension($type, FALSE);
+      assert(is_string($extension));
+      $image->createNew(50, 20, $extension, '#ffff00');
+      $file = 'from_null.' . $extension;
       $file_path = $this->testDirectory . '/' . $file;
       $this->assertEquals(50, $image->getWidth(), "Image file '$file' has the correct width.");
       $this->assertEquals(20, $image->getHeight(), "Image file '$file' has the correct height.");
@@ -673,6 +675,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
     /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $toolkit */
     $toolkit = $image->getToolkit();
     $color_index = imagecolorat($toolkit->getImage(), $x, $y);
+    assert(is_int($color_index));
 
     $transparent_index = imagecolortransparent($toolkit->getImage());
     if ($color_index == $transparent_index) {

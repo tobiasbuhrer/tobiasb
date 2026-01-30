@@ -10,9 +10,15 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 /**
  * Defines imagemagick Scale operation.
  *
+ * @phpstan-type PreparedScaleArguments array{
+ *   width: ?numeric,
+ *   height: ?numeric,
+ *   upscale: bool,
+ *   filter: string,
+ * }
  * @phpstan-type ScaleArguments array{
- *   width: ?positive-int,
- *   height: ?positive-int,
+ *   width: positive-int,
+ *   height: positive-int,
  *   upscale: bool,
  *   filter: string,
  * }
@@ -55,12 +61,13 @@ class Scale extends Resize {
   }
 
   /**
-   * @param ScaleArguments $arguments
+   * @param PreparedScaleArguments $arguments
    * @return ScaleArguments
    */
   protected function validateArguments(array $arguments): array {
     // Fail if no dimensions available for current image.
     if (is_null($this->getToolkit()->getWidth()) || is_null($this->getToolkit()->getHeight())) {
+      // @phpstan-ignore offsetAccess.nonOffsetAccessible
       throw new \RuntimeException("No image dimensions available for the image '{$this->getPluginDefinition()['operation']}' operation");
     }
 

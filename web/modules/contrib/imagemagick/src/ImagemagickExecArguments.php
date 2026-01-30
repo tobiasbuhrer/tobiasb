@@ -58,12 +58,6 @@ class ImagemagickExecArguments {
    */
   protected string $destinationFormat = '';
 
-  /**
-   * Constructs an ImagemagickExecArguments object.
-   *
-   * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $execManager
-   *   The ImageMagick execution manager service.
-   */
   public function __construct(
     protected readonly ImagemagickExecManagerInterface $execManager,
   ) {

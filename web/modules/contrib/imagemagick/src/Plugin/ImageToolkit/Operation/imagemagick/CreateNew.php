@@ -12,9 +12,15 @@ use Drupal\imagemagick\PackageSuite;
 /**
  * Defines imagemagick CreateNew operation.
  *
+ * @phpstan-type PreparedCreateNewArguments array{
+ *   width: numeric,
+ *   height: numeric,
+ *   extension: string,
+ *   transparent_color: string,
+ * }
  * @phpstan-type CreateNewArguments array{
- *   width: int,
- *   height: int,
+ *   width: positive-int,
+ *   height: positive-int,
  *   extension: string,
  *   transparent_color: string,
  * }
@@ -53,7 +59,7 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * @param CreateNewArguments $arguments
+   * @param PreparedCreateNewArguments $arguments
    * @return CreateNewArguments
    */
   protected function validateArguments(array $arguments): array {
@@ -63,8 +69,8 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
     }
 
     // Assure integers for width and height.
-    $arguments['width'] = (int) round($arguments['width']);
-    $arguments['height'] = (int) round($arguments['height']);
+    $arguments['width'] = (int) round((float) $arguments['width']);
+    $arguments['height'] = (int) round((float) $arguments['height']);
 
     // Fail when width or height are 0 or negative.
     if ($arguments['width'] <= 0) {

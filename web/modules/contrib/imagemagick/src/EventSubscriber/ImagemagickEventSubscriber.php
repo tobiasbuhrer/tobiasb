@@ -29,20 +29,6 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
    */
   protected ImmutableConfig $imagemagickSettings;
 
-  /**
-   * Constructs an ImagemagickEventSubscriber object.
-   *
-   * @param \Psr\Log\LoggerInterface $logger
-   *   A logger instance.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config factory.
-   * @param \Drupal\Core\File\FileSystemInterface $fileSystem
-   *   The file system service.
-   * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $streamWrapperManager
-   *   The stream wrapper manager service.
-   * @param \Drupal\file_mdm\FileMetadataManagerInterface $fileMetadataManager
-   *   The file metadata manager service.
-   */
   public function __construct(
     #[Autowire(service: 'logger.channel.image')]
     protected readonly LoggerInterface $logger,
@@ -101,10 +87,18 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
         // temp one and set the local path to it.
         try {
           $temp_path = $this->fileSystem->tempnam('temporary://', 'imagemagick_');
+          if ($temp_path === FALSE) {
+            throw new FileException('Failed to create a temporary file');
+          }
           $this->fileSystem->unlink($temp_path);
           $temp_path .= '.' . pathinfo($source, PATHINFO_EXTENSION);
-          $path = $this->fileSystem->copy($arguments->getSource(), $temp_path, FileExists::Error);
-          $arguments->setSourceLocalPath($this->fileSystem->realpath($path));
+          $source = $arguments->getSource();
+          $path = $this->fileSystem->copy($source, $temp_path, FileExists::Error);
+          $localTempRealPath = $this->fileSystem->realpath($path);
+          if ($localTempRealPath === FALSE) {
+            throw new FileException("Invalid local path {$path} to local temporary file");
+          }
+          $arguments->setSourceLocalPath($localTempRealPath);
           drupal_register_shutdown_function(
             [static::class, 'removeTemporaryRemoteCopy'],
             $arguments->getSourceLocalPath()
@@ -147,9 +141,16 @@ class ImagemagickEventSubscriber implements EventSubscriberInterface {
         // We are working with a remote file, set the local destination to
         // a temp local file.
         $temp_path = $this->fileSystem->tempnam('temporary://', 'imagemagick_');
+        if ($temp_path === FALSE) {
+          throw new FileException('Failed to create a temporary file');
+        }
         $this->fileSystem->unlink($temp_path);
         $temp_path .= '.' . pathinfo($destination, PATHINFO_EXTENSION);
-        $arguments->setDestinationLocalPath($this->fileSystem->realpath($temp_path));
+        $localTempRealPath = $this->fileSystem->realpath($temp_path);
+        if ($localTempRealPath === FALSE) {
+          throw new FileException("Invalid local path {$temp_path} to local temporary file");
+        }
+        $arguments->setDestinationLocalPath($localTempRealPath);
         drupal_register_shutdown_function(
           [static::class, 'removeTemporaryRemoteCopy'],
           $arguments->getDestinationLocalPath()

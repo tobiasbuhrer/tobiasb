@@ -10,6 +10,9 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 /**
  * Defines imagemagick Convert operation.
  *
+ * @phpstan-type PreparedConvertArguments array{
+ *   extension: string,
+ * }
  * @phpstan-type ConvertArguments array{
  *   extension: string,
  * }
@@ -35,7 +38,7 @@ class Convert extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * @param ConvertArguments $arguments
+   * @param PreparedConvertArguments $arguments
    * @return ConvertArguments
    */
   protected function validateArguments(array $arguments): array {

@@ -57,7 +57,9 @@ trait ToolkitSetupTrait {
     // Check that ImageMagick or GraphicsMagick binaries are installed, and
     // mark the test skipped if not.
     if ($toolkit_id === 'imagemagick') {
-      $status = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick')->getExecManager()->checkPath('');
+      /** @var \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit $toolkit */
+      $toolkit = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick');
+      $status = $toolkit->getExecManager()->checkPath('');
       if (!empty($status['errors'])) {
         $this->markTestSkipped("Tests for '{$toolkit_settings['binaries']}' cannot run because the binaries are not available on the shell path.");
       }

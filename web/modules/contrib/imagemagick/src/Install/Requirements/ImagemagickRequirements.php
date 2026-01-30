@@ -16,10 +16,11 @@ class ImagemagickRequirements implements InstallRequirementsInterface {
   /**
    * {@inheritdoc}
    */
+  // @phpstan-ignore missingType.iterableValue
   public static function getRequirements(): array {
     $requirements = [];
 
-    if (stripos(ini_get('disable_functions'), 'proc_open') !== FALSE) {
+    if (stripos((string) ini_get('disable_functions'), 'proc_open') !== FALSE) {
       $reported_info = [];
       // proc_open() is disabled.
       $severity = RequirementSeverity::Error;
@@ -49,6 +50,7 @@ class ImagemagickRequirements implements InstallRequirementsInterface {
   /**
    * Returns a warning requirement if core rotate effects are in use.
    */
+  // @phpstan-ignore missingType.iterableValue
   public static function checkRotateEffects(): ?array {
     if (\Drupal::entityTypeManager()->hasDefinition('image_style')) {
       $imageRotateEffectsCount = \Drupal::entityTypeManager()->getStorage('image_style')->getQuery()

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\imagemagick\Plugin\FileMetadata;
 
+use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\file_mdm\FileMetadataException;
 use Drupal\file_mdm\Plugin\Attribute\FileMetadata;
@@ -14,6 +17,7 @@ use Drupal\imagemagick\ImagemagickExecArguments;
 use Drupal\imagemagick\ImagemagickExecManagerInterface;
 use Drupal\imagemagick\PackageCommand;
 use Drupal\imagemagick\PackageSuite;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -27,15 +31,19 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 )]
 class ImagemagickIdentify extends FileMetadataPluginBase {
 
-  /**
-   * The event dispatcher.
-   */
-  protected readonly EventDispatcherInterface $eventDispatcher;
-
-  /**
-   * The ImageMagick execution manager service.
-   */
-  protected readonly ImagemagickExecManagerInterface $execManager;
+  public function __construct(
+    array $configuration,
+    string $plugin_id,
+    array $plugin_definition,
+    #[Autowire(service: 'cache.file_mdm')]
+    CacheBackendInterface $cache,
+    ConfigFactoryInterface $configFactory,
+    StreamWrapperManagerInterface $streamWrapperManager,
+    protected readonly EventDispatcherInterface $eventDispatcher,
+    protected readonly ImagemagickExecManagerInterface $execManager,
+  ) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $cache, $configFactory, $streamWrapperManager);
+  }
 
   /**
    * The ImageMagick execution arguments.
@@ -43,10 +51,10 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
   protected ?ImagemagickExecArguments $arguments;
 
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
-    $instance->execManager = $container->get(ImagemagickExecManagerInterface::class);
-    $instance->eventDispatcher = $container->get(EventDispatcherInterface::class);
-    return $instance;
+    // While file_mdm overrides PluginBase::create, we need to fallback to
+    // parent to allow autowiring.
+    // @todo remove the method when file_mdm:4.0.0 is out.
+    return static::createInstanceAutowired($container, $configuration, $plugin_id, $plugin_definition);
   }
 
   /**

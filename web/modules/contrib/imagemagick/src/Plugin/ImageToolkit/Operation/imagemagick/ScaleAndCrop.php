@@ -10,11 +10,18 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 /**
  * Defines imagemagick Scale and crop operation.
  *
+ * @phpstan-type PreparedScaleAndCropArguments array{
+ *   x: ?numeric,
+ *   y: ?numeric,
+ *   width: numeric,
+ *   height: numeric,
+ *   filter: string,
+ * }
  * @phpstan-type ScaleAndCropArguments array{
- *   x: ?positive-int,
- *   y: ?positive-int,
- *   width: int,
- *   height: int,
+ *   x: non-negative-int,
+ *   y: non-negative-int,
+ *   width: positive-int,
+ *   height: positive-int,
  *   resize: array{width: positive-int, height: positive-int, filter: string},
  *   filter: string,
  * }
@@ -58,12 +65,13 @@ class ScaleAndCrop extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * @param ScaleAndCropArguments $arguments
+   * @param PreparedScaleAndCropArguments $arguments
    * @return ScaleAndCropArguments
    */
   protected function validateArguments(array $arguments): array {
     // Fail if no dimensions available for current image.
     if (is_null($this->getToolkit()->getWidth()) || is_null($this->getToolkit()->getHeight())) {
+      // @phpstan-ignore offsetAccess.nonOffsetAccessible
       throw new \RuntimeException("No image dimensions available for the image '{$this->getPluginDefinition()['operation']}' operation");
     }
 
@@ -72,27 +80,46 @@ class ScaleAndCrop extends ImagemagickImageToolkitOperationBase {
 
     $scaleFactor = max($arguments['width'] / $actualWidth, $arguments['height'] / $actualHeight);
 
-    $arguments['x'] = isset($arguments['x']) ?
-      (int) round($arguments['x']) :
+    $output['x'] = isset($arguments['x']) ?
+      (int) round((float) $arguments['x']) :
       (int) round(($actualWidth * $scaleFactor - $arguments['width']) / 2);
-    $arguments['y'] = isset($arguments['y']) ?
-      (int) round($arguments['y']) :
+    $output['y'] = isset($arguments['y']) ?
+      (int) round((float) $arguments['y']) :
       (int) round(($actualHeight * $scaleFactor - $arguments['height']) / 2);
-    $arguments['resize'] = [
+    $output['width'] = (int) $arguments['width'];
+    $output['height'] = (int) $arguments['height'];
+    $output['filter'] = (string) $arguments['filter'];
+    $output['resize'] = [
       'width' => (int) round($actualWidth * $scaleFactor),
       'height' => (int) round($actualHeight * $scaleFactor),
       'filter' => $arguments['filter'],
     ];
 
     // Fail when width or height are 0 or negative.
-    if ($arguments['width'] <= 0) {
-      throw new \InvalidArgumentException("Invalid width ('{$arguments['width']}') specified for the image 'scale_and_crop' operation");
+    if ($output['width'] <= 0) {
+      throw new \InvalidArgumentException("Invalid width ('{$output['width']}') specified for the image 'scale_and_crop' operation");
     }
-    if ($arguments['height'] <= 0) {
-      throw new \InvalidArgumentException("Invalid height ('{$arguments['height']}') specified for the image 'scale_and_crop' operation");
+    if ($output['height'] <= 0) {
+      throw new \InvalidArgumentException("Invalid height ('{$output['height']}') specified for the image 'scale_and_crop' operation");
     }
 
-    return $arguments;
+    // Fail when x or y are negative.
+    if ($output['x'] < 0) {
+      throw new \InvalidArgumentException("Invalid x ('{$output['x']}') specified for the image 'crop' operation");
+    }
+    if ($output['y'] < 0) {
+      throw new \InvalidArgumentException("Invalid y ('{$output['y']}') specified for the image 'crop' operation");
+    }
+
+    // Fail when resize width or height are 0 or negative.
+    if ($output['resize']['width'] <= 0) {
+      throw new \InvalidArgumentException("Invalid resize width ('{$output['resize']['width']}') calculated for the image 'scale_and_crop' operation");
+    }
+    if ($output['resize']['height'] <= 0) {
+      throw new \InvalidArgumentException("Invalid resize height ('{$output['resize']['height']}') calculated for the image 'scale_and_crop' operation");
+    }
+
+    return $output;
   }
 
   /**

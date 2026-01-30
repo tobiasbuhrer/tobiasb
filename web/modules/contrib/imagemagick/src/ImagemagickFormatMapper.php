@@ -24,18 +24,6 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
   use SchemaCheckTrait;
   use StringTranslationTrait;
 
-  /**
-   * Constructs an ImagemagickFormatMapper object.
-   *
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
-   *   The cache service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config factory.
-   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfig
-   *   The typed config service.
-   * @param \Drupal\sophron\MimeMapManagerInterface $mimeMapManager
-   *   The MIME map manager service.
-   */
   public function __construct(
     #[Autowire(service: 'cache.default')]
     protected readonly CacheBackendInterface $cache,
@@ -57,7 +45,10 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
 
     // Validates against schema.
     $schema_errors = $this->checkConfigSchema($this->typedConfig, 'imagemagick.settings', $data, TRUE);
-    if ($schema_errors !== TRUE) {
+    if ($schema_errors === FALSE) {
+      $errors['schema'][] = $this->t("Configuration schema for @schema not found.", ['@schema' => 'imagemagick.settings']);
+    }
+    elseif ($schema_errors !== TRUE) {
       foreach ($schema_errors as $key => $value) {
         if (is_numeric($key)) {
           // This is a constraint validation error.
