@@ -37,7 +37,7 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @legacy-covers ::percentFilter
+   * Tests ::percentFilter.
    */
   #[DataProvider('percentFilterProvider')]
   public function testPercentFilter(int|string|NULL $length_specification, ?int $current_length, ?int $expected_result): void {
@@ -77,7 +77,7 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @legacy-covers ::resizeDimensions
+   * Tests ::resizeDimensions.
    */
   #[DataProvider('resizeDimensionsProvider')]
   public function testResizeDimensions(?int $source_width, ?int $source_height, int|string|NULL $width_specification, int|string|NULL $height_specification, bool $square, ?int $expected_width, ?int $expected_height): void {
@@ -87,7 +87,7 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @legacy-covers ::getKeywordOffset
+   * Tests ::getKeywordOffset.
    */
   public function testInvalidGetKeywordOffset(): void {
     $this->expectException(\InvalidArgumentException::class);
@@ -96,7 +96,7 @@ class ImageUtilityTest extends TestCase {
   }
 
   /**
-   * @legacy-covers ::getKeywordOffset
+   * Tests ::getKeywordOffset.
    */
   #[DataProvider('providerTestGetKeywordOffset')]
   public function testGetKeywordOffset(array $input, int $expected): void {

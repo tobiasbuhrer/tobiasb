@@ -34,6 +34,7 @@ trait FontOperationTrait {
 
     // Determine if a local path can be resolved for the URI. If so, return it.
     $local_path = $uri_wrapper->realpath();
+    // @phpstan-ignore notIdentical.alwaysTrue
     if ($local_path !== FALSE) {
       return $local_path;
     }
@@ -42,6 +43,7 @@ trait FontOperationTrait {
     // system. Use the file metadata manager service to copy the file to local
     // temp and keep it there for further access within same request. It is not
     // necessary to load its metadata.
+    // @phpstan-ignore deadCode.unreachable
     $file = \Drupal::service(FileMetadataManagerInterface::class)->uri($font_uri);
     $local_path = $file->getLocalTempPath();
     if ($local_path !== NULL) {

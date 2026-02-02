@@ -72,7 +72,7 @@ class MatrixUtilityTest extends TestCase {
   }
 
   /**
-   * @legacy-covers ::cumulativeSum
+   * Tests ::cumulativeSum.
    */
   #[DataProvider('cumulativeSumProvider')]
   public function testCumulativeSum(array $input, array $expected): void {
@@ -124,7 +124,7 @@ class MatrixUtilityTest extends TestCase {
   }
 
   /**
-   * @legacy-covers ::findMaxSumSubmatrix
+   * Tests ::findMaxSumSubmatrix.
    */
   #[DataProvider('findMaxSumSubmatrixProvider')]
   public function testFindMaxSumSubmatrix(array $input, int $rows, int $columns, array $expected): void {

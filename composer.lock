@@ -2244,17 +2244,17 @@
         },
         {
             "name": "drupal/image_effects",
-            "version": "5.0.0-rc1",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/image_effects.git",
-                "reference": "5.0.0-rc1"
+                "reference": "5.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/image_effects-5.0.0-rc1.zip",
-                "reference": "5.0.0-rc1",
-                "shasum": "fc937678be4d45b7b0743af700a2a397b6c5f054"
+                "url": "https://ftp.drupal.org/files/projects/image_effects-5.0.0.zip",
+                "reference": "5.0.0",
+                "shasum": "6f4c50bdb35127053e3625d855428627d4bf0415"
             },
             "require": {
                 "drupal/core": "^11.3",
@@ -2267,6 +2267,7 @@
             },
             "require-dev": {
                 "drupal/imagemagick": "^5",
+                "drupal/textimage": "^5",
                 "drupal/token": "*",
                 "drupal/vendor_stream_wrapper": "^2.0.5",
                 "drush/drush": ">=13",
@@ -2275,11 +2276,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "5.0.0-rc1",
-                    "datestamp": "1765214636",
+                    "version": "5.0.0",
+                    "datestamp": "1769890352",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "drush": {
@@ -4584,6 +4585,7 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Console_Getopt",
                 "source": "https://github.com/pear/Console_Getopt"
             },
+            "abandoned": true,
             "time": "2019-11-20T18:27:48+00:00"
         },
         {
@@ -5468,16 +5470,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.12.18",
+            "version": "v0.12.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "ddff0ac01beddc251786fe70367cd8bbdb258196"
+                "reference": "a4f766e5c5b6773d8399711019bb7d90875a50ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/ddff0ac01beddc251786fe70367cd8bbdb258196",
-                "reference": "ddff0ac01beddc251786fe70367cd8bbdb258196",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/a4f766e5c5b6773d8399711019bb7d90875a50ee",
+                "reference": "a4f766e5c5b6773d8399711019bb7d90875a50ee",
                 "shasum": ""
             },
             "require": {
@@ -5541,9 +5543,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.12.18"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.19"
             },
-            "time": "2025-12-17T14:35:46+00:00"
+            "time": "2026-01-30T17:33:13+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

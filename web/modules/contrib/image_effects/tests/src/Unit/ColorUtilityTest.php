@@ -18,12 +18,12 @@ use PHPUnit\Framework\TestCase;
 class ColorUtilityTest extends TestCase {
 
   /**
+   * Tests RGBA validation.
    *
    * @param bool $expected
    *   The expected result of validation.
    * @param string $value
    *   The hex color value.
-   * @legacy-covers ::validateRgba
    */
   #[DataProvider('providerTestValidateRgba')]
   public function testValidateRgba(bool $expected, string $value): void {

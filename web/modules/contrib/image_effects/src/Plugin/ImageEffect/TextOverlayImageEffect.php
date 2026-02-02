@@ -927,8 +927,9 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
     // If the effect is executed outside of the context of Textimage
     // (e.g. by the core Image module), then the text_string has not been
     // pre-processed to translate tokens or apply text conversion. Do it here.
+    /** @var \Drupal\textimage\TextimageFactory|null $textimage_factory */
     $textimage_factory = $this->getTextimageFactory();
-    if (!$textimage_factory || $textimage_factory->getState('building_module') !== 'textimage') {
+    if ($textimage_factory === NULL || $textimage_factory->getState('building_module') !== 'textimage') {
       // Replace any tokens in text with run-time values.
       $this->configuration['text_string'] = $this->token->replace($this->configuration['text_string']);
       // Let modules alter the text as needed.

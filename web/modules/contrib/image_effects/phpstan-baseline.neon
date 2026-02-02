@@ -1,49 +1,7 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Call to method get\(\) on an unknown class Drupal\\textimage\\TextimageFactoryInterface\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Plugin/ImageEffect/TextOverlayImageEffect.php
-
-		-
-			message: '#^Call to method getState\(\) on an unknown class Drupal\\textimage\\TextimageFactoryInterface\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Plugin/ImageEffect/TextOverlayImageEffect.php
-
-		-
-			message: '#^Method Drupal\\image_effects\\Plugin\\ImageEffect\\TextOverlayImageEffect\:\:getTextimageFactory\(\) has invalid return type Drupal\\textimage\\TextimageFactoryInterface\.$#'
-			identifier: class.notFound
-			count: 2
-			path: src/Plugin/ImageEffect/TextOverlayImageEffect.php
-
-		-
 			message: '#^Missing cache backend declaration for performance\.$#'
 			identifier: pluginManagerSetsCacheBackend.missingCacheBackend
 			count: 1
 			path: src/Plugin/ImageEffectsPluginManagerBase.php
-
-		-
-			message: '#^Strict comparison using \!\=\= between string and false will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: src/Plugin/ImageToolkit/Operation/gd/TextOverlay.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Plugin/ImageToolkit/Operation/gd/TextOverlay.php
-
-		-
-			message: '#^Strict comparison using \!\=\= between string and false will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: src/Plugin/ImageToolkit/Operation/gd/TextToWrapper.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Plugin/ImageToolkit/Operation/gd/TextToWrapper.php

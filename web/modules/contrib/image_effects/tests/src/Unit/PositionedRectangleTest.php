@@ -18,9 +18,7 @@ use PHPUnit\Framework\TestCase;
 class PositionedRectangleTest extends TestCase {
 
   /**
-   * @legacy-covers ::resize
-   * @legacy-covers ::setPoint
-   * @legacy-covers ::getPoint
+   * Tests ::resize.
    */
   public function testResize(): void {
     $rect = new PositionedRectangle(200, 100);
@@ -390,9 +388,7 @@ class PositionedRectangleTest extends TestCase {
   }
 
   /**
-   * @legacy-covers ::addGrid
-   * @legacy-covers ::getSubGridDimensions
-   * @legacy-covers ::getPoints
+   * Tests ::addGrid.
    */
   #[DataProvider('addGridProvider')]
   public function testAddGrid(int $rect_width, int $rect_height, int $x, int $y, int $width, int $height, int $rows, int $columns, array $expected_points, array $expected_subgrid_dimensions): void {

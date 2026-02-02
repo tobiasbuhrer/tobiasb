@@ -20,8 +20,6 @@ class RectangleTest extends TestCase {
 
   /**
    * Tests wrong rectangle width.
-   *
-   * @legacy-covers ::rotate
    */
   public function testWrongWidth(): void {
     $this->expectException(\InvalidArgumentException::class);
@@ -30,8 +28,6 @@ class RectangleTest extends TestCase {
 
   /**
    * Tests wrong rectangle height.
-   *
-   * @legacy-covers ::rotate
    */
   public function testWrongHeight(): void {
     $this->expectException(\InvalidArgumentException::class);
@@ -51,10 +47,6 @@ class RectangleTest extends TestCase {
    *   The expected width of the rotated rectangle.
    * @param int $exp_height
    *   The expected height of the rotated rectangle.
-   *
-   * @legacy-covers ::rotate
-   * @legacy-covers ::getBoundingWidth
-   * @legacy-covers ::getBoundingHeight
    */
   #[DataProvider('providerGd222RotateDimensions')]
   public function testRotateDimensions(int $width, int $height, float $angle, int $exp_width, int $exp_height): void {
