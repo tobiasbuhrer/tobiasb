@@ -13,12 +13,14 @@ use FileEye\MimeMap\Map\DefaultMap;
 use FileEye\MimeMap\MappingException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests for Sophron API.
  */
 #[CoversClass(MimeMapManager::class)]
 #[Group('sophron')]
+#[RunTestsInSeparateProcesses]
 class SophronApiTest extends KernelTestBase {
 
   /**

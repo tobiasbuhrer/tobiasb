@@ -8,11 +8,13 @@ use Drupal\Tests\BrowserTestBase;
 use Drupal\sophron\MimeMapManagerInterface;
 use FileEye\MimeMap\MappingException;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests Sophron functionality.
  */
 #[Group('sophron')]
+#[RunTestsInSeparateProcesses]
 class SophronTest extends BrowserTestBase {
 
   /**

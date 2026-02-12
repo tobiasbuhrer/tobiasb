@@ -13,6 +13,7 @@ Sophron of Drupal is a module to enhance MIME type management, based on the
   475 file extensions).
 * Provides an extensive MIME type management API through [FileEye/MimeMap](https://github.com/FileEye/MimeMap).
 * Optionally replaces Drupal's core MIME type extension-based guesser map.
+* Provides a JSON extract of the MIME type definitions.
 
 ## Installation
 
@@ -53,6 +54,12 @@ methods:
   changes through the ```Drupal\Core\File\MimeType\MimeTypeMapInterface``` API.
 * **NOTE** The Sophron guesser module does not invoke the legacy (deprecated in
   Drupal 11.2, removed in 12.0) ```hook_file_mimetype_mapping_alter``` hook.
+
+## Retrieve the MIME type definitions as a JSON
+
+Visit ```/sophron/mime-types.json```; it will return a JSON feed of all the MIME
+types defined, with their description, aliases and related file extensions.
+The ```access mime types json feed``` permission is required to access the URL.
 
 ## Configuration
 

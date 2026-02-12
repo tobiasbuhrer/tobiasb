@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\sophron;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -149,6 +150,35 @@ class MimeMapManager implements MimeMapManagerInterface {
         'description' => $is_sophron_guessing ? $this->t('The <strong>Sophron guesser</strong> module is providing MIME type guessing. <a href=":url">Uninstall the module</a> to revert to Drupal core guessing.', [':url' => Url::fromRoute('system.modules_uninstall')->toString()]) : $this->t('Drupal core is providing MIME type guessing. <a href=":url">Install the <strong>Sophron guesser</strong> module</a> to allow the enhanced guessing provided by Sophron.', [':url' => Url::fromRoute('system.modules_list')->toString()]),
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getMimeTypesJson(): string {
+    $data = [];
+    foreach ($this->listTypes() as $mime_type) {
+      $type = $this->getType($mime_type);
+      $data[$mime_type] = [
+        'extensions' => $type->getExtensions(),
+      ];
+      $aliases = $type->getAliases();
+      if ($aliases) {
+        $data[$mime_type]['aliases'] = $aliases;
+      }
+      try {
+        $description = $type->getDescription(includeAcronym: TRUE);
+        $data[$mime_type]['description'] = $description;
+      }
+      catch (MappingException) {
+        // Continue.
+      }
+      $aliases = $type->getAliases();
+      if ($aliases) {
+        $data[$mime_type]['aliases'] = $aliases;
+      }
+    }
+    return Json::encode($data);
   }
 
   /**

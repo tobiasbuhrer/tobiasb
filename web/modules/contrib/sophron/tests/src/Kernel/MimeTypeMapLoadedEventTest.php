@@ -6,6 +6,7 @@ namespace Drupal\Tests\sophron\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests ensuring MimeTypeMapLoadedEvent has effect on the Sophron map.
@@ -14,6 +15,7 @@ use PHPUnit\Framework\Attributes\Group;
  * to execute and add some mappings. We check here that they are.
  */
 #[Group('sophron')]
+#[RunTestsInSeparateProcesses]
 class MimeTypeMapLoadedEventTest extends KernelTestBase {
 
   /**

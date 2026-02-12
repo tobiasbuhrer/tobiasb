@@ -6,11 +6,13 @@ namespace Drupal\Tests\sophron\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests for Sophron guesser.
  */
 #[Group('sophron')]
+#[RunTestsInSeparateProcesses]
 class SophronGuesserTest extends KernelTestBase {
 
   /**

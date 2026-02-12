@@ -142,4 +142,14 @@ interface MimeMapManagerInterface {
    */
   public function determineMapGaps(string $mapClass): array;
 
+  /**
+   * Get a JSON encoded array of the mime types and their extensions.
+   *
+   * @return string
+   *   A JSON encoded array of the mime types and their extensions. Keys:
+   *   - mime_type (string): The mime type.
+   *   - extensions (array): An array of extensions the mime type applies to.
+   */
+  public function getMimeTypesJson(): string;
+
 }
