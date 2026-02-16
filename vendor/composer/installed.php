@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f1a45c5f18f643a126a62cdfa1827636b86763a9',
+        'reference' => 'e77c040807d427df0b1ba9a2c3f619394d29a9e6',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -200,12 +200,12 @@
             'dev_requirement' => false,
         ),
         'drupal/backup_migrate' => array(
-            'pretty_version' => '5.1.3',
-            'version' => '5.1.3.0',
+            'pretty_version' => '5.1.4',
+            'version' => '5.1.4.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/backup_migrate',
             'aliases' => array(),
-            'reference' => '5.1.3',
+            'reference' => '5.1.4',
             'dev_requirement' => false,
         ),
         'drupal/core' => array(
@@ -529,7 +529,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f1a45c5f18f643a126a62cdfa1827636b86763a9',
+            'reference' => 'e77c040807d427df0b1ba9a2c3f619394d29a9e6',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
