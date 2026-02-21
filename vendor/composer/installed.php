@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '2d89555a4ddc49dc018ef9ec10491041a3ee202b',
+        'reference' => 'c60d7fa85399eb7dab92f4109cdd62e530e8e614',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -538,7 +538,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '2d89555a4ddc49dc018ef9ec10491041a3ee202b',
+            'reference' => 'c60d7fa85399eb7dab92f4109cdd62e530e8e614',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -557,6 +557,15 @@
             'install_path' => __DIR__ . '/../../web/modules/contrib/sophron',
             'aliases' => array(),
             'reference' => '3.1.0',
+            'dev_requirement' => false,
+        ),
+        'drupal/statistics' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/statistics',
+            'aliases' => array(),
+            'reference' => '1.0.0',
             'dev_requirement' => false,
         ),
         'drupal/upgrade_status' => array(
