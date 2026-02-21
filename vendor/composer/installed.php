@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '2a3af4605971c36d5ce92052093f0a31de79207b',
+        'reference' => '2d89555a4ddc49dc018ef9ec10491041a3ee202b',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -514,6 +514,15 @@
             'reference' => '2.0.5',
             'dev_requirement' => false,
         ),
+        'drupal/permissions_fixer' => array(
+            'pretty_version' => '2.0.2',
+            'version' => '2.0.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../drupal/permissions_fixer',
+            'aliases' => array(),
+            'reference' => '6ca0920636de6163a43a1e12fc0c5a7773702ac0',
+            'dev_requirement' => false,
+        ),
         'drupal/plupload' => array(
             'pretty_version' => '2.2.0',
             'version' => '2.2.0.0',
@@ -529,7 +538,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '2a3af4605971c36d5ce92052093f0a31de79207b',
+            'reference' => '2d89555a4ddc49dc018ef9ec10491041a3ee202b',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(

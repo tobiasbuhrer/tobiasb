@@ -2825,6 +2825,63 @@
             "install-path": "../../web/modules/contrib/minifyhtml"
         },
         {
+            "name": "drupal/permissions_fixer",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/permissions_fixer.git",
+                "reference": "6ca0920636de6163a43a1e12fc0c5a7773702ac0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fpermissions_fixer/repository/archive.zip?sha=6ca0920636de6163a43a1e12fc0c5a7773702ac0",
+                "reference": "6ca0920636de6163a43a1e12fc0c5a7773702ac0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "composer/composer": "^2.0"
+            },
+            "time": "2026-01-22T23:09:25+00:00",
+            "bin": [
+                "fix-drupal-permissions",
+                "autofix-drupal-permissions"
+            ],
+            "type": "library",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Ricardo Sanz Ante",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Metadrop",
+                    "homepage": "https://www.metadrop.net"
+                }
+            ],
+            "description": "Security-focused bash scripts to fix file permissions and ownership in Drupal installations following best practices",
+            "homepage": "https://www.drupal.org/project/permissions_fixer",
+            "keywords": [
+                "deployment",
+                "drupal",
+                "filesystem",
+                "permissions",
+                "security"
+            ],
+            "support": {
+                "issues": "https://www.drupal.org/project/issues/permissions_fixer",
+                "source": "https://git.drupalcode.org/project/permissions_fixer"
+            },
+            "install-path": "../drupal/permissions_fixer"
+        },
+        {
             "name": "drupal/plupload",
             "version": "2.2.0",
             "version_normalized": "2.2.0.0",
