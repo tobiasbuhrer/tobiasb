@@ -39,9 +39,9 @@
         "drupal/plupload": "^2.1@beta",
         "drupal/smtp": "^1.0",
         "drupal/sophron": "^3.0",
-        "drupal/statistics": "^1.0",
         "drupal/upgrade_status": "^4.0",
         "drupal/video": "^3.0",
+        "drupal/visitors": "^2.32",
         "drupal/webform": "^6.3@beta",
         "drush/drush": "^13.0"
     },
