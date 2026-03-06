@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1e73556ff02507cccefade972b0c228fc947b7fe',
+        'reference' => 'e9a5da845a605015dfd9f2eb3f9986d9b100b941',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -565,7 +565,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1e73556ff02507cccefade972b0c228fc947b7fe',
+            'reference' => 'e9a5da845a605015dfd9f2eb3f9986d9b100b941',
             'dev_requirement' => false,
         ),
         'drupal/smtp' => array(
@@ -614,12 +614,12 @@
             'dev_requirement' => false,
         ),
         'drupal/webform' => array(
-            'pretty_version' => '6.3.0-beta7',
-            'version' => '6.3.0.0-beta7',
+            'pretty_version' => '6.3.0-beta8',
+            'version' => '6.3.0.0-beta8',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../web/modules/contrib/webform',
             'aliases' => array(),
-            'reference' => '6.3.0-beta7',
+            'reference' => '6.3.0-beta8',
             'dev_requirement' => false,
         ),
         'drupal8-rector/drupal8-rector' => array(

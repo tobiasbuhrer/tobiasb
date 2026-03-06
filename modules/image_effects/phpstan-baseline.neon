@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Missing cache backend declaration for performance\.$#'
+			identifier: pluginManagerSetsCacheBackend.missingCacheBackend
+			count: 1
+			path: src/Plugin/ImageEffectsPluginManagerBase.php

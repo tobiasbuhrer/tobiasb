@@ -1,0 +1,25 @@
+services:
+  logger.channel.image_effects:
+    parent: logger.channel_base
+    arguments: ['image_effects']
+  Drupal\image_effects\Plugin\ColorSelectorPluginManager:
+    parent: default_plugin_manager
+    arguments: ['@config.factory']
+  Drupal\image_effects\Plugin\ImageSelectorPluginManager:
+    parent: default_plugin_manager
+    arguments: ['@config.factory']
+  Drupal\image_effects\Plugin\FontSelectorPluginManager:
+    parent: default_plugin_manager
+    arguments: ['@config.factory']
+  image_effects.converter:
+    class: Drupal\image_effects\ImageEffectsConverter
+
+  plugin.manager.image_effects.color_selector:
+    alias: Drupal\image_effects\Plugin\ColorSelectorPluginManager
+    deprecated: 'The "%alias_id%" service alias is deprecated. Use "Drupal\image_effects\Plugin\ColorSelectorPluginManager" service id instead.'
+  plugin.manager.image_effects.image_selector:
+    alias: Drupal\image_effects\Plugin\ImageSelectorPluginManager
+    deprecated: 'The "%alias_id%" service alias is deprecated. Use "Drupal\image_effects\Plugin\ImageSelectorPluginManager" service id instead.'
+  plugin.manager.image_effects.font_selector:
+    alias: Drupal\image_effects\Plugin\FontSelectorPluginManager
+    deprecated: 'The "%alias_id%" service alias is deprecated. Use "Drupal\image_effects\Plugin\FontSelectorPluginManager" service id instead.'
