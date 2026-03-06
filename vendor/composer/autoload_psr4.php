@@ -60,6 +60,7 @@ return array(
     'Peast\\' => array($vendorDir . '/mck89/peast/lib/Peast'),
     'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-deprecation-rules/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'OomphInc\\ComposerInstallersExtender\\' => array($vendorDir . '/oomphinc/composer-installers-extender/src'),
     'MaxMind\\WebService\\' => array($vendorDir . '/maxmind/web-service-common/src/WebService'),
     'MaxMind\\Exception\\' => array($vendorDir . '/maxmind/web-service-common/src/Exception'),
     'MaxMind\\Db\\' => array($vendorDir . '/maxmind-db/reader/src/MaxMind/Db'),

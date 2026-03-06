@@ -47,7 +47,11 @@
         "drupal/video": "^3.0",
         "drupal/visitors": "^2.32",
         "drupal/webform": "^6.3@beta",
-        "drush/drush": "^13.0"
+        "drush/drush": "^13.0",
+        "npm-asset/chart.js": "^4.4",
+        "npm-asset/chartjs-adapter-date-fns": "^3.0",
+        "npm-asset/chartjs-plugin-datalabels": "^2.0",
+        "oomphinc/composer-installers-extender": "^2.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -62,7 +66,8 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/console-extend-plugin": true,
             "cweagans/composer-patches": true,
-            "wikimedia/composer-merge-plugin": true
+            "wikimedia/composer-merge-plugin": true,
+            "oomphinc/composer-installers-extender": true
         },
         "sort-packages": true
     },
@@ -72,12 +77,13 @@
                 "web-root": "web/"
             }
         },
+        "installer-types": ["bower-asset","npm-asset"],
         "installer-paths": {
             "web/core": [
                 "type:drupal-core"
             ],
             "web/libraries/{$name}": [
-                "type:drupal-library"
+                "type:drupal-library", "vendor:npm-asset"
             ],
             "web/modules/contrib/{$name}": [
                 "type:drupal-module"
@@ -104,5 +110,14 @@
     },
     "require-dev": {
         "palantirnet/drupal-rector": "^0.20.3"
+    },
+    "scripts": {
+        "clean-chartjs": "chmod +x scripts/clean-chartjs.sh && ./scripts/clean-chartjs.sh",
+           "post-install-cmd": [
+                "@clean-chartjs"
+            ],
+            "post-update-cmd": [
+                "@clean-chartjs"
+            ]
     }
 }
