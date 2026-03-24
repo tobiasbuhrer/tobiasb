@@ -7,11 +7,13 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Hook\Attribute\LegacyRequirementsHook;
 use Drupal\sophron\MimeMapManagerInterface;
 
 /**
  * Implements hook_requirements().
  */
+#[LegacyRequirementsHook]
 function sophron_requirements(string $phase) {
   if ($phase === 'runtime') {
     return \Drupal::service(MimeMapManagerInterface::class)->requirements($phase);

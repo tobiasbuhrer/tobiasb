@@ -1544,6 +1544,22 @@ class DrupalMap extends AbstractMap {
         1 => 'teicorpus',
       ),
     ),
+    'application/texinfo' =>
+    array (
+      'a' =>
+      array (
+        0 => 'text/x-texinfo',
+      ),
+      'desc' =>
+      array (
+        0 => 'TeXInfo document',
+      ),
+      'e' =>
+      array (
+        0 => 'texi',
+        1 => 'texinfo',
+      ),
+    ),
     'application/thraud+xml' =>
     array (
       'e' =>
@@ -1959,6 +1975,21 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'rep',
+      ),
+    ),
+    'application/vnd.bzip3' =>
+    array (
+      'a' =>
+      array (
+        0 => 'application/x-bzip3',
+      ),
+      'desc' =>
+      array (
+        0 => 'Bzip3 archive',
+      ),
+      'e' =>
+      array (
+        0 => 'bz3',
       ),
     ),
     'application/vnd.chemdraw+xml' =>
@@ -3012,6 +3043,18 @@ class DrupalMap extends AbstractMap {
         0 => 'qfx',
       ),
     ),
+    'application/vnd.ipld.car' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Archive used for storing and transporting IPLD (InterPlanetary Linked Data)',
+        1 => 'CAR: Content Addressable aRchive',
+      ),
+      'e' =>
+      array (
+        0 => 'car',
+      ),
+    ),
     'application/vnd.ipunplugged.rcprofile' =>
     array (
       'e' =>
@@ -3895,6 +3938,22 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'nlu',
+      ),
+    ),
+    'application/vnd.nintendo.nitro.rom' =>
+    array (
+      'a' =>
+      array (
+        0 => 'application/x-nintendo-ds-rom',
+      ),
+      'desc' =>
+      array (
+        0 => 'Nintendo DS ROM',
+        1 => 'DS: Dual Screen/Developers\' System',
+      ),
+      'e' =>
+      array (
+        0 => 'nds',
       ),
     ),
     'application/vnd.nintendo.snes.rom' =>
@@ -5628,17 +5687,6 @@ class DrupalMap extends AbstractMap {
         0 => 'aas',
       ),
     ),
-    'application/x-awk' =>
-    array (
-      'desc' =>
-      array (
-        0 => 'AWK script',
-      ),
-      'e' =>
-      array (
-        0 => 'awk',
-      ),
-    ),
     'application/x-bat' =>
     array (
       'a' =>
@@ -5707,6 +5755,33 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'bps',
+      ),
+    ),
+    'application/x-brotli' =>
+    array (
+      'a' =>
+      array (
+        0 => 'application/brotli',
+      ),
+      'desc' =>
+      array (
+        0 => 'Brotli archive',
+      ),
+      'e' =>
+      array (
+        0 => 'br',
+      ),
+    ),
+    'application/x-brotli-compressed-tar' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Tar archive (brotli-compressed)',
+      ),
+      'e' =>
+      array (
+        0 => 'tar.br',
+        1 => 'tbr',
       ),
     ),
     'application/x-bsdiff' =>
@@ -5786,17 +5861,6 @@ class DrupalMap extends AbstractMap {
         0 => 'tar.bz2',
         1 => 'tbz2',
         2 => 'tb2',
-      ),
-    ),
-    'application/x-bzip3' =>
-    array (
-      'desc' =>
-      array (
-        0 => 'Bzip3 archive',
-      ),
-      'e' =>
-      array (
-        0 => 'bz3',
       ),
     ),
     'application/x-bzip3-compressed-tar' =>
@@ -5898,6 +5962,30 @@ class DrupalMap extends AbstractMap {
         0 => 'chat',
       ),
     ),
+    'application/x-chip8-octo-source' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'CHIP-8 Octo source',
+      ),
+      'e' =>
+      array (
+        0 => '8o',
+      ),
+    ),
+    'application/x-chip8-program' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'CHIP-8 program',
+      ),
+      'e' =>
+      array (
+        0 => 'ch8',
+        1 => 'sc8',
+        2 => 'xo8',
+      ),
+    ),
     'application/x-cisco-vpn-settings' =>
     array (
       'desc' =>
@@ -5907,6 +5995,128 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'pcf',
+      ),
+    ),
+    'application/x-commodore-crt' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore cartridge',
+      ),
+      'e' =>
+      array (
+        0 => 'crt',
+      ),
+    ),
+    'application/x-commodore-d64-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore 1571 floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'd64',
+      ),
+    ),
+    'application/x-commodore-d71-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore 1571 floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'd71',
+      ),
+    ),
+    'application/x-commodore-d80-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore 8050 floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'd80',
+      ),
+    ),
+    'application/x-commodore-d81-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore 1581 floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'd81',
+      ),
+    ),
+    'application/x-commodore-d82-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore 8250 floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'd82',
+      ),
+    ),
+    'application/x-commodore-d90-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore D9090/D9060 hard disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'd90',
+      ),
+    ),
+    'application/x-commodore-g64-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore 1541 floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'g64',
+      ),
+    ),
+    'application/x-commodore-g71-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore 1571 floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'g71',
+      ),
+    ),
+    'application/x-commodore-tape' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore tape image',
+      ),
+      'e' =>
+      array (
+        0 => 'tap',
+        1 => 't64',
+      ),
+    ),
+    'application/x-commodore-x64-disk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Commodore C64 headered disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'x64',
       ),
     ),
     'application/x-compress' =>
@@ -5974,14 +6184,6 @@ class DrupalMap extends AbstractMap {
     ),
     'application/x-csh' =>
     array (
-      'a' =>
-      array (
-        0 => 'text/x-csh',
-      ),
-      'desc' =>
-      array (
-        0 => 'C shell script',
-      ),
       'e' =>
       array (
         0 => 'csh',
@@ -6474,7 +6676,9 @@ class DrupalMap extends AbstractMap {
       ),
       'e' =>
       array (
-        0 => 'iso',
+        0 => 'rvz',
+        1 => 'wia',
+        2 => 'iso',
       ),
     ),
     'application/x-gamegear-rom' =>
@@ -7252,6 +7456,17 @@ class DrupalMap extends AbstractMap {
         1 => 'lmdb',
       ),
     ),
+    'application/x-lowresnx-program' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'LowRes NX program',
+      ),
+      'e' =>
+      array (
+        0 => 'nx',
+      ),
+    ),
     'application/x-lrzip' =>
     array (
       'desc' =>
@@ -7274,6 +7489,22 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'tar.lrz',
         1 => 'tlrz',
+      ),
+    ),
+    'application/x-lx-executable' =>
+    array (
+      'desc' =>
+      array (
+        0 => '32-bit DOS executable',
+        1 => 'DOS: Disk Operating System',
+      ),
+      'e' =>
+      array (
+        0 => 'exe',
+        1 => '386',
+        2 => 'dll',
+        3 => 'sys',
+        4 => 'vxd',
       ),
     ),
     'application/x-lyx' =>
@@ -7828,17 +8059,6 @@ class DrupalMap extends AbstractMap {
         1 => 'cci',
       ),
     ),
-    'application/x-nintendo-ds-rom' =>
-    array (
-      'desc' =>
-      array (
-        0 => 'Nintendo DS ROM',
-      ),
-      'e' =>
-      array (
-        0 => 'nds',
-      ),
-    ),
     'application/x-nintendo-switch-xci' =>
     array (
       'a' =>
@@ -7852,6 +8072,17 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'xci',
+      ),
+    ),
+    'application/x-nrg' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Nero Burning ROM disc image',
+      ),
+      'e' =>
+      array (
+        0 => 'nrg',
       ),
     ),
     'application/x-ns-proxy-autoconfig' =>
@@ -8060,6 +8291,28 @@ class DrupalMap extends AbstractMap {
         2 => 'php4',
         3 => 'php5',
         4 => 'phps',
+      ),
+    ),
+    'application/x-pico8-rom' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'PICO-8 binary code',
+      ),
+      'e' =>
+      array (
+        0 => 'p8.rom',
+      ),
+    ),
+    'application/x-pico8-source' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'PICO-8 editable code',
+      ),
+      'e' =>
+      array (
+        0 => 'p8',
       ),
     ),
     'application/x-pkcs7-certificates' =>
@@ -8448,21 +8701,6 @@ class DrupalMap extends AbstractMap {
         0 => 'so',
       ),
     ),
-    'application/x-shellscript' =>
-    array (
-      'a' =>
-      array (
-        0 => 'text/x-sh',
-      ),
-      'desc' =>
-      array (
-        0 => 'Shell script',
-      ),
-      'e' =>
-      array (
-        0 => 'sh',
-      ),
-    ),
     'application/x-shorten' =>
     array (
       'a' =>
@@ -8528,6 +8766,153 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'src.rpm',
         1 => 'spm',
+      ),
+    ),
+    'application/x-spectrum-d80' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Didaktik D40/D80 floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'd80',
+        1 => 'd40',
+      ),
+    ),
+    'application/x-spectrum-dsk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Amstrad CPC/ZX Spectrum DSK floppy disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'dsk',
+      ),
+    ),
+    'application/x-spectrum-hdf' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum HDF hard disk image',
+      ),
+      'e' =>
+      array (
+        0 => 'hdf',
+      ),
+    ),
+    'application/x-spectrum-mdr' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Sinclair Microdrive tape cartridge image',
+      ),
+      'e' =>
+      array (
+        0 => 'mdr',
+      ),
+    ),
+    'application/x-spectrum-mgt' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum/SAM Coupé MGT floppy disk image',
+        1 => 'MGT: Miles Gordon Technology',
+      ),
+      'e' =>
+      array (
+        0 => 'mgt',
+      ),
+    ),
+    'application/x-spectrum-pzx' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum PZX tape archival image',
+      ),
+      'e' =>
+      array (
+        0 => 'pzx',
+      ),
+    ),
+    'application/x-spectrum-rzx' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum RZX replay snapshot',
+      ),
+      'e' =>
+      array (
+        0 => 'rzx',
+      ),
+    ),
+    'application/x-spectrum-slt' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum SLT multiload snapshot',
+        1 => 'SLT: Super Level loader Trap',
+      ),
+      'e' =>
+      array (
+        0 => 'slt',
+      ),
+    ),
+    'application/x-spectrum-sna' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum SNA snapshot',
+      ),
+      'e' =>
+      array (
+        0 => 'sna',
+      ),
+    ),
+    'application/x-spectrum-szx' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum SZX snapshot',
+      ),
+      'e' =>
+      array (
+        0 => 'szx',
+        1 => 'zx-state',
+      ),
+    ),
+    'application/x-spectrum-tap' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum TAP tape image',
+      ),
+      'e' =>
+      array (
+        0 => 'tap',
+      ),
+    ),
+    'application/x-spectrum-tzx' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum TZX tape image',
+      ),
+      'e' =>
+      array (
+        0 => 'tzx',
+      ),
+    ),
+    'application/x-spectrum-z80' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'ZX Spectrum Z80 snapshot',
+      ),
+      'e' =>
+      array (
+        0 => 'z80',
       ),
     ),
     'application/x-spss-por' =>
@@ -8911,6 +9296,18 @@ class DrupalMap extends AbstractMap {
         0 => 'sap',
       ),
     ),
+    'application/x-tic80-item' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'TIC-80 cartridge',
+        1 => 'TIC: TIny Computer',
+      ),
+      'e' =>
+      array (
+        0 => 'tic',
+      ),
+    ),
     'application/x-tiled-tmx' =>
     array (
       'desc' =>
@@ -9095,7 +9492,9 @@ class DrupalMap extends AbstractMap {
       ),
       'e' =>
       array (
-        0 => 'iso',
+        0 => 'rvz',
+        1 => 'wia',
+        2 => 'iso',
       ),
     ),
     'application/x-wii-wad' =>
@@ -9725,6 +10124,17 @@ class DrupalMap extends AbstractMap {
         0 => 'flac',
       ),
     ),
+    'audio/matroska' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Matroska audio',
+      ),
+      'e' =>
+      array (
+        0 => 'mka',
+      ),
+    ),
     'audio/midi' =>
     array (
       'a' =>
@@ -10037,6 +10447,22 @@ class DrupalMap extends AbstractMap {
         0 => 'weba',
       ),
     ),
+    'audio/x-669' =>
+    array (
+      'a' =>
+      array (
+        0 => 'audio/x-669-mod',
+      ),
+      'desc' =>
+      array (
+        0 => 'Composer 669 audio',
+      ),
+      'e' =>
+      array (
+        0 => '669',
+        1 => 'uni',
+      ),
+    ),
     'audio/x-aifc' =>
     array (
       'a' =>
@@ -10218,13 +10644,20 @@ class DrupalMap extends AbstractMap {
     ),
     'audio/x-matroska' =>
     array (
-      'desc' =>
-      array (
-        0 => 'Matroska audio',
-      ),
       'e' =>
       array (
         0 => 'mka',
+      ),
+    ),
+    'audio/x-med' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'OctaMED audio',
+      ),
+      'e' =>
+      array (
+        0 => 'med',
       ),
     ),
     'audio/x-minipsf' =>
@@ -10259,12 +10692,10 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'mod',
-        1 => 'ult',
-        2 => 'uni',
-        3 => 'm15',
-        4 => 'mtm',
-        5 => '669',
-        6 => 'med',
+        1 => 'm15',
+        2 => 'stk',
+        3 => 'nst',
+        4 => 'fst',
       ),
     ),
     'audio/x-mpegurl' =>
@@ -10329,6 +10760,21 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'wma',
+      ),
+    ),
+    'audio/x-mtm' =>
+    array (
+      'a' =>
+      array (
+        0 => 'audio/x-multitrack',
+      ),
+      'desc' =>
+      array (
+        0 => 'MultiTracker audio',
+      ),
+      'e' =>
+      array (
+        0 => 'mtm',
       ),
     ),
     'audio/x-musepack' =>
@@ -10495,6 +10941,21 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'tta',
+      ),
+    ),
+    'audio/x-ult' =>
+    array (
+      'a' =>
+      array (
+        0 => 'audio/x-multimate-mod',
+      ),
+      'desc' =>
+      array (
+        0 => 'UltraTracker audio',
+      ),
+      'e' =>
+      array (
+        0 => 'ult',
       ),
     ),
     'audio/x-voc' =>
@@ -11204,14 +11665,22 @@ class DrupalMap extends AbstractMap {
         0 => 'gif',
       ),
     ),
+    'image/heic' =>
+    array (
+      'e' =>
+      array (
+        0 => 'heic',
+      ),
+    ),
+    'image/heic-sequence' =>
+    array (
+      'e' =>
+      array (
+        0 => 'heics',
+      ),
+    ),
     'image/heif' =>
     array (
-      'a' =>
-      array (
-        0 => 'image/heic',
-        1 => 'image/heic-sequence',
-        2 => 'image/heif-sequence',
-      ),
       'desc' =>
       array (
         0 => 'HEIF image',
@@ -11219,9 +11688,16 @@ class DrupalMap extends AbstractMap {
       ),
       'e' =>
       array (
-        0 => 'heic',
-        1 => 'heif',
+        0 => 'heif',
+        1 => 'heic',
         2 => 'hif',
+      ),
+    ),
+    'image/heif-sequence' =>
+    array (
+      'e' =>
+      array (
+        0 => 'heifs',
       ),
     ),
     'image/hej2k' =>
@@ -11761,6 +12237,19 @@ class DrupalMap extends AbstractMap {
         0 => 'ag',
       ),
     ),
+    'image/x-aseprite' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Aseprite image',
+        1 => 'ASE: Allegro Sprite Editor',
+      ),
+      'e' =>
+      array (
+        0 => 'ase',
+        1 => 'aseprite',
+      ),
+    ),
     'image/x-bzeps' =>
     array (
       'desc' =>
@@ -11886,6 +12375,17 @@ class DrupalMap extends AbstractMap {
         2 => 'epsf',
       ),
     ),
+    'image/x-epson-erf' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Epson ERF raw image',
+      ),
+      'e' =>
+      array (
+        0 => 'erf',
+      ),
+    ),
     'image/x-exr' =>
     array (
       'desc' =>
@@ -11964,6 +12464,28 @@ class DrupalMap extends AbstractMap {
         0 => 'eps.gz',
         1 => 'epsi.gz',
         2 => 'epsf.gz',
+      ),
+    ),
+    'image/x-hasselblad-3fr' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Hasselblad 3FR raw image',
+      ),
+      'e' =>
+      array (
+        0 => '3fr',
+      ),
+    ),
+    'image/x-hasselblad-fff' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Hasselblad FFF raw image',
+      ),
+      'e' =>
+      array (
+        0 => 'fff',
       ),
     ),
     'image/x-icns' =>
@@ -12076,6 +12598,17 @@ class DrupalMap extends AbstractMap {
         0 => 'kdc',
       ),
     ),
+    'image/x-leaf-mos' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Leaf MOS raw image',
+      ),
+      'e' =>
+      array (
+        0 => 'mos',
+      ),
+    ),
     'image/x-lwo' =>
     array (
       'desc' =>
@@ -12108,6 +12641,28 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'pntg',
+      ),
+    ),
+    'image/x-mamiya-mef' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Mamiya MEF raw image',
+      ),
+      'e' =>
+      array (
+        0 => 'mef',
+      ),
+    ),
+    'image/x-minolta-mdc' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Minolta MDC raw image',
+      ),
+      'e' =>
+      array (
+        0 => 'mdc',
       ),
     ),
     'image/x-minolta-mrw' =>
@@ -12203,6 +12758,7 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'rw2',
+        1 => 'rwl',
       ),
     ),
     'image/x-pentax-pef' =>
@@ -12226,6 +12782,17 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'pfm',
+      ),
+    ),
+    'image/x-phaseone-iiq' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Phaseone IIQ raw image',
+      ),
+      'e' =>
+      array (
+        0 => 'iiq',
       ),
     ),
     'image/x-phm' =>
@@ -12348,6 +12915,17 @@ class DrupalMap extends AbstractMap {
         0 => 'rgb',
       ),
     ),
+    'image/x-samsung-srw' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Samsung SRW raw image',
+      ),
+      'e' =>
+      array (
+        0 => 'srw',
+      ),
+    ),
     'image/x-sct' =>
     array (
       'desc' =>
@@ -12381,6 +12959,17 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'x3f',
+      ),
+    ),
+    'image/x-sinar-sti' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Sinar STI raw image',
+      ),
+      'e' =>
+      array (
+        0 => 'sti',
       ),
     ),
     'image/x-skencil' =>
@@ -12466,6 +13055,17 @@ class DrupalMap extends AbstractMap {
         2 => 'tpic',
         3 => 'vda',
         4 => 'vst',
+      ),
+    ),
+    'image/x-tim' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'PlayStation graphics',
+      ),
+      'e' =>
+      array (
+        0 => 'tim',
       ),
     ),
     'image/x-win-bitmap' =>
@@ -13031,6 +13631,10 @@ class DrupalMap extends AbstractMap {
     ),
     'text/scriptlet' =>
     array (
+      'desc' =>
+      array (
+        0 => 'Windows scriptlet',
+      ),
       'e' =>
       array (
         0 => 'sct',
@@ -13048,6 +13652,17 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'sgml',
         1 => 'sgm',
+      ),
+    ),
+    'text/slint' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Slint Language',
+      ),
+      'e' =>
+      array (
+        0 => 'slint',
       ),
     ),
     'text/spdx' =>
@@ -13403,6 +14018,18 @@ class DrupalMap extends AbstractMap {
         1 => 'asm',
       ),
     ),
+    'text/x-awk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'AWK script',
+        1 => 'AWK: [Alfred Vaino] Aho, [Peter Jay] Weinberger and [Brian Wilson] Kernighan [language]',
+      ),
+      'e' =>
+      array (
+        0 => 'awk',
+      ),
+    ),
     'text/x-basic' =>
     array (
       'desc' =>
@@ -13547,6 +14174,17 @@ class DrupalMap extends AbstractMap {
       'e' =>
       array (
         0 => 'cr',
+      ),
+    ),
+    'text/x-csh' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'C shell script',
+      ),
+      'e' =>
+      array (
+        0 => 'csh',
       ),
     ),
     'text/x-csharp' =>
@@ -13731,6 +14369,18 @@ class DrupalMap extends AbstractMap {
         2 => 'f77',
         3 => 'f90',
         4 => 'f95',
+      ),
+    ),
+    'text/x-gawk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'GNU AWK script',
+        1 => 'GNU AWK: GNU\'s Not Unix[\'s] [Alfred Vaino] Aho, [Peter Jay] Weinberger and [Brian Wilson] Kernighan [language]',
+      ),
+      'e' =>
+      array (
+        0 => 'awk',
       ),
     ),
     'text/x-gcode-gx' =>
@@ -14149,6 +14799,18 @@ class DrupalMap extends AbstractMap {
         1 => 'not',
       ),
     ),
+    'text/x-nawk' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'New (BWK) AWK script',
+        1 => 'New (BWK) AWK: New (Brian Wilson Kernighan) [Alfred Vaino] Aho, [Peter Jay] Weinberger and [Brian Wilson] Kernighan [language]',
+      ),
+      'e' =>
+      array (
+        0 => 'awk',
+      ),
+    ),
     'text/x-nfo' =>
     array (
       'desc' =>
@@ -14509,6 +15171,22 @@ class DrupalMap extends AbstractMap {
         0 => 'sfv',
       ),
     ),
+    'text/x-shellscript' =>
+    array (
+      'a' =>
+      array (
+        0 => 'application/x-shellscript',
+        1 => 'text/x-sh',
+      ),
+      'desc' =>
+      array (
+        0 => 'Shell script',
+      ),
+      'e' =>
+      array (
+        0 => 'sh',
+      ),
+    ),
     'text/x-ssa' =>
     array (
       'desc' =>
@@ -14606,18 +15284,6 @@ class DrupalMap extends AbstractMap {
         4 => 'dtx',
         5 => 'ins',
         6 => 'latex',
-      ),
-    ),
-    'text/x-texinfo' =>
-    array (
-      'desc' =>
-      array (
-        0 => 'TeXInfo document',
-      ),
-      'e' =>
-      array (
-        0 => 'texi',
-        1 => 'texinfo',
       ),
     ),
     'text/x-troff-me' =>
@@ -14904,6 +15570,32 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'jpm',
         1 => 'jpgm',
+      ),
+    ),
+    'video/matroska' =>
+    array (
+      'desc' =>
+      array (
+        0 => 'Matroska video',
+      ),
+      'e' =>
+      array (
+        0 => 'mkv',
+      ),
+    ),
+    'video/matroska-3d' =>
+    array (
+      'a' =>
+      array (
+        0 => 'video/x-matroska-3d',
+      ),
+      'desc' =>
+      array (
+        0 => 'Matroska 3D video',
+      ),
+      'e' =>
+      array (
+        0 => 'mk3d',
       ),
     ),
     'video/mj2' =>
@@ -15241,6 +15933,7 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'video/fli',
         1 => 'video/x-fli',
+        2 => 'video/x-flc',
       ),
       'desc' =>
       array (
@@ -15290,26 +15983,11 @@ class DrupalMap extends AbstractMap {
     ),
     'video/x-matroska' =>
     array (
-      'desc' =>
-      array (
-        0 => 'Matroska video',
-      ),
       'e' =>
       array (
         0 => 'mkv',
         1 => 'mk3d',
         2 => 'mks',
-      ),
-    ),
-    'video/x-matroska-3d' =>
-    array (
-      'desc' =>
-      array (
-        0 => 'Matroska 3D video',
-      ),
-      'e' =>
-      array (
-        0 => 'mk3d',
       ),
     ),
     'video/x-mjpeg' =>
@@ -15464,6 +16142,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/x-genesis-32x-rom',
       ),
     ),
+    386 =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-lx-executable',
+      ),
+    ),
     '3dml' =>
     array (
       't' =>
@@ -15484,6 +16169,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-nintendo-3ds-executable',
+      ),
+    ),
+    '3fr' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-hasselblad-3fr',
       ),
     ),
     '3g2' =>
@@ -15546,7 +16238,7 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'audio/x-mod',
+        0 => 'audio/x-669',
       ),
     ),
     '7z' =>
@@ -15561,6 +16253,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-7z-compressed',
+      ),
+    ),
+    '8o' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-chip8-octo-source',
       ),
     ),
     'a' =>
@@ -16111,6 +16810,20 @@ class DrupalMap extends AbstractMap {
         0 => 'text/x-common-lisp',
       ),
     ),
+    'ase' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-aseprite',
+      ),
+    ),
+    'aseprite' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-aseprite',
+      ),
+    ),
     'asf' =>
     array (
       't' =>
@@ -16291,7 +17004,9 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'application/x-awk',
+        0 => 'text/x-awk',
+        1 => 'text/x-gawk',
+        2 => 'text/x-nawk',
       ),
     ),
     'axa' =>
@@ -16530,6 +17245,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/x-bps-patch',
       ),
     ),
+    'br' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-brotli',
+      ),
+    ),
     'brk' =>
     array (
       't' =>
@@ -16583,7 +17305,7 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'application/x-bzip3',
+        0 => 'application/vnd.bzip3',
       ),
     ),
     'c' =>
@@ -16699,6 +17421,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/vnd.curl.car',
+        1 => 'application/vnd.ipld.car',
       ),
     ),
     'cascii' =>
@@ -16970,6 +17693,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'image/cgm',
+      ),
+    ),
+    'ch8' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-chip8-program',
       ),
     ),
     'chat' =>
@@ -17293,6 +18023,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-x509-ca-cert',
+        1 => 'application/x-commodore-crt',
       ),
     ),
     'crw' =>
@@ -17483,6 +18214,56 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'text/x-dsrc',
+      ),
+    ),
+    'd40' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-d80',
+      ),
+    ),
+    'd64' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-d64-disk',
+      ),
+    ),
+    'd71' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-d71-disk',
+      ),
+    ),
+    'd80' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-d80-disk',
+        1 => 'application/x-spectrum-d80',
+      ),
+    ),
+    'd81' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-d81-disk',
+      ),
+    ),
+    'd82' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-d82-disk',
+      ),
+    ),
+    'd90' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-d90-disk',
       ),
     ),
     'dae' =>
@@ -17769,8 +18550,9 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'application/x-msdos-program',
         1 => 'application/x-msdownload',
-        2 => 'application/x-ms-ne-executable',
-        3 => 'application/vnd.microsoft.portable-executable',
+        2 => 'application/x-lx-executable',
+        3 => 'application/x-ms-ne-executable',
+        4 => 'application/vnd.microsoft.portable-executable',
       ),
     ),
     'dmg' =>
@@ -17916,6 +18698,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'audio/x-dsf',
+      ),
+    ),
+    'dsk' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-dsk',
       ),
     ),
     'dsl' =>
@@ -18322,6 +19111,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/epub+zip',
       ),
     ),
+    'erf' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-epson-erf',
+      ),
+    ),
     'eris' =>
     array (
       't' =>
@@ -18420,8 +19216,9 @@ class DrupalMap extends AbstractMap {
         0 => 'application/x-msdos-program',
         1 => 'application/x-msdownload',
         2 => 'application/x-dosexec',
-        3 => 'application/x-ms-ne-executable',
-        4 => 'application/vnd.microsoft.portable-executable',
+        3 => 'application/x-lx-executable',
+        4 => 'application/x-ms-ne-executable',
+        5 => 'application/vnd.microsoft.portable-executable',
       ),
     ),
     'exi' =>
@@ -18634,6 +19431,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'text/x-gherkin',
+      ),
+    ),
+    'fff' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-hasselblad-fff',
       ),
     ),
     'fg5' =>
@@ -18891,6 +19695,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'image/vnd.fst',
+        1 => 'audio/x-mod',
       ),
     ),
     'ftc' =>
@@ -18968,6 +19773,20 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/vnd.geospace',
+      ),
+    ),
+    'g64' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-g64-disk',
+      ),
+    ),
+    'g71' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-g71-disk',
       ),
     ),
     'gac' =>
@@ -19635,6 +20454,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-hdf',
+        1 => 'application/x-spectrum-hdf',
       ),
     ),
     'hdf4' =>
@@ -19669,7 +20489,15 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'image/heif',
+        0 => 'image/heic',
+        1 => 'image/heif',
+      ),
+    ),
+    'heics' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/heic-sequence',
       ),
     ),
     'heif' =>
@@ -19677,6 +20505,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'image/heif',
+      ),
+    ),
+    'heifs' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/heif-sequence',
       ),
     ),
     'hej2' =>
@@ -20008,6 +20843,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-iphone',
+      ),
+    ),
+    'iiq' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-phaseone-iiq',
       ),
     ),
     'ilbm' =>
@@ -21455,11 +22297,25 @@ class DrupalMap extends AbstractMap {
         2 => 'application/vnd.ms-access',
       ),
     ),
+    'mdc' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-minolta-mdc',
+      ),
+    ),
     'mdi' =>
     array (
       't' =>
       array (
         0 => 'image/vnd.ms-modi',
+      ),
+    ),
+    'mdr' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-mdr',
       ),
     ),
     'mdx' =>
@@ -21482,7 +22338,14 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'audio/x-mod',
+        0 => 'audio/x-med',
+      ),
+    ),
+    'mef' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-mamiya-mef',
       ),
     ),
     'mesh' =>
@@ -21540,6 +22403,13 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'application/vnd.osgeo.mapguide.package',
         1 => 'application/x-magicpoint',
+      ),
+    ),
+    'mgt' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-mgt',
       ),
     ),
     'mgz' =>
@@ -21653,7 +22523,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'video/x-matroska',
-        1 => 'video/x-matroska-3d',
+        1 => 'video/matroska-3d',
       ),
     ),
     'mka' =>
@@ -21661,6 +22531,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'audio/x-matroska',
+        1 => 'audio/matroska',
       ),
     ),
     'mkd' =>
@@ -21682,6 +22553,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'video/x-matroska',
+        1 => 'video/matroska',
       ),
     ),
     'ml' =>
@@ -21863,6 +22735,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'chemical/x-mopac-input',
+      ),
+    ),
+    'mos' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-leaf-mos',
       ),
     ),
     'mount' =>
@@ -22228,7 +23107,7 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'audio/x-mod',
+        0 => 'audio/x-mtm',
       ),
     ),
     'mts' =>
@@ -22370,7 +23249,7 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'application/x-nintendo-ds-rom',
+        0 => 'application/vnd.nintendo.nitro.rom',
       ),
     ),
     'nef' =>
@@ -22506,6 +23385,13 @@ class DrupalMap extends AbstractMap {
         0 => 'image/vnd.net-fpx',
       ),
     ),
+    'nrg' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-nrg',
+      ),
+    ),
     'nrw' =>
     array (
       't' =>
@@ -22540,6 +23426,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'text/x-nsis',
+      ),
+    ),
+    'nst' =>
+    array (
+      't' =>
+      array (
+        0 => 'audio/x-mod',
       ),
     ),
     'nsv' =>
@@ -22582,6 +23475,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-nwc',
+      ),
+    ),
+    'nx' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-lowresnx-program',
       ),
     ),
     'nzb' =>
@@ -23078,6 +23978,14 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/pkcs8',
+        1 => 'application/x-pico8-source',
+      ),
+    ),
+    'p8.rom' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-pico8-rom',
       ),
     ),
     'p8e' =>
@@ -24056,6 +24964,13 @@ class DrupalMap extends AbstractMap {
         0 => 'text/x-cython',
       ),
     ),
+    'pzx' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-pzx',
+      ),
+    ),
     'qam' =>
     array (
       't' =>
@@ -24693,7 +25608,22 @@ class DrupalMap extends AbstractMap {
         0 => 'video/vnd.rn-realvideo',
       ),
     ),
+    'rvz' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-wii-rom',
+        1 => 'application/x-gamecube-rom',
+      ),
+    ),
     'rw2' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-panasonic-rw2',
+      ),
+    ),
+    'rwl' =>
     array (
       't' =>
       array (
@@ -24712,6 +25642,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-rzip',
+      ),
+    ),
+    'rzx' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-rzx',
       ),
     ),
     's' =>
@@ -24791,6 +25728,13 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'application/vnd.ibm.secure-container',
         1 => 'text/x-scala',
+      ),
+    ),
+    'sc8' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-chip8-program',
       ),
     ),
     'scala' =>
@@ -25143,7 +26087,7 @@ class DrupalMap extends AbstractMap {
       array (
         0 => 'text/x-sh',
         1 => 'application/x-sh',
-        2 => 'application/x-shellscript',
+        2 => 'text/x-shellscript',
       ),
     ),
     'shape' =>
@@ -25342,6 +26286,13 @@ class DrupalMap extends AbstractMap {
         0 => 'text/x-systemd-unit',
       ),
     ),
+    'slint' =>
+    array (
+      't' =>
+      array (
+        0 => 'text/slint',
+      ),
+    ),
     'slk' =>
     array (
       't' =>
@@ -25354,6 +26305,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/vnd.epson.salt',
+        1 => 'application/x-spectrum-slt',
       ),
     ),
     'sm' =>
@@ -25443,6 +26395,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/vnd.stepmania.package',
+      ),
+    ),
+    'sna' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-sna',
       ),
     ),
     'snap' =>
@@ -25662,6 +26621,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/sru+xml',
       ),
     ),
+    'srw' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-samsung-srw',
+      ),
+    ),
     'srx' =>
     array (
       't' =>
@@ -25751,6 +26717,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/vnd.sun.xml.impress.template',
+        1 => 'image/x-sinar-sti',
       ),
     ),
     'stk' =>
@@ -25758,6 +26725,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/hyperstudio',
+        1 => 'audio/x-mod',
       ),
     ),
     'stl' =>
@@ -26003,7 +26971,15 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'application/vnd.microsoft.portable-executable',
+        0 => 'application/x-lx-executable',
+        1 => 'application/vnd.microsoft.portable-executable',
+      ),
+    ),
+    'szx' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-szx',
       ),
     ),
     't' =>
@@ -26027,6 +27003,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-t3vm-image',
+      ),
+    ),
+    't64' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-tape',
       ),
     ),
     'tab.sf3' =>
@@ -26057,11 +27040,26 @@ class DrupalMap extends AbstractMap {
         0 => 'application/vnd.tao.intent-module-archive',
       ),
     ),
+    'tap' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-tape',
+        1 => 'application/x-spectrum-tap',
+      ),
+    ),
     'tar' =>
     array (
       't' =>
       array (
         0 => 'application/x-tar',
+      ),
+    ),
+    'tar.br' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-brotli-compressed-tar',
       ),
     ),
     'tar.bz' =>
@@ -26178,6 +27176,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/x-bzip2-compressed-tar',
       ),
     ),
+    'tbr' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-brotli-compressed-tar',
+      ),
+    ),
     'tbz' =>
     array (
       't' =>
@@ -26248,7 +27253,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-texinfo',
-        1 => 'text/x-texinfo',
+        1 => 'application/texinfo',
       ),
     ),
     'texinfo' =>
@@ -26256,7 +27261,7 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-texinfo',
-        1 => 'text/x-texinfo',
+        1 => 'application/texinfo',
       ),
     ),
     'text' =>
@@ -26324,6 +27329,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/vnd.ms-officetheme',
       ),
     ),
+    'tic' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-tic80-item',
+      ),
+    ),
     'tif' =>
     array (
       't' =>
@@ -26336,6 +27348,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'image/tiff',
+      ),
+    ),
+    'tim' =>
+    array (
+      't' =>
+      array (
+        0 => 'image/x-tim',
       ),
     ),
     'timer' =>
@@ -26644,6 +27663,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/x-zstd-compressed-tar',
       ),
     ),
+    'tzx' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-tzx',
+      ),
+    ),
     'u32' =>
     array (
       't' =>
@@ -26706,7 +27732,7 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'audio/x-mod',
+        0 => 'audio/x-ult',
       ),
     ),
     'ulx' =>
@@ -26734,7 +27760,7 @@ class DrupalMap extends AbstractMap {
     array (
       't' =>
       array (
-        0 => 'audio/x-mod',
+        0 => 'audio/x-669',
       ),
     ),
     'unif' =>
@@ -27355,6 +28381,13 @@ class DrupalMap extends AbstractMap {
         0 => 'model/vnd.vtu',
       ),
     ),
+    'vxd' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-lx-executable',
+      ),
+    ),
     'vxml' =>
     array (
       't' =>
@@ -27497,6 +28530,14 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/widget',
+      ),
+    ),
+    'wia' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-wii-rom',
+        1 => 'application/x-gamecube-rom',
       ),
     ),
     'wim' =>
@@ -27872,6 +28913,13 @@ class DrupalMap extends AbstractMap {
         0 => 'image/x-sigma-x3f',
       ),
     ),
+    'x64' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-commodore-x64-disk',
+      ),
+    ),
     'xac' =>
     array (
       't' =>
@@ -28240,6 +29288,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/vnd.olpc-sugar',
       ),
     ),
+    'xo8' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-chip8-program',
+      ),
+    ),
     'xop' =>
     array (
       't' =>
@@ -28500,6 +29555,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/x-zmachine',
       ),
     ),
+    'z80' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-z80',
+      ),
+    ),
     'zabw' =>
     array (
       't' =>
@@ -28591,6 +29653,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/zstd',
       ),
     ),
+    'zx-state' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-spectrum-szx',
+      ),
+    ),
     'zz' =>
     array (
       't' =>
@@ -28631,6 +29700,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-bat',
+      ),
+    ),
+    'application/brotli' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/x-brotli',
       ),
     ),
     'application/bzip2' =>
@@ -29064,6 +30140,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/x-bzip2-compressed-tar',
+      ),
+    ),
+    'application/x-bzip3' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/vnd.bzip3',
       ),
     ),
     'application/x-cab' =>
@@ -29552,6 +30635,13 @@ class DrupalMap extends AbstractMap {
         0 => 'application/msword',
       ),
     ),
+    'application/x-nintendo-ds-rom' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/vnd.nintendo.nitro.rom',
+      ),
+    ),
     'application/x-nx-xci' =>
     array (
       't' =>
@@ -29700,6 +30790,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/sdp',
+      ),
+    ),
+    'application/x-shellscript' =>
+    array (
+      't' =>
+      array (
+        0 => 'text/x-shellscript',
       ),
     ),
     'application/x-shockwave-flash' =>
@@ -30110,6 +31207,13 @@ class DrupalMap extends AbstractMap {
         0 => 'audio/x-ms-wma',
       ),
     ),
+    'audio/x-669-mod' =>
+    array (
+      't' =>
+      array (
+        0 => 'audio/x-669',
+      ),
+    ),
     'audio/x-aac' =>
     array (
       't' =>
@@ -30220,6 +31324,20 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'audio/mpeg',
+      ),
+    ),
+    'audio/x-multimate-mod' =>
+    array (
+      't' =>
+      array (
+        0 => 'audio/x-ult',
+      ),
+    ),
+    'audio/x-multitrack' =>
+    array (
+      't' =>
+      array (
+        0 => 'audio/x-mtm',
       ),
     ),
     'audio/x-ogg' =>
@@ -30352,27 +31470,6 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'application/fits',
-      ),
-    ),
-    'image/heic' =>
-    array (
-      't' =>
-      array (
-        0 => 'image/heif',
-      ),
-    ),
-    'image/heic-sequence' =>
-    array (
-      't' =>
-      array (
-        0 => 'image/heif',
-      ),
-    ),
-    'image/heif-sequence' =>
-    array (
-      't' =>
-      array (
-        0 => 'image/heif',
       ),
     ),
     'image/ico' =>
@@ -30780,17 +31877,6 @@ class DrupalMap extends AbstractMap {
         0 => 'text/csv',
       ),
     ),
-    'text/x-csh' =>
-    array (
-      'e' =>
-      array (
-        0 => 'csh',
-      ),
-      't' =>
-      array (
-        0 => 'application/x-csh',
-      ),
-    ),
     'text/x-csv' =>
     array (
       't' =>
@@ -30914,7 +32000,7 @@ class DrupalMap extends AbstractMap {
       ),
       't' =>
       array (
-        0 => 'application/x-shellscript',
+        0 => 'text/x-shellscript',
       ),
     ),
     'text/x-sql' =>
@@ -30934,6 +32020,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'text/tcl',
+      ),
+    ),
+    'text/x-texinfo' =>
+    array (
+      't' =>
+      array (
+        0 => 'application/texinfo',
       ),
     ),
     'text/x-troff' =>
@@ -31095,6 +32188,13 @@ class DrupalMap extends AbstractMap {
         0 => 'video/vnd.avi',
       ),
     ),
+    'video/x-flc' =>
+    array (
+      't' =>
+      array (
+        0 => 'video/x-flic',
+      ),
+    ),
     'video/x-fli' =>
     array (
       't' =>
@@ -31111,6 +32211,13 @@ class DrupalMap extends AbstractMap {
       't' =>
       array (
         0 => 'video/mp4',
+      ),
+    ),
+    'video/x-matroska-3d' =>
+    array (
+      't' =>
+      array (
+        0 => 'video/matroska-3d',
       ),
     ),
     'video/x-mpeg' =>
