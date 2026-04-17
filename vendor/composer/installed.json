@@ -1778,17 +1778,17 @@
         },
         {
             "name": "drupal/core",
-            "version": "11.3.6",
-            "version_normalized": "11.3.6.0",
+            "version": "11.3.7",
+            "version_normalized": "11.3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "728d09ef108bcbadf06cf8f0a5984450e089de9b"
+                "reference": "bb36d7d09b0132185bd33be730ec2e6d35c2d627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/728d09ef108bcbadf06cf8f0a5984450e089de9b",
-                "reference": "728d09ef108bcbadf06cf8f0a5984450e089de9b",
+                "url": "https://api.github.com/repos/drupal/core/zipball/bb36d7d09b0132185bd33be730ec2e6d35c2d627",
+                "reference": "bb36d7d09b0132185bd33be730ec2e6d35c2d627",
                 "shasum": ""
             },
             "require": {
@@ -1877,7 +1877,7 @@
             "suggest": {
                 "ext-zip": "Needed to extend the plugin.manager.archiver service capability with the handling of files in the ZIP format."
             },
-            "time": "2026-04-08T09:15:33+00:00",
+            "time": "2026-04-15T15:47:32+00:00",
             "type": "drupal-core",
             "extra": {
                 "drupal-scaffold": {
@@ -1948,14 +1948,14 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/11.3.6"
+                "source": "https://github.com/drupal/core/tree/11.3.7"
             },
             "install-path": "../../web/core"
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "11.3.6",
-            "version_normalized": "11.3.6.0",
+            "version": "11.3.7",
+            "version_normalized": "11.3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -2001,14 +2001,14 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/11.3.6"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/11.3.7"
             },
             "install-path": "../drupal/core-composer-scaffold"
         },
         {
             "name": "drupal/core-project-message",
-            "version": "11.3.6",
-            "version_normalized": "11.3.6.0",
+            "version": "11.3.7",
+            "version_normalized": "11.3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -2045,30 +2045,30 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-project-message/tree/11.3.6"
+                "source": "https://github.com/drupal/core-project-message/tree/11.3.7"
             },
             "install-path": "../drupal/core-project-message"
         },
         {
             "name": "drupal/core-recommended",
-            "version": "11.3.6",
-            "version_normalized": "11.3.6.0",
+            "version": "11.3.7",
+            "version_normalized": "11.3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "1ec126c1608f7fdeb877599ec65436f008b61d5c"
+                "reference": "fb5d6475f4f564d5fa8a8846e4b5e1b97cdfeb94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/1ec126c1608f7fdeb877599ec65436f008b61d5c",
-                "reference": "1ec126c1608f7fdeb877599ec65436f008b61d5c",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/fb5d6475f4f564d5fa8a8846e4b5e1b97cdfeb94",
+                "reference": "fb5d6475f4f564d5fa8a8846e4b5e1b97cdfeb94",
                 "shasum": ""
             },
             "require": {
                 "asm89/stack-cors": "~v2.3.0",
                 "composer/semver": "~3.4.4",
                 "doctrine/lexer": "~3.0.1",
-                "drupal/core": "11.3.6",
+                "drupal/core": "11.3.7",
                 "egulias/email-validator": "~4.0.4",
                 "guzzlehttp/guzzle": "~7.10.0",
                 "guzzlehttp/promises": "~2.3.0",
@@ -2123,7 +2123,7 @@
             "conflict": {
                 "webflo/drupal-core-strict": "*"
             },
-            "time": "2026-04-08T09:15:33+00:00",
+            "time": "2026-04-15T15:47:32+00:00",
             "type": "metapackage",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2131,7 +2131,7 @@
             ],
             "description": "Core and its dependencies with known-compatible minor versions. Require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/11.3.6"
+                "source": "https://github.com/drupal/core-recommended/tree/11.3.7"
             },
             "install-path": null
         },
@@ -8440,8 +8440,8 @@
         },
         {
             "name": "symfony/polyfill-php81",
-            "version": "v1.33.0",
-            "version_normalized": "1.33.0.0",
+            "version": "v1.36.0",
+            "version_normalized": "1.36.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php81.git",
@@ -8499,7 +8499,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php81/tree/v1.33.0"
+                "source": "https://github.com/symfony/polyfill-php81/tree/v1.36.0"
             },
             "funding": [
                 {
@@ -8523,23 +8523,23 @@
         },
         {
             "name": "symfony/polyfill-php83",
-            "version": "v1.33.0",
-            "version_normalized": "1.33.0.0",
+            "version": "v1.36.0",
+            "version_normalized": "1.36.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php83.git",
-                "reference": "17f6f9a6b1735c0f163024d959f700cfbc5155e5"
+                "reference": "3600c2cb22399e25bb226e4a135ce91eeb2a6149"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php83/zipball/17f6f9a6b1735c0f163024d959f700cfbc5155e5",
-                "reference": "17f6f9a6b1735c0f163024d959f700cfbc5155e5",
+                "url": "https://api.github.com/repos/symfony/polyfill-php83/zipball/3600c2cb22399e25bb226e4a135ce91eeb2a6149",
+                "reference": "3600c2cb22399e25bb226e4a135ce91eeb2a6149",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
-            "time": "2025-07-08T02:45:35+00:00",
+            "time": "2026-04-10T17:25:58+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -8582,7 +8582,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php83/tree/v1.33.0"
+                "source": "https://github.com/symfony/polyfill-php83/tree/v1.36.0"
             },
             "funding": [
                 {
