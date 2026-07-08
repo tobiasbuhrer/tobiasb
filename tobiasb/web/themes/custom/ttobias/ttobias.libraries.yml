@@ -1,0 +1,17 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      includes/font-awesome/css/font-awesome.css: {}
+      css/style.css: {}
+  js:
+    js/ttobias.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupal.ajax
+    - core/once
+    - core/drupalSettings
+fonts:
+  css:
+    theme:
+      '//fonts.googleapis.com/css?family=Libre+Franklin:400,400i,600,600i,700,700i&amp;subset=latin-ext': { type: external, minified: true }

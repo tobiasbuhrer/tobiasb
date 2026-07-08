@@ -1,0 +1,38 @@
+{
+    "name": "drupal/permissions_fixer",
+    "description": "Security-focused bash scripts to fix file permissions and ownership in Drupal installations following best practices",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+        "drupal",
+        "permissions",
+        "security",
+        "deployment",
+        "filesystem"
+    ],
+    "authors": [
+        {
+            "name": "Ricardo Sanz Ante",
+            "role": "Developer"
+        },
+        {
+            "name": "Metadrop",
+            "homepage": "https://www.metadrop.net"
+        }
+    ],
+    "homepage": "https://www.drupal.org/project/permissions_fixer",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/permissions_fixer",
+        "source": "https://git.drupalcode.org/project/permissions_fixer"
+    },
+    "bin": [
+        "fix-drupal-permissions",
+        "autofix-drupal-permissions"
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "composer/composer": "^2.0"
+    }
+}

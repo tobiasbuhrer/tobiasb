@@ -1,0 +1,36 @@
+# Example sudoers configuration for autofix-drupal-permissions script.
+#
+# This file provides example sudoers configurations to allow users to run
+# the autofix-drupal-permissions script with sudo without password prompts.
+#
+# Installation:
+# 1. Copy this file to /etc/sudoers.d/drupal-permissions-fixer
+# 2. Modify the paths and usernames as appropriate for your system
+# 3. Ensure the file has correct permissions: chmod 0440 /etc/sudoers.d/drupal-permissions-fixer
+# 4. Verify the configuration: sudo visudo -c
+#
+# WARNING: Sudoers files are security-sensitive. Always test configuration
+# with 'sudo visudo -c' before using.
+
+# Example 1: Allow specific user to run the script installed via composer.
+# Replace 'deploy' with your deploy username
+# Replace '/var/www/html/vendor' with your actual vendor directory path
+deploy ALL=(root) NOPASSWD: /var/www/html/vendor/drupal/permissions-fixer/autofix-drupal-permissions
+
+# Example 2: Allow all users in deploy group to run the script installed via
+# composer.
+# Replace 'deploy' with the desired group name
+%deploy ALL=(root) NOPASSWD: /var/www/html/vendor/drupal/permissions-fixer/autofix-drupal-permissions
+
+# Example 3: Allow deploy user to run the script installed globally.
+# This is useful when there are multiple Drupal installations managed by the
+# same deploy user. This avoids to add one sudoers configuration per
+# installation.
+deploy ALL=(root) NOPASSWD: /usr/local/bin/autofix-drupal-permissions
+
+# Example 4: Allow all users to run the script installed globally.
+# This can be useful when there are many deploy users. Make sure the script
+# calls the fix-drupal-permissions with appropriate parameters to avoid security
+# issues. As the example 3, this avoids to add one sudoers configuration per
+# installation.
+ALL ALL=(root) NOPASSWD: /usr/local/bin/autofix-drupal-permissions

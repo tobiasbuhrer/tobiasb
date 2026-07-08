@@ -1,0 +1,10 @@
+name: File Permissions
+type: module
+description: Drush commands for setting up local file permissions.
+package: Developer Tools
+core_version_requirement: ^9 || ^10 || ^11
+
+# Information added by Drupal.org packaging script on 2026-02-28
+version: '2.1.3'
+project: 'file_permissions'
+datestamp: 1772294333

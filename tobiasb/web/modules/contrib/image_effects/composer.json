@@ -1,0 +1,27 @@
+{
+    "name": "drupal/image_effects",
+    "type": "drupal-module",
+    "description": "Provides effects and operations for the Image API.",
+    "require": {
+        "drupal/core": "^11.3",
+        "drupal/file_mdm": "^3.2"
+    },
+    "conflict": {
+        "drupal/imagemagick": "<5"
+    },
+    "require-dev": {
+        "drupal/imagemagick": "^5",
+        "drupal/textimage": "^5",
+        "drupal/token": "*",
+        "drupal/vendor_stream_wrapper": "^2.0.5",
+        "drush/drush": ">=13",
+        "fileeye/linuxlibertine-fonts": "^5.3"
+    },
+    "extra": {
+        "drush": {
+            "services": {
+                "drush.services.yml": ">=9"
+            }
+        }
+    }
+}

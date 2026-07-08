@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+// Vertical tabs fix.
+.vertical-tabs {
+  .vertical-tabs__panes {
+    padding: 1rem;
+
+    .vertical-tabs__pane {
+      padding-right: 1rem;
+    }
+
+    // Fix for fieldsets inside vertical tabs.
+    .panel {
+      .panel-block {
+        border: 0;
+      }
+    }
+
+    .control {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #header {
+    .nav-menu {
+      &.nav-right {
+        &.is-active {
+          nav {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+article {
+  &.content {
+    padding-bottom: 2rem;
+  }
+
+  section {
+    &.comment-section {
+      article {
+        padding-bottom: 2rem;
+      }
+    }
+  }
+}
+
+.links {
+
+  &.bulma {
+    padding-top: 1rem;
+  }
+}
+
+// Customize inline labels.
+// @see templates/field/field.html.twig
+.label {
+  &.is-pulled-left {
+    margin-bottom: 0;
+    margin-right: 0.5rem;
+    &::after {
+      content: ':';
+    }
+  }
+}
+
+// Address left and right padding issue at beginning and end of navbar.
+.navbar {
+  > .container {
+    > .navbar-brand {
+      margin-left: -1rem;
+    }
+    > .navbar-menu {
+      margin-right: -1rem;
+    }
+  }
+}
+
+// Add margin between logo and site name.
+.block-system-branding-block {
+  > figure {
+    margin-right: 0.5rem
+  }
+}
+
+// changes on horizontal form
+.field {
+
+  &.is-horizontal {
+    @include tablet {
+      align-items:center;
+    }
+  }
+}
+
+.field-label {
+  margin-right:1rem;
+  .label {
+    white-space: nowrap;
+  }
+
+  @include tablet {
+    flex-grow: 0;
+  }
+}
+
+.field-body {
+  @include tablet {
+    flex-grow: 0;
+    margin-right:0.25rem;
+  }
+}
+
+#block-sitebranding img {
+  width:auto;
+}
+
+main {
+  padding: $section-padding;
+
+  // Responsiveness
+  @include desktop {
+    // Sizes
+    &.is-medium {
+      padding: $section-padding-medium;
+    }
+
+    &.is-large {
+      padding: $section-padding-large;
+    }
+  }
+}

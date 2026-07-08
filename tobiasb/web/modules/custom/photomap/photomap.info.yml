@@ -1,0 +1,7 @@
+name: 'Photomap'
+type: module
+description: 'Leaflet map. Markers in form of clickable miniature photos'
+package: 'Custom'
+core_version_requirement: '>=10'
+dependencies:
+  - drupal:leaflet_views

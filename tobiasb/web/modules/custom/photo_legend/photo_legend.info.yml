@@ -1,0 +1,6 @@
+name: 'Photo legend'
+type: module
+description: 'Calculates photo legend on save of node'
+core: 8.x
+core_version_requirement: '>=10'
+package: 'Custom'

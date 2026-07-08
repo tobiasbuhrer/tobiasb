@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the image_effects module.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Minimum schema version to allow upgrading from.
+ */
+function image_effects_update_last_removed(): int {
+  return 8203;
+}
