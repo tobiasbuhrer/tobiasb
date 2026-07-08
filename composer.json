@@ -47,7 +47,7 @@
         "drupal/upgrade_status": "^4.0",
         "drupal/video": "^3.0",
         "drupal/visitors": "^2.32",
-        "drupal/webform": "^6.3@beta",
+        "drupal/webform": "^6.3",
         "drush/drush": "^13.0",
         "npm-asset/chart.js": "^4.4",
         "npm-asset/chartjs-adapter-date-fns": "^3.0",

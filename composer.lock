@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f535fe683530a883057709f9aa397a5",
+    "content-hash": "e75b9ea6fa4de91cddb1b9591b3e3901",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3505,17 +3505,17 @@
         },
         {
             "name": "drupal/webform",
-            "version": "6.3.0-rc2",
+            "version": "6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "6.3.0-rc2"
+                "reference": "6.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-6.3.0-rc2.zip",
-                "reference": "6.3.0-rc2",
-                "shasum": "833904081e5eab7e8e36250fea3652c797ddfb28"
+                "url": "https://ftp.drupal.org/files/projects/webform-6.3.0.zip",
+                "reference": "6.3.0",
+                "shasum": "67b09271edfd2fb38dc699ff733911ad500ae5d7"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11.0"
@@ -3560,11 +3560,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.3.0-rc2",
-                    "datestamp": "1782137794",
+                    "version": "6.3.0",
+                    "datestamp": "1783438699",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "drush": {
@@ -10099,8 +10099,7 @@
     "stability-flags": {
         "drupal/image_effects": 5,
         "drupal/juicebox": 15,
-        "drupal/plupload": 10,
-        "drupal/webform": 10
+        "drupal/plupload": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,
