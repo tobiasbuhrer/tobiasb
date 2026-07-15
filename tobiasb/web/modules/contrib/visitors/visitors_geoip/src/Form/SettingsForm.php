@@ -4,6 +4,7 @@ namespace Drupal\visitors_geoip\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Visitors Settings Form.
@@ -16,6 +17,16 @@ final class SettingsForm extends ConfigFormBase {
    * @var string
    */
   const SETTINGS = 'visitors_geoip.settings';
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container): static {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('config.typed'),
+    );
+  }
 
   /**
    * {@inheritdoc}

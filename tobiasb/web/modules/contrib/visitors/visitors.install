@@ -218,7 +218,7 @@ function visitors_schema() {
       ],
       'language' => [
         'type' => 'varchar',
-        'length' => 2,
+        'length' => 3,
         'not null' => TRUE,
         'default' => '',
       ],
@@ -13773,4 +13773,38 @@ function visitors_update_8229() {
  */
 function visitors_update_8231() {
   drupal_flush_all_caches();
+}
+
+/**
+ * Fixes separator for visitor_id field in recent_view_table and referrer_table.
+ */
+function visitors_update_8232() {
+  $view = \Drupal::configFactory()->getEditable('views.view.visitors');
+  $view->set('display.recent_view_table.display_options.fields.visitor_id.separator', '');
+  $view->set('display.referrer_table.display_options.fields.visitor_id.separator', '');
+
+  $view->save();
+}
+
+/**
+ * Increase language field length from 2 to 3 characters.
+ *
+ * Fixes an issue where ISO 639-3 language codes (e.g. 'gsw', 'zho')
+ * were being truncated because the column was defined as VARCHAR(2).
+ * This caused database errors during insert operations.
+ */
+function visitors_update_8233() {
+  $schema = \Drupal::database()->schema();
+
+  $schema->changeField(
+    'visitors',
+    'language',
+    'language',
+    [
+      'type' => 'varchar',
+      'length' => 3,
+      'not null' => TRUE,
+      'default' => '',
+    ]
+  );
 }

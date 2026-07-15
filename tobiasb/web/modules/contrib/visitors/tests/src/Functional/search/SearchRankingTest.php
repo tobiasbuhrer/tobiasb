@@ -41,6 +41,13 @@ class SearchRankingTest extends BrowserTestBase {
   protected function setUp(): void {
     parent::setUp();
 
+    // search_node was split from search in Drupal 11.4. Conditionally install
+    // it so the test remains compatible with Drupal 11.3 and earlier.
+    $extension_list = \Drupal::service('extension.list.module');
+    if (array_key_exists('search_node', $extension_list->getList())) {
+      \Drupal::service('module_installer')->install(['search_node']);
+    }
+
     $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);
 
     // Create a plugin instance.

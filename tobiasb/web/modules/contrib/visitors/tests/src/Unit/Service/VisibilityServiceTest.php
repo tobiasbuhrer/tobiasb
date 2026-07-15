@@ -4,7 +4,7 @@ namespace Drupal\Tests\visitors\Unit\Service;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Path\CurrentPathStack;
-use Drupal\Core\Path\PathMatcher;
+use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\path_alias\AliasManagerInterface;
@@ -47,7 +47,7 @@ class VisibilityServiceTest extends UnitTestCase {
   /**
    * The mocked path matcher.
    *
-   * @var \Drupal\Core\Path\PathMatcher|\PHPUnit\Framework\MockObject\MockObject
+   * @var \Drupal\Core\Path\PathMatcherInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $pathMatcher;
 
@@ -95,7 +95,7 @@ class VisibilityServiceTest extends UnitTestCase {
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
     $this->currentPathStack = $this->createMock(CurrentPathStack::class);
     $this->aliasManager = $this->createMock(AliasManagerInterface::class);
-    $this->pathMatcher = $this->createMock(PathMatcher::class);
+    $this->pathMatcher = $this->createMock(PathMatcherInterface::class);
     $this->userData = $this->createMock(UserDataInterface::class);
     $this->stack = $this->createMock(RequestStack::class);
     $this->accountProxy = $this->createMock(AccountProxyInterface::class);

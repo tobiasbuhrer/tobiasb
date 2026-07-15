@@ -34,35 +34,35 @@
 
   <testsuites>
     <testsuite name="unit">
-      <directory>web/modules/custom/visitors/tests/src/Unit</directory>
-      <directory>web/modules/custom/visitors/visitors_geoip/tests/src/Unit</directory>
+      <directory>tests/src/Unit</directory>
+      <directory>visitors_geoip/tests/src/Unit</directory>
     </testsuite>
     <testsuite name="kernel">
-      <directory>web/modules/custom/visitors/tests/src/Kernel</directory>
-      <directory>web/modules/custom/visitors/*/tests/src/Kernel</directory>
+      <directory>tests/src/Kernel</directory>
+      <directory>visitors_geoip/tests/src/Kernel</directory>
     </testsuite>
     <testsuite name="functional">
-      <directory>web/modules/custom/visitors/tests/src/Functional</directory>
-      <directory>web/modules/custom/visitors/*/tests/src/Functional</directory>
+      <directory>tests/src/Functional</directory>
+      <directory>visitors_geoip/tests/src/Functional</directory>
     </testsuite>
     <testsuite name="functional-javascript">
-      <directory>web/modules/custom/visitors/tests/src/FunctionalJavascript</directory>
-      <directory>web/modules/custom/visitors/*/tests/src/FunctionalJavascript</directory>
+      <directory>tests/src/FunctionalJavascript</directory>
+      <directory>visitors_geoip/tests/src/FunctionalJavascript</directory>
     </testsuite>
   </testsuites>
 
     <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="false">
         <include>
-            <directory>web/modules/custom/visitors</directory>
-            <directory suffix=".module">web/modules/custom/visitors</directory>
-            <directory suffix=".install">web/modules/custom/visitors</directory>
-            <directory>web/modules/custom/visitors/visitors_geoip</directory>
-            <directory suffix=".module">web/modules/custom/visitors/visitors_geoip</directory>
-            <directory suffix=".install">web/modules/custom/visitors/visitors_geoip</directory>
+            <directory>src</directory>
+            <file>visitors.module</file>
+            <file>visitors.install</file>
+            <directory>visitors_geoip/src</directory>
+            <file>visitors_geoip/visitors_geoip.module</file>
+            <file>visitors_geoip/visitors_geoip.install</file>
         </include>
         <exclude>
-            <directory>web/modules/custom/visitors/visitors_geoip/tests</directory>
-            <directory>web/modules/custom/visitors/tests</directory>
+            <directory>tests</directory>
+            <directory>visitors_geoip/tests</directory>
         </exclude>
     </source>
 </phpunit>

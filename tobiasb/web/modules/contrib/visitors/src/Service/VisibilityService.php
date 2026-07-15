@@ -4,7 +4,7 @@ namespace Drupal\visitors\Service;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Path\CurrentPathStack;
-use Drupal\Core\Path\PathMatcher;
+use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\path_alias\AliasManagerInterface;
@@ -41,7 +41,7 @@ class VisibilityService implements VisitorsVisibilityInterface {
   /**
    * The path matcher.
    *
-   * @var \Drupal\Core\Path\PathMatcher
+   * @var \Drupal\Core\Path\PathMatcherInterface
    */
   protected $pathMatcher;
 
@@ -82,7 +82,7 @@ class VisibilityService implements VisitorsVisibilityInterface {
    *   The current path.
    * @param \Drupal\path_alias\AliasManagerInterface|null $alias_manager
    *   The alias manager.
-   * @param \Drupal\Core\Path\PathMatcher $path_matcher
+   * @param \Drupal\Core\Path\PathMatcherInterface $path_matcher
    *   The path matcher.
    * @param \Drupal\user\UserDataInterface $user_data
    *   The user data service.
@@ -91,7 +91,7 @@ class VisibilityService implements VisitorsVisibilityInterface {
    * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    *   The current user.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, CurrentPathStack $path_current, ?AliasManagerInterface $alias_manager, PathMatcher $path_matcher, UserDataInterface $user_data, RequestStack $request_stack, AccountProxyInterface $current_user) {
+  public function __construct(ConfigFactoryInterface $config_factory, CurrentPathStack $path_current, ?AliasManagerInterface $alias_manager, PathMatcherInterface $path_matcher, UserDataInterface $user_data, RequestStack $request_stack, AccountProxyInterface $current_user) {
 
     $this->config = $config_factory->get('visitors.config');
     $this->path = $path_current;

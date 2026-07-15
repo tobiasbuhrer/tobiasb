@@ -287,6 +287,153 @@ class VisitorsControllerTest extends UnitTestCase {
   }
 
   /**
+   * Tests track() with a valid 3-letter language code.
+   *
+   * @covers ::doLanguage
+   * @covers ::track
+   */
+  public function testTrackWithValidThreeLetterLanguage() {
+    $this->device->expects($this->once())
+      ->method('hasLibrary')
+      ->willReturn(FALSE);
+    $request = $this->createMock('\Symfony\Component\HttpFoundation\Request');
+    $request->expects($this->once())
+      ->method('getClientIp')
+      ->willReturn('127.0.0.1');
+    $query = new InputBag();
+    $query->set('h', '1');
+    $query->set('m', '2');
+    $query->set('s', '3');
+    $_cvar = [
+      ['route', 'entity.node.canonical'],
+      ['path', '/node/1'],
+      ['server', 'localhost'],
+      ['viewed', 'node:1'],
+    ];
+    $query->set('cvar', json_encode($_cvar));
+    $request->server = new ServerBag();
+    $request->method('getLanguages')->willReturn(['gsw_CH']);
+    $request->query = $query;
+
+    $this->settings->expects($this->once())
+      ->method('get')
+      ->with('bot_retention_log')
+      ->willReturn(0);
+
+    $this->location->expects($this->once())
+      ->method('isValidCountryCode')
+      ->with('CH')
+      ->willReturn(FALSE);
+
+    $this->visitorsTracker->expects($this->once())
+      ->method('writeLog')
+      ->with($this->callback(function (array $fields): bool {
+        return ($fields['language'] ?? NULL) === 'gsw';
+      }))
+      ->willReturn(1);
+
+    $this->controller->track($request);
+  }
+
+  /**
+   * Tests track() with an invalid language code length.
+   *
+   * @covers ::doLanguage
+   * @covers ::track
+   */
+  public function testTrackWithInvalidLanguageLength() {
+    $this->device->expects($this->once())
+      ->method('hasLibrary')
+      ->willReturn(FALSE);
+    $request = $this->createMock('\Symfony\Component\HttpFoundation\Request');
+    $request->expects($this->once())
+      ->method('getClientIp')
+      ->willReturn('127.0.0.1');
+    $query = new InputBag();
+    $query->set('h', '1');
+    $query->set('m', '2');
+    $query->set('s', '3');
+    $_cvar = [
+      ['route', 'entity.node.canonical'],
+      ['path', '/node/1'],
+      ['server', 'localhost'],
+      ['viewed', 'node:1'],
+    ];
+    $query->set('cvar', json_encode($_cvar));
+    $request->server = new ServerBag();
+    $request->method('getLanguages')->willReturn(['english_US']);
+    $request->query = $query;
+
+    $this->settings->expects($this->once())
+      ->method('get')
+      ->with('bot_retention_log')
+      ->willReturn(0);
+
+    $this->location->expects($this->once())
+      ->method('isValidCountryCode')
+      ->with('US')
+      ->willReturn(FALSE);
+
+    $this->visitorsTracker->expects($this->once())
+      ->method('writeLog')
+      ->with($this->callback(function (array $fields): bool {
+        return !array_key_exists('language', $fields);
+      }))
+      ->willReturn(1);
+
+    $this->controller->track($request);
+  }
+
+  /**
+   * Tests track() with a one-letter language code.
+   *
+   * @covers ::doLanguage
+   * @covers ::track
+   */
+  public function testTrackWithSingleLetterLanguageCode() {
+    $this->device->expects($this->once())
+      ->method('hasLibrary')
+      ->willReturn(FALSE);
+    $request = $this->createMock('\Symfony\Component\HttpFoundation\Request');
+    $request->expects($this->once())
+      ->method('getClientIp')
+      ->willReturn('127.0.0.1');
+    $query = new InputBag();
+    $query->set('h', '1');
+    $query->set('m', '2');
+    $query->set('s', '3');
+    $_cvar = [
+      ['route', 'entity.node.canonical'],
+      ['path', '/node/1'],
+      ['server', 'localhost'],
+      ['viewed', 'node:1'],
+    ];
+    $query->set('cvar', json_encode($_cvar));
+    $request->server = new ServerBag();
+    $request->method('getLanguages')->willReturn(['e_US']);
+    $request->query = $query;
+
+    $this->settings->expects($this->once())
+      ->method('get')
+      ->with('bot_retention_log')
+      ->willReturn(0);
+
+    $this->location->expects($this->once())
+      ->method('isValidCountryCode')
+      ->with('US')
+      ->willReturn(FALSE);
+
+    $this->visitorsTracker->expects($this->once())
+      ->method('writeLog')
+      ->with($this->callback(function (array $fields): bool {
+        return !array_key_exists('language', $fields);
+      }))
+      ->willReturn(1);
+
+    $this->controller->track($request);
+  }
+
+  /**
    * Tests the track() method.
    *
    * @covers ::doConfig

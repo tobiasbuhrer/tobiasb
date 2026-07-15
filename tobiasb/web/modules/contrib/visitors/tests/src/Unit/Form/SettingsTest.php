@@ -151,12 +151,10 @@ class SettingsTest extends UnitTestCase {
 
     $bartik_theme = $this->createMock('\Drupal\Core\Extension\Extension');
     $bartik_theme->info = ['name' => 'bartik'];
-    // @phpstan-ignore-next-line
     $bartik_theme->status = 1;
 
     $claro_theme = $this->createMock('\Drupal\Core\Extension\Extension');
     $claro_theme->info = ['name' => 'claro'];
-    // @phpstan-ignore-next-line
     $claro_theme->status = 1;
     $this->extensionThemeList->expects($this->once())
       ->method('getList')
@@ -250,12 +248,10 @@ class SettingsTest extends UnitTestCase {
 
     $bartik_theme = $this->createMock('\Drupal\Core\Extension\Extension');
     $bartik_theme->info = ['name' => 'bartik'];
-    // @phpstan-ignore-next-line
     $bartik_theme->status = 1;
 
     $claro_theme = $this->createMock('\Drupal\Core\Extension\Extension');
     $claro_theme->info = ['name' => 'claro'];
-    // @phpstan-ignore-next-line
     $claro_theme->status = 1;
     $this->extensionThemeList->expects($this->once())
       ->method('getList')

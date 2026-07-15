@@ -67,7 +67,7 @@ class DeviceServiceTest extends UnitTestCase {
       'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/106.0.5249.103 Safari/537.36',
     ];
 
-    $statement = $this->createMock('Drupal\Core\Database\StatementInterface');
+    $statement = $this->createMock('Drupal\Core\Database\Statement\StatementBase');
     $statement->expects($this->once())
       ->method('fetchAll')
       ->willReturn($result);
