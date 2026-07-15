@@ -85,9 +85,7 @@ class HitDetailsControllerTest extends UnitTestCase {
    */
   public function testDisplay(): void {
     $hitId = 123;
-    $rows = [
-      // Add sample rows.
-    ];
+    $rows  = [];
 
     $this->visitorsReport->expects($this->once())
       ->method('hitDetails')
@@ -96,13 +94,44 @@ class HitDetailsControllerTest extends UnitTestCase {
 
     $expectedOutput = [
       'visitors_table' => [
-        '#type' => 'table',
-        '#rows' => $rows,
+        '#type'  => 'table',
+        '#rows'  => $rows,
       ],
     ];
 
     $output = $this->controller->display($hitId);
     $this->assertEquals($expectedOutput, $output);
+  }
+
+  /**
+   * Tests display() passes a large ID to the report service unchanged.
+   *
+   * IDs >= 1,000 were previously delivered to the controller as comma-
+   * formatted strings (e.g. "2,011") from Views token substitution, causing
+   * the route to cast the value to "2" and return an empty page. The fix
+   * lives in the view config (separator: ''), but the controller must also
+   * forward the raw integer correctly.
+   *
+   * @covers ::display
+   */
+  public function testDisplayWithLargeHitId(): void {
+    $hitId = 2011;
+    $rows  = [
+      ['Field', 'Value'],
+    ];
+
+    $this->visitorsReport->expects($this->once())
+      ->method('hitDetails')
+      ->with($hitId)
+      ->willReturn($rows);
+
+    $output = $this->controller->display($hitId);
+
+    $this->assertSame(
+      $rows,
+      $output['visitors_table']['#rows'],
+      'The report service must receive the full, unformatted hit ID.'
+    );
   }
 
 }

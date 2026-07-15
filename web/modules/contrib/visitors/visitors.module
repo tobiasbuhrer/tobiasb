@@ -166,8 +166,34 @@ function visitors_entity_delete(EntityInterface $entity) {
 
 /**
  * Implements hook_ranking().
+ *
+ * @see hook_node_search_ranking()
  */
 function visitors_ranking() {
+  return _visitors_search_ranking();
+}
+
+/**
+ * Implements hook_node_search_ranking().
+ *
+ * Used by the search_node submodule introduced in Drupal 11.4.
+ *
+ * @see hook_ranking()
+ */
+function visitors_node_search_ranking() {
+  return _visitors_search_ranking();
+}
+
+/**
+ * Returns the search ranking definitions for the visitors module.
+ *
+ * Shared implementation for hook_ranking() and
+ * hook_node_search_ranking().
+ *
+ * @return array|null
+ *   The ranking definitions, or NULL if ranking is not applicable.
+ */
+function _visitors_search_ranking(): ?array {
   $settings = \Drupal::config('visitors.config');
   $is_enabled_and_has_node_entity_type = $settings->get('counter.enabled')
     && in_array('node', $settings->get('counter.entity_types'));
@@ -176,22 +202,23 @@ function visitors_ranking() {
       'views' => [
         'title' => t('Number of views'),
         'join' => [
-          'type' => 'LEFT',
+          'type'  => 'LEFT',
           'table' => 'visitors_counter',
           'alias' => 'visitors_counter',
-          'on' => "visitors_counter.entity_id = i.sid AND visitors_counter.entity_type = 'node'",
+          'on'    => "visitors_counter.entity_id = i.sid AND visitors_counter.entity_type = 'node'",
         ],
-        // Inverse law that maps the highest view count on the site to 1 and 0
-        // to 0. Note that the ROUND here is necessary for PostgreSQL and SQLite
-        // in order to ensure that the :statistics_scale argument is treated as
-        // a numeric type, because the PostgreSQL PDO driver sometimes puts
-        // values in as strings instead of numbers in complex expressions like
-        // this.
-        'score' => '2.0 - 2.0 / (1.0 + visitors_counter.total * (ROUND(:statistics_scale, 4)))',
+        // Inverse law that maps the highest view count on the site to 1
+        // and 0 to 0. Note that the ROUND here is necessary for
+        // PostgreSQL and SQLite in order to ensure that the
+        // :statistics_scale argument is treated as a numeric type,
+        // because the PostgreSQL PDO driver sometimes puts values in as
+        // strings instead of numbers in complex expressions like this.
+        'score'     => '2.0 - 2.0 / (1.0 + visitors_counter.total * (ROUND(:statistics_scale, 4)))',
         'arguments' => [':statistics_scale' => \Drupal::state()->get('visitors.node_counter_scale', 0)],
       ],
     ];
   }
+  return NULL;
 }
 
 /**

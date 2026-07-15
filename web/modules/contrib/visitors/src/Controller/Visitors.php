@@ -425,7 +425,13 @@ final class Visitors extends ControllerBase {
 
     $language = $languages[0] ?? '';
     $lang = explode('_', $language);
-    $fields['language'] = $lang[0];
+    $language_code = strtolower((string) ($lang[0] ?? ''));
+
+    if (!preg_match('/^[a-z]{2,3}$/', $language_code)) {
+      return NULL;
+    }
+
+    $fields['language'] = $language_code;
   }
 
   /**

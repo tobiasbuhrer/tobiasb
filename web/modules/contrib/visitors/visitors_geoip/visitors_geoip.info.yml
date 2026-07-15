@@ -7,7 +7,7 @@ configure: visitors_geoip.settings
 dependencies:
   - visitors:visitors
 
-# Information added by Drupal.org packaging script on 2025-09-26
-version: '8.x-2.32'
+# Information added by Drupal.org packaging script on 2026-07-13
+version: '8.x-2.33'
 project: 'visitors'
-datestamp: 1758919525
+datestamp: 1783974424

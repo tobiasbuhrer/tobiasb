@@ -74,7 +74,7 @@ class RebuildLocationServiceTest extends UnitTestCase {
    * @covers ::getLocations
    */
   public function testGetLocations(): void {
-    $statement = $this->createMock('Drupal\Core\Database\StatementInterface');
+    $statement = $this->createMock('Drupal\Core\Database\Statement\StatementBase');
     $select = $this->createMock('Drupal\Core\Database\Query\SelectInterface');
     $this->database->expects($this->once())
       ->method('select')
@@ -97,7 +97,6 @@ class RebuildLocationServiceTest extends UnitTestCase {
       ->willReturn($statement);
     $statement->expects($this->once())
       ->method('fetchAll')
-      ->with(\PDO::FETCH_COLUMN, 0)
       ->willReturn(['127.0.0.1']);
 
     $result = $this->service->getLocations();

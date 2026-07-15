@@ -45,9 +45,17 @@ class RebuildIpAddressService implements VisitorsRebuildIpAddressInterface {
    * {@inheritdoc}
    */
   public function rebuild(string $ip_address): int {
-    if (inet_pton($ip_address) !== FALSE) {
-      return 0;
+    // Check if the IP address is already in a valid string format.
+    // Avoid calling inet_pton on binary strings with null bytes.
+    try {
+      if (inet_pton($ip_address) !== FALSE) {
+        return 0;
+      }
     }
+    catch (\ValueError $e) {
+      // Input contains null bytes, likely a packed address.
+    }
+
     $new_address = NULL;
     if (inet_ntop($ip_address) !== FALSE) {
       $new_address = inet_ntop($ip_address);
