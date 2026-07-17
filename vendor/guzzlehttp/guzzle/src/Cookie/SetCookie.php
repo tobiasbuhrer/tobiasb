@@ -2,6 +2,8 @@
 
 namespace GuzzleHttp\Cookie;
 
+use GuzzleHttp\Psr7;
+
 /**
  * Set-Cookie object
  */
@@ -59,7 +61,7 @@ class SetCookie
                 $data['Value'] = $value;
             } else {
                 foreach (\array_keys(self::$defaults) as $search) {
-                    if (\strtr($search, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') === \strtr($key, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
+                    if (Psr7\Utils::caselessEquals($search, $key)) {
                         if ($search === 'Max-Age') {
                             if (is_numeric($value)) {
                                 $data[$search] = (int) $value;
@@ -448,7 +450,7 @@ class SetCookie
 
         // Remove the leading '.' as per spec in RFC 6265.
         // https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.3
-        $cookieDomain = \strtr($cookieDomain, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
+        $cookieDomain = Psr7\Utils::asciiToLower($cookieDomain);
         if ($cookieDomain !== '' && $cookieDomain[0] === '.') {
             /** @var string */
             $cookieDomain = \substr($cookieDomain, 1);
@@ -457,7 +459,7 @@ class SetCookie
             return false;
         }
 
-        $domain = \strtr($domain, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
+        $domain = Psr7\Utils::asciiToLower($domain);
         if ($domain === $cookieDomain) {
             return true;
         }
