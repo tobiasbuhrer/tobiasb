@@ -2,6 +2,7 @@
 
 namespace GuzzleHttp\Cookie;
 
+use GuzzleHttp\Psr7;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -88,7 +89,7 @@ class CookieJar implements CookieJarInterface
     public function getCookieByName(string $name): ?SetCookie
     {
         foreach ($this->cookies as $cookie) {
-            if ($cookie->getName() !== null && \strtr($cookie->getName(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') === \strtr($name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
+            if ($cookie->getName() !== null && Psr7\Utils::caselessEquals($cookie->getName(), $name)) {
                 return $cookie;
             }
         }
