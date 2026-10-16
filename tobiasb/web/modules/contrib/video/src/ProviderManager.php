@@ -6,6 +6,7 @@ use Drupal\Component\Plugin\Mapper\MapperInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
+use Drupal\video\Attribute\VideoEmbeddableProvider;
 
 /**
  * Gathers the provider plugins.
@@ -16,7 +17,7 @@ class ProviderManager extends DefaultPluginManager implements ProviderManagerInt
    * {@inheritdoc}
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
-    parent::__construct('Plugin/video/Provider', $namespaces, $module_handler, 'Drupal\video\ProviderPluginInterface', 'Drupal\video\Annotation\VideoEmbeddableProvider');
+    parent::__construct('Plugin/video/Provider', $namespaces, $module_handler, 'Drupal\video\ProviderPluginInterface', VideoEmbeddableProvider::class, 'Drupal\video\Annotation\VideoEmbeddableProvider');
   }
 
   /**

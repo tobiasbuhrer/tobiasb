@@ -6,7 +6,7 @@ package: Media
 dependencies:
   - video
 
-# Information added by Drupal.org packaging script on 2024-11-28
-version: '3.1.0'
+# Information added by Drupal.org packaging script on 2026-10-08
+version: '3.2.0'
 project: 'video'
-datestamp: 1732797425
+datestamp: 1791474139

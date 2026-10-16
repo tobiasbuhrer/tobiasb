@@ -9,6 +9,7 @@ namespace Drupal\video_transcode;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\video_transcode\Attribute\Transcoder;
 
 /**
  * Transcoder plugin manager.
@@ -27,7 +28,7 @@ class TranscoderManager extends DefaultPluginManager {
    *   The module handler to invoke the alter hook with.
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
-    parent::__construct('Plugin/video/Transcoder', $namespaces, $module_handler, 'Drupal\video_transcode\TranscoderInterface', 'Drupal\video_transcode\Annotation\Transcoder');
+    parent::__construct('Plugin/video/Transcoder', $namespaces, $module_handler, 'Drupal\video_transcode\TranscoderInterface', Transcoder::class, 'Drupal\video_transcode\Annotation\Transcoder');
 
     $this->alterInfo('video_transcode_transcoder_info');
     $this->setCacheBackend($cache_backend, 'video_transcode_transcoders');
