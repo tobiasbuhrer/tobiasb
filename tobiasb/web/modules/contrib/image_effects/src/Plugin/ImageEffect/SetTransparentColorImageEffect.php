@@ -24,7 +24,7 @@ class SetTransparentColorImageEffect extends ConfigurableImageEffectBase impleme
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'transparent_color' => NULL,
     ] + parent::defaultConfiguration();
@@ -33,7 +33,7 @@ class SetTransparentColorImageEffect extends ConfigurableImageEffectBase impleme
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $data = $this->configuration;
     if ($data['transparent_color']) {
       $data['color_info'] = [
@@ -53,7 +53,7 @@ class SetTransparentColorImageEffect extends ConfigurableImageEffectBase impleme
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['transparent_color'] = [
       '#type' => 'image_effects_color',
       '#description'  => $this->t('Select a color to be used for transparency of GIF image files. Leave the checkbox ticked to use the color of the image being processed, if it has one.'),
@@ -68,7 +68,7 @@ class SetTransparentColorImageEffect extends ConfigurableImageEffectBase impleme
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['transparent_color'] = $form_state->getValue('transparent_color');
   }
@@ -76,7 +76,7 @@ class SetTransparentColorImageEffect extends ConfigurableImageEffectBase impleme
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('set_gif_transparent_color', ['transparent_color' => $this->configuration['transparent_color']]);
   }
 

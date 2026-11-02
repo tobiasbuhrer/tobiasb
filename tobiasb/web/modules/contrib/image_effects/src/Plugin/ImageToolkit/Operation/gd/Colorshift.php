@@ -27,7 +27,7 @@ class Colorshift extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $rgb = Color::hexToRgb($arguments['RGB']);
     return imagefilter($this->getToolkit()->getImage(), IMG_FILTER_COLORIZE, $rgb['red'], $rgb['green'], $rgb['blue']);
   }

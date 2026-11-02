@@ -81,7 +81,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -120,7 +120,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return NestedArray::mergeDeep(
       [
         'font'          => [
@@ -173,7 +173,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form = [];
 
     if ($this->getTextimageFactory()) {
@@ -640,7 +640,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * Preview Ajax callback.
    */
-  public function processAjaxPreview($form, FormStateInterface $form_state) {
+  public function processAjaxPreview($form, FormStateInterface $form_state): AjaxResponse {
     [$success, $preview] = $this->buildPreviewRender($form_state->getValue(['data', 'ajax_config']));
     $preview_render = [
       '#theme' => 'image_effects_text_overlay_preview',
@@ -655,7 +655,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::validateConfigurationForm($form, $form_state);
 
     // @todo the array syntax for $form_state->getValue([...]) fails code
@@ -723,7 +723,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $data = $this->configuration;
     $data['font_color_detail'] = [
       '#theme' => 'image_effects_color_detail',
@@ -758,7 +758,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     // Preserve current background image dimensions.
     if ($image->getWidth() === 1 && $image->getHeight() === 1) {
       // Special case: when width and height of the source image is 1, we set
@@ -878,7 +878,7 @@ class TextOverlayImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = $dimensions['width'] ? (int) $dimensions['width'] : NULL;
     $dimensions['height'] = $dimensions['height'] ? (int) $dimensions['height'] : NULL;
 

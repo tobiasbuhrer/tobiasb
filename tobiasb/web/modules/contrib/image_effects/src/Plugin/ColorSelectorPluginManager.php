@@ -42,7 +42,7 @@ class ColorSelectorPluginManager extends ImageEffectsPluginManagerBase implement
   /**
    * {@inheritdoc}
    */
-  public function getFallbackPluginId($plugin_id, array $configuration = []) {
+  public function getFallbackPluginId($plugin_id, array $configuration = []): string {
     return 'html_color';
   }
 

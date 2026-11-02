@@ -12,7 +12,7 @@ trait SmartCropTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'algorithm' => [
         'description' => 'The calculation algorithm for the crop',
@@ -59,7 +59,7 @@ trait SmartCropTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Fail when width or height are 0 or negative.

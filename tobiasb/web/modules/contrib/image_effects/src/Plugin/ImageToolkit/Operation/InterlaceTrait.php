@@ -12,7 +12,7 @@ trait InterlaceTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'type' => [
         'description' => 'The interlace type.',
@@ -26,7 +26,7 @@ trait InterlaceTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Assure interlace type is valid.

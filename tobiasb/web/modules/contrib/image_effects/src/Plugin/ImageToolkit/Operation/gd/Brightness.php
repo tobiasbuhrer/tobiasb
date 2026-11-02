@@ -26,7 +26,7 @@ class Brightness extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if ($arguments['level']) {
       return imagefilter($this->getToolkit()->getImage(), IMG_FILTER_BRIGHTNESS, (int) round($arguments['level'] / 100 * 255));
     }

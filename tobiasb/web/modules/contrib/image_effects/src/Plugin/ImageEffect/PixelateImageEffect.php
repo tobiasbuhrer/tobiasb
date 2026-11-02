@@ -23,7 +23,7 @@ class PixelateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'size' => 10,
     ] + parent::defaultConfiguration();
@@ -32,7 +32,7 @@ class PixelateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_pixelate_summary',
       '#data' => $this->configuration,
@@ -42,7 +42,7 @@ class PixelateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['size'] = [
       '#type' => 'number',
       '#title' => $this->t('Size of the pixels'),
@@ -57,7 +57,7 @@ class PixelateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['size'] = $form_state->getValue('size');
   }
@@ -65,7 +65,7 @@ class PixelateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('pixelate', $this->configuration);
   }
 

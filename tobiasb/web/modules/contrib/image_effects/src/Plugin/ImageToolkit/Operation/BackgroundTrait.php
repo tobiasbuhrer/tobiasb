@@ -14,7 +14,7 @@ trait BackgroundTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'x_offset' => [
         'description' => 'X offset for source image.',
@@ -40,7 +40,7 @@ trait BackgroundTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Ensure source image opacity is in the range 0-100.

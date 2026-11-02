@@ -27,7 +27,7 @@ class Opacity extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if ($arguments['opacity'] < 100) {
       return $this->filterOpacity($this->getToolkit()->getImage(), $arguments['opacity']);
     }

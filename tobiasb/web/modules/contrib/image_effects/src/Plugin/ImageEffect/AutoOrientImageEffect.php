@@ -50,7 +50,8 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
     string $plugin_id,
     array $plugin_definition,
     LoggerInterface $logger,
-    protected readonly FileMetadataManagerInterface $fileMetadataManager,
+    // @todo add readonly.
+    protected FileMetadataManagerInterface $fileMetadataManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
   }
@@ -58,7 +59,7 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -71,7 +72,7 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'scan_exif' => TRUE,
     ];
@@ -80,7 +81,7 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['info'] = [
       '#type'  => 'details',
       '#title' => $this->t('Information'),
@@ -124,7 +125,7 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['scan_exif'] = $form_state->getValue('scan_exif');
   }
@@ -132,7 +133,7 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     // Test to see if EXIF is supported by the image format.
     if (in_array($image->getMimeType(), ['image/jpeg', 'image/tiff'])) {
       // Hand over to toolkit.
@@ -144,7 +145,7 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = $dimensions['width'] ? (int) $dimensions['width'] : NULL;
     $dimensions['height'] = $dimensions['height'] ? (int) $dimensions['height'] : NULL;
 

@@ -12,7 +12,7 @@ trait ConvolutionTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'kernel' => [
         'description' => 'The convolution kernel matrix.',
@@ -32,7 +32,7 @@ trait ConvolutionTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Ensure convolution parameters are valid.

@@ -15,7 +15,7 @@ trait RotateTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'degrees' => [
         'description' => 'The number of (clockwise) degrees to rotate the image',
@@ -45,7 +45,7 @@ trait RotateTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     if (!empty($arguments['background']) && !ColorUtility::validateRgba($arguments['background'])) {

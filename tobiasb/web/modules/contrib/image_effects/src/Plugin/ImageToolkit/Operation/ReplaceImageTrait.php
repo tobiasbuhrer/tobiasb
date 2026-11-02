@@ -14,7 +14,7 @@ trait ReplaceImageTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'replacement_image' => [
         'description' => 'The image to be used to replace current one.',
@@ -26,7 +26,7 @@ trait ReplaceImageTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Ensure replacement_image is a valid image.

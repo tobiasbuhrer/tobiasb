@@ -12,7 +12,7 @@ trait ImagemagickArgumentsTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'command_line' => [
         'description' => 'Command line arguments.',
@@ -32,7 +32,7 @@ trait ImagemagickArgumentsTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Ensure 'width' is NULL or a positive integer.

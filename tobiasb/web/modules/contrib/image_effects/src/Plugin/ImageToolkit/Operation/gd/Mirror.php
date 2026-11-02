@@ -26,7 +26,7 @@ class Mirror extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if ($arguments['x_axis'] === TRUE && $arguments['y_axis'] === TRUE) {
       return imageflip($this->getToolkit()->getImage(), IMG_FLIP_BOTH);
     }

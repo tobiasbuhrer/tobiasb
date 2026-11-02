@@ -12,7 +12,7 @@ trait PixelateTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'size' => [
         'description' => 'The size of the pixels.',
@@ -24,7 +24,7 @@ trait PixelateTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Assure pixelate size is valid.

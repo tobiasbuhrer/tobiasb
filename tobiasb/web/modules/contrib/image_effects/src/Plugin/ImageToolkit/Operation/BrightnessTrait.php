@@ -12,7 +12,7 @@ trait BrightnessTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'level' => [
         'description' => 'The brightness level.',
@@ -24,7 +24,7 @@ trait BrightnessTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Assure brightness level is valid.

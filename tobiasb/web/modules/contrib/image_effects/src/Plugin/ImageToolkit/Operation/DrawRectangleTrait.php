@@ -15,7 +15,7 @@ trait DrawRectangleTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'rectangle' => [
         'description' => 'A PositionedRectangle object.',
@@ -51,7 +51,7 @@ trait DrawRectangleTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Match color luma.

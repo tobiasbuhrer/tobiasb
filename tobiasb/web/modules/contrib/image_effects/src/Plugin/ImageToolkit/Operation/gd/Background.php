@@ -27,7 +27,7 @@ class Background extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Preserves original image.
     $original_image = $this->getToolkit()->getImage();
 

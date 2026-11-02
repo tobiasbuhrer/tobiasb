@@ -24,7 +24,7 @@ class ImagemagickArgumentsImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'command_line' => '',
       'dimensions_method' => 'keep',
@@ -36,7 +36,7 @@ class ImagemagickArgumentsImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_imagemagick_arguments_summary',
       '#data' => $this->configuration,
@@ -46,7 +46,7 @@ class ImagemagickArgumentsImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['command_line'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Command line arguments'),
@@ -101,7 +101,7 @@ class ImagemagickArgumentsImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['command_line'] = $form_state->getValue('command_line');
     $this->configuration['dimensions_method'] = $form_state->getValue('dimensions_method');
@@ -112,7 +112,7 @@ class ImagemagickArgumentsImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     // Get resulting dimensions.
     $d = $this->getDimensions($image->getWidth(), $image->getHeight());
 

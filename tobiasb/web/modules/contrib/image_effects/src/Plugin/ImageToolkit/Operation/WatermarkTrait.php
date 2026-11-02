@@ -14,7 +14,7 @@ trait WatermarkTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'watermark_image' => [
         'description' => 'Watermark image.',
@@ -56,7 +56,7 @@ trait WatermarkTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Ensure watermark_image opacity is in the range 0-100.

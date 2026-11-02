@@ -24,7 +24,7 @@ class ResizePercentageImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'width' => NULL,
       'height' => NULL,
@@ -34,7 +34,7 @@ class ResizePercentageImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_resize_percentage_summary',
       '#data' => $this->configuration,
@@ -44,7 +44,7 @@ class ResizePercentageImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['width'] = [
       '#type' => 'image_effects_px_perc',
       '#title' => $this->t('Width'),
@@ -70,7 +70,7 @@ class ResizePercentageImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['width'] = $form_state->getValue('width');
     $this->configuration['height'] = $form_state->getValue('height');
@@ -79,7 +79,7 @@ class ResizePercentageImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::validateConfigurationForm($form, $form_state);
     $width = (bool) $form_state->getValue('width');
     $height = (bool) $form_state->getValue('height');
@@ -91,7 +91,7 @@ class ResizePercentageImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = $dimensions['width'] ? (int) $dimensions['width'] : NULL;
     $dimensions['height'] = $dimensions['height'] ? (int) $dimensions['height'] : NULL;
     ['width' => $dimensions['width'], 'height' => $dimensions['height']] = ImageUtility::resizeDimensions($dimensions['width'], $dimensions['height'], $this->configuration['width'], $this->configuration['height']);
@@ -100,7 +100,7 @@ class ResizePercentageImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     // Get resulting dimensions.
     $dimensions = ImageUtility::resizeDimensions($image->getWidth(), $image->getHeight(), $this->configuration['width'], $this->configuration['height']);
     return $image->resize($dimensions['width'], $dimensions['height']);

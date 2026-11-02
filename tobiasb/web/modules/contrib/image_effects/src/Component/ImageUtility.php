@@ -81,10 +81,10 @@ abstract class ImageUtility {
         else {
           $aspect_ratio = $source_height / $source_width;
         }
-        if ($dimensions['width'] && !$dimensions['height']) {
+        if ($dimensions['width']) {
           $dimensions['height'] = (int) round($dimensions['width'] * $aspect_ratio);
         }
-        elseif (!$dimensions['width'] && $dimensions['height']) {
+        elseif (!$dimensions['width']) {
           $dimensions['width'] = (int) round($dimensions['height'] / $aspect_ratio);
         }
       }

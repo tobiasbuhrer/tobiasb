@@ -14,7 +14,7 @@ trait MaskTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'mask_image' => [
         'description' => 'Mask image.',
@@ -50,7 +50,7 @@ trait MaskTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Ensure mask_image is a valid image.

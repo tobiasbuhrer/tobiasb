@@ -12,7 +12,7 @@ trait MirrorTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'x_axis' => [
         'description' => 'Flop the source image horizontally.',
@@ -32,7 +32,7 @@ trait MirrorTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Ensure either horizontal flop or vertical flip is requested.

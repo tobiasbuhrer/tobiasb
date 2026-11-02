@@ -12,7 +12,7 @@ trait DrawLineTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'x1' => [
         'description' => 'x-coordinate for first point.',
@@ -40,7 +40,7 @@ trait DrawLineTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     return ArgumentsTypeValidator::validate($this->arguments(), $arguments);
   }
 

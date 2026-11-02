@@ -24,7 +24,7 @@ class ConvolutionImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'kernel' => [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]],
       'divisor' => 0.0,
@@ -36,7 +36,7 @@ class ConvolutionImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_convolution_summary',
       '#data' => $this->configuration,
@@ -46,7 +46,7 @@ class ConvolutionImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
 
     $form['#attached']['library'][] = 'image_effects/image_effects.admin.convolution';
 
@@ -107,7 +107,7 @@ class ConvolutionImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['kernel'] = $form_state->getValue('kernel')['entries'];
     $this->configuration['divisor'] = $form_state->getValue('divisor');
@@ -118,7 +118,7 @@ class ConvolutionImageEffect extends ConfigurableImageEffectBase implements Cont
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('convolution', [
       'kernel' => $this->configuration['kernel'],
       'divisor' => $this->configuration['divisor'],

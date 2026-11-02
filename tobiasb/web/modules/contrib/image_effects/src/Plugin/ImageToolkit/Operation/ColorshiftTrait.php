@@ -14,7 +14,7 @@ trait ColorshiftTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'RGB' => [
         'description' => 'The RGB of the color shift.',
@@ -26,7 +26,7 @@ trait ColorshiftTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Assure color is a valid hex string.

@@ -27,7 +27,7 @@ class DrawRectangle extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $success = TRUE;
     if ($arguments['fill_color']) {
       $color = $this->allocateColorFromRgba($this->getToolkit()->getImage(), $arguments['fill_color']);

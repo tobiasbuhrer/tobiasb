@@ -23,7 +23,7 @@ class GaussianBlurImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'radius' => 3,
       'sigma' => NULL,
@@ -33,7 +33,7 @@ class GaussianBlurImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_gaussian_blur_summary',
       '#data' => $this->configuration,
@@ -43,7 +43,7 @@ class GaussianBlurImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['info'] = [
       '#type'  => 'details',
       '#title' => $this->t('Information'),
@@ -79,7 +79,7 @@ class GaussianBlurImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::validateConfigurationForm($form, $form_state);
     $radius = (int) $form_state->getValue('radius');
     $sigma = (float) $form_state->getValue('sigma');
@@ -91,7 +91,7 @@ class GaussianBlurImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['radius'] = $form_state->getValue('radius');
     $this->configuration['sigma'] = $form_state->getValue('sigma');
@@ -100,7 +100,7 @@ class GaussianBlurImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('gaussian_blur', [
       'radius' => $this->configuration['radius'],
       'sigma' => $this->configuration['sigma'],

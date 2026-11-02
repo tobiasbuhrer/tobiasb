@@ -26,7 +26,7 @@ class TextToWrapper extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Get a temporary wrapper image object via the GD toolkit.
     $gd_wrapper = \Drupal::service('image.factory')->get(NULL, 'gd');
     $gd_wrapper->apply('text_to_wrapper', $arguments);

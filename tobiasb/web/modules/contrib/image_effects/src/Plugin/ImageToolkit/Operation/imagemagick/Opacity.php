@@ -27,7 +27,7 @@ class Opacity extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if ($this->getToolkit()->getExecManager()->getPackageSuite() === PackageSuite::Graphicsmagick) {
       // GraphicsMagick does not support -alpha argument, return early.
       // @todo implement a GraphicsMagick solution if possible.

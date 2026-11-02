@@ -27,7 +27,7 @@ class SetCanvas extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Store the original image.
     $original_image = $this->getToolkit()->getImage();
 

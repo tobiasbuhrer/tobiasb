@@ -26,7 +26,7 @@ class ImagemagickArguments extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Split the string in multiple space-separated tokens. Quotes, both " and
     // ', can delimit tokens with spaces inside. Such tokens can contain
     // escaped quotes too.

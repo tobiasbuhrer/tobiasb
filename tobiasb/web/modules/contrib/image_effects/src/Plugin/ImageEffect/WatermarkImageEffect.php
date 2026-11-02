@@ -50,8 +50,9 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
     string $plugin_id,
     array $plugin_definition,
     LoggerInterface $logger,
-    protected readonly ImageFactory $imageFactory,
-    protected readonly ImageEffectsPluginBaseInterface $imageSelector,
+    // @todo add readonly.
+    protected ImageFactory $imageFactory,
+    protected ImageEffectsPluginBaseInterface $imageSelector,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
   }
@@ -59,7 +60,7 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -73,7 +74,7 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'watermark_image' => '',
       'watermark_width' => NULL,
@@ -88,7 +89,7 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $summary = [
       '#theme' => 'image_effects_watermark_summary',
       '#data' => $this->configuration,
@@ -104,7 +105,7 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $options = [
       '#title' => $this->t('Watermark image'),
       '#description' => $this->t('Image to use as watermark.'),
@@ -174,7 +175,7 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['watermark_image'] = $form_state->getValue('watermark_image');
     $this->configuration['watermark_width'] = $form_state->getValue(['watermark_resize', 'watermark_width']);
@@ -188,7 +189,7 @@ class WatermarkImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     // Get the watermark image object.
     $watermark_image = $this->imageFactory->get($this->configuration['watermark_image']);
     if (!$watermark_image->isValid()) {

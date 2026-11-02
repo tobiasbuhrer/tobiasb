@@ -70,7 +70,7 @@ class Dropdown extends ImageEffectsPluginBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -85,14 +85,14 @@ class Dropdown extends ImageEffectsPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return ['path' => ''];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state, array $ajax_settings = []) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state, array $ajax_settings = []): array {
     $element['path'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Path'),

@@ -23,7 +23,7 @@ class AutoOrient extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     // This operation does not use any parameters.
     return [];
   }
@@ -31,7 +31,7 @@ class AutoOrient extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $this->addArguments(['-auto-orient']);
     // Swap toolkit's height and width when picture orientation is vertical.
     if (in_array($this->getToolkit()->getExifOrientation(), [5, 6, 7, 8])) {

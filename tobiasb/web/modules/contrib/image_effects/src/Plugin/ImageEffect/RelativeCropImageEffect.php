@@ -24,7 +24,7 @@ class RelativeCropImageEffect extends CropImageEffect {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     $dimensions = [
       'width' => $image->getWidth(),
       'height' => $image->getHeight(),
@@ -68,7 +68,7 @@ class RelativeCropImageEffect extends CropImageEffect {
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = $dimensions['width'] ? (int) $dimensions['width'] : NULL;
     $dimensions['height'] = $dimensions['height'] ? (int) $dimensions['height'] : NULL;
 
@@ -98,7 +98,7 @@ class RelativeCropImageEffect extends CropImageEffect {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_relative_crop_summary',
     ] + parent::getSummary();
@@ -107,7 +107,7 @@ class RelativeCropImageEffect extends CropImageEffect {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'anchor' => [
         'width' => 'center',
@@ -119,7 +119,7 @@ class RelativeCropImageEffect extends CropImageEffect {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['#tree'] = TRUE;
 
     $form = parent::buildConfigurationForm($form, $form_state);

@@ -29,7 +29,7 @@ class TextOverlay extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $font_file = $this->getFontPath($arguments['font_uri']);
 
     // Overlays the text outline/shadow, if required.

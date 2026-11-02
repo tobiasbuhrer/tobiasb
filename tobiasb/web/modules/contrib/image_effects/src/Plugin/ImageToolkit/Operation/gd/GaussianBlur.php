@@ -27,7 +27,7 @@ class GaussianBlur extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $blur = $this->imageCopyGaussianBlurred($this->getToolkit()->getImage(), $arguments['radius'], $arguments['sigma']);
     if ($blur) {
       $this->getToolkit()->setImage($blur);

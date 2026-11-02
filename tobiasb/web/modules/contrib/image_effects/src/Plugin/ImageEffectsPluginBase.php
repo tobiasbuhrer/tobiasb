@@ -43,7 +43,7 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -56,21 +56,21 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getConfiguration() {
+  public function getConfiguration(): array {
     return $this->configuration;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setConfiguration(array $configuration) {
+  public function setConfiguration(array $configuration): void {
     $this->configuration = $configuration;
   }
 
@@ -91,20 +91,20 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state, array $ajax_settings = []) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state, array $ajax_settings = []): array {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
   }
 
   /**

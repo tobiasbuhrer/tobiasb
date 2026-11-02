@@ -26,7 +26,7 @@ class DrawRectangle extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if ($arguments['fill_color']) {
       $arg = ['-fill', $arguments['fill_color']];
     }

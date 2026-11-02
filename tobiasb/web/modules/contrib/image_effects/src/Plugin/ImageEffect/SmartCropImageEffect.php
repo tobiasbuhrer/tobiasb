@@ -24,7 +24,7 @@ class SmartCropImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'width' => NULL,
       'height' => NULL,
@@ -37,7 +37,7 @@ class SmartCropImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_smart_crop_summary',
       '#data' => $this->configuration,
@@ -47,7 +47,7 @@ class SmartCropImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['width'] = [
       '#type' => 'image_effects_px_perc',
       '#title' => $this->t('Width'),
@@ -106,7 +106,7 @@ class SmartCropImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::validateConfigurationForm($form, $form_state);
     $width = $form_state->getValue('width');
     $height = $form_state->getValue('height');
@@ -124,7 +124,7 @@ class SmartCropImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $width = $form_state->getValue('width');
     $height = $form_state->getValue('height');
@@ -143,7 +143,7 @@ class SmartCropImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = $dimensions['width'] ? (int) $dimensions['width'] : NULL;
     $dimensions['height'] = $dimensions['height'] ? (int) $dimensions['height'] : NULL;
 
@@ -163,7 +163,7 @@ class SmartCropImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     $dimensions = ImageUtility::resizeDimensions($image->getWidth(), $image->getHeight(), $this->configuration['width'], $this->configuration['height'], $this->configuration['square']);
     return $image->apply('smart_crop', [
       'width' => min($dimensions['width'], $image->getWidth()),

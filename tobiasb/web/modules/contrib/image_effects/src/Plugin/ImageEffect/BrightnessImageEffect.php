@@ -24,7 +24,7 @@ class BrightnessImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'level' => 0,
     ] + parent::defaultConfiguration();
@@ -33,7 +33,7 @@ class BrightnessImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_brightness_summary',
       '#data' => $this->configuration,
@@ -43,7 +43,7 @@ class BrightnessImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['level'] = [
       '#type' => 'number',
       '#title' => $this->t('Brightness'),
@@ -62,7 +62,7 @@ class BrightnessImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['level'] = $form_state->getValue('level');
   }
@@ -70,7 +70,7 @@ class BrightnessImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('brightness', ['level' => $this->configuration['level']]);
   }
 

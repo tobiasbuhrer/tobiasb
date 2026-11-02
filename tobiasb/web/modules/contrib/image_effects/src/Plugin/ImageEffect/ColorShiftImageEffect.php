@@ -28,7 +28,7 @@ class ColorShiftImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'RGB' => '#FF0000',
     ] + parent::defaultConfiguration();
@@ -37,7 +37,7 @@ class ColorShiftImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $data = $this->configuration;
     if ($data['RGB']) {
       $data['color_info'] = [
@@ -57,7 +57,7 @@ class ColorShiftImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['RGB'] = [
       '#type' => 'image_effects_color',
       '#title' => $this->t('Color shift'),
@@ -70,7 +70,7 @@ class ColorShiftImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['RGB'] = $form_state->getValue('RGB');
   }
@@ -78,7 +78,7 @@ class ColorShiftImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('colorshift', ['RGB' => $this->configuration['RGB']]);
   }
 

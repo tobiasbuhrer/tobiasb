@@ -23,7 +23,7 @@ class Invert extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     // This operation does not use any parameters.
     return [];
   }
@@ -31,7 +31,7 @@ class Invert extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $this->addArguments(['-negate']);
     return TRUE;
   }

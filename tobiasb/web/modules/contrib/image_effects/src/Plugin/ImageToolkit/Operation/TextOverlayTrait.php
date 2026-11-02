@@ -12,7 +12,7 @@ trait TextOverlayTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'font_uri' => [
         'description' => 'Font file URI.',
@@ -84,7 +84,7 @@ trait TextOverlayTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     if (empty($arguments['font_uri'])) {

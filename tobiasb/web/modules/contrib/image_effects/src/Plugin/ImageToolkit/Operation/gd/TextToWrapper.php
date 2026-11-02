@@ -33,7 +33,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Determine if outline/shadow is required.
     $outline = $shadow = FALSE;
     if ($arguments['font_stroke_mode'] == 'outline' && ($arguments['font_outline_top'] || $arguments['font_outline_right'] || $arguments['font_outline_bottom'] || $arguments['font_outline_left']) && $arguments['font_stroke_color']) {

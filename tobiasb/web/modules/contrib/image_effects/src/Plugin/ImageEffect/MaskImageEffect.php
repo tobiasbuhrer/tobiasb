@@ -50,8 +50,9 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
     string $plugin_id,
     array $plugin_definition,
     LoggerInterface $logger,
-    protected readonly ImageFactory $imageFactory,
-    protected readonly ImageEffectsPluginBaseInterface $imageSelector,
+    // @todo add readonly.
+    protected ImageFactory $imageFactory,
+    protected ImageEffectsPluginBaseInterface $imageSelector,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
   }
@@ -59,7 +60,7 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -73,7 +74,7 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'mask_image' => '',
       'mask_width' => NULL,
@@ -87,7 +88,7 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $summary = [
       '#theme' => 'image_effects_mask_summary',
       '#data' => $this->configuration,
@@ -103,7 +104,7 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $options = [
       '#title' => $this->t('Mask image'),
       '#description' => $this->t('Image to use for masking. The mask file should be a grayscale image, where full white pixels will let the original image through, and full black pixels will hide it.'),
@@ -164,7 +165,7 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['mask_image'] = $form_state->getValue('mask_image');
     $this->configuration['mask_width'] = $form_state->getValue(['mask_resize', 'mask_width']);
@@ -177,7 +178,7 @@ class MaskImageEffect extends ConfigurableImageEffectBase implements ContainerFa
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     // Get the mask image object.
     $mask_image = $this->imageFactory->get($this->configuration['mask_image']);
     if (!$mask_image->isValid()) {

@@ -29,7 +29,7 @@ class Rotate extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $toolkit_arguments = $this->getToolkit()->arguments();
 
     if ($this->getToolkit()->getExecManager()->getPackageSuite() === PackageSuite::Graphicsmagick && !empty($arguments['background'])) {

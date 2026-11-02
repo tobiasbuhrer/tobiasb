@@ -12,7 +12,7 @@ trait SetCanvasTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'canvas_color' => [
         'description' => 'Color',
@@ -42,7 +42,7 @@ trait SetCanvasTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     return ArgumentsTypeValidator::validate($this->arguments(), $arguments);
   }
 

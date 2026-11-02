@@ -24,7 +24,7 @@ class InterlaceImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'type' => 'Plane',
     ] + parent::defaultConfiguration();
@@ -33,7 +33,7 @@ class InterlaceImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_interlace_summary',
       '#data' => $this->configuration,
@@ -43,7 +43,7 @@ class InterlaceImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['type'] = [
       '#type' => 'select',
       '#title' => $this->t('Interlace type'),
@@ -61,7 +61,7 @@ class InterlaceImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['type'] = $form_state->getValue('type');
   }
@@ -69,7 +69,7 @@ class InterlaceImageEffect extends ConfigurableImageEffectBase implements Contai
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('interlace', ['type' => $this->configuration['type']]);
   }
 

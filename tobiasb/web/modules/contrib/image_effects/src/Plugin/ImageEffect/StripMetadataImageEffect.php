@@ -22,7 +22,7 @@ class StripMetadataImageEffect extends ImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('strip');
   }
 

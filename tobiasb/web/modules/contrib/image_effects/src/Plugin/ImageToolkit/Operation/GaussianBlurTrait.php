@@ -12,7 +12,7 @@ trait GaussianBlurTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'radius' => [
         'description' => 'The blur radius, in pixels.',
@@ -30,7 +30,7 @@ trait GaussianBlurTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Assure blur radius is valid.

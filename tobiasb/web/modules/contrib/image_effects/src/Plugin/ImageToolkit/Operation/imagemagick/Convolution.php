@@ -26,7 +26,7 @@ class Convolution extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if (isset($arguments['kernel']) && isset($arguments['divisor']) && isset($arguments['offset'])) {
       $matrix_s = '';
       foreach ($arguments['kernel'] as $vector) {

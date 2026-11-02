@@ -26,7 +26,7 @@ class Contrast extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if ($arguments['level']) {
       return imagefilter($this->getToolkit()->getImage(), IMG_FILTER_CONTRAST, $arguments['level'] * -1);
     }

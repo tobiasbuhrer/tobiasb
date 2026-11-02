@@ -24,7 +24,7 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'level' => 10,
     ] + parent::defaultConfiguration();
@@ -33,7 +33,7 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_convolution_sharpen_summary',
       '#data' => $this->configuration,
@@ -43,7 +43,7 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
 
     $form['level'] = [
       '#type' => 'number',
@@ -59,7 +59,7 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['level'] = $form_state->getValue('level');
   }
@@ -67,7 +67,7 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     $sharpenlevel = $this->configuration['level'] / 100;
     $kernel = [
       [-$sharpenlevel, -$sharpenlevel, -$sharpenlevel],

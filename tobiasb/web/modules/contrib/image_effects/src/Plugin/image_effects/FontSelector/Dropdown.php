@@ -26,14 +26,14 @@ class Dropdown extends Basic {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return ['path' => ''];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state, array $ajax_settings = []) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state, array $ajax_settings = []): array {
     $element['path'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Path'),

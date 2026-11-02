@@ -27,7 +27,7 @@ class DrawEllipse extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $color = $this->allocateColorFromRgba($this->getToolkit()->getImage(), $arguments['color']);
     return imagefilledellipse($this->getToolkit()->getImage(), $arguments['cx'], $arguments['cy'], $arguments['width'], $arguments['height'], $color);
   }

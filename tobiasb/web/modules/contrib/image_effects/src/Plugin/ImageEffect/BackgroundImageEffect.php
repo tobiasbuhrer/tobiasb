@@ -48,8 +48,9 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
     string $plugin_id,
     array $plugin_definition,
     LoggerInterface $logger,
-    protected readonly ImageFactory $imageFactory,
-    protected readonly ImageEffectsPluginBaseInterface $imageSelector,
+    // @todo add readonly.
+    protected ImageFactory $imageFactory,
+    protected ImageEffectsPluginBaseInterface $imageSelector,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
   }
@@ -57,7 +58,7 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -71,7 +72,7 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'placement' => 'center-center',
       'x_offset' => 0,
@@ -84,7 +85,7 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $summary = [
       '#theme' => 'image_effects_background_summary',
       '#data' => $this->configuration,
@@ -97,7 +98,7 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $options = [
       '#title' => $this->t('Background image'),
       '#description' => $this->t('Image to use for background.'),
@@ -157,7 +158,7 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['placement'] = $form_state->getValue('placement');
     $this->configuration['x_offset'] = $form_state->getValue('x_offset');
@@ -175,7 +176,7 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     $background_image = $this->imageFactory->get($this->configuration['background_image']);
     if (!$background_image->isValid()) {
       $this->logger->error('Image background failed using the %toolkit toolkit on %path', [
@@ -198,7 +199,7 @@ class BackgroundImageEffect extends ConfigurableImageEffectBase implements Conta
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = (int) $this->configuration['background_image_width'];
     $dimensions['height'] = (int) $this->configuration['background_image_height'];
   }

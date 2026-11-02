@@ -36,7 +36,7 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     switch ($this->configuration['method']) {
       case static::PSEUDO_RANDOM:
         $degrees = $this->getRotationFromUri($image->getSource(), $this->configuration['degrees']);
@@ -74,7 +74,7 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = $dimensions['width'] ? (int) $dimensions['width'] : NULL;
     $dimensions['height'] = $dimensions['height'] ? (int) $dimensions['height'] : NULL;
 
@@ -111,7 +111,7 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $data = $this->configuration;
 
     if ($data['background_color']) {
@@ -135,7 +135,7 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'degrees' => 0,
       'background_color' => NULL,
@@ -147,7 +147,7 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['degrees'] = [
       '#type' => 'number',
       '#default_value' => $this->configuration['degrees'],
@@ -194,7 +194,7 @@ class RotateImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
 
     $this->configuration['degrees'] = $form_state->getValue('degrees');

@@ -29,7 +29,8 @@ class FontSelectionImageEffect extends ConfigurableImageEffectBase implements Co
     $plugin_id,
     $plugin_definition,
     LoggerInterface $logger,
-    protected readonly ImageEffectsFontSelectorPluginInterface $fontSelector,
+    // @todo add readonly.
+    protected ImageEffectsFontSelectorPluginInterface $fontSelector,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
   }
@@ -37,7 +38,7 @@ class FontSelectionImageEffect extends ConfigurableImageEffectBase implements Co
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -50,7 +51,7 @@ class FontSelectionImageEffect extends ConfigurableImageEffectBase implements Co
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'font_name' => '',
       'font_uri' => '',
@@ -60,7 +61,7 @@ class FontSelectionImageEffect extends ConfigurableImageEffectBase implements Co
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#markup' => $this->configuration['font_name'],
     ] + parent::getSummary();
@@ -69,7 +70,7 @@ class FontSelectionImageEffect extends ConfigurableImageEffectBase implements Co
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     // Image selection.
     $options = [
       '#default_value' => $this->configuration['font_uri'],
@@ -82,7 +83,7 @@ class FontSelectionImageEffect extends ConfigurableImageEffectBase implements Co
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['font_uri'] = $form_state->getValue('font_uri');
     $this->configuration['font_name'] = $this->fontSelector->getDescription($form_state->getValue('font_uri'));
@@ -91,7 +92,7 @@ class FontSelectionImageEffect extends ConfigurableImageEffectBase implements Co
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return TRUE;
   }
 

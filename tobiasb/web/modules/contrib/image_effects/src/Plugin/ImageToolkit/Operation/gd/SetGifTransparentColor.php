@@ -28,7 +28,7 @@ class SetGifTransparentColor extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if ($this->getToolkit()->getType() == IMAGETYPE_GIF && $arguments['transparent_color']) {
       $rgb = Color::hexToRgb($arguments['transparent_color']);
       $color = imagecolorallocate($this->getToolkit()->getImage(), $rgb['red'], $rgb['green'], $rgb['blue']);

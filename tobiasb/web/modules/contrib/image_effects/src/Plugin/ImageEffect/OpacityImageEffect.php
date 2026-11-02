@@ -23,7 +23,7 @@ class OpacityImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'opacity' => 50,
     ] + parent::defaultConfiguration();
@@ -32,7 +32,7 @@ class OpacityImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_opacity_summary',
       '#data' => $this->configuration,
@@ -42,7 +42,7 @@ class OpacityImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['opacity'] = [
       '#type' => 'number',
       '#title' => $this->t('Opacity'),
@@ -60,7 +60,7 @@ class OpacityImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['opacity'] = $form_state->getValue('opacity');
   }
@@ -68,7 +68,7 @@ class OpacityImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('opacity', ['opacity' => $this->configuration['opacity']]);
   }
 

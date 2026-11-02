@@ -24,7 +24,7 @@ class AutoOrient extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     // This operation does not use any parameters.
     return [];
   }
@@ -32,7 +32,7 @@ class AutoOrient extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // If image has been created in memory, this will not apply.
     if (!$source_path = $this->getToolkit()->getSource()) {
       return TRUE;

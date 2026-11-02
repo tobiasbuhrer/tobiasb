@@ -26,7 +26,7 @@ class Background extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Background image local path.
     $local_path = $arguments['background_image']->getToolkit()->ensureSourceLocalPath();
     if ($local_path !== '') {

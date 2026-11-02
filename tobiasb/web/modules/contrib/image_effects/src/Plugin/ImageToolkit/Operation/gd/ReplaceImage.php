@@ -26,7 +26,7 @@ class ReplaceImage extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Prepare the new image.
     $data = [
       'width' => $arguments['replacement_image']->getWidth(),

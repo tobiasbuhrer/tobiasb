@@ -27,7 +27,7 @@ class SetGifTransparentColor extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $toolkit_arguments = $this->getToolkit()->arguments();
     $format = $toolkit_arguments->getDestinationFormat() ?: $toolkit_arguments->getSourceFormat();
     $mime_type = $this->getFormatMapper()->getMimeTypeFromFormat($format);

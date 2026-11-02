@@ -26,7 +26,7 @@ class ImagemagickArguments extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Obviously, we can not do anything here. This operation is a no-op in GD,
     // this is just defined to avoid effects to fail when GD toolkit is in use.
     return TRUE;

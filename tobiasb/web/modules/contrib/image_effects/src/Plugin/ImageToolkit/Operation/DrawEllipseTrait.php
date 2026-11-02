@@ -12,7 +12,7 @@ trait DrawEllipseTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'cx' => [
         'description' => 'x-coordinate of the center.',
@@ -40,7 +40,7 @@ trait DrawEllipseTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     return ArgumentsTypeValidator::validate($this->arguments(), $arguments);
   }
 

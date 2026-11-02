@@ -2569,21 +2569,21 @@
         },
         {
             "name": "drupal/image_effects",
-            "version": "5.0.0",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/image_effects.git",
-                "reference": "5.0.0"
+                "reference": "5.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/image_effects-5.0.0.zip",
-                "reference": "5.0.0",
-                "shasum": "6f4c50bdb35127053e3625d855428627d4bf0415"
+                "url": "https://ftp.drupal.org/files/projects/image_effects-5.0.1.zip",
+                "reference": "5.0.1",
+                "shasum": "5647fcb85619052dfd7ab59fe6a18529cd300aa8"
             },
             "require": {
-                "drupal/core": "^11.3",
-                "drupal/file_mdm": "^3.2",
+                "drupal/core": "^11.3 | ^12",
+                "drupal/file_mdm": "^3.2.1",
                 "drupal/file_mdm_exif": "*",
                 "drupal/file_mdm_font": "*"
             },
@@ -2601,8 +2601,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "5.0.0",
-                    "datestamp": "1769890352",
+                    "version": "5.0.1",
+                    "datestamp": "1793549377",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2636,31 +2636,31 @@
         },
         {
             "name": "drupal/imagemagick",
-            "version": "5.0.1",
+            "version": "5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/imagemagick.git",
-                "reference": "5.0.1"
+                "reference": "5.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/imagemagick-5.0.1.zip",
-                "reference": "5.0.1",
-                "shasum": "3a9e70d80064b3be3f2d0b4b4a4d1beb92d6ead2"
+                "url": "https://ftp.drupal.org/files/projects/imagemagick-5.0.2.zip",
+                "reference": "5.0.2",
+                "shasum": "4ea586c19b0bbd4c735351c44b03d6692848ac9f"
             },
             "require": {
-                "drupal/core": "^11.3",
-                "drupal/file_mdm": "^3.2",
-                "drupal/sophron": "^3"
+                "drupal/core": "^11.3 | ^12",
+                "drupal/file_mdm": "^3.2.1",
+                "drupal/sophron": "^3.1.1"
             },
             "require-dev": {
-                "drupal/image_effects": "^5"
+                "drupal/image_effects": "^5.0.1"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "5.0.1",
-                    "datestamp": "1769759255",
+                    "version": "5.0.2",
+                    "datestamp": "1793561392",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

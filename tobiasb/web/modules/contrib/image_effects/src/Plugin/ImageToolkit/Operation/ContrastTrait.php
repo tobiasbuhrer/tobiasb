@@ -12,7 +12,7 @@ trait ContrastTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'level' => [
         'description' => 'The contrast level.',
@@ -24,7 +24,7 @@ trait ContrastTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Assure contrast level is valid.

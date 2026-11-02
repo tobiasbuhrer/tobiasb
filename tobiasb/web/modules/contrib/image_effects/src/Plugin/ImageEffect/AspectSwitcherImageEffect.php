@@ -24,7 +24,7 @@ class AspectSwitcherImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'landscape_image_style' => '',
       'portrait_image_style' => '',
@@ -35,7 +35,7 @@ class AspectSwitcherImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $data = $this->configuration;
     if ($portrait_image_style = $this->failSafeGetImageStyle($this->configuration['portrait_image_style'])) {
       $data['portrait'] = $portrait_image_style->label();
@@ -58,7 +58,7 @@ class AspectSwitcherImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function calculateDependencies() {
+  public function calculateDependencies(): array {
     $image_styles = [];
     if ($portrait_image_style = $this->failSafeGetImageStyle($this->configuration['portrait_image_style'])) {
       $image_styles[] = $portrait_image_style->getConfigDependencyName();
@@ -72,7 +72,7 @@ class AspectSwitcherImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['info'] = [
       '#type'  => 'details',
       '#title' => $this->t('Information'),
@@ -115,7 +115,7 @@ class AspectSwitcherImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::validateConfigurationForm($form, $form_state);
     if ($form_state->getValue('portrait_image_style') === NULL && $form_state->getValue('landscape_image_style') === NULL) {
       $form_state->setErrorByName('portrait_image_style', $this->t("At least one of 'Landscape image style' or 'Portrait image style' must be selected."));
@@ -135,7 +135,7 @@ class AspectSwitcherImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['portrait_image_style'] = $form_state->getValue('portrait_image_style');
     $this->configuration['landscape_image_style'] = $form_state->getValue('landscape_image_style');
@@ -145,7 +145,7 @@ class AspectSwitcherImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     $style_name = $this->getChildImageStyleToExecute($image->getWidth(), $image->getHeight());
     $style = $this->failSafeGetImageStyle($style_name);
 
@@ -168,7 +168,7 @@ class AspectSwitcherImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = $dimensions['width'] ? (int) $dimensions['width'] : NULL;
     $dimensions['height'] = $dimensions['height'] ? (int) $dimensions['height'] : NULL;
 

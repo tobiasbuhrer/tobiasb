@@ -28,7 +28,7 @@ class SmartCrop extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments = []) {
+  protected function execute(array $arguments): bool {
     $file_system = \Drupal::service('file_system');
     $image_factory = \Drupal::service('image.factory');
 

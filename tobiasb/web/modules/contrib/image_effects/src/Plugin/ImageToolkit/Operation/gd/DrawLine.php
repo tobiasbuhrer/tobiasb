@@ -26,7 +26,7 @@ class DrawLine extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $color = $this->allocateColorFromRgba($this->getToolkit()->getImage(), $arguments['color']);
     return imageline($this->getToolkit()->getImage(), $arguments['x1'], $arguments['y1'], $arguments['x2'], $arguments['y2'], $color);
   }

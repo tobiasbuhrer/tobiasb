@@ -25,7 +25,7 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return NestedArray::mergeDeep([
       'canvas_size' => 'exact',
       'canvas_color' => NULL,
@@ -48,7 +48,7 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     $data = $this->configuration;
 
     $data['color_info'] = [
@@ -67,7 +67,7 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['canvas_size'] = [
       '#type' => 'radios',
       '#title' => $this->t('Canvas size'),
@@ -207,7 +207,7 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::validateConfigurationForm($form, $form_state);
     $this->configuration = $form_state->getValues();
   }
@@ -215,7 +215,7 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     $data = [];
     $data['canvas_color'] = $this->configuration['canvas_color'];
 
@@ -242,7 +242,7 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function transformDimensions(array &$dimensions, $uri) {
+  public function transformDimensions(array &$dimensions, $uri): void {
     $dimensions['width'] = $dimensions['width'] ? (int) $dimensions['width'] : NULL;
     $dimensions['height'] = $dimensions['height'] ? (int) $dimensions['height'] : NULL;
 

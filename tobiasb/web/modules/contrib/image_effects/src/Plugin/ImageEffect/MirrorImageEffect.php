@@ -23,7 +23,7 @@ class MirrorImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'x_axis' => FALSE,
       'y_axis' => FALSE,
@@ -33,7 +33,7 @@ class MirrorImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#theme' => 'image_effects_mirror_summary',
       '#data' => $this->configuration,
@@ -43,7 +43,7 @@ class MirrorImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form['x_axis'] = [
       '#type'  => 'checkbox',
       '#title' => $this->t('Horizontal'),
@@ -62,7 +62,7 @@ class MirrorImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::validateConfigurationForm($form, $form_state);
     $x_axis = (bool) $form_state->getValue('x_axis');
     $y_axis = (bool) $form_state->getValue('y_axis');
@@ -74,7 +74,7 @@ class MirrorImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['x_axis'] = (bool) $form_state->getValue('x_axis');
     $this->configuration['y_axis'] = (bool) $form_state->getValue('y_axis');
@@ -83,7 +83,7 @@ class MirrorImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return $image->apply('mirror', [
       'x_axis' => $this->configuration['x_axis'],
       'y_axis' => $this->configuration['y_axis'],

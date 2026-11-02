@@ -26,7 +26,7 @@ class Convolution extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     if (isset($arguments['kernel']) && isset($arguments['divisor']) && isset($arguments['offset'])) {
       return imageconvolution($this->getToolkit()->getImage(), $arguments['kernel'], $arguments['divisor'], $arguments['offset']);
     }

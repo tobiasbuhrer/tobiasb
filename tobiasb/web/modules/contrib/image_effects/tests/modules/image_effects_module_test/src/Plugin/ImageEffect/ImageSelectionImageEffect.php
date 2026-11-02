@@ -29,7 +29,8 @@ class ImageSelectionImageEffect extends ConfigurableImageEffectBase implements C
     $plugin_id,
     $plugin_definition,
     LoggerInterface $logger,
-    protected readonly ImageEffectsPluginBaseInterface $imageSelector,
+    // @todo add readonly.
+    protected ImageEffectsPluginBaseInterface $imageSelector,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
   }
@@ -37,7 +38,7 @@ class ImageSelectionImageEffect extends ConfigurableImageEffectBase implements C
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -50,7 +51,7 @@ class ImageSelectionImageEffect extends ConfigurableImageEffectBase implements C
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'image_uri' => '',
     ];
@@ -59,7 +60,7 @@ class ImageSelectionImageEffect extends ConfigurableImageEffectBase implements C
   /**
    * {@inheritdoc}
    */
-  public function getSummary() {
+  public function getSummary(): array {
     return [
       '#markup' => $this->configuration['image_uri'],
     ] + parent::getSummary();
@@ -68,7 +69,7 @@ class ImageSelectionImageEffect extends ConfigurableImageEffectBase implements C
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     // Image selection.
     $options = [
       '#default_value' => $this->configuration['image_uri'],
@@ -81,7 +82,7 @@ class ImageSelectionImageEffect extends ConfigurableImageEffectBase implements C
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['image_uri'] = $form_state->getValue('image_uri');
   }
@@ -89,7 +90,7 @@ class ImageSelectionImageEffect extends ConfigurableImageEffectBase implements C
   /**
    * {@inheritdoc}
    */
-  public function applyEffect(ImageInterface $image) {
+  public function applyEffect(ImageInterface $image): bool {
     return TRUE;
   }
 

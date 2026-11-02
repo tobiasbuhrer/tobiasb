@@ -26,7 +26,7 @@ class Mask extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $mask = $arguments['mask_image'];
     $x_offset = $arguments['x_offset'];
     $y_offset = $arguments['y_offset'];

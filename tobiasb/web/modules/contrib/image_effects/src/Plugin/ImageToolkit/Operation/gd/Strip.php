@@ -23,7 +23,7 @@ class Strip extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     // This operation does not use any parameters.
     return [];
   }
@@ -31,7 +31,7 @@ class Strip extends GDImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     // Actually, we have nothing to do here. The GD toolkit drops all EXIF
     // information when loading the image in memory, which is then missing
     // when saving to the derivative image.

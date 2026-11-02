@@ -27,7 +27,7 @@ class GaussianBlur extends ImagemagickImageToolkitOperationBase {
   /**
    * {@inheritdoc}
    */
-  protected function execute(array $arguments) {
+  protected function execute(array $arguments): bool {
     $sigma = $arguments['sigma'] ?? $arguments['radius'] / 3 * 2;
     $op = match ($this->getToolkit()->getExecManager()->getPackageSuite()) {
       PackageSuite::Imagemagick => ['-channel', 'RGBA', '-blur'],

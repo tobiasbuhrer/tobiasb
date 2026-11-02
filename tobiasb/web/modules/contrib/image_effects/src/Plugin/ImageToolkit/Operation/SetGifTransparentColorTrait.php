@@ -14,7 +14,7 @@ trait SetGifTransparentColorTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'transparent_color' => [
         'description' => 'The RGB hex color for GIF transparency',
@@ -28,7 +28,7 @@ trait SetGifTransparentColorTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Assure transparent color is a valid hex string.

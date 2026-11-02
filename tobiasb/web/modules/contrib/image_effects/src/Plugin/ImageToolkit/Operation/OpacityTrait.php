@@ -12,7 +12,7 @@ trait OpacityTrait {
   /**
    * {@inheritdoc}
    */
-  protected function arguments() {
+  protected function arguments(): array {
     return [
       'opacity' => [
         'description' => 'Opacity.',
@@ -26,7 +26,7 @@ trait OpacityTrait {
   /**
    * {@inheritdoc}
    */
-  protected function validateArguments(array $arguments) {
+  protected function validateArguments(array $arguments): array {
     $arguments = ArgumentsTypeValidator::validate($this->arguments(), $arguments);
 
     // Ensure opacity is in the range 0-100.
