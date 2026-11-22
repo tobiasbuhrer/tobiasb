@@ -5,10 +5,13 @@
  * Install/uninstall visitors module.
  */
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
 use DeviceDetector\Parser\Client\Browser;
+use Drupal\Core\Database\Query\Condition;
+use Drupal\Core\Database\Schema;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Utility\Error;
 
 /**
  * Implements hook_install().
@@ -347,7 +350,7 @@ function visitors_requirements($phase) {
     $requirements['visitors_device'] = [
       'title' => t('Device Detector'),
       'value' => t('Not found'),
-      'severity' => REQUIREMENT_WARNING,
+      'severity' => DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::Warning, fn() => REQUIREMENT_WARNING),
       'description' => t('The <a href=":url">Device Detector</a> library is strongly encouraged by the Visitors module. Composer will download the library automatically.', [
         ':url' => 'https://github.com/matomo-org/device-detector',
       ]),
@@ -355,13 +358,13 @@ function visitors_requirements($phase) {
   }
 
   $requirements['visitors']['title'] = t('Visitors');
-  $requirements['visitors']['severity'] = REQUIREMENT_OK;
+  $requirements['visitors']['severity'] = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::OK, fn() => REQUIREMENT_OK);
   $requirements['visitors']['value'] = t('Enabled');
   $requirements['visitors']['description'] = ['#markup' => ''];
   $rebuild_ip_address = \Drupal::state()
     ->get('visitors.rebuild.ip_address', FALSE);
   if ($rebuild_ip_address) {
-    $requirements['visitors']['severity'] = REQUIREMENT_WARNING;
+    $requirements['visitors']['severity'] = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::Warning, fn() => REQUIREMENT_WARNING);
     $url_ip_form = Url::fromUri('internal:/admin/config/system/visitors/rebuild-ip-address', [
       'query' => [
         'destination' => Url::fromUri('internal:/admin/reports/status')->toString(),
@@ -375,7 +378,7 @@ function visitors_requirements($phase) {
   $rebuild_route = \Drupal::state()
     ->get('visitors.rebuild.route', FALSE);
   if ($rebuild_route) {
-    $requirements['visitors']['severity'] = REQUIREMENT_WARNING;
+    $requirements['visitors']['severity'] = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::Warning, fn() => REQUIREMENT_WARNING);
     $url_route_form = Url::fromUri('internal:/admin/config/system/visitors/rebuild-route', [
       'query' => [
         'destination' => Url::fromUri('internal:/admin/reports/status')->toString(),
@@ -391,7 +394,7 @@ function visitors_requirements($phase) {
   $schema = \Drupal::database()->schema();
   $performance_exists = $schema->tableExists('visitors_performance');
   if ($performance_exists) {
-    $requirements['visitors']['severity'] = REQUIREMENT_WARNING;
+    $requirements['visitors']['severity'] = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::Warning, fn() => REQUIREMENT_WARNING);
     $url_performance = Url::fromUri('internal:/admin/config/system/visitors/performance', [
       'query' => [
         'destination' => Url::fromUri('internal:/admin/reports/status')->toString(),
@@ -493,13 +496,19 @@ function visitors_update_8214() {
   /** @var \Drupal\Core\Database\Connection $database */
   $database = \Drupal::database();
 
-  $database->schema()
-    ->changeField('visitors', 'visitors_ip', 'visitors_ip', [
-      'type' => 'varchar',
-      'length' => 45,
-      'not null' => TRUE,
-      'default' => '',
-    ]);
+  $dbSchema = $database->schema();
+  $spec = [
+    'type'     => 'varchar',
+    'length'   => 45,
+    'not null' => TRUE,
+    'default'  => '',
+  ];
+  if ($dbSchema->fieldExists('visitors', 'visitors_ip')) {
+    $dbSchema->changeField('visitors', 'visitors_ip', 'visitors_ip', $spec);
+  }
+  else {
+    $dbSchema->addField('visitors', 'visitors_ip', $spec);
+  }
   \Drupal::state()->set('visitors.rebuild.ip_address', TRUE);
 
 }
@@ -642,7 +651,7 @@ function visitors_update_8216(&$sandbox) {
   }
   elseif ($sandbox['progress'] == -15) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'route')) {
       $schema->addField(
         'visitors',
         'route',
@@ -654,15 +663,12 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     \Drupal::state()->set('visitors.rebuild.route', TRUE);
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -14) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_resolution')) {
       $schema->addField(
         'visitors',
         'config_resolution',
@@ -674,14 +680,11 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -13) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_pdf')) {
       $schema->addField(
         'visitors',
         'config_pdf',
@@ -693,14 +696,11 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -12) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_flash')) {
       $schema->addField(
         'visitors',
         'config_flash',
@@ -712,14 +712,11 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -11) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_java')) {
       $schema->addField(
         'visitors',
         'config_java',
@@ -731,14 +728,11 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -10) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_quicktime')) {
       $schema->addField(
         'visitors',
         'config_quicktime',
@@ -750,14 +744,11 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -9) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_realplayer')) {
       $schema->addField(
         'visitors',
         'config_realplayer',
@@ -769,14 +760,11 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -8) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_windowsmedia')) {
       $schema->addField(
         'visitors',
         'config_windowsmedia',
@@ -788,14 +776,11 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -7) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_silverlight')) {
       $schema->addField(
         'visitors',
         'config_silverlight',
@@ -807,14 +792,11 @@ function visitors_update_8216(&$sandbox) {
         ]
       );
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
-    }
     $sandbox['progress'] += 1;
   }
   elseif ($sandbox['progress'] == -6) {
     $schema = $database->schema();
-    try {
+    if (!$schema->fieldExists('visitors', 'config_cookie')) {
       $schema->addField(
         'visitors',
         'config_cookie',
@@ -825,9 +807,6 @@ function visitors_update_8216(&$sandbox) {
           'default' => NULL,
         ]
       );
-    }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
     }
     $sandbox['progress'] += 1;
   }
@@ -877,11 +856,8 @@ function visitors_update_8216(&$sandbox) {
       ],
       'primary key' => ['entity_type', 'entity_id'],
     ];
-    try {
+    if (!$schema->tableExists($table_name)) {
       $schema->createTable($table_name, $table_schema);
-    }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
     }
     $sandbox['progress'] += 1;
   }
@@ -1194,10 +1170,10 @@ function visitors_update_8217(&$sandbox) {
   ];
   /** @var \Drupal\Core\Database\Connection $database */
   $database = \Drupal::database();
-  $logger = \Drupal::logger('visitors');
   if ($sandbox['progress'] == 1) {
-    try {
-      $database->schema()->addField(
+    $dbSchema = $database->schema();
+    if (!$dbSchema->fieldExists('visitors', 'visitor_localtime')) {
+      $dbSchema->addField(
         'visitors',
         'visitor_localtime',
         [
@@ -1207,39 +1183,40 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()
-        ->addField('visitors', 'visitor_id', [
-          'type' => 'varchar',
-          'length' => 32,
-          'not null' => FALSE,
-          'default' => NULL,
-        ]);
-      $database->schema()
-        ->addIndex('visitors', 'visitor_id', ['visitor_id'], $schema);
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
+    if (!$dbSchema->fieldExists('visitors', 'visitor_id')) {
+      $dbSchema->addField('visitors', 'visitor_id', [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => FALSE,
+        'default' => NULL,
+      ]);
+    }
+    if (!$dbSchema->indexExists('visitors', 'visitor_id')) {
+      $dbSchema->addIndex('visitors', 'visitor_id', ['visitor_id'], $schema);
     }
   }
   elseif ($sandbox['progress'] == 2) {
-    try {
-      $database->schema()
-        ->addIndex('visitors', 'visitors_uid', ['visitors_uid'], $schema);
-
-      $database->schema()
-        ->addIndex('visitors', 'visitors_ip', ['visitors_ip'], $schema);
-
-      $database->schema()
-        ->addIndex('visitors', 'visitors_date_time', ['visitors_date_time'], $schema);
+    $dbSchema = $database->schema();
+    if (!$dbSchema->indexExists('visitors', 'visitors_uid')) {
+      $dbSchema->addIndex('visitors', 'visitors_uid', ['visitors_uid'], $schema);
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
+    if (!$dbSchema->indexExists('visitors', 'visitors_ip')) {
+      $dbSchema->addIndex('visitors', 'visitors_ip', ['visitors_ip'], $schema);
+    }
+    if (!$dbSchema->indexExists('visitors', 'visitors_date_time')) {
+      $dbSchema->addIndex(
+        'visitors',
+        'visitors_date_time',
+        ['visitors_date_time'],
+        $schema
+      );
     }
   }
   elseif ($sandbox['progress'] == 3) {
-    try {
-      $database->schema()->addField(
+    $dbSchema = $database->schema();
+    if (!$dbSchema->fieldExists('visitors', 'config_browser_engine')) {
+      $dbSchema->addField(
         'visitors',
         'config_browser_engine',
         [
@@ -1249,8 +1226,9 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()->addField(
+    }
+    if (!$dbSchema->fieldExists('visitors', 'config_browser_name')) {
+      $dbSchema->addField(
         'visitors',
         'config_browser_name',
         [
@@ -1260,8 +1238,9 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()->addField(
+    }
+    if (!$dbSchema->fieldExists('visitors', 'config_browser_version')) {
+      $dbSchema->addField(
         'visitors',
         'config_browser_version',
         [
@@ -1271,9 +1250,10 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      // @todo need to check length
-      $database->schema()->addField(
+    }
+    // @todo need to check length
+    if (!$dbSchema->fieldExists('visitors', 'config_client_type')) {
+      $dbSchema->addField(
         'visitors',
         'config_client_type',
         [
@@ -1283,8 +1263,9 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()->addField(
+    }
+    if (!$dbSchema->fieldExists('visitors', 'config_device_brand')) {
+      $dbSchema->addField(
         'visitors',
         'config_device_brand',
         [
@@ -1294,8 +1275,9 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()->addField(
+    }
+    if (!$dbSchema->fieldExists('visitors', 'config_device_model')) {
+      $dbSchema->addField(
         'visitors',
         'config_device_model',
         [
@@ -1305,8 +1287,9 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()->addField(
+    }
+    if (!$dbSchema->fieldExists('visitors', 'config_device_type')) {
+      $dbSchema->addField(
         'visitors',
         'config_device_type',
         [
@@ -1316,8 +1299,9 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()->addField(
+    }
+    if (!$dbSchema->fieldExists('visitors', 'config_os')) {
+      $dbSchema->addField(
         'visitors',
         'config_os',
         [
@@ -1327,8 +1311,9 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()->addField(
+    }
+    if (!$dbSchema->fieldExists('visitors', 'config_os_version')) {
+      $dbSchema->addField(
         'visitors',
         'config_os_version',
         [
@@ -1338,8 +1323,9 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-
-      $database->schema()->addField(
+    }
+    if (!$dbSchema->fieldExists('visitors', 'bot')) {
+      $dbSchema->addField(
         'visitors',
         'bot',
         [
@@ -1349,14 +1335,11 @@ function visitors_update_8217(&$sandbox) {
           'default' => NULL,
         ]
       );
-      $database->schema()
-        ->addIndex('visitors', 'bot', ['bot'], $schema);
-
-      \Drupal::state()->set('visitors.rebuild.device', TRUE);
     }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
+    if (!$dbSchema->indexExists('visitors', 'bot')) {
+      $dbSchema->addIndex('visitors', 'bot', ['bot'], $schema);
     }
+    \Drupal::state()->set('visitors.rebuild.device', TRUE);
   }
   elseif ($sandbox['progress'] == 4) {
 
@@ -1407,11 +1390,8 @@ function visitors_update_8217(&$sandbox) {
       ],
     ];
 
-    try {
+    if (!$schema->tableExists($table_name)) {
       $schema->createTable($table_name, $table_schema);
-    }
-    catch (\Exception $e) {
-      Error::logException($logger, $e);
     }
   }
 
@@ -1463,12 +1443,72 @@ function visitors_update_8218(&$sandbox) {
 
   if ($sandbox['#finished'] == 1) {
     $schema = \Drupal::database()->schema();
-    $schema->changeField('visitors', 'config_browser_name', 'config_browser_name', [
-      'type' => 'varchar',
-      'length' => '2',
+    $spec = [
+      'type'     => 'varchar',
+      'length'   => '2',
       'not null' => FALSE,
-      'default' => NULL,
-    ]);
+      'default'  => NULL,
+    ];
+    if ($schema->fieldExists('visitors', 'config_browser_name')) {
+      $schema->changeField(
+        'visitors',
+        'config_browser_name',
+        'config_browser_name',
+        $spec
+      );
+    }
+    else {
+      $schema->addField('visitors', 'config_browser_name', $spec);
+    }
+  }
+}
+
+/**
+ * Ensures a location column exists under its current name.
+ *
+ * Renames the legacy column when it is the only one present. Adds the
+ * current column when neither exists. When both exist, blank current
+ * values are filled from the legacy column, which is then dropped.
+ *
+ * @param \Drupal\Core\Database\Schema $schema
+ *   The database schema.
+ * @param string $legacy_field
+ *   The legacy column, such as location_continent_code.
+ * @param string $field
+ *   The current column, such as location_continent.
+ */
+function _visitors_update_8220_location_field(
+  Schema $schema,
+  string $legacy_field,
+  string $field,
+): void {
+  $table = 'visitors';
+  $spec = [
+    'type'     => 'varchar',
+    'length'   => 2,
+    'not null' => TRUE,
+    'default'  => '',
+  ];
+  $has_legacy  = $schema->fieldExists($table, $legacy_field);
+  $has_current = $schema->fieldExists($table, $field);
+
+  if ($has_legacy && !$has_current) {
+    $schema->changeField($table, $legacy_field, $field, $spec);
+    return;
+  }
+  if (!$has_current) {
+    $schema->addField($table, $field, $spec);
+    return;
+  }
+  if ($has_legacy) {
+    $blank = new Condition('OR');
+    $blank->condition($field, '');
+    $blank->condition($field, NULL, 'IS NULL');
+    \Drupal::database()->update($table)
+      ->expression($field, $legacy_field)
+      ->condition($blank)
+      ->execute();
+    $schema->dropField($table, $legacy_field);
   }
 }
 
@@ -1504,57 +1544,16 @@ function visitors_update_8220() {
     );
   }
 
-  if ($schema->fieldExists($table, 'location_continent_code')) {
-    $schema->changeField(
-      'visitors',
-      'location_continent_code',
-      'location_continent',
-      [
-        'type' => 'varchar',
-        'length' => 2,
-        'not null' => TRUE,
-        'default' => '',
-      ]
-    );
-  }
-  else {
-    $schema->addField(
-      'visitors',
-      'location_continent',
-      [
-        'type' => 'varchar',
-        'length' => 2,
-        'not null' => TRUE,
-        'default' => '',
-      ]
-    );
-  }
-
-  if ($schema->fieldExists($table, 'location_country_code')) {
-    $schema->changeField(
-      'visitors',
-      'location_country_code',
-      'location_country',
-      [
-        'type' => 'varchar',
-        'length' => 2,
-        'not null' => TRUE,
-        'default' => '',
-      ]
-    );
-  }
-  else {
-    $schema->addField(
-      'visitors',
-      'location_country',
-      [
-        'type' => 'varchar',
-        'length' => 2,
-        'not null' => TRUE,
-        'default' => '',
-      ]
-    );
-  }
+  _visitors_update_8220_location_field(
+    $schema,
+    'location_continent_code',
+    'location_continent'
+  );
+  _visitors_update_8220_location_field(
+    $schema,
+    'location_country_code',
+    'location_country'
+  );
 
   $visitors_view = [
     'langcode' => 'en',
@@ -11139,10 +11138,21 @@ function visitors_update_8222(&$sandbox) {
         );
     }
 
-    $schema->changeField('visitors', 'visitors_title', 'visitors_title', [
-      'type' => 'text',
+    $title_spec = [
+      'type'     => 'text',
       'not null' => TRUE,
-    ]);
+    ];
+    if ($schema->fieldExists('visitors', 'visitors_title')) {
+      $schema->changeField(
+        'visitors',
+        'visitors_title',
+        'visitors_title',
+        $title_spec
+      );
+    }
+    else {
+      $schema->addField('visitors', 'visitors_title', $title_spec);
+    }
   }
   elseif ($sandbox['progress'] == 1) {
     $settings = \Drupal::configFactory()->getEditable('visitors.config');
@@ -13796,15 +13806,26 @@ function visitors_update_8232() {
 function visitors_update_8233() {
   $schema = \Drupal::database()->schema();
 
-  $schema->changeField(
-    'visitors',
-    'language',
-    'language',
-    [
-      'type' => 'varchar',
-      'length' => 3,
-      'not null' => TRUE,
-      'default' => '',
-    ]
-  );
+  $spec = [
+    'type'     => 'varchar',
+    'length'   => 3,
+    'not null' => TRUE,
+    'default'  => '',
+  ];
+  if ($schema->fieldExists('visitors', 'language')) {
+    $schema->changeField('visitors', 'language', 'language', $spec);
+  }
+  else {
+    $schema->addField('visitors', 'language', $spec);
+  }
+}
+
+/**
+ * Adds the client debug setting.
+ */
+function visitors_update_8234() {
+  $config = \Drupal::configFactory()->getEditable('visitors.config');
+  if ($config->get('client_debug') === NULL) {
+    $config->set('client_debug', FALSE)->save();
+  }
 }

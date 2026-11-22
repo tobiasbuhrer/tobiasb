@@ -10,6 +10,10 @@ visitors.index:
   parent: system.admin
   description: 'Web analytics reports.'
   weight: 5
+  options:
+    icon:
+      pack_id: visitors
+      icon_id: visitors
 
 visitors.hits:
   title: 'Recent hits'

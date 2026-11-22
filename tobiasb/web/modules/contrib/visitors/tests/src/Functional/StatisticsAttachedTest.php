@@ -4,12 +4,16 @@ namespace Drupal\Tests\visitors\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use Drupal\node\Entity\Node;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversFunction;
 
 /**
  * Tests if tacker.js is loaded when content is not printed.
- *
- * @group visitors
  */
+#[CoversFunction('visitors_page_attachments')]
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class StatisticsAttachedTest extends BrowserTestBase {
 
   /**
@@ -45,8 +49,6 @@ class StatisticsAttachedTest extends BrowserTestBase {
 
   /**
    * Tests if statistics.js is loaded when content is not printed.
-   *
-   * @covers visitors_page_attachments
    */
   public function testAttached() {
 
@@ -56,9 +58,14 @@ class StatisticsAttachedTest extends BrowserTestBase {
       'body' => 'body text',
     ]);
     $node->save();
+    $this->config('visitors.config')
+      ->set('client_debug', TRUE)
+      ->save();
+
     $this->drupalGet('node/' . $node->id());
 
     $this->assertSession()->responseContains('/js/visitors.js');
+    $this->assertSession()->responseContains('"debug":true');
   }
 
 }

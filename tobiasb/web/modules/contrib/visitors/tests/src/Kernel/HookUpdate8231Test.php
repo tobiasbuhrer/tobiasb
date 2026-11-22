@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace Drupal\Tests\visitors\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests the hook_update_8231() function.
- *
- * @group visitors
  */
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class HookUpdate8231Test extends KernelTestBase {
 
   /**

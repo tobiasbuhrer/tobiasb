@@ -4,17 +4,39 @@ namespace Drupal\Tests\visitors\Unit\Controller;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Controller\Visitors;
+use Drupal\visitors_geoip\GeoIpCity;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ServerBag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Unit tests for the HitDetails controller.
- *
- * @coversDefaultClass \Drupal\visitors\Controller\Visitors
- * @uses \Drupal\visitors\Controller\Visitors
- * @group visitors
  */
+#[CoversClass(Visitors::class)]
+#[CoversMethod(Visitors::class, 'create')]
+#[CoversMethod(Visitors::class, '__construct')]
+#[CoversMethod(Visitors::class, 'doConfig')]
+#[CoversMethod(Visitors::class, 'doCounter')]
+#[CoversMethod(Visitors::class, 'doCustom')]
+#[CoversMethod(Visitors::class, 'doDeviceDetect')]
+#[CoversMethod(Visitors::class, 'doLanguage')]
+#[CoversMethod(Visitors::class, 'doLocalTime')]
+#[CoversMethod(Visitors::class, 'doLocation')]
+#[CoversMethod(Visitors::class, 'doPerformance')]
+#[CoversMethod(Visitors::class, 'doReferrer')]
+#[CoversMethod(Visitors::class, 'doTime')]
+#[CoversMethod(Visitors::class, 'doUrl')]
+#[CoversMethod(Visitors::class, 'doVisitorId')]
+#[CoversMethod(Visitors::class, 'getDefaultFields')]
+#[CoversMethod(Visitors::class, 'track')]
+#[CoversMethod(Visitors::class, 'getResponse')]
+#[CoversMethod(Visitors::class, 'getImageContent')]
+#[UsesClass(Visitors::class)]
+#[Group('visitors')]
 class VisitorsControllerTest extends UnitTestCase {
 
   /**
@@ -131,8 +153,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests the create() method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -142,8 +162,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests the construct() method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
 
@@ -163,22 +181,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests the track() method.
-   *
-   * @covers ::doConfig
-   * @covers ::doCounter
-   * @covers ::doCustom
-   * @covers ::doDeviceDetect
-   * @covers ::doLanguage
-   * @covers ::doLocalTime
-   * @covers ::doLocation
-   * @covers ::doPerformance
-   * @covers ::doReferrer
-   * @covers ::doTime
-   * @covers ::doUrl
-   * @covers ::doVisitorId
-   * @covers ::getDefaultFields
-   * @covers ::track
-   * @covers ::getResponse
    */
   public function testTrack() {
     $this->device->expects($this->once())
@@ -223,22 +225,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests the track() method.
-   *
-   * @covers ::doConfig
-   * @covers ::doCounter
-   * @covers ::doCustom
-   * @covers ::doDeviceDetect
-   * @covers ::doLanguage
-   * @covers ::doLocalTime
-   * @covers ::doLocation
-   * @covers ::doPerformance
-   * @covers ::doReferrer
-   * @covers ::doTime
-   * @covers ::doUrl
-   * @covers ::doVisitorId
-   * @covers ::getDefaultFields
-   * @covers ::track
-   * @covers ::getResponse
    */
   public function testTrackNoDeviceLibrary() {
     $this->device->expects($this->once())
@@ -288,9 +274,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests track() with a valid 3-letter language code.
-   *
-   * @covers ::doLanguage
-   * @covers ::track
    */
   public function testTrackWithValidThreeLetterLanguage() {
     $this->device->expects($this->once())
@@ -337,9 +320,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests track() with an invalid language code length.
-   *
-   * @covers ::doLanguage
-   * @covers ::track
    */
   public function testTrackWithInvalidLanguageLength() {
     $this->device->expects($this->once())
@@ -386,9 +366,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests track() with a one-letter language code.
-   *
-   * @covers ::doLanguage
-   * @covers ::track
    */
   public function testTrackWithSingleLetterLanguageCode() {
     $this->device->expects($this->once())
@@ -435,22 +412,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests the track() method.
-   *
-   * @covers ::doConfig
-   * @covers ::doCounter
-   * @covers ::doCustom
-   * @covers ::doDeviceDetect
-   * @covers ::doLanguage
-   * @covers ::doLocalTime
-   * @covers ::doLocation
-   * @covers ::doPerformance
-   * @covers ::doReferrer
-   * @covers ::doTime
-   * @covers ::doUrl
-   * @covers ::doVisitorId
-   * @covers ::getDefaultFields
-   * @covers ::track
-   * @covers ::getResponse
    */
   public function testTrackBot() {
     $this->device->expects($this->once())
@@ -496,8 +457,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests the track() method.
-   *
-   * @covers ::doLocalTime
    */
   public function testTrackNoLocal() {
     $request = $this->createMock('\Symfony\Component\HttpFoundation\Request');
@@ -532,34 +491,11 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests location with geoip; location null.
-   *
-   * @covers ::doLocation
    */
   public function testTrackGeoIp() {
     $container = \Drupal::getContainer();
 
-    $continent = new \stdClass();
-    $continent->code = 'NA';
-    $country = new \stdClass();
-    $country->isoCode = 'US';
-    $location = new \stdClass();
-    $location->latitude = 37.751;
-    $location->longitude = -97.822;
-    $location->metroCode = '815';
-    $subdivision = new \stdClass();
-    $subdivision->isoCode = 'CA';
-    $postal = new \stdClass();
-    $postal->code = '94043';
-    $c = new \stdClass();
-    $c->names = ['en' => 'Chicago'];
-
-    $city = new \stdClass();
-    $city->continent = $continent;
-    $city->country = $country;
-    $city->subdivisions = [$subdivision];
-    $city->city = $c;
-    $city->postal = $postal;
-    $city->location = $location;
+    $city = new GeoIpCity('NA', 'US', 'CA', 'Chicago', 37.751, -97.822);
 
     $geoip = $this->createMock('\Drupal\visitors_geoip\VisitorsGeoIpInterface');
     $geoip->expects($this->once())
@@ -596,14 +532,24 @@ class VisitorsControllerTest extends UnitTestCase {
       ->with('bot_retention_log')
       ->willReturn(0);
 
+    $this->visitorsTracker->expects($this->once())
+      ->method('writeLog')
+      ->with($this->callback(function (array $fields): bool {
+        return ($fields['location_continent'] ?? NULL) === 'NA'
+          && ($fields['location_country'] ?? NULL) === 'US'
+          && ($fields['location_region'] ?? NULL) === 'CA'
+          && ($fields['location_city'] ?? NULL) === 'Chicago'
+          && ($fields['location_latitude'] ?? NULL) === 37.751
+          && ($fields['location_longitude'] ?? NULL) === -97.822;
+      }))
+      ->willReturn(1);
+
     $response = $controller->track($request);
     $this->assertSame('', $response->getContent());
   }
 
   /**
    * Tests location with geoip; location null.
-   *
-   * @covers ::doLocation
    */
   public function testTrackGeoIpNull() {
     $container = \Drupal::getContainer();
@@ -639,16 +585,24 @@ class VisitorsControllerTest extends UnitTestCase {
       ->with('bot_retention_log')
       ->willReturn(0);
 
+    $this->visitorsTracker->expects($this->once())
+      ->method('writeLog')
+      ->with($this->callback(function (array $fields): bool {
+        return !array_key_exists('location_continent', $fields)
+          && !array_key_exists('location_country', $fields)
+          && !array_key_exists('location_region', $fields)
+          && !array_key_exists('location_city', $fields)
+          && !array_key_exists('location_latitude', $fields)
+          && !array_key_exists('location_longitude', $fields);
+      }))
+      ->willReturn(1);
+
     $response = $controller->track($request);
     $this->assertSame('', $response->getContent());
   }
 
   /**
    * Tests the track() method with send_image=true.
-   *
-   * @covers ::track
-   * @covers ::getResponse
-   * @covers ::getImageContent
    */
   public function testTrackWithSendImageTrue() {
     $this->device->expects($this->once())
@@ -695,9 +649,6 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests the track() method with send_image=false.
-   *
-   * @covers ::track
-   * @covers ::getResponse
    */
   public function testTrackWithSendImageFalse() {
     $this->device->expects($this->once())
@@ -741,13 +692,10 @@ class VisitorsControllerTest extends UnitTestCase {
 
   /**
    * Tests the getImageContent() method.
-   *
-   * @covers ::getImageContent
    */
   public function testGetImageContent() {
     $reflection = new \ReflectionClass($this->controller);
     $method = $reflection->getMethod('getImageContent');
-    $method->setAccessible(TRUE);
 
     $content = $method->invoke($this->controller);
     $expected_content = hex2bin('47494638396101000100800000000000FFFFFF21F9040100000000002C00000000010001000002024401003B');

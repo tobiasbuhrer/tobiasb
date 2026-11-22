@@ -2,18 +2,22 @@
 
 namespace Drupal\Tests\visitors_geoip\Unit\Service;
 
-use GeoIp2\Model\City;
 use Drupal\Tests\UnitTestCase;
+use Drupal\visitors_geoip\GeoIpCity;
 use Drupal\visitors_geoip\Service\RebuildLocationService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the RebuildLocationService.
- *
- * @coversDefaultClass \Drupal\visitors_geoip\Service\RebuildLocationService
- *
- * @group visitors_geoip
  */
+#[CoversClass(RebuildLocationService::class)]
+#[CoversMethod(RebuildLocationService::class, '__construct')]
+#[CoversMethod(RebuildLocationService::class, 'getLocations')]
+#[CoversMethod(RebuildLocationService::class, 'rebuild')]
+#[Group('visitors_geoip')]
 class RebuildLocationServiceTest extends UnitTestCase {
 
   /**
@@ -59,8 +63,6 @@ class RebuildLocationServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstruct(): void {
     $service = new RebuildLocationService($this->database, $this->geoipService);
@@ -70,8 +72,6 @@ class RebuildLocationServiceTest extends UnitTestCase {
 
   /**
    * Tests getLocations() method.
-   *
-   * @covers ::getLocations
    */
   public function testGetLocations(): void {
     $statement = $this->createMock('Drupal\Core\Database\Statement\StatementBase');
@@ -104,8 +104,6 @@ class RebuildLocationServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild() method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildNone(): void {
     $ip_address = '127.0.0.1';
@@ -119,18 +117,17 @@ class RebuildLocationServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild() method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuild(): void {
 
-    $city = new City([
-      'city' => ['names' => ['en' => 'Los Angeles']],
-      'country' => ['iso_code' => 'US'],
-      'subdivisions' => [['iso_code' => 'CA']],
-      'continent' => ['code' => 'NA'],
-      'location' => ['latitude' => 34.0522, 'longitude' => -118.2437],
-    ]);
+    $city = new GeoIpCity(
+      'NA',
+      'US',
+      'CA',
+      'Los Angeles',
+      34.0522,
+      -118.2437,
+    );
 
     $ip_address = '127.0.0.1';
     $this->geoipService->expects($this->once())

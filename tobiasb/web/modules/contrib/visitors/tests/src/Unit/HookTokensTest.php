@@ -5,14 +5,14 @@ namespace Drupal\Tests\visitors\Unit;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\StatisticsViewsResult;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.module';
 
 /**
  * Tests visitors_tokens.
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookTokensTest extends UnitTestCase {
 
   /**

@@ -8,14 +8,22 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsCountry;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Drupal\views\ResultRow;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsCountry
- * @uses \Drupal\visitors\Plugin\views\field\VisitorsCountry
  */
+#[CoversClass(VisitorsCountry::class)]
+#[CoversMethod(VisitorsCountry::class, 'buildOptionsForm')]
+#[CoversMethod(VisitorsCountry::class, 'create')]
+#[CoversMethod(VisitorsCountry::class, '__construct')]
+#[CoversMethod(VisitorsCountry::class, 'defineOptions')]
+#[CoversMethod(VisitorsCountry::class, 'render')]
+#[UsesClass(VisitorsCountry::class)]
+#[Group('visitors')]
 class VisitorsCountryTest extends UnitTestCase {
 
   /**
@@ -160,8 +168,6 @@ class VisitorsCountryTest extends UnitTestCase {
 
   /**
    * Tests the buildOptionsForm method.
-   *
-   * @covers ::buildOptionsForm
    */
   public function testBuildOptionsForm() {
     $this->field->view = $this->createMock('Drupal\views\ViewExecutable');
@@ -195,8 +201,6 @@ class VisitorsCountryTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -209,8 +213,6 @@ class VisitorsCountryTest extends UnitTestCase {
 
   /**
    * Tests the construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $field = new VisitorsCountry([], 'visitors_country', [], $this->moduleHandler, $this->request, $this->location);
@@ -219,14 +221,11 @@ class VisitorsCountryTest extends UnitTestCase {
 
   /**
    * Tests the defineOptions method.
-   *
-   * @covers ::defineOptions
    */
   public function testDefineOptions() {
     $this->field->view = $this->createMock('Drupal\views\ViewExecutable');
 
     $method = new \ReflectionMethod($this->field, 'defineOptions');
-    $method->setAccessible(TRUE);
     $options = $method->invoke($this->field);
 
     $this->assertArrayHasKey('icon', $options);
@@ -237,8 +236,6 @@ class VisitorsCountryTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRender() {
 

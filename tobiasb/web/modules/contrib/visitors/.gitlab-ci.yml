@@ -60,36 +60,543 @@ variables:
 # The 4 validation jobs below are explicit about their artifact. This is not strictly needed
 # (last wins) but done for demonstration. https://docs.gitlab.com/ee/ci/jobs/job_control.html#fetch-artifacts-from-a-parallelmatrix-job
 #
-phpunit (coverage):
-  extends: phpunit
+
+# Coverage jobs cannot extend `phpunit`: the template always passes
+# $DRUPAL_PROJECT_FOLDER as a path, so --testsuite is ignored.
+.phpunit-coverage-base:
+  extends: .phpunit-base
+  variables:
+    _PHPUNIT_CONCURRENT: "0"
   rules:
     - if: '$SKIP_PHPUNIT == "1"'
       when: never
     - when: on_success
   before_script:
-    # Install and enable PCOV.
-    - echo -e '[pcov]\npcov.directory=.' > /usr/local/etc/php/conf.d/pcov.ini
+    # PCOV matches realpaths. Composer symlinks the module from the
+    # checkout into web/modules/custom, so executed files are under
+    # $CI_PROJECT_DIR (src/), not the symlink path.
+    - echo -e "[pcov]\npcov.directory=${CI_PROJECT_DIR}" > /usr/local/etc/php/conf.d/pcov.ini
     - docker-php-ext-enable pcov
-  variables:
-    REPORT_COVERAGE: "true"
-    _PHPUNIT_EXTRA:
-      value: --coverage-cobertura $CI_PROJECT_DIR/coverage.xml --coverage-text --colors=never --coverage-html $CI_PROJECT_DIR/coverage
-  coverage: /^\s*Lines:\s*\d+.\d+\%/
+  script:
+    - cd $CI_PROJECT_DIR && pwd
+    - !reference [ .check-composer-end-code ]
+    - !reference [ .phpunit-webdriver-variables ]
+    - !reference [ .show-environment-variables ]
+    - !reference [ .setup-webserver ]
+    - !reference [ .simpletest-db ]
+    - !reference [ .show-context ]
+    - |
+      echo ' ' > $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/files/simpletest/phpunit-ignore.xml
+      if [ "$COVERAGE_SUITE" = "unit" ]; then
+        COVERAGE_FILE="$CI_PROJECT_DIR/coverage-unit.xml"
+        echo "executing phpunit --testsuite unit (coverage)"
+        sudo -u www-data -H -E $COMPOSER_BIN_DIR/phpunit \
+          --bootstrap $PWD/$_WEB_ROOT/core/tests/bootstrap.php \
+          --log-junit $CI_PROJECT_DIR/junit.xml \
+          --testsuite unit \
+          --coverage-cobertura "$COVERAGE_FILE" \
+          --coverage-text --colors=never || EXIT_CODE=$?
+      elif [ "$COVERAGE_SUITE" = "kernel" ]; then
+        COVERAGE_FILE="$CI_PROJECT_DIR/coverage-kernel-${CI_NODE_INDEX}.xml"
+        mapfile -t ALL_KERNEL < <(find -L "$DRUPAL_PROJECT_FOLDER" -type f -path '*/tests/src/Kernel/*' -name '*Test.php' | sort)
+        SHARD=()
+        i=0
+        for f in "${ALL_KERNEL[@]}"; do
+          if [ $((i % CI_NODE_TOTAL)) -eq $((CI_NODE_INDEX - 1)) ]; then
+            SHARD+=("$f")
+          fi
+          i=$((i + 1))
+        done
+        echo "Kernel shard ${CI_NODE_INDEX}/${CI_NODE_TOTAL}: ${#SHARD[@]} of ${#ALL_KERNEL[@]} files"
+        printf '%s\n' "${SHARD[@]}"
+        if [ ${#SHARD[@]} -eq 0 ]; then
+          echo "No kernel tests in this shard"
+          exit 1
+        fi
+        sudo -u www-data -H -E $COMPOSER_BIN_DIR/phpunit \
+          --bootstrap $PWD/$_WEB_ROOT/core/tests/bootstrap.php \
+          --log-junit $CI_PROJECT_DIR/junit.xml \
+          --coverage-cobertura "$COVERAGE_FILE" \
+          --coverage-text --colors=never \
+          "${SHARD[@]}" || EXIT_CODE=$?
+      else
+        echo "Unknown COVERAGE_SUITE='$COVERAGE_SUITE'"
+        exit 1
+      fi
+      if [ -f "$COVERAGE_FILE" ]; then
+        sed -i "s#filename=\"$CI_PROJECT_DIR/$_WEB_ROOT/modules/custom/$CI_PROJECT_NAME/#filename=\"#g" "$COVERAGE_FILE"
+        sed -i "s#filename=\"$_WEB_ROOT/modules/custom/$CI_PROJECT_NAME/#filename=\"#g" "$COVERAGE_FILE"
+        sed -i "s#<source>.*</source>#<source>$CI_PROJECT_DIR</source>#g" "$COVERAGE_FILE"
+      fi
+      cp /var/log/apache2/test.apache.access.log $CI_PROJECT_DIR/apache.access.log.txt || true
+      cp /var/log/apache2/test.apache.error.log $CI_PROJECT_DIR/apache.error.log.txt || true
+      echo "Exiting with EXIT_CODE=${EXIT_CODE:-0}"
+      exit ${EXIT_CODE:-0}
   artifacts:
+    expire_in: 6 mos
+    when: always
+    reports:
+      junit:
+        - junit.xml
+    paths:
+      - junit.xml
+      - apache.access.log.txt
+      - apache.error.log.txt
+      - $BROWSERTEST_OUTPUT_DIRECTORY
+
+phpunit (coverage unit):
+  extends: .phpunit-coverage-base
+  variables:
+    COVERAGE_SUITE: unit
+  artifacts:
+    expire_in: 6 mos
+    when: always
+    reports:
+      junit:
+        - junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage-unit.xml
+    paths:
+      - junit.xml
+      - coverage-unit.xml
+      - apache.access.log.txt
+      - apache.error.log.txt
+      - $BROWSERTEST_OUTPUT_DIRECTORY
+
+phpunit (coverage kernel):
+  extends: .phpunit-coverage-base
+  parallel: 3
+  variables:
+    COVERAGE_SUITE: kernel
+  artifacts:
+    expire_in: 6 mos
+    when: always
+    reports:
+      junit:
+        - junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage-kernel-$CI_NODE_INDEX.xml
+    paths:
+      - junit.xml
+      - coverage-kernel-$CI_NODE_INDEX.xml
+      - apache.access.log.txt
+      - apache.error.log.txt
+      - $BROWSERTEST_OUTPUT_DIRECTORY
+
+phpunit (coverage):
+  stage: test
+  coverage: /^\s*Lines:\s*\d+.\d+\%/
+  needs:
+    - job: phpunit (coverage unit)
+      artifacts: true
+    - job: phpunit (coverage kernel)
+      artifacts: true
+  rules:
+    - if: '$SKIP_PHPUNIT == "1"'
+      when: never
+    - when: on_success
+  script:
+    - |
+      cat > /tmp/merge-cobertura.php <<'PHP'
+      <?php
+
+      declare(strict_types=1);
+
+      /**
+       * Escape a value for HTML text and attributes.
+       */
+      function coverage_escape(string $value): string {
+        return htmlspecialchars(
+          $value,
+          ENT_QUOTES | ENT_SUBSTITUTE,
+          'UTF-8'
+        );
+      }
+
+      /**
+       * Drop a checkout prefix so names are project-relative.
+       */
+      function coverage_relative_name(string $filename, string $source): string {
+        $filename = str_replace('\\', '/', $filename);
+        $roots = [];
+        if ($source !== '') {
+          $roots[] = rtrim(str_replace('\\', '/', $source), '/');
+        }
+        $project = getenv('CI_PROJECT_DIR');
+        if (is_string($project) && $project !== '') {
+          $roots[] = rtrim(str_replace('\\', '/', $project), '/');
+        }
+        foreach ($roots as $root) {
+          $prefix = $root . '/';
+          if (str_starts_with($filename, $prefix)) {
+            return substr($filename, strlen($prefix));
+          }
+        }
+        return $filename;
+      }
+
+      /**
+       * Report page path, or NULL when the name is unsafe.
+       */
+      function coverage_output_path(
+        string $coverage_dir,
+        string $filename,
+      ): ?string {
+        if ($filename === '' || str_contains($filename, "\0")) {
+          return NULL;
+        }
+        $parts = explode('/', str_replace('\\', '/', $filename));
+        foreach ($parts as $part) {
+          if ($part === '' || $part === '.' || $part === '..') {
+            return NULL;
+          }
+        }
+        return $coverage_dir . '/' . implode('/', $parts) . '.html';
+      }
+
+      /**
+       * URL of a per-file page, relative to the index.
+       */
+      function coverage_page_href(string $filename): string {
+        $parts = explode('/', str_replace('\\', '/', $filename));
+        return implode('/', array_map('rawurlencode', $parts)) . '.html';
+      }
+
+      /**
+       * First readable source path for a coverage filename.
+       */
+      function coverage_source_path(string $filename, string $source): ?string {
+        $candidates = [];
+        $normalized = str_replace('\\', '/', $filename);
+        if (str_starts_with($normalized, '/')) {
+          $candidates[] = $normalized;
+        }
+        if ($source !== '') {
+          $candidates[] = rtrim($source, '/') . '/' . $filename;
+        }
+        $project = getenv('CI_PROJECT_DIR');
+        if (is_string($project) && $project !== '') {
+          $candidates[] = rtrim($project, '/') . '/' . $filename;
+        }
+        foreach ($candidates as $path) {
+          if (is_readable($path)) {
+            return $path;
+          }
+        }
+        return NULL;
+      }
+
+      /**
+       * Write a file, creating parent directories first.
+       */
+      function coverage_write(string $path, string $contents): void {
+        $directory = dirname($path);
+        if (!is_dir($directory) && !mkdir($directory, 0775, TRUE) && !is_dir($directory)) {
+          fwrite(STDERR, "Failed to create $directory\n");
+          exit(1);
+        }
+        if (file_put_contents($path, $contents) === FALSE) {
+          fwrite(STDERR, "Failed to write $path\n");
+          exit(1);
+        }
+      }
+
+      /**
+       * Shared stylesheet for the published coverage pages.
+       */
+      function coverage_styles(): string {
+        return <<<'CSS'
+      body { font-family: sans-serif; }
+      table { border-collapse: collapse; }
+      td, th { border: 1px solid #ccc; padding: 0.25rem 0.5rem; text-align: left; }
+      td.num, th.num { text-align: right; }
+      .hit { background: #c8e6c9; }
+      .miss { background: #ffcdd2; }
+      pre { margin: 0; font-family: monospace; white-space: pre-wrap; }
+      CSS;
+      }
+
+      /**
+       * Write the index and one HTML page per covered file.
+       */
+      function coverage_write_html(
+        string $coverage_dir,
+        array $hits,
+        string $source,
+        int $lines_covered,
+        int $lines_valid,
+        string $percent,
+      ): void {
+        $rows = '';
+        foreach ($hits as $filename => $lines) {
+          $relative = coverage_relative_name((string) $filename, $source);
+          $page = coverage_output_path($coverage_dir, $relative);
+          if ($page === NULL) {
+            fwrite(STDERR, "Skipping unsafe coverage path: $filename\n");
+            continue;
+          }
+          $valid = count($lines);
+          $covered = 0;
+          foreach ($lines as $count) {
+            if ($count > 0) {
+              $covered++;
+            }
+          }
+          $rate = $valid > 0 ? $covered / $valid : 0.0;
+          $file_percent = sprintf('%.2f', $rate * 100);
+          coverage_write_file_page(
+            $page,
+            $relative,
+            $lines,
+            $source,
+            $file_percent
+          );
+          $rows .= '<tr><td><a href="'
+            . coverage_escape(coverage_page_href($relative))
+            . '">'
+            . coverage_escape($relative)
+            . '</a></td><td class="num">'
+            . $covered
+            . '</td><td class="num">'
+            . $valid
+            . '</td><td class="num">'
+            . coverage_escape($file_percent)
+            . '%</td></tr>';
+        }
+        $index = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
+          . '<title>Coverage</title><style>'
+          . coverage_styles()
+          . '</style></head><body><h1>Coverage</h1><p>Lines: '
+          . coverage_escape($percent)
+          . '% ('
+          . $lines_covered
+          . '/'
+          . $lines_valid
+          . ')</p><table><thead><tr><th scope="col">File</th>'
+          . '<th scope="col" class="num">Covered</th>'
+          . '<th scope="col" class="num">Lines</th>'
+          . '<th scope="col" class="num">Percent</th></tr></thead><tbody>'
+          . $rows
+          . '</tbody></table></body></html>';
+        coverage_write($coverage_dir . '/index.html', $index);
+      }
+
+      /**
+       * Write one source file with hit and miss lines highlighted.
+       *
+       * @param array<int, int> $lines
+       *   Line number to hit count.
+       */
+      function coverage_write_file_page(
+        string $page,
+        string $relative,
+        array $lines,
+        string $source,
+        string $file_percent,
+      ): void {
+        $depth = substr_count(str_replace('\\', '/', $relative), '/');
+        $index_href = str_repeat('../', $depth) . 'index.html';
+        $source_lines = [];
+        $path = coverage_source_path($relative, $source);
+        if ($path !== NULL) {
+          $read = file($path, FILE_IGNORE_NEW_LINES);
+          if (is_array($read)) {
+            $source_lines = $read;
+          }
+        }
+        $last = count($source_lines);
+        foreach (array_keys($lines) as $number) {
+          if ($number > $last) {
+            $last = $number;
+          }
+        }
+        $body = '';
+        for ($number = 1; $number <= $last; $number++) {
+          $text = $source_lines[$number - 1] ?? '';
+          $class = '';
+          $hits = '';
+          if (isset($lines[$number])) {
+            $class = $lines[$number] > 0 ? ' class="hit"' : ' class="miss"';
+            $hits = (string) $lines[$number];
+          }
+          $body .= '<tr' . $class . '><td class="num">'
+            . $number
+            . '</td><td class="num">'
+            . coverage_escape($hits)
+            . '</td><td><pre>'
+            . coverage_escape($text)
+            . '</pre></td></tr>';
+        }
+        $html = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>'
+          . coverage_escape($relative)
+          . '</title><style>'
+          . coverage_styles()
+          . '</style></head><body><p><a href="'
+          . coverage_escape($index_href)
+          . '">Coverage index</a></p><h1>'
+          . coverage_escape($relative)
+          . '</h1><p>Lines: '
+          . coverage_escape($file_percent)
+          . '%</p><table><thead><tr><th scope="col" class="num">Line</th>'
+          . '<th scope="col" class="num">Hits</th>'
+          . '<th scope="col">Source</th></tr></thead><tbody>'
+          . $body
+          . '</tbody></table></body></html>';
+        coverage_write($page, $html);
+      }
+
+      $output = $argv[1];
+      $hits = [];
+      $source = '';
+      foreach (array_slice($argv, 2) as $file) {
+        if (!is_readable($file)) {
+          fwrite(STDERR, "Cannot read Cobertura file: $file\n");
+          exit(1);
+        }
+        $xml = simplexml_load_file($file);
+        if ($xml === FALSE) {
+          fwrite(STDERR, "Invalid Cobertura XML: $file\n");
+          exit(1);
+        }
+        if ($source === '' && isset($xml->sources->source)) {
+          $source = (string) $xml->sources->source;
+        }
+        foreach ($xml->xpath('//class') ?: [] as $class) {
+          $filename = (string) $class['filename'];
+          if ($filename === '') {
+            continue;
+          }
+          if (!isset($hits[$filename])) {
+            $hits[$filename] = [];
+          }
+          $line_nodes = $class->xpath('./lines/line') ?: [];
+          if ($line_nodes === []) {
+            $line_nodes = $class->xpath('.//line') ?: [];
+          }
+          foreach ($line_nodes as $line) {
+            $number = (int) $line['number'];
+            $count = (int) $line['hits'];
+            if (!isset($hits[$filename][$number]) || $count > $hits[$filename][$number]) {
+              $hits[$filename][$number] = $count;
+            }
+          }
+        }
+      }
+      if ($hits === []) {
+        fwrite(STDERR, "No coverage data found in input files.\n");
+        exit(1);
+      }
+      ksort($hits);
+      $lines_valid = 0;
+      $lines_covered = 0;
+      foreach ($hits as $lines) {
+        foreach ($lines as $count) {
+          $lines_valid++;
+          if ($count > 0) {
+            $lines_covered++;
+          }
+        }
+      }
+      $line_rate = $lines_valid > 0 ? $lines_covered / $lines_valid : 0.0;
+      $percent = sprintf('%.2f', $line_rate * 100);
+      $dom = new DOMDocument('1.0', 'UTF-8');
+      $dom->formatOutput = TRUE;
+      $coverage = $dom->createElement('coverage');
+      $coverage->setAttribute('line-rate', (string) $line_rate);
+      $coverage->setAttribute('branch-rate', '0');
+      $coverage->setAttribute('lines-covered', (string) $lines_covered);
+      $coverage->setAttribute('lines-valid', (string) $lines_valid);
+      $coverage->setAttribute('branches-covered', '0');
+      $coverage->setAttribute('branches-valid', '0');
+      $coverage->setAttribute('complexity', '0');
+      $coverage->setAttribute('version', '0.4');
+      $coverage->setAttribute('timestamp', (string) time());
+      $dom->appendChild($coverage);
+      $sources = $dom->createElement('sources');
+      $source_el = $dom->createElement('source');
+      $source_el->appendChild($dom->createTextNode($source !== '' ? $source : '.'));
+      $sources->appendChild($source_el);
+      $coverage->appendChild($sources);
+      $packages = $dom->createElement('packages');
+      $package = $dom->createElement('package');
+      $package->setAttribute('name', 'merged');
+      $package->setAttribute('line-rate', (string) $line_rate);
+      $package->setAttribute('branch-rate', '0');
+      $package->setAttribute('complexity', '0');
+      $packages->appendChild($package);
+      $coverage->appendChild($packages);
+      $classes = $dom->createElement('classes');
+      $package->appendChild($classes);
+      foreach ($hits as $filename => $lines) {
+        ksort($lines);
+        $valid = count($lines);
+        $covered = 0;
+        foreach ($lines as $count) {
+          if ($count > 0) {
+            $covered++;
+          }
+        }
+        $class_rate = $valid > 0 ? $covered / $valid : 0.0;
+        $class = $dom->createElement('class');
+        $class->setAttribute('name', $filename);
+        $class->setAttribute('filename', $filename);
+        $class->setAttribute('line-rate', (string) $class_rate);
+        $class->setAttribute('branch-rate', '0');
+        $class->setAttribute('complexity', '0');
+        $classes->appendChild($class);
+        $lines_el = $dom->createElement('lines');
+        $class->appendChild($lines_el);
+        foreach ($lines as $number => $count) {
+          $line = $dom->createElement('line');
+          $line->setAttribute('number', (string) $number);
+          $line->setAttribute('hits', (string) $count);
+          $lines_el->appendChild($line);
+        }
+      }
+      $dtd = '<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">';
+      $xml_out = $dom->saveXML();
+      if ($xml_out === FALSE) {
+        fwrite(STDERR, "Failed to serialize merged Cobertura XML.\n");
+        exit(1);
+      }
+      $xml_out = preg_replace('/<\?xml.*?\?>\n/', "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n$dtd\n", $xml_out, 1) ?? $xml_out;
+      if (file_put_contents($output, $xml_out) === FALSE) {
+        fwrite(STDERR, "Failed to write $output\n");
+        exit(1);
+      }
+      $project_dir = getenv('CI_PROJECT_DIR');
+      $coverage_dir = (is_string($project_dir) && $project_dir !== '')
+        ? rtrim($project_dir, '/') . '/coverage'
+        : dirname($output) . '/coverage';
+      coverage_write_html(
+        $coverage_dir,
+        $hits,
+        $source,
+        $lines_covered,
+        $lines_valid,
+        $percent
+      );
+      echo "  Lines:               {$percent}%\n";
+      echo "Merged $lines_covered/$lines_valid lines into $output\n";
+      PHP
+      php /tmp/merge-cobertura.php \
+        "$CI_PROJECT_DIR/coverage.xml" \
+        "$CI_PROJECT_DIR/coverage-unit.xml" \
+        "$CI_PROJECT_DIR/coverage-kernel-1.xml" \
+        "$CI_PROJECT_DIR/coverage-kernel-2.xml" \
+        "$CI_PROJECT_DIR/coverage-kernel-3.xml"
+  artifacts:
+    expire_in: 6 mos
+    when: always
     reports:
       coverage_report:
         coverage_format: cobertura
         path: coverage.xml
     paths:
-      - junit.xml
-      - apache.access.log.txt
-      - $BROWSERTEST_OUTPUT_DIRECTORY
       - coverage.xml
       - coverage
-
-phpunit:
-  rules:
-    - when: never
 
 pages:
   stage: test

@@ -6,14 +6,20 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors_geoip\Form\SettingsForm;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the Visitors Settings Form.
- *
- * @coversDefaultClass \Drupal\visitors_geoip\Form\SettingsForm
- *
- * @group visitors_geoip
  */
+#[CoversClass(SettingsForm::class)]
+#[CoversMethod(SettingsForm::class, 'buildForm')]
+#[CoversMethod(SettingsForm::class, 'submitForm')]
+#[CoversMethod(SettingsForm::class, 'validateForm')]
+#[CoversMethod(SettingsForm::class, 'getFormId')]
+#[CoversMethod(SettingsForm::class, 'getEditableConfigNames')]
+#[Group('visitors_geoip')]
 class SettingsFormTest extends UnitTestCase {
 
   /**
@@ -75,8 +81,6 @@ class SettingsFormTest extends UnitTestCase {
 
   /**
    * Tests the buildForm() method.
-   *
-   * @covers ::buildForm
    */
   public function testBuildForm() {
 
@@ -110,8 +114,6 @@ class SettingsFormTest extends UnitTestCase {
 
   /**
    * Tests the submitForm() method.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
 
@@ -156,8 +158,6 @@ class SettingsFormTest extends UnitTestCase {
 
   /**
    * Tests the validateForm() method.
-   *
-   * @covers ::validateForm
    */
   public function testValidateForm() {
 
@@ -176,8 +176,6 @@ class SettingsFormTest extends UnitTestCase {
 
   /**
    * Tests the getFormId() method.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId(): void {
     $this->assertEquals('visitors_geoip_admin_form', $this->form->getFormId());
@@ -185,13 +183,10 @@ class SettingsFormTest extends UnitTestCase {
 
   /**
    * Tests the getEditableConfigNames() method.
-   *
-   * @covers ::getEditableConfigNames
    */
   public function testGetEditableConfigNames(): void {
     // Make the method accessible.
     $method = new \ReflectionMethod($this->form, 'getEditableConfigNames');
-    $method->setAccessible(TRUE);
     // Invoke the method.
     $result = $method->invoke($this->form);
     $this->assertEquals(['visitors_geoip.settings'], $result);

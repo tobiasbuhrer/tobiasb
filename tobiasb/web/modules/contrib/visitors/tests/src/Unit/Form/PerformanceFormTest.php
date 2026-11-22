@@ -5,16 +5,25 @@ namespace Drupal\Tests\visitors\Unit\Form;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Form\PerformanceForm;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 require_once __DIR__ . '/../../../../web/core/includes/form.inc';
 
 /**
  * Rebuild IP address form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Form\PerformanceForm
- * @uses \Drupal\visitors\Form\PerformanceForm
  */
+#[CoversClass(PerformanceForm::class)]
+#[CoversMethod(PerformanceForm::class, 'getFormId')]
+#[CoversMethod(PerformanceForm::class, 'getQuestion')]
+#[CoversMethod(PerformanceForm::class, 'getCancelUrl')]
+#[CoversMethod(PerformanceForm::class, 'batch')]
+#[CoversMethod(PerformanceForm::class, 'dropTable')]
+#[CoversMethod(PerformanceForm::class, 'submitForm')]
+#[UsesClass(PerformanceForm::class)]
+#[Group('visitors')]
 class PerformanceFormTest extends UnitTestCase {
 
   /**
@@ -95,8 +104,6 @@ class PerformanceFormTest extends UnitTestCase {
 
   /**
    * Test the form id.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId() {
     $this->assertEquals('visitors_performance_form', $this->form->getFormId());
@@ -104,8 +111,6 @@ class PerformanceFormTest extends UnitTestCase {
 
   /**
    * Test getQuestion.
-   *
-   * @covers ::getQuestion
    */
   public function testGetQuestion() {
     $this->assertEquals('This will migrate the performance data from the old table. Are you sure?', (string) $this->form->getQuestion());
@@ -113,8 +118,6 @@ class PerformanceFormTest extends UnitTestCase {
 
   /**
    * Test getCancelUrl.
-   *
-   * @covers ::getCancelUrl
    */
   public function testGetCancelUrl() {
     $this->assertEquals('visitors.settings', $this->form->getCancelUrl()->getRouteName());
@@ -122,8 +125,6 @@ class PerformanceFormTest extends UnitTestCase {
 
   /**
    * Test batch.
-   *
-   * @covers ::batch
    */
   public function testBatchFirst() {
     $context = [];
@@ -161,8 +162,6 @@ class PerformanceFormTest extends UnitTestCase {
 
   /**
    * Test batch.
-   *
-   * @covers ::batch
    */
   public function testBatch() {
     $context = [
@@ -255,8 +254,6 @@ class PerformanceFormTest extends UnitTestCase {
 
   /**
    * Test dropTable.
-   *
-   * @covers ::dropTable
    */
   public function testDropTable() {
     $schema = $this->createMock('Drupal\Core\Database\Schema');
@@ -271,8 +268,6 @@ class PerformanceFormTest extends UnitTestCase {
 
   /**
    * Test submitForm.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
 

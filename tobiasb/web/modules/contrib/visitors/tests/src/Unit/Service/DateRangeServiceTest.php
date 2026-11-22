@@ -5,14 +5,26 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\DateRangeService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the DateRangeService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\DateRangeService
- * @uses \Drupal\visitors\Service\DateRangeService
- * @group visitors
  */
+#[CoversClass(DateRangeService::class)]
+#[CoversMethod(DateRangeService::class, '__construct')]
+#[CoversMethod(DateRangeService::class, 'getPeriod')]
+#[CoversMethod(DateRangeService::class, 'getStartTimestamp')]
+#[CoversMethod(DateRangeService::class, 'getStartDate')]
+#[CoversMethod(DateRangeService::class, 'getEndTimestamp')]
+#[CoversMethod(DateRangeService::class, 'getEndDate')]
+#[CoversMethod(DateRangeService::class, 'getSummary')]
+#[CoversMethod(DateRangeService::class, 'setPeriod')]
+#[CoversMethod(DateRangeService::class, 'setPeriodAndDates')]
+#[UsesClass(DateRangeService::class)]
+#[Group('visitors')]
 class DateRangeServiceTest extends UnitTestCase {
 
   /**
@@ -82,8 +94,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
 
@@ -101,8 +111,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::getPeriod
    */
   public function testGetPeriod() {
 
@@ -121,8 +129,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getStartTimestamp method.
-   *
-   * @covers ::getStartTimestamp
    */
   public function testGetStartTimestamp() {
     $this->currentLanguage->expects($this->once())
@@ -146,8 +152,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getStartDate method.
-   *
-   * @covers ::getStartDate
    */
   public function testGetStartDate() {
     $this->currentLanguage->expects($this->exactly(2))
@@ -171,8 +175,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getEndTimestamp method.
-   *
-   * @covers ::getEndTimestamp
    */
   public function testGetEndTimestamp() {
     $this->currentLanguage->expects($this->once())
@@ -197,8 +199,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getEndDate method.
-   *
-   * @covers ::getEndDate
    */
   public function testGetEndDate() {
     $this->currentLanguage->expects($this->exactly(2))
@@ -222,8 +222,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getSummary method.
-   *
-   * @covers ::getSummary
    */
   public function testGetSummaryDay() {
 
@@ -254,8 +252,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getSummary method.
-   *
-   * @covers ::getSummary
    */
   public function testGetSummaryWeek() {
 
@@ -292,8 +288,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getSummary method.
-   *
-   * @covers ::getSummary
    */
   public function testGetSummaryRange() {
 
@@ -330,8 +324,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getSummary method.
-   *
-   * @covers ::getSummary
    */
   public function testGetSummaryMonth() {
     $start_date = date('Y-m-01');
@@ -365,8 +357,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the getSummary method.
-   *
-   * @covers ::getSummary
    */
   public function testGetSummaryYear() {
     $start_date = date('Y-m-01');
@@ -400,9 +390,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the setPeriod method.
-   *
-   * @covers ::setPeriod
-   * @covers ::setPeriodAndDates
    */
   public function testSetPeriodAndDatesInvalid() {
     $this->currentLanguage->expects($this->exactly(2))
@@ -435,9 +422,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the setPeriod method.
-   *
-   * @covers ::setPeriod
-   * @covers ::setPeriodAndDates
    */
   public function testSetPeriodAndDatesDay() {
     $this->currentLanguage->expects($this->exactly(2))
@@ -469,9 +453,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the setPeriod method.
-   *
-   * @covers ::setPeriod
-   * @covers ::setPeriodAndDates
    */
   public function testSetPeriodAndDatesWeek() {
     $this->currentLanguage->expects($this->exactly(4))
@@ -504,9 +485,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the setPeriod method.
-   *
-   * @covers ::setPeriod
-   * @covers ::setPeriodAndDates
    */
   public function testSetPeriodAndDatesMonth() {
 
@@ -538,9 +516,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the setPeriod method.
-   *
-   * @covers ::setPeriod
-   * @covers ::setPeriodAndDates
    */
   public function testSetPeriodAndDatesYear() {
     $this->currentLanguage->expects($this->exactly(4))
@@ -571,9 +546,6 @@ class DateRangeServiceTest extends UnitTestCase {
 
   /**
    * Tests the setPeriod method.
-   *
-   * @covers ::setPeriod
-   * @covers ::setPeriodAndDates
    */
   public function testSetPeriodAndDatesRange() {
     $this->currentLanguage->expects($this->exactly(2))

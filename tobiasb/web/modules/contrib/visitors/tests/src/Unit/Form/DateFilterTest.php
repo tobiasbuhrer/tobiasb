@@ -7,14 +7,22 @@ namespace Drupal\Tests\visitors\Unit\Form;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Form\DateFilter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Form\DateFilter
- * @uses \Drupal\visitors\Form\DateFilter
  */
+#[CoversClass(DateFilter::class)]
+#[CoversMethod(DateFilter::class, 'getFormId')]
+#[CoversMethod(DateFilter::class, 'buildForm')]
+#[CoversMethod(DateFilter::class, 'create')]
+#[CoversMethod(DateFilter::class, '__construct')]
+#[CoversMethod(DateFilter::class, 'submitForm')]
+#[UsesClass(DateFilter::class)]
+#[Group('visitors')]
 class DateFilterTest extends UnitTestCase {
 
   /**
@@ -109,8 +117,6 @@ class DateFilterTest extends UnitTestCase {
 
   /**
    * Test the form id.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId() {
     $this->assertEquals('visitors_date_filter_form', $this->form->getFormId());
@@ -118,8 +124,6 @@ class DateFilterTest extends UnitTestCase {
 
   /**
    * Test the form build.
-   *
-   * @covers ::buildForm
    */
   public function testBuildForm() {
     $form_state = $this->createMock('Drupal\Core\Form\FormStateInterface');
@@ -135,8 +139,6 @@ class DateFilterTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -146,8 +148,6 @@ class DateFilterTest extends UnitTestCase {
 
   /**
    * Test __construct.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $form = new DateFilter(
@@ -159,8 +159,6 @@ class DateFilterTest extends UnitTestCase {
 
   /**
    * Test submitForm.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
     $form = [];

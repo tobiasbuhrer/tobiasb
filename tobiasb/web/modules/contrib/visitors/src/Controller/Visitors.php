@@ -452,18 +452,18 @@ final class Visitors extends ControllerBase {
       return NULL;
     }
 
-    /** @var \GeoIp2\Model\City|null $location */
+    /** @var \Drupal\visitors_geoip\GeoIpCity|null $location */
     $location = $this->geoip->city($ip_address);
     if (!$location) {
       return NULL;
     }
 
-    $fields['location_continent'] = $location->continent->code;
-    $fields['location_country']   = $location->country->isoCode;
-    $fields['location_region']    = $location->subdivisions[0]->isoCode;
-    $fields['location_city']      = $location->city->names['en'];
-    $fields['location_latitude']  = $location->location->latitude;
-    $fields['location_longitude'] = $location->location->longitude;
+    $fields['location_continent'] = $location->continentCode;
+    $fields['location_country']   = $location->countryCode;
+    $fields['location_region']    = $location->regionCode;
+    $fields['location_city']      = $location->city;
+    $fields['location_latitude']  = $location->latitude;
+    $fields['location_longitude'] = $location->longitude;
 
   }
 

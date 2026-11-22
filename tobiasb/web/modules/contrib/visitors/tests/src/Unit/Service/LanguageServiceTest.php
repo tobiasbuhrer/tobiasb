@@ -5,16 +5,20 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\LanguageService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the CookieService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\LanguageService
- * @uses \Drupal\visitors\Service\LanguageService
- * @group visitors
  */
+#[CoversClass(LanguageService::class)]
+#[CoversMethod(LanguageService::class, '__construct')]
+#[CoversMethod(LanguageService::class, 'getLanguageLabel')]
+#[UsesClass(LanguageService::class)]
+#[Group('visitors')]
 class LanguageServiceTest extends UnitTestCase {
-
 
   /**
    * The language service.
@@ -40,8 +44,6 @@ class LanguageServiceTest extends UnitTestCase {
 
   /**
    * Tests the construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $language = new LanguageService($this->getStringTranslationStub());
@@ -50,8 +52,6 @@ class LanguageServiceTest extends UnitTestCase {
 
   /**
    * Tests the getLanguageLabel method.
-   *
-   * @covers ::getLanguageLabel
    */
   public function testGetLanguageLabel() {
     // Existing ISO 639-1 (2-letter) codes must still resolve correctly.

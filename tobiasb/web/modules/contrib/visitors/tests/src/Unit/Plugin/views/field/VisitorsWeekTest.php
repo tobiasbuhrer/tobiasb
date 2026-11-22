@@ -8,14 +8,21 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsWeek;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Drupal\views\ResultRow;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use Drupal\visitors\Plugin\views\field\VisitorsTimestamp;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsWeek
- * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp
  */
+#[CoversClass(VisitorsWeek::class)]
+#[CoversClass(VisitorsTimestamp::class)]
+#[CoversMethod(VisitorsTimestamp::class, 'getFormat')]
+#[CoversMethod(VisitorsWeek::class, 'render')]
+#[CoversMethod(VisitorsTimestamp::class, 'query')]
+#[CoversMethod(VisitorsTimestamp::class, 'getCacheTags')]
+#[Group('visitors')]
 class VisitorsWeekTest extends UnitTestCase {
 
   /**
@@ -66,8 +73,6 @@ class VisitorsWeekTest extends UnitTestCase {
 
   /**
    * Tests the getFormat method.
-   *
-   * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp::getFormat
    */
   public function testGetFormat() {
     $this->assertEquals('%X%V', $this->field->getFormat());
@@ -75,8 +80,6 @@ class VisitorsWeekTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRender() {
 
@@ -88,8 +91,6 @@ class VisitorsWeekTest extends UnitTestCase {
 
   /**
    * Tests the query method.
-   *
-   * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp::query
    */
   public function testQuery() {
     $settings = $this->createMock('Drupal\Core\Config\ImmutableConfig');
@@ -117,8 +118,6 @@ class VisitorsWeekTest extends UnitTestCase {
 
   /**
    * Tests the getCacheTags method.
-   *
-   * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp::getCacheTags
    */
   public function testGetCacheTags(): void {
     $tags = ['config:system.date'];

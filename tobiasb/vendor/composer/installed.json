@@ -716,17 +716,17 @@
         },
         {
             "name": "consolidation/robo",
-            "version": "5.2.3",
-            "version_normalized": "5.2.3.0",
+            "version": "5.2.4",
+            "version_normalized": "5.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/robo.git",
-                "reference": "78a541531cb613e9ce825b64ef3aa666d1e95598"
+                "reference": "2a2327b8dc6c893b76a6fc1cfe51cb785a38b7e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/robo/zipball/78a541531cb613e9ce825b64ef3aa666d1e95598",
-                "reference": "78a541531cb613e9ce825b64ef3aa666d1e95598",
+                "url": "https://api.github.com/repos/consolidation/robo/zipball/2a2327b8dc6c893b76a6fc1cfe51cb785a38b7e2",
+                "reference": "2a2327b8dc6c893b76a6fc1cfe51cb785a38b7e2",
                 "shasum": ""
             },
             "require": {
@@ -749,11 +749,11 @@
                 "codegyre/robo": "*"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.95.30",
                 "natxet/cssmin": "3.0.4",
                 "patchwork/jsqueeze": "^2",
                 "pear/archive_tar": "^1.4.4",
                 "phpunit/phpunit": "^7.5.20 || ^8 || ^9",
-                "squizlabs/php_codesniffer": "^3.6",
                 "yoast/phpunit-polyfills": "^0.2.0"
             },
             "suggest": {
@@ -762,7 +762,7 @@
                 "pear/archive_tar": "Allows tar archives to be created and extracted in taskPack and taskExtract, respectively.",
                 "totten/lurkerlite": "For monitoring filesystem changes in taskWatch"
             },
-            "time": "2026-11-12T17:53:46+00:00",
+            "time": "2026-11-20T19:31:06+00:00",
             "bin": [
                 "robo"
             ],
@@ -786,7 +786,7 @@
             "description": "Modern task runner",
             "support": {
                 "issues": "https://github.com/consolidation/robo/issues",
-                "source": "https://github.com/consolidation/robo/tree/5.2.3"
+                "source": "https://github.com/consolidation/robo/tree/5.2.4"
             },
             "install-path": "../consolidation/robo"
         },
@@ -3662,35 +3662,36 @@
         },
         {
             "name": "drupal/visitors",
-            "version": "2.33.0",
-            "version_normalized": "2.33.0.0",
+            "version": "2.34.0",
+            "version_normalized": "2.34.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/visitors.git",
-                "reference": "8.x-2.33"
+                "reference": "8.x-2.34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/visitors-8.x-2.33.zip",
-                "reference": "8.x-2.33",
-                "shasum": "ea57f181bdc88f9df1bb799fd61ef00b8c615de4"
+                "url": "https://ftp.drupal.org/files/projects/visitors-8.x-2.34.zip",
+                "reference": "8.x-2.34",
+                "shasum": "26dd89cd42778afc122172b0ecbf0670e2a27a27"
             },
             "require": {
                 "drupal/charts": "^5",
                 "drupal/charts_chartjs": "*",
                 "drupal/core": "^10 || ^11",
-                "geoip2/geoip2": "~2.0",
+                "geoip2/geoip2": "^2 || ^3",
                 "matomo/device-detector": "^6.1"
             },
             "require-dev": {
+                "brianium/paratest": "^7.3",
                 "drupal/statistics": "~1",
                 "drush/drush": "^12 || ^13"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.33",
-                    "datestamp": "1783974421",
+                    "version": "8.x-2.34",
+                    "datestamp": "1795269712",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3716,6 +3717,10 @@
             ],
             "description": "Visitors is a native drupal web analytics software.",
             "homepage": "https://drupal.org/project/visitors",
+            "keywords": [
+                "Actively maintained",
+                "Search engine optimization (SEO)"
+            ],
             "support": {
                 "source": "https://git.drupalcode.org/project/visitors",
                 "issues": "https://www.drupal.org/project/issues/visitors?version=8.x",
@@ -4186,32 +4191,32 @@
         },
         {
             "name": "geoip2/geoip2",
-            "version": "v2.13.0",
-            "version_normalized": "2.13.0.0",
+            "version": "v3.4.0",
+            "version_normalized": "3.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maxmind/GeoIP2-php.git",
-                "reference": "6a41d8fbd6b90052bc34dff3b4252d0f88067b23"
+                "reference": "257a350e5e0cae57ac95417f32bb0aba285b2c0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/6a41d8fbd6b90052bc34dff3b4252d0f88067b23",
-                "reference": "6a41d8fbd6b90052bc34dff3b4252d0f88067b23",
+                "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/257a350e5e0cae57ac95417f32bb0aba285b2c0d",
+                "reference": "257a350e5e0cae57ac95417f32bb0aba285b2c0d",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "maxmind-db/reader": "~1.8",
-                "maxmind/web-service-common": "~0.8",
-                "php": ">=7.2"
+                "maxmind-db/reader": "^1.13.0",
+                "maxmind/web-service-common": "~0.11",
+                "php": ">=8.1"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "3.*",
                 "phpstan/phpstan": "*",
-                "phpunit/phpunit": "^8.0 || ^9.0",
-                "squizlabs/php_codesniffer": "3.*"
+                "phpunit/phpunit": "^10.0",
+                "squizlabs/php_codesniffer": "4.*"
             },
-            "time": "2022-08-05T20:32:58+00:00",
+            "time": "2026-07-16T22:11:20+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -4227,10 +4232,10 @@
                 {
                     "name": "Gregory J. Oschwald",
                     "email": "goschwald@maxmind.com",
-                    "homepage": "https://www.maxmind.com/"
+                    "homepage": "https://www.maxmind.com/en/home"
                 }
             ],
-            "description": "MaxMind GeoIP2 PHP API",
+            "description": "MaxMind GeoIP PHP API",
             "homepage": "https://github.com/maxmind/GeoIP2-php",
             "keywords": [
                 "IP",
@@ -4241,7 +4246,7 @@
             ],
             "support": {
                 "issues": "https://github.com/maxmind/GeoIP2-php/issues",
-                "source": "https://github.com/maxmind/GeoIP2-php/tree/v2.13.0"
+                "source": "https://github.com/maxmind/GeoIP2-php/tree/v3.4.0"
             },
             "install-path": "../geoip2/geoip2"
         },
@@ -4361,23 +4366,23 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.16.3",
-            "version_normalized": "7.16.3.0",
+            "version": "7.16.5",
+            "version_normalized": "7.16.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "c88a78082757dd5a0c44191651535259fcb6e605"
+                "reference": "b0605f32e77a13cf98bc5e75b1d71877b6814e17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/c88a78082757dd5a0c44191651535259fcb6e605",
-                "reference": "c88a78082757dd5a0c44191651535259fcb6e605",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b0605f32e77a13cf98bc5e75b1d71877b6814e17",
+                "reference": "b0605f32e77a13cf98bc5e75b1d71877b6814e17",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^2.6",
-                "guzzlehttp/psr7": "^2.13.4",
+                "guzzlehttp/promises": "^2.6.1",
+                "guzzlehttp/psr7": "^2.13.5",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
                 "symfony/deprecation-contracts": "^2.5 || ^3.0",
@@ -4400,7 +4405,7 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "time": "2026-11-17T16:23:09+00:00",
+            "time": "2026-11-20T22:56:33+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -4472,7 +4477,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.16.3"
+                "source": "https://github.com/guzzle/guzzle/tree/7.16.5"
             },
             "funding": [
                 {
@@ -4492,17 +4497,17 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.6.0",
-            "version_normalized": "2.6.0.0",
+            "version": "2.6.2",
+            "version_normalized": "2.6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "3d88c829bd5f13d13847b39067dbf09a60af2154"
+                "reference": "72e93ed2b1f3d8c09d1460c950bd5726face7ccd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/3d88c829bd5f13d13847b39067dbf09a60af2154",
-                "reference": "3d88c829bd5f13d13847b39067dbf09a60af2154",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/72e93ed2b1f3d8c09d1460c950bd5726face7ccd",
+                "reference": "72e93ed2b1f3d8c09d1460c950bd5726face7ccd",
                 "shasum": ""
             },
             "require": {
@@ -4513,7 +4518,7 @@
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "phpunit/phpunit": "^8.5.52 || ^9.6.34"
             },
-            "time": "2026-10-18T12:46:59+00:00",
+            "time": "2026-11-21T03:45:23+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -4559,7 +4564,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.6.0"
+                "source": "https://github.com/guzzle/promises/tree/2.6.2"
             },
             "funding": [
                 {
@@ -4579,17 +4584,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.13.4",
-            "version_normalized": "2.13.4.0",
+            "version": "2.13.6",
+            "version_normalized": "2.13.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "ad5e3f872690e1151e1171de2963150fc45ea1e3"
+                "reference": "2bd3dccf56e99cdacf74b1ad5e06a08a5a7739f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/ad5e3f872690e1151e1171de2963150fc45ea1e3",
-                "reference": "ad5e3f872690e1151e1171de2963150fc45ea1e3",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/2bd3dccf56e99cdacf74b1ad5e06a08a5a7739f2",
+                "reference": "2bd3dccf56e99cdacf74b1ad5e06a08a5a7739f2",
                 "shasum": ""
             },
             "require": {
@@ -4613,7 +4618,7 @@
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "time": "2026-11-17T16:15:51+00:00",
+            "time": "2026-11-21T23:48:40+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -4681,7 +4686,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.13.4"
+                "source": "https://github.com/guzzle/psr7/tree/2.13.6"
             },
             "funding": [
                 {

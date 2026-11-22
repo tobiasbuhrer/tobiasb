@@ -8,14 +8,19 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsMonth;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Drupal\views\ResultRow;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use Drupal\visitors\Plugin\views\field\VisitorsTimestamp;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsMonth
- * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp
  */
+#[CoversClass(VisitorsMonth::class)]
+#[CoversClass(VisitorsTimestamp::class)]
+#[CoversMethod(VisitorsTimestamp::class, 'getFormat')]
+#[CoversMethod(VisitorsMonth::class, 'render')]
+#[Group('visitors')]
 class VisitorsMonthTest extends UnitTestCase {
 
   /**
@@ -56,8 +61,6 @@ class VisitorsMonthTest extends UnitTestCase {
 
   /**
    * Tests the getFormat method.
-   *
-   * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp::getFormat
    */
   public function testGetFormat() {
     $this->assertEquals('Ym', $this->field->getFormat());
@@ -65,8 +68,6 @@ class VisitorsMonthTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRender() {
 

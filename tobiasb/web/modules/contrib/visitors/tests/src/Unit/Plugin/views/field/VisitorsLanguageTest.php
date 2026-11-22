@@ -8,14 +8,22 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsLanguage;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Drupal\views\ResultRow;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsLanguage
- * @uses \Drupal\visitors\Plugin\views\field\VisitorsLanguage
  */
+#[CoversClass(VisitorsLanguage::class)]
+#[CoversMethod(VisitorsLanguage::class, 'buildOptionsForm')]
+#[CoversMethod(VisitorsLanguage::class, 'create')]
+#[CoversMethod(VisitorsLanguage::class, '__construct')]
+#[CoversMethod(VisitorsLanguage::class, 'defineOptions')]
+#[CoversMethod(VisitorsLanguage::class, 'render')]
+#[UsesClass(VisitorsLanguage::class)]
+#[Group('visitors')]
 class VisitorsLanguageTest extends UnitTestCase {
 
   /**
@@ -123,8 +131,6 @@ class VisitorsLanguageTest extends UnitTestCase {
 
   /**
    * Tests the buildOptionsForm method.
-   *
-   * @covers ::buildOptionsForm
    */
   public function testBuildOptionsForm() {
     $this->field->view = $this->createMock('Drupal\views\ViewExecutable');
@@ -157,8 +163,6 @@ class VisitorsLanguageTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -171,8 +175,6 @@ class VisitorsLanguageTest extends UnitTestCase {
 
   /**
    * Tests the construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $field = new VisitorsLanguage([], 'visitors_language', [], $this->language);
@@ -181,14 +183,11 @@ class VisitorsLanguageTest extends UnitTestCase {
 
   /**
    * Tests the defineOptions method.
-   *
-   * @covers ::defineOptions
    */
   public function testDefineOptions() {
     $this->field->view = $this->createMock('Drupal\views\ViewExecutable');
 
     $method = new \ReflectionMethod($this->field, 'defineOptions');
-    $method->setAccessible(TRUE);
     $options = $method->invoke($this->field);
 
     $this->assertArrayHasKey('code', $options);
@@ -197,8 +196,6 @@ class VisitorsLanguageTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRenderWithCode() {
 
@@ -218,8 +215,6 @@ class VisitorsLanguageTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRender() {
     $this->field->options['code'] = FALSE;

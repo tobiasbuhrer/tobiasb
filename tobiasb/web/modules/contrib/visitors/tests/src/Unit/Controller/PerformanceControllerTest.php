@@ -5,14 +5,20 @@ namespace Drupal\Tests\visitors\Unit\Controller;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Controller\PerformanceController;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Unit tests for the performance controller.
- *
- * @coversDefaultClass \Drupal\visitors\Controller\PerformanceController
- * @uses \Drupal\visitors\Controller\PerformanceController
- * @group visitors
  */
+#[CoversClass(PerformanceController::class)]
+#[CoversMethod(PerformanceController::class, 'migrate')]
+#[CoversMethod(PerformanceController::class, 'create')]
+#[CoversMethod(PerformanceController::class, '__construct')]
+#[UsesClass(PerformanceController::class)]
+#[Group('visitors')]
 class PerformanceControllerTest extends UnitTestCase {
 
   /**
@@ -77,8 +83,6 @@ class PerformanceControllerTest extends UnitTestCase {
 
   /**
    * Tests the migrate() method.
-   *
-   * @covers ::migrate
    */
   public function testMigrateStatisticsNotExist() {
 
@@ -105,8 +109,6 @@ class PerformanceControllerTest extends UnitTestCase {
 
   /**
    * Tests the migrate() method.
-   *
-   * @covers ::migrate
    */
   public function testMigrateStatisticsExist() {
     $schema = $this->createMock('Drupal\Core\Database\Schema');
@@ -129,8 +131,6 @@ class PerformanceControllerTest extends UnitTestCase {
 
   /**
    * Tests the create() method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -140,8 +140,6 @@ class PerformanceControllerTest extends UnitTestCase {
 
   /**
    * Tests the construct() method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
 

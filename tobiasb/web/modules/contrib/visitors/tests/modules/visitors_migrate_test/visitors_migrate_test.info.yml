@@ -1,0 +1,13 @@
+name: 'Visitors migrate test'
+type: module
+description: 'Provides a node migration for Visitors statistics migrate tests.'
+package: Testing
+core_version_requirement: '^10.1 || ^11'
+dependencies:
+  - drupal:migrate
+  - drupal:node
+
+# Information added by Drupal.org packaging script on 2026-11-21
+version: '8.x-2.34'
+project: 'visitors'
+datestamp: 1795269714

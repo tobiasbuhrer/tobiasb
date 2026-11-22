@@ -4,14 +4,14 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests visitors_update_8212().
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookUpdate8212Test extends UnitTestCase {
 
   /**
@@ -20,13 +20,6 @@ class HookUpdate8212Test extends UnitTestCase {
    * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $configFactory;
-
-  /**
-   * The block storage.
-   *
-   * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface|\PHPUnit\Framework\MockObject\MockObject
-   */
-  protected $blockStorage;
 
   /**
    * The block query.
@@ -67,8 +60,6 @@ class HookUpdate8212Test extends UnitTestCase {
 
     $this->settings = $this->createMock('Drupal\Core\Config\ImmutableConfig');
 
-    $this->blockStorage = $this->createMock('Drupal\Core\Config\Entity\ConfigEntityStorageInterface');
-
     $this->blockQuery = $this->createMock('Drupal\Core\Entity\Query\QueryInterface');
 
   }
@@ -82,12 +73,13 @@ class HookUpdate8212Test extends UnitTestCase {
       ->with('visitors.config')
       ->willReturn($this->settings);
 
+    $block_storage = $this->createMock('Drupal\Core\Config\Entity\ConfigEntityStorageInterface');
     $this->entityTypeManager->expects($this->once())
       ->method('getStorage')
       ->with('block')
-      ->willReturn($this->blockStorage);
+      ->willReturn($block_storage);
 
-    $this->blockStorage->expects($this->once())
+    $block_storage->expects($this->once())
       ->method('getQuery')
       ->willReturn($this->blockQuery);
 
@@ -130,7 +122,7 @@ class HookUpdate8212Test extends UnitTestCase {
     $block->expects($this->once())
       ->method('save');
 
-    $this->blockStorage->expects($this->once())
+    $block_storage->expects($this->once())
       ->method('load')
       ->with('visitors_block_1')
       ->willReturn($block);

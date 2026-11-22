@@ -5,16 +5,23 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\LocationService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the CookieService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\LocationService
- * @uses \Drupal\visitors\Service\LocationService
- * @group visitors
  */
+#[CoversClass(LocationService::class)]
+#[CoversMethod(LocationService::class, '__construct')]
+#[CoversMethod(LocationService::class, 'getCountryLabel')]
+#[CoversMethod(LocationService::class, 'getContinent')]
+#[CoversMethod(LocationService::class, 'getContinentLabel')]
+#[CoversMethod(LocationService::class, 'isValidCountryCode')]
+#[UsesClass(LocationService::class)]
+#[Group('visitors')]
 class LocationServiceTest extends UnitTestCase {
-
 
   /**
    * The location service.
@@ -40,8 +47,6 @@ class LocationServiceTest extends UnitTestCase {
 
   /**
    * Tests the construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $counter = new LocationService($this->getStringTranslationStub());
@@ -50,8 +55,6 @@ class LocationServiceTest extends UnitTestCase {
 
   /**
    * Tests the getCountryLabel method.
-   *
-   * @covers ::getCountryLabel
    */
   public function testGetCountryLabel() {
     $this->assertSame('United States', (string) $this->location->getCountryLabel('US'));
@@ -62,8 +65,6 @@ class LocationServiceTest extends UnitTestCase {
 
   /**
    * Tests the getContinent method.
-   *
-   * @covers ::getContinent
    */
   public function testGetContinent() {
     $this->assertSame('NA', $this->location->getContinent('US'));
@@ -74,8 +75,6 @@ class LocationServiceTest extends UnitTestCase {
 
   /**
    * Tests the getContinentLabel method.
-   *
-   * @covers ::getContinentLabel
    */
   public function testGetContinentLabel() {
     $this->assertSame('North America', (string) $this->location->getContinentLabel('NA'));
@@ -85,8 +84,6 @@ class LocationServiceTest extends UnitTestCase {
 
   /**
    * Tests the isValidCountryCode method.
-   *
-   * @covers ::isValidCountryCode
    */
   public function testIsValidCountryCode() {
     $this->assertTrue($this->location->isValidCountryCode('US'));

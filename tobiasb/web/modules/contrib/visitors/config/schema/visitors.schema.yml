@@ -68,6 +68,9 @@ visitors.config:
     script_type:
       type: string
       label: 'Script type'
+    client_debug:
+      type: boolean
+      label: 'Client debug'
 
 block.settings.visitors_popular_block:
   type: block_settings

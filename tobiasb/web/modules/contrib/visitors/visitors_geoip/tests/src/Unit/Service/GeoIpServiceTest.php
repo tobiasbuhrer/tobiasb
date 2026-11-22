@@ -5,17 +5,27 @@ namespace Drupal\Tests\visitors_geoip\Unit\Service;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Tests\UnitTestCase;
+use Drupal\visitors_geoip\GeoIpCity;
 use Drupal\visitors_geoip\Service\GeoIpService;
 use GeoIp2\Database\Reader;
+use GeoIp2\Exception\AddressNotFoundException;
 use GeoIp2\Model\City;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the GeoIpService.
- *
- * @coversDefaultClass \Drupal\visitors_geoip\Service\GeoIpService
- *
- * @group visitors_geoip
  */
+#[CoversClass(GeoIpService::class)]
+#[CoversMethod(GeoIpService::class, '__construct')]
+#[CoversMethod(GeoIpService::class, 'metadata')]
+#[CoversMethod(GeoIpService::class, 'city')]
+#[CoversMethod(GeoIpService::class, 'setReader')]
+#[CoversMethod(GeoIpService::class, 'getReader')]
+#[CoversMethod(GeoIpService::class, 'hasLibrary')]
+#[CoversMethod(GeoIpService::class, 'hasExtension')]
+#[Group('visitors_geoip')]
 class GeoIpServiceTest extends UnitTestCase {
 
   /**
@@ -87,8 +97,6 @@ class GeoIpServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructorBetterDatabase() {
     $this->fileSystem->expects($this->once())
@@ -103,8 +111,6 @@ class GeoIpServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructorFreeDatabase() {
     $this->fileSystem->expects($this->exactly(2))
@@ -121,8 +127,6 @@ class GeoIpServiceTest extends UnitTestCase {
 
   /**
    * Tests the metadata() method.
-   *
-   * @covers ::metadata
    */
   public function testMetadata() {
     // Mock the reader service.
@@ -140,8 +144,6 @@ class GeoIpServiceTest extends UnitTestCase {
 
   /**
    * Tests the metadata() method with a NULL reader.
-   *
-   * @covers ::metadata
    */
   public function testMetadataNull() {
     $this->geoIpService->setReader(NULL);
@@ -154,31 +156,35 @@ class GeoIpServiceTest extends UnitTestCase {
 
   /**
    * Tests the city() method.
-   *
-   * @covers ::city
-   * @covers ::setReader
    */
   public function testCity() {
     $ipAddress = '127.0.0.1';
 
-    // Mock the reader service.
-    $city = $this->createMock(City::class);
+    $city = new City([
+      'city' => ['names' => ['en' => 'Los Angeles']],
+      'country' => ['iso_code' => 'US'],
+      'subdivisions' => [['iso_code' => 'CA']],
+      'continent' => ['code' => 'NA'],
+      'location' => ['latitude' => 34.0522, 'longitude' => -118.2437],
+    ]);
     $this->reader->expects($this->once())
       ->method('city')
       ->with($ipAddress)
       ->willReturn($city);
     $this->geoIpService->setReader($this->reader);
-    // Call the city() method.
     $result = $this->geoIpService->city($ipAddress);
 
-    // Assert the result.
-    $this->assertSame($city, $result);
+    $this->assertInstanceOf(GeoIpCity::class, $result);
+    $this->assertSame('NA', $result->continentCode);
+    $this->assertSame('US', $result->countryCode);
+    $this->assertSame('CA', $result->regionCode);
+    $this->assertSame('Los Angeles', $result->city);
+    $this->assertSame(34.0522, $result->latitude);
+    $this->assertSame(-118.2437, $result->longitude);
   }
 
   /**
    * Tests the city() method with a NULL reader.
-   *
-   * @covers ::city
    */
   public function testCityNull() {
     $ipAddress = '127.0.0.1';
@@ -192,9 +198,32 @@ class GeoIpServiceTest extends UnitTestCase {
   }
 
   /**
+   * A missing address returns NULL instead of throwing.
+   */
+  public function testCityReturnsNullWhenAddressIsNotInTheDatabase() {
+    $ip_address = '10.0.0.1';
+    $exception = new AddressNotFoundException(
+      'The address 10.0.0.1 is not in the database.'
+    );
+    $this->reader->expects($this->once())
+      ->method('city')
+      ->with($ip_address)
+      ->willThrowException($exception);
+    $this->geoIpService->setReader($this->reader);
+
+    $result = NULL;
+    try {
+      $result = $this->geoIpService->city($ip_address);
+    }
+    catch (\Throwable $thrown) {
+      $this->fail($thrown->getMessage());
+    }
+
+    $this->assertNull($result);
+  }
+
+  /**
    * Tests the getReader() method.
-   *
-   * @covers ::getReader
    */
   public function testGetReader() {
     $this->geoIpService->setReader($this->reader);
@@ -203,8 +232,6 @@ class GeoIpServiceTest extends UnitTestCase {
 
   /**
    * Tests the setReader() method.
-   *
-   * @covers ::setReader
    */
   public function testSetReader() {
     $this->geoIpService->setReader($this->reader);
@@ -213,8 +240,6 @@ class GeoIpServiceTest extends UnitTestCase {
 
   /**
    * Tests the hasLibrary method.
-   *
-   * @covers ::hasLibrary
    */
   public function testHasLibrary():void {
     $this->assertTrue($this->geoIpService->hasLibrary());
@@ -222,8 +247,6 @@ class GeoIpServiceTest extends UnitTestCase {
 
   /**
    * Tests the hasLibrary method with a missing class name.
-   *
-   * @covers ::hasLibrary
    */
   public function testHasLibraryWithClassName():void {
     $this->assertFalse($this->geoIpService->hasLibrary('Missing\Class'));
@@ -234,8 +257,6 @@ class GeoIpServiceTest extends UnitTestCase {
    *
    * We can not guarantee that the maxminddb extension is installed on the
    * testing environment, so we will test the method with a fake extension.
-   *
-   * @covers ::hasExtension
    */
   public function testHasExtension(): void {
     $this->assertFalse($this->geoIpService->hasExtension('fake_extension'));

@@ -4,14 +4,14 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests visitors_update_8218().
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookUpdate8218Test extends UnitTestCase {
 
   /**
@@ -149,6 +149,10 @@ class HookUpdate8218Test extends UnitTestCase {
 
     $schema = $this->createMock('Drupal\Core\Database\Schema');
     $schema->expects($this->once())
+      ->method('fieldExists')
+      ->with('visitors', 'config_browser_name')
+      ->willReturn(TRUE);
+    $schema->expects($this->once())
       ->method('changeField')
       ->with('visitors', 'config_browser_name', 'config_browser_name', [
         'type' => 'varchar',
@@ -168,6 +172,50 @@ class HookUpdate8218Test extends UnitTestCase {
     $this->assertEquals([], $sandbox['browser']);
     $this->assertEquals(1, $sandbox['#finished']);
 
+  }
+
+  /**
+   * Tests the finish block when config_browser_name does not exist (addField).
+   */
+  public function testUpdate8218FinishFieldMissing(): void {
+    // Pre-seed sandbox so one more iteration reaches #finished == 1.
+    // 'ie' has length 2, so no DB update is issued.
+    $ie = new \stdClass();
+    $ie->config_browser_name = 'ie';
+
+    $spec = [
+      'type'     => 'varchar',
+      'length'   => '2',
+      'not null' => FALSE,
+      'default'  => NULL,
+    ];
+
+    $schema = $this->createMock('Drupal\Core\Database\Schema');
+    $schema->expects($this->once())
+      ->method('fieldExists')
+      ->with('visitors', 'config_browser_name')
+      ->willReturn(FALSE);
+    $schema->expects($this->never())
+      ->method('changeField');
+    $schema->expects($this->once())
+      ->method('addField')
+      ->with('visitors', 'config_browser_name', $spec);
+
+    $this->database->expects($this->once())
+      ->method('schema')
+      ->willReturn($schema);
+
+    $sandbox = [
+      'progress' => 0,
+      'max'      => 1,
+      'browser'  => [$ie],
+    ];
+
+    visitors_update_8218($sandbox);
+
+    $this->assertEquals(1, $sandbox['progress']);
+    $this->assertEquals([], $sandbox['browser']);
+    $this->assertEquals(1, $sandbox['#finished']);
   }
 
 }

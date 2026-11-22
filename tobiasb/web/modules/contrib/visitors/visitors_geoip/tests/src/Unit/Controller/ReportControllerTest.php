@@ -8,14 +8,24 @@ use Drupal\Core\Form\FormInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors_geoip\Controller\ReportController;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use Drupal\visitors\Controller\Report\ReportBaseController;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Unit tests for the ReportController.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors_geoip\Controller\ReportController
- * @uses \Drupal\visitors\Controller\Report\ReportBaseController
  */
+#[CoversClass(ReportController::class)]
+#[CoversMethod(ReportController::class, 'create')]
+#[CoversMethod(ReportController::class, '__construct')]
+#[CoversMethod(ReportController::class, 'getCityTitle')]
+#[CoversMethod(ReportController::class, 'region')]
+#[CoversMethod(ReportController::class, 'getRegionTitle')]
+#[CoversMethod(ReportController::class, 'city')]
+#[UsesClass(ReportBaseController::class)]
+#[Group('visitors')]
 class ReportControllerTest extends UnitTestCase {
 
   /**
@@ -93,7 +103,6 @@ class ReportControllerTest extends UnitTestCase {
    */
   protected function setUp(): void {
     parent::setUp();
-    require_once __DIR__ . '/../../../../../tests/fixtures/views_embed_view.php';
 
     if (!defined('RESPONSIVE_PRIORITY_LOW')) {
       define('RESPONSIVE_PRIORITY_LOW', 'priority-low');
@@ -134,8 +143,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the create() method of the Report controller.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -145,8 +152,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the construct() method of the Report controller.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $translation = $this->getStringTranslationStub();
@@ -174,8 +179,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the getCityTitle() method.
-   *
-   * @covers ::getCityTitle
    */
   public function testGetCityTitle() {
     $markup = $this->createMock('Drupal\Component\Render\MarkupInterface');
@@ -192,8 +195,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the region() method of the Report controller.
-   *
-   * @covers ::region
    */
   public function testRegion() {
     $this->form();
@@ -207,8 +208,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the getRegionTitle() method.
-   *
-   * @covers ::getRegionTitle
    */
   public function testGetRegionTitle() {
     $markup = $this->createMock('Drupal\Component\Render\MarkupInterface');
@@ -226,8 +225,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the getRegionTitle() method.
-   *
-   * @covers ::getRegionTitle
    */
   public function testGetRegionTitleUnknownRegion() {
     $markup = $this->createMock('Drupal\Component\Render\MarkupInterface');
@@ -245,8 +242,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the city() method of the Report controller.
-   *
-   * @covers ::city
    */
   public function testCity() {
     $this->form();

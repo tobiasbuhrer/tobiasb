@@ -16,7 +16,18 @@
         const u = drupalSettings.path.baseUrl;
         const path = `/${drupalSettings.path.currentPath}`;
         const { uid } = drupalSettings.user;
-        const { route, server, module, counter } = drupalSettings.visitors;
+        const { route, server, module, counter, debug } =
+          drupalSettings.visitors;
+
+        if (debug) {
+          const push = _paq.push.bind(_paq);
+          _paq.push = function visitorsDebugPush(...args) {
+            // Log each command before the tracker replaces _paq.
+            // eslint-disable-next-line no-console
+            console.log('Visitors tracker:', ...args);
+            return push(...args);
+          };
+        }
 
         function visitorsTracker() {
           _paq.push(['setSiteId', 1]);
@@ -39,6 +50,15 @@
           g.defer = true;
           g.async = true;
           g.src = `${module}/js/tracker.min.js`;
+          g.onload = function visitorsTrackerLoaded() {
+            if (
+              debug &&
+              window.Matomo &&
+              typeof window.Matomo.setLogger === 'function'
+            ) {
+              window.Matomo.setLogger(console);
+            }
+          };
 
           s.parentNode.insertBefore(g, s);
         }

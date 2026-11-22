@@ -1,0 +1,19 @@
+id: visitors_statistics_node_counter
+label: 'Statistics node counts'
+migration_tags:
+  - Visitors
+source:
+  plugin: visitors_node_counter
+  node_migrations: []
+process:
+  entity_type:
+    plugin: default_value
+    default_value: node
+  entity_id:
+    plugin: visitors_node_counter_id
+    source: nid
+  total: totalcount
+  today: daycount
+  timestamp: timestamp
+destination:
+  plugin: visitors_counter

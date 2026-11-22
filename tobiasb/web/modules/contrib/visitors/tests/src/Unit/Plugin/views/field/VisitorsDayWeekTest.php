@@ -8,15 +8,20 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsDayWeek;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Drupal\views\ResultRow;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use Drupal\visitors\Plugin\views\field\VisitorsTimestamp;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsDayWeek
- * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp
- * @covers \Drupal\visitors\Plugin\views\field\VisitorsDayWeek
  */
+#[CoversClass(VisitorsDayWeek::class)]
+#[CoversClass(VisitorsTimestamp::class)]
+#[CoversMethod(VisitorsTimestamp::class, 'getFormat')]
+#[CoversMethod(VisitorsDayWeek::class, 'render')]
+#[CoversMethod(VisitorsDayWeek::class, 'query')]
+#[Group('visitors')]
 class VisitorsDayWeekTest extends UnitTestCase {
 
   /**
@@ -67,8 +72,6 @@ class VisitorsDayWeekTest extends UnitTestCase {
 
   /**
    * Tests the getFormat method.
-   *
-   * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp::getFormat
    */
   public function testGetFormat() {
     $this->assertEquals('%w', $this->field->getFormat());
@@ -76,8 +79,6 @@ class VisitorsDayWeekTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRender() {
     $system_date = $this->createMock('Drupal\Core\Config\ImmutableConfig');
@@ -98,8 +99,6 @@ class VisitorsDayWeekTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRenderFirstDay() {
     $system_date = $this->createMock('Drupal\Core\Config\ImmutableConfig');
@@ -120,8 +119,6 @@ class VisitorsDayWeekTest extends UnitTestCase {
 
   /**
    * Tests the query method.
-   *
-   * @covers ::query
    */
   public function testQuery() {
     $settings = $this->createMock('Drupal\Core\Config\ImmutableConfig');
@@ -166,8 +163,6 @@ class VisitorsDayWeekTest extends UnitTestCase {
 
   /**
    * Tests the query method.
-   *
-   * @covers ::query
    */
   public function testQueryFirstDay() {
     $settings = $this->createMock('Drupal\Core\Config\ImmutableConfig');

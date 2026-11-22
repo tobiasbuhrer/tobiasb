@@ -7,14 +7,22 @@ namespace Drupal\Tests\visitors\Unit\Plugin\Block;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\Block\VisitorsOnlineBlock;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Visitors Online block test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\Block\VisitorsOnlineBlock
- * @covers \Drupal\visitors\Plugin\Block\VisitorsOnlineBlock
  */
+#[CoversClass(VisitorsOnlineBlock::class)]
+#[CoversMethod(VisitorsOnlineBlock::class, 'create')]
+#[CoversMethod(VisitorsOnlineBlock::class, '__construct')]
+#[CoversMethod(VisitorsOnlineBlock::class, 'defaultConfiguration')]
+#[CoversMethod(VisitorsOnlineBlock::class, 'blockForm')]
+#[CoversMethod(VisitorsOnlineBlock::class, 'blockSubmit')]
+#[CoversMethod(VisitorsOnlineBlock::class, 'build')]
+#[CoversMethod(VisitorsOnlineBlock::class, 'getCacheMaxAge')]
+#[Group('visitors')]
 class VisitorsOnlineBlockTest extends UnitTestCase {
 
   /**
@@ -64,8 +72,6 @@ class VisitorsOnlineBlockTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate(): void {
     $container = \Drupal::getContainer();
@@ -80,8 +86,6 @@ class VisitorsOnlineBlockTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor(): void {
     $configuration = [];
@@ -100,8 +104,6 @@ class VisitorsOnlineBlockTest extends UnitTestCase {
 
   /**
    * Tests the block defaultConfiguration method.
-   *
-   * @covers ::defaultConfiguration
    */
   public function testDefaultConfiguration(): void {
     $configuration = $this->block->defaultConfiguration();
@@ -117,8 +119,6 @@ class VisitorsOnlineBlockTest extends UnitTestCase {
 
   /**
    * Tests the blockForm method.
-   *
-   * @covers ::blockForm
    */
   public function testBlockForm(): void {
 
@@ -135,8 +135,6 @@ class VisitorsOnlineBlockTest extends UnitTestCase {
 
   /**
    * Tests the blockSubmit method.
-   *
-   * @covers ::blockSubmit
    */
   public function testBlockSubmit(): void {
     $form = [];
@@ -163,8 +161,6 @@ class VisitorsOnlineBlockTest extends UnitTestCase {
 
   /**
    * Tests the build method.
-   *
-   * @covers ::build
    */
   public function testBuild(): void {
     $this->online->expects($this->once())
@@ -195,8 +191,6 @@ class VisitorsOnlineBlockTest extends UnitTestCase {
 
   /**
    * Tests the getCacheMaxAge method.
-   *
-   * @covers ::getCacheMaxAge
    */
   public function testGetCacheMaxAge() {
     $this->assertEquals(300, $this->block->getCacheMaxAge());

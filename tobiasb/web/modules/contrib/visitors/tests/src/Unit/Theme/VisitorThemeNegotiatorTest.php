@@ -4,14 +4,18 @@ namespace Drupal\Tests\visitors\Unit\Theme;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Theme\VisitorThemeNegotiator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the CookieService class.
- *
- * @coversDefaultClass \Drupal\visitors\Theme\VisitorThemeNegotiator
- * @covers \Drupal\visitors\Theme\VisitorThemeNegotiator
- * @group visitors
  */
+#[CoversClass(VisitorThemeNegotiator::class)]
+#[CoversMethod(VisitorThemeNegotiator::class, '__construct')]
+#[CoversMethod(VisitorThemeNegotiator::class, 'applies')]
+#[CoversMethod(VisitorThemeNegotiator::class, 'determineActiveTheme')]
+#[Group('visitors')]
 class VisitorThemeNegotiatorTest extends UnitTestCase {
 
   /**
@@ -50,8 +54,6 @@ class VisitorThemeNegotiatorTest extends UnitTestCase {
 
   /**
    * Tests the __construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
 
@@ -61,8 +63,6 @@ class VisitorThemeNegotiatorTest extends UnitTestCase {
 
   /**
    * Tests the applies method.
-   *
-   * @covers ::applies
    */
   public function testAppliesUserNotHasPermission(): void {
     $route_match = $this->createMock('Drupal\Core\Routing\RouteMatchInterface');
@@ -77,8 +77,6 @@ class VisitorThemeNegotiatorTest extends UnitTestCase {
 
   /**
    * Tests the applies method.
-   *
-   * @covers ::applies
    */
   public function testAppliesNoRouteObject(): void {
     $route_match = $this->createMock('Drupal\Core\Routing\RouteMatchInterface');
@@ -95,8 +93,6 @@ class VisitorThemeNegotiatorTest extends UnitTestCase {
 
   /**
    * Tests the applies method.
-   *
-   * @covers ::applies
    */
   public function testAppliesVisitorsRoute(): void {
     $route_object = $this->createMock('Symfony\Component\Routing\Route');
@@ -117,8 +113,6 @@ class VisitorThemeNegotiatorTest extends UnitTestCase {
 
   /**
    * Tests the applies method.
-   *
-   * @covers ::applies
    */
   public function testAppliesVisitorsPath(): void {
     $route_object = $this->createMock('Symfony\Component\Routing\Route');
@@ -142,8 +136,6 @@ class VisitorThemeNegotiatorTest extends UnitTestCase {
 
   /**
    * Tests the applies method.
-   *
-   * @covers ::applies
    */
   public function testAppliesNotVisitorsPath(): void {
     $route_object = $this->createMock('Symfony\Component\Routing\Route');
@@ -167,8 +159,6 @@ class VisitorThemeNegotiatorTest extends UnitTestCase {
 
   /**
    * Tests the determineActiveTheme method.
-   *
-   * @covers ::determineActiveTheme
    */
   public function testDetermineActiveTheme(): void {
     $route_match = $this->createMock('Drupal\Core\Routing\RouteMatchInterface');

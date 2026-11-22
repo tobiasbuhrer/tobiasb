@@ -112,9 +112,10 @@ class PageAttachmentsService implements VisitorsPageAttachmentsInterface {
 
     $page['#cache']['tags'][] = 'user:' . $this->currentUser->id();
     $page['#cache']['contexts'][] = 'user';
-    $page['#cache']['tags'][] = 'config:visitors.settings';
+    $page['#cache']['tags'][] = 'config:visitors.config';
 
     $this->attachToolbar($page);
+    $this->attachNavigation($page);
 
     try {
       if ($this->visibilityService->isVisible()) {
@@ -139,9 +140,12 @@ class PageAttachmentsService implements VisitorsPageAttachmentsInterface {
     $base_path = $request->getBasePath();
     $module_path = $this->moduleHandler->getModule('visitors')->getPath();
 
+    $settings = $this->configFactory->get('visitors.config');
+
     $page['#attached']['drupalSettings']['visitors']['module'] = "$base_path/$module_path";
     $page['#attached']['drupalSettings']['visitors']['route'] = $route;
     $page['#attached']['drupalSettings']['visitors']['server'] = gethostname();
+    $page['#attached']['drupalSettings']['visitors']['debug'] = (bool) $settings->get('client_debug');
     $page['#attached']['library'][] = 'visitors/visitors';
 
   }
@@ -153,11 +157,32 @@ class PageAttachmentsService implements VisitorsPageAttachmentsInterface {
    *   The page attachments array.
    */
   protected function attachToolbar(array &$page): void {
-    $required_permissions = ['access visitors', 'access toolbar'];
-
-    $access = AccessResult::allowedIfHasPermissions($this->currentUser, $required_permissions);
-    if ($access->isAllowed()) {
+    $toolbar_access = AccessResult::allowedIfHasPermissions($this->currentUser, [
+      'access visitors',
+      'access toolbar',
+    ]);
+    if ($toolbar_access->isAllowed()) {
       $page['#attached']['library'][] = 'visitors/menu';
+    }
+  }
+
+  /**
+   * Visitors navigation integration.
+   *
+   * @param array $page
+   *   The page attachments array.
+   */
+  protected function attachNavigation(array &$page): void {
+    if (!$this->moduleHandler->moduleExists('navigation')) {
+      return;
+    }
+
+    $navigation_access = AccessResult::allowedIfHasPermissions($this->currentUser, [
+      'access visitors',
+      'access navigation',
+    ]);
+    if ($navigation_access->isAllowed()) {
+      $page['#attached']['library'][] = 'visitors/navigation';
     }
   }
 

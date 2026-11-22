@@ -7,14 +7,21 @@ namespace Drupal\Tests\visitors\Unit\Plugin\views\filter;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\filter\VisitorsDate;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\filter\VisitorsDate
- * @covers \Drupal\visitors\Plugin\views\filter\VisitorsDate
  */
+#[CoversClass(VisitorsDate::class)]
+#[CoversMethod(VisitorsDate::class, 'create')]
+#[CoversMethod(VisitorsDate::class, '__construct')]
+#[CoversMethod(VisitorsDate::class, 'valueForm')]
+#[CoversMethod(VisitorsDate::class, 'validateValidTime')]
+#[CoversMethod(VisitorsDate::class, 'opBetween')]
+#[CoversMethod(VisitorsDate::class, 'getCacheContexts')]
+#[Group('visitors')]
 class VisitorsDateTest extends UnitTestCase {
 
   /**
@@ -65,8 +72,6 @@ class VisitorsDateTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate(): void {
     $container = \Drupal::getContainer();
@@ -80,8 +85,6 @@ class VisitorsDateTest extends UnitTestCase {
 
   /**
    * Tests the constructor method.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
     $plugin = new VisitorsDate([], 'visitors_date', [], $this->dateRange);
@@ -90,8 +93,6 @@ class VisitorsDateTest extends UnitTestCase {
 
   /**
    * Tests the valueForm method.
-   *
-   * @covers ::valueForm
    */
   public function testValueForm() {
     $this->plugin->value['value'] = 'value';
@@ -111,7 +112,6 @@ class VisitorsDateTest extends UnitTestCase {
     ];
     $form_state = $this->createMock('Drupal\Core\Form\FormStateInterface');
     $reflection = new \ReflectionMethod($this->plugin, 'valueForm');
-    $reflection->setAccessible(TRUE);
 
     $reflection->invokeArgs($this->plugin, [&$form, $form_state]);
 
@@ -120,8 +120,6 @@ class VisitorsDateTest extends UnitTestCase {
 
   /**
    * Tests the validateValidTime method.
-   *
-   * @covers ::validateValidTime
    */
   public function testValidateValidTime(): void {
 
@@ -146,8 +144,6 @@ class VisitorsDateTest extends UnitTestCase {
 
   /**
    * Tests the validateValidTime method.
-   *
-   * @covers ::validateValidTime
    */
   public function testValidateValidTimeBetween(): void {
 
@@ -178,8 +174,6 @@ class VisitorsDateTest extends UnitTestCase {
 
   /**
    * Tests the opBetween method.
-   *
-   * @covers ::opBetween
    */
   public function testOpBetween(): void {
     $this->plugin->value['value'] = 'value';
@@ -197,15 +191,12 @@ class VisitorsDateTest extends UnitTestCase {
 
     $this->plugin->query = $query;
     $reflection = new \ReflectionMethod($this->plugin, 'opBetween');
-    $reflection->setAccessible(TRUE);
 
     $reflection->invoke($this->plugin, $field);
   }
 
   /**
    * Tests the opBetween method.
-   *
-   * @covers ::opBetween
    */
   public function testOpBetweenGlobal(): void {
     $this->dateRange->expects($this->once())
@@ -230,15 +221,12 @@ class VisitorsDateTest extends UnitTestCase {
 
     $this->plugin->query = $query;
     $reflection = new \ReflectionMethod($this->plugin, 'opBetween');
-    $reflection->setAccessible(TRUE);
 
     $reflection->invoke($this->plugin, $field);
   }
 
   /**
    * Test the getCacheContexts method.
-   *
-   * @covers ::getCacheContexts
    */
   public function testGetCacheContext() {
     $this->plugin->value['type'] = 'global';

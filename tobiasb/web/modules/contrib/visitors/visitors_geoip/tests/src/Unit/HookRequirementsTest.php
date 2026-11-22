@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\visitors_geoip\Unit;
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors_geoip.install';
 
@@ -21,9 +24,8 @@ if (!defined('REQUIREMENT_OK')) {
 
 /**
  * Tests visitors_geoip_requirements.
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookRequirementsTest extends UnitTestCase {
 
   /**
@@ -112,7 +114,7 @@ class HookRequirementsTest extends UnitTestCase {
     $this->assertIsArray($requirements);
     $this->assertCount(1, $requirements);
     $this->assertArrayHasKey('visitors_geoip', $requirements);
-    $this->assertEquals(REQUIREMENT_WARNING, $requirements['visitors_geoip']['severity']);
+    $this->assertEquals(DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::Warning, fn() => REQUIREMENT_WARNING), $requirements['visitors_geoip']['severity']);
   }
 
   /**
@@ -145,7 +147,7 @@ class HookRequirementsTest extends UnitTestCase {
     $this->assertIsArray($requirements);
     $this->assertCount(1, $requirements);
     $this->assertArrayHasKey('visitors_geoip', $requirements);
-    $this->assertEquals(REQUIREMENT_OK, $requirements['visitors_geoip']['severity']);
+    $this->assertEquals(DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::OK, fn() => REQUIREMENT_OK), $requirements['visitors_geoip']['severity']);
   }
 
 }

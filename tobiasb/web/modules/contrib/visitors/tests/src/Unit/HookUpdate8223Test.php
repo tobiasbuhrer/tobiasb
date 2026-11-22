@@ -4,14 +4,14 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests visitors_form_user_form_alter.
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookUpdate8223Test extends UnitTestCase {
 
   /**

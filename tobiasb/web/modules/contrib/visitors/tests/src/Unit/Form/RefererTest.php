@@ -8,15 +8,23 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Form\Referer;
 use Drupal\visitors\VisitorsReportInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use Drupal\visitors\Form\DateFilter;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Referer form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Form\Referer
- * @uses \Drupal\visitors\Form\Referer
- * @uses \Drupal\visitors\Form\DateFilter
  */
+#[CoversClass(Referer::class)]
+#[CoversMethod(Referer::class, 'getFormId')]
+#[CoversMethod(Referer::class, 'buildForm')]
+#[CoversMethod(Referer::class, 'setSessionRefererType')]
+#[CoversMethod(Referer::class, 'submitForm')]
+#[UsesClass(Referer::class)]
+#[UsesClass(DateFilter::class)]
+#[Group('visitors')]
 class RefererTest extends UnitTestCase {
 
   /**
@@ -70,8 +78,6 @@ class RefererTest extends UnitTestCase {
 
   /**
    * Test the form id.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId() {
     $this->assertEquals('visitors_referer_form', $this->form->getFormId());
@@ -79,9 +85,6 @@ class RefererTest extends UnitTestCase {
 
   /**
    * Test the form.
-   *
-   * @covers ::buildForm
-   * @covers ::setSessionRefererType
    */
   public function testBuildForm() {
 
@@ -105,9 +108,6 @@ class RefererTest extends UnitTestCase {
 
   /**
    * Test the default referer.
-   *
-   * @covers ::buildForm
-   * @covers ::setSessionRefererType
    */
   public function testBuildFormReferer() {
     unset($_SESSION['referer_type']);
@@ -133,8 +133,6 @@ class RefererTest extends UnitTestCase {
 
   /**
    * Tests submitForm.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
     $date_to = $this->createMock('Drupal\Core\Datetime\DrupalDateTime');

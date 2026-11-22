@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Drupal\Tests\visitors\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
-use Symfony\Component\Yaml\Yaml;
+use Drupal\Component\Serialization\Yaml;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests the hook_update_8227() function.
- *
- * @group visitors
  */
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class HookUpdate8227Test extends KernelTestBase {
 
   /**
@@ -8520,7 +8522,7 @@ display:
         - 'languages:language_interface'
       tags: {  }
 YAML;
-    $view_array = Yaml::parse($yaml);
+    $view_array = Yaml::decode($yaml);
     $view = $this->config('views.view.visitors');
     $view->setData($view_array);
     $view->save();
@@ -8554,7 +8556,7 @@ settings:
 visibility: {  }
 YAML;
 
-    $block_array = Yaml::parse($yaml);
+    $block_array = Yaml::decode($yaml);
     $block = $this->config('block.block.olivero_popular_content');
     $block->setData($block_array);
     $block->save();
@@ -17251,7 +17253,7 @@ display:
         - 'languages:language_interface'
       tags: {  }
 YAML;
-    $view_array = Yaml::parse($yaml);
+    $view_array = Yaml::decode($yaml);
     return $view_array;
   }
 

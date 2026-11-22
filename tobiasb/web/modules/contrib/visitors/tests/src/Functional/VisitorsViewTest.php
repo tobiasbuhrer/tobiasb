@@ -3,14 +3,30 @@
 namespace Drupal\Tests\visitors\Functional;
 
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Drupal\visitors\Controller\Report\ReportController;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use Drupal\visitors\Form\Settings;
 
 /**
  * Tests the visitors/{report} page.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Controller\Report\ReportController
- * @uses \Drupal\visitors\Controller\Report\ReportController
  */
+#[CoversClass(ReportController::class)]
+#[CoversMethod(ReportController::class, 'performance')]
+#[CoversMethod(ReportController::class, 'location')]
+#[CoversMethod(ReportController::class, 'device')]
+#[CoversMethod(ReportController::class, 'software')]
+#[CoversMethod(ReportController::class, 'time')]
+#[CoversMethod(ReportController::class, 'topHost')]
+#[CoversMethod(ReportController::class, 'topPages')]
+#[CoversMethod(ReportController::class, 'recentHost')]
+#[CoversMethod(Settings::class, 'buildForm')]
+#[UsesClass(ReportController::class)]
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class VisitorsViewTest extends BrowserTestBase {
 
   /**
@@ -27,15 +43,6 @@ class VisitorsViewTest extends BrowserTestBase {
 
   /**
    * Tests the html head links.
-   *
-   * @covers ::performance
-   * @covers ::location
-   * @covers ::device
-   * @covers ::software
-   * @covers ::time
-   * @covers ::topHost
-   * @covers ::topPages
-   * @covers ::recentHost
    */
   public function testHasReportAccess() {
     $user = $this->drupalCreateUser([
@@ -48,15 +55,6 @@ class VisitorsViewTest extends BrowserTestBase {
 
   /**
    * Tests the Link header.
-   *
-   * @covers ::performance
-   * @covers ::location
-   * @covers ::device
-   * @covers ::software
-   * @covers ::time
-   * @covers ::topHost
-   * @covers ::topPages
-   * @covers ::recentHost
    */
   public function testNoReportAccess() {
     $user = $this->drupalCreateUser([]);
@@ -67,8 +65,6 @@ class VisitorsViewTest extends BrowserTestBase {
 
   /**
    * Tests Visitors Settings form access.
-   *
-   * @covers \Drupal\visitors\Form\Settings::buildForm
    */
   public function testVisitorsSettingsForm403() {
     $user = $this->drupalCreateUser([]);
@@ -79,8 +75,6 @@ class VisitorsViewTest extends BrowserTestBase {
 
   /**
    * Tests Visitors Settings form access.
-   *
-   * @covers \Drupal\visitors\Form\Settings::buildForm
    */
   public function testVisitorsSettingsForm200() {
     $user = $this->drupalCreateUser([

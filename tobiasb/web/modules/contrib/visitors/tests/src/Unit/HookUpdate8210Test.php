@@ -4,14 +4,14 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests visitors_update_8210().
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookUpdate8210Test extends UnitTestCase {
 
   /**

@@ -4,14 +4,15 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests visitors_update_8215().
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookUpdate8215Test extends UnitTestCase {
 
   /**
@@ -108,9 +109,8 @@ class HookUpdate8215Test extends UnitTestCase {
 
   /**
    * Tests visitors_update_8215 with a delete operation.
-   *
-   * @dataProvider deleteDataProvider
    */
+  #[DataProvider('deleteDataProvider')]
   public function testUpdate8215Delete($progress, $column, $value, $operator = '='): void {
 
     $delete = $this->createMock('Drupal\Core\Database\Query\Delete');

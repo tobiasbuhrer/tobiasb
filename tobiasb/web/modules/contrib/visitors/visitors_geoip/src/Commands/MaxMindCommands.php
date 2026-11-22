@@ -2,7 +2,7 @@
 
 namespace Drupal\visitors_geoip\Commands;
 
-use Drupal\Core\Archiver\Tar;
+use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
@@ -123,19 +123,25 @@ class MaxMindCommands extends DrushCommands {
     // Add a new line after the progress bar.
     $output->writeln('');
 
-    $tar = new Tar($real_file, ['compress' => 'gz']);
-    $content = $tar->listContents();
-    $matches = preg_grep('/\.mmdb$/', $content);
+    $archive = $real_file . '.tar.gz';
+    $this->fileSystem->copy($real_file, $archive);
+    $phar = new \PharData($archive);
+    $files = [];
+    $iterator = new \RecursiveIteratorIterator($phar);
+    foreach ($iterator as $file) {
+      $files[] = $iterator->getSubPathname();
+    }
+    $matches = preg_grep('/\.mmdb$/', $files);
     $database = reset($matches);
 
-    $tar->extract($temp_path, [$database]);
-    $db = end(explode('/', $database));
+    $phar->extractTo($temp_path, $database, TRUE);
+    $db = basename($database);
     if (version_compare(\Drupal::VERSION, '10.3.0', '>=')) {
       $this->fileSystem->copy($temp_path . '/' . $database, $path . '/' . $db, FileExists::Replace);
     }
     else {
       // @phpstan-ignore-next-line
-      $this->fileSystem->copy($temp_path . '/' . $database, $path . '/' . $db, FileSystemInterface::EXISTS_REPLACE);
+      $this->fileSystem->copy($temp_path . '/' . $database, $path . '/' . $db, DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.3.0', fn() => FileExists::Replace, fn() => FileSystemInterface::EXISTS_REPLACE));
     }
 
     // Output a completion message.

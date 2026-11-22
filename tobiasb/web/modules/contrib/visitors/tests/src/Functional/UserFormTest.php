@@ -4,12 +4,14 @@ namespace Drupal\Tests\visitors\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use Drupal\visitors\VisitorsVisibilityInterface;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests basic integration of views data from the visitors module.
- *
- * @group visitors
  */
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class UserFormTest extends BrowserTestBase {
 
 

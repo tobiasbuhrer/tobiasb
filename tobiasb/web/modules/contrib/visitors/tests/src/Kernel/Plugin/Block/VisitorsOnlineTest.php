@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Drupal\Tests\visitors\Kernel\Plugin\Block;
 
 use Drupal\KernelTests\KernelTestBase;
-use Symfony\Component\Yaml\Yaml;
+use Drupal\Component\Serialization\Yaml;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the Visitors Online block.
- *
- * @group visitors
  */
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class VisitorsOnlineTest extends KernelTestBase {
 
   /**
@@ -54,7 +56,7 @@ settings:
 visibility: {  }
 YAML;
 
-    $block_array = Yaml::parse($yaml);
+    $block_array = Yaml::decode($yaml);
     $block = $this->config('block.block.olivero_visitors_online');
     $block->setData($block_array);
     $block->save();

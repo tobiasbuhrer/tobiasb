@@ -7,14 +7,25 @@ namespace Drupal\Tests\visitors\Unit\Plugin\Block;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\Block\VisitorsPopularBlock;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\Block\VisitorsPopularBlock
- * @covers \Drupal\visitors\Plugin\Block\VisitorsPopularBlock
  */
+#[CoversClass(VisitorsPopularBlock::class)]
+#[CoversMethod(VisitorsPopularBlock::class, 'create')]
+#[CoversMethod(VisitorsPopularBlock::class, '__construct')]
+#[CoversMethod(VisitorsPopularBlock::class, 'defaultConfiguration')]
+#[CoversMethod(VisitorsPopularBlock::class, 'blockAccess')]
+#[CoversMethod(VisitorsPopularBlock::class, 'blockForm')]
+#[CoversMethod(VisitorsPopularBlock::class, 'entityTypes')]
+#[CoversMethod(VisitorsPopularBlock::class, 'blockSubmit')]
+#[CoversMethod(VisitorsPopularBlock::class, 'build')]
+#[CoversMethod(VisitorsPopularBlock::class, 'entityLabelList')]
+#[CoversMethod(VisitorsPopularBlock::class, 'getCacheTags')]
+#[Group('visitors')]
 class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
@@ -111,8 +122,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate(): void {
     $container = \Drupal::getContainer();
@@ -127,8 +136,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor(): void {
     $configuration = [
@@ -156,8 +163,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the block defaultConfiguration method.
-   *
-   * @covers ::defaultConfiguration
    */
   public function testDefaultConfiguration(): void {
     $configuration = $this->block->defaultConfiguration();
@@ -169,8 +174,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the blockAccess method.
-   *
-   * @covers ::blockAccess
    */
   public function testBlockAccessAllowed(): void {
     $settings = $this->createMock('Drupal\Core\Config\ImmutableConfig');
@@ -195,7 +198,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
       ->with('access content')
       ->willReturn(TRUE);
     $reflection = new \ReflectionMethod($this->block, 'blockAccess');
-    $reflection->setAccessible(TRUE);
 
     $access = $reflection->invoke($this->block, $account);
     $this->assertTrue($access->isAllowed());
@@ -203,8 +205,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the blockAccess method.
-   *
-   * @covers ::blockAccess
    */
   public function testBlockAccessNotAllowed(): void {
     $settings = $this->createMock('Drupal\Core\Config\ImmutableConfig');
@@ -229,7 +229,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
       ->with('access content')
       ->willReturn(FALSE);
     $reflection = new \ReflectionMethod($this->block, 'blockAccess');
-    $reflection->setAccessible(TRUE);
 
     $access = $reflection->invoke($this->block, $account);
     $this->assertFalse($access->isAllowed());
@@ -237,8 +236,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the blockAccess method.
-   *
-   * @covers ::blockAccess
    */
   public function testBlockAccessNotEnabled(): void {
     $settings = $this->createMock('Drupal\Core\Config\ImmutableConfig');
@@ -256,7 +253,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
     $account = $this->createMock('Drupal\Core\Session\AccountInterface');
 
     $reflection = new \ReflectionMethod($this->block, 'blockAccess');
-    $reflection->setAccessible(TRUE);
 
     $access = $reflection->invoke($this->block, $account);
     $this->assertFalse($access->isAllowed());
@@ -264,8 +260,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the blockAccess method.
-   *
-   * @covers ::blockAccess
    */
   public function testBlockAccessNotEntityType(): void {
     $settings = $this->createMock('Drupal\Core\Config\ImmutableConfig');
@@ -283,7 +277,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
     $account = $this->createMock('Drupal\Core\Session\AccountInterface');
 
     $reflection = new \ReflectionMethod($this->block, 'blockAccess');
-    $reflection->setAccessible(TRUE);
 
     $access = $reflection->invoke($this->block, $account);
     $this->assertFalse($access->isAllowed());
@@ -291,9 +284,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the blockForm method.
-   *
-   * @covers ::blockForm
-   * @covers ::entityTypes
    */
   public function testBlockForm(): void {
     $node_definition = $this->createMock('Drupal\Core\Entity\ContentEntityType');
@@ -328,8 +318,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the blockSubmit method.
-   *
-   * @covers ::blockSubmit
    */
   public function testBlockSubmit(): void {
     $form = [];
@@ -350,9 +338,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the build method.
-   *
-   * @covers ::build
-   * @covers ::entityLabelList
    */
   public function testBuild(): void {
     $node_type = $this->createMock('Drupal\Core\Entity\EntityTypeInterface');
@@ -403,8 +388,6 @@ class VisitorsPopularBlockTest extends UnitTestCase {
 
   /**
    * Tests the getCacheTags method.
-   *
-   * @covers ::getCacheTags
    */
   public function testGetCacheTags(): void {
     $this->assertEquals(['config:visitors.config'], $this->block->getCacheTags());

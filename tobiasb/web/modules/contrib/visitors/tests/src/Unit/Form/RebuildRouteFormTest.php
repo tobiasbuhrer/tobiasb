@@ -8,16 +8,28 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Form\RebuildRouteForm;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\InputBag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 require_once __DIR__ . '/../../../../web/core/includes/form.inc';
 
 /**
  * Rebuild Route form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Form\RebuildRouteForm
- * @uses \Drupal\visitors\Form\RebuildRouteForm
  */
+#[CoversClass(RebuildRouteForm::class)]
+#[CoversMethod(RebuildRouteForm::class, 'getFormId')]
+#[CoversMethod(RebuildRouteForm::class, 'getCancelUrl')]
+#[CoversMethod(RebuildRouteForm::class, 'getQuestion')]
+#[CoversMethod(RebuildRouteForm::class, 'batch')]
+#[CoversMethod(RebuildRouteForm::class, 'buildForm')]
+#[CoversMethod(RebuildRouteForm::class, 'batchFinished')]
+#[CoversMethod(RebuildRouteForm::class, 'submitForm')]
+#[CoversMethod(RebuildRouteForm::class, 'create')]
+#[CoversMethod(RebuildRouteForm::class, '__construct')]
+#[UsesClass(RebuildRouteForm::class)]
+#[Group('visitors')]
 class RebuildRouteFormTest extends UnitTestCase {
 
   /**
@@ -94,8 +106,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Test the form id.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId() {
     $this->assertEquals('confirm_visitor_rebuild_route_form', $this->form->getFormId());
@@ -103,8 +113,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Test the form.
-   *
-   * @covers ::getCancelUrl
    */
   public function testGetCancelUrl() {
     $this->assertEquals('visitors.settings', $this->form->getCancelUrl()->getRouteName());
@@ -112,8 +120,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Test the form.
-   *
-   * @covers ::getQuestion
    */
   public function testGetQuestion() {
     $this->assertEquals('Do you want to rebuild the routes?', (string) $this->form->getQuestion());
@@ -121,8 +127,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Test the form.
-   *
-   * @covers ::batch
    */
   public function testBatch() {
     $path = '/node/1';
@@ -138,8 +142,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Test the form.
-   *
-   * @covers ::buildForm
    */
   public function testBuildForm() {
     $query = new InputBag([]);
@@ -164,8 +166,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Test the form.
-   *
-   * @covers ::batchFinished
    */
   public function testBatchFinishedSuccess() {
     $result = $this->form->batchFinished(TRUE, [], []);
@@ -174,8 +174,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Test the form.
-   *
-   * @covers ::batchFinished
    */
   public function testBatchFinishedFailure() {
     $error = [
@@ -188,8 +186,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Tests submitForm.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
     $record = new \stdClass();
@@ -206,8 +202,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Tests create.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -217,8 +211,6 @@ class RebuildRouteFormTest extends UnitTestCase {
 
   /**
    * Tests construct.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $form = new RebuildRouteForm($this->visitorsRouteRebuilder);

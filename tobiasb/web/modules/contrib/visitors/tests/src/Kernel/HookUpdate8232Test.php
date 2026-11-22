@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Drupal\Tests\visitors\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
-use Symfony\Component\Yaml\Yaml;
+use Drupal\Component\Serialization\Yaml;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests the hook_update_8232() function.
- *
- * @group visitors
  */
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class HookUpdate8232Test extends KernelTestBase {
 
   /**
@@ -111,7 +113,7 @@ display:
           field: visitor_id
           separator: ','
 YAML;
-    $view_array = Yaml::parse($yaml);
+    $view_array = Yaml::decode($yaml);
     $view = $this->config('views.view.visitors');
     $view->setData($view_array);
     $view->save();

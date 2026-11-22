@@ -6,14 +6,14 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests visitors_update_8233().
- *
- * @group visitors
  */
+#[Group('visitors')]
 final class HookUpdate8233Test extends UnitTestCase {
 
   /**
@@ -37,27 +37,65 @@ final class HookUpdate8233Test extends UnitTestCase {
   }
 
   /**
-   * Tests visitors_update_8233().
+   * The language field spec used by the update.
+   *
+   * @return array<string, mixed>
+   *   The field spec.
    */
-  public function testUpdate8233(): void {
+  private function spec(): array {
+    return [
+      'type'     => 'varchar',
+      'length'   => 3,
+      'not null' => TRUE,
+      'default'  => '',
+    ];
+  }
+
+  /**
+   * Tests visitors_update_8233() when the language field exists (changeField).
+   */
+  public function testUpdate8233FieldExists(): void {
     $schema = $this->createMock('Drupal\Core\Database\Schema');
     $this->database->expects($this->once())
       ->method('schema')
       ->willReturn($schema);
 
     $schema->expects($this->once())
+      ->method('fieldExists')
+      ->with('visitors', 'language')
+      ->willReturn(TRUE);
+    $schema->expects($this->once())
       ->method('changeField')
       ->with(
         'visitors',
         'language',
         'language',
-        [
-          'type'     => 'varchar',
-          'length'   => 3,
-          'not null' => TRUE,
-          'default'  => '',
-        ]
+        $this->spec()
       );
+    $schema->expects($this->never())
+      ->method('addField');
+
+    visitors_update_8233();
+  }
+
+  /**
+   * Tests visitors_update_8233() when the language field is missing (addField).
+   */
+  public function testUpdate8233FieldMissing(): void {
+    $schema = $this->createMock('Drupal\Core\Database\Schema');
+    $this->database->expects($this->once())
+      ->method('schema')
+      ->willReturn($schema);
+
+    $schema->expects($this->once())
+      ->method('fieldExists')
+      ->with('visitors', 'language')
+      ->willReturn(FALSE);
+    $schema->expects($this->never())
+      ->method('changeField');
+    $schema->expects($this->once())
+      ->method('addField')
+      ->with('visitors', 'language', $this->spec());
 
     visitors_update_8233();
   }

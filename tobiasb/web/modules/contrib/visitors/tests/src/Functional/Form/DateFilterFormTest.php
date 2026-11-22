@@ -3,13 +3,19 @@
 namespace Drupal\Tests\visitors\Functional\Form;
 
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Drupal\visitors\Form\DateFilter;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the DateFilter form.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Form\DateFilter
  */
+#[CoversClass(DateFilter::class)]
+#[CoversMethod(DateFilter::class, 'buildForm')]
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class DateFilterFormTest extends BrowserTestBase {
 
   /**
@@ -26,8 +32,6 @@ class DateFilterFormTest extends BrowserTestBase {
 
   /**
    * Tests the DateFilter form.
-   *
-   * @covers ::buildForm
    */
   public function testDateFilterForm() {
     // Create a user with the necessary permissions.

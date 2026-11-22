@@ -7,16 +7,25 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\DeviceService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the CookieService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\DeviceService
- * @uses \Drupal\visitors\Service\DeviceService
- * @group visitors
  */
+#[CoversClass(DeviceService::class)]
+#[CoversMethod(DeviceService::class, '__construct')]
+#[CoversMethod(DeviceService::class, 'getUniqueUserAgents')]
+#[CoversMethod(DeviceService::class, 'getDeviceDetector')]
+#[CoversMethod(DeviceService::class, 'doDeviceFields')]
+#[CoversMethod(DeviceService::class, 'setDeviceFields')]
+#[CoversMethod(DeviceService::class, 'bulkUpdate')]
+#[CoversMethod(DeviceService::class, 'hasLibrary')]
+#[UsesClass(DeviceService::class)]
+#[Group('visitors')]
 class DeviceServiceTest extends UnitTestCase {
-
 
   /**
    * The device service.
@@ -49,8 +58,6 @@ class DeviceServiceTest extends UnitTestCase {
 
   /**
    * Tests the construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct():void {
     $device = new DeviceService($this->database);
@@ -59,8 +66,6 @@ class DeviceServiceTest extends UnitTestCase {
 
   /**
    * Tests the getUniqueUserAgents method.
-   *
-   * @covers ::getUniqueUserAgents
    */
   public function testGetLanguageLabel():void {
     $result = [
@@ -102,10 +107,6 @@ class DeviceServiceTest extends UnitTestCase {
 
   /**
    * Tests the getDeviceDetector method.
-   *
-   * @covers ::getDeviceDetector
-   * @covers ::doDeviceFields
-   * @covers ::setDeviceFields
    */
   public function testGetDeviceDetector():void {
     $fields = [];
@@ -119,8 +120,6 @@ class DeviceServiceTest extends UnitTestCase {
 
   /**
    * Tests the bulkUpdate method.
-   *
-   * @covers ::bulkUpdate
    */
   public function testBulkUpdate():void {
     $user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/106.0.5249.103 Safari/537.36';
@@ -159,8 +158,6 @@ class DeviceServiceTest extends UnitTestCase {
 
   /**
    * Tests the hasLibrary method.
-   *
-   * @covers ::hasLibrary
    */
   public function testHasLibrary():void {
     $this->assertTrue($this->device->hasLibrary());
@@ -168,8 +165,6 @@ class DeviceServiceTest extends UnitTestCase {
 
   /**
    * Tests the hasLibrary method with a missing class name.
-   *
-   * @covers ::hasLibrary
    */
   public function testHasLibraryWithClassName():void {
     $this->assertFalse($this->device->hasLibrary('Missing\Class'));
@@ -177,8 +172,6 @@ class DeviceServiceTest extends UnitTestCase {
 
   /**
    * Tests setDeviceFields method.
-   *
-   * @covers ::setDeviceFields
    */
   public function testSetDeviceFields(): void {
     $dd = $this->createMock('DeviceDetector\DeviceDetector');
@@ -201,7 +194,6 @@ class DeviceServiceTest extends UnitTestCase {
     $fields = [];
     // Make setDeviceFields method public.
     $method = new \ReflectionMethod($this->device, 'setDeviceFields');
-    $method->setAccessible(TRUE);
     $method->invokeArgs($this->device, [&$fields, $dd]);
 
     $this->assertNull($fields['config_os']);

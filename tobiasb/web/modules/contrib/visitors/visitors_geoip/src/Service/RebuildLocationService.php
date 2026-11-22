@@ -2,6 +2,8 @@
 
 namespace Drupal\visitors_geoip\Service;
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Core\Database\Statement\FetchAs;
 use Drupal\Core\Database\Connection;
 use Drupal\visitors_geoip\VisitorsGeoIpInterface;
 use Drupal\visitors_geoip\VisitorsGeoIpRebuildLocationInterface;
@@ -42,19 +44,19 @@ class RebuildLocationService implements VisitorsGeoIpRebuildLocationInterface {
    * {@inheritdoc}
    */
   public function rebuild(string $ip_address) {
-    /** @var \GeoIp2\Model\City|null $location */
+    /** @var \Drupal\visitors_geoip\GeoIpCity|null $location */
     $location = $this->geoip->city($ip_address);
     if (!$location) {
       return NULL;
     }
 
     $geoip_data                   = [];
-    $geoip_data['continent_code'] = $location->continent->code;
-    $geoip_data['country_code']   = $location->country->isoCode;
-    $geoip_data['region']         = $location->subdivisions[0]->isoCode;
-    $geoip_data['city']           = $location->city->names['en'];
-    $geoip_data['latitude']       = $location->location->latitude;
-    $geoip_data['longitude']      = $location->location->longitude;
+    $geoip_data['continent_code'] = $location->continentCode;
+    $geoip_data['country_code']   = $location->countryCode;
+    $geoip_data['region']         = $location->regionCode;
+    $geoip_data['city']           = $location->city;
+    $geoip_data['latitude']       = $location->latitude;
+    $geoip_data['longitude']      = $location->longitude;
 
     $fields['location_continent'] = $geoip_data['continent_code'];
     $fields['location_country']   = $geoip_data['country_code'];
@@ -75,12 +77,17 @@ class RebuildLocationService implements VisitorsGeoIpRebuildLocationInterface {
    */
   public function getLocations() {
 
-    $missing_location = $this->database->select('visitors', 'v')
+    $missing_location = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => $this->database->select('visitors', 'v')
       ->fields('v', ['visitors_ip'])
       ->condition('location_latitude', NULL, 'IS NULL')
       ->distinct()
       ->execute()
-      ->fetchAll(\PDO::FETCH_COLUMN, 0);
+      ->fetchAll(FetchAs::Column, 0), fn() => $this->database->select('visitors', 'v')
+      ->fields('v', ['visitors_ip'])
+      ->condition('location_latitude', NULL, 'IS NULL')
+      ->distinct()
+      ->execute()
+      ->fetchAll(\PDO::FETCH_COLUMN, 0));
 
     return $missing_location;
   }

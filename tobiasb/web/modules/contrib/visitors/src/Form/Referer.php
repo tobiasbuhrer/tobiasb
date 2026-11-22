@@ -37,7 +37,7 @@ class Referer extends DateFilter {
     $form['visitors_referer']['referer_type'] = [
       '#type' => 'select',
       '#title' => 'Referer type',
-      '#default_value' => $_SESSION['referer_type'],
+      '#default_value' => $_SESSION['referer_type'] ?? VisitorsReportInterface::REFERER_TYPE_EXTERNAL_PAGES,
       '#options' => [
         $this->t('Internal pages'),
         $this->t('External pages'),
@@ -65,7 +65,7 @@ class Referer extends DateFilter {
   /**
    * Set to session info default values for visitors referer type.
    */
-  protected function setSessionRefererType() {
+  protected function setSessionRefererType(): void {
     if (!isset($_SESSION['referer_type'])) {
       $_SESSION['referer_type'] = VisitorsReportInterface::REFERER_TYPE_EXTERNAL_PAGES;
     }

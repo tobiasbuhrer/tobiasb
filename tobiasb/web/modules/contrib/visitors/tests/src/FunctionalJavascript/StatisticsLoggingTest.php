@@ -6,13 +6,16 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\user\Entity\Role;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests that visitors works.
- *
- * @group visitors
- * @CoversNothing
  */
+#[CoversNothing]
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class StatisticsLoggingTest extends WebDriverTestBase {
 
   /**
@@ -71,9 +74,8 @@ class StatisticsLoggingTest extends WebDriverTestBase {
 
   /**
    * Tests that statistics works with different addressing variants.
-   *
-   * @coversNothing
    */
+  #[CoversNothing]
   public function testLoggingPage() {
     // At the first request, the page does not contain statistics counter.
     $this->assertNull($this->getStatisticsCounter('node/1'));

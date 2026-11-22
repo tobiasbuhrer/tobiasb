@@ -13,14 +13,24 @@ use Drupal\user\UserDataInterface;
 use Drupal\visitors\Service\VisibilityService;
 use Drupal\visitors\VisitorsVisibilityInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the VisibilityService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\VisibilityService
- * @uses \Drupal\visitors\Service\VisibilityService
- * @group visitors
  */
+#[CoversClass(VisibilityService::class)]
+#[CoversMethod(VisibilityService::class, 'user')]
+#[CoversMethod(VisibilityService::class, '__construct')]
+#[CoversMethod(VisibilityService::class, 'page')]
+#[CoversMethod(VisibilityService::class, 'roles')]
+#[CoversMethod(VisibilityService::class, 'isVisible')]
+#[CoversMethod(VisibilityService::class, 'getPathAlias')]
+#[UsesClass(VisibilityService::class)]
+#[Group('visitors')]
 class VisibilityServiceTest extends UnitTestCase {
 
   /**
@@ -114,11 +124,8 @@ class VisibilityServiceTest extends UnitTestCase {
 
   /**
    * Tests the user() method.
-   *
-   * @dataProvider userDataProvider
-   * @covers ::user
-   * @covers ::__construct
    */
+  #[DataProvider('userDataProvider')]
   public function testUser($accountRoles, $visibilityConfig, $userData, $user_id, $account_mode, $expectedResult) {
     $account = $this->createMock(AccountInterface::class);
     $account->expects($this->any())
@@ -272,10 +279,8 @@ class VisibilityServiceTest extends UnitTestCase {
 
   /**
    * Tests the page() method.
-   *
-   * @dataProvider pageDataProvider
-   * @covers ::page
    */
+  #[DataProvider('pageDataProvider')]
   public function testPage($visibilityConfig, $pages, $path, $aliasPath, $pathMatcherResult, $expectedResult) {
     $config = $this->createMock('\Drupal\Core\Config\ImmutableConfig');
     $config->expects($this->any())
@@ -402,10 +407,8 @@ class VisibilityServiceTest extends UnitTestCase {
 
   /**
    * Tests the page() method.
-   *
-   * @dataProvider pageDataProviderNoAlias
-   * @covers ::page
    */
+  #[DataProvider('pageDataProviderNoAlias')]
   public function testPageNoAlias($visibilityConfig, $path, $aliasPath, $pathMatcherResult, $expectedResult) {
     $config = $this->createMock('\Drupal\Core\Config\ImmutableConfig');
     $config->expects($this->any())
@@ -528,10 +531,8 @@ class VisibilityServiceTest extends UnitTestCase {
 
   /**
    * Tests the roles() method.
-   *
-   * @dataProvider rolesDataProvider
-   * @covers ::roles
    */
+  #[DataProvider('rolesDataProvider')]
   public function testRoles($accountRoles, $visibilityConfig, $config_roles, $expectedResult) {
     $this->accountProxy->expects($this->any())
       ->method('getRoles')
@@ -616,8 +617,6 @@ class VisibilityServiceTest extends UnitTestCase {
 
   /**
    * Tests the trackingDisabled.
-   *
-   * @covers ::isVisible
    */
   public function testIsVisibleTrackingDisabled() {
     $config = $this->createMock('\Drupal\Core\Config\ImmutableConfig');
@@ -647,8 +646,6 @@ class VisibilityServiceTest extends UnitTestCase {
 
   /**
    * Tests the trackingDisabled.
-   *
-   * @covers ::isVisible
    */
   public function testIsVisible() {
     $config = $this->createMock('\Drupal\Core\Config\ImmutableConfig');
@@ -695,8 +692,6 @@ class VisibilityServiceTest extends UnitTestCase {
 
   /**
    * Tests the trackingDisabled.
-   *
-   * @covers ::isVisible
    */
   public function testIsVisiblePage() {
     $config = $this->createMock('\Drupal\Core\Config\ImmutableConfig');
@@ -747,13 +742,10 @@ class VisibilityServiceTest extends UnitTestCase {
 
   /**
    * Tests the getPathAlias method.
-   *
-   * @covers ::getPathAlias
    */
   public function testGetPathAlias(): void {
 
     $method = new \ReflectionMethod($this->service, 'getPathAlias');
-    $method->setAccessible(TRUE);
 
     $path = '/node/1';
     $alias = '/blog/bluegeek9/1';

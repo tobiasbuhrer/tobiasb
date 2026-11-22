@@ -3,11 +3,13 @@
 namespace Drupal\visitors\Controller\Report;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Security\TrustedCallbackInterface;
+use Drupal\views\Views;
 
 /**
  * Report base controller.
  */
-class ReportBaseController extends ControllerBase {
+class ReportBaseController extends ControllerBase implements TrustedCallbackInterface {
 
   /**
    * Render the registered blocks as output.
@@ -21,6 +23,9 @@ class ReportBaseController extends ControllerBase {
    */
   public function renderViews(array $blocks, $class = NULL, $args = NULL) {
     $output = [];
+    if ($args !== NULL && !is_array($args)) {
+      $args = [$args];
+    }
     // Render each block element.
     foreach ($blocks as $block) {
       if (empty($block['#view_id'])) {
@@ -30,19 +35,14 @@ class ReportBaseController extends ControllerBase {
       else {
         $view_id = $block['#view_id'];
         $display_id = $block['#view_display'];
-
-        if (is_null($args)) {
-          // Create a view embed for this content.
-          $build = \views_embed_view($view_id, $display_id);
-        }
-        else {
-          if (!is_array($args)) {
-            $args = [$args];
-          }
-          // Create a view embed for this content.
-          $build = \views_embed_view($view_id, $display_id, ...$args);
-        }
-
+        $build = [
+          '#pre_render'  => [
+            [static::class, 'preRenderEmbeddedView'],
+          ],
+          '#name'        => $view_id,
+          '#display_id'  => $display_id,
+          '#arguments'   => $args ?? [],
+        ];
       }
       if (!isset($build['#attributes']) && isset($block['#attributes'])) {
         $build['#attributes'] = $block['#attributes'];
@@ -59,6 +59,44 @@ class ReportBaseController extends ControllerBase {
       'blocks'    => $output,
       '#suffix'   => '</div>',
     ];
+  }
+
+  /**
+   * Builds a view element when the view exists and is accessible.
+   *
+   * The replaced helper returned an empty array for a missing or
+   * inaccessible view. The view render element throws instead.
+   *
+   * @param array $element
+   *   The placeholder render element.
+   *
+   * @return array
+   *   The view render element, or an empty array.
+   */
+  public static function preRenderEmbeddedView(array $element): array {
+    $view = Views::getView($element['#name']);
+    if (!$view || !$view->access($element['#display_id'])) {
+      return [];
+    }
+
+    $view_element = [
+      '#type'       => 'view',
+      '#name'       => $element['#name'],
+      '#display_id' => $element['#display_id'],
+      '#arguments'  => $element['#arguments'] ?? [],
+    ];
+    if (isset($element['#attributes'])) {
+      $view_element['#attributes'] = $element['#attributes'];
+    }
+    $element['view'] = $view_element;
+    return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function trustedCallbacks() {
+    return ['preRenderEmbeddedView'];
   }
 
 }

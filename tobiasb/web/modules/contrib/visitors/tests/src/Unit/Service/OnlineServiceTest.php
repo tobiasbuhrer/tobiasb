@@ -6,14 +6,23 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\OnlineService;
 use Drupal\visitors\VisitorsOnlineInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the OnlineService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\OnlineService
- *
- * @group visitors
  */
+#[CoversClass(OnlineService::class)]
+#[CoversMethod(OnlineService::class, '__construct')]
+#[CoversMethod(OnlineService::class, 'getLast30Minutes')]
+#[CoversMethod(OnlineService::class, 'query')]
+#[CoversMethod(OnlineService::class, 'getLast24Hours')]
+#[CoversMethod(OnlineService::class, 'getYesterday30Minutes')]
+#[CoversMethod(OnlineService::class, 'getYesterday24Hours')]
+#[CoversMethod(OnlineService::class, 'getLastWeek30Minutes')]
+#[CoversMethod(OnlineService::class, 'getLastWeek24Hours')]
+#[Group('visitors')]
 class OnlineServiceTest extends UnitTestCase {
 
   /**
@@ -63,8 +72,6 @@ class OnlineServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
     $service = new OnlineService($this->database, $this->time);
@@ -73,9 +80,6 @@ class OnlineServiceTest extends UnitTestCase {
 
   /**
    * Tests the getLast30Minutes method.
-   *
-   * @covers ::getLast30Minutes
-   * @covers ::query
    */
   public function testGetLast30Minutes(): void {
     $end = self::NOW;
@@ -114,9 +118,6 @@ class OnlineServiceTest extends UnitTestCase {
 
   /**
    * Tests the getLast24Hours method.
-   *
-   * @covers ::getLast24Hours
-   * @covers ::query
    */
   public function testGetLast24Hours(): void {
     $end = self::NOW;
@@ -155,9 +156,6 @@ class OnlineServiceTest extends UnitTestCase {
 
   /**
    * Tests the getYesterday30Minutes method.
-   *
-   * @covers ::getYesterday30Minutes
-   * @covers ::query
    */
   public function testGetYesterday30Minutes(): void {
     $end = self::NOW - VisitorsOnlineInterface::HOUR_24;
@@ -196,9 +194,6 @@ class OnlineServiceTest extends UnitTestCase {
 
   /**
    * Tests the getYesterday24Hours method.
-   *
-   * @covers ::getYesterday24Hours
-   * @covers ::query
    */
   public function testGetYesterday24Hours(): void {
     $end = self::NOW - VisitorsOnlineInterface::HOUR_24;
@@ -237,9 +232,6 @@ class OnlineServiceTest extends UnitTestCase {
 
   /**
    * Tests the getLastWeek30Minutes method.
-   *
-   * @covers ::getLastWeek30Minutes
-   * @covers ::query
    */
   public function testGetLastWeek30Minutes(): void {
     $end = self::NOW - VisitorsOnlineInterface::DAY_7;
@@ -278,9 +270,6 @@ class OnlineServiceTest extends UnitTestCase {
 
   /**
    * Tests the getLastWeek24Hours method.
-   *
-   * @covers ::getLastWeek24Hours
-   * @covers ::query
    */
   public function testGetLastWeek24Hours(): void {
     $end = self::NOW - VisitorsOnlineInterface::DAY_7;

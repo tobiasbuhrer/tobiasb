@@ -2,6 +2,8 @@
 
 namespace Drupal\visitors\Service;
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Core\Database\Statement\FetchAs;
 use DeviceDetector\ClientHints;
 use DeviceDetector\DeviceDetector;
 use Drupal\Core\Database\Connection;
@@ -35,13 +37,19 @@ class DeviceService implements VisitorsDeviceInterface {
    * {@inheritdoc}
    */
   public function getUniqueUserAgents(): array {
-    $results = $this->database->select('visitors', 'v')
+    $results = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => $this->database->select('visitors', 'v')
       ->fields('v', ['visitors_user_agent'])
       ->condition('bot', NULL, 'IS NULL')
       ->distinct()
       ->orderBy('visitors_user_agent')
       ->execute()
-      ->fetchAll(\PDO::FETCH_COLUMN, 0);
+      ->fetchAll(FetchAs::Column, 0), fn() => $this->database->select('visitors', 'v')
+      ->fields('v', ['visitors_user_agent'])
+      ->condition('bot', NULL, 'IS NULL')
+      ->distinct()
+      ->orderBy('visitors_user_agent')
+      ->execute()
+      ->fetchAll(\PDO::FETCH_COLUMN, 0));
 
     return $results;
   }

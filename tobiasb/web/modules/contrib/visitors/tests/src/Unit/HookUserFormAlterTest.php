@@ -5,14 +5,17 @@ namespace Drupal\Tests\visitors\Unit;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\VisitorsVisibilityInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversFunction;
 
 require_once __DIR__ . '/../../../visitors.module';
 
 /**
  * Tests visitors_form_user_form_alter.
- *
- * @group visitors
  */
+#[CoversFunction('visitors_form_user_form_alter')]
+#[CoversFunction('visitors_user_profile_form_submit')]
+#[Group('visitors')]
 class HookUserFormAlterTest extends UnitTestCase {
 
   /**
@@ -44,6 +47,9 @@ class HookUserFormAlterTest extends UnitTestCase {
 
     $container = new ContainerBuilder();
 
+    $string_translation = $this->getStringTranslationStub();
+    $container->set('string_translation', $string_translation);
+
     $this->configFactory = $this->createMock('Drupal\Core\Config\ConfigFactoryInterface');
     $container->set('config.factory', $this->configFactory);
 
@@ -57,8 +63,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests when personalization is not allowed.
-   *
-   * @covers visitors_form_user_form_alter
    */
   public function testNoPersonalization(): void {
 
@@ -82,8 +86,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests when user does not have permission is personalize.
-   *
-   * @covers visitors_form_user_form_alter
    */
   public function testNoPermission(): void {
 
@@ -120,8 +122,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests when user has permission, opt out default.
-   *
-   * @covers visitors_form_user_form_alter
    */
   public function testOptOut(): void {
 
@@ -164,8 +164,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests when user has permission, opt out default with data.
-   *
-   * @covers visitors_form_user_form_alter
    */
   public function testOptOutWithData(): void {
 
@@ -215,8 +213,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests when user has permission, opt in default.
-   *
-   * @covers visitors_form_user_form_alter
    */
   public function testOptIn(): void {
 
@@ -259,8 +255,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests when user has permission, opt in default with data.
-   *
-   * @covers visitors_form_user_form_alter
    */
   public function testOptInWithData(): void {
 
@@ -310,8 +304,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests submit opt out.
-   *
-   * @covers visitors_user_profile_form_submit
    */
   public function testSubmitOptIn(): void {
 
@@ -349,8 +341,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests submit opt out.
-   *
-   * @covers visitors_user_profile_form_submit
    */
   public function testSubmitOptOut(): void {
 
@@ -388,8 +378,6 @@ class HookUserFormAlterTest extends UnitTestCase {
 
   /**
    * Tests submit missing value.
-   *
-   * @covers visitors_user_profile_form_submit
    */
   public function testSubmitMissingValue(): void {
 

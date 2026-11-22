@@ -8,14 +8,23 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsFlash;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Drupal\views\ResultRow;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use Drupal\visitors\Plugin\views\field\VisitorsBrowserPlugin;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsBrowserPlugin
- * @uses \Drupal\visitors\Plugin\views\field\VisitorsBrowserPlugin
  */
+#[CoversClass(VisitorsBrowserPlugin::class)]
+#[CoversMethod(VisitorsBrowserPlugin::class, 'buildOptionsForm')]
+#[CoversMethod(VisitorsBrowserPlugin::class, 'create')]
+#[CoversMethod(VisitorsBrowserPlugin::class, '__construct')]
+#[CoversMethod(VisitorsBrowserPlugin::class, 'defineOptions')]
+#[CoversMethod(VisitorsBrowserPlugin::class, 'render')]
+#[UsesClass(VisitorsBrowserPlugin::class)]
+#[Group('visitors')]
 class VisitorsBrowserPluginTest extends UnitTestCase {
 
   /**
@@ -155,8 +164,6 @@ class VisitorsBrowserPluginTest extends UnitTestCase {
 
   /**
    * Tests the buildOptionsForm method.
-   *
-   * @covers ::buildOptionsForm
    */
   public function testBuildOptionsForm() {
     $this->field->view = $this->createMock('Drupal\views\ViewExecutable');
@@ -188,8 +195,6 @@ class VisitorsBrowserPluginTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -202,8 +207,6 @@ class VisitorsBrowserPluginTest extends UnitTestCase {
 
   /**
    * Tests the construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $field = new VisitorsFlash([], 'visitors_country', [], $this->moduleHandler, $this->request);
@@ -212,14 +215,11 @@ class VisitorsBrowserPluginTest extends UnitTestCase {
 
   /**
    * Tests the defineOptions method.
-   *
-   * @covers ::defineOptions
    */
   public function testDefineOptions() {
     $this->field->view = $this->createMock('Drupal\views\ViewExecutable');
 
     $method = new \ReflectionMethod($this->field, 'defineOptions');
-    $method->setAccessible(TRUE);
     $options = $method->invoke($this->field);
 
     $this->assertArrayHasKey('icon', $options);
@@ -228,8 +228,6 @@ class VisitorsBrowserPluginTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRender() {
 
@@ -241,8 +239,6 @@ class VisitorsBrowserPluginTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRenderNoIcon() {
 

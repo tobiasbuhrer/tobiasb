@@ -7,13 +7,18 @@ namespace Drupal\Tests\visitors_geoip\Unit\Commands;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors_geoip\Commands\MaxMindCommands;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests Visitors GeoIp Drush commands.
- *
- * @group visitors_geoip
- * @coversDefaultClass \Drupal\visitors_geoip\Commands\MaxMindCommands
  */
+#[CoversClass(MaxMindCommands::class)]
+#[CoversMethod(MaxMindCommands::class, '__construct')]
+#[CoversMethod(MaxMindCommands::class, 'locations')]
+#[CoversMethod(MaxMindCommands::class, 'downloadCities')]
+#[Group('visitors_geoip')]
 class MaxMindCommandsTest extends UnitTestCase {
 
   /**
@@ -96,8 +101,6 @@ class MaxMindCommandsTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor(): void {
     $command = new MaxMindCommands(
@@ -111,8 +114,6 @@ class MaxMindCommandsTest extends UnitTestCase {
 
   /**
    * Tests the locations command.
-   *
-   * @covers ::locations
    */
   public function testLocations(): void {
     $records = [
@@ -135,8 +136,6 @@ class MaxMindCommandsTest extends UnitTestCase {
 
   /**
    * Tests downloading cities.
-   *
-   * @covers ::downloadCities
    */
   public function testDownloadCitiesNoLicense(): void {
     $this->settings->expects($this->once())

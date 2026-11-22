@@ -8,14 +8,22 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\argument_default\Path;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\argument_default\Path
- * @covers \Drupal\visitors\Plugin\views\argument_default\Path
  */
+#[CoversClass(Path::class)]
+#[CoversMethod(Path::class, 'create')]
+#[CoversMethod(Path::class, '__construct')]
+#[CoversMethod(Path::class, 'defineOptions')]
+#[CoversMethod(Path::class, 'buildOptionsForm')]
+#[CoversMethod(Path::class, 'getArgument')]
+#[CoversMethod(Path::class, 'getCacheMaxAge')]
+#[CoversMethod(Path::class, 'getCacheContexts')]
+#[Group('visitors')]
 class PathTest extends UnitTestCase {
 
   /**
@@ -66,8 +74,6 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate(): void {
     $container = \Drupal::getContainer();
@@ -81,8 +87,6 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests the constructor method.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
     $plugin = new Path([], 'visitors_path', [], $this->currentPath);
@@ -91,12 +95,9 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests the defineOptions method.
-   *
-   * @covers ::defineOptions
    */
   public function testDefineOptions() {
     $reflection = new \ReflectionMethod($this->plugin, 'defineOptions');
-    $reflection->setAccessible(TRUE);
 
     $options = $reflection->invoke($this->plugin);
 
@@ -105,8 +106,6 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests the buildOptionsForm method.
-   *
-   * @covers ::buildOptionsForm
    */
   public function testBuildOptionsForm(): void {
     $this->plugin->options['pop'] = 0;
@@ -122,8 +121,6 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests getArgument method.
-   *
-   * @covers ::getArgument
    */
   public function testGetArgumentPop(): void {
     $this->plugin->options['pop'] = 1;
@@ -137,8 +134,6 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests getArgument method.
-   *
-   * @covers ::getArgument
    */
   public function testGetArgumentNoPath(): void {
 
@@ -150,8 +145,6 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests getArgument method.
-   *
-   * @covers ::getArgument
    */
   public function testGetArgumentRoute(): void {
     $url = $this->createMock('Drupal\Core\Url');
@@ -176,8 +169,6 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests the getCacheMaxAge method.
-   *
-   * @covers ::getCacheMaxAge
    */
   public function testGetCacheMaxAge() {
     $this->assertEquals(Cache::PERMANENT, $this->plugin->getCacheMaxAge());
@@ -185,8 +176,6 @@ class PathTest extends UnitTestCase {
 
   /**
    * Tests the getCacheContexts method.
-   *
-   * @covers ::getCacheContexts
    */
   public function testGetCacheContexts() {
     $this->assertEquals(['url.path'], $this->plugin->getCacheContexts());

@@ -324,6 +324,12 @@ class Settings extends ConfigFormBase {
       '#default_value' => $script_type == 'full' ? 'full' : 'minified',
       '#description' => $this->t('Full script is for debugging purposes. Minified script is for production.'),
     ];
+    $form['miscellaneous']['client_debug'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Client debug'),
+      '#default_value' => $config->get('client_debug'),
+      '#description' => $this->t('Log tracker commands in the browser console. Open the browser developer tools and look at the Console tab.'),
+    ];
     $form['miscellaneous']['items_per_page'] = [
       '#type' => 'select',
       '#title' => 'Items per page',
@@ -369,6 +375,7 @@ class Settings extends ConfigFormBase {
       ->set('visibility.user_role_roles', array_filter($values['visitors_visibility_user_role_roles']))
       ->set('visibility.exclude_user1', $values['visibility_exclude_user1'])
       ->set('script_type', $values['script_type'] ?? 'minified')
+      ->set('client_debug', (bool) ($values['client_debug'] ?? FALSE))
       ->save();
 
     parent::submitForm($form, $form_state);

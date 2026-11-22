@@ -5,15 +5,27 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\CounterService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use Drupal\visitors\StatisticsViewsResult;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the CookieService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\CounterService
- * @uses \Drupal\visitors\Service\CounterService
- * @uses \Drupal\visitors\StatisticsViewsResult
- * @group visitors
  */
+#[CoversClass(CounterService::class)]
+#[CoversMethod(CounterService::class, '__construct')]
+#[CoversMethod(CounterService::class, 'recordView')]
+#[CoversMethod(CounterService::class, 'fetchViews')]
+#[CoversMethod(CounterService::class, 'fetchView')]
+#[CoversMethod(CounterService::class, 'fetchAll')]
+#[CoversMethod(CounterService::class, 'resetDayCount')]
+#[CoversMethod(CounterService::class, 'deleteViews')]
+#[CoversMethod(CounterService::class, 'maxTotalCount')]
+#[UsesClass(CounterService::class)]
+#[UsesClass(StatisticsViewsResult::class)]
+#[Group('visitors')]
 class CounterServiceTest extends UnitTestCase {
 
   /**
@@ -68,8 +80,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $counter = new CounterService($this->database, $this->time, $this->state);
@@ -78,8 +88,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the recordView method.
-   *
-   * @covers ::recordView
    */
   public function testRecordView() {
     $this->time->expects($this->once())
@@ -115,8 +123,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the fetchViews method.
-   *
-   * @covers ::fetchViews
    */
   public function testFetchViews() {
     $object = new \stdClass();
@@ -154,8 +160,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the fetchViews method.
-   *
-   * @covers ::fetchView
    */
   public function testFetchView() {
     $object = new \stdClass();
@@ -191,8 +195,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the fetchAll method.
-   *
-   * @covers ::fetchAll
    */
   public function testFetchAll() {
     $object = new \stdClass();
@@ -234,8 +236,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the fetchAll method with invalid order.
-   *
-   * @covers ::fetchAll
    */
   public function testFetchAllInvalidOrder() {
     $this->expectException(\AssertionError::class);
@@ -245,8 +245,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the resetDayCount method.
-   *
-   * @covers ::resetDayCount
    */
   public function testResetDayCount() {
     $this->time->expects($this->once())
@@ -279,8 +277,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the resetDayCount method.
-   *
-   * @covers ::resetDayCount
    */
   public function testResetDayCountLessThanDay() {
     $this->time->expects($this->once())
@@ -303,8 +299,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the deleteViews method.
-   *
-   * @covers ::deleteViews
    */
   public function testDeleteViews() {
     $delete = $this->createMock('\Drupal\Core\Database\Query\Delete');
@@ -324,8 +318,6 @@ class CounterServiceTest extends UnitTestCase {
 
   /**
    * Tests the maxTotalCount method.
-   *
-   * @covers ::maxTotalCount
    */
   public function testMaxTotalCount() {
     $statement = $this->createMock('\Drupal\Core\Database\StatementInterface');

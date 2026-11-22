@@ -131,6 +131,13 @@
             values.push(Drupal.checkPlain(this.textContent));
           });
 
+        const clientDebug = $editContext
+          .find('input[name="client_debug"]')
+          .get(0);
+        if (clientDebug?.matches(':checked')) {
+          values.push(Drupal.t('Client debug'));
+        }
+
         $editContext
           .find('select[name="items_per_page"] option:selected')
           .each(function itemsPerPage() {

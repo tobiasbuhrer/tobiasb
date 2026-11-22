@@ -20,11 +20,12 @@
   },
   "require": {
     "drupal/core": "^10 || ^11",
-    "geoip2/geoip2": "~2.0",
+    "geoip2/geoip2": "^2 || ^3",
     "matomo/device-detector": "^6.1",
     "drupal/charts": "^5"
   },
   "require-dev": {
+    "brianium/paratest": "^7.3",
     "drush/drush": "^12 || ^13",
     "drupal/statistics": "~1"
   },

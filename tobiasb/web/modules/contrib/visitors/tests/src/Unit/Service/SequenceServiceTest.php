@@ -5,20 +5,28 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\SequenceService;
 use Drupal\views\ResultRow;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the SequenceService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\SequenceService
- *
- * @group visitors
  */
+#[CoversClass(SequenceService::class)]
+#[CoversMethod(SequenceService::class, 'fill')]
+#[CoversMethod(SequenceService::class, 'hours')]
+#[CoversMethod(SequenceService::class, 'integer')]
+#[CoversMethod(SequenceService::class, 'dayOfMonth')]
+#[CoversMethod(SequenceService::class, 'daysOfWeek')]
+#[CoversMethod(SequenceService::class, 'days')]
+#[CoversMethod(SequenceService::class, 'weeks')]
+#[CoversMethod(SequenceService::class, 'date')]
+#[CoversMethod(SequenceService::class, 'months')]
+#[Group('visitors')]
 class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when result is empty.
-   *
-   * @covers ::fill
    */
   public function testEmptyResult(): void {
     $result = [];
@@ -27,10 +35,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when hour.
-   *
-   * @covers ::fill
-   * @covers ::hours
-   * @covers ::integer
    */
   public function testHour(): void {
     $result = [
@@ -49,10 +53,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when hour.
-   *
-   * @covers ::fill
-   * @covers ::hours
-   * @covers ::integer
    */
   public function testHourOutOfOrder(): void {
     $result = [
@@ -71,10 +71,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when hour.
-   *
-   * @covers ::fill
-   * @covers ::hours
-   * @covers ::integer
    */
   public function testDuplicateHour(): void {
     $result = [
@@ -97,10 +93,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when local hour.
-   *
-   * @covers ::fill
-   * @covers ::hours
-   * @covers ::integer
    */
   public function testLocalHour(): void {
     $result = [
@@ -119,10 +111,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when local hour.
-   *
-   * @covers ::fill
-   * @covers ::hours
-   * @covers ::integer
    */
   public function testLocalHourOutOfOrder(): void {
     $result = [
@@ -141,10 +129,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when local hour.
-   *
-   * @covers ::fill
-   * @covers ::hours
-   * @covers ::integer
    */
   public function testLocalHourDuplicate(): void {
     $result = [
@@ -167,10 +151,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when month.
-   *
-   * @covers ::fill
-   * @covers ::dayOfMonth
-   * @covers ::integer
    */
   public function testDayOfMonth(): void {
     $result = [
@@ -189,10 +169,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when month.
-   *
-   * @covers ::fill
-   * @covers ::dayOfMonth
-   * @covers ::integer
    */
   public function testDayOfMonthOutOfOrder(): void {
     $result = [
@@ -211,10 +187,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when month.
-   *
-   * @covers ::fill
-   * @covers ::dayOfMonth
-   * @covers ::integer
    */
   public function testDuplicateDayOfMonth(): void {
     $result = [
@@ -237,10 +209,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when day of week.
-   *
-   * @covers ::fill
-   * @covers ::daysOfWeek
-   * @covers ::integer
    */
   public function testDayOfWeek(): void {
     $result = [
@@ -259,10 +227,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when day of week.
-   *
-   * @covers ::fill
-   * @covers ::daysOfWeek
-   * @covers ::integer
    */
   public function testDayOfWeekOutOfOrder(): void {
     $result = [
@@ -281,10 +245,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when day of week.
-   *
-   * @covers ::fill
-   * @covers ::daysOfWeek
-   * @covers ::integer
    */
   public function testDuplicateDayOfWeek(): void {
     $result = [
@@ -307,9 +267,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when days.
-   *
-   * @covers ::fill
-   * @covers ::days
    */
   public function testDays(): void {
     $result = [
@@ -328,9 +285,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when days.
-   *
-   * @covers ::fill
-   * @covers ::days
    */
   public function testDaysOutOfOrder(): void {
     $result = [
@@ -349,9 +303,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when days.
-   *
-   * @covers ::fill
-   * @covers ::days
    */
   public function testDuplicateDays(): void {
     $result = [
@@ -374,10 +325,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when weeks.
-   *
-   * @covers ::fill
-   * @covers ::weeks
-   * @covers ::date
    */
   public function testWeeks(): void {
     $result = [
@@ -396,10 +343,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when weeks.
-   *
-   * @covers ::fill
-   * @covers ::weeks
-   * @covers ::date
    */
   public function testWeeksOutOfOrder(): void {
     $result = [
@@ -418,10 +361,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when weeks.
-   *
-   * @covers ::fill
-   * @covers ::weeks
-   * @covers ::date
    */
   public function testDuplicateWeeks(): void {
     $result = [
@@ -444,10 +383,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when months.
-   *
-   * @covers ::fill
-   * @covers ::months
-   * @covers ::date
    */
   public function testMonths(): void {
     $result = [
@@ -466,10 +401,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when months.
-   *
-   * @covers ::fill
-   * @covers ::months
-   * @covers ::date
    */
   public function testMonthsOutOfOrder(): void {
     $result = [
@@ -488,10 +419,6 @@ class SequenceServiceTest extends UnitTestCase {
 
   /**
    * Tests the fill method when months.
-   *
-   * @covers ::fill
-   * @covers ::months
-   * @covers ::date
    */
   public function testDuplicateMonths(): void {
     $result = [

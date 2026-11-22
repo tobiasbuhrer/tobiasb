@@ -7,13 +7,19 @@ namespace Drupal\Tests\visitors\Unit\Commands;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Commands\RebuildCommands;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests Visitors Drush commands.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Commands\RebuildCommands
  */
+#[CoversClass(RebuildCommands::class)]
+#[CoversMethod(RebuildCommands::class, '__construct')]
+#[CoversMethod(RebuildCommands::class, 'routes')]
+#[CoversMethod(RebuildCommands::class, 'addresses')]
+#[CoversMethod(RebuildCommands::class, 'device')]
+#[Group('visitors')]
 class RebuildCommandsTest extends UnitTestCase {
 
   /**
@@ -81,8 +87,6 @@ class RebuildCommandsTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor(): void {
     $command = new RebuildCommands($this->state, $this->route, $this->address, $this->device);
@@ -92,8 +96,6 @@ class RebuildCommandsTest extends UnitTestCase {
 
   /**
    * Tests the rebuild routes.
-   *
-   * @covers ::routes
    */
   public function testRebuildRoute(): void {
     $this->route->expects($this->once())
@@ -119,8 +121,6 @@ class RebuildCommandsTest extends UnitTestCase {
 
   /**
    * Tests rebuild IP addresses.
-   *
-   * @covers ::addresses
    */
   public function testAddresses(): void {
     $this->address->expects($this->once())
@@ -140,8 +140,6 @@ class RebuildCommandsTest extends UnitTestCase {
 
   /**
    * Tests rebuild devices.
-   *
-   * @covers ::device
    */
   public function testDeviceWithoutLibrary(): void {
     $this->device->expects($this->once())
@@ -156,8 +154,6 @@ class RebuildCommandsTest extends UnitTestCase {
 
   /**
    * Tests rebuild devices.
-   *
-   * @covers ::device
    */
   public function testDeviceWithLibrary(): void {
     $this->device->expects($this->once())

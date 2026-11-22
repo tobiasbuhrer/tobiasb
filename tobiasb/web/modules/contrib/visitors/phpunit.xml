@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
-         bootstrap="web/core/tests/bootstrap.php"
-         executionOrder="depends,defects"
-         beStrictAboutOutputDuringTests="true"
-         failOnRisky="true"
-         failOnWarning="true">
-
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd" bootstrap="web/core/tests/bootstrap.php" executionOrder="depends,defects" beStrictAboutOutputDuringTests="true" failOnRisky="true" failOnWarning="true">
   <php>
     <!-- Example for changing the driver args to webdriver tests MINK_DRIVER_ARGS_WEBDRIVER value: '["chrome", { "goog:chromeOptions": { "w3c": false } }, "http://localhost:4444/wd/hub"]' For using the Firefox browser, replace "chrome" with "firefox" -->
     <env name="MINK_DRIVER_ARGS_WEBDRIVER" value='["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox"]}}, "http://chromedriver:9515"]'/>
   </php>
-
   <extensions>
     <!-- Functional tests HTML output logging. -->
     <bootstrap class="Drupal\TestTools\Extension\HtmlLogging\HtmlOutputLogger">
@@ -31,7 +22,6 @@
       -->
     </bootstrap>
   </extensions>
-
   <testsuites>
     <testsuite name="unit">
       <directory>tests/src/Unit</directory>
@@ -50,19 +40,18 @@
       <directory>visitors_geoip/tests/src/FunctionalJavascript</directory>
     </testsuite>
   </testsuites>
-
-    <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="false">
-        <include>
-            <directory>src</directory>
-            <file>visitors.module</file>
-            <file>visitors.install</file>
-            <directory>visitors_geoip/src</directory>
-            <file>visitors_geoip/visitors_geoip.module</file>
-            <file>visitors_geoip/visitors_geoip.install</file>
-        </include>
-        <exclude>
-            <directory>tests</directory>
-            <directory>visitors_geoip/tests</directory>
-        </exclude>
-    </source>
+  <source restrictNotices="true" restrictWarnings="false" ignoreIndirectDeprecations="true">
+    <include>
+      <directory>src</directory>
+      <file>visitors.module</file>
+      <file>visitors.install</file>
+      <directory>visitors_geoip/src</directory>
+      <file>visitors_geoip/visitors_geoip.module</file>
+      <file>visitors_geoip/visitors_geoip.install</file>
+    </include>
+    <exclude>
+      <directory>tests</directory>
+      <directory>visitors_geoip/tests</directory>
+    </exclude>
+  </source>
 </phpunit>

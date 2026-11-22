@@ -4,14 +4,14 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests visitors_update_8222().
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookUpdate8222Test extends UnitTestCase {
 
   /**
@@ -69,7 +69,7 @@ class HookUpdate8222Test extends UnitTestCase {
       ->method('schema')
       ->willReturn($schema);
 
-    $schema->expects($this->exactly(8))
+    $schema->expects($this->exactly(9))
       ->method('fieldExists')
       ->willReturnMap([
         ['visitors', 'pf_network', TRUE],
@@ -80,6 +80,7 @@ class HookUpdate8222Test extends UnitTestCase {
         ['visitors', 'pf_on_load', FALSE],
         ['visitors', 'pf_total', FALSE],
         ['visitors', 'server', FALSE],
+        ['visitors', 'visitors_title', TRUE],
       ]);
     $schema->expects($this->exactly(7))
       ->method('addField')
@@ -139,7 +140,7 @@ class HookUpdate8222Test extends UnitTestCase {
     $schema->expects($this->once())
       ->method('changeField')
       ->with('visitors', 'visitors_title', 'visitors_title', [
-        'type' => 'text',
+        'type'     => 'text',
         'not null' => TRUE,
       ]);
 
@@ -149,6 +150,43 @@ class HookUpdate8222Test extends UnitTestCase {
     $this->assertEquals(1, $sandbox['progress']);
     $this->assertEquals(2, $sandbox['max']);
 
+  }
+
+  /**
+   * Tests visitors_update_8222() step 0 when visitors_title is missing.
+   */
+  public function testStepZeroTitleMissing(): void {
+    $schema = $this->createMock('Drupal\Core\Database\Schema');
+
+    $this->database->expects($this->any())
+      ->method('schema')
+      ->willReturn($schema);
+
+    $schema->expects($this->exactly(9))
+      ->method('fieldExists')
+      ->willReturnMap([
+        ['visitors', 'pf_network', TRUE],
+        ['visitors', 'pf_server', FALSE],
+        ['visitors', 'pf_transfer', FALSE],
+        ['visitors', 'pf_dom_processing', FALSE],
+        ['visitors', 'pf_dom_complete', FALSE],
+        ['visitors', 'pf_on_load', FALSE],
+        ['visitors', 'pf_total', FALSE],
+        ['visitors', 'server', FALSE],
+        ['visitors', 'visitors_title', FALSE],
+      ]);
+
+    // 7 performance columns + visitors_title = 8 addField calls.
+    $schema->expects($this->exactly(8))
+      ->method('addField');
+    $schema->expects($this->never())
+      ->method('changeField');
+
+    $sandbox = [];
+    visitors_update_8222($sandbox);
+
+    $this->assertEquals(1, $sandbox['progress']);
+    $this->assertEquals(2, $sandbox['max']);
   }
 
   /**

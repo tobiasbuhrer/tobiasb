@@ -9,14 +9,19 @@ use Drupal\visitors\Cache\DateRangeCacheContext;
 use Drupal\visitors\VisitorsDateRangeInterface;
 use Drupal\Component\Datetime\TimeInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the DateRangeCacheContext class.
- *
- * @coversDefaultClass \Drupal\visitors\Cache\DateRangeCacheContext
- *
- * @group visitors
  */
+#[CoversClass(DateRangeCacheContext::class)]
+#[CoversMethod(DateRangeCacheContext::class, '__construct')]
+#[CoversMethod(DateRangeCacheContext::class, 'getLabel')]
+#[CoversMethod(DateRangeCacheContext::class, 'getContext')]
+#[CoversMethod(DateRangeCacheContext::class, 'getCacheableMetadata')]
+#[Group('visitors')]
 class DateRangeCacheContextTest extends UnitTestCase {
 
   /**
@@ -64,8 +69,6 @@ class DateRangeCacheContextTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
     $context = new DateRangeCacheContext($this->dateRange, $this->time);
@@ -74,8 +77,6 @@ class DateRangeCacheContextTest extends UnitTestCase {
 
   /**
    * Tests the getLabel method.
-   *
-   * @covers ::getLabel
    */
   public function testGetLabel() {
     $label = $this->context::getLabel();
@@ -84,8 +85,6 @@ class DateRangeCacheContextTest extends UnitTestCase {
 
   /**
    * Tests the getContext method.
-   *
-   * @covers ::getContext
    */
   public function testGetContext() {
     $this->dateRange->expects($this->once())
@@ -106,8 +105,6 @@ class DateRangeCacheContextTest extends UnitTestCase {
 
   /**
    * Tests the getContext method.
-   *
-   * @covers ::getContext
    */
   public function testGetContextNow() {
     $this->dateRange->expects($this->once())
@@ -128,8 +125,6 @@ class DateRangeCacheContextTest extends UnitTestCase {
 
   /**
    * Tests the getCacheableMetadata method.
-   *
-   * @covers ::getCacheableMetadata
    */
   public function testGetCacheableMetadata() {
     $this->dateRange->expects($this->once())
@@ -148,8 +143,6 @@ class DateRangeCacheContextTest extends UnitTestCase {
 
   /**
    * Tests the getCacheableMetadata method.
-   *
-   * @covers ::getCacheableMetadata
    */
   public function testGetCacheableMetadataFuture() {
     $this->dateRange->expects($this->once())

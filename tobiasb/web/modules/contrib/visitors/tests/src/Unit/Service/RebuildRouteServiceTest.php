@@ -9,14 +9,18 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\RebuildRouteService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the RebuildRouteService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\RebuildRouteService
- *
- * @group visitors
  */
+#[CoversClass(RebuildRouteService::class)]
+#[CoversMethod(RebuildRouteService::class, '__construct')]
+#[CoversMethod(RebuildRouteService::class, 'getPaths')]
+#[CoversMethod(RebuildRouteService::class, 'rebuild')]
+#[Group('visitors')]
 class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
@@ -78,8 +82,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor(): void {
     $service = new RebuildRouteService(
@@ -92,8 +94,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the getPaths method.
-   *
-   * @covers ::getPaths
    */
   public function testGetPaths(): void {
     $statement = $this->createMock('\Drupal\Core\Database\StatementInterface');
@@ -126,8 +126,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the getPaths method.
-   *
-   * @covers ::getPaths
    */
   public function testGetPathsException(): void {
 
@@ -157,8 +155,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildNoRoute(): void {
     $this->routeMatcher->expects($this->once())
@@ -171,8 +167,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildHasRoute(): void {
     $this->routeMatcher->expects($this->once())
@@ -204,8 +198,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildHasRouteUpdateException(): void {
     $this->routeMatcher->expects($this->once())
@@ -237,8 +229,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildResourceNotFoundException(): void {
     $this->routeMatcher->expects($this->once())
@@ -251,8 +241,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildException(): void {
     $this->routeMatcher->expects($this->once())
@@ -265,8 +253,6 @@ class RebuildRouteServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildParamNotConvertedException(): void {
     $this->routeMatcher->expects($this->once())

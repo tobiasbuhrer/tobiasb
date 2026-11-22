@@ -4,14 +4,14 @@ namespace Drupal\Tests\visitors_geoip\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors_geoip.install';
 
 /**
  * Tests visitors_geoip_update_8222().
- *
- * @group visitors_geoip
  */
+#[Group('visitors_geoip')]
 class HookUpdate8222Test extends UnitTestCase {
 
   /**

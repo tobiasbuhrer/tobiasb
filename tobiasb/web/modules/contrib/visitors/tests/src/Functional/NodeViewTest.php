@@ -3,13 +3,19 @@
 namespace Drupal\Tests\visitors\Functional;
 
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Drupal\visitors\Controller\Report\ReportController;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the visitors/{report} page.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Controller\Report\ReportController
  */
+#[CoversClass(ReportController::class)]
+#[CoversMethod(ReportController::class, 'nodeViews')]
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class NodeViewTest extends BrowserTestBase {
 
   /**
@@ -26,8 +32,6 @@ class NodeViewTest extends BrowserTestBase {
 
   /**
    * Tests the html head links.
-   *
-   * @covers ::nodeViews
    */
   public function testHasReportAccess() {
     $user = $this->drupalCreateUser([

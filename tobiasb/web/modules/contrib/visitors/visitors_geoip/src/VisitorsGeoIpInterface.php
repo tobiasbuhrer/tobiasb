@@ -25,8 +25,8 @@ interface VisitorsGeoIpInterface {
    * @param string $ip_address
    *   The IP address.
    *
-   * @return array|null
-   *   The country.
+   * @return \Drupal\visitors_geoip\GeoIpCity|null
+   *   The normalized city location, or NULL when it cannot be resolved.
    */
   public function city($ip_address);
 

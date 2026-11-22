@@ -169,7 +169,7 @@ class ReportService implements VisitorsReportInterface {
    * Build sql query from referer type value.
    */
   protected function setReferrersCondition($query) {
-    switch ($_SESSION['referer_type']) {
+    switch ($_SESSION['referer_type'] ?? VisitorsReportInterface::REFERER_TYPE_EXTERNAL_PAGES) {
       case VisitorsReportInterface::REFERER_TYPE_INTERNAL_PAGES:
         $query->condition(
           'visitors_referer',

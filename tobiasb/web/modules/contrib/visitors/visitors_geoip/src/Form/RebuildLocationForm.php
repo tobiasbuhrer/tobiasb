@@ -79,7 +79,10 @@ final class RebuildLocationForm extends ConfirmFormBase {
       'error_message' => $this->t('Location rebuild has encountered an error.'),
     ];
 
-    \batch_set($batch);
+    // batch_set may not be available in tests.
+    if (function_exists('batch_set')) {
+      batch_set($batch);
+    }
   }
 
   /**

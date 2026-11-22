@@ -5,14 +5,20 @@ namespace Drupal\Tests\visitors\Unit\Controller;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Controller\StatisticsMigrateController;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Unit tests for the HitDetails controller.
- *
- * @coversDefaultClass \Drupal\visitors\Controller\StatisticsMigrateController
- * @uses \Drupal\visitors\Controller\StatisticsMigrateController
- * @group visitors
  */
+#[CoversClass(StatisticsMigrateController::class)]
+#[CoversMethod(StatisticsMigrateController::class, 'migrate')]
+#[CoversMethod(StatisticsMigrateController::class, 'create')]
+#[CoversMethod(StatisticsMigrateController::class, '__construct')]
+#[UsesClass(StatisticsMigrateController::class)]
+#[Group('visitors')]
 class StatisticsMigrateControllerTest extends UnitTestCase {
 
   /**
@@ -77,8 +83,6 @@ class StatisticsMigrateControllerTest extends UnitTestCase {
 
   /**
    * Tests the migrate() method.
-   *
-   * @covers ::migrate
    */
   public function testMigrateStatisticsNotExist() {
     $this->moduleHandler->expects($this->once())
@@ -99,8 +103,6 @@ class StatisticsMigrateControllerTest extends UnitTestCase {
 
   /**
    * Tests the migrate() method.
-   *
-   * @covers ::migrate
    */
   public function testMigrateStatisticsExist() {
     $this->moduleHandler->expects($this->once())
@@ -118,8 +120,6 @@ class StatisticsMigrateControllerTest extends UnitTestCase {
 
   /**
    * Tests the create() method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -129,8 +129,6 @@ class StatisticsMigrateControllerTest extends UnitTestCase {
 
   /**
    * Tests the construct() method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
 

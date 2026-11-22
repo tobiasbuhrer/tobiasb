@@ -4,14 +4,14 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.module';
 
 /**
  * Tests visitors_token_info.
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookTokenInfoTest extends UnitTestCase {
 
   /**
@@ -41,6 +41,10 @@ class HookTokenInfoTest extends UnitTestCase {
 
     $this->configFactory = $this->createMock('Drupal\Core\Config\ConfigFactoryInterface');
     $container->set('config.factory', $this->configFactory);
+
+    $container->set('token', $this->createMock('Drupal\Core\Utility\Token'));
+    $container->set('visitors.counter', $this->createMock('Drupal\visitors\VisitorsCounterInterface'));
+    $container->set('date.formatter', $this->createMock('Drupal\Core\Datetime\DateFormatterInterface'));
 
     $this->settings = $this->createMock('Drupal\Core\Config\Config');
 

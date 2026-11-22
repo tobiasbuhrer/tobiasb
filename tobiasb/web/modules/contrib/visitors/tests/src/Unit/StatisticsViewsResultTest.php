@@ -4,23 +4,26 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\StatisticsViewsResult;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
- * @coversDefaultClass \Drupal\visitors\StatisticsViewsResult
- * @group visitors
+ * Tests the StatisticsViewsResult value object.
  */
+#[CoversClass(StatisticsViewsResult::class)]
+#[CoversMethod(StatisticsViewsResult::class, '__construct')]
+#[CoversMethod(StatisticsViewsResult::class, 'getTotalCount')]
+#[CoversMethod(StatisticsViewsResult::class, 'getDayCount')]
+#[CoversMethod(StatisticsViewsResult::class, 'getTimestamp')]
+#[Group('visitors')]
 class StatisticsViewsResultTest extends UnitTestCase {
 
   /**
    * Tests migration of node counter.
-   *
-   * @covers ::__construct
-   * @covers ::getTotalCount
-   * @covers ::getDayCount
-   * @covers ::getTimestamp
-   *
-   * @dataProvider providerTestStatisticsCount
    */
+  #[DataProvider('providerTestStatisticsCount')]
   public function testStatisticsCount($total_count, $day_count, $timestamp) {
     $statistics = new StatisticsViewsResult($total_count, $day_count, $timestamp);
     $this->assertSame((int) $total_count, $statistics->getTotalCount());

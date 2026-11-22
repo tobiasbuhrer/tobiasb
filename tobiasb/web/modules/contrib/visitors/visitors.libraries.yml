@@ -22,3 +22,8 @@ menu:
   css:
     theme:
       css/menu.css: { }
+
+navigation:
+  css:
+    theme:
+      css/navigation.css: { }

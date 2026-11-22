@@ -5,14 +5,17 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\CookieService;
 use Symfony\Component\HttpFoundation\InputBag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the CookieService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\CookieService
- *
- * @group visitors
  */
+#[CoversClass(CookieService::class)]
+#[CoversMethod(CookieService::class, 'getId')]
+#[CoversMethod(CookieService::class, '__construct')]
+#[Group('visitors')]
 class CookieServiceTest extends UnitTestCase {
 
   /**
@@ -34,9 +37,6 @@ class CookieServiceTest extends UnitTestCase {
 
   /**
    * Tests the getId method.
-   *
-   * @covers ::getId
-   * @covers ::__construct
    */
   public function testGetId() {
 
@@ -55,9 +55,6 @@ class CookieServiceTest extends UnitTestCase {
 
   /**
    * Tests the getId method when null.
-   *
-   * @covers ::getId
-   * @covers ::__construct
    */
   public function testGetNullId() {
 

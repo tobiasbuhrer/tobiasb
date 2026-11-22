@@ -7,14 +7,18 @@ namespace Drupal\Tests\visitors\Unit\Plugin\views\field;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsDayMonth;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use Drupal\visitors\Plugin\views\field\VisitorsTimestamp;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsDayMonth
- * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp
  */
+#[CoversClass(VisitorsDayMonth::class)]
+#[CoversClass(VisitorsTimestamp::class)]
+#[CoversMethod(VisitorsTimestamp::class, 'getFormat')]
+#[Group('visitors')]
 class VisitorsDayMonthTest extends UnitTestCase {
 
   /**
@@ -56,8 +60,6 @@ class VisitorsDayMonthTest extends UnitTestCase {
 
   /**
    * Tests the getFormat method.
-   *
-   * @covers \Drupal\visitors\Plugin\views\field\VisitorsTimestamp::getFormat
    */
   public function testGetFormat() {
     $this->assertEquals('d', $this->field->getFormat());

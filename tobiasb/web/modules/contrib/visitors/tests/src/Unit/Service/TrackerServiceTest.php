@@ -4,14 +4,19 @@ namespace Drupal\Tests\visitors\Unit\Service;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\TrackerService;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the TrackerService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\TrackerService
- * @uses \Drupal\visitors\Service\TrackerService
- * @group visitors
  */
+#[CoversClass(TrackerService::class)]
+#[CoversMethod(TrackerService::class, '__construct')]
+#[CoversMethod(TrackerService::class, 'writeLog')]
+#[UsesClass(TrackerService::class)]
+#[Group('visitors')]
 class TrackerServiceTest extends UnitTestCase {
 
   /**
@@ -41,8 +46,6 @@ class TrackerServiceTest extends UnitTestCase {
 
   /**
    * Tests the getId method.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
     $tracker_service = new TrackerService($this->database);
@@ -51,8 +54,6 @@ class TrackerServiceTest extends UnitTestCase {
 
   /**
    * Tests the writeLog method.
-   *
-   * @covers ::writeLog
    */
   public function testWriteLog() {
     $fields = [

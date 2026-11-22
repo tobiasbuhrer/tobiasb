@@ -7,13 +7,16 @@ namespace Drupal\Tests\visitors\Unit\Plugin\views\field;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsLocalHour;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsLocalHour
  */
+#[CoversClass(VisitorsLocalHour::class)]
+#[CoversMethod(VisitorsLocalHour::class, 'query')]
+#[Group('visitors')]
 class VisitorsLocalHourTest extends UnitTestCase {
 
   /**
@@ -66,8 +69,6 @@ class VisitorsLocalHourTest extends UnitTestCase {
 
   /**
    * Tests the query method.
-   *
-   * @covers ::query
    */
   public function testQuery() {
     $this->query->expects($this->once())

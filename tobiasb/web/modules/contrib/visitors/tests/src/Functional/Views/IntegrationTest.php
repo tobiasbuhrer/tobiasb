@@ -3,14 +3,19 @@
 namespace Drupal\Tests\visitors\Functional\Views;
 
 use Drupal\Tests\views\Functional\ViewTestBase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use Drupal\visitors\Service\CounterService;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests basic integration of views data from the visitors module.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Service\CounterService
- * @uses \Drupal\visitors\Service\CounterService
  */
+#[CoversClass(CounterService::class)]
+#[CoversMethod(CounterService::class, 'fetchViews')]
+#[UsesClass(CounterService::class)]
+#[Group('visitors')]
 class IntegrationTest extends ViewTestBase {
 
   /**
@@ -74,8 +79,6 @@ class IntegrationTest extends ViewTestBase {
 
   /**
    * Tests the integration of the {visitors_counter} table in views.
-   *
-   * @covers ::fetchViews
    */
   public function testNodeCounterIntegration() {
     $this->drupalLogin($this->webUser);

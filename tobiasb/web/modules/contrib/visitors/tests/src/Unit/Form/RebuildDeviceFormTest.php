@@ -6,16 +6,28 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Form\RebuildDeviceForm;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\InputBag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 require_once __DIR__ . '/../../../../web/core/includes/form.inc';
 
 /**
  * Rebuild Device form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Form\RebuildDeviceForm
- * @uses \Drupal\visitors\Form\RebuildDeviceForm
  */
+#[CoversClass(RebuildDeviceForm::class)]
+#[CoversMethod(RebuildDeviceForm::class, 'getFormId')]
+#[CoversMethod(RebuildDeviceForm::class, 'buildForm')]
+#[CoversMethod(RebuildDeviceForm::class, 'submitForm')]
+#[CoversMethod(RebuildDeviceForm::class, 'batch')]
+#[CoversMethod(RebuildDeviceForm::class, 'batchFinished')]
+#[CoversMethod(RebuildDeviceForm::class, 'create')]
+#[CoversMethod(RebuildDeviceForm::class, '__construct')]
+#[CoversMethod(RebuildDeviceForm::class, 'getCancelUrl')]
+#[CoversMethod(RebuildDeviceForm::class, 'getQuestion')]
+#[UsesClass(RebuildDeviceForm::class)]
+#[Group('visitors')]
 class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
@@ -83,8 +95,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form id.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId() {
     $this->assertEquals('confirm_visitor_rebuild_device_form', $this->form->getFormId());
@@ -92,8 +102,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form.
-   *
-   * @covers ::buildForm
    */
   public function testBuildForm() {
     $query = new InputBag([]);
@@ -120,8 +128,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the submit form.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
 
@@ -146,8 +152,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form batch().
-   *
-   * @covers ::batch
    */
   public function testBatch() {
     $user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3';
@@ -163,8 +167,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form batchFinished().
-   *
-   * @covers ::batchFinished
    */
   public function testBatchFinishedSuccess() {
     $result = RebuildDeviceForm::batchFinished(TRUE, [], []);
@@ -173,8 +175,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form batchFinished().
-   *
-   * @covers ::batchFinished
    */
   public function testBatchFinishedFailure() {
     $operation = ['operation', ['arguments']];
@@ -184,8 +184,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form create().
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -195,8 +193,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form construct().
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $form = new RebuildDeviceForm($this->visitorsDeviceRebuilder);
@@ -205,8 +201,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form getCancelUrl().
-   *
-   * @covers ::getCancelUrl
    */
   public function testGetCancelUrl() {
     $url = $this->form->getCancelUrl();
@@ -215,8 +209,6 @@ class RebuildDeviceFormTest extends UnitTestCase {
 
   /**
    * Test the form getQuestion().
-   *
-   * @covers ::getQuestion
    */
   public function testGetQuestion() {
     $this->assertEquals('Do you want to rebuild the devices?', (string) $this->form->getQuestion());

@@ -7,16 +7,25 @@ namespace Drupal\Tests\visitors\Unit\Form;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Form\StatisticsMigrateForm;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests settings form.
- *
- * @coversDefaultClass \Drupal\visitors\Form\StatisticsMigrateForm
- *
- * @group visitors
  */
+#[CoversClass(StatisticsMigrateForm::class)]
+#[CoversMethod(StatisticsMigrateForm::class, 'getFormId')]
+#[CoversMethod(StatisticsMigrateForm::class, 'getQuestion')]
+#[CoversMethod(StatisticsMigrateForm::class, 'getDescription')]
+#[CoversMethod(StatisticsMigrateForm::class, 'getCancelUrl')]
+#[CoversMethod(StatisticsMigrateForm::class, 'delete')]
+#[CoversMethod(StatisticsMigrateForm::class, 'insert')]
+#[CoversMethod(StatisticsMigrateForm::class, 'uninstallStatistics')]
+#[CoversMethod(StatisticsMigrateForm::class, 'enableVisitorsLogging')]
+#[CoversMethod(StatisticsMigrateForm::class, 'submitForm')]
+#[Group('visitors')]
 class StatisticsMigrateFormTest extends UnitTestCase {
-
 
   /**
    * The form under test.
@@ -162,8 +171,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the getFormId method.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId() {
     $this->assertEquals('visitors_statistics_migrate', $this->form->getFormId());
@@ -171,8 +178,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the getQuestion method.
-   *
-   * @covers ::getQuestion
    */
   public function testGetQuestion() {
     $this->assertEquals('Migrate statistics node view count?', $this->form->getQuestion());
@@ -180,8 +185,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the getDescription method.
-   *
-   * @covers ::getDescription
    */
   public function testGetDescription() {
     $this->assertEquals('This will migrate the Statistics view count to Visitors, and uninstall Statistics.', $this->form->getDescription());
@@ -189,8 +192,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the getCancelUrl method.
-   *
-   * @covers ::getCancelUrl
    */
   public function testGetCancelUrl() {
     $this->assertEquals('visitors.settings', $this->form->getCancelUrl()->getRouteName());
@@ -198,8 +199,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the submitForm method.
-   *
-   * @covers ::delete
    */
   public function testDelete() {
 
@@ -223,8 +222,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the insert method.
-   *
-   * @covers ::insert
    */
   public function testInsert() {
 
@@ -278,8 +275,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the uninstallStatistics method.
-   *
-   * @covers ::uninstallStatistics
    */
   public function testUninstallStatistics() {
 
@@ -297,8 +292,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the uninstallStatistics method.
-   *
-   * @covers ::uninstallStatistics
    */
   public function testUninstallStatisticsFails() {
 
@@ -316,8 +309,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the enableVisitorsLogging method.
-   *
-   * @covers ::enableVisitorsLogging
    */
   public function testEnableVisitorsLogging() {
     $config = $this->createMock('Drupal\Core\Config\Config');
@@ -339,8 +330,6 @@ class StatisticsMigrateFormTest extends UnitTestCase {
 
   /**
    * Test the submitForm method.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
     $form = [];

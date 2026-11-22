@@ -7,14 +7,24 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors_geoip\Form\RebuildLocationForm;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\InputBag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the Visitors Settings Form.
- *
- * @coversDefaultClass \Drupal\visitors_geoip\Form\RebuildLocationForm
- *
- * @group visitors_geoip
  */
+#[CoversClass(RebuildLocationForm::class)]
+#[CoversMethod(RebuildLocationForm::class, 'create')]
+#[CoversMethod(RebuildLocationForm::class, '__construct')]
+#[CoversMethod(RebuildLocationForm::class, 'buildForm')]
+#[CoversMethod(RebuildLocationForm::class, 'submitForm')]
+#[CoversMethod(RebuildLocationForm::class, 'getFormId')]
+#[CoversMethod(RebuildLocationForm::class, 'getQuestion')]
+#[CoversMethod(RebuildLocationForm::class, 'getCancelUrl')]
+#[CoversMethod(RebuildLocationForm::class, 'batchFinished')]
+#[CoversMethod(RebuildLocationForm::class, 'batch')]
+#[Group('visitors_geoip')]
 class RebuildLocationFormTest extends UnitTestCase {
 
   /**
@@ -83,8 +93,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the create() method.
-   *
-   * @covers ::create
    */
   public function testCreate(): void {
     $container = \Drupal::getContainer();
@@ -94,8 +102,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstruct(): void {
     $form = new RebuildLocationForm($this->rebuildLocationService);
@@ -104,8 +110,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the buildForm() method.
-   *
-   * @covers ::buildForm
    */
   public function testBuildForm() {
     $request = $this->createMock('Symfony\Component\HttpFoundation\Request');
@@ -127,8 +131,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the submitForm() method.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
     $this->rebuildLocationService
@@ -143,8 +145,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the getFormId() method.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId(): void {
     $this->assertEquals('confirm_visitor_rebuild_location_form', $this->form->getFormId());
@@ -152,8 +152,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the getQuestion() method.
-   *
-   * @covers ::getQuestion
    */
   public function testGetQuestion() {
     $this->assertEquals('Do you want to rebuild missing locations?', (string) $this->form->getQuestion());
@@ -161,8 +159,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Test getCancelUrl().
-   *
-   * @covers ::getCancelUrl
    */
   public function testGetCancelUrl() {
     $this->assertEquals('visitors_geoip.settings', $this->form->getCancelUrl()->getRouteName());
@@ -170,8 +166,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the batchFinished() method.
-   *
-   * @covers ::batchFinished
    */
   public function testBatchFinished() {
     $success = TRUE;
@@ -190,8 +184,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the batchFinished() method.
-   *
-   * @covers ::batchFinished
    */
   public function testBatchFinishedFalse() {
     $success = FALSE;
@@ -207,8 +199,6 @@ class RebuildLocationFormTest extends UnitTestCase {
 
   /**
    * Tests the batch() method.
-   *
-   * @covers ::batch
    */
   public function testBatch(): void {
     $ip_address = '127.0.0.1';

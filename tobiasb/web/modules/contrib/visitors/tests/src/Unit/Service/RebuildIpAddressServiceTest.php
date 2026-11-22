@@ -7,14 +7,18 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\RebuildIpAddressService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the RebuildIpAddressService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\RebuildIpAddressService
- *
- * @group visitors
  */
+#[CoversClass(RebuildIpAddressService::class)]
+#[CoversMethod(RebuildIpAddressService::class, '__construct')]
+#[CoversMethod(RebuildIpAddressService::class, 'getIpAddresses')]
+#[CoversMethod(RebuildIpAddressService::class, 'rebuild')]
+#[Group('visitors')]
 class RebuildIpAddressServiceTest extends UnitTestCase {
 
   /**
@@ -65,8 +69,6 @@ class RebuildIpAddressServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor(): void {
     $service = new RebuildIpAddressService(
@@ -78,8 +80,6 @@ class RebuildIpAddressServiceTest extends UnitTestCase {
 
   /**
    * Tests the getIpAddresses method.
-   *
-   * @covers ::getIpAddresses
    */
   public function testGetIpAddresses(): void {
     $statement = $this->createMock('\Drupal\Core\Database\StatementInterface');
@@ -111,8 +111,6 @@ class RebuildIpAddressServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildValid(): void {
 
@@ -123,8 +121,6 @@ class RebuildIpAddressServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildPackedAddress(): void {
 
@@ -155,8 +151,6 @@ class RebuildIpAddressServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildLong(): void {
 
@@ -187,8 +181,6 @@ class RebuildIpAddressServiceTest extends UnitTestCase {
 
   /**
    * Tests the rebuild method.
-   *
-   * @covers ::rebuild
    */
   public function testRebuildException(): void {
 

@@ -4,6 +4,7 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.install';
 
@@ -16,9 +17,8 @@ if (!defined('REQUIREMENT_OK')) {
 
 /**
  * Tests visitors_requirements().
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookRequirementsTest extends UnitTestCase {
 
   /**

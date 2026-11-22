@@ -6,14 +6,14 @@ namespace Drupal\Tests\visitors_geoip\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors_geoip.module';
 
 /**
  * Tests visitors_geoip_views_data_alter.
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookViewsDataAlterTest extends UnitTestCase {
 
   /**

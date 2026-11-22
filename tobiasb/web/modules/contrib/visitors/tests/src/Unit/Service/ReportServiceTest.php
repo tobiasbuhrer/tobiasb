@@ -9,14 +9,20 @@ use Drupal\visitors\Service\ReportService;
 use Drupal\visitors\VisitorsReportInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\InputBag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the ReportService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\ReportService
- *
- * @group visitors
  */
+#[CoversClass(ReportService::class)]
+#[CoversMethod(ReportService::class, '__construct')]
+#[CoversMethod(ReportService::class, 'addDateFilter')]
+#[CoversMethod(ReportService::class, 'setReferrersCondition')]
+#[CoversMethod(ReportService::class, 'referer')]
+#[CoversMethod(ReportService::class, 'hitDetails')]
+#[Group('visitors')]
 class ReportServiceTest extends UnitTestCase {
 
   /**
@@ -173,8 +179,6 @@ class ReportServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor(): void {
     $service = new ReportService(
@@ -192,8 +196,6 @@ class ReportServiceTest extends UnitTestCase {
 
   /**
    * Tests the addDateFilter method.
-   *
-   * @covers ::addDateFilter
    */
   public function testAddDateFilter(): void {
     $this->dateRange->expects($this->once())
@@ -211,14 +213,11 @@ class ReportServiceTest extends UnitTestCase {
 
     // Make addDateFilter method public.
     $method = new \ReflectionMethod($this->service, 'addDateFilter');
-    $method->setAccessible(TRUE);
     $method->invokeArgs($this->service, [&$query]);
   }
 
   /**
    * Tests the setReferrersCondition method with no date range.
-   *
-   * @covers ::setReferrersCondition
    */
   public function testSetReferrersConditionInternal(): void {
     $_SERVER['HTTP_HOST'] = 'example.com';
@@ -233,14 +232,11 @@ class ReportServiceTest extends UnitTestCase {
 
     // Make addDateFilter method public.
     $method = new \ReflectionMethod($this->service, 'setReferrersCondition');
-    $method->setAccessible(TRUE);
     $method->invoke($this->service, $query);
   }
 
   /**
    * Tests the setReferrersCondition method with no date range.
-   *
-   * @covers ::setReferrersCondition
    */
   public function testSetReferrersConditionExternal(): void {
     $_SERVER['HTTP_HOST'] = 'example.com';
@@ -254,14 +250,11 @@ class ReportServiceTest extends UnitTestCase {
 
     // Make addDateFilter method public.
     $method = new \ReflectionMethod($this->service, 'setReferrersCondition');
-    $method->setAccessible(TRUE);
     $method->invoke($this->service, $query);
   }
 
   /**
    * Tests the referer method.
-   *
-   * @covers ::referer
    */
   public function testReferer(): void {
     $_SERVER['HTTP_HOST'] = 'example.com';
@@ -301,8 +294,6 @@ class ReportServiceTest extends UnitTestCase {
 
   /**
    * Tests the hitDetails method.
-   *
-   * @covers ::hitDetails
    */
   public function testHitDetails(): void {
     $this->moduleHandler->expects($this->once())

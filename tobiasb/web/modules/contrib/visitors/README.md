@@ -38,6 +38,49 @@ Composer is the preferred method to install visitors.
 1. Enable the module at **admin/modules**
 1. Configure **admin/config/system/visitors**
 
+## Statistics node counts
+
+Core Statistics stores aggregate node counts in `node_counter` (`nid`,
+`totalcount`, `daycount`, `timestamp`). It does not store each hit, so this
+migration fills `visitors_counter` and does not create visit rows.
+
+Enable Migrate, and Migrate Tools if you import with Drush. Point a database
+connection named `migrate` at the Drupal 8 database. Visitors reads that
+connection by default. See [Migrating data from a SQL source](https://www.drupal.org/docs/drupal-apis/migrate-api/migrating-data-from-a-sql-source).
+
+When the rebuilt nodes keep their IDs, import after the node migrations:
+
+```bash
+drush migrate:import visitors_statistics_node_counter
+```
+
+When node IDs change, name the node migrations in
+`hook_migration_plugins_alter()`:
+
+```php
+function my_module_migration_plugins_alter(array &$migrations) {
+  if (!isset($migrations['visitors_statistics_node_counter'])) {
+    return;
+  }
+  $migrations['visitors_statistics_node_counter']['source']['node_migrations'] = [
+    'my_node_migration',
+  ];
+}
+```
+
+A node that was not migrated is skipped. A second import with
+`drush migrate:import visitors_statistics_node_counter --update` replaces the
+counts for migrated nodes. Import before the new site records its own views.
+`drush migrate:rollback visitors_statistics_node_counter` deletes only the
+rows this migration wrote.
+
+`daycount` is copied to `today`. Visitors cron sets every `today` value back
+to 0 after a day.
+
+If Statistics is installed on the same site, the form at Administration,
+Configuration, System, Visitors, Statistics copies `node_counter` and
+uninstalls Statistics. Use the migration above when the old table is on
+another database.
 
 ## Development
 

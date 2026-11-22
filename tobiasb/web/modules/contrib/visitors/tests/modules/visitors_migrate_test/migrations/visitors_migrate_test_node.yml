@@ -1,0 +1,27 @@
+id: visitors_migrate_test_node
+label: 'Test node'
+source:
+  plugin: embedded_data
+  data_rows:
+    -
+      nid: 10
+      title: 'Mapped node'
+  ids:
+    nid:
+      type: integer
+process:
+  nid:
+    plugin: default_value
+    default_value: 42
+  title: title
+  type:
+    plugin: default_value
+    default_value: article
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 0
+destination:
+  plugin: entity:node

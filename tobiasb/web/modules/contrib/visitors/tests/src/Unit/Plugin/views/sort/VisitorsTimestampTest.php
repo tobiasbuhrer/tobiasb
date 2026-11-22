@@ -8,14 +8,17 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\views\ResultRow;
 use Drupal\visitors\Plugin\views\sort\VisitorsTimestamp;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\sort\VisitorsTimestamp
- * @covers \Drupal\visitors\Plugin\views\sort\VisitorsTimestamp
  */
+#[CoversClass(VisitorsTimestamp::class)]
+#[CoversMethod(VisitorsTimestamp::class, 'query')]
+#[CoversMethod(VisitorsTimestamp::class, 'postExecute')]
+#[Group('visitors')]
 class VisitorsTimestampTest extends UnitTestCase {
 
   /**
@@ -66,8 +69,6 @@ class VisitorsTimestampTest extends UnitTestCase {
 
   /**
    * Tests the query method.
-   *
-   * @covers \Drupal\visitors\Plugin\views\sort\VisitorsTimestamp::query
    */
   public function testQuery() {
 
@@ -83,8 +84,6 @@ class VisitorsTimestampTest extends UnitTestCase {
 
   /**
    * Tests the query method.
-   *
-   * @covers \Drupal\visitors\Plugin\views\sort\VisitorsTimestamp::query
    */
   public function testQueryLocalHour() {
 
@@ -100,8 +99,6 @@ class VisitorsTimestampTest extends UnitTestCase {
 
   /**
    * Tests the postExecute method.
-   *
-   * @covers ::postExecute
    */
   public function testPostExecute() {
     $values = [

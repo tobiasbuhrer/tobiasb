@@ -6,16 +6,28 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Form\RebuildIpAddressForm;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\InputBag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 require_once __DIR__ . '/../../../../web/core/includes/form.inc';
 
 /**
  * Rebuild IP address form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Form\RebuildIpAddressForm
- * @uses \Drupal\visitors\Form\RebuildIpAddressForm
  */
+#[CoversClass(RebuildIpAddressForm::class)]
+#[CoversMethod(RebuildIpAddressForm::class, 'getFormId')]
+#[CoversMethod(RebuildIpAddressForm::class, 'getQuestion')]
+#[CoversMethod(RebuildIpAddressForm::class, 'getCancelUrl')]
+#[CoversMethod(RebuildIpAddressForm::class, 'batch')]
+#[CoversMethod(RebuildIpAddressForm::class, 'batchFinished')]
+#[CoversMethod(RebuildIpAddressForm::class, 'buildForm')]
+#[CoversMethod(RebuildIpAddressForm::class, 'submitForm')]
+#[CoversMethod(RebuildIpAddressForm::class, 'create')]
+#[CoversMethod(RebuildIpAddressForm::class, '__construct')]
+#[UsesClass(RebuildIpAddressForm::class)]
+#[Group('visitors')]
 class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
@@ -89,8 +101,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test the form id.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId() {
     $this->assertEquals('confirm_visitor_rebuild_ip_address_form', $this->form->getFormId());
@@ -98,8 +108,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test getQuestion.
-   *
-   * @covers ::getQuestion
    */
   public function testGetQuestion() {
     $this->assertEquals('Do you want to rebuild the IP Address?', (string) $this->form->getQuestion());
@@ -107,8 +115,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test getCancelUrl.
-   *
-   * @covers ::getCancelUrl
    */
   public function testGetCancelUrl() {
     $this->assertEquals('visitors.settings', $this->form->getCancelUrl()->getRouteName());
@@ -116,8 +122,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test batch.
-   *
-   * @covers ::batch
    */
   public function testBatch() {
     $ip_address = '127.0.0.1';
@@ -136,8 +140,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test batchFinished.
-   *
-   * @covers ::batchFinished
    */
   public function testBatchFinishedSuccess() {
     $success = TRUE;
@@ -148,8 +150,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test batchFinished.
-   *
-   * @covers ::batchFinished
    */
   public function testBatchFinishedFailure() {
     $success = FALSE;
@@ -160,8 +160,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test buildForm.
-   *
-   * @covers ::buildForm
    */
   public function testBuildForm() {
     $query = new InputBag([]);
@@ -187,8 +185,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test submitForm.
-   *
-   * @covers ::submitForm
    */
   public function testSubmitForm() {
     $record = new \stdClass();
@@ -206,8 +202,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test create method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -217,8 +211,6 @@ class RebuildIpAddressFormTest extends UnitTestCase {
 
   /**
    * Test construct.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $form = new RebuildIpAddressForm(

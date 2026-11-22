@@ -9,14 +9,25 @@ use Drupal\user\RoleInterface;
 use Drupal\visitors\Form\Settings;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests settings form.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Form\Settings
- * @uses \Drupal\visitors\Form\Settings
  */
+#[CoversClass(Settings::class)]
+#[CoversMethod(Settings::class, 'getFormId')]
+#[CoversMethod(Settings::class, 'buildForm')]
+#[CoversMethod(Settings::class, 'roleOptions')]
+#[CoversMethod(Settings::class, 'entityTypes')]
+#[CoversMethod(Settings::class, 'submitForm')]
+#[CoversMethod(Settings::class, 'getEditableConfigNames')]
+#[CoversMethod(Settings::class, 'create')]
+#[CoversMethod(Settings::class, '__construct')]
+#[UsesClass(Settings::class)]
+#[Group('visitors')]
 class SettingsTest extends UnitTestCase {
 
   use ProphecyTrait;
@@ -85,8 +96,6 @@ class SettingsTest extends UnitTestCase {
 
   /**
    * Test the getFormId method.
-   *
-   * @covers ::getFormId
    */
   public function testGetFormId() {
     $this->assertEquals('visitors_admin_settings', $this->form->getFormId());
@@ -94,10 +103,6 @@ class SettingsTest extends UnitTestCase {
 
   /**
    * Test the buildForm method.
-   *
-   * @covers ::buildForm
-   * @covers ::roleOptions
-   * @covers ::entityTypes
    */
   public function testBuildForm() {
     $user_role_storage = $this->createMock('Drupal\Core\Entity\EntityStorageInterface');
@@ -133,7 +138,7 @@ class SettingsTest extends UnitTestCase {
 
     $config = $this->createMock('Drupal\Core\Config\Config');
     $config
-      ->expects($this->exactly(15))
+      ->expects($this->exactly(16))
       ->method('get');
     $system_config = $this->createMock('Drupal\Core\Config\Config');
     $system_config->expects($this->exactly(2))
@@ -179,13 +184,12 @@ class SettingsTest extends UnitTestCase {
     $this->assertArrayHasKey('theme', $form);
     $this->assertArrayHasKey('tracking_scope', $form);
     $this->assertArrayHasKey('miscellaneous', $form);
+    $this->assertArrayHasKey('client_debug', $form['miscellaneous']);
     $this->assertArrayHasKey('entity', $form);
   }
 
   /**
    * Test the buildForm method with different options.
-   *
-   * @covers ::buildForm
    */
   public function testBuildFormOtherSettings() {
     $user_role_storage = $this->createMock('Drupal\Core\Entity\EntityStorageInterface');
@@ -221,7 +225,7 @@ class SettingsTest extends UnitTestCase {
 
     $config = $this->createMock('Drupal\Core\Config\Config');
     $config
-      ->expects($this->exactly(15))
+      ->expects($this->exactly(16))
       ->method('get')
       ->willReturnMap([
         ['flush_log_timer', 0],
@@ -231,6 +235,7 @@ class SettingsTest extends UnitTestCase {
         ['disable_tracking', FALSE],
         ['visibility.request_path_mode', 1],
         ['script_type', 'minified'],
+        ['client_debug', FALSE],
       ]);
     $system_config = $this->createMock('Drupal\Core\Config\Config');
     $system_config->expects($this->exactly(2))
@@ -276,14 +281,12 @@ class SettingsTest extends UnitTestCase {
     $this->assertArrayHasKey('theme', $form);
     $this->assertArrayHasKey('tracking_scope', $form);
     $this->assertArrayHasKey('miscellaneous', $form);
+    $this->assertArrayHasKey('client_debug', $form['miscellaneous']);
     $this->assertArrayHasKey('entity', $form);
   }
 
   /**
    * Test the submitForm method.
-   *
-   * @covers ::submitForm
-   * @covers ::getEditableConfigNames
    */
   public function testSubmitForm() {
     $form = [];
@@ -305,6 +308,7 @@ class SettingsTest extends UnitTestCase {
         'visitors_visibility_user_role_mode' => 'visitors_visibility_user_role_mode',
         'visitors_visibility_user_role_roles' => ['visitors_visibility_user_role_roles'],
         'visibility_exclude_user1' => 'visibility_exclude_user1',
+        'client_debug' => 1,
       ]);
 
     $config = $this->createMock('Drupal\Core\Config\Config');
@@ -323,8 +327,6 @@ class SettingsTest extends UnitTestCase {
 
   /**
    * Test the create method.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -334,8 +336,6 @@ class SettingsTest extends UnitTestCase {
 
   /**
    * Test the construct method.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $form = new Settings(

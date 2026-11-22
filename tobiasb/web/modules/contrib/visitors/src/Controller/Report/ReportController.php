@@ -117,7 +117,14 @@ class ReportController extends ReportBaseController {
       '#view_display' => $display_id,
     ];
 
-    $rendered = \views_embed_view($view_id, $display_id);
+    $rendered = [
+      '#pre_render' => [
+        [static::class, 'preRenderEmbeddedView'],
+      ],
+      '#name'       => $view_id,
+      '#display_id' => $display_id,
+      '#arguments'  => [],
+    ];
 
     $settings = NULL;
     $selector = $request->query->get('class');

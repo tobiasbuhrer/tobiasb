@@ -8,12 +8,14 @@ use Drupal\Core\Database\Database;
 use Drupal\search\Entity\SearchPage;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\Traits\Core\CronRunTrait;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Indexes content and tests ranking factors.
- *
- * @group visitors
  */
+#[Group('visitors')]
+#[RunTestsInSeparateProcesses]
 class SearchRankingTest extends BrowserTestBase {
 
   use CronRunTrait;

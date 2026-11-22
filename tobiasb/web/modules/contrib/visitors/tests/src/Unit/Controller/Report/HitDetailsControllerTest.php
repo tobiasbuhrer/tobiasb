@@ -7,14 +7,20 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Controller\Report\HitDetails;
 use Drupal\visitors\VisitorsReportInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Unit tests for the HitDetails controller.
- *
- * @group visitors
- * @uses \Drupal\visitors\Controller\Report\HitDetails
- * @coversDefaultClass \Drupal\visitors\Controller\Report\HitDetails
  */
+#[CoversClass(HitDetails::class)]
+#[CoversMethod(HitDetails::class, 'create')]
+#[CoversMethod(HitDetails::class, '__construct')]
+#[CoversMethod(HitDetails::class, 'display')]
+#[UsesClass(HitDetails::class)]
+#[Group('visitors')]
 class HitDetailsControllerTest extends UnitTestCase {
 
   /**
@@ -59,8 +65,6 @@ class HitDetailsControllerTest extends UnitTestCase {
 
   /**
    * Tests the create() method.
-   *
-   * @covers ::create
    */
   public function testCreate(): void {
     $container = \Drupal::getContainer();
@@ -70,8 +74,6 @@ class HitDetailsControllerTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstruct(): void {
     $controller = new HitDetails($this->dateFormatter, $this->visitorsReport);
@@ -80,8 +82,6 @@ class HitDetailsControllerTest extends UnitTestCase {
 
   /**
    * Tests the display() method.
-   *
-   * @covers ::display
    */
   public function testDisplay(): void {
     $hitId = 123;
@@ -111,8 +111,6 @@ class HitDetailsControllerTest extends UnitTestCase {
    * the route to cast the value to "2" and return an empty page. The fix
    * lives in the view config (separator: ''), but the controller must also
    * forward the raw integer correctly.
-   *
-   * @covers ::display
    */
   public function testDisplayWithLargeHitId(): void {
     $hitId = 2011;

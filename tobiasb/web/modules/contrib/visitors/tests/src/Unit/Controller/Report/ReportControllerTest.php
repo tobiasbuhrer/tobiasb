@@ -10,15 +10,41 @@ use Drupal\visitors\Controller\Report\ReportController;
 use Drupal\visitors\VisitorsReportInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\InputBag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use Drupal\visitors\Controller\Report\ReportBaseController;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Unit tests for the ReportController.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Controller\Report\ReportController
- * @uses \Drupal\visitors\Controller\Report\ReportController
- * @uses \Drupal\visitors\Controller\Report\ReportBaseController
  */
+#[CoversClass(ReportController::class)]
+#[CoversMethod(ReportController::class, 'create')]
+#[CoversMethod(ReportController::class, '__construct')]
+#[CoversMethod(ReportController::class, 'time')]
+#[CoversMethod(ReportController::class, 'topPages')]
+#[CoversMethod(ReportController::class, 'topHost')]
+#[CoversMethod(ReportController::class, 'recentHost')]
+#[CoversMethod(ReportController::class, 'getHostTitle')]
+#[CoversMethod(ReportController::class, 'topRoute')]
+#[CoversMethod(ReportController::class, 'recentRoute')]
+#[CoversMethod(ReportController::class, 'getRouteTitle')]
+#[CoversMethod(ReportController::class, 'recentViews')]
+#[CoversMethod(ReportController::class, 'software')]
+#[CoversMethod(ReportController::class, 'device')]
+#[CoversMethod(ReportController::class, 'location')]
+#[CoversMethod(ReportController::class, 'performance')]
+#[CoversMethod(ReportController::class, 'nodeViews')]
+#[CoversMethod(ReportController::class, 'getContinentTitle')]
+#[CoversMethod(ReportController::class, 'continent')]
+#[CoversMethod(ReportController::class, 'getCountryTitle')]
+#[CoversMethod(ReportController::class, 'country')]
+#[CoversMethod(ReportController::class, 'report')]
+#[CoversMethod(ReportBaseController::class, 'renderViews')]
+#[UsesClass(ReportController::class)]
+#[UsesClass(ReportBaseController::class)]
+#[Group('visitors')]
 class ReportControllerTest extends UnitTestCase {
 
   /**
@@ -96,7 +122,6 @@ class ReportControllerTest extends UnitTestCase {
    */
   protected function setUp(): void {
     parent::setUp();
-    require_once __DIR__ . '/../../../../fixtures/views_embed_view.php';
 
     if (!defined('RESPONSIVE_PRIORITY_LOW')) {
       define('RESPONSIVE_PRIORITY_LOW', 'priority-low');
@@ -137,6 +162,14 @@ class ReportControllerTest extends UnitTestCase {
     $this->moduleHandler = $this->createMock('Drupal\Core\Extension\ModuleHandlerInterface');
     $container->set('module_handler', $this->moduleHandler);
 
+    $renderer = $this->createMock('Drupal\Core\Render\RendererInterface');
+    $renderer->method('renderRoot')
+      ->willReturnCallback(function (array &$elements): string {
+        $elements['#attached'] = [];
+        return 'rendered';
+      });
+    $container->set('renderer', $renderer);
+
     \Drupal::setContainer($container);
 
     $this->controller = ReportController::create($container);
@@ -144,8 +177,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the create() method of the Report controller.
-   *
-   * @covers ::create
    */
   public function testCreate() {
     $container = \Drupal::getContainer();
@@ -155,8 +186,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the construct() method of the Report controller.
-   *
-   * @covers ::__construct
    */
   public function testConstruct() {
     $translation = $this->getStringTranslationStub();
@@ -175,8 +204,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the time() method of the report controller.
-   *
-   * @covers ::time
    */
   public function testTime(): void {
     $this->form();
@@ -192,8 +219,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the topPages() method.
-   *
-   * @covers ::topPages
    */
   public function testTopPages(): void {
     $this->form();
@@ -207,8 +232,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the topHost() method of the Report controller.
-   *
-   * @covers ::topHost
    */
   public function testTopHost(): void {
     $this->form();
@@ -224,8 +247,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the recentHost() method.
-   *
-   * @covers ::recentHost
    */
   public function testRecent(): void {
     $this->form();
@@ -239,8 +260,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the getHostTitle() method.
-   *
-   * @covers ::getHostTitle
    */
   public function testHostTitle(): void {
     $title = $this->controller->getHostTitle('10.10.10.10');
@@ -249,8 +268,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the topRoute() method.
-   *
-   * @covers ::topRoute
    */
   public function testTopRoute(): void {
     $this->form();
@@ -264,8 +281,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the recentRoute() method.
-   *
-   * @covers ::recentRoute
    */
   public function testRecentRoute(): void {
     $this->form();
@@ -279,8 +294,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the getRouteTitle() method.
-   *
-   * @covers ::getRouteTitle
    */
   public function testRouteTitle(): void {
     $title = $this->controller->getRouteTitle('entity.node.canonical');
@@ -289,8 +302,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the recentViews() method of the Report controller.
-   *
-   * @covers ::recentViews
    */
   public function testRecentViews(): void {
     $this->form();
@@ -306,8 +317,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the software() method of the Report controller.
-   *
-   * @covers ::software
    */
   public function testSoftware(): void {
     $this->form();
@@ -323,8 +332,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the device() method of the Report controller.
-   *
-   * @covers ::device
    */
   public function testDevice(): void {
     $this->form();
@@ -340,8 +347,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the location() method of the Report controller.
-   *
-   * @covers ::location
    */
   public function testLocation(): void {
     $this->form();
@@ -357,8 +362,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the performance() method of the Report controller.
-   *
-   * @covers ::performance
    */
   public function testPerformance(): void {
     $this->form();
@@ -376,8 +379,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the performance() method of the Report controller.
-   *
-   * @covers ::performance
    */
   public function testPerformanceHour(): void {
     $this->form();
@@ -395,8 +396,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the performance() method of the Report controller.
-   *
-   * @covers ::performance
    */
   public function testPerformanceDay(): void {
     $this->form();
@@ -414,8 +413,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the nodeViews() method of the Report controller.
-   *
-   * @covers ::nodeViews
    */
   public function testNode(): void {
     $this->form();
@@ -444,8 +441,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the getContinentTitle() method.
-   *
-   * @covers ::getContinentTitle
    */
   public function testGetContinentTitle() {
     $markup = $this->createMock('Drupal\Component\Render\MarkupInterface');
@@ -462,8 +457,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the continent() method of the Report controller.
-   *
-   * @covers ::continent
    */
   public function testContinent() {
     $this->form();
@@ -477,8 +470,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the getCountryTitle() method.
-   *
-   * @covers ::getCountryTitle
    */
   public function testGetCountryTitle() {
     $markup = $this->createMock('Drupal\Component\Render\MarkupInterface');
@@ -495,8 +486,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the country() method of the Report controller.
-   *
-   * @covers ::country
    */
   public function testCountry() {
     $this->form();
@@ -515,8 +504,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the report() method of the Report controller.
-   *
-   * @covers ::report
    */
   public function testReport() {
     $view_id = 'visitors';
@@ -533,8 +520,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the renderViews() method of the ReportBaseController.
-   *
-   * @covers Drupal\visitors\Controller\Report\ReportBaseController::renderViews
    */
   public function testRenderViews() {
 
@@ -549,8 +534,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the renderViews() method of the ReportBaseController.
-   *
-   * @covers Drupal\visitors\Controller\Report\ReportBaseController::renderViews
    */
   public function testRenderViews2() {
 
@@ -566,8 +549,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the renderViews() method of the ReportBaseController.
-   *
-   * @covers Drupal\visitors\Controller\Report\ReportBaseController::renderViews
    */
   public function testRenderViews3() {
 
@@ -583,8 +564,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the renderViews() method of the ReportBaseController.
-   *
-   * @covers Drupal\visitors\Controller\Report\ReportBaseController::renderViews
    */
   public function testRenderViews4() {
 
@@ -601,8 +580,6 @@ class ReportControllerTest extends UnitTestCase {
 
   /**
    * Tests the renderViews() method of the ReportBaseController.
-   *
-   * @covers Drupal\visitors\Controller\Report\ReportBaseController::renderViews
    */
   public function testRenderViews5() {
     $third_row['city_table'] = [

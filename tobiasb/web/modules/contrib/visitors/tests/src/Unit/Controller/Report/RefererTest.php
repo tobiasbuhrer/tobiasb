@@ -9,14 +9,21 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Controller\Report\Referer;
 use Drupal\visitors\VisitorsReportInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the Referer controller.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Controller\Report\Referer
- * @uses \Drupal\visitors\Controller\Report\Referer
  */
+#[CoversClass(Referer::class)]
+#[CoversMethod(Referer::class, 'create')]
+#[CoversMethod(Referer::class, '__construct')]
+#[CoversMethod(Referer::class, 'display')]
+#[CoversMethod(Referer::class, 'getHeader')]
+#[UsesClass(Referer::class)]
+#[Group('visitors')]
 class RefererTest extends UnitTestCase {
 
   /**
@@ -85,8 +92,6 @@ class RefererTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate(): void {
     $container = \Drupal::getContainer();
@@ -96,8 +101,6 @@ class RefererTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor(): void {
     $controller = new Referer($this->dateFormatter, $this->formBuilder, $this->report, $this->stringTranslation);
@@ -106,9 +109,6 @@ class RefererTest extends UnitTestCase {
 
   /**
    * Tests the display method.
-   *
-   * @covers ::display
-   * @covers ::getHeader
    */
   public function testDisplay(): void {
     $date_form = $this->createMock(FormInterface::class);

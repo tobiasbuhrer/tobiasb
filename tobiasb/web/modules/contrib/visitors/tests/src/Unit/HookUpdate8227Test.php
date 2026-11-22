@@ -4,14 +4,14 @@ namespace Drupal\Tests\visitors\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.install';
 
 /**
  * Tests Release 8.x-2.27.
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookUpdate8227Test extends UnitTestCase {
 
   /**
@@ -20,13 +20,6 @@ class HookUpdate8227Test extends UnitTestCase {
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $entityTypeManager;
-
-  /**
-   * The block storage.
-   *
-   * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface|\PHPUnit\Framework\MockObject\MockObject
-   */
-  protected $blockStorage;
 
   /**
    * The block query.
@@ -56,7 +49,6 @@ class HookUpdate8227Test extends UnitTestCase {
     $this->configFactory = $this->createMock('Drupal\Core\Config\ConfigFactoryInterface');
     $container->set('config.factory', $this->configFactory);
 
-    $this->blockStorage = $this->createMock('Drupal\Core\Config\Entity\ConfigEntityStorageInterface');
     $this->blockQuery = $this->createMock('Drupal\Core\Entity\Query\QueryInterface');
 
     \Drupal::setContainer($container);
@@ -66,11 +58,12 @@ class HookUpdate8227Test extends UnitTestCase {
    * Tests visitors_update_8227.
    */
   public function testUpdate8227(): void {
+    $block_storage = $this->createMock('Drupal\Core\Config\Entity\ConfigEntityStorageInterface');
     $this->entityTypeManager->expects($this->once())
       ->method('getStorage')
       ->with('block')
-      ->willReturn($this->blockStorage);
-    $this->blockStorage->expects($this->once())
+      ->willReturn($block_storage);
+    $block_storage->expects($this->once())
       ->method('getQuery')
       ->willReturn($this->blockQuery);
     $this->blockQuery->expects($this->once())
@@ -106,7 +99,7 @@ class HookUpdate8227Test extends UnitTestCase {
         'entity_type' => 'node',
       ]);
 
-    $this->blockStorage->expects($this->exactly(2))
+    $block_storage->expects($this->exactly(2))
       ->method('load')
       ->willReturnMap([
         ['visitors_popular_block_1', $block_1],

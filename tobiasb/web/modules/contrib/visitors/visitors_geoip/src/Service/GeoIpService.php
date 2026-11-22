@@ -4,8 +4,10 @@ namespace Drupal\visitors_geoip\Service;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\visitors_geoip\GeoIpCity;
 use Drupal\visitors_geoip\VisitorsGeoIpInterface;
 use GeoIp2\Database\Reader;
+use GeoIp2\Exception\GeoIp2Exception;
 
 /**
  * GeoIp lookup Service.
@@ -66,8 +68,15 @@ class GeoIpService implements VisitorsGeoIpInterface {
     if (is_null($this->reader)) {
       return NULL;
     }
-    $record = $this->reader->city($ip_address);
-    return $record;
+    try {
+      $record = $this->reader->city($ip_address);
+    }
+    catch (GeoIp2Exception $e) {
+      // Private/reserved IPs (common in local dev) and other lookup
+      // failures (corrupt database, etc.) aren't in the GeoIP database.
+      return NULL;
+    }
+    return GeoIpCity::fromLibrary($record);
   }
 
   /**

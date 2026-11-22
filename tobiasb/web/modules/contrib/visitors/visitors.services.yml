@@ -119,3 +119,38 @@ services:
       - '@datetime.time'
     tags:
       - { name: cache.context, context_id: visitors.date_range }
+
+  Drupal\visitors\Hook\CounterHooks:
+    class: Drupal\visitors\Hook\CounterHooks
+    autowire: true
+  Drupal\visitors\Hook\CronHooks:
+    class: Drupal\visitors\Hook\CronHooks
+    autowire: true
+  Drupal\visitors\Hook\HelpHooks:
+    class: Drupal\visitors\Hook\HelpHooks
+    autowire: true
+  Drupal\visitors\Hook\PageAttachmentsHooks:
+    class: Drupal\visitors\Hook\PageAttachmentsHooks
+    autowire: true
+  Drupal\visitors\Hook\SearchHooks:
+    class: Drupal\visitors\Hook\SearchHooks
+    arguments:
+      - '@config.factory'
+      - '@state'
+  Drupal\visitors\Hook\TokenHooks:
+    class: Drupal\visitors\Hook\TokenHooks
+    arguments:
+      - '@config.factory'
+      - '@token'
+      - '@visitors.counter'
+      - '@date.formatter'
+  Drupal\visitors\Hook\UserHooks:
+    class: Drupal\visitors\Hook\UserHooks
+    arguments:
+      - '@config.factory'
+      - '@user.data'
+  Drupal\visitors\Hook\ViewsHooks:
+    class: Drupal\visitors\Hook\ViewsHooks
+    arguments:
+      - '@config.factory'
+      - '@entity_type.manager'

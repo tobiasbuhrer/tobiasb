@@ -5,14 +5,14 @@ namespace Drupal\Tests\visitors\Unit;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\StatisticsViewsResult;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 require_once __DIR__ . '/../../../visitors.module';
 
 /**
  * Tests visitors_node_links_alter.
- *
- * @group visitors
  */
+#[Group('visitors')]
 class HookNodeLinksAlterTest extends UnitTestCase {
 
   /**

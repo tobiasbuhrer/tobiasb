@@ -14,3 +14,7 @@ services:
   logger.channel.visitors_geoip:
     parent: logger.channel_base
     arguments: ['visitors_geoip']
+
+  Drupal\visitors_geoip\Hook\VisitorsGeoipHooks:
+    class: Drupal\visitors_geoip\Hook\VisitorsGeoipHooks
+    autowire: true

@@ -18,3 +18,4 @@ visibility:
   user_account_mode: 1
   exclude_user1: false
 script_type: minified
+client_debug: false

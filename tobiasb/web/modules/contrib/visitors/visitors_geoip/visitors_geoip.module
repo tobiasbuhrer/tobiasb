@@ -5,34 +5,25 @@
  * Visitors GeoIP module file.
  */
 
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\visitors_geoip\Hook\VisitorsGeoipHooks;
+
+/**
+ * Returns the VisitorsGeoipHooks service, instantiating directly if missing.
+ *
+ * @see _visitors_hooks()
+ */
+function _visitors_geoip_hooks(): VisitorsGeoipHooks {
+  if (\Drupal::hasService(VisitorsGeoipHooks::class)) {
+    return \Drupal::service(VisitorsGeoipHooks::class);
+  }
+  return new VisitorsGeoipHooks();
+}
+
 /**
  * Implements hook_views_data_alter().
  */
+#[LegacyHook]
 function visitors_geoip_views_data_alter(array &$data) {
-  $data['visitors']['location_region'] = [
-    'title' => t('Region'),
-    'help' => t('The region of the visitor.'),
-    'field' => [
-      'id' => 'standard',
-    ],
-    'filter' => [
-      'id' => 'string',
-    ],
-    'argument' => [
-      'id' => 'string',
-    ],
-  ];
-  $data['visitors']['location_city'] = [
-    'title' => t('City'),
-    'help' => t('The city of the visitor.'),
-    'field' => [
-      'id' => 'standard',
-    ],
-    'filter' => [
-      'id' => 'string',
-    ],
-    'argument' => [
-      'id' => 'string',
-    ],
-  ];
+  _visitors_geoip_hooks()->viewsDataAlter($data);
 }

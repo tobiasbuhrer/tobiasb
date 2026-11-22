@@ -1,0 +1,6 @@
+/**
+ * Drupal 10 Navigation masks this icon. Drupal 11.1+ uses the icon pack.
+ */
+.toolbar-button--icon--visitors-index {
+  --icon: url(../icons/visitors.svg);
+}

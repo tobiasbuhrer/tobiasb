@@ -5,14 +5,20 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\CronService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the CronService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\CronService
- *
- * @group visitors
  */
+#[CoversClass(CronService::class)]
+#[CoversMethod(CronService::class, '__construct')]
+#[CoversMethod(CronService::class, 'deleteExpiredLogs')]
+#[CoversMethod(CronService::class, 'execute')]
+#[CoversMethod(CronService::class, 'deleteBotLogs')]
+#[CoversMethod(CronService::class, 'dayCounter')]
+#[Group('visitors')]
 class CronServiceTest extends UnitTestCase {
 
   const ONE_DAY = 86400;
@@ -103,8 +109,6 @@ class CronServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
     $service = new CronService($this->configFactory, $this->database, $this->state, $this->time, $this->counter);
@@ -113,8 +117,6 @@ class CronServiceTest extends UnitTestCase {
 
   /**
    * Test deleteExpiredLogs() method.
-   *
-   * @covers ::deleteExpiredLogs
    */
   public function testDeleteExpiredLogsRetainAll(): void {
     $this->settings->expects($this->once())
@@ -124,14 +126,11 @@ class CronServiceTest extends UnitTestCase {
 
     // Make deleteExpiredLogs() public for testing.
     $method = new \ReflectionMethod($this->service, 'deleteExpiredLogs');
-    $method->setAccessible(TRUE);
     $method->invoke($this->service);
   }
 
   /**
    * Tests the execute method.
-   *
-   * @covers ::execute
    */
   public function testExecute(): void {
     $this->settings->expects($this->exactly(2))
@@ -175,8 +174,6 @@ class CronServiceTest extends UnitTestCase {
 
   /**
    * Test deleteExpiredLogs() method.
-   *
-   * @covers ::deleteExpiredLogs
    */
   public function testDeleteExpiredLogs(): void {
     $this->settings->expects($this->once())
@@ -204,14 +201,11 @@ class CronServiceTest extends UnitTestCase {
 
     // Make deleteExpiredLogs() public for testing.
     $method = new \ReflectionMethod($this->service, 'deleteExpiredLogs');
-    $method->setAccessible(TRUE);
     $method->invoke($this->service);
   }
 
   /**
    * Test deleteBotLogs() method.
-   *
-   * @covers ::deleteBotLogs
    */
   public function testDeleteBotLogsRetainAll(): void {
     $this->settings->expects($this->once())
@@ -221,14 +215,11 @@ class CronServiceTest extends UnitTestCase {
 
     // Make deleteBotLogs() public for testing.
     $method = new \ReflectionMethod($this->service, 'deleteBotLogs');
-    $method->setAccessible(TRUE);
     $method->invoke($this->service);
   }
 
   /**
    * Test deleteBotLogs() method.
-   *
-   * @covers ::deleteBotLogs
    */
   public function testDeleteBotLogs(): void {
     $this->settings->expects($this->once())
@@ -258,14 +249,11 @@ class CronServiceTest extends UnitTestCase {
 
     // Make deleteBotLogs() public for testing.
     $method = new \ReflectionMethod($this->service, 'deleteBotLogs');
-    $method->setAccessible(TRUE);
     $method->invoke($this->service);
   }
 
   /**
    * Tests reset entity day counter.
-   *
-   * @covers ::dayCounter
    */
   public function testDayCounter(): void {
     $this->counter->expects($this->once())
@@ -282,7 +270,6 @@ class CronServiceTest extends UnitTestCase {
 
     // Make dayCounter() public for testing.
     $method = new \ReflectionMethod($this->service, 'dayCounter');
-    $method->setAccessible(TRUE);
     $method->invoke($this->service);
   }
 

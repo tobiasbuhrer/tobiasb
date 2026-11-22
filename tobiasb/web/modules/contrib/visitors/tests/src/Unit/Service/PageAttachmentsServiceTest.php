@@ -5,14 +5,21 @@ namespace Drupal\Tests\visitors\Unit\Service;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Service\PageAttachmentsService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the PageAttachmentsService class.
- *
- * @coversDefaultClass \Drupal\visitors\Service\PageAttachmentsService
- *
- * @group visitors
  */
+#[CoversClass(PageAttachmentsService::class)]
+#[CoversMethod(PageAttachmentsService::class, '__construct')]
+#[CoversMethod(PageAttachmentsService::class, 'pageAttachments')]
+#[CoversMethod(PageAttachmentsService::class, 'attachToolbar')]
+#[CoversMethod(PageAttachmentsService::class, 'attachNavigation')]
+#[CoversMethod(PageAttachmentsService::class, 'attachMetaData')]
+#[CoversMethod(PageAttachmentsService::class, 'attachEntityCounter')]
+#[Group('visitors')]
 class PageAttachmentsServiceTest extends UnitTestCase {
 
   /**
@@ -86,6 +93,13 @@ class PageAttachmentsServiceTest extends UnitTestCase {
   protected $cacheContextsManager;
 
   /**
+   * Whether the Navigation module is enabled for this test.
+   *
+   * @var bool
+   */
+  protected $navigationEnabled = FALSE;
+
+  /**
    * {@inheritdoc}
    */
   protected function setUp(): void {
@@ -100,6 +114,10 @@ class PageAttachmentsServiceTest extends UnitTestCase {
     $container->set('current_user', $this->currentUser);
 
     $this->moduleHandler = $this->createMock('Drupal\Core\Extension\ModuleHandlerInterface');
+    $this->moduleHandler->method('moduleExists')
+      ->willReturnCallback(function (string $module): bool {
+        return $module === 'navigation' && $this->navigationEnabled;
+      });
     $container->set('module_handler', $this->moduleHandler);
 
     $this->currentRouteMatch = $this->createMock('Drupal\Core\Routing\ResettableStackedRouteMatchInterface');
@@ -127,8 +145,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
 
   /**
    * Tests the constructor.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
     $service = new PageAttachmentsService($this->configFactory, $this->currentUser, $this->moduleHandler, $this->currentRouteMatch, $this->requestStack, $this->visibilityService, $this->logger);
@@ -137,8 +153,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
 
   /**
    * Tests the pageAttachments method.
-   *
-   * @covers ::pageAttachments
    */
   public function testPageAttachments() {
 
@@ -172,18 +186,27 @@ class PageAttachmentsServiceTest extends UnitTestCase {
       ->method('getRouteName')
       ->willReturn('visitors.index');
 
+    $this->configFactory->expects($this->once())
+      ->method('get')
+      ->with('visitors.config')
+      ->willReturn($this->settings);
+    $this->settings->expects($this->once())
+      ->method('get')
+      ->with('client_debug')
+      ->willReturn(FALSE);
+
     $page = [];
     $this->service->pageAttachments($page);
 
     $this->assertCount(2, $page);
 
     $this->assertArrayHasKey('#cache', $page);
+    $this->assertContains('config:visitors.config', $page['#cache']['tags']);
+    $this->assertFalse($page['#attached']['drupalSettings']['visitors']['debug']);
   }
 
   /**
    * Tests the pageAttachments method when visibility is false.
-   *
-   * @covers ::pageAttachments
    */
   public function testPageAttachmentsWithException() {
     $this->cacheContextsManager->expects($this->once())
@@ -203,8 +226,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
 
   /**
    * Tests the attachToolbar method.
-   *
-   * @covers ::attachToolbar
    */
   public function testAttachToolbar() {
     $this->cacheContextsManager->expects($this->once())
@@ -220,7 +241,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
       ]);
 
     $reflection = new \ReflectionMethod($this->service, 'attachToolbar');
-    $reflection->setAccessible(TRUE);
 
     $page = [];
     $access = $reflection->invokeArgs($this->service, [&$page]);
@@ -232,8 +252,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
 
   /**
    * Tests the attachToolbar method.
-   *
-   * @covers ::attachToolbar
    */
   public function testAttachToolbarNoVisitorsAccess() {
     $this->cacheContextsManager->expects($this->once())
@@ -249,7 +267,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
       ]);
 
     $reflection = new \ReflectionMethod($this->service, 'attachToolbar');
-    $reflection->setAccessible(TRUE);
 
     $page = [];
     $access = $reflection->invokeArgs($this->service, [&$page]);
@@ -259,8 +276,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
 
   /**
    * Tests the attachToolbar method.
-   *
-   * @covers ::attachToolbar
    */
   public function testAttachToolbarNoToolbar() {
     $this->cacheContextsManager->expects($this->once())
@@ -276,7 +291,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
       ]);
 
     $reflection = new \ReflectionMethod($this->service, 'attachToolbar');
-    $reflection->setAccessible(TRUE);
 
     $page = [];
     $access = $reflection->invokeArgs($this->service, [&$page]);
@@ -285,9 +299,35 @@ class PageAttachmentsServiceTest extends UnitTestCase {
   }
 
   /**
+   * Tests the navigation library is attached without Toolbar.
+   */
+  public function testAttachNavigation(): void {
+    $this->navigationEnabled = TRUE;
+
+    $this->cacheContextsManager->expects($this->once())
+      ->method('assertValidTokens')
+      ->with(['user.permissions'])
+      ->willReturn(TRUE);
+
+    $this->currentUser->expects($this->exactly(2))
+      ->method('hasPermission')
+      ->willReturnMap([
+        ['access visitors', TRUE],
+        ['access navigation', TRUE],
+      ]);
+
+    $reflection = new \ReflectionMethod($this->service, 'attachNavigation');
+
+    $page = [];
+    $reflection->invokeArgs($this->service, [&$page]);
+
+    $this->assertArrayHasKey('#attached', $page);
+    $this->assertContains('visitors/navigation', $page['#attached']['library']);
+    $this->assertNotContains('visitors/menu', $page['#attached']['library']);
+  }
+
+  /**
    * Tests the attachMetaData method.
-   *
-   * @covers ::attachMetaData
    */
   public function testAttachMetaData() {
 
@@ -313,9 +353,17 @@ class PageAttachmentsServiceTest extends UnitTestCase {
       ->method('getRouteName')
       ->willReturn('visitors.index');
 
+    $this->configFactory->expects($this->once())
+      ->method('get')
+      ->with('visitors.config')
+      ->willReturn($this->settings);
+    $this->settings->expects($this->once())
+      ->method('get')
+      ->with('client_debug')
+      ->willReturn(TRUE);
+
     // Make attachMetaData public for testing.
     $reflection = new \ReflectionMethod($this->service, 'attachMetaData');
-    $reflection->setAccessible(TRUE);
 
     $page = [];
     $reflection->invokeArgs($this->service, [&$page]);
@@ -325,12 +373,11 @@ class PageAttachmentsServiceTest extends UnitTestCase {
     $this->assertArrayHasKey('visitors', $page['#attached']['drupalSettings']);
     $this->assertArrayHasKey('module', $page['#attached']['drupalSettings']['visitors']);
     $this->assertEquals('/modules/custom/visitors', $page['#attached']['drupalSettings']['visitors']['module']);
+    $this->assertTrue($page['#attached']['drupalSettings']['visitors']['debug']);
   }
 
   /**
    * Tests the attachEntityCounter method.
-   *
-   * @covers ::attachEntityCounter
    */
   public function testAttachEntityCounter() {
 
@@ -360,7 +407,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
 
     // Make attachEntityCounter public for testing.
     $reflection = new \ReflectionMethod($this->service, 'attachEntityCounter');
-    $reflection->setAccessible(TRUE);
 
     $page = [];
     $reflection->invokeArgs($this->service, [&$page]);
@@ -374,8 +420,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
 
   /**
    * Tests the attachEntityCounter method.
-   *
-   * @covers ::attachEntityCounter
    */
   public function testAttachEntityCounterNotConfigured() {
 
@@ -396,7 +440,6 @@ class PageAttachmentsServiceTest extends UnitTestCase {
 
     // Make attachEntityCounter public for testing.
     $reflection = new \ReflectionMethod($this->service, 'attachEntityCounter');
-    $reflection->setAccessible(TRUE);
 
     $page = [];
     $reflection->invokeArgs($this->service, [&$page]);

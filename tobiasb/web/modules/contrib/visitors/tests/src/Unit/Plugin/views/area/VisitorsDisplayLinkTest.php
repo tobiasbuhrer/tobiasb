@@ -7,14 +7,20 @@ namespace Drupal\Tests\visitors\Unit\Plugin\views\area;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\area\VisitorsDisplayLink;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\area\VisitorsDisplayLink
- * @covers \Drupal\visitors\Plugin\views\area\VisitorsDisplayLink
  */
+#[CoversClass(VisitorsDisplayLink::class)]
+#[CoversMethod(VisitorsDisplayLink::class, 'create')]
+#[CoversMethod(VisitorsDisplayLink::class, '__construct')]
+#[CoversMethod(VisitorsDisplayLink::class, 'render')]
+#[CoversMethod(VisitorsDisplayLink::class, 'validate')]
+#[CoversMethod(VisitorsDisplayLink::class, 'buildOptionsForm')]
+#[Group('visitors')]
 class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
@@ -98,8 +104,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the create method.
-   *
-   * @covers ::create
    */
   public function testCreate(): void {
     $container = \Drupal::getContainer();
@@ -113,8 +117,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the constructor method.
-   *
-   * @covers ::__construct
    */
   public function testConstructor() {
     $plugin = new VisitorsDisplayLink([], 'visitors_display_link', [], $this->viewSettings);
@@ -123,8 +125,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRenderEmptyDisplay() {
 
@@ -136,8 +136,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRenderPath() {
     $this->plugin->options['display_id'] = 'page_1';
@@ -161,8 +159,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the render method.
-   *
-   * @covers ::render
    */
   public function testRender() {
     $this->plugin->options['display_id'] = 'embed_1';
@@ -196,8 +192,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the validate method.
-   *
-   * @covers ::validate
    */
   public function testValidateDefaultDisplay(): void {
     $this->plugin->options['label'] = 'Visitors';
@@ -219,8 +213,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the validate method.
-   *
-   * @covers ::validate
    */
   public function testValidateNoDisplaySet(): void {
 
@@ -240,8 +232,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the validate method.
-   *
-   * @covers ::validate
    */
   public function testValidateDisplayRemoved(): void {
     $this->plugin->options['display_id'] = 'embed_1';
@@ -270,8 +260,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the validate method.
-   *
-   * @covers ::validate
    */
   public function testValidateHasPath(): void {
     $this->plugin->options['display_id'] = 'page_1';
@@ -302,8 +290,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the validate method.
-   *
-   * @covers ::validate
    */
   public function testValidateDifferentOptions(): void {
     $this->plugin->options['display_id'] = 'page_1';
@@ -348,8 +334,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the buildOptionsForm method.
-   *
-   * @covers ::buildOptionsForm
    */
   public function testBuildOptionsForm(): void {
     $this->plugin->options['admin_label'] = 'embed display';
@@ -389,8 +373,6 @@ class VisitorsDisplayLinkTest extends UnitTestCase {
 
   /**
    * Tests the buildOptionsForm method.
-   *
-   * @covers ::buildOptionsForm
    */
   public function testBuildOptionsFormNotAllowed(): void {
     $this->plugin->options['admin_label'] = 'embed display';

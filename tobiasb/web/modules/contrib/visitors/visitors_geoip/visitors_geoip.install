@@ -5,6 +5,8 @@
  * Install/uninstall visitors geoip module.
  */
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
 use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
@@ -29,7 +31,7 @@ function visitors_geoip_requirements($phase) {
             '@buildEpoch' => DrupalDateTime::createFromTimestamp($meta->buildEpoch),
           ]
         );
-        $requirements['visitors_geoip']['severity'] = REQUIREMENT_OK;
+        $requirements['visitors_geoip']['severity'] = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::OK, fn() => REQUIREMENT_OK);
       }
       $has_extension = $service->hasExtension();
       if (!$has_extension) {
@@ -37,7 +39,7 @@ function visitors_geoip_requirements($phase) {
           'The @extension_geoip PHP extension is not installed.',
           ['@extension_geoip' => 'maxminddb']
         );
-        $requirements['visitors_geoip']['severity'] = REQUIREMENT_WARNING;
+        $requirements['visitors_geoip']['severity'] = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::Warning, fn() => REQUIREMENT_WARNING);
       }
       break;
   }

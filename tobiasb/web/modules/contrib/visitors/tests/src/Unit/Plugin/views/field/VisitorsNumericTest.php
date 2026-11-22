@@ -7,13 +7,16 @@ namespace Drupal\Tests\visitors\Unit\Plugin\views\field;
 use Drupal\Tests\UnitTestCase;
 use Drupal\visitors\Plugin\views\field\VisitorsNumeric;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Date filter form test.
- *
- * @group visitors
- * @coversDefaultClass \Drupal\visitors\Plugin\views\field\VisitorsNumeric
  */
+#[CoversClass(VisitorsNumeric::class)]
+#[CoversMethod(VisitorsNumeric::class, 'access')]
+#[Group('visitors')]
 class VisitorsNumericTest extends UnitTestCase {
 
   /**
@@ -44,8 +47,6 @@ class VisitorsNumericTest extends UnitTestCase {
 
   /**
    * Tests the access method.
-   *
-   * @covers ::access
    */
   public function testAccess() {
     $account = $this->createMock('Drupal\Core\Session\AccountInterface');
